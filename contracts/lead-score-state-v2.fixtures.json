@@ -1,0 +1,275 @@
+{
+  "valid": [
+    {
+      "name": "qualified_v2",
+      "lead": {
+        "status": "qualified",
+        "pipeline_version": 2,
+        "scoring_version": 2,
+        "lead_score": 72,
+        "score_breakdown": {
+          "version": 2,
+          "components": {
+            "identity": 14,
+            "shopifyValidation": 20,
+            "categoryFit": 24,
+            "contactEvidence": 14
+          },
+          "total": 72,
+          "semantics": "deterministic_evidence_rank_not_probability"
+        },
+        "score_semantics": "evidence_rank_v2"
+      }
+    },
+    {
+      "name": "rejected_v2",
+      "lead": {
+        "status": "rejected",
+        "pipeline_version": 2,
+        "scoring_version": 2,
+        "lead_score": null,
+        "score_breakdown": null,
+        "score_semantics": "not_scored_v2"
+      }
+    },
+    {
+      "name": "failed_v2",
+      "lead": {
+        "status": "failed",
+        "pipeline_version": 2,
+        "scoring_version": 2,
+        "lead_score": null,
+        "score_breakdown": null,
+        "score_semantics": "not_scored_v2"
+      }
+    },
+    {
+      "name": "legacy_scored",
+      "lead": {
+        "status": "qualified",
+        "pipeline_version": null,
+        "scoring_version": null,
+        "lead_score": 81.5,
+        "score_breakdown": null,
+        "score_semantics": "legacy_v1"
+      }
+    },
+    {
+      "name": "legacy_unscored",
+      "lead": {
+        "status": "rejected",
+        "pipeline_version": null,
+        "scoring_version": null,
+        "lead_score": null,
+        "score_breakdown": null,
+        "score_semantics": "legacy_v1"
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "name": "qualified_v2_null_score",
+      "lead": {
+        "status": "qualified",
+        "pipeline_version": 2,
+        "scoring_version": 2,
+        "lead_score": null,
+        "score_breakdown": null,
+        "score_semantics": "not_scored_v2"
+      }
+    },
+    {
+      "name": "qualified_v2_missing_breakdown",
+      "lead": {
+        "status": "qualified",
+        "pipeline_version": 2,
+        "scoring_version": 2,
+        "lead_score": 72,
+        "score_breakdown": null,
+        "score_semantics": "evidence_rank_v2"
+      }
+    },
+    {
+      "name": "qualified_v2_fractional_score",
+      "lead": {
+        "status": "qualified",
+        "pipeline_version": 2,
+        "scoring_version": 2,
+        "lead_score": 72.5,
+        "score_breakdown": {
+          "version": 2,
+          "components": { "identity": 14, "shopifyValidation": 20, "categoryFit": 24, "contactEvidence": 14.5 },
+          "total": 72.5,
+          "semantics": "deterministic_evidence_rank_not_probability"
+        },
+        "score_semantics": "evidence_rank_v2"
+      }
+    },
+    {
+      "name": "qualified_v2_out_of_range",
+      "lead": {
+        "status": "qualified",
+        "pipeline_version": 2,
+        "scoring_version": 2,
+        "lead_score": 101,
+        "score_breakdown": {
+          "version": 2,
+          "components": { "identity": 20, "shopifyValidation": 25, "categoryFit": 30, "contactEvidence": 26 },
+          "total": 101,
+          "semantics": "deterministic_evidence_rank_not_probability"
+        },
+        "score_semantics": "evidence_rank_v2"
+      }
+    },
+    {
+      "name": "qualified_v2_negative_score",
+      "lead": {
+        "status": "qualified",
+        "pipeline_version": 2,
+        "scoring_version": 2,
+        "lead_score": -1,
+        "score_breakdown": {
+          "version": 2,
+          "components": { "identity": 0, "shopifyValidation": 0, "categoryFit": 0, "contactEvidence": 0 },
+          "total": -1,
+          "semantics": "deterministic_evidence_rank_not_probability"
+        },
+        "score_semantics": "evidence_rank_v2"
+      }
+    },
+    {
+      "name": "qualified_v2_mismatched_total",
+      "lead": {
+        "status": "qualified",
+        "pipeline_version": 2,
+        "scoring_version": 2,
+        "lead_score": 72,
+        "score_breakdown": {
+          "version": 2,
+          "components": { "identity": 14, "shopifyValidation": 20, "categoryFit": 24, "contactEvidence": 14 },
+          "total": 71,
+          "semantics": "deterministic_evidence_rank_not_probability"
+        },
+        "score_semantics": "evidence_rank_v2"
+      }
+    },
+    {
+      "name": "qualified_v2_mismatched_components",
+      "lead": {
+        "status": "qualified",
+        "pipeline_version": 2,
+        "scoring_version": 2,
+        "lead_score": 72,
+        "score_breakdown": {
+          "version": 2,
+          "components": { "identity": 14, "shopifyValidation": 20, "categoryFit": 24, "contactEvidence": 10 },
+          "total": 72,
+          "semantics": "deterministic_evidence_rank_not_probability"
+        },
+        "score_semantics": "evidence_rank_v2"
+      }
+    },
+    {
+      "name": "qualified_v2_wrong_breakdown_version",
+      "lead": {
+        "status": "qualified",
+        "pipeline_version": 2,
+        "scoring_version": 2,
+        "lead_score": 72,
+        "score_breakdown": {
+          "version": 1,
+          "components": { "identity": 14, "shopifyValidation": 20, "categoryFit": 24, "contactEvidence": 14 },
+          "total": 72,
+          "semantics": "deterministic_evidence_rank_not_probability"
+        },
+        "score_semantics": "evidence_rank_v2"
+      }
+    },
+    {
+      "name": "qualified_v2_wrong_breakdown_semantics",
+      "lead": {
+        "status": "qualified",
+        "pipeline_version": 2,
+        "scoring_version": 2,
+        "lead_score": 72,
+        "score_breakdown": {
+          "version": 2,
+          "components": { "identity": 14, "shopifyValidation": 20, "categoryFit": 24, "contactEvidence": 14 },
+          "total": 72,
+          "semantics": "evidence_rank_v2"
+        },
+        "score_semantics": "evidence_rank_v2"
+      }
+    },
+    {
+      "name": "rejected_v2_with_score",
+      "lead": {
+        "status": "rejected",
+        "pipeline_version": 2,
+        "scoring_version": 2,
+        "lead_score": 72,
+        "score_breakdown": {
+          "version": 2,
+          "components": { "identity": 14, "shopifyValidation": 20, "categoryFit": 24, "contactEvidence": 14 },
+          "total": 72,
+          "semantics": "deterministic_evidence_rank_not_probability"
+        },
+        "score_semantics": "evidence_rank_v2"
+      }
+    },
+    {
+      "name": "failed_v2_with_breakdown",
+      "lead": {
+        "status": "failed",
+        "pipeline_version": 2,
+        "scoring_version": 2,
+        "lead_score": null,
+        "score_breakdown": {
+          "version": 2,
+          "components": { "identity": 0, "shopifyValidation": 0, "categoryFit": 0, "contactEvidence": 0 },
+          "total": 0,
+          "semantics": "deterministic_evidence_rank_not_probability"
+        },
+        "score_semantics": "not_scored_v2"
+      }
+    },
+    {
+      "name": "split_versions",
+      "lead": {
+        "status": "rejected",
+        "pipeline_version": 2,
+        "scoring_version": null,
+        "lead_score": null,
+        "score_breakdown": null,
+        "score_semantics": "not_scored_v2"
+      }
+    },
+    {
+      "name": "legacy_with_v2_semantics",
+      "lead": {
+        "status": "qualified",
+        "pipeline_version": null,
+        "scoring_version": null,
+        "lead_score": 72,
+        "score_breakdown": null,
+        "score_semantics": "evidence_rank_v2"
+      }
+    },
+    {
+      "name": "qualified_v2_with_not_scored_semantics",
+      "lead": {
+        "status": "qualified",
+        "pipeline_version": 2,
+        "scoring_version": 2,
+        "lead_score": 72,
+        "score_breakdown": {
+          "version": 2,
+          "components": { "identity": 14, "shopifyValidation": 20, "categoryFit": 24, "contactEvidence": 14 },
+          "total": 72,
+          "semantics": "deterministic_evidence_rank_not_probability"
+        },
+        "score_semantics": "not_scored_v2"
+      }
+    }
+  ]
+}

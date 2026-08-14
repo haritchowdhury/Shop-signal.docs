@@ -1,0 +1,176 @@
+{
+  "valid": [
+    {
+      "name": "qualified_scored_v3",
+      "lead": {
+        "status": "qualified",
+        "pipeline_version": 2,
+        "scoring_version": 3,
+        "lead_score": 84,
+        "score_breakdown": {
+          "version": 3,
+          "components": {
+            "identity": 11,
+            "shopifyValidation": 14,
+            "categoryFit": 16,
+            "contactEvidence": 14,
+            "traffic": 24,
+            "crux": 5
+          },
+          "total": 84,
+          "semantics": "deterministic_traffic_evidence_rank_not_probability",
+          "evidence": {
+            "traffic": {
+              "state": "measured",
+              "metric": "estimated_google_search_traffic",
+              "value": 1000,
+              "transform": "log10_v1",
+              "sourceContractVersion": "dataforseo-traffic-v1",
+              "observedAt": "2026-08-04T00:00:00.000Z"
+            },
+            "crux": {
+              "state": "available",
+              "largestContentfulPaintP75Ms": 2500,
+              "interactionToNextPaintP75Ms": 200,
+              "cumulativeLayoutShiftP75": "0.1",
+              "ratings": { "lcp": "good", "inp": "good", "cls": "good" },
+              "sourceContractVersion": "crux-origin-metrics-v1",
+              "observedAt": "2026-08-04T00:00:00.000Z"
+            }
+          }
+        },
+        "score_semantics": "traffic_evidence_rank_v3"
+      }
+    },
+    {
+      "name": "qualified_insufficient_traffic_v3",
+      "lead": {
+        "status": "qualified",
+        "pipeline_version": 2,
+        "scoring_version": 3,
+        "lead_score": null,
+        "score_breakdown": null,
+        "score_semantics": "insufficient_traffic_v3"
+      }
+    },
+    {
+      "name": "rejected_v3",
+      "lead": {
+        "status": "rejected",
+        "pipeline_version": 2,
+        "scoring_version": 3,
+        "lead_score": null,
+        "score_breakdown": null,
+        "score_semantics": "not_scored_v3"
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "name": "mixed_version_pair",
+      "lead": {
+        "status": "qualified",
+        "pipeline_version": 3,
+        "scoring_version": 3,
+        "lead_score": null,
+        "score_breakdown": null,
+        "score_semantics": "insufficient_traffic_v3"
+      }
+    },
+    {
+      "name": "insufficient_with_score",
+      "lead": {
+        "status": "qualified",
+        "pipeline_version": 2,
+        "scoring_version": 3,
+        "lead_score": 0,
+        "score_breakdown": null,
+        "score_semantics": "insufficient_traffic_v3"
+      }
+    },
+    {
+      "name": "traffic_points_do_not_recompute",
+      "lead": {
+        "status": "qualified",
+        "pipeline_version": 2,
+        "scoring_version": 3,
+        "lead_score": 85,
+        "score_breakdown": {
+          "version": 3,
+          "components": {
+            "identity": 11,
+            "shopifyValidation": 14,
+            "categoryFit": 16,
+            "contactEvidence": 14,
+            "traffic": 25,
+            "crux": 5
+          },
+          "total": 85,
+          "semantics": "deterministic_traffic_evidence_rank_not_probability",
+          "evidence": {
+            "traffic": {
+              "state": "measured",
+              "metric": "estimated_google_search_traffic",
+              "value": 1000,
+              "transform": "log10_v1",
+              "sourceContractVersion": "dataforseo-traffic-v1",
+              "observedAt": "2026-08-04T00:00:00.000Z"
+            },
+            "crux": {
+              "state": "available",
+              "largestContentfulPaintP75Ms": 2500,
+              "interactionToNextPaintP75Ms": 200,
+              "cumulativeLayoutShiftP75": "0.1",
+              "ratings": { "lcp": "good", "inp": "good", "cls": "good" },
+              "sourceContractVersion": "crux-origin-metrics-v1",
+              "observedAt": "2026-08-04T00:00:00.000Z"
+            }
+          }
+        },
+        "score_semantics": "traffic_evidence_rank_v3"
+      }
+    },
+    {
+      "name": "crux_rating_does_not_recompute",
+      "lead": {
+        "status": "qualified",
+        "pipeline_version": 2,
+        "scoring_version": 3,
+        "lead_score": 84,
+        "score_breakdown": {
+          "version": 3,
+          "components": {
+            "identity": 11,
+            "shopifyValidation": 14,
+            "categoryFit": 16,
+            "contactEvidence": 14,
+            "traffic": 24,
+            "crux": 5
+          },
+          "total": 84,
+          "semantics": "deterministic_traffic_evidence_rank_not_probability",
+          "evidence": {
+            "traffic": {
+              "state": "measured",
+              "metric": "estimated_google_search_traffic",
+              "value": 1000,
+              "transform": "log10_v1",
+              "sourceContractVersion": "dataforseo-traffic-v1",
+              "observedAt": "2026-08-04T00:00:00.000Z"
+            },
+            "crux": {
+              "state": "available",
+              "largestContentfulPaintP75Ms": 2500,
+              "interactionToNextPaintP75Ms": 200,
+              "cumulativeLayoutShiftP75": "0.1",
+              "ratings": { "lcp": "poor", "inp": "good", "cls": "good" },
+              "sourceContractVersion": "crux-origin-metrics-v1",
+              "observedAt": "2026-08-04T00:00:00.000Z"
+            }
+          }
+        },
+        "score_semantics": "traffic_evidence_rank_v3"
+      }
+    }
+  ]
+}
