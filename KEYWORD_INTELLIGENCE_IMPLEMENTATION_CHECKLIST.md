@@ -1,6 +1,6 @@
 # Keyword Intelligence Decision-Complete Execution Checklist (`A4`)
 
-**Checklist revision:** `KI-CL-18`  
+**Checklist revision:** `KI-CL-20`  
 **Package status:** `AUTHORING-READY`; assignable only by a one-window `A5`
 assignment  
 **Execution status authority:** only `ACTIVE_EXECUTION_STATE.md`
@@ -3207,9 +3207,13 @@ two-file proof topology, case IDs, interpretations, or certificates.
    productionDatabaseUrl})`; return a frozen object exposing
    `{frontendEnv,ownerId,otherOwnerId,trace,setAuthOwner,drainKeywordWork,
    restartBackend,drainDownstream,readDurableState,injectCapturedDefect,close}`.
-   `frontendEnv` contains only local `BACKEND_API_BASE_URL`, `NEON_AUTH_BASE_URL`
-   and a deterministic test-only 32+-character cookie secret; no secret value is
-   logged or placed in a certificate.
+   `frontendEnv` contains exactly local `BACKEND_API_BASE_URL`,
+   `BACKEND_API_TOKEN:"kiw6-backend-token"`, `NEON_AUTH_BASE_URL` and
+   `NEON_AUTH_COOKIE_SECRET:"kiw6-local-e2e-cookie-secret-0000000000000000000000"`;
+   the emitted Next
+   child receives those four values plus only `PATH`, `HOME` and
+   `NODE_ENV:"production"`. Neither test-only credential is logged or placed
+   in a certificate. The backend uses the same literal token.
 6. **Algorithm:** create one safe unique `kiw6_` schema, deploy migrations and
    assert schema locality; start a loopback auth server whose `GET /get-session`
    returns exactly `{user:{id:<selected nonempty owner>}}` with status 200 for
@@ -3222,7 +3226,9 @@ two-file proof topology, case IDs, interpretations, or certificates.
    calls production `validateResearchBackedConfirmedQueryRows` with a
    deterministic `searchPage`, and require that search function to call
    production `parseGoogleSearchResponse` on the strict raw Google fixture for
-   the received query; inject `createLeadServer.schedule` as a FIFO callback
+   the received query; pass `createLeadServer.logger` as the callable no-op
+   function `() => {}` (never an object), and inject
+   `createLeadServer.schedule` as a FIFO callback
    queue so the harness, not wall-clock timing, deterministically starts each
    accepted queue-drain callback; start one fixed UTC clock and advance it by
    exactly 2,000 ms before each successive fresh keyword-provider claim so the
@@ -3230,10 +3236,38 @@ two-file proof topology, case IDs, interpretations, or certificates.
    replay/fault cases advance only to their persisted due/expiry timestamp;
    raw task bodies report `0.01560000` for each of ten expansion calls,
    `0.04800000` for the 300-keyword anchor and `0.03600000` for each of eight
-   200-keyword market calls, totalling `0.49200000`; adapt the accepted keyword
-   maximum fixture to 300/200 and the accepted downstream harness to 100 query
-   artifacts each containing ten unique hosts; drive only actual public worker/
-   service functions until their durable readiness predicates settle.
+   200-keyword market calls, totalling `0.49200000`. Provider synthesis is
+   literal: define `pad2(n)=String(n).padStart(2,"0")` and
+   `pad3(n)=String(n).padStart(3,"0")`; for zero-based seed index `s` and
+   one-based item index `i=1..30`,
+   suggestions return `{keyword:` ``${seed} suggestion s${s}${pad2(i)}`` `}`
+   and related returns `{keyword_data:{keyword:`
+   ``${seed} related r${s}${pad2(i)}`` `},depth:2,related_keywords:[]}` in
+   ascending `i`; the accepted per-seed cap therefore retains the seed, all 30
+   suggestions and the first 29 related values, producing 300 distinct anchor
+   inputs. Every overview item is produced in input order by the exact
+   `overviewResponse` field/month formula at
+   `test/keyword-intelligence-worker.test.js:93-122`; its response cost is
+   `0.048` for 300 inputs and `0.036` for 200. Production aggregation must
+   witness 300 active anchor candidates, the deterministic first 200 shortlist,
+   and a 200-row final result/default-100 selection.
+
+   For Google validation, deep-clone the accepted one-item fixture and replace
+   `items` with ten one-based occurrences. With
+   `queryProbeConcurrency:1`, received query ordinal `q` is exactly one plus
+   the zero-based `searchPage` invocation index; for ordinal `q` and
+   occurrence `r`, set exactly `title: receivedQuery`,
+   `snippet: receivedQuery`, `displayLink: host`, and
+   `link:` ``https://${host}/products/result-${pad2(r)}``, where `host` is
+   ``w6-q${pad3(q)}-r${pad2(r)}.myshopify.com``; preserve all other top-level
+   fixture members. Call `parseGoogleSearchResponse(payload, receivedQuery)`
+   and pass its result through the production query-probe path. Each of all 100
+   validations must witness ten usable distinct hosts, ten relevant results,
+   relevance ratio `1`, and no rejection; parser success alone is not an
+   acceptance oracle. The production discovery worker, not the harness, creates
+   the 100 query artifacts from those persisted probe results. Drive only actual
+   public worker/service functions until their durable readiness predicates
+   settle.
 7. **Operations:** record every auth, DataForSEO, Google, S3 and SQS operation as
    a privacy-safe typed tuple; strict artifact adapters parse schemas on put/get
    and reject unequal immutable replay; dispatch preserves each individual
@@ -3247,10 +3281,27 @@ two-file proof topology, case IDs, interpretations, or certificates.
    `w6-q<001..100>-r<01..10>.myshopify.com`; assert actual `stableShopIdentity`,
    `shopIdForStableKey` and `runStoreId` outputs rather than duplicating formulas.
 10. **Failure/replay:** expose only the locked test operations: owner switch
-    followed by emitted-Next restart so no auth-instance/cache state is reused,
-    duplicate/reordered message delivery, one backend restart retaining DB/S3/SQS,
-    corrupt captured artifact before validated read, omit one Neon terminal while
-    leaving its S3 object present, and replay the same client request ID. The
+    followed by emitted-Next restart so no auth-instance/cache state is reused;
+    `duplicate-next-keyword-message`, `reorder-pending-keyword-messages`,
+    `duplicate-next-discovery-message`, `reorder-pending-discovery-messages`,
+    `duplicate-next-domain-check-message`, and
+    `reorder-pending-domain-check-messages`; exactly two backend restarts,
+    each retaining DB/S3/SQS: restart A immediately after the keyword
+    duplicate/reorder operations and before expansion drain, and restart B
+    immediately after the post-handoff research-selection mutation and before
+    the immutable Run/RunQuery snapshot comparison; corrupt captured artifact
+    before validated read; omit one Neon
+    terminal while leaving its S3 object present; and replay the same client
+    request ID. Each duplicate receives a fresh monotonic delivery ID without a
+    dispatcher send trace; each reorder reverses the named queue's pending body
+    order and reissues fresh increasing delivery IDs in that reversed order.
+    Invoke the keyword duplicate/reorder immediately after initialization has
+    queued expansion tasks/checks, invoke restart A, and then drain expansion.
+    Invoke discovery duplicate/reorder immediately after confirmation dispatches
+    the 100 discovery deliveries; after the first discovery emits a domain check,
+    duplicate/reorder that check before completing downstream drain. Thus every
+    partition operates on a nonempty queue and base dispatcher-send counts remain
+    unchanged. The
     corrupt-artifact and missing-terminal partitions each use a separate
     one-seed research in the same schema: two expansion calls and two stored
     task objects; corrupt-artifact has two terminal tasks then mutates one memory
@@ -3411,9 +3462,9 @@ not prose; its named control must falsify the same captured-data assertion.
 | `W6-FLOW-10` | confirm edited queries | exactly 100 production-validator searchPage calls, each passed through the strict Google parser with ten occurrences, 1,000 total; confirmation terminal only after all succeed | omitted/bypassed validation or product-only rewrite; `NC-07` |
 | `W6-FLOW-11` | confirmation dispatches downstream | exactly 100 query-identity discovery tasks/messages/artifacts/terminal rows; duplicate/reorder adds no logical work | batched `itemIds` or queue-count completion; `NC-08` |
 | `W6-FLOW-12` | actual domain aggregator consumes all terminal evidence | exactly 1,000 unique stable hosts, shops, run stores and lead tasks; one stable identity per occurrence host; stage completes once | raw URL identity/S3 count/queue empty; `NC-08` |
-| `W6-FLOW-13` | edit research selection after handoff and restart backend | original Run snapshot, 100 RunQueries, probe and downstream lineage remain byte/deep equal; research revision may advance independently | live research join mutates historical run; `NC-06` |
+| `W6-FLOW-13` | edit research selection after handoff, invoke restart B, then reload and compare the durable run projection | original Run snapshot, 100 RunQueries, probe and downstream lineage remain byte/deep equal; research revision may advance independently | live research join mutates historical run or the post-handoff restart is omitted; `NC-06` |
 | `W6-RES-01` | switch auth to owner B and restart emitted Next, then select no-session and restart again | research/run GET and mutations deny/not-found per accepted route contract; durable owner-A rows unchanged | owner leak, cached owner A or browser-supplied owner; `NC-02` |
-| `W6-RES-02` | duplicate/reorder keyword and discovery/check messages around backend restart | provider counts, terminal counters, RunQueries and downstream logical work remain exact; recovery uses durable inputs | second paid/logical work or memory-only recovery; `NC-03/08` |
+| `W6-RES-02` | duplicate/reorder nonempty keyword queues across restart A, then duplicate/reorder nonempty discovery and domain-check queues at their frozen pre-drain points | provider counts, terminal counters, RunQueries and downstream logical work remain exact; recovery uses durable inputs | second paid/logical work, empty-queue no-op or memory-only recovery; `NC-03/08` |
 | `W6-RES-03` | separate one-seed fixture completes two expansion calls/tasks, then corrupts one stored memory object before actual aggregate read | `2/2/2/0` calls/objects/terminal tasks/next-stage rows; typed contract failure and no result/selection/Run visibility | permissive parser/publication; `NC-04/05` |
 | `W6-RES-04` | separate one-seed fixture stores both task objects but throws after the second put before Neon terminal; drain local queues then check | `2/2/1/0`; aggregator returns not-ready and produces zero next-stage/result visibility | S3/queue completion signal; `NC-08` |
 | `W6-CONF-01` | strict manifest load | exact contract/keys, group counts `3/13/4/6`, 26 unique cases and 13 unique controls | manifest drift; `NC-10` |

@@ -4857,3 +4857,241 @@ requester_actions_required_before_decomposition: []
 assignment_status: UNASSIGNED
 planned_stop: READY_FOR_PARENT_REVIEW after KI-W6 window-agent integration assessment
 ```
+
+### `EV-KI-A-082` — KI-W6 reauthored-decomposition parent rejection and correction assignment
+
+- **Timestamp / phase:** 2026-08-20 / parent decomposition review before any
+  implementation-leaf assignment.
+- **Reviewed package:** S1
+  `e7893e49930321c911def84082d6ce7a243a154e7bab644e2b73ee25bec12868`,
+  S2 state 1, and S3 through `EV-KI-W6-R03`. The five planned paths and digest
+  `d28ae17864073639580d7650bb03c03474d5370a5034b632cf412e1e3cf3d0bb`
+  match A4; both nested repositories are clean at their A4-pinned commits.
+- **Disposition:** `CORRECTION_REQUIRED`; the decomposition is not approved and
+  no leaf may be assigned. A5 CAS 142→143 now records
+  `ASG-KI-W6-WA-02` / `KI-W6-WINDOW-AGENT` with write authority limited to the
+  three `REAUTHORED` coordination artifacts. The agent must correct all five
+  findings below and return a superseding decomposition-readiness certificate.
+- **F1 — entry authority and current pins:** S1/S3 checked `SW-A01` even though
+  A5 v142 explicitly said `current_window:NONE`, `assigned_agent:UNASSIGNED`
+  and prohibited decomposition. The requester instruction did not replace A5,
+  which is the sole assignment authority. Treat the pre-state-143 package as an
+  unapproved draft, pin/reconcile A5 state 143, and supersede every readiness
+  claim/certificate that described the entry gate as passing before this CAS.
+- **F2 — S102 mechanical oracles are arithmetically wrong:** under the prescribed
+  transformation the hostile run literal occurs once, not twice, and the exact
+  diff is eight inserted/four deleted lines, not ten/four. Correct `S102-C3` and
+  `S102-C6`; retain the transformation and the one-oracle-only ownership.
+- **F3 — IF-2/T3 is not interface- or execution-complete:** freeze literal
+  signatures, argument/return/error schemas for every returned harness member;
+  the discriminated trace-event union; fault/control IDs and outcomes; runtime,
+  queue/config, clock, deterministic IDs/data and cleanup contracts; and the
+  exact message-type-to-public-function drive sequence. Remove the prohibited
+  `as needed` choice. Correct the production contradiction: actual
+  `dispatchConfirmedQueries` and `processDomainAggregation` call
+  `dispatcher.sendMany`; the memory dispatcher must implement `sendOne` and
+  `sendMany`, expanding each call into individual message identities without
+  inventing an `itemIds` message contract. It may not state that `sendMany` is
+  never used.
+- **F4 — assignable blocks contain placeholders and false readiness evidence:**
+  replace wildcard read scopes with exact dependency paths; replace
+  `computed at dispatch`, ellipses, pseudo-commands, `≥1`, “or its generator”
+  and other nonliteral check choices with deterministic assignment-time values
+  or exact commands/assertions; make the V3 command executable without the
+  `<validated isolated URL>` placeholder; make the certificate emission-site
+  count exact; and explicitly prohibit leaf subdelegation/spawning in every
+  leaf block. `SW-A06`, `SW-D05`, `SW-D07`, `SW-E02`, `SW-E03`, `SW-R02` and
+  `SW-R10` cannot remain checked until these statements are true.
+- **F5 — final-gate enforcement is not frozen:** V1 and V6 must name literal
+  commands/inspections, inputs, expected hashes and compared path sets. Phrases
+  such as “accepted W3/R4 worker packaging inputs”, “all R5 evidence” and “all
+  downstream non-W6 source” are not executable hash proofs. Allocate each of
+  the thirteen controls to one exact mutation mechanism (harness fault ID or
+  synthetic-set operation), remove the remaining alternative `or`, and require
+  exactly one `KI_W6_CERTIFICATE=` emission site before the V3 runtime
+  single-line oracle.
+- **No execution:** the parent performed read-only source/standard/diff review
+  and changed only A5 plus this evidence entry. No implementation, leaf,
+  test/build/browser/database/provider/AWS/production/destructive/commit/push or
+  KI-W7 action occurred; cost `$0.00`.
+
+### `EV-KI-A-083` — KI-W6 superseding-decomposition parent review
+
+- **Timestamp / phase:** 2026-08-20 / second parent decomposition review before
+  any implementation-leaf assignment.
+- **Reviewed package:** superseding package `KI-W6-REAUTHORED-DECOMP-2`: S1
+  `c1771d1e994e520202cf165c27ff8586a69fd9dea48393568cbc2e6753c7e372`
+  (1506 lines), S2 state 2, and S3 through `EV-KI-W6-R05`. A5 state 143 and
+  every pinned parent artifact match the live files; both nested repositories
+  are clean. Findings `EV-KI-A-082/F1-F5` are resolved.
+- **Disposition:** `CORRECTION_REQUIRED`; the package is not yet approved and no
+  leaf may be assigned. The same window agent may revise only S1/S2/S3 and must
+  return one superseding readiness certificate after resolving F6-F9 below.
+- **F6 — queue progression and duplicate delivery:** the expansion drain must
+  consume the initial `keyword.initialize.v1` message, the resulting expansion
+  tasks, and their aggregation checks, then stop with the anchor task queued and
+  unconsumed. Remove body-derived deduplication: it collapses repeated aggregate
+  checks because those messages have no task natural ID/input fingerprint and
+  prevents duplicate-delivery proof. Give each enqueued delivery a monotonic
+  harness delivery ID and invoke the production handler once for every pending
+  delivery, including intentionally duplicated/reordered bodies; production
+  idempotency, not the harness, must absorb duplicates.
+- **F7 — source-real server configuration and durable projection:** replace the
+  nonexistent `Run.runIntentId` member in `DurableStateSnapshot.run` and its
+  query with literal fields/relations that exist in the Prisma schema and prove
+  the handoff state required by the W6 cases. Freeze the complete literal
+  `createLeadServer`/`PrismaRunRepository` configuration, deterministic scheduler,
+  interval/clock/logger options, and the exact allowlisted child-process
+  environment; do not permit ambient provider or production configuration.
+  Correct the frozen cookie-secret length claim from 55 to 51 characters.
+- **F8 — provider fixture expansion and discovery causality:** the pinned Google
+  fixture contains one result, while W6 requires ten occurrences for every one
+  of 100 queries. Freeze the exact per-query transformation into ten strict raw
+  provider items using the required `q<query>/r<occurrence>` host template and
+  call the production Google parser with the received query. The harness must
+  not preload fabricated query-discovery artifacts: the production discovery
+  worker must create those artifacts from the parsed `probeResults`.
+- **F9 — causal order, cleanup proof, and exact dependencies:** freeze one
+  physical causal action order that creates research, saves selection, performs
+  the handoff and exercises navigation; case assertions/certificate registration
+  may then be emitted in manifest order without rerunning provider work. Make
+  `close()` drop the disposable schema, verify its absence before disconnecting,
+  throw on residual presence, and return an exact positive absence witness.
+  Close browser/server/auth resources, verify schema removal, and delete the
+  temporary artifact root before the sole certificate emission and exit 0.
+  Replace the remaining directory-level read scopes with the literal files the
+  leaves actually consume and reconcile the affected readiness claims.
+- **No execution:** this review used read-only source/schema/fixture checks and
+  changes only A5 plus this evidence entry. No decomposition edit, implementation,
+  leaf, test/build/browser/database/provider/AWS/production/destructive/commit/
+  push or KI-W7 action occurred; cost `$0.00`.
+
+### `EV-KI-A-084` — KI-W6 DECOMP-3 parent rejection and parent-authority repair
+
+- **Timestamp / phase:** 2026-08-20 / third parent decomposition review before
+  any implementation-leaf assignment.
+- **Reviewed package:** `KI-W6-REAUTHORED-DECOMP-3`: S1
+  `2ea48e27d47ddc0824285471877e4897b3740c16516f0b1abea81cb79b77bb4c`
+  (1710 lines), S2 state 3, and S3 through `EV-KI-W6-R07`. Its A5 state-144
+  pin and parent-artifact pins matched the live files; both nested repositories
+  were clean. `EV-KI-A-083/F6-F9` are represented, but executable source review
+  found three contradictions inherited from the parent W6 task text.
+- **Disposition:** `CORRECTION_REQUIRED`; no leaf may be assigned. The parent
+  corrected A4 from `KI-CL-18` to `KI-CL-19`, revision
+  `8fa54dd445dda3ad3bda8a4b0434bbbc8f93ad75469f782015ab4631eed9bcb3`.
+  The same window agent must reconcile only S1/S2/S3 to that authority and
+  return a superseding readiness certificate.
+- **F10 — emitted-server bootstrap was unrunnable:** `frontendEnv` and the
+  exact `next start` environment omitted `BACKEND_API_TOKEN`, while every
+  frontend proxy request conditionally derives its Authorization header from
+  that value and the backend requires `kiw6-backend-token`; the flow would
+  receive 401. The frozen `createLeadServer.logger` was an object although the
+  server invokes it as a function. A4 now freezes the fourth frontend value,
+  the matching child allowlist, and callable no-op `() => {}`.
+- **F11 — provider data could not satisfy the claimed topology:** the keyword
+  recipe still said only to “adapt” shapes to 300/200, delegating the distinct
+  candidate set and overview values. The Google recipe changed only links and
+  preserved fixture title/snippet `Fixture Eyewear` / `Fixture catalog entry`;
+  a production `summarizeProbe` check for `insulated water bottle` produced
+  ten hosts but zero relevant results, ratio zero and
+  `irrelevant_probe_results`. A4 now freezes the exact 30+30 per-seed expansion
+  strings, overview formula, 300→200→default-100 witnesses, and exact per-query
+  Google item fields. Acceptance is through the production probe path with
+  ten relevant results and ratio one, not parser success alone; discovery
+  artifacts remain production-created.
+- **F12 — resilience operations targeted empty queues:** DECOMP-3 placed its
+  duplicate/reorder operations after keyword and downstream drains, while its
+  fault contract required a next pending message and did not distinguish
+  discovery/domain-check queues. A4 now names all six queue-specific fault IDs,
+  their delivery-ID semantics, and exact nonempty injection points: keyword
+  faults immediately after initialization and across the sole backend restart;
+  discovery faults after confirmation; domain-check faults after the first
+  discovery emits a check. Harness-only fault deliveries do not increment base
+  dispatcher-send counts.
+- **Authority/scope:** A5 CAS 144→145 keeps `ASG-KI-W6-WA-02` assigned only to
+  the three REAUTHORED coordination artifacts. The window agent may reconcile
+  F10-F12 and all affected pins/contracts/checks/readiness claims; it may not
+  execute or dispatch a leaf.
+- **No execution:** the parent performed read-only source/schema/fixture
+  inspection and one read-only production parser/probe calculation, then edited
+  only A4, A5, A6 and A7. No implementation, decomposition, leaf, test/build/
+  browser/database/provider/AWS/production/destructive/commit/push or KI-W7
+  action occurred; cost `$0.00`.
+
+### `EV-KI-A-085` — KI-W6 DECOMP-4 parent rejection and restart-order authority repair
+
+- **Timestamp / phase:** 2026-08-20 / fourth parent decomposition review before
+  any implementation-leaf assignment.
+- **Reviewed package:** `KI-W6-REAUTHORED-DECOMP-4`: S1
+  `c197af8640cce52e9224c35aa41159754c271b99d5a5222765bf20feb0665831`
+  (1827 lines), S2 state 4, and S3 through `EV-KI-W6-R09`. All reported pins
+  matched the live files; S1 faithfully reconciled `F10`–`F12`; both nested
+  repositories were clean.
+- **Disposition:** `CORRECTION_REQUIRED`; no leaf may be assigned. The parent
+  corrected A4 from `KI-CL-19` to `KI-CL-20`, revision
+  `8fe18271bf368a283246d55807dcc4612e118c725e5aabeb6188962a7abf5f4e`.
+- **F13 — one restart was assigned to two causal positions:** `KI-CL-19` and
+  DECOMP-4 required the sole backend restart immediately after keyword
+  initialization and before expansion drain, while `W6-FLOW-13` independently
+  required a backend restart after handoff and the research-selection mutation.
+  Those states cannot coexist at one physical point. A4 now freezes exactly two
+  invocations of the existing `restartBackend()` harness operation: restart A
+  after the nonempty keyword duplicate/reorder partition and before expansion;
+  restart B after the post-handoff selection mutation and before reloading and
+  comparing the immutable Run/RunQuery projection. `W6-RES-02` owns restart A;
+  `W6-FLOW-13` owns restart B. No new file, interface or product behavior is
+  introduced.
+- **Authority/scope:** A5 CAS 145→146 keeps `ASG-KI-W6-WA-02` assigned only to
+  S1/S2/S3. The window agent may reconcile only this two-restart correction and
+  affected pins/checks/readiness evidence, then must return for parent review.
+- **No execution:** read-only decomposition review plus edits only to A4, A5,
+  A6 and A7; no implementation, leaf, test/build/browser/database/provider/AWS/
+  production/destructive/commit/push or KI-W7 action; cost `$0.00`.
+
+### `EV-KI-A-086` — KI-W6 DECOMP-5 parent correction assignment for strict leaf order
+
+- **Timestamp / phase:** 2026-08-20 / fifth parent decomposition review before
+  any implementation-leaf assignment.
+- **Reviewed package:** S1 DECOMP-5
+  `dedb5a2b3339856d6eeafb6f34ea4460a4de7dd3da298cb9ee9f515fd48ebe2e`,
+  S2 state 5, S3 through `EV-KI-W6-R11`. F13 and all pins/file baselines passed.
+- **Disposition:** `CORRECTION_REQUIRED`; no leaf may be assigned.
+- **F14 — declared predecessor graph contradicted frozen execution order:** S1
+  froze `S101→S102→S103→S104→S105→I101` and starting change-set digests based
+  on that order, but S103/S104 declared no predecessor and S105 declared only
+  a partial set. A scheduler following the leaf blocks could therefore dispatch
+  them early despite the parent prohibition on parallel/out-of-order leaves.
+  The correction is mechanical: S101 `[]`; S102 `[S101]`; S103 `[S102]`;
+  S104 `[S103]`; S105 `[S104]`; I101 remains after all five. File dependency
+  records and interfaces remain semantic and unchanged.
+- **Authority/scope:** A5 CAS 146→147 keeps the same coordination-only window
+  assignment and authorizes only S1/S2/S3 reconciliation of F14.
+- **No execution:** no implementation, leaf, test/build/browser/database/
+  provider/AWS/production/destructive/commit/push or KI-W7 action; `$0.00`.
+
+### `EV-KI-A-087` — KI-W6 DECOMP-6 parent approval
+
+- **Timestamp / phase:** 2026-08-20 / final parent decomposition review before
+  first-leaf dispatch.
+- **Approved package:** S1 `KI-W6-REAUTHORED-DECOMP-6`
+  `bf92d2515a3dde37e7e577308ee69b224fe21498434ef831612536a841475134`
+  (1864 lines), S2 state 6, S3 through `EV-KI-W6-R13`.
+- **Independent parent checks:** all seven governing pins matched; the exact
+  five-path digest recomputed to `d28ae17864073639580d7650bb03c03474d5370a5034b632cf412e1e3cf3d0bb`;
+  the two existing starting file hashes and three `ABSENT` states matched;
+  backend/frontend commits matched and both nested worktrees were clean; five
+  unique single-file leaves encoded the exact chain S101→S102→S103→S104→S105;
+  predecessor-based starting changed-set digests recomputed byte-equal; I101
+  remained after all five with zero implementation-write authority; 47/47
+  readiness items were checked with zero unresolved mapping/interface/state/
+  execution/evidence entries.
+- **Behavioral closure:** the parent A4 and S1 now both require restart A at
+  the pre-expansion keyword-recovery point and restart B after the post-handoff
+  selection mutation before immutable Run/RunQuery comparison. S105-C11/V1-12
+  enforce exactly two calls. F1–F14 have no unresolved member.
+- **Disposition:** `APPROVED`. A5 CAS 147→148 records the exact approved S1
+  revision and authorizes the window agent to acknowledge approval in S2/S3,
+  then dispatch only one named leaf at a time in the frozen order. This approval
+  does not itself assign a leaf or execute a gate.
+- **No execution:** no implementation, leaf, test/build/browser/database/
+  provider/AWS/production/destructive/commit/push or KI-W7 action; `$0.00`.

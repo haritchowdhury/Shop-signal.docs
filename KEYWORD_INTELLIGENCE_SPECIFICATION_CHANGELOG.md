@@ -929,3 +929,67 @@ compatibility_or_migration_effect: no schema migration package backend API route
 authorization_effect: This change authorizes no implementation or decomposition. A future explicit parent A5 CAS may assign one KI-W6-WINDOW-AGENT to create only the three fresh REAUTHORED coordination artifacts and return for parent decomposition review; leaf and integration work remain prohibited until that review.
 resumption_state: A5 state 142 is READY with no current window/assignment, accepted through KI-R5, next KI-W6, stop_after KI-R5 and may_start_successor false.
 ```
+
+```yaml
+change_id: CHG-KI-057
+timestamp: 2026-08-20T23:05:00+05:30
+trigger_evidence: [EV-KI-A-084]
+reason: DECOMP-3 faithfully exposed runnable-harness gaps in the parent W6 authority: missing frontend backend-token propagation, a non-callable server logger, unfrozen DataForSEO synthesis, Google results that parse but fail production relevance, and duplicate/reorder operations scheduled against empty or unidentified queues.
+old_revision: A4 KI-CL-18 / 02352344d5ba940f640463f89bc3011339d6e9f175ca35343abe4e63412523e2; A5 state 144; S1 DECOMP-3 2ea48e27d47ddc0824285471877e4897b3740c16516f0b1abea81cb79b77bb4c
+new_revision: A4 KI-CL-19 / 8fa54dd445dda3ad3bda8a4b0434bbbc8f93ad75469f782015ab4631eed9bcb3; A5 state 145; DECOMP-3 rejected pending S1/S2/S3 reconciliation
+changed_requirements: []
+changed_decisions: [Emitted Next receives the exact matching backend token privately, createLeadServer logger is callable, deterministic expansion and overview synthesis proves 300/200/default-100, every Google occurrence carries received-query relevance and passes the production probe, queue-specific duplicate/reorder faults run only at frozen nonempty points]
+affected_windows: [KI-W6 decomposition only; KI-W7 remains prohibited]
+invalidated_evidence: [KI-W6-R07 decomposition-readiness certificate and DECOMP-3 assignability claim; its F6-F9 source findings remain valid inputs]
+compatibility_or_migration_effect: none — local W6 harness specification only; no product runtime API schema migration package provider AWS or production behavior change.
+authorization_effect: KI-W6-WINDOW-AGENT may revise only the three REAUTHORED coordination artifacts to reconcile A4 KI-CL-19 and EV-KI-A-084 F10-F12, then return for parent review; no leaf or gate execution is authorized.
+resumption_state: A5 state 145 READY under ASG-KI-W6-WA-02; stop before leaf dispatch, implementation or KI-W7.
+```
+
+```yaml
+change_id: CHG-KI-058
+timestamp: 2026-08-20T22:38:27+05:30
+trigger_evidence: [EV-KI-A-085]
+reason: KI-CL-19 assigned one backend restart to both the pre-expansion resilience partition and the post-handoff immutable-snapshot partition, two mutually exclusive causal positions.
+old_revision: A4 KI-CL-19 / 8fa54dd445dda3ad3bda8a4b0434bbbc8f93ad75469f782015ab4631eed9bcb3; A5 state 145; S1 DECOMP-4 c197af8640cce52e9224c35aa41159754c271b99d5a5222765bf20feb0665831
+new_revision: A4 KI-CL-20 / 8fe18271bf368a283246d55807dcc4612e118c725e5aabeb6188962a7abf5f4e; A5 state 146; DECOMP-4 rejected pending narrow S1/S2/S3 reconciliation
+changed_requirements: []
+changed_decisions: [Invoke restart A after keyword duplicate/reorder and before expansion drain, Invoke restart B after post-handoff research-selection mutation and before immutable Run projection comparison, Reuse the existing restartBackend harness operation for both invocations]
+affected_windows: [KI-W6 decomposition only; KI-W7 remains prohibited]
+invalidated_evidence: [KI-W6-R09 decomposition-readiness certificate and DECOMP-4 assignability claim; its F10-F12 reconciliation remains valid]
+compatibility_or_migration_effect: none — local W6 harness causal ordering only; no product runtime API schema migration package provider AWS or production behavior change.
+authorization_effect: KI-W6-WINDOW-AGENT may revise only the three REAUTHORED coordination artifacts to reconcile A4 KI-CL-20 and EV-KI-A-085 F13, then return for parent review; no leaf or gate execution is authorized.
+resumption_state: A5 state 146 READY under ASG-KI-W6-WA-02; stop before leaf dispatch, implementation or KI-W7.
+```
+
+```yaml
+change_id: CHG-KI-059
+timestamp: 2026-08-20T22:50:00+05:30
+trigger_evidence: [EV-KI-A-086]
+reason: DECOMP-5's predecessor declarations permitted out-of-order dispatch even though the parent and the same S1 froze strict sequential execution and predecessor-based starting change-set digests.
+old_revision: A5 state 146; S1 DECOMP-5 dedb5a2b3339856d6eeafb6f34ea4460a4de7dd3da298cb9ee9f515fd48ebe2e; mixed predecessor graph
+new_revision: A5 state 147; narrow F14 correction assigned; exact chain S101 to S102 to S103 to S104 to S105 to I101 required
+changed_requirements: []
+changed_decisions: [Each initial leaf after S101 names the immediately preceding leaf as its sole predecessor, I101 retains all five accepted leaves as predecessors, Semantic file dependency records remain unchanged]
+affected_windows: [KI-W6 decomposition only; KI-W7 remains prohibited]
+invalidated_evidence: [EV-KI-W6-R11 readiness certificate and DECOMP-5 assignability claim; its F13 reconciliation remains valid]
+compatibility_or_migration_effect: none — recursive scheduling metadata only; no implementation file interface behavior case registry digest or gate changes.
+authorization_effect: KI-W6-WINDOW-AGENT may revise only S1/S2/S3 for F14 and return for parent review; no leaf or gate execution.
+resumption_state: A5 state 147 READY under ASG-KI-W6-WA-02; stop before leaf dispatch, implementation or KI-W7.
+```
+
+```yaml
+change_id: CHG-KI-060
+timestamp: 2026-08-20T23:00:00+05:30
+trigger_evidence: [EV-KI-W6-R12, EV-KI-W6-R13, EV-KI-A-087]
+reason: DECOMP-6 resolves all parent findings and passes the standards-mandated independent parent review with exact file set baselines sequence interfaces gates controls and readiness closure.
+old_revision: A5 state 147 correction assignment; S1 DECOMP-6 awaiting parent review
+new_revision: A5 state 148 DECOMPOSITION_APPROVED; approved S1 revision bf92d2515a3dde37e7e577308ee69b224fe21498434ef831612536a841475134
+changed_requirements: []
+changed_decisions: [The approved leaf order is S101 then S102 then S103 then S104 then S105, I101 begins only after all five are independently accepted, Window agent may create one-file corrections only inside the same five-file parent scope for already-decided implementation defects]
+affected_windows: [KI-W6 only; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: []
+compatibility_or_migration_effect: none — decomposition approval and recursive execution authority only; no product runtime interface schema package or provider behavior change.
+authorization_effect: KI-W6-WINDOW-AGENT may acknowledge approval in S2/S3 and manage the approved sequential leaves and I101; no leaf is assigned by this parent transition.
+resumption_state: A5 state 148 DECOMPOSITION_APPROVED under ASG-KI-W6-WA-02; S2 must record approval and become READY before S101 dispatch.
+```
