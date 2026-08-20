@@ -19,3 +19,4 @@ The active AWS migration and execution records are maintained at the main root:
 These active documents were reconciled on 11 August 2026. Historical plans under
 application `docs/history/` directories are evidence, not current execution
 instructions.
+# Shop-signal.docs
