@@ -22,9 +22,10 @@ read these files in order:
 6. `PARENT_AGENT_CHECKLIST_INSTRUCTIONS.md`
 
 For creation of a future execution checklist, read
-`DECISION_COMPLETE_CHECKLIST_AUTHORING_STANDARD.md`. It is the authoritative
-authoring standard. `PARENT_AGENT_CHECKLIST_INSTRUCTIONS.md` is retained as the
-first draft and historical context; it does not override the new standard.
+`PROJECT_AGNOSTIC_DECISION_COMPLETE_CHECKLIST_AUTHORING_STANDARD.md`. It is the
+sole authoritative authoring standard. `DECISION_COMPLETE_CHECKLIST_AUTHORING_STANDARD.md`
+and `PARENT_AGENT_CHECKLIST_INSTRUCTIONS.md` are retained as historical context;
+they do not override the project-agnostic standard.
 
 The post-G13 review rescinded G11-G13 acceptance; G10 remains the last accepted
 gate. Section 10A of `FINAL_LAMBDA_SQS_S3_MIGRATION_EXECUTION_PLAN.md` is the
@@ -73,11 +74,13 @@ user input. A failing check must first be diagnosed and corrected within the
 active window when the locked specification already determines the fix. Stop
 only when the remaining condition genuinely matches `Stop and escalate`.
 
-Before a parent assigns a window from any future checklist, its four-artifact
+Before a parent assigns a window from any future checklist, its eight-artifact
 package must pass Sections 4 through 11 of
-`DECISION_COMPLETE_CHECKLIST_AUTHORING_STANDARD.md`. Architectural prose,
-wildcard ownership, fixture references, or broad verbs are not executable task
-specifications. If any agent would need to choose a dependency, schema, public
+`PROJECT_AGNOSTIC_DECISION_COMPLETE_CHECKLIST_AUTHORING_STANDARD.md`.
+Architectural prose,
+wildcard ownership, fixture references without authoritative literal expected
+members, or broad verbs are not executable task specifications. If any agent
+would need to choose a dependency, schema, public
 interface, transaction protocol, module boundary, configuration policy, failure
 semantics, or acceptance behavior, the checklist remains `DRAFT / NOT
 ASSIGNABLE`; the parent must resolve the choice and record its mechanical trace.

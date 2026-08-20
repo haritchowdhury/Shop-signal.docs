@@ -2,8 +2,8 @@
 
 ## Document status
 
-Status: **FROZEN IMPLEMENTATION SPECIFICATION; LIVE AUTHORITY IS
-`ACTIVE_EXECUTION_STATE.md`; G10 IS THE LAST ACCEPTED GATE**
+Status: **FROZEN HISTORICAL IMPLEMENTATION SPECIFICATION; NOT LIVE STATUS OR
+ASSIGNMENT AUTHORITY; READ `ACTIVE_EXECUTION_STATE.md` FIRST**
 
 Prepared on 11 August 2026 and placed on mandatory correction hold on 12 August
 2026 under Section 9 of `PARENT_AGENT_CHECKLIST_INSTRUCTIONS.md`; the corrective
@@ -15,7 +15,9 @@ Section 10 evidence; no unchecked remainder item authorizes work. No production 
 production database migration, secret, paid-provider call, event-source
 enablement, or cutover is authorized here.
 
-The independent post-G13 review on 12 August 2026 found that the implementing
+The following G10/G11-G13 disposition records the historical 12 August
+correction baseline, not the current accepted boundary. The independent
+post-G13 review on 12 August 2026 found that the implementing
 agent's G11-G13 acceptance claims exceeded both the implemented behavior and
 the tests that actually ran. Section 11.10A is the authoritative correction
 record. The original handoff evidence remains append-only historical evidence;
@@ -26,6 +28,50 @@ G-R7 corrects and proves G11, G-R8 corrects and proves G12, and G-R9 corrects
 and proves G13. Mutable assignment and progress never live in this file; read
 `ACTIVE_EXECUTION_STATE.md`. New evidence goes only to
 `AWS_PIPELINE_EXECUTION_EVIDENCE.md`.
+
+### Post-deployment implementation supersession — 15 August 2026
+
+This frozen document remains the historical implementation specification. For
+the current implemented architecture, Sections 24 and 25 of
+`AWS_G14_G15_DEPLOYMENT_EXECUTION_SPECIFICATION.md` supersede any statement in
+this document that treats global `ShopWork` ownership as cross-run execution
+authority or permits the Traffic Worker Run lease and Final Aggregator stage
+lease to race.
+
+- `ShopWork` is non-authoritative bookkeeping and a global cache/profile
+  locator. Current-run execution authority is the run-scoped `PipelineTask`,
+  stage/Run lease, immutable S3 artifacts, provider ledger, and fenced final
+  publication. A foreign Run's `ShopWork` owner or state never blocks or
+  supplies the current Run's execution result; compatible completed cache and
+  profile reuse remains allowed.
+- Traffic execution and final publication are atomically mutually exclusive.
+  Both claim paths lock the deterministic `traffic_crux` `PipelineStage` row
+  before the `Run` row in one PostgreSQL transaction. A live lease on either
+  side makes the other claim return `busy`, and simultaneous claims produce
+  exactly one owner without deadlock.
+
+### Post-G-R29 maximum-cardinality reliability finding — 16 August 2026
+
+Fresh parent verification confirmed the G-R29 ownership correction but found a
+timing-sensitive maximum-publication acceptance gap. The required isolated
+PostgreSQL corpus passed 28/29: the 1,000-domain/12,000-work-outcome case reached
+`grants_written` after 14,414 ms and then lost its 15,000 ms interactive
+transaction before stage completion. The identical case passed alone, so this
+is a load-sensitive safety-margin failure rather than a deterministic payload,
+identity, or ownership conflict.
+
+The decision-complete correction is G-R30 in Section 26 of
+`AWS_G14_G15_DEPLOYMENT_EXECUTION_SPECIFICATION.md`. It uses generic explicit
+row projections, narrows score preparation without changing score semantics,
+keeps the complete publication atomic, retains a 15-second performance target,
+and separates it from a 30-second transaction safety timeout. It adds no
+volume-specific production branch. G-R30 is authored but not assigned; only
+`ACTIVE_EXECUTION_STATE.md` may authorize it.
+
+Do not rewrite the historical window contracts or evidence below to reflect
+these corrections. Mutable status and acceptance remain authoritative only in
+`ACTIVE_EXECUTION_STATE.md`; implementation and deployment evidence remains
+authoritative only in `AWS_PIPELINE_EXECUTION_EVIDENCE.md`.
 
 ### Historical pre-implementation corrective audit disposition — 12 August 2026
 

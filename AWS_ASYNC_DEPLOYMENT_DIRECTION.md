@@ -205,6 +205,16 @@ Global `ShopWork` ownership is additionally fenced by the registered domain
 PipelineTask, not solely by the temporary Run lease, so the required lease
 release before final aggregation does not open a cross-run reclaim window.
 
+Provider/cache identity and shop/task identity are distinct cardinalities. Two
+or more stable shops may share one canonical DataForSEO hostname or CrUX origin.
+Every shop retains its own PipelineTask, ShopWork, source/combined artifact,
+Lead result and ownership fence, while all of those owners are claimed before
+one provider call is made for the unique provider identity. The validated result
+fans back out to every associated shop/Lead. The global traffic cache stores one
+row per exact provider cache key: normalized-equivalent duplicates coalesce and
+unequal duplicates fail closed. Shared cache existence alone never merges shops
+or grants cross-owner visibility.
+
 ## Neon coordinator contract
 
 The exact schema and transaction-composable callables are locked in Section 11

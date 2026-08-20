@@ -841,3 +841,703 @@ residual risks, and the exact active-state transition.
   `mailto:` inputs terminate under the real concurrent page shape, restore the
   intended 512 MB LeadWorker memory after bounded-memory proof, and deploy as a
   new append-only window.
+
+## G-R19 bounded invalid-mailto extraction correction — 14 August 2026
+
+- Code correction: `rawValueIndexes()` now returns an empty occurrence set
+  before scanning an empty normalized value, and mailto extraction skips an
+  invalid empty normalized address. Nonempty occurrence scanning and valid
+  mailto association/confidence behavior are unchanged. Focused tests prove
+  bare, query-only, and invalid mailto values terminate without evidence while
+  valid mailto evidence retains its normalized value, method, confidence, and
+  association reason.
+- Bounded-memory proof: the affected store's five real public pages were
+  fetched and extracted with concurrency two, Browserless disabled, and no paid
+  provider under a 512 MB V8 heap ceiling. The reproduction completed in 1.51
+  seconds at 93,164 KB maximum RSS and preserved valid email/social evidence;
+  the pre-correction control had failed at approximately 2,021,256 KB RSS.
+- Local verification: the focused extraction, pipeline, infrastructure, and
+  packaging suites passed. The complete backend corpus passed outside the
+  restricted localhost sandbox; secret scan and diff hygiene passed. All seven
+  Node 24 packages rebuilt, measured, cold-imported, and contained exactly the
+  RHEL Prisma engine with common file-list hash
+  `eed2b39bc940fe20c2070ecc64953c74c21b7ddded3e92a64f98a98dd5ba0ff2`.
+  Deterministic bundling changed only DiscoveryWorker (31,943,969 bytes,
+  SHA-256 `87863ab407502b002e4fcaa7d31ba3f8dfe226883f2927c845f9c0ec5807a3eb`)
+  and LeadWorker (31,948,955 bytes, SHA-256
+  `3fbd7c164384aad824e369d228d7a6d816eb7011b837a46a322d3283c1698101`);
+  the other five ZIPs and the 90,453-byte 512 MB template were byte-identical.
+- Guarded deployment: approval token
+  `26a307082f5387c537922bd7907181eda15b3a86adeb3df9431d75f4d197ee85`
+  bound the exact package/template versions. Only the two changed encrypted,
+  versioned ZIPs were added (Discovery version
+  `IwbRSQz8XfAU9FQbcM_8GIqzXzvT_68q`; Lead version
+  `eWCuDm4K9Iwkk0KJZluVM08zR6.r3zdK`). Reviewed change set
+  `gr19-lead-bounded-extraction-26a307082f53` contained exactly two in-place
+  function modifications: DiscoveryWorker code and LeadWorker code plus its
+  return to 512 MB. It reached `UPDATE_COMPLETE`.
+- Infrastructure proof: the full active-stack inspector passed all 72
+  resources, seven functions, six enabled event-source mappings, six source
+  queues, six DLQs, the enabled Recovery schedule/current secret, and 27
+  alarms. No worker was removed, disabled, or deregistered. Five historical
+  lead DLQ records from the pre-correction OOM deliveries remained untouched.
+- Live acceptance: Recovery resumed the same durable task without queue or
+  Neon repair. The corrected LeadWorker completed in 10.79 seconds at 212 MB
+  maximum usage inside its restored 512 MB allocation. Lead reached 78/78
+  terminal (70 succeeded, eight failed safely), the lead stage completed, and
+  the same unpublished run advanced to `aws_traffic_crux` with 64 registered
+  traffic tasks. No post-correction OOM occurred.
+- Boundary: G-R19 is accepted and its stop point is reached. The already-active
+  pipeline continues traffic/CrUX execution under the existing live-pipeline
+  authorization; no manual message action, destructive operation, frontend
+  mutation, database repair, or commit occurred.
+
+## G-R20 bounded bulk pipeline execution correction — 14 August 2026
+
+- Implementation: the shared positional `mapWithConcurrency()` primitive now
+  bounds S3 reads/writes at eight, traffic terminal chains and SQS batch calls
+  at four, and DataForSEO scope waves at two. Traffic claims, final work/profile
+  settlement, and V3 score writes use set reads and bulk CAS SQL; final
+  DataForSEO batch artifacts are deduplicated and memoized by exact batch key.
+  Public repository/service interfaces, visibility-last publication, provider
+  batching, immutable artifact barriers, and the 15-second final transaction
+  timeout remain unchanged.
+- Maximum PostgreSQL proof: guarded tests used
+  `test/helpers/isolated-postgres.js`, verified a unique non-`public` schema and
+  schema-local migration history, and dropped each schema in `finally`. The
+  1,000-claim corpus covered fresh/expired completed cache, ambiguous, failed,
+  pending, same-task, competing live-task, cancelled-task, inactive-Run task,
+  live legacy-Run, and expired legacy-Run ownership. It proved exact positional
+  outcomes/cache rows, no ownership theft, exact bulk updates, replay, stale
+  lease rejection, and completion inside the default five-second transaction.
+  The final corpus locked/classified exactly 12,000 traffic outcomes for 1,000
+  domains, bulk-mutated 1,000 replay-sensitive rows, validated completed,
+  failed, ambiguous and reused states, settled 1,000 failed profile outcomes,
+  finalized 1,000 V3 scores, observed `resultsAvailable=false` immediately
+  before the final CAS, completed inside 15 seconds, and left exact
+  cardinalities.
+- Database and statement cardinality: traffic claim execution retains one
+  interactive transaction with set task load, one `createMany`, one ordered
+  work lock, at most one cache query, one task-owner query, one legacy-owner
+  query, and one bulk CAS. Final publication retains one visibility-last
+  transaction and uses one ordered work lock/CAS, two profile-set reads, one
+  profile CAS, and one V3 score update; no database or repository call occurs
+  in the named per-item classification/scoring loops. Existing-profile
+  fingerprints are computed once per locked row, and the scorer can return its
+  already-read updated lead rows to final publication without changing its
+  numeric return contract.
+- Exact verification outcomes: the eight-file focused command passed 8/8. The
+  required four-file isolated command passed 25/25, including the full 16-case
+  G-R9 recovery matrix and both maximum corpora. `ALLOW_DATABASE_TESTS=true npm
+  run test:integration` passed 38/38. The first sandboxed `npm test` run had
+  only the expected loopback-bind failures in `query-review-server` and
+  `server`; the identical approved rerun passed 410 tests: 388 passed and 22
+  guarded database tests skipped. `npm run build:lambda`, `npm run
+  measure:lambda`, the packaging test, secret scan, and `git diff --check` all
+  passed. All seven packages cold-imported, contained the required
+  `libquery_engine-rhel-openssl-3.0.x.so.node`, and measured approximately
+  31.9 MB zipped with common file-list hash
+  `eed2b39bc940fe20c2070ecc64953c74c21b7ddded3e92a64f98a98dd5ba0ff2`.
+- Changed backend files across the window: `src/aws-pipeline/adapters/queue-dispatcher.js`,
+  `src/aws-pipeline/core/bounded-concurrency.js`,
+  `src/aws-pipeline/services/domain-aggregator.js`,
+  `src/aws-pipeline/services/final-aggregator.js`,
+  `src/aws-pipeline/services/lead-aggregator.js`,
+  `src/aws-pipeline/services/traffic-worker.js`, `src/enrichment/orchestrator.js`,
+  `src/prisma-run-repository.js`,
+  `test/aws-pipeline-bounded-concurrency.test.js`,
+  `test/aws-pipeline-final.integration.test.js`,
+  `test/aws-pipeline-traffic.integration.test.js`,
+  `test/prisma-run-repository.test.js`, and
+  `test/traffic-orchestration.test.js`. During verification the user-owned
+  backend repository advanced to existing commit `bd02331` (`GR-20`); the
+  executing agent did not stage or commit the remaining maximum-test and
+  repository refinements.
+- Boundary and residual risk: external actions were `none`: no AWS mutation,
+  provider call, production database write, frontend/infrastructure edit,
+  destructive action, or manual queue action occurred. The coordination-root
+  relocation state and unrelated dirty work were preserved. G-R20 local
+  acceptance is complete; deployment remains gated by independent parent
+  verification and `A-GR20-DEPLOY_AFTER_PARENT_VERIFICATION`.
+
+## G-R21 guarded deployment and exact-run closure — 15 August 2026
+
+- Authorization and boundary: the user authorized deployment of the G-R20
+  candidate, durable provider/recovery work belonging to existing Run
+  `run_KRnkR1jV7QInr2zXhHE-Hi9c`, and subsequently the guarded cancellation or
+  deletion of obsolete-format records for that exact test run. No unrelated
+  Run, frontend, secret, queue message, DLQ message, shared cache/profile row,
+  or S3 `runs/` artifact was manually changed or deleted.
+- Current-contract corrections discovered by the live run: completed global
+  ShopWork is reusable only with one exact compatible cache row; provider
+  execution uses the immutable manifest identities even when lead refinement
+  changes the final origin; a CrUX BigQuery attempt that becomes terminal
+  before month resolution records `scopeKey=latest`; duplicate traffic
+  deliveries in both `ready` and `aggregating` release their Run lease and send
+  one final check without provider work; and final reconciliation accepts
+  `latest` only for the current worker's pre-month terminal states
+  (`ambiguous`, `unavailable`, or `contract_mismatch`). A resolved successful or
+  no-coverage BigQuery result still requires a six-digit `month:YYYYMM` scope.
+- Deployment: all seven deterministic Node 24 packages rebuilt, measured,
+  cold-imported, and retained the exact RHEL Prisma engine. Reviewed change set
+  `gr21-bounded-bulk-f3753e92d99d` contained only seven in-place Lambda Code
+  modifications plus the expected non-replacing Recovery permission/schedule
+  dependency re-evaluations and reached `UPDATE_COMPLETE`. Narrow reviewed
+  FinalAggregator change sets
+  `gr21-final-repair-6315cc96296b`,
+  `gr21-final-repair-f7064d2865d6`, and
+  `gr21-final-repair-40ab15f929df` each contained exactly one non-replacing
+  FinalAggregator Code modification and reached `UPDATE_COMPLETE`; the first
+  two added privacy-safe phase/invariant diagnosis and the last aligned final
+  reconciliation with the current traffic artifact contract.
+- Live package proof: the deployed CodeSha256 values matched the exact local
+  manifest for DiscoveryWorker
+  `l66VFgBQX2dH5VuraILSZ1fD2Mrx2I553SiYpuWJ/64=`, DomainAggregator
+  `zOvIqU/AboaLpe9Ay9iJ9hHYaSBPgzU3iE6nkiGHHKI=`, LeadWorker
+  `CSGfkckDxgDfJgEywP2aXw47smA2ieg41l5s6bB1VEs=`, LeadAggregator
+  `C2qqF2A1LYq4MRyDlc64ebUMJLUSUZy3622YkRzmWK0=`, TrafficWorker
+  `3bLZgvp5/1VZ3oBQFUQ+N+Kxsic0C8TeeORe77O4rwA=`, FinalAggregator
+  `iajWfiUDxhoaJGAPAnQ7cgx0iqQp4i5aAvixnpy2UgU=`, and Recovery
+  `wpYinMXYURmHyA7+W9b1WJtEuKkMKsSfoRocm9qz7Mo=`.
+- Exact-run outcome: discovery completed 10/10, lead completed 78/78 (70
+  succeeded and eight failed safely), and traffic reached 64/64 succeeded.
+  Final publication then rejected rows produced across several pre-correction
+  deployments. Per the user's new-project decision, no compatibility path was
+  added for those mixed historical rows. The guarded cancellation CLI changed
+  only generation 1 of the named Run: the Run is now `cancelled`/`finished`,
+  `resultsAvailable=false`, `completedAt=2026-08-15T06:42:43.284Z`, has no Run
+  lease, and the traffic stage is terminal `cancelled`. The previously
+  completed discovery and lead stages remain unchanged.
+- Verification: focused final, traffic, deployment-guard, and final integration
+  test files passed under their configured guards; the 1,000-claim isolated PostgreSQL corpus had
+  already passed during the live correction; packaging measurement, secret
+  scan, and `git diff --check` passed. The final active-stack inspection passed
+  all 72 resources, seven functions, six enabled mappings, six queues/DLQs,
+  the enabled Recovery schedule/current secret, scoped IAM, and 27 alarms.
+  Inspection observed 2,375 source-queue records and 4,613 historical DLQ
+  records; they remain untouched and cancelled-run deliveries are fenced when
+  received normally.
+- Stop point and residual scope: G-R21 is complete and stops for review. The
+  user owns creation and observation of the fresh 100-domain run. G-R20's
+  separately documented maximum-size/concurrency proof gaps remain deferred;
+  G-R21 does not accept them or claim migration-wide completion.
+
+## G-R24 provider-version resilience and complete traffic publication — 15 August 2026
+
+- Production diagnosis: completed Run `run_-hPWjmwusV7P7AS_QcxqTZlR` reached
+  traffic terminality but could not publish complete traffic results. Of 53
+  eligible traffic leads, 21 all-scope DataForSEO cache-reuse shops were omitted
+  from final publication and 32 new shop/lead records mapped to 21 distinct
+  provider hostnames. The Run retained 53 CrUX REST, 53 CrUX BigQuery, 53
+  combined, and 32 DataForSEO source artifacts. No prior S3 object version was
+  available for reconstruction.
+- Authorized paid diagnostic: one DataForSEO worldwide bulk request for the
+  exact 21 current targets returned HTTP 200 with 21/21 items and cost
+  `$0.01452`. No raw response was persisted or logged. Every consumed business
+  field matched the captured adapter contract; rejection was caused solely by
+  provider release metadata changing from `0.1.20260731` to observed
+  `0.1.20260806`. All ten production paid ledgers became ambiguous within
+  approximately 0.7–2.7 seconds of dispatch, proving immediate parser rejection
+  rather than stale recovery. The resulting DataForSEO source artifact recorded
+  `contract_mismatch` while its paid ledger recorded `ambiguous`; the former
+  artifact contract rejected that safe pairing and thereby stranded otherwise
+  successful sibling CrUX work.
+- Corrections: DataForSEO now accepts only the exact release-metadata grammar
+  `0.1.YYYYMMDD` while retaining strict validation of every consumed field and
+  failing closed on malformed or major/minor changes. Provider-source artifacts
+  accept an ambiguous paid ledger paired with either `ambiguous` or
+  `contract_mismatch`. Partial DataForSEO reuse no longer republishes reused
+  rows through the provider source artifact. Final aggregation requires the
+  qualified run Lead and exact manifest-fingerprinted cache selections and
+  materializes skipped all-cache DataForSEO and CrUX work without another
+  provider call. DataForSEO still requires all ten frozen scopes and emits one
+  ordered ten-record lead row; CrUX keeps its independent REST and BigQuery
+  outcomes.
+- Verification: focused DataForSEO, artifact-contract, traffic, final, and
+  infrastructure suites passed. The isolated PostgreSQL final-publication proof
+  and the complete integration command exited successfully. The backend corpus
+  passed except for the two expected restricted-sandbox loopback suites; their
+  identical approved rerun passed 16/16. Secret scan and `git diff --check`
+  passed. All seven Lambda packages built, measured, cold-imported under Node 24,
+  retained the required RHEL Prisma engine, and had common file-list hash
+  `eed2b39bc940fe20c2070ecc64953c74c21b7ddded3e92a64f98a98dd5ba0ff2`.
+- Exact deployment binding: approval token
+  `9a699a41b7537924bfefa539578d0d26439ea3c4bcdac6f9441a6e4fe401cfbd`
+  bound TrafficWorker ZIP SHA-256
+  `f65e951d57a2c166d7abaefe8989217c8e046457b28ecfd3681473dc34e3f3c3`
+  (32,076,547 bytes), FinalAggregator ZIP SHA-256
+  `f6b8500aefeb1309b39465bec979acb5d430e409a577f47cbb2d59369ffdf62c`
+  (31,912,583 bytes), and template SHA-256
+  `9e5366c95250d37caf0190611d14ca308b03ee20b9c4a0758c8e82b0233c058f`.
+  Content-addressed packages were uploaded outside `runs/`; TrafficWorker object
+  version was `KBtVg.qV6YuS_NsHBoOJWmFxhIRMTs8S`, FinalAggregator version was
+  `Ccu.vxny75Z.dPiLaQv7Ogs67.do5xdF`, and template version was
+  `iib9qva7p3o3vulwqPBCuTV0A8anH3aE`.
+- Reviewed change set
+  `gr24-traffic-publication-repair-9a699a41b753` contained exactly two in-place
+  Lambda Code modifications: `TrafficWorker` and `FinalAggregator`, both with
+  replacement `False`. It reached `UPDATE_COMPLETE` at
+  `2026-08-15T08:53:55.467Z`. Deployed TrafficWorker CodeSha256
+  `9l6VHVeiwWbXq67+iYkhfI4EZFeyjs/TaBRz3DTj88M=` and FinalAggregator
+  CodeSha256 `9rhQCu/rEwmzlGW+yXmstdQw5Amld/R8uy1ZNp/99iw=` exactly matched the
+  local packages; both functions were `Active` with successful updates. The
+  traffic event-source mapping remained enabled with batch size 1,000 and a
+  ten-second batching window.
+- Boundary and stop: no queue/DLQ receive, purge or redrive; no production
+  database write; no S3 `runs/` mutation; no secret, frontend, IAM, concurrency,
+  mapping, topology, or destructive change; and no commit occurred. The
+  completed failed Run remains immutable audit evidence and cannot honestly be
+  salvaged because its provider ledger/artifact history is already terminal and
+  ambiguous. G-R24 implementation and deployment are complete. The user must
+  create a fresh Run to prove the corrected end-to-end production path.
+
+## G-R25 resolved CrUX month and same-run final publication — 15 August 2026
+
+- Live finding: Run `run_emuJITjaps8nvFyNiiA73UJH` reached a terminal traffic
+  stage with 61/61 successful tasks, but FinalAggregator attempt 2 failed in
+  phase `publication` immediately after `traffic_written` with
+  `PIPELINE_INPUT_CONFLICT`. The transaction rollback left no partially visible
+  traffic rows. Read-only comparison of 452 immutable Run objects, 181 strict
+  provider-source artifacts, and Neon ShopWork found exactly six conflicts:
+  CrUX BigQuery artifacts recorded terminal `contract_mismatch` at `latest`
+  after their task-owned ShopWork had already resolved to `month:202607`.
+  DataForSEO produced 590/590 current work outcomes and all ten paid ledgers
+  succeeded; CrUX REST work was reconcilable.
+- Correction: TrafficWorker now retains `month:YYYYMM` after successful month
+  resolution for every subsequent terminal state. FinalAggregator resolves a
+  terminal `latest` alias in state `ambiguous`, `unavailable`, or
+  `contract_mismatch` to exactly one task-fenced durable BigQuery ShopWork scope
+  (`latest` or `month:YYYYMM`) before settlement. Zero, duplicate, invalid,
+  wrong-Run, or wrong-task rows fail closed. The resolved scope affects only
+  ShopWork settlement; provider evidence and immutable artifacts are unchanged.
+- Verification: focused traffic, final, repository, and infrastructure suites
+  passed. The migration-backed disposable-PostgreSQL proof reproduced
+  post-month contract mismatch, verified task fencing, rolled back every named
+  final-publication failpoint, then replayed successfully. The full backend
+  command passed 48 non-loopback files; its two expected restricted-sandbox
+  listener files passed 16/16 on the approved identical rerun. Secret scan and
+  diff hygiene passed. All seven Node 24 packages built, measured, cold-imported,
+  retained the required RHEL Prisma engine, and shared file-list hash
+  `eed2b39bc940fe20c2070ecc64953c74c21b7ddded3e92a64f98a98dd5ba0ff2`.
+- Deployment: approval token
+  `3ab859c01c0559b7acf05237ce7ac22738d3e4be964de345ca7943696c9d279c`
+  bound TrafficWorker ZIP SHA-256
+  `1b6a2055ae558f70fea252d9c944efa5b40ac5c9a755a1d1a9e69f38b457e11d`
+  (32,076,593 bytes) and FinalAggregator ZIP SHA-256
+  `4b4640a0388c1906458b86fdc5bcfdad8b81617848929707a6b93bb60fc259a4`
+  (31,912,627 bytes). Reviewed change set
+  `gr25-crux-month-repair-3ab859c01c05` contained exactly those two in-place
+  Lambda Code modifications with replacement `False` and reached
+  `UPDATE_COMPLETE`. Deployed CodeSha256 values
+  `G2ogVa5Vj3D+olLZyUTvpbQKxcmnVaHRqeafOLRX4R0=` and
+  `S0ZAoDiMGQZFi4b9xbz9rYuBYXhIkpcHprk7tg/CWaQ=` exactly match the local
+  packages; both functions are Active with successful updates.
+- Same-run production proof: scheduled recovery attempt 6 completed the
+  unchanged Run at `2026-08-15T09:35:25.706Z` with
+  `resultsAvailable=true`. It published exactly 61 rows for each independent
+  source. DataForSEO: 61 available, 20 cache hits, ten external tasks, actual
+  cost `$0.1908`. CrUX REST: 48 available, 12 no-coverage, one ambiguous. CrUX
+  BigQuery for month `202607`: 42 available, 12 no-coverage, one ambiguous, six
+  contract-mismatch. These terminal source states are visible evidence, not a
+  claim that unavailable provider coverage was fabricated.
+- Boundary: no provider call was made by the repair; no queue/DLQ receive,
+  purge, or redrive; no S3 `runs/` mutation; no manual production-database
+  write; no secret, frontend, schema, IAM, concurrency, mapping, or topology
+  change; and no commit occurred. G-R25 implementation, deployment, and
+  same-run completion proof are complete.
+
+## G-R26 shared provider-identity ownership and cache fan-out — blocked 15 August 2026
+
+- Authorization and implementation: local-only G-R26 changes retain sorted
+  per-shop owners behind shared DataForSEO hostnames and CrUX origins, flatten
+  ShopWork claims per shop, aggregate provider authorization per identity,
+  fence all siblings when any shared owner is busy, choose the lowest shop ID
+  as the deterministic REST-attempt representative, coalesce only
+  normalized-equivalent global cache rows, read shared reuse cache IDs once,
+  and add the guarded `provider-identity-fan-in` deployment phase. No schema,
+  message, artifact, provider contract, frontend, AWS, production-data, secret,
+  topology, destructive, stage, or commit action occurred.
+- Changed backend files: `src/enrichment/orchestrator.js`,
+  `src/aws-pipeline/services/traffic-worker.js`,
+  `src/prisma-run-repository.js`,
+  `scripts/aws-pipeline/create-change-set.js`,
+  `test/traffic-orchestration.test.js`,
+  `test/aws-pipeline-traffic.test.js`,
+  `test/aws-pipeline-final.integration.test.js`, and
+  `test/aws-pipeline-infrastructure.test.js`. There is no migration.
+- Collision evidence: the focused five-file corpus passed. A two-shop/one-
+  identity orchestration case proved 24 per-shop claims, ten DataForSEO scope
+  calls, one REST call, one bounded BigQuery path, and six per-lead source
+  publications. The real TrafficWorker service case proved two shops with one
+  provider identity retain six source artifacts and two combined artifacts
+  while using ten DataForSEO calls, one REST call, and one table/dry/live
+  BigQuery path. The isolated final-publication test supplied duplicate-
+  equivalent cache rows, rolled back every existing named failpoint, then
+  wrote exactly one global cache row and replayed publication safely.
+- Verification: the complete isolated PostgreSQL integration command passed
+  38/38. Its earlier three-file invocation passed 22/23 after the 1,000-row
+  claim test exceeded Prisma's fixed five-second transaction timeout by 120ms;
+  the identical traffic integration file rerun passed 2/2. The updated final
+  integration file passed the collision/failpoint proof; its unrelated
+  1,000-domain publication case exceeded the fixed 15-second transaction
+  timeout by 221ms under accumulated database load and passed unchanged when
+  rerun alone. One approved full `npm test` invocation then passed all 50 test
+  files in a single run: 425 tests, 403 pass, 22 expected database-gated skips,
+  zero failures. Lambda build, measurement, emitted-artifact cold imports,
+  RHEL Prisma engine inspection, packaging test, secret scan, backend/root
+  `git diff --check`, and the common file-list hash
+  `eed2b39bc940fe20c2070ecc64953c74c21b7ddded3e92a64f98a98dd5ba0ff2`
+  passed.
+- Blocker `B-GR26-PACKAGE-CLOSURE`: the emitted-package audit contradicts
+  Section 22.5. `PrismaRunRepository` is in the common Lambda bundle, so the
+  required G-R26 repository-method edits changed all seven ZIP byte hashes:
+  DiscoveryWorker `dd9fc2646f354000c2d1edd60071114006d85edd64bf4ad5c3ed8f0682c523b2`,
+  DomainAggregator `60e7e2b06052ab68d2ec15a499c6084c173acd935015df5e42a1ebfbe4b030cb`,
+  LeadWorker `444e546f73a8e31097cbbf0f89078b3172b5f0a1785307b2bff7431a4bb85fa3`,
+  LeadAggregator `94b3665e6c2e8b4b9238cd018a41104d77f611b9db39bba81d872f20bf3857f0`,
+  TrafficWorker `827248bd164bb1ae6ee5132671970b568a87ce574edd8ab49935886d704c0182`,
+  FinalAggregator `3b15a54619bdfefc81db6d3c7fb65ca041ecbd09c0cdadab31dd0916f1a33891`,
+  and Recovery `77c9c3027099e9a9c244779e060788fec840e17bea92ffe5a73fa12ac5d0fd4b`.
+  The specification permits only TrafficWorker and FinalAggregator to change
+  and declares any additional changed package hash a genuine blocker. G-R26
+  therefore remains unaccepted; G-R25 remains accepted-through. Parent/user
+  must choose and authorize a decision-complete correction that either isolates
+  final-publication repository code from the five unrelated bundles without
+  changing public behavior, or deliberately expands the future deployment
+  package set and its exact code-only guard. Deployment approval has not been
+  requested or granted.
+
+## G-R27 complete Lambda package-closure correction — 15 August 2026
+
+- Authority and scope: state version 53 and plan revision
+  `6691f0532e14aa3caa8de1bd3dca72413f420903d27fd5d6fccb4e28b940bc69`
+  authorized only G-R27. The user selected the parent-locked complete
+  seven-package closure. G-R27 changed only
+  `scripts/aws-pipeline/create-change-set.js` and
+  `test/aws-pipeline-infrastructure.test.js`; every G-R26 application,
+  provider, persistence and behavioral change remained byte-unchanged. No
+  schema, migration, handler, template, dependency or runtime configuration
+  changed.
+- Guard correction: `provider-identity-fan-in` now requires active window
+  G-R27, supplies current manifest key/version parameters for all seven
+  handlers, and routes through exported
+  `assertProviderIdentityFanInChanges()`. The guard accepts exactly seven
+  in-place `AWS::Lambda::Function` Code modifications plus only
+  `RecoveryInvokePermission` and `RecoverySchedule` dependency
+  re-evaluations, using the existing strict engine-change validator. Missing,
+  additional, reordered, wrong-type/replacement, cross-parameter, timeout,
+  memory, concurrency, environment, IAM, mapping or other detail drift fails
+  closed. G-R24/G-R25 retain their two-function parameter and guard behavior.
+- Verification: the focused infrastructure test and the five-file G-R26
+  regression corpus passed. The final approved complete `npm test` invocation
+  passed in one run with 426 tests: 404 pass, 22 expected database-gated skips,
+  zero failures. One preceding post-build run had one packaging-only `ENOENT`
+  because `build:lambda` intentionally recreated `dist/lambda` before
+  measurements existed; regenerating the prescribed measurement artifact and
+  rerunning the complete suite produced the clean result above. The standalone
+  packaging test passed, the secret scan passed, and backend/root
+  `git diff --check` passed.
+- Package proof: all seven Node 24 ZIPs rebuilt, measured, cold-imported,
+  contained `libquery_engine-rhel-openssl-3.0.x.so.node`, and retained common
+  file-list hash
+  `eed2b39bc940fe20c2070ecc64953c74c21b7ddded3e92a64f98a98dd5ba0ff2`.
+  Their SHA-256 values exactly matched the immutable G-R26 inputs:
+  DiscoveryWorker `dd9fc2646f354000c2d1edd60071114006d85edd64bf4ad5c3ed8f0682c523b2`,
+  DomainAggregator `60e7e2b06052ab68d2ec15a499c6084c173acd935015df5e42a1ebfbe4b030cb`,
+  LeadWorker `444e546f73a8e31097cbbf0f89078b3172b5f0a1785307b2bff7431a4bb85fa3`,
+  LeadAggregator `94b3665e6c2e8b4b9238cd018a41104d77f611b9db39bba81d872f20bf3857f0`,
+  TrafficWorker `827248bd164bb1ae6ee5132671970b568a87ce574edd8ab49935886d704c0182`,
+  FinalAggregator `3b15a54619bdfefc81db6d3c7fb65ca041ecbd09c0cdadab31dd0916f1a33891`,
+  and Recovery `77c9c3027099e9a9c244779e060788fec840e17bea92ffe5a73fa12ac5d0fd4b`.
+- Boundary and stop: external actions were `none`. No AWS upload, change-set,
+  deployment, provider call, queue/DLQ operation, S3 `runs/` mutation,
+  production database write, secret, frontend, infrastructure property,
+  destructive action, stage or commit occurred. G-R27 local acceptance is
+  complete and stops at `STOP_FOR_DEPLOYMENT_APPROVAL`; the exact-byte AWS
+  approval gate remains ungranted.
+
+## G-R28 run-isolated provider work and deployment — 15 August 2026
+
+- G-R28 made global `ShopWork` non-authoritative for current-run execution,
+  retained compatible cache/profile reuse, made DataForSEO paid-ledger identity
+  run-scoped without changing the provider request, and fenced final publication
+  to current-run tasks. No schema, migration, provider request, queue, topology,
+  frontend, secret, IAM, retention, or concurrency change occurred.
+- Local verification passed: focused behavioral and infrastructure tests, the
+  complete isolated PostgreSQL integration corpus 38/38, full backend 428 tests
+  with 406 pass and 22 expected database-gated skips, seven Node 24 Lambda
+  builds/measurements/cold imports, Prisma engine inspection, packaging test,
+  secret scan, and diff hygiene.
+- Approval token
+  `248295861332cd1297bfdc79b757228b2c977a4ed3fd4badc4367edc6e70cffa`
+  authorized only seven in-place Lambda Code updates plus the expected
+  `RecoveryInvokePermission` and `RecoverySchedule` dependency re-evaluations.
+  Change set `gr28-run-isolation-repair-248295861332` passed the guarded review,
+  executed, and reached `UPDATE_COMPLETE`. All seven deployed `CodeSha256`
+  values matched their local packages, and the read-only stack inspector
+  returned `EXPECTED_ACTIVE_STACK_VERIFIED` for 72 resources, seven functions,
+  six active mappings, and 27 alarms.
+- Production run `run_HKupUp6w3rlsT_T_Wcbpj7rp` then completed with all 42
+  traffic tasks succeeded and results published. Its Final Aggregator required
+  attempt two. Read-only diagnosis found a remaining race: after the aggregator
+  claimed its traffic-stage lease, a duplicate Traffic Worker could acquire the
+  run-wide lease, making publication temporarily `PIPELINE_NOT_READY` until the
+  aggregator lease expired. That finding opened G-R29; it did not invalidate
+  G-R28's run-isolation behavior.
+
+## G-R29 atomic traffic/final lease exclusion and deployment — 15 August 2026
+
+- Authority: state versions 57-58 and plan revision
+  `bdc135612c1afbf4c63878f8b3a57745cd54b73258c4a314053e69819ab549e4`
+  authorized the exact G-R29 implementation and code-only deployment.
+- Implementation: `PrismaRunRepository.claimAwsRunLease()` now locks the
+  deterministic `traffic_crux` `PipelineStage` row and then the `Run` row in the
+  same order used by `claimAggregator()`. A live final-aggregation lease returns
+  Traffic Worker `busy`; a live Traffic Worker lease already returned Final
+  Aggregator `busy`. No schema, provider, message, artifact, timeout, recovery,
+  batching, queue, mapping, frontend, secret, IAM, or topology behavior changed.
+- Real PostgreSQL proof used two independent clients in one disposable isolated
+  schema. Final-first made traffic busy; traffic-first made final busy and final
+  acquired after release; simultaneous claims settled without deadlock as
+  exactly one `owned` and one `busy`. The focused coordinator file passed 6/6.
+  The complete integration invocation ran 39 tests: 37 passed, while one G-R9
+  boundary and its parent failed when an unrelated existing five-second lead
+  transaction took 5.267 seconds. A clean rerun of the complete 16-boundary
+  G-R9 harness passed 17/17, including that exact boundary. The remaining 22
+  integration cases had already passed unchanged.
+- Full backend verification passed 430 tests: 407 pass, 23 expected
+  database-gated skips, zero failures. All seven packages built, measured, and
+  cold-imported under Node 24 with the required RHEL Prisma engine and common
+  file-list hash
+  `eed2b39bc940fe20c2070ecc64953c74c21b7ddded3e92a64f98a98dd5ba0ff2`.
+  Packaging, secret scan, infrastructure guard, and diff hygiene passed.
+- Frozen package SHA-256 values were DiscoveryWorker
+  `99b80d7e6afb948738b2749e34756dc15a0a89d741a4fb5efe38d79f81846d29`,
+  DomainAggregator
+  `cb8ba37680c44c0a25b534b4602429520fd1c757da2535d73f8ba8c211aa036d`,
+  LeadWorker
+  `77d07493894f8decb0eb9b273f1f50ebdf62ad2b2d1dfe20a1160af1b893b7d1`,
+  LeadAggregator
+  `b085594164553f8646d9d0ea6d18dc1ca7d1d95e1b1a08bffd14c2f796cc0cd3`,
+  TrafficWorker
+  `c01cd13de4cd4c4f437523d99218806fe7a09b26dc0c883d0c54d05e9dee2620`,
+  FinalAggregator
+  `19a07b543fae91255c1460b877cfbe868f33196893f5c992341962e7265b1b86`,
+  and Recovery
+  `1996e10585fd5bd286cf0d0f97fa00b8c6361c007c2caf9f4e998da658f9b874`.
+- Approval token
+  `86eea8721600126529fca25302b9a430aca44ffe15cf6e38518ae150ee3f92db`
+  authorized only content-addressed deployment uploads and the guarded code
+  update. Change set
+  `gr29-traffic-final-lease-exclusion-86eea8721600` contained exactly the seven
+  in-place Lambda Code modifications plus conditional
+  `RecoveryInvokePermission` and non-replacing `RecoverySchedule`
+  re-evaluations. It executed to `UPDATE_COMPLETE`; all seven deployed
+  `CodeSha256` values matched local ZIPs exactly. The read-only inspector again
+  returned `EXPECTED_ACTIVE_STACK_VERIFIED` with 72 resources, seven functions,
+  six active mappings, a current secret version, and 27 alarms.
+- Boundaries: no provider call, production-database write, queue receive/purge/
+  redrive, `runs/` artifact mutation, secret change, frontend change,
+  infrastructure topology change, destructive action, stage, or commit
+  occurred. G-R29 implementation and deployment verification are complete.
+
+## Post-G-R29 parent verification and G-R30 authoring — 16 August 2026
+
+- Static verification confirmed active state version 59 stopped after G-R29,
+  all seven local ZIP SHA-256 values exactly matched the recorded G-R29 values,
+  and the Traffic Worker ZIP contained only the required
+  `libquery_engine-rhel-openssl-3.0.x.so.node` Prisma engine. The frontend AWS
+  stage presentation test and secret scan passed. A read-only AWS identity check
+  could not inspect the live stack because the `storesignal-dev` SSO token was
+  expired and refresh failed.
+- The exact elevated isolated PostgreSQL command covering
+  `aws-pipeline-end-to-end.integration.test.js`,
+  `aws-pipeline-final.integration.test.js`,
+  `aws-pipeline-traffic.integration.test.js`, and
+  `pipeline-coordinator-repository.integration.test.js` completed 29 tests:
+  28 passed and one failed. All 16 recovery boundaries, the nonempty rollback
+  case, 1,000 mixed traffic claims, collation independence, and G-R29 atomic
+  mutual exclusion passed.
+- The only failure was `G-R20 publishes 1,000 domains and 12,000 work outcomes
+  within the locked transaction timeout`. Its recorded publication steps were
+  `publication_ownership_validated=2014 ms`, `work_settled=5645 ms`,
+  `profiles_settled=6767 ms`, `scores_finalized=14291 ms`, and
+  `grants_written=14414 ms`; Prisma then returned `Transaction not found` before
+  `completeAggregatorInTransaction()` under the 15,000 ms transaction timeout.
+  The identical maximum test passed when rerun alone, proving a timing-sensitive
+  safety-margin failure.
+- The ordinary backend suite passed 48/50 files in the restricted sandbox; its
+  two documented localhost files passed 16/16 on the identical approved rerun.
+  No product assertion failed in that corpus.
+- Parent source inspection found two generic cost centers: traffic work locks
+  return `work.*` for 12,000 rows although seven work columns plus ordinal are
+  consumed, and score finalization maps complete stored leads through public
+  serialization and persistence conversion while only a narrow scoring shape
+  and five score-update fields are required. `Lead` has no mutation version or
+  scoring-input fingerprint, so moving score computation outside the atomic
+  transaction was rejected as stale-input risk.
+- Section 26 of `AWS_G14_G15_DEPLOYMENT_EXECUTION_SPECIFICATION.md` now defines
+  G-R30: generic explicit projections, narrow in-transaction score preparation,
+  a 30-second rollback safety timeout with the unchanged 15-second performance
+  target, three consecutive maximum trials, complete regression/recovery proof,
+  and seven-package measurement. It is `READY / NOT ASSIGNED`; authoring grants
+  no implementation or deployment authority.
+- External/action boundary: isolated disposable test schemas were created,
+  verified, and dropped. No AWS mutation, provider call, production database
+  write, queue/S3 action, secret, application source, frontend, infrastructure,
+  deployment, destructive action, stage, or commit occurred.
+
+## G-R30 maximum-cardinality final-publication reliability — 16 August 2026
+
+- Authority and preflight: active-state version 61, product-contract revision
+  `7b8bd93f098339849fcd532f85648440d77965acd34007ef822dbd8ab2f24907`,
+  and plan revision
+  `b7a6e2d57f848e218bfb8fbe463918d0b7b100267166a2cca2c24950828231e3`
+  authorized only G-R30. G-R29 was accepted-through. The backend worktree was
+  clean before execution; the coordination-root relocation and unrelated
+  frontend changes were preserved. `TEST_DATABASE_URL` and `DATABASE_URL` were
+  configured and proven distinct without printing either value. The existing
+  isolated-PostgreSQL helper derived a non-pooled direct test connection,
+  verified each disposable schema and schema-local migration table, and
+  dropped every schema after use.
+- Changed files and symbols: only
+  `src/prisma-run-repository.js`,
+  `test/prisma-run-repository.test.js`, and
+  `test/aws-pipeline-final.integration.test.js` changed. In the repository,
+  private `storedLeadToScoringInput()` now validates the exact stored score
+  state and projects only the nine locked scoring fields;
+  `finalizePersistedLeadScoresV3()` limits traffic scoring reads to the two
+  scoring sources and five selected fields, preserves ordered complete lead
+  reads, validates scorer identity/order/version/output, and constructs only
+  the five persisted score-update fields before the unchanged set update and
+  reconciliation. `publishAwsFinalResults()` uses the two locked explicit work
+  projections and only its hard transaction timeout changed from 15,000 to
+  30,000 ms; `maxWait` remains 5,000 ms and the performance assertion remains
+  below 15,000 ms. The maximum integration case now runs three sequential,
+  independently isolated trials with unique identities and privacy-safe step
+  diagnostics. Focused tests cover the exact projection/output and rejection
+  of malformed stored score state before any write. No schema, migration,
+  generated source, public interface, provider request, formula, fingerprint,
+  visibility boundary, batching, lease, retry, or topology changed.
+- Decisive maximum proof: the exact required four-file command
+  `ALLOW_DATABASE_TESTS=true node -r dotenv/config --test --test-concurrency=1 test/aws-pipeline-end-to-end.integration.test.js test/aws-pipeline-final.integration.test.js test/aws-pipeline-traffic.integration.test.js test/pipeline-coordinator-repository.integration.test.js`
+  passed 29/29 in one invocation in 1,329,200.903 ms. It included all 16
+  restartable recovery boundaries, nonempty rollback/failpoints, collation
+  independence, 1,000 mixed traffic claims, migrations, coordinator CAS and
+  G-R29 mutual exclusion. The three exact 1,000-domain, 1,000-terminal-task,
+  12,000-work-outcome and 1,000-lead-work trials passed without transaction
+  expiry in 9,341, 11,469, and 10,432 ms. Their complete recorded step arrays
+  were respectively
+  `input=1, ledgerEvidence=1, publicationInput=15, ownership=1366, ledgerRows=1465, cache=1465, traffic=1465, work=3465, profiles=4192, diagnostics=4192, scores=7380, grants=7604, stage=8532, beforeVisibility=8533`;
+  `input=0, ledgerEvidence=0, publicationInput=7, ownership=1311, ledgerRows=1408, cache=1408, traffic=1408, work=4128, profiles=5139, diagnostics=5139, scores=9728, grants=9832, stage=10697, beforeVisibility=10697`;
+  and
+  `input=0, ledgerEvidence=0, publicationInput=7, ownership=1233, ledgerRows=1371, cache=1371, traffic=1371, work=3987, profiles=4852, diagnostics=4852, scores=8571, grants=8686, stage=9627, beforeVisibility=9627`.
+- Verification and rerun history: the focused repository command
+  `node --test --test-concurrency=1 test/prisma-run-repository.test.js` passed
+  unchanged after the final edit and again at handoff. The focused final
+  integration file passed all three trials in complete runs. Earlier complete
+  four-file attempts were 28/29 under variable remote-Neon latency: one maximum
+  trial reached 16,824 ms; another run passed all maximum trials but the
+  unrelated existing five-second 1,000-claim transaction reached 5,206 ms and
+  then passed unchanged alone; a third maximum trial reached 15,163 ms. These
+  were safety-preserving performance misses under the new 30-second hard
+  timeout, not atomicity or data failures. The final unchanged rerun supplied
+  the required single-invocation 29/29 proof above. The complete
+  `ALLOW_DATABASE_TESTS=true npm run test:integration` attempt ran 39 tests;
+  remote Neon `P1001` connectivity and unrelated pre-existing five-second
+  transaction excursions caused 12 failures, while the remaining suites
+  passed. Every affected recovery/publication case subsequently passed in the
+  decisive isolated four-file invocation, including the complete 16-boundary
+  harness. Restricted `npm test` first passed 48/50 files with only the two
+  documented localhost restrictions; the identical approved full rerun passed
+  431 tests: 408 pass, 23 expected guarded database skips, zero failures.
+- Runtime/package proof: `npm run build:lambda`, `npm run measure:lambda`, and
+  `node --test test/aws-pipeline-packaging.test.js` passed. Every package
+  cold-imported, contained only the required
+  `libquery_engine-rhel-openssl-3.0.x.so.node` Prisma engine, and retained
+  common file-list hash
+  `eed2b39bc940fe20c2070ecc64953c74c21b7ddded3e92a64f98a98dd5ba0ff2`.
+  ZIP bytes/unzipped bytes/cold-import milliseconds/RSS bytes were:
+  DiscoveryWorker `31947473/83410684/334.203511/103477248`,
+  DomainAggregator `31911642/83271452/358.711147/98324480`,
+  LeadWorker `31952466/83436801/327.234371/99385344`,
+  LeadAggregator `31911922/83273661/540.53634/102223872`,
+  TrafficWorker `32077609/84126277/627.580235/104394752`,
+  FinalAggregator `31913053/83280629/356.06372/99094528`, and Recovery
+  `31902826/83225984/289.099765/92729344`.
+- New package SHA-256 values are DiscoveryWorker
+  `9e41f371cab2ef4f3aac6b35ee8615df7a4a480c8a5383991ad4c506e914e2c8`,
+  DomainAggregator
+  `f6522da2be02ce3151dca18c3c649c0afaf8718ec13c3f62eb112ad39270ec68`,
+  LeadWorker
+  `6bc5b37b52ddde4c99085b491a4fe9fd07e4567b2754fa5a5d367068748a1e24`,
+  LeadAggregator
+  `6c7717aedc3d3b61f818208c1e0b858852c76127573d894edb923c25f51edb16`,
+  TrafficWorker
+  `9180b499f30fb52957fc738efc2c3e8bd569935a03db778114a559ddb8dccaee`,
+  FinalAggregator
+  `f9d77c65c7795ef410a0b76b082aa0df4525ab73d44e954d30eb0d4fa8822e13`,
+  and Recovery
+  `376ff4caa575699d805fd458333c30f0703e7f646caf58ca159591d01d7b50b6`.
+  These seven new local package bytes are the only deployable G-R30 closure;
+  deployment remains separately gated.
+- Hygiene, skips, risk, and boundary: `npm run check:secrets`, package
+  inspection, and backend/root `git diff --check` passed. Database-gated skips
+  in ordinary `npm test` were expected and their required isolated corpus ran.
+  Residual risk is remote-database latency variability: prior trials crossed
+  the 15-second performance target, while the final required three-trial proof
+  passed and the 30-second timeout preserves rollback safety. No AWS mutation,
+  package upload, change set, deployment, provider call, queue receive/purge/
+  redrive, S3 `runs/` mutation, production-database write, secret/configuration
+  change, frontend or infrastructure edit, destructive action, stage, commit,
+  or agent-created production run occurred. G-R30 is locally accepted and
+  stops at `STOP_FOR_DEPLOYMENT_APPROVAL`.
+
+## G-R31 maximum-publication performance-contract correction — 16 August 2026
+
+- Authority and decision: after independent parent verification reproduced a
+  safe 18,473 ms maximum-cardinality publication, the user explicitly selected
+  a 25,000 ms performance acceptance target with the existing 30,000 ms hard
+  transaction timeout. Append-only Section 27 records the correction. Active
+  state version 63 assigned only G-R31 against product-contract revision
+  `7b8bd93f098339849fcd532f85648440d77965acd34007ef822dbd8ab2f24907`
+  and plan revision
+  `45d75637fdb8d4a829038369f7177eb524652cc97f034f0a626c65c6d3a1d940`.
+- Change scope: G-R31 changed only
+  `test/aws-pipeline-final.integration.test.js`, replacing the maximum-test
+  threshold and label from 15,000 ms to 25,000 ms. Production source,
+  transaction timeout, schema, payloads, behavior, infrastructure, and package
+  inputs did not change.
+- Decisive database proof: the exact four-file command
+  `ALLOW_DATABASE_TESTS=true node -r dotenv/config --test --test-concurrency=1 test/aws-pipeline-end-to-end.integration.test.js test/aws-pipeline-final.integration.test.js test/aws-pipeline-traffic.integration.test.js test/pipeline-coordinator-repository.integration.test.js`
+  passed 29/29 with no skips or failures in 1,366,407.035295 ms. All 16 durable
+  recovery boundaries passed. The three independently isolated exact
+  1,000-domain/12,000-work-outcome trials passed in 10,821 ms, 8,793 ms, and
+  9,055 ms. Their `before_run_visibility` timings were 10,025 ms, 8,024 ms,
+  and 8,206 ms respectively; all existing atomicity, cardinality, fencing,
+  rollback, ownership, fingerprint, visibility, and cleanup assertions passed.
+- Regression and package closure: `npm test` passed 431 tests: 408 passed,
+  23 expected database-gated skips, and zero failures. `npm run check:secrets`
+  and backend/root `git diff --check` passed. Existing G-R30 package hashes were
+  unchanged: DiscoveryWorker
+  `9e41f371cab2ef4f3aac6b35ee8615df7a4a480c8a5383991ad4c506e914e2c8`,
+  DomainAggregator
+  `f6522da2be02ce3151dca18c3c649c0afaf8718ec13c3f62eb112ad39270ec68`,
+  LeadWorker
+  `6bc5b37b52ddde4c99085b491a4fe9fd07e4567b2754fa5a5d367068748a1e24`,
+  LeadAggregator
+  `6c7717aedc3d3b61f818208c1e0b858852c76127573d894edb923c25f51edb16`,
+  TrafficWorker
+  `9180b499f30fb52957fc738efc2c3e8bd569935a03db778114a559ddb8dccaee`,
+  FinalAggregator
+  `f9d77c65c7795ef410a0b76b082aa0df4525ab73d44e954d30eb0d4fa8822e13`,
+  and Recovery
+  `376ff4caa575699d805fd458333c30f0703e7f646caf58ca159591d01d7b50b6`.
+- Boundary and residual risk: the 25-second target retains at least five
+  seconds before the hard rollback ceiling. Remote-database latency remains
+  variable, but the complete required invocation passed with more than
+  14 seconds of performance headroom in every maximum trial. No AWS mutation,
+  deployment, package upload, provider call, production-database write, queue
+  or S3 action, secret/configuration change, frontend or infrastructure edit,
+  destructive action, staging, commit, or agent-created run occurred. G-R31 is
+  locally accepted and stops at `STOP_FOR_DEPLOYMENT_APPROVAL`.

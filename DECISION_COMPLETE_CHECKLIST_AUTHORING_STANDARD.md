@@ -1,11 +1,15 @@
-# Decision-Complete Checklist Authoring Standard
+# Decision-Complete Checklist Authoring Standard (Historical)
 
 ## Status and purpose
 
-This is the authoritative parent-planner standard for creating future
-implementation checklists from product-level requirements. It supersedes
-`PARENT_AGENT_CHECKLIST_INSTRUCTIONS.md` for new checklist authoring. The older
-file is retained as the first draft and as historical context.
+This file is retained as historical context and is not authoritative for new
+checklist authoring. The sole current authority is
+`PROJECT_AGNOSTIC_DECISION_COMPLETE_CHECKLIST_AUTHORING_STANDARD.md`. This file
+previously superseded `PARENT_AGENT_CHECKLIST_INSTRUCTIONS.md`; neither
+historical document overrides the project-agnostic standard.
+
+Normative language below is preserved only to explain the historical design; it
+does not govern a current assignment.
 
 The standard exists to make a high-reasoning parent agent do all material
 discovery and design work before implementation begins, so a default-reasoning
@@ -776,6 +780,10 @@ prevent each failure below:
 | Predictable account/approval/measurement gate surprised the user mid-run | Preflight Gate Report requires trigger, branches, owner, and resumption before implementation. |
 | Placeholder handlers falsely certified final Lambda/package compatibility | Build/package ledger labels scaffold proof provisional, requires a representative production dependency closure before readiness, repeats emitted-artifact cold import when real imports are wired, and preauthorizes the prescribed correction owner. |
 | A schema URL parameter falsely certified migration isolation while pooled/raw SQL reached `public` | Database transport/isolation ledger separates direct migration and pooled runtime endpoints, verifies server `current_schema()` plus namespace-local migration history before behavioral writes, centralizes disposable-schema setup, and forbids cleanup of shared/public objects. |
+| Several shop/task owners shared one provider/cache identity, but planning retained only one owner or rejected equivalent cache fan-out | Identity, ownership, external-call, and persistence ledgers must separately enumerate global provider/cache keys and every per-shop owner. Require deterministic identity fan-in, all-owner claim/fencing, one provider call per unique identity, per-owner result fan-out, exact-equivalent global cache coalescing, conflicting-duplicate rejection, shared-reuse tests, and a two-owner/one-identity forward/backward simulation. |
+| A shared repository module changed every emitted Lambda ZIP although the edited methods had only two runtime callers | Package closure is determined by emitted byte hashes, not business-call reachability. Before locking a selective deployment, build every deployable artifact after representative source edits or use bundler metadata proving exclusion; define the exact branch for either module isolation or expansion to the complete changed-hash set. |
 
-If the parent cannot point to the exact prevention mechanism for a newly found
-planning failure, update this standard before using it again.
+For current authoring, a newly found planning failure is handled under the
+change rules in
+`PROJECT_AGNOSTIC_DECISION_COMPLETE_CHECKLIST_AUTHORING_STANDARD.md`; this
+historical file is not updated as the governing standard.

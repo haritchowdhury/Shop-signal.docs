@@ -2642,3 +2642,34 @@ relocation state) and outside the `frontend/` repository boundary;
 git-based discovery from inside `frontend/` cannot find it. Leaves reach
 it only via the explicit path supplied at dispatch (§9.1). Committing
 root coordination documents remains an owner action.
+
+---
+
+## 10. Addendum: I-F14 `SelectionReview` draft-channel amendment (requester-authorized 2026-08-19)
+
+Appended under explicit requester authorization ("i am authorizing this
+one dicision to alter the frozen contract", 2026-08-19, together with
+authorizing the window agent to execute the correction directly as
+`KI-W5-C001`). Frozen §3.7 text is unchanged; this addendum supersedes
+the `SelectionReview` props definition as the operative contract.
+
+**Amended frozen interface:** `SelectionReview({ view, draft, conflicts,
+saving, staleConflict, onSave, onFinalize, finalizeState, onDraftChange }: {
+view: ResearchView; draft: SelectionItem[]; conflicts: SelectionConflict[];
+saving: boolean; staleConflict: boolean; onSave: () => void; onFinalize: () =>
+void; finalizeState: "idle" | "handing-off"; onDraftChange: (draft:
+SelectionItem[]) => void })`. The component is fully controlled: every
+draft mutation (manual add, remove, edit commit) computes the next draft
+and calls exactly `onDraftChange(next)`; the parent (`KI-W5-S016`) owns
+the single draft state, passes it back as the `draft` prop, and saves
+that copy via `saveKeywordSelection`. Rationale: the original props had
+no upward channel, making the block's manual-add/edit/remove features
+silently lost on save (`EV-KI-W5-S18` Defect 2).
+
+**Amended manual-item identity rule:** manual item IDs are generated in
+the component as `ksi_` + exactly 12 lowercase hex chars (deterministic
+FNV-1a-derived 48-bit digest of the normalized text with an in-draft
+collision salt), matching the authoritative backend PUT validation
+`/^ksi_[a-f0-9]{12}$/u` (`selection.js:151`). `newClientRequestId()` is
+not an item ID source. The parent retains sole ownership of
+`clientRequestId` for finalize.
