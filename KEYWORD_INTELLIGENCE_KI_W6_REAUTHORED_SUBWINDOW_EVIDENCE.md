@@ -1183,3 +1183,489 @@ The window agent stops here. No implementation leaf or gate began.
 - **External mutations/cost:** none; `$0.00`; no implementation, test, build,
   browser, database, provider, AWS, production, destructive, commit, push, or
   KI-W7 action.
+
+---
+
+## `KI-W6-S101` file-subwindow execution certificate
+
+```yaml
+certificate: FILE-SUBWINDOW-EXECUTED
+parent_window_id: KI-W6
+subwindow_id: KI-W6-S101
+assignment_id: ASG-KI-W6-S101
+agent_identity: KI-W6-S101-LEAF-AGENT
+writable_file: frontend/components/keyword-intelligence/research-dashboard.tsx
+starting_file_digest: 19494a99a2be28683167908289176bf44ebb8d0bb1eb40f63cc6d1cd770c6337
+ending_file_digest: 68a7ec84d77a955122dfb9ca1767ab1a52c2a2f2125db5c34581e5e9af8f5984
+starting_repository_change_set_digest: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+attributable_changed_file_set: [frontend/components/keyword-intelligence/research-dashboard.tsx]
+required_local_cases: [S101-C1, S101-C2, S101-C3, S101-C4]
+registered_local_cases: [S101-C1, S101-C2, S101-C3, S101-C4]
+executed_local_cases: [S101-C1, S101-C2, S101-C3, S101-C4]
+skipped_local_cases: []
+duplicate_case_ids: []
+unexpected_case_ids: []
+missing_activation_witnesses: []
+negative_controls_expected: 0
+negative_controls_falsified: 0
+commands:
+  - "grep -cF 'router.push(handoff.statusUrl)' frontend/components/keyword-intelligence/research-dashboard.tsx -> count 0 (exit 1) [S101-C1]"
+  - "grep -cF 'router.push(`/runs/${encodeURIComponent(handoff.run.runId)}`)' frontend/components/keyword-intelligence/research-dashboard.tsx -> 2 [S101-C2]"
+  - "wc -l frontend/components/keyword-intelligence/research-dashboard.tsx -> 529 [S101-C3]"
+  - "git -C frontend diff --numstat -- components/keyword-intelligence/research-dashboard.tsx -> 2 inserted, 2 deleted [S101-C4]"
+deferred_integration_checks: [V2 lint/tsc/build of the changed file, W6-NAV-01, W6-NAV-02, W6-NAV-03, W6-NC-01 (registered in S105)]
+external_mutations: []
+prohibited_actions_observed: []
+successor_work_started: false
+direct_parent_communication: false
+status: AWAITING_WINDOW_REVIEW
+```
+
+Applied transformation: anchor A (line 266, `handleFinalize` success branch)
+then anchor B (line 300, `handleRetryHandoff` success branch), each
+`      router.push(handoff.statusUrl);` →
+``      router.push(`/runs/${encodeURIComponent(handoff.run.runId)}`);``
+with six-space indentation preserved; both replacements single-line for
+single-line; all other 527 lines byte-identical (C3/C4 witnesses). No
+import, state, prop, component, type, helper, fallback, route-probe, or
+conditional change; `startKeywordResearchRun` return shape consumed
+unchanged; no I/O of any kind added.
+
+---
+
+## `EV-KI-W6-R15` — S101 independent review disposition
+
+- **Timestamp:** 2026-08-20T23:40:00+05:30
+- **Actor/role:** `KI-W6-WINDOW-AGENT` (independent leaf review, standard §8
+  13-point)
+- **Independent inspection:** full `git -C frontend diff` read directly —
+  exactly two single-line replacements inside the two pinned success
+  branches, no other byte change; anchors verified pre-edit at lines
+  266/300 against starting digest `19494a99…` (recomputed byte-equal before
+  dispatch); `frontend` worktree was clean pre-dispatch (change-set digest
+  `e3b0c442…` per §3.1).
+- **P1–P2 baselines:** assignment identity, writable file, pinned starting
+  digest, and clean baseline all matched. **T1/V1:** transformation and all
+  four LOCAL_NOW witnesses exact (C1 0/exit 1, C2 2, C3 529, C4 2/2).
+  **V2:** `git -C frontend status --porcelain` shows exactly
+  ` M components/keyword-intelligence/research-dashboard.tsx` — the
+  attributable changed-file set equals the writable file. **V3:** required =
+  registered = executed = {C1..C4}, zero skips. **H2:** no prohibited
+  action, second-file edit, successor work, external mutation, or parent
+  communication.
+- **Disposition:** `ACCEPTED_FOR_INTEGRATION`. Deferred V2 build/lint and
+  V3 navigation gates (`W6-NAV-01..03`, `W6-NC-01`) remain registered in
+  `S105`/`I101` per the approved decomposition.
+- **State transition:** S2 records S101 EXECUTED → ACCEPTED;
+  `next_subwindow: KI-W6-S102` (predecessor `KI-W6-S101` accepted).
+- **External mutations/cost:** the single writable file only; `$0.00`.
+
+---
+
+## `KI-W6-S102` file-subwindow execution certificate
+
+```yaml
+certificate: FILE-SUBWINDOW-EXECUTED
+parent_window_id: KI-W6
+subwindow_id: KI-W6-S102
+assignment_id: ASG-KI-W6-S102
+agent_identity: KI-W6-S102-LEAF-AGENT
+writable_file: frontend/test/browser/keyword-intelligence-dashboard.mjs
+starting_file_digest: d30bed66cdc77ff53438515345be01baf2e1ad90ea2b9b8c8ab71c47f339c398
+ending_file_digest: 17ae402882f64fd8da6aba61161343f119aa1b7a62edbed0cbf97d9bbe0896b7
+starting_repository_change_set_digest: d1349d2efaeb4f235fdc62a01f529a7c4c861e814964c4a12c05eba5f27f0be2
+attributable_changed_file_set: [frontend/test/browser/keyword-intelligence-dashboard.mjs]
+required_local_cases: [S102-C1, S102-C2, S102-C3, S102-C4, S102-C5, S102-C6]
+registered_local_cases: [S102-C1, S102-C2, S102-C3, S102-C4, S102-C5, S102-C6]
+executed_local_cases: [S102-C1, S102-C2, S102-C3, S102-C4, S102-C5, S102-C6]
+skipped_local_cases: []
+duplicate_case_ids: []
+unexpected_case_ids: []
+missing_activation_witnesses: []
+negative_controls_expected: 0
+negative_controls_falsified: 0
+commands:
+  - "node --check frontend/test/browser/keyword-intelligence-dashboard.mjs -> exit 0 [S102-C1]"
+  - "grep -c 'ki-r5-fin-nav-witness' ... -> 0 (exit 1) [S102-C2]"
+  - "grep -cF 'run_kiw5_hostile_status_witness0001' ... -> 1 [S102-C3]"
+  - "grep -cF 'encodeURIComponent(runHandoff.run.runId)' ... -> 1 [S102-C4]"
+  - "grep -c 'runScenario(' ... -> 26 [S102-C5]"
+  - "git -C frontend diff --numstat -- test/browser/keyword-intelligence-dashboard.mjs -> 8 inserted, 4 deleted [S102-C6]"
+deferred_integration_checks: [V2 eslint of this file, W6-NAV-01, W6-NAV-02, W6-NAV-03, W6-NC-01 (executed in S105/V3)]
+external_mutations: []
+prohibited_actions_observed: []
+successor_work_started: false
+direct_parent_communication: false
+status: AWAITING_WINDOW_REVIEW
+```
+
+Applied transformation: only the `R5-FIN-01` block — comments −2/+3;
+`hostileStatusPath` const inserted before the `evaluate`; the fixture
+assignment replaced with `${JSON.stringify(hostileStatusPath)}`;
+`workspacePath` const inserted after the three `fin` assertions; the
+pathname `waitFor` replaced with the
+`location.pathname === ${JSON.stringify(workspacePath)}` /
+`"finalize workspace navigation witness"` form; hostile-path non-visit
+`assert` inserted after it; `capture("R5-FIN-01-finalize")` and every other
+line byte-identical. Predecessor S101 accepted (`EV-KI-W6-R15`);
+starting change-set digest `d1349d2e…` recomputed from the actual
+changed-path set `{F-001}` under the sorted-member-plus-LF formula
+(§3.1) — byte-equal.
+
+---
+
+## `EV-KI-W6-R16` — S102 independent review disposition
+
+- **Timestamp:** 2026-08-20T23:55:00+05:30
+- **Actor/role:** `KI-W6-WINDOW-AGENT` (independent leaf review)
+- **Independent inspection:** full diff read directly — exactly 8 inserted /
+  4 deleted, all inside the `R5-FIN-01` block; no other R5/W5 case,
+  registration (26 unchanged), screenshot, capture, fetch-interception,
+  presentation assertion, registry, output-path, helper, port, build, or
+  browser-lifecycle line touched. Hostile literal occurs exactly once (its
+  declaration); the assignment and assert reference the variable.
+  `hostileStatusPath`/`workspacePath` counts (3/2) confirm block-local use
+  only. `node --check` proves syntax.
+- **P1–P2:** assignment identity, pinned starting digest `d30bed66…`
+  (recomputed byte-equal), predecessor S101 accepted, and change-set digest
+  `d1349d2e…` all matched. **T1/V1:** all six witnesses exact. **V2:**
+  workspace delta since S101 = exactly this writable file. **V3:**
+  required = registered = executed = {C1..C6}, zero skips. **H2:** no
+  prohibited action, second-file edit, successor work, external mutation,
+  or parent communication.
+- **Disposition:** `ACCEPTED_FOR_INTEGRATION`.
+- **State transition:** S2 records S102 EXECUTED → ACCEPTED;
+  `next_subwindow: KI-W6-S103`.
+- **External mutations/cost:** the single writable file only; `$0.00`.
+
+---
+
+## `KI-W6-S103` file-subwindow execution certificate
+
+```yaml
+certificate: FILE-SUBWINDOW-EXECUTED
+parent_window_id: KI-W6
+subwindow_id: KI-W6-S103
+assignment_id: ASG-KI-W6-S103
+agent_identity: KI-W6-S103-LEAF-AGENT
+writable_file: email_scraper/test/helpers/keyword-intelligence-e2e-harness.js
+starting_file_digest: ABSENT
+ending_file_digest: 93ee3a3b31275a84babe27e3b37519bb4b86e3bd1571485f3bf3486c3b8c5a26
+starting_repository_change_set_digest: fbfdac4a76ef0754ab3de904905a85b38b3777b2ad39926625f46ae4ae503954
+attributable_changed_file_set: [email_scraper/test/helpers/keyword-intelligence-e2e-harness.js]
+required_local_cases: [S103-C1, S103-C2, S103-C3, S103-C4, S103-C5, S103-C6, S103-C7, S103-C8, S103-C9, S103-C10, S103-C11, S103-C12, S103-C13, S103-C14, S103-C15, S103-C16]
+registered_local_cases: [S103-C1, S103-C2, S103-C3, S103-C4, S103-C5, S103-C6, S103-C7, S103-C8, S103-C9, S103-C10, S103-C11, S103-C12, S103-C13, S103-C14, S103-C15, S103-C16]
+executed_local_cases: [S103-C1, S103-C2, S103-C3, S103-C4, S103-C5, S103-C6, S103-C7, S103-C8, S103-C9, S103-C10, S103-C11, S103-C12, S103-C13, S103-C14, S103-C15, S103-C16]
+skipped_local_cases: []
+duplicate_case_ids: []
+unexpected_case_ids: []
+missing_activation_witnesses: []
+negative_controls_expected: 0
+negative_controls_falsified: 0
+commands:
+  - "node --check email_scraper/test/helpers/keyword-intelligence-e2e-harness.js -> exit 0 [S103-C1]"
+  - "grep -cF structural witnesses C2..C16 -> exactly 1 each (C9: eight fault IDs each 1) [S103-C2..C16]"
+  - "grep -cE 'KeywordSearchVolume|data/output|output\\.json|sqlite|\\.py\\b|python' -> 0 (exit 1) [S103-C4]"
+  - "grep -c 'preloadLead' -> 0 (exit 1) [S103-C10]"
+deferred_integration_checks: [all behavioral claims: W6-FLOW-*, W6-RES-*, NC-02..09, NC-12, operation counts, schema lifecycle — V3 only]
+external_mutations: []
+prohibited_actions_observed: []
+successor_work_started: false
+direct_parent_communication: false
+status: AWAITING_WINDOW_REVIEW
+```
+
+Construction followed the S1 §4 S103 recipe steps 1–10 against verified
+source anchors; no database connection, build, or test execution occurred
+during the leaf. Leaf-agent-reported source divergences (all resolved by
+following real source, none a structural-check failure): (1) frozen 12-key
+config literal omits `googleApiKey`/`googleSearchEngineId`/`openaiApiKey`
+required only by direct `POST /api/runs` config assertion paths the W6 flow
+never touches; (2) `research.selectionFingerprint` projected from the
+linked handoff row (no Prisma column on `KeywordResearch`); (3) keyword
+provider throttle compares against the PostgreSQL clock, so the harness
+uses the exact `resetThrottle` anchor from
+`keyword-intelligence-worker.test.js:177-179` alongside the mandated
++2000 ms clock advance; (4) **integration risk flagged for S105/V3:**
+production discovery identity resolution
+(`processDiscoveryMessage` → `resolveStoreIdentity` → `requestText` →
+`globalThis.fetch` + `dns.lookup`) exposes no runtime injection seam; the
+leaf fabricated none (correct per contract rules) and claims zero
+behavioral parity; (5) Google trace `runQueryId` records the received
+query text — the only identity the `searchPage` seam receives.
+
+---
+
+## `EV-KI-W6-R17` — S103 independent review disposition
+
+- **Timestamp:** 2026-08-21T00:20:00+05:30
+- **Actor/role:** `KI-W6-WINDOW-AGENT` (independent leaf review)
+- **Independent inspection:** all C1–C16 commands re-executed directly by
+  the window agent — every count exact (frozen signature/return statement,
+  `pad2`/`pad3`, three synthesis templates, host template, `TASK_COSTS`,
+  `SCHEMA_PREFIX`, `DISPATCHER_METHODS`, `SCHEMA_ABSENCE_QUERY`,
+  `HarnessCleanupError`, `BACKEND_API_TOKEN` literal, `logger: () => {}`,
+  eight fault IDs each once; zero forbidden tokens).
+- **P1–P2:** assignment identity, ABSENT starting file, and starting
+  change-set digest `fbfdac4a…` (changed set `{F-001, F-002}` recomputed
+  under the §3.1 formula — S101/S102 frontend changes only) matched;
+  backend worktree was clean pre-dispatch. **V2:** backend delta = exactly
+  the one new untracked helper. **V3:** required = registered = executed =
+  {C1..C16}, zero skips. **H2:** no prohibited action, production/package
+  edit, database connection, second-file edit, successor work, external
+  mutation, or parent communication.
+- **Divergence ruling:** all five leaf-reported divergences follow real
+  source within the frozen literals; divergence (4) is recorded as a V3
+  integration risk for `S105`/`I101` (discovery identity seam), not an
+  S103 defect — the leaf's acceptance basis is structural with zero
+  behavioral parity claims by design.
+- **Disposition:** `ACCEPTED_FOR_INTEGRATION`.
+- **State transition:** S2 records S103 EXECUTED → ACCEPTED;
+  `next_subwindow: KI-W6-S104`.
+- **External mutations/cost:** the single writable file only; `$0.00`.
+
+---
+
+## `KI-W6-S104` file-subwindow execution certificate
+
+```yaml
+certificate: FILE-SUBWINDOW-EXECUTED
+parent_window_id: KI-W6
+subwindow_id: KI-W6-S104
+assignment_id: ASG-KI-W6-S104
+agent_identity: KI-W6-S104-LEAF-AGENT
+writable_file: email_scraper/test/fixtures/keyword-intelligence/ki-w6-enforcement-manifest-v1.json
+starting_file_digest: ABSENT
+ending_file_digest: ea3a5471e33f5dcc656a6b522e8d379f596caad158c0bd3ff2315e93d145e475
+starting_repository_change_set_digest: b94659a0de51b39e36e984c858ee4f0fa0effefaba27140ea29146fa947515e9
+attributable_changed_file_set: [email_scraper/test/fixtures/keyword-intelligence/ki-w6-enforcement-manifest-v1.json]
+required_local_cases: [S104-C1, S104-C2, S104-C3, S104-C4]
+registered_local_cases: [S104-C1, S104-C2, S104-C3, S104-C4]
+executed_local_cases: [S104-C1, S104-C2, S104-C3, S104-C4]
+skipped_local_cases: []
+duplicate_case_ids: []
+unexpected_case_ids: []
+missing_activation_witnesses: []
+negative_controls_expected: 0
+negative_controls_falsified: 0
+commands:
+  - "node -e strict JSON.parse -> S104-C1 OK, exit 0 [S104-C1]"
+  - "node -e keys/groups/counts/uniqueness/order script -> S104-C2 OK, exit 0 [S104-C2]"
+  - "node -e sha256 member-plus-LF digest script -> S104-C3 OK (all four group digests + global digest recompute), exit 0 [S104-C3]"
+  - "node -e final-LF/no-BOM byte script -> S104-C4 OK, exit 0 [S104-C4]"
+deferred_integration_checks: [manifest conformance execution (W6-CONF-01, W6-NC-10) in V3]
+external_mutations: []
+prohibited_actions_observed: []
+successor_work_started: false
+direct_parent_communication: false
+status: AWAITING_WINDOW_REVIEW
+```
+
+File created with exactly the S1 §4 literal bytes (two-space indent, one
+final LF, no BOM, no trailing spaces): 26 unique case IDs in groups 3/13/4/6
+and 13 negative controls, all ascending; the five `DEC-KI-038` digest
+literals verified against independent recomputation.
+
+---
+
+## `EV-KI-W6-R18` — S104 independent review disposition
+
+- **Timestamp:** 2026-08-21T00:35:00+05:30
+- **Actor/role:** `KI-W6-WINDOW-AGENT` (independent leaf review)
+- **Independent inspection:** all four exact check scripts re-executed by
+  the window agent — C1 strict parse OK, C2 top-level/group keys,
+  3/13/4/6 counts, 26 unique cases, 13 controls, ascending orders all OK,
+  C3 all four group digests and the global digest recompute equal to the
+  manifest literals, C4 final LF present and no BOM.
+- **P1–P2:** assignment identity, ABSENT starting file, and starting
+  change-set digest `b94659a0…` (changed set `{F-001, F-002, F-003}`
+  recomputed under the §3.1 formula) matched. **V2:** backend delta since
+  S103 = exactly the one new fixture. **V3:** required = registered =
+  executed = {C1..C4}, zero skips. **H2:** no prohibited action, manifest
+  execution, second-file edit, successor work, external mutation, or
+  parent communication.
+- **Disposition:** `ACCEPTED_FOR_INTEGRATION`.
+- **State transition:** S2 records S104 EXECUTED → ACCEPTED;
+  `next_subwindow: KI-W6-S105`.
+- **External mutations/cost:** the single writable file only; `$0.00`.
+
+---
+
+## `KI-W6-S105` file-subwindow execution certificate
+
+```yaml
+certificate: FILE-SUBWINDOW-EXECUTED
+parent_window_id: KI-W6
+subwindow_id: KI-W6-S105
+assignment_id: ASG-KI-W6-S105
+agent_identity: KI-W6-S105-LEAF-AGENT
+writable_file: frontend/test/browser/keyword-intelligence-e2e.mjs
+starting_file_digest: ABSENT
+ending_file_digest: 25b30bba733e4d77e3912ae1079448065e035e1e9f58b91887d874430595e7b0
+starting_repository_change_set_digest: dc48365f600adb2d36194745f5c6433ee34339626c03bf6f509245661ee2dbcc
+attributable_changed_file_set: [frontend/test/browser/keyword-intelligence-e2e.mjs]
+required_local_cases: [S105-C1, S105-C2, S105-C3, S105-C4, S105-C5, S105-C6, S105-C7, S105-C8, S105-C9, S105-C10, S105-C11]
+registered_local_cases: [S105-C1, S105-C2, S105-C3, S105-C4, S105-C5, S105-C6, S105-C7, S105-C8, S105-C9, S105-C10, S105-C11]
+executed_local_cases: [S105-C1, S105-C2, S105-C3, S105-C4, S105-C5, S105-C6, S105-C7, S105-C8, S105-C9, S105-C10, S105-C11]
+skipped_local_cases: []
+duplicate_case_ids: []
+unexpected_case_ids: []
+missing_activation_witnesses: []
+negative_controls_expected: 0
+negative_controls_falsified: 0
+commands:
+  - "node --check frontend/test/browser/keyword-intelligence-e2e.mjs -> exit 0 [S105-C1]"
+  - "grep -cF structural witnesses C2..C5, C7, C9..C11 -> exactly the expected counts (C11: exactly 2 restart sites) [S105-C2..C5, C7, C9..C11]"
+  - "grep -cE 'Page.captureScreenshot|review-evidence' -> 0 (exit 1) [S105-C6]"
+  - "grep -cF 'kiw6-local-e2e-cookie-secret-0000000000000000000000' -> 0 (exit 1; secret never copied into the emitter) [S105-C8]"
+deferred_integration_checks: [execution of all 26 cases, 13 controls, digest recomputation, certificate emission, schema lifecycle assertions — V3 only]
+external_mutations: []
+prohibited_actions_observed: []
+successor_work_started: false
+direct_parent_communication: false
+status: AWAITING_WINDOW_REVIEW
+```
+
+Construction followed S1 §4 S105 steps 1–13 with the accepted
+dashboard.mjs CDP/spawn patterns and the A4 authoritative coverage
+matrix/substitute-fidelity ledger copied as literal case/control
+assertions. Leaf-agent-reported divergences (all resolved in S1's favor;
+none weakens an oracle): (1) conformance activations ordered before the
+controls so `NC-11` mutates the literal 26-witness map, with `CONF-02/04`
+live oracles re-asserted after the controls and in the final manifest-order
+pass; (2) A4 `NC-02/NC-11` alternatives not taken — S1's frozen
+single-mechanism allocation followed; (3) `W6-NAV-03` hostility realized
+via the real backend's valid-but-distinct `/api/runs/<id>` statusUrl (no
+response substitution), asserting zero document navigations to it;
+(4) RunQuery identity set captured as the 100 unique workspace query texts
+cross-checked against durable `queryCount === 100` (frozen snapshot exposes
+only the count); (5) `W6-RES-03` corrupt injection after the full expansion
+drain with the typed rejection surfacing at the anchor-screen artifact read
+(`2/2/2/0`). The known V3 integration risk from `EV-KI-W6-R17` (discovery
+identity seam) remains flagged for `I101`.
+
+---
+
+## `EV-KI-W6-R19` — S105 independent review disposition
+
+- **Timestamp:** 2026-08-21T01:05:00+05:30
+- **Actor/role:** `KI-W6-WINDOW-AGENT` (independent leaf review)
+- **Independent inspection:** all C1–C11 commands re-executed directly by
+  the window agent — syntax valid; sole certificate emission site; port
+  literal; both frozen exclusion lists; harness/manifest specifiers each
+  exactly once; skip-build and database opt-in literals each exactly once
+  (the opt-in name is message-built without a second literal occurrence);
+  zero screenshot/review tokens; zero cookie-secret copies; cleanup-order
+  literal; single absence-witness assertion; exactly two
+  `await harness.restartBackend();` sites (restart A post-keyword-faults,
+  restart B post-selection-mutation).
+- **P1–P2:** assignment identity, ABSENT starting file, and starting
+  change-set digest `dc48365f…` (changed set `{F-001..F-004}` recomputed
+  under the §3.1 formula) matched. **V2:** frontend delta = exactly the one
+  new e2e file beside the two accepted S101/S102 modifications. **V3:**
+  required = registered = executed = {C1..C11}, zero skips. **H2:** no
+  prohibited action, build/browser/database execution, second-file edit,
+  successor work, external mutation, or parent communication.
+- **Divergence ruling:** all five divergences stay within S1's frozen
+  mechanism allocations; the `W6-NAV-03` realization and the RunQuery
+  identity-set capture are recorded for the parent's V3 attention but are
+  not S105 defects — the leaf's acceptance basis is structural with zero
+  executed behavioral evidence by design.
+- **Disposition:** `ACCEPTED_FOR_INTEGRATION`.
+- **State transition:** S2 records S105 EXECUTED → ACCEPTED; all five
+  leaves accepted; `next: I101` (integration assessment, window agent).
+- **External mutations/cost:** the single writable file only; `$0.00`.
+
+---
+
+## `EV-KI-W6-R20` — Integration assessment `KI-W6-I101` (executed by the window agent)
+
+- **Timestamp:** 2026-08-21T01:35:00+05:30
+- **Actor/role:** `KI-W6-WINDOW-AGENT` (integration assessment, personally
+  executed)
+- **Inputs:** assembled window state (S2 v12), actual diffs and ending
+  digests of all five files, leaf certificates `KI-W6-S101..S105`,
+  review dispositions `EV-KI-W6-R15..R19`.
+
+### Checklist I1–I10
+
+- [x] I1 All five file sub-windows independently accepted
+  (`ACCEPTED_FOR_INTEGRATION` in `EV-KI-W6-R15..R19`).
+- [x] I2 Assembled changed-file set equals the planned five-path set
+  (backend: two untracked W6 paths, V1-9 exact; frontend: two modified W6
+  paths + one untracked W6 path, V1-10 exact; five-path set digest
+  `d28ae178…` re-verified; set contained by parent-authorized scope).
+- [x] I3 Requirement/decision traceability intact (A4 T1–T5 → S101–S105 →
+  matrix rows → witnesses; no owned file changed since acceptance).
+- [x] I4 Gates executed with witnesses: **V1 PASS** (all 12 rows exact —
+  node checks, S104 scripts, S101/S102/S103/S105 command sets, both
+  porcelain sets byte-exact); **V2 PASS** (`npm run check` from `frontend/`
+  exit 0, fail 0, compiled, `.next` preserved); **V4 PASS** (backend
+  `npm test` exit 0 — 677 pass / 0 fail / guarded skips;
+  `npm run check:secrets` clean); **V6 PASS** (V6-1/V6-2 empty, V6-3
+  exactly `8\t4`, V6-4 all seven pinned hashes byte-equal). **V3 FAIL**
+  (deterministic conformance failure; detail below). **V5 not runnable**
+  (recomputes the V3 certificate, which was correctly never emitted).
+- [ ] I5 Not satisfiable until V3 passes (no certificate to compare).
+- [ ] I6 Not satisfiable until V3 passes (controls never executed:
+  `controlsExecuted: 0`).
+- [x] I7 Substitute-fidelity claims are bounded by the A4 ledger in the
+  emitter (structural); R5 integrity proven by V6-2/V6-3; W3/R4 packaging
+  unchanged by V6-4. Final behavioral confirmation pending V3.
+- [x] I8 No prohibited, successor, external, destructive, secret-bearing,
+  or out-of-scope action occurred; no commit/push; production trees outside
+  the five paths byte-identical (V6-1/V6-2).
+- [x] I9 Current source and complete diffs independently inspected at
+  `EV-KI-W6-R15..R19`; gate failures reproduced from the real tree, not
+  leaf summaries.
+- [x] I10 **PARENT_BLOCKED** — exact blocker below.
+
+### V3 execution record (single run, `KI_W6_SKIP_BUILD=1`)
+
+Command (from `frontend/`): `ALLOW_DATABASE_TESTS=true
+KI_W6_SKIP_BUILD=1 node test/browser/keyword-intelligence-e2e.mjs` with the
+workspace-provided `TEST_DATABASE_URL` (distinct endpoint from
+`DATABASE_URL`; sourced from `email_scraper/.env` without logging).
+Outcome: exit 1 in 75 ms; zero cases/controls executed; **no certificate
+emitted** (correct per step 13); diagnostics
+`KI_W6_OBSOLETE_RUNTIME_MEMBER:[{"path":"components/keyword-intelligence/keyword-dashboard.module.css","pattern":"KeywordSearchVolume","kind":"local"}]`.
+
+### The exact blocker (one)
+
+The frozen A4/S1 obsolete-runtime exclusion oracle, applied exactly as
+specified to the real production dependency inventory, fails:
+`frontend/components/keyword-intelligence/keyword-dashboard.module.css`
+line 2 carries the historical provenance comment "Ports
+KeywordSearchVolume/dashboard/index.html:12-467 into module scope.", and
+that CSS module is imported by all nine shipped keyword-intelligence
+components (including `research-dashboard.tsx`), so it is legitimately
+reachable from the A4 T5 item 12 roots. The obsolete standalone runtime is
+**not** wired in — this is a naming artifact — but the frozen scan has no
+comment exemption, and §6 rule 4 forbids weakening the oracle because
+current code fails it. Resolution requires exactly one parent decision:
+(a) authorize a scope expansion adding the CSS file (comment removal) as a
+corrective sub-window outside the current five-file set; or (b) amend the
+A4 `KI-CL-20` oracle definition (e.g., a frozen comment-stripping rule) and
+re-freeze the affected S105 assertions; or (c) another parent-chosen
+mechanism. Until then V3 can never pass and the window cannot reach
+`READY_FOR_PARENT_REVIEW`.
+
+### Secondary recorded defect (non-blocking, in-scope correctable)
+
+On the V3 failure path the S105 cleanup diagnostics labeled step
+`schema-absence:failed` although no harness schema had been created (run
+aborted at 75 ms pre-harness; `droppedSchema: null`). Independent database
+verification: **zero residual `kiw6_` schemas** in the test database (query
+`information_schema.schemata` via the isolated test endpoint). The
+failure-path labeling should treat "harness never created" distinctly from
+"schema survived drop"; reserved for the next corrective window per §6.
+
+### Disposition
+
+`PARENT_BLOCKED` per §5.3 ("missing parent decision, contradiction, or
+required scope expansion → stop and report one exact blocker to the
+parent"). No corrective sub-window is assigned (§6 rule 7: unresolved
+parent decision requires escalation). Gate evidence V1/V2/V4/V6 remains
+valid; V3/V5 must rerun after the parent decision. External mutations
+beyond the five owned files: none. Cost: `$0.00` (one local gate run; no
+paid provider, AWS, or production action).

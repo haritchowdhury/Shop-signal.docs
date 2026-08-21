@@ -9,7 +9,7 @@ authority lives in `S1`
 (`KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_CHECKLIST.md`).
 
 ```yaml
-state_version: 7
+state_version: 13
 parent_window_id: KI-W6
 parent_assignment_id: ASG-KI-W6-WA-02
 window_agent_identity: KI-W6-WINDOW-AGENT
@@ -26,7 +26,8 @@ decomposition_path: KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_CHECKLIST.md
 decomposition_revision: bf92d2515a3dde37e7e577308ee69b224fe21498434ef831612536a841475134
 evidence_path: KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_EVIDENCE.md
 decomposition_status: READY
-current_subwindow: NONE
+integration: 'I101 = PARENT_BLOCKED (EV-KI-W6-R20): V1/V2/V4/V6 pass; V3 fails on the frozen obsolete-runtime oracle (KeywordSearchVolume provenance comment in the shipped keyword-dashboard.module.css, transitively inside the A4 T5 inventory); parent decision required (scope expansion vs oracle amendment); secondary non-blocking S105 failure-path diagnostics defect recorded'
+current_subwindow: NONE  # I101 executed -> PARENT_BLOCKED
 current_assignment_id: NONE
 assigned_agent: UNASSIGNED
 subwindow_type: NONE
@@ -40,22 +41,22 @@ execution_environment_policy:
   recovery_limit_per_invalidated_execution: 1
   external_authority_expansion: false
 may_start_successor: false
-current_status: READY
-accepted_subwindows: []
-next_subwindow: KI-W6-S101
+current_status: PARENT_BLOCKED
+accepted_subwindows: [KI-W6-S101, KI-W6-S102, KI-W6-S103, KI-W6-S104, KI-W6-S105]
+next_subwindow: NONE  # parent decision required on the obsolete-runtime oracle contradiction before any corrective window
 blocker: null
-last_updated: 2026-08-20T23:00:00+05:30
+last_updated: 2026-08-21T01:35:00+05:30
 ```
 
 ## Sub-window registry
 
 | ID | Type | File | Status | Assigned agent | Assignment ID |
 |---|---|---|---|---|---|
-| `KI-W6-S101` | FILE | `frontend/components/keyword-intelligence/research-dashboard.tsx` | NOT_STARTED | UNASSIGNED | `ASG-KI-W6-S101` (reserved) |
-| `KI-W6-S102` | FILE | `frontend/test/browser/keyword-intelligence-dashboard.mjs` | NOT_STARTED | UNASSIGNED | `ASG-KI-W6-S102` (reserved) |
-| `KI-W6-S103` | FILE | `email_scraper/test/helpers/keyword-intelligence-e2e-harness.js` | NOT_STARTED | UNASSIGNED | `ASG-KI-W6-S103` (reserved) |
-| `KI-W6-S104` | FILE | `email_scraper/test/fixtures/keyword-intelligence/ki-w6-enforcement-manifest-v1.json` | NOT_STARTED | UNASSIGNED | `ASG-KI-W6-S104` (reserved) |
-| `KI-W6-S105` | FILE | `frontend/test/browser/keyword-intelligence-e2e.mjs` | NOT_STARTED | UNASSIGNED | `ASG-KI-W6-S105` (reserved) |
+| `KI-W6-S101` | FILE | `frontend/components/keyword-intelligence/research-dashboard.tsx` | ACCEPTED | `KI-W6-S101-LEAF-AGENT` | `ASG-KI-W6-S101` (executed; certificate + `EV-KI-W6-R15` in S3) |
+| `KI-W6-S102` | FILE | `frontend/test/browser/keyword-intelligence-dashboard.mjs` | ACCEPTED | `KI-W6-S102-LEAF-AGENT` | `ASG-KI-W6-S102` (executed; certificate + `EV-KI-W6-R16` in S3) |
+| `KI-W6-S103` | FILE | `email_scraper/test/helpers/keyword-intelligence-e2e-harness.js` | ACCEPTED | `KI-W6-S103-LEAF-AGENT` | `ASG-KI-W6-S103` (executed; certificate + `EV-KI-W6-R17` in S3) |
+| `KI-W6-S104` | FILE | `email_scraper/test/fixtures/keyword-intelligence/ki-w6-enforcement-manifest-v1.json` | ACCEPTED | `KI-W6-S104-LEAF-AGENT` | `ASG-KI-W6-S104` (executed; certificate + `EV-KI-W6-R18` in S3) |
+| `KI-W6-S105` | FILE | `frontend/test/browser/keyword-intelligence-e2e.mjs` | ACCEPTED | `KI-W6-S105-LEAF-AGENT` | `ASG-KI-W6-S105` (executed; certificate + `EV-KI-W6-R19` in S3) |
 | `KI-W6-I101` | INTEGRATION_ASSESSMENT | (none; gates V1–V6) | NOT_STARTED | RESERVED (`KI-W6-WINDOW-AGENT`) | NONE |
 
 Counters: accepted 0/5 file leaves; corrections 0; integration assessments
