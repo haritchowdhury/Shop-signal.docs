@@ -1,6 +1,6 @@
 # Keyword Intelligence Decision-Complete Execution Checklist (`A4`)
 
-**Checklist revision:** `KI-CL-22`
+**Checklist revision:** `KI-CL-23`
 **Package status:** `AUTHORING-READY`; assignable only by a one-window `A5`
 assignment  
 **Execution status authority:** only `ACTIVE_EXECUTION_STATE.md`
@@ -5399,6 +5399,205 @@ uses the standard's new one-file corrective-subwindow path.
 - [x] `RW6D-007` I103 gates are ordered, bounded and invalidation-aware.
 - [x] `RW6D-008` Authority stops before KI-W7 and grants no external action.
 
+#### `KI-W6` third in-flight corrective amendment — page-aware selection swap
+
+This `KI-CL-23` amendment supersedes only the accepted S105
+`swapOneSelectionItemViaUi` helper and failed I103/CV9 result `EV-KI-W6-R33`.
+It changes no product source, contract, payload, schema, package, case/control
+membership, case digest, provider operation, database behavior, or production
+build input. `SRC-KI-043` and `DEC-KI-041` classify the failure as a causal
+browser-harness navigation defect: the real 200-row table renders 25 rows per
+page and does not promise checked and unchecked rows on the same page.
+
+```yaml
+window_id: KI-W6
+correction_id: KI-W6-PCA-03
+trigger: SRC-KI-043
+governing_decision: DEC-KI-041
+implementation_subwindow: KI-W6-C107
+integration_assessment: KI-W6-I104
+write_scope: [frontend/test/browser/keyword-intelligence-e2e.mjs::swapOneSelectionItemViaUi only]
+starting_file_digest: fc88c77ebb1bf8f62cafa600afbe5d789cd7a688899a552cff93a0ec0ada0a8f
+starting_frontend_head: a39663c8f99d9cc3c4aa1301ff088d5f4a24e7fd
+starting_frontend_change_set_digest: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+parent_scope_expansion: false
+coverage_membership_change: false
+production_or_build_input_change: false
+successor: STOP_LOCAL
+successor_reserved_for: parent
+may_start_successor: false
+```
+
+The window agent may append the literal C107/I104 blocks to S1/S2/S3, certify
+exact transcription, dispatch C107, independently review it, and personally
+continue through I104 without another parent-decomposition review. A differing
+algorithm, second file, new case/control, changed oracle, production edit, or
+scope expansion stops for parent disposition. The window agent does not edit
+A1–A8 and does not communicate with the leaf through the parent.
+
+##### Task block `KI-W6-CT4` / sub-window `KI-W6-C107`
+
+1. **Task:** repair only the private causal-harness selection-swap helper so it
+   uses the real table pagination to replace one selected keyword with one
+   different unselected keyword.
+2. **Requirements/decisions:** `REQ-KI-007`, `REQ-KI-008`, `REQ-KI-009`,
+   `REQ-KI-014`, `REQ-KI-015`, `INV-KI-010`, `DEC-KI-034`, `DEC-KI-035`,
+   `DEC-KI-038`, `DEC-KI-041`, `SRC-KI-043`.
+3. **Source:** current SHA-256
+   `fc88c77ebb1bf8f62cafa600afbe5d789cd7a688899a552cff93a0ec0ada0a8f`;
+   R33 proves the same-page `checkedRow && uncheckedRow` precondition fails
+   after the real 200-row/default-100 result is visible.
+4. **Target:** only
+   `frontend/test/browser/keyword-intelligence-e2e.mjs`, limited to
+   `swapOneSelectionItemViaUi`. Preserve both existing call sites and every
+   registry, oracle, control, certificate, cleanup and diagnostic symbol.
+5. **Private interface:** keep `swapOneSelectionItemViaUi` async with no
+   parameters. It may return a private diagnostic object but neither caller may
+   depend on it. Keep the exact existing checkbox selector. Define no export,
+   product hook, route, payload, config, package or fixture interface.
+6. **Ordered algorithm:** (a) wait for nonempty matching checkboxes; (b) read
+   their ordered `{label,checked}` state on freshly mounted page 1, recording
+   the first nonempty checked label and first different nonempty unchecked
+   label with their integer page numbers; (c) if either is absent, capture the
+   ordered newline-joined checkbox-label signature, require within the
+   keyword-table surface an enabled `Next` button, click it, wait for the
+   signature to change, increment the local page, and repeat through page 8;
+   (d) require both recorded labels and different values; (e) navigate from the
+   current page to the checked row's recorded page using the exact number of
+   enabled `Prev` or `Next` clicks, requiring a changed checkbox signature after
+   each; (f) click the checked row and wait until that same checkbox is
+   unchecked; (g) navigate by the same direction/page-difference rule to the
+   unchecked row's recorded page; (h) click the recorded distinct unchecked row
+   and wait until it is checked; (i) wait until the selection-review surface
+   contains the exact text `100 of 200 selected`.
+7. **Operation order/boundary:** exactly two user-equivalent checkbox change
+   events occur per invocation: one removal before one addition. Pagination
+   clicks may occur only between them. Save/CAS/handoff remain in the existing
+   callers after this helper returns. This test-only navigation changes no
+   durable or external boundary and performs no direct API/database mutation.
+8. **Identity:** checkbox labels locate rendered controls only; they do not
+   become selection identity. The production checkbox handler continues to use
+   the row's `itemId`; page signatures are ordered labels used only to observe
+   a completed page transition. `addedLabel !== removedLabel` is mandatory.
+9. **Failure behavior:** missing/empty/repeated candidate label, either state
+   absent by page eight, absent or disabled required `Next`/`Prev`, unchanged
+   page signature, failure to observe removal/addition, or final count other
+   than 100 throws and prevents save/handoff/certificate.
+   No retry, fallback filter, direct state edit, fetch mutation, or assertion
+   weakening is permitted.
+10. **Bounds/concurrency:** frozen 200 rows, 25 default rows per page, at most
+    eight inventoried pages, at most 21 total pagination clicks, exactly two
+    checkbox changes, one Chrome process and the existing waits/timeouts. Do
+    not increase any timeout or add a browser/process/schema.
+11. **Preserved callers:** the pre-handoff W6-FLOW-07 invocation must still
+    produce one stale 409 then one successful revision-2 CAS with 100 strict
+    items; the post-handoff W6-FLOW-13 invocation must still advance only the
+    live research selection while the immutable Run snapshot stays equal.
+12. **Forbidden alternatives:** no product component/view-model edit, page-size
+    change, recommended filter, arbitrary DOM `checked` assignment, direct
+    React state, API-side fabricated draft, removed-row re-addition, row-index
+    identity, case/control/manifest edit, build, database, provider or AWS call.
+13. **Local checks:** from `frontend/`, run exactly once
+    `node --check test/browser/keyword-intelligence-e2e.mjs`, then
+    `git diff --check -- test/browser/keyword-intelligence-e2e.mjs`. Require
+    exit zero. The leaf runs no browser/build/database/full test command.
+14. **Output:** one reviewed page-aware helper consumed by I104. Its final
+    digest and exact one-symbol diff are recorded; accepted S105 helper evidence
+    is explicitly superseded by C107 review and CV15.
+15. **Non-goals:** no production behavior, response shape, persistent state,
+    selection count/rank, paging UI, case ID/digest, substitute claim, timeout,
+    package, schema, provider economics, commit, push or KI-W7 change.
+
+```yaml
+subwindow_id: KI-W6-C107
+type: CORRECTION
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-02
+assigned_agent: UNASSIGNED
+predecessors: [KI-W6-I103 CV9 BLOCKED by EV-KI-W6-R33]
+successor_reserved_for: WINDOW-AGENT
+writable_file: frontend/test/browser/keyword-intelligence-e2e.mjs
+writable_symbol: swapOneSelectionItemViaUi
+file_operation: MODIFY
+starting_file_digest: fc88c77ebb1bf8f62cafa600afbe5d789cd7a688899a552cff93a0ec0ada0a8f
+starting_repository_change_set_digest: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+read_only_scope: [KEYWORD_INTELLIGENCE_PRODUCT_CONTRACT.md, KEYWORD_INTELLIGENCE_DECISION_LEDGER.md §DEC-KI-041, KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md §KI-W6 third in-flight corrective amendment, ACTIVE_EXECUTION_STATE.md, frontend/components/keyword-intelligence/keyword-table.tsx::KeywordTable, frontend/components/keyword-intelligence/research-dashboard.tsx::ResearchDashboard, frontend/lib/keyword-intelligence-view-model.ts::emptyKeywordFilterState/paginate, KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_EVIDENCE.md::EV-KI-W6-R33]
+authorized_actions: [perform KI-W6-CT4 in the one writable symbol, run the two C107 local commands once, return evidence only to the window agent]
+prohibited_actions: [second-symbol or second-file edit, browser build database full-test provider AWS production commit push parent communication subdelegation successor or KI-W7 action]
+may_start_successor: false
+```
+
+- [ ] `C107-P1` Pins, assignment, exact baseline, clean frontend and R33 predecessor match.
+- [ ] `C107-P2` The attributable diff is exactly the writable symbol in the one file.
+- [ ] `C107-T1` Apply all ordered CT4 behavior and no forbidden alternative.
+- [ ] `C107-V1` Run the two local commands once with exit zero.
+- [ ] `C107-H1` Return the diff, ending digest, commands and outcomes to the window agent.
+- [ ] `C107-H2` Confirm zero prohibited/external/successor action and stop for independent review.
+
+##### Integration assessment `KI-W6-I104`
+
+I104 is owned personally by the window agent, writes no implementation file,
+and begins only after independent C107 acceptance. It supersedes blocked I103
+and preserves accepted C106/CV7/CV8 evidence.
+
+- [ ] `KI-W6-CV13` Independently inspect the complete C107 diff, require only
+  `swapOneSelectionItemViaUi` changed, recompute its ending file digest, rerun
+  the two C107 local commands once, and verify both helper call sites and all
+  26 case/13 control registrations remain byte-identical.
+- [ ] `KI-W6-CV14` Reuse the accepted Next build only if `.next/BUILD_ID`
+  exists and the changed-path set from frontend commit
+  `a39663c8f99d9cc3c4aa1301ff088d5f4a24e7fd` to the current tree, excluding
+  only `test/browser/keyword-intelligence-e2e.mjs`, is empty. From `frontend/`
+  run exactly `test -f .next/BUILD_ID` and
+  `git diff --name-only a39663c8f99d9cc3c4aa1301ff088d5f4a24e7fd -- . ':(exclude)test/browser/keyword-intelligence-e2e.mjs'`;
+  require both exit zero and the second command to print no path. Do not run
+  `npm run check` or another build.
+- [ ] `KI-W6-CV15` From `frontend/`, run once
+  `ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node test/browser/keyword-intelligence-e2e.mjs`
+  with the existing isolated `TEST_DATABASE_URL` sourced without logging.
+  Require exit zero; the unchanged 26 required/registered/executed/activated
+  cases, 13 pass→fail→fresh-pass controls and all group/global digests; exact
+  19 calls, 23 keyword objects, 42 sends, `$0.49200000`, five seeds,
+  300/200/200/default-100, both successful page-aware selection swaps, complete
+  cleanup and zero residual schema. An environment-only invalidation follows
+  E8.1; an observable assertion failure is not recoverable under that rule.
+- [ ] `KI-W6-CV16` Only after CV15 passes, from `email_scraper/` run `npm test`
+  once and then `npm run check:secrets` once; require zero failures and clean
+  scan without opting into the full database suite.
+- [ ] `KI-W6-CV17` Then from `email_scraper/` run
+  `node scripts/build-keyword-worker.js` exactly twice; require byte-identical
+  ZIP hashes, preserved siblings, no forbidden/stale members, ZIP ≤45 MiB,
+  unzipped ≤200 MiB and cold-imported function `handler`; run once
+  `node --test --test-isolation=none test/aws-pipeline-packaging.test.js` with
+  zero failures. Do not run the seven-handler build/measure.
+- [ ] `KI-W6-CV18` Recompute the unchanged seven-path set/digest, current file
+  hashes, exact 26-ID/group/global equality, 13 controls, substitute ceilings,
+  privacy, obsolete-runtime inventory and W7 handoff. Require only the accepted
+  C104, C106 and C107 changes against the respective frozen predecessors and no
+  out-of-scope source/test member.
+- [ ] `KI-W6-CH5` Append one consolidated integration certificate recording
+  C107 acceptance, R33 supersession, preserved CV7/CV8, CV13–CV18, exact final
+  files/digests, coverage sets, controls, cleanup, costs and requester commit
+  provenance if the requester committed C107.
+- [ ] `KI-W6-CH6` Stop `READY_FOR_PARENT_REVIEW`; do not begin KI-W7.
+
+If C107 and all I104 gates pass, the window agent continues through CH5/CH6
+without another parent prompt. A new implementation-affecting choice, second
+file, changed case/control set, observable test failure or contract
+contradiction stops. No further CV15 run is pre-authorized after an observable
+failure.
+
+##### Third-correction readiness
+
+- [x] `RW6E-001` R33 is an observable failing result and is not relabelled as sandbox invalidation. Evidence: `SRC-KI-043`; `EV-KI-A-095`.
+- [x] `RW6E-002` The causal defect is the helper's same-page assumption; production pagination and selection behavior remain correct. Evidence: `SRC-KI-043`; `DEC-KI-041`.
+- [x] `RW6E-003` C107 owns one existing symbol in one existing W6 file with an exact baseline and ordered bounded algorithm. Evidence: `KI-W6-CT4`; `EV-KI-A-095`.
+- [x] `RW6E-004` Exactly one removal precedes one distinct addition through real controls and returns to 100 items. Evidence: `DEC-KI-041`; `KI-W6-CT4`.
+- [x] `RW6E-005` Existing W6-FLOW-07/FLOW-13 and NC-06 supply enforcement; membership and digests do not change. Evidence: `DEC-KI-041`; `EV-KI-A-095`.
+- [x] `RW6E-006` CV15 is one fresh causal gate on the changed harness; unchanged backend component and production Next-build evidence are not repeated. Evidence: `KI-W6-I104`; parent standard E8.
+- [x] `RW6E-007` Pending regression, secret, worker-package and closure gates remain ordered after causal success. Evidence: `KI-W6-CV16`–`CV18`.
+- [x] `RW6E-008` Recursive authority permits transcription/execution but no parent-artifact, external, commit or KI-W7 action. Evidence: A5 state 156; `EV-KI-A-095`.
+
 ## 5. Final independent review (not assigned to implementation agents)
 
 - [ ] `KI-FR-1` Independently inspect current source/diff, active hashes, every accepted window, and changed-file scope.
@@ -5415,19 +5614,21 @@ items: **10**. Checked W4 authoring supplements: **12**. Checked KI-R5
 corrective supplements: **12**. Checked KI-W6 reauthoring supplements: **12**.
 Checked KI-W6 in-flight corrective supplements: **8**.
 Checked KI-W6 second-correction supplements: **8**.
+Checked KI-W6 third-correction supplements: **8**.
 Unchecked required authoring items: **0**.
 
 KI-R5 is accepted and closed by `EV-KI-A-080` / `CHG-KI-055`; A5 accepts
 through KI-R5. The reauthored KI-W6 is decision-complete and
-enforcement-complete as amended: `SRC-KI-038`–`042`, `DEC-KI-038`–`040`, the
-five accepted initial files plus two complete corrective 15-field tasks, one
+enforcement-complete as amended: `SRC-KI-038`–`043`, `DEC-KI-038`–`041`, the
+five accepted initial files plus four complete corrective 15-field tasks, one
 exact seven-file set/digest, the unchanged literal 26-case matrix and thirteen
 falsification controls, bounded substitute claims, and the corrected focused,
 causal, regression, privacy and worker-package gate schedule close the observed
-300-row escape without changing product intent or provider economics.
+300-row escape and paginated selection-harness defect without changing product
+intent or provider economics.
 
-A5 supplies the live authority. The second correction preserves the seven-file
-scope and authorizes the window agent to transcribe and execute C106 then I103
+A5 supplies the live authority. The third correction preserves the seven-file
+scope and authorizes the window agent to transcribe and execute C107 then I104
 without another parent prompt only when the literal parent block is preserved.
 It accepts only through KI-R5, keeps `may_start_successor:false`, and prohibits
 KI-W7. No implementation, leaf, test, build, database, provider, AWS or

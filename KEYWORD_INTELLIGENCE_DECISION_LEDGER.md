@@ -1,6 +1,6 @@
 # Keyword Intelligence Decision Ledger (`A3`)
 
-**Revision:** `KI-DL-16`
+**Revision:** `KI-DL-17`
 **Status:** locked decisions; not an assignment
 
 This is the sole authority for implementation-affecting choices and
@@ -1958,6 +1958,57 @@ estimates them. This specification decision is not paid-call authorization.
   or the causal V3 oracle.
 - **Tasks/scenarios:** `KI-W6-CT3`; corrected `SCN-KI-041`; existing
   `W6-FLOW-04/05/06` and `W6-NC-05`; `KI-W6-CV7`–`CV12`.
+
+### `DEC-KI-041` — Selection swap traverses the real paginated table
+
+- **Requirements:** `REQ-KI-007`, `REQ-KI-008`, `REQ-KI-009`,
+  `REQ-KI-014`, `REQ-KI-015`, `INV-KI-010`; correction evidence
+  `SRC-KI-043`.
+- **Locked choice:** preserve the production dashboard and the existing
+  200-row/default-100 selection contract. Correct only
+  `swapOneSelectionItemViaUi` in the causal browser harness. Starting at the
+  freshly mounted page 1, it must inventory successive real table pages until
+  it records one checked row and one differently labelled unchecked row plus
+  each row's page number. It then navigates to the checked row, removes it,
+  navigates to the recorded unchecked row, adds it, and waits until the
+  selection-review surface reports exactly `100 of 200 selected`.
+- **Exact traversal:** the checkbox selector remains
+  `[data-surface="surface:keyword-table"] tbody tr input[type=checkbox][aria-label^="Select"]`.
+  Scan page 1 before advancing. At most eight pages may be inventoried because
+  the frozen result is 200 rows and the unchanged default page size is 25.
+  Every `Next` or `Prev` navigation captures the ordered newline-joined
+  checkbox-label signature before the click, requires an enabled
+  keyword-table button with that exact trimmed text, clicks it, and waits for
+  the signature to change. Track the current page locally from 1; do not infer
+  it from a CSS-module class. Stop inventory once both distinct rows exist.
+  Move to each recorded page using the direction implied by the integer page
+  difference. The complete helper permits at most 21 pagination clicks
+  (seven inventory, seven repositioning, seven between rows). Missing either
+  state by page 8, a repeated label, an unavailable required direction, or an
+  unchanged signature fails closed. Do not select before removing: the
+  100-item cap would correctly reject that attempted addition.
+- **Mutation semantics:** perform exactly two checkbox changes per helper
+  invocation—one checked→unchecked removal and one different
+  unchecked→checked addition. Do not use fetch, direct React state, DOM property
+  assignment, test-only product hooks, filters, row text as an item identity,
+  or a fabricated selection. The existing save request, numeric-revision CAS,
+  strict minimal payload, 100-item assertion, stale-conflict path and immutable
+  handoff assertions remain unchanged.
+- **Acceptance/invalidation:** this changes no W6 case/control membership or
+  digest. It supersedes only the accepted S105 helper implementation and the
+  failed R33 CV9 result. A fresh emitted-browser/isolated-schema run must execute
+  the unchanged 26 cases and 13 controls and prove both helper invocations,
+  including `W6-FLOW-07` and the post-handoff `W6-FLOW-13` selection mutation.
+  C106/CV7 and the clean committed frontend build/CV8 remain valid; the test
+  file is not a Next build input. CV10–CV12 remain pending and run only after
+  the fresh causal gate passes.
+- **Rejected:** changing pagination or selection product code; requiring both
+  states on one page; increasing page size; changing default selection rank or
+  count; using the removed row as the addition; weakening the exact saved-100
+  or case/control certificate; adding a case ID; rebuilding unchanged Next
+  output; or relabelling R33 as an environment failure.
+- **Tasks/scenarios:** `KI-W6-CT4`; existing `W6-FLOW-07`, `W6-FLOW-13`,
+  `W6-NC-06`; `KI-W6-CV13`–`CV18`.
 
 ## 2. Lifecycle transition tables
 

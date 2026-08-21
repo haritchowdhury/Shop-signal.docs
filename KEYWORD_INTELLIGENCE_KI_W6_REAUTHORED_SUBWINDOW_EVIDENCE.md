@@ -1913,6 +1913,31 @@ next_integration_assessment_id: KI-W6-I102
 status: READY
 ```
 
+---
+
+## `EV-KI-W6-R32` — State-155 final observable CV9 transport-recovery preflight
+
+- **Timestamp / role:** 2026-08-21T14:50:00+05:30 / `KI-W6-WINDOW-AGENT`
+  integration assessment resumption.
+- **Authority:** A5 state 155 / `ASG-KI-W6-WA-02`, `EV-KI-A-094`, and
+  `CHG-KI-067`. The parent preserves C106 acceptance and I103 CV7/CV8 passing
+  evidence, authorizing exactly one final *elevated*, observable CV9 recovery.
+- **Read-only preflight:** process inspection found no prior
+  `keyword-intelligence-e2e`, Next, auth, or browser-test process beyond the
+  inspection shell itself. The permitted `/tmp` inspection found no retained
+  KI-W6/CV9 output artifact. Therefore no prior usable CV9 result can be
+  reused.
+- **Execution boundary:** the frozen command is unchanged:
+  `ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node
+  test/browser/keyword-intelligence-e2e.mjs`, from `frontend/`, using the
+  pre-existing isolated database input without logging it. Its one final
+  invocation must retain complete stdout, stderr, and final exit status; a
+  partial, reconstructed, or summary-only result is not acceptable.
+- **Sequence:** CV10–CV12 may run only after a complete CV9 pass certificate
+  with all frozen 26-case/13-control, numeric, and cleanup witnesses. An
+  observable failure or renewed unobservability stops I103 with no further
+  recovery. KI-W7 remains prohibited.
+
 ### Corrective readiness certificate — `KI-W6-C105`
 
 ```yaml
@@ -1938,6 +1963,36 @@ unresolved_execution_choices: []
 next_integration_assessment_id: KI-W6-I102
 status: READY
 ```
+
+---
+
+## `EV-KI-W6-R33` — I103 CV9 final elevated observable recovery: failed
+
+- **Timestamp / role:** 2026-08-21T14:54:00+05:30 / `KI-W6-WINDOW-AGENT`
+  integration assessment.
+- **Authority and execution:** A5 state 155 / `EV-KI-A-094` / `CHG-KI-067`
+  authorized one final elevated transport-only recovery. After R32's
+  no-process/no-capture preflight, the frozen command was run once from
+  `frontend/` in a persistent terminal session: `ALLOW_DATABASE_TESTS=true
+  KI_W6_SKIP_BUILD=1 node test/browser/keyword-intelligence-e2e.mjs`.
+  Complete terminal capture returned final exit status `1`.
+- **Observable failure:** the harness reports `mainError: "keyword table must
+  expose a checked and an unchecked row for the minimal mutation"`. This is a
+  browser workflow/assertion outcome after startup, not the former execution
+  transport invalidation. It cannot establish the frozen 26-case/13-control
+  certificate.
+- **Complete diagnostics:** `wallTimeMs: 188805`; `buildSkipped: true`;
+  `chromeProcesses: 1`; viewports `1440x900` and `390x844`; peak RSS kB
+  `next: 200696`, `chrome: 276528`; `networkRequests: 153`;
+  `consoleErrors: 1`; `pageExceptions: 0`; `casesExecuted: 0`;
+  `controlsExecuted: 0`. Cleanup was fully successful:
+  `browser`, `next-server`, `auth-server`, `backend-server`, `schema-absence`,
+  and `temp-root` each report `ok`; the isolated schema was dropped. No database
+  URL was logged.
+- **Disposition:** `I103` is `BLOCKED` at CV9. The state-155 allowance is
+  consumed. CV10–CV12, CH3/CH4, corrective implementation, and KI-W7 did not
+  start; a new parent disposition is required. No provider, AWS, production,
+  destructive, commit, push, or paid action occurred; cost `$0.00`.
 
 ### I102 readiness and disposition
 
@@ -2135,6 +2190,81 @@ external_mutations: []
 prohibited_actions_observed: []
 status: READY
 ```
+
+## `EV-KI-W6-R30` — Independent C106 review and I103 start
+
+- **Timestamp / role:** 2026-08-21T14:38:00+05:30 / `KI-W6-WINDOW-AGENT`
+  independent corrective-leaf review.
+- **Authority and pins:** A5 state 154 / `ASG-KI-W6-WA-02`; S1 C106 and A4
+  `KI-CL-22` / `DEC-KI-040`. The accepted starting digest and empty backend
+  change-set matched dispatch evidence.
+- **Leaf-returned C106 evidence:** C106-C1 (`node --check
+  test/keyword-intelligence-worker-flow.test.js`) passed. C106-C2 (`node --test
+  --test-isolation=none test/keyword-intelligence-worker-flow.test.js`) passed
+  with 37 pass, zero fail, zero skip; R3-G11–R3-G15 and SCN-KI-041 passed with
+  exact 5/60/300/200/200/100 witnesses. The leaf reports no prohibited,
+  external, successor, or coordination-artifact action.
+- **Independent inspection:** ending SHA-256 is
+  `724443c920ac2b091031e03bed0a650ec74f7b6396dea58d2adf2b641d9af7e9`.
+  Relative to requester-owned C105 commit
+  `adf416662e3aae581328478b70dfe828d3191e8b`, the attributable changed-file
+  set is exactly `test/keyword-intelligence-worker-flow.test.js` (29 additions,
+  14 deletions); `git diff --check` passed. Source inspection proves the
+  private `bySeed` fallback, two ordered tasks per seed and counts, preserved
+  seed-aware expansion provenance, exact anchor-stage fingerprint in both
+  shortlist locations, and the SCN-KI-041 five × 60 / 300 distinct / 200
+  shortlist / 200 result / 100 selection / no-leaked-key assertions.
+- **Disposition:** `KI-W6-C106` is `ACCEPTED_FOR_INTEGRATION`. I102 remains
+  superseded diagnostic evidence; S2 state 23 starts I103. No I103 gate has
+  executed in this review entry. No provider, AWS, production/database,
+  destructive, commit, push, or KI-W7 action occurred; cost `$0.00`.
+
+```yaml
+certificate: WINDOW-AGENT-FILE-ACCEPTED
+parent_window_id: KI-W6
+subwindow_id: KI-W6-C106
+assignment_id: ASG-KI-W6-C106
+reviewer: KI-W6-WINDOW-AGENT
+ending_file_digest: 724443c920ac2b091031e03bed0a650ec74f7b6396dea58d2adf2b641d9af7e9
+local_checks: [C106-C1 PASS, C106-C2 PASS, git-diff-check PASS]
+required_registered_executed: [C106-C1, C106-C2]
+skipped_local_cases: []
+duplicate_case_ids: []
+unexpected_case_ids: []
+external_mutations: []
+status: ACCEPTED_FOR_INTEGRATION
+```
+
+---
+
+## `EV-KI-W6-R31` — I103 CV7/CV8 pass and CV9 execution-channel blocker
+
+- **Timestamp / role:** 2026-08-21T14:45:00+05:30 / `KI-W6-WINDOW-AGENT`
+  integration assessment.
+- **CV7 (PASS):** from `email_scraper/`,
+  `node --check src/aws-pipeline/keyword-intelligence/service.js && node --test --test-isolation=none test/keyword-intelligence-worker-flow.test.js`
+  passed. The service syntax check passed; the worker-flow suite reported 37
+  pass, zero fail, zero skip, R3-G11–R3-G15 green, R4 green, and SCN-KI-041
+  passed with the corrected 5/60/300/200/200/100 runtime witness.
+- **CV8 (PASS / authorized reuse):** `frontend/` porcelain was empty and HEAD
+  was exactly `a39663c8f99d9cc3c4aa1301ff088d5f4a24e7fd`; no frontend build was
+  run.
+- **CV9 first attempt (environment-invalidated):** from `frontend/`, the exact
+  command `ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node
+  test/browser/keyword-intelligence-e2e.mjs` exited with diagnostics showing
+  `mainError: "[object ErrorEvent]"`, `casesExecuted: 0`,
+  `controlsExecuted: 0`, `networkRequests: 0`, and successful cleanup. This
+  occurred before any workflow assertion or provider/database action and did
+  not establish a product failure.
+- **CV9 one authorized identical elevated recovery (unverifiable):** the same
+  command was run once with authorized local sandbox escalation. The execution
+  tool reported completion but returned no certificate, diagnostics, stdout,
+  stderr, or exit metadata. Consequently neither the exact 26-case/13-control
+  certificate nor any required CV9 numeric/cleanup witness can be evidenced.
+  A second recovery is prohibited by A5's one-recovery limit.
+- **Disposition:** `BLOCKED`, not a product correction. CV10–CV12, CH3, CH4,
+  and KI-W7 did not start. No implementation edit, provider, AWS, production,
+  destructive, commit, push, or paid action occurred; cost `$0.00`.
 
 **Disposition:** C104 is dispatched and awaits its leaf evidence. C105,
 I102, and KI-W7 remain prohibited from starting.
@@ -2411,6 +2541,64 @@ starting_repository_change_set_digest: e3b0c44298fc1c149afbf4c8996fb92427ae41e46
 required_local_cases: [C106-C1, C106-C2]
 predecessors: [KI-W6-I102 PARENT_BLOCKED]
 integration_assessment_reservation: KI-W6-I103 after independent C106 acceptance only
+external_mutations: []
+prohibited_actions_observed: []
+status: READY
+```
+
+---
+
+## `EV-KI-W6-R34` — State-156 C107/I104 literal transcription and C107 dispatch
+
+- **Timestamp / role:** 2026-08-21T15:09:13+05:30 /
+  `KI-W6-WINDOW-AGENT` decomposition and dispatch.
+- **Authority:** A5 state 156 / `ASG-KI-W6-WA-02`; parent artifacts
+  `SRC-KI-043`, `DEC-KI-041`, `KI-CL-23`, `KI-TR-15`, `EV-KI-A-095`, and
+  `CHG-KI-068`. The authority permits literal C107/I104 transcription,
+  exactly one C107 dispatch, independent review, then I104 without another
+  decomposition review. KI-W7 remains prohibited.
+- **Exact-transcription certificate:** S1 §9.4 now contains the KI-CL-23
+  amendment metadata, complete C107 task block, assignment YAML, readiness
+  checks, and I104 CV13–CV18/CH5/CH6 in the parent order. The transcript keeps
+  the parent task-block assignment placeholder `UNASSIGNED`; S2 records the
+  distinct operational dispatch assignment below. No implementation-affecting
+  task content was changed.
+- **Verified dispatch baseline:** `ACTIVE_EXECUTION_STATE.md` SHA-256 is
+  `199870af4d0dbf03153316abb29acbd4d68151da87a9368517aa54270aad5123`;
+  parent checklist and decision SHA-256 values are respectively
+  `d47d0dd73b7efd357a7fc196ee64bfba2c2e5b0e4f818ea6e8180054e1f36eae` and
+  `4d7e4aa311286d997b2498f7af46fa0a32426d1cbace5e1d1f3db340009168b7`.
+  The assigned frontend helper file matched its frozen SHA-256
+  `fc88c77ebb1bf8f62cafa600afbe5d789cd7a688899a552cff93a0ec0ada0a8f`;
+  `frontend` HEAD was `a39663c8f99d9cc3c4aa1301ff088d5f4a24e7fd`; both nested
+  repositories had empty porcelain before dispatch.
+- **C107 dispatch:** `ASG-KI-W6-C107` assigns only
+  `frontend/test/browser/keyword-intelligence-e2e.mjs::swapOneSelectionItemViaUi`
+  to `KI-W6-C107-LEAF-AGENT`. The leaf must execute the two specified local
+  checks exactly once and stop for independent window review. I104 is reserved
+  and unstarted.
+- **Boundary:** only S1/S2/S3 coordination records changed in this dispatch.
+  No helper or other implementation edit, browser/build/database/full-test
+  command, provider/AWS/production action, external mutation, destructive
+  action, commit, push, credential access, cost, or KI-W7 action occurred.
+- **Disposition:** `CORRECTIVE-SUBWINDOW-DISPATCHED`; awaiting complete C107
+  leaf evidence for independent review.
+
+```yaml
+certificate: CORRECTIVE-SUBWINDOW-DISPATCHED
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-02
+subwindow_id: KI-W6-C107
+assignment_id: ASG-KI-W6-C107
+assigned_agent: KI-W6-C107-LEAF-AGENT
+writable_file: frontend/test/browser/keyword-intelligence-e2e.mjs
+writable_symbol: swapOneSelectionItemViaUi
+starting_file_digest: fc88c77ebb1bf8f62cafa600afbe5d789cd7a688899a552cff93a0ec0ada0a8f
+starting_frontend_head: a39663c8f99d9cc3c4aa1301ff088d5f4a24e7fd
+starting_repository_change_set_digest: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+required_local_commands: [node --check test/browser/keyword-intelligence-e2e.mjs, git diff --check -- test/browser/keyword-intelligence-e2e.mjs]
+predecessors: [KI-W6-I103 CV9 BLOCKED by EV-KI-W6-R33]
+integration_assessment_reservation: KI-W6-I104 after independent C107 acceptance only
 external_mutations: []
 prohibited_actions_observed: []
 status: READY

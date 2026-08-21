@@ -1089,3 +1089,35 @@ compatibility_or_migration_effect: none — test substitute correction only; no 
 authorization_effect: KI-W6-WINDOW-AGENT may copy the literal C106/I103 blocks into S1/S2/S3, certify identity, dispatch/review C106, then execute I103 and continue to handoff without another parent prompt if all gates pass.
 resumption_state: A5 state 154 READY under ASG-KI-W6-WA-02; stop READY_FOR_PARENT_REVIEW after I103 and before KI-W7.
 ```
+
+```yaml
+change_id: CHG-KI-067
+timestamp: 2026-08-21T14:50:00+05:30
+trigger_evidence: [EV-KI-W6-R31, EV-KI-A-094]
+reason: I103 CV9's restricted attempt was environment-invalidated before any case and its one elevated recovery returned no output certificate diagnostics or exit metadata, leaving no usable acceptance result or observable product failure.
+old_revision: A5 state 154 READY; I103 BLOCKED after CV7/CV8 with the automatic identical-recovery allowance exhausted
+new_revision: A5 state 155 READY; one final observable elevated CV9 transport recovery authorized
+changed_requirements: []
+changed_decisions: []
+affected_windows: [KI-W6 only; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: []
+compatibility_or_migration_effect: none — gate transport and evidence retention only; the CV9 command environment selection fixtures oracle cases controls and acceptance values are unchanged.
+authorization_effect: KI-W6-WINDOW-AGENT may record the disposition in S2/S3 and make exactly one final elevated CV9 attempt using persistent or transparent stdout stderr and exit capture; on pass it continues CV10-CV12 and CH3/CH4, while an observable failure or renewed unobservability stops with no further CV9 retry.
+resumption_state: A5 state 155 READY under ASG-KI-W6-WA-02; preserve C106/CV7/CV8; stop READY_FOR_PARENT_REVIEW after I103 and before KI-W7.
+```
+
+```yaml
+change_id: CHG-KI-068
+timestamp: 2026-08-21T15:05:00+05:30
+trigger_evidence: [EV-KI-W6-R33, SRC-KI-043, EV-KI-A-095]
+reason: The final observable CV9 recovery exposed a causal-harness same-page assumption: its selection helper requires checked and unchecked rows in one 25-row DOM page although the accepted result has 200 paginated rows and a 100-item selection.
+old_revision: A2 KI-DD-7 / 8095243aa7482b49e0991a8cafae0235cf87894d39d1a9e2007f3c234978e9e2; A3 KI-DL-16 / e59252cb3798fbdae805f43f33f69bf22de083c67d9a000632f5a1d2208e5a6c; A4 KI-CL-22 / bb823eca63520b6e0a8cd3b90b37fd9063813ee692c49d5c83bcc355cb1c0025; A8 KI-TR-14 / 31bd8df4912b2cf7d569316c08398d993d60b486ff7b175ad96362f220be28b5; A5 state 155; I103 CV9 failed
+new_revision: A2 KI-DD-8 / 66a85fa6918193635e438dac1dd21986d0fd75fbfba791386a7f140470a9bd68; A3 KI-DL-17 / 4d7e4aa311286d997b2498f7af46fa0a32426d1cbace5e1d1f3db340009168b7; A4 KI-CL-23 / d47d0dd73b7efd357a7fc196ee64bfba2c2e5b0e4f818ea6e8180054e1f36eae; A8 KI-TR-15 / e4fb208e39e60f41f87f0b398b5979aa1702fce7e6124a7f2260c2a7d844a9bc; A5 state 156 READY
+changed_requirements: []
+changed_decisions: [DEC-KI-041 locks a real-pagination two-checkbox swap in the causal harness]
+affected_windows: [KI-W6 remains active; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: [accepted S105 swapOneSelectionItemViaUi implementation evidence is superseded only for that helper; EV-KI-W6-R33 remains diagnostic and cannot satisfy CV15; C106/CV7/CV8 and all other S105 cases controls and oracles remain valid]
+compatibility_or_migration_effect: none — one test-harness symbol only; no product runtime payload schema persistence package provider cost case registry or build input changes.
+authorization_effect: KI-W6-WINDOW-AGENT may transcribe C107/I104 into S1/S2/S3, dispatch and review one C107 leaf, then execute I104 and continue to READY_FOR_PARENT_REVIEW only if every frozen gate passes; no parent artifact edit by the window agent and no KI-W7 action.
+resumption_state: A5 state 156 READY under ASG-KI-W6-WA-02; preserve C106/CV7/CV8, execute C107 then I104, stop before KI-W7.
+```

@@ -1,6 +1,6 @@
 # Keyword Intelligence Traceability Index (`A8`)
 
-**Revision:** `KI-TR-14`
+**Revision:** `KI-TR-15`
 
 This is the sole authority for mechanical requirement/source/decision/task/test
 closure. The other artifacts are `A1`
@@ -162,7 +162,9 @@ and the one accepted R5-FIN-01 destination oracle now uniquely owned by
 `KI-W6-T1/T2`. KI-W6 initially owned its new helper, literal manifest and
 causal browser harness; `SRC-KI-041`/`DEC-KI-039` add only
 `service.js::aggregateMarket` and the aggregation scaffold/additive
-`SCN-KI-041` symbols. The complete seven-path digest is
+`SCN-KI-041` symbols; `SRC-KI-043`/`DEC-KI-041` supersede only
+`frontend/test/browser/keyword-intelligence-e2e.mjs::swapOneSelectionItemViaUi`
+inside the already-owned causal harness. The complete seven-path digest is
 `c3bfe436aba49d52de26298ac74eb30e061d392144dfffbb6954ee792c908bdc`.
 Only additive SAM/build/config/runtime-config symbols named in the
 W7 header by `KI-W7`; and only approved
@@ -267,3 +269,4 @@ is the mechanical expansion used for completeness checks:
 | `REQ-KI-019/020`; all `EXC-KI-001`–`008` and `AUTH-KI-001`–`004/006/007` applicable locally | W6 header, `KI-W6-T3/T5`, A5 | `W6-CONF-01`–`06`, `W6-NC-09`–`13`; exact scope, obsolete-runtime, substitute and authority closure | `KI-W6-P1`–`P6`, `V1/V3/V5/V6`, `H1`–`H6` |
 | `REQ-KI-002/003/023/024`; `INV-KI-004/005/014` corrective overlay | `KI-W6-CT1/CT2` under `DEC-KI-039` | `SCN-KI-041`; existing sole `W6-FLOW-05` registration and `W6-NC-05` control; 300 anchor keys project through the durable 200-keyword manifest to exactly 200 final keys/default 100 | `KI-W6-CV1/CV3/CV5/CV6`, `KI-W6-CH1/CH2` |
 | `REQ-KI-001`, `REQ-KI-002`, `REQ-KI-003`, `REQ-KI-023`, `REQ-KI-024`; `INV-KI-004`, `INV-KI-005`, `INV-KI-014` fixture-correction overlay | `KI-W6-CT3` under `DEC-KI-040` | corrected supplemental `SCN-KI-041`; five seeds × 60 unique ordered candidates; anchor-stage manifest fingerprint; unchanged `W6-FLOW-04`, `W6-FLOW-05`, `W6-FLOW-06` and `W6-NC-05` | `KI-W6-CV7`, `KI-W6-CV9`, `KI-W6-CV10`, `KI-W6-CV11`, `KI-W6-CV12`, `KI-W6-CH3`, `KI-W6-CH4` |
+| `REQ-KI-007`, `REQ-KI-008`, `REQ-KI-009`, `REQ-KI-014`, `REQ-KI-015`; `INV-KI-010` paginated-selection correction overlay | `KI-W6-CT4` under `DEC-KI-041` | existing `W6-FLOW-07` and `W6-FLOW-13` traverse the real 25-row pages, remove one selected row, add one different unselected row and preserve exactly 100; unchanged `W6-NC-06`; zero new registration | `KI-W6-CV13`–`CV18`, `KI-W6-CH5`, `KI-W6-CH6` |

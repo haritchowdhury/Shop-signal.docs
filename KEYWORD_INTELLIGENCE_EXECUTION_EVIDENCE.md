@@ -5408,3 +5408,141 @@ authorized_first_action: window agent transcribes C106 and I103 exactly into S1/
 authorized_first_implementation: C106 only after exact transcription certificate
 planned_stop: READY_FOR_PARENT_REVIEW after I103; before KI-W7
 ```
+
+### `EV-KI-A-094` — I103 CV9 final observable transport recovery authorization
+
+- **Timestamp / phase:** 2026-08-21T14:50:00+05:30 / parent disposition of
+  an execution-channel-invalidated frozen gate.
+- **Accepted prior evidence:** `EV-KI-W6-R30` establishes C106 acceptance;
+  `EV-KI-W6-R31` establishes CV7 and CV8. The first CV9 attempt executed zero
+  cases, controls and network requests and cleaned up after an `ErrorEvent`.
+  Its identical elevated recovery returned no stdout, stderr, certificate,
+  diagnostics or exit metadata. Neither attempt supplies an observable product
+  failure or usable acceptance result.
+- **Classification:** the elevated recovery is itself independently invalidated
+  by execution-channel loss. This is not a feature defect, test failure,
+  changed input, new gate or reason to rerun CV7/CV8. The automatic recovery
+  allowance is exhausted, so this entry supplies the required parent
+  disposition for one final attempt.
+- **Frozen recovery:** run exactly one elevated CV9 recovery with the same
+  `ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node
+  test/browser/keyword-intelligence-e2e.mjs` child command, arguments,
+  selection, isolated `TEST_DATABASE_URL`, fixtures and behavioral oracle.
+  Use a persistent execution session or transparent transport capture that
+  retains complete stdout, stderr and final exit status. A diagnostic capture
+  may exist only under `/tmp`; it must not expose the database URL or change the
+  child command's environment or behavior.
+- **Acceptance and continuation:** accept CV9 only if the unchanged 26-case /
+  13-control certificate and every frozen numeric, cleanup and zero-residual-
+  schema witness are present with exit zero. Then continue through CV10–CV12
+  and CH3/CH4 without another parent prompt. An observable assertion/product
+  failure or another unobservable result stops I103; neither permits a further
+  CV9 attempt under this authorization.
+- **Scope:** A5 CAS 154→155. No checklist, decision, decomposition, source,
+  test, build, browser, database, provider, AWS, production, destructive,
+  commit, push or KI-W7 action was performed by the parent; cost `$0.00`.
+
+```yaml
+certificate: EXECUTION-TRANSPORT-RECOVERY-AUTHORIZED
+window: KI-W6
+assessment: KI-W6-I103
+gate: KI-W6-CV9
+prior_usable_acceptance_result: false
+prior_observable_product_failure: false
+authorized_attempts: 1
+child_command_changed: false
+behavioral_oracle_changed: false
+implementation_write_authority: false
+continue_on_pass: [KI-W6-CV10, KI-W6-CV11, KI-W6-CV12, KI-W6-CH3, KI-W6-CH4]
+stop_on: [observable_test_failure, observable_product_failure, renewed_unobservability]
+successor_authorized: false
+```
+
+### `EV-KI-A-095` — R33 diagnosis and direct C107/I104 authorization
+
+- **Timestamp / phase:** 2026-08-21T15:05:00+05:30 / independent parent
+  diagnosis, corrective authoring, enforcement audit and continuation
+  assignment.
+- **Accepted diagnostic fact:** R33 is an observable test failure, not a
+  sandbox/channel invalidation. The final authorized recovery exited `1` after
+  188,805 ms with 153 requests and complete schema/process/temp cleanup. It
+  emitted no acceptance certificate, ran no later gate and consumed the
+  state-155 recovery allowance.
+- **Independent causal review:** the failing helper queries only the currently
+  rendered keyword-table checkboxes and requires both a checked and an
+  unchecked member. Production `KeywordTable` renders only
+  `paginate(sorted,page,pageSize)`, where the unchanged default is 25, and
+  supplies real `Prev`/`Next` controls. A 200-row/default-100 result therefore
+  does not promise both states in the first 25-row DOM. The product already
+  exposes 200 rows and 100 persisted selected items; the invalid assumption is
+  confined to the test helper.
+- **Locked repair:** `SRC-KI-043` / `DEC-KI-041` / A4 `KI-CL-23` specify one
+  symbol in one existing W6 file. C107 inventories up to eight real pages for
+  one checked and one differently labelled unchecked row, records their page
+  numbers, uses only enabled `Prev`/`Next` controls with changed checkbox-label
+  signatures to reach them, removes before adding, and requires exact
+  `100 of 200 selected`. It cannot alter product code, direct state/API data,
+  page size, timeout, coverage membership or an oracle.
+- **Enforcement and invalidation:** the required set remains the literal 26 W6
+  cases and 13 controls with unchanged group/global digests. Existing
+  `W6-FLOW-07`, `W6-FLOW-13` and `W6-NC-06` remain the sole registrations and
+  prove the repaired helper in the causal run. C107 explicitly supersedes only
+  the accepted S105 helper bytes and failed R33 CV9 result. C106/CV7 and the
+  unchanged production Next-build/CV8 evidence remain valid; a test-only file
+  is not a production build dependency.
+- **Frozen gates:** after independent C107 review, I104 performs the exact
+  build-reuse hash/path proof, one fresh emitted-browser/isolated-schema CV15,
+  then only on pass the previously pending backend regression/secrets,
+  deterministic keyword-worker package and final scope/coverage closure. A
+  sandbox-only invalidation follows E8.1; an observable failure stops and is
+  never retried under that rule.
+- **Authority:** A5 CAS 155→156 allows the window agent to transcribe the
+  literal C107/I104 blocks into S1/S2/S3, dispatch and independently review the
+  one-file leaf, then personally continue through I104 and stop
+  `READY_FOR_PARENT_REVIEW`. KI-W7 remains prohibited. This parent did not edit
+  S1/S2/S3, implementation, tests, builds, database, provider, AWS, production
+  or Git history; cost `$0.00`.
+- **Revisions:** A2 `KI-DD-8`
+  `66a85fa6918193635e438dac1dd21986d0fd75fbfba791386a7f140470a9bd68`;
+  A3 `KI-DL-17`
+  `4d7e4aa311286d997b2498f7af46fa0a32426d1cbace5e1d1f3db340009168b7`;
+  A4 `KI-CL-23`
+  `d47d0dd73b7efd357a7fc196ee64bfba2c2e5b0e4f818ea6e8180054e1f36eae`;
+  A8 `KI-TR-15`
+  `e4fb208e39e60f41f87f0b398b5979aa1702fce7e6124a7f2260c2a7d844a9bc`.
+
+```yaml
+certificate: AUTHORING-READY
+window: KI-W6
+correction: KI-W6-C107
+assessment: KI-W6-I104
+required_changed_file: frontend/test/browser/keyword-intelligence-e2e.mjs
+required_changed_symbol: swapOneSelectionItemViaUi
+starting_file_digest: fc88c77ebb1bf8f62cafa600afbe5d789cd7a688899a552cff93a0ec0ada0a8f
+starting_frontend_head: a39663c8f99d9cc3c4aa1301ff088d5f4a24e7fd
+starting_repository_change_set_digest: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+checked_authoring_items: 8
+unchecked_required_items: 0
+unresolved_evidence_references: 0
+unresolved_payload_contracts: 0
+delegated_implementation_decisions: 0
+unowned_source_members: 0
+unowned_plan_members: 0
+unproven_competing_owner_pairs: 0
+anti_vacuity_failures: 0
+mistake_conformance_failures: 0
+planned_coverage_cases: 26
+unmapped_coverage_cases: 0
+duplicate_coverage_case_ids: 0
+critical_invariants_without_negative_control: 0
+test_substitutes_without_fidelity_disposition: 0
+unresolved_accepted_evidence_invalidations: 0
+frozen_gate_ambiguities: 0
+coverage_membership_changes: 0
+parent_scope_expansion: false
+predictable_gates: [one fresh CV15 isolated-schema emitted-browser run, pending backend regression and secret scan, two deterministic keyword-worker builds and one packaging test, read-only final closure]
+requester_actions_before_start: []
+authorized_first_action: window agent transcribes C107 and I104 exactly into S1/S2/S3
+authorized_first_implementation: C107 only after exact transcription certificate
+planned_stop: READY_FOR_PARENT_REVIEW after I104; before KI-W7
+```
