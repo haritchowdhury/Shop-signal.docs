@@ -1,6 +1,6 @@
 # Keyword Intelligence Decision-Complete Execution Checklist (`A4`)
 
-**Checklist revision:** `KI-CL-20`  
+**Checklist revision:** `KI-CL-21`  
 **Package status:** `AUTHORING-READY`; assignable only by a one-window `A5`
 assignment  
 **Execution status authority:** only `ACTIVE_EXECUTION_STATE.md`
@@ -3558,6 +3558,252 @@ not prose; its named control must falsify the same captured-data assertion.
 - [ ] `KI-W6-H6` Stop after KI-W6. Passing local evidence does not authorize
   infrastructure source, AWS mutation, provider call or KI-W7. Evidence: ___
 
+#### `KI-W6` in-flight corrective amendment — final result shortlist projection
+
+This `KI-CL-21` amendment supersedes only the affected `KI-W6` scope,
+calculation, verification, packaging-reuse, and handoff statements above. The
+five accepted initial files remain accepted history. The current W6 parent
+scope is their exact set plus these two paths:
+
+- `email_scraper/src/aws-pipeline/keyword-intelligence/service.js`
+- `email_scraper/test/keyword-intelligence-worker-flow.test.js`
+
+The complete seven-path sorted-member-plus-LF digest is
+`c3bfe436aba49d52de26298ac74eb30e061d392144dfffbb6954ee792c908bdc`.
+The two added starting SHA-256 values are respectively
+`c37a038f189470ad1d2eca6626f515b9f0c45bd60de470d84c4b72fa497637b5`
+and `f0e8be1a29d9ed5d85a657b8e73083f6c603ca30b18121701b3a33a7c1938510`.
+The window agent must append two sequential single-file corrections,
+`KI-W6-C104` then `KI-W6-C105`, and a zero-implementation-write reassessment
+`KI-W6-I102`; it must return that decomposition for parent review before either
+leaf is assigned. `KI-W6-C101`–`C103` remain used history and are not reused.
+
+```yaml
+window_id: KI-W6
+correction_id: KI-W6-PCA-01
+trigger: SRC-KI-041
+governing_decision: DEC-KI-039
+assigned_agent_policy: one_window_recursive
+authorized_write_scope: [frontend/components/keyword-intelligence/research-dashboard.tsx, frontend/test/browser/keyword-intelligence-dashboard.mjs, email_scraper/test/helpers/keyword-intelligence-e2e-harness.js, email_scraper/test/fixtures/keyword-intelligence/ki-w6-enforcement-manifest-v1.json, frontend/test/browser/keyword-intelligence-e2e.mjs, email_scraper/src/aws-pipeline/keyword-intelligence/service.js aggregateMarket only, email_scraper/test/keyword-intelligence-worker-flow.test.js aggregationScaffold and additive SCN-KI-041 symbols only]
+shared_file_scope: [service.js aggregateMarket only; worker-flow.test.js aggregationScaffold and additive SCN-KI-041 only; all unrelated symbols and accepted assertions remain byte/semantically preserved]
+read_only_scope: [KEYWORD_INTELLIGENCE_PRODUCT_CONTRACT.md, KEYWORD_INTELLIGENCE_DISCOVERY_DOSSIER.md, KEYWORD_INTELLIGENCE_DECISION_LEDGER.md, KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md, ACTIVE_EXECUTION_STATE.md, KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md, KEYWORD_INTELLIGENCE_SPECIFICATION_CHANGELOG.md, KEYWORD_INTELLIGENCE_TRACEABILITY_INDEX.md, KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_CHECKLIST.md, KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_STATE.md, KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_EVIDENCE.md, email_scraper/src/keyword-intelligence/pipeline.js, email_scraper/src/keyword-intelligence/config.js, email_scraper/src/aws-pipeline/keyword-intelligence/contracts.js, email_scraper/src/aws-pipeline/keyword-intelligence/keys.js, email_scraper/src/aws-pipeline/keyword-intelligence/handler.js, email_scraper/src/aws-pipeline/keyword-intelligence/recovery.js, email_scraper/src/keyword-intelligence/repository.js, email_scraper/test/aws-pipeline-packaging.test.js, email_scraper/scripts/build-keyword-worker.js, email_scraper/package.json, frontend/package.json]
+authorized_actions: [window-agent S1/S2/S3 correction authoring, parent-reviewed sequential single-file leaf delegation, local static and focused component diagnostics, one corrected frozen V3 isolated-schema emitted-browser run, one backend npm test, one secret scan, exactly two keyword-worker builds, one unchanged packaging test, read-only dependency and coverage recomputation, consolidated parent handoff]
+prohibited_actions: [window-agent implementation-file edits, leaf multi-file edits, parallel or out-of-order leaves, direct parent-leaf communication, leaf subdelegation, new or changed coverage IDs, manifest or frontend edits, schema migration package lock config handler recovery adapter repository pipeline or build-script edits, full opted-in database suite, Prisma generation or validation, seven-handler build or measure, provider calls, AWS operations, production database writes, destructive shared cleanup, commits or pushes, KI-W7 work]
+successor: STOP_LOCAL
+successor_reserved_for: parent
+may_start_successor: false
+```
+
+##### Task block `KI-W6-CT1` — project final calculation from the durable shortlist
+
+1. **Task:** correct only `aggregateMarket` so the final nine-market
+   calculation uses the fingerprint-validated durable shortlist as its exact
+   keyword universe.
+2. **Requirements/decisions:** `REQ-KI-002/003/023/024`, `INV-KI-004/005/014`,
+   `DEC-KI-006/024/038/039`.
+3. **Source:** `SRC-KI-041`; current `aggregateMarket` reads the 300-row anchor
+   artifact and expansion manifest but never reads the anchor shortlist
+   manifest, then sends those unfiltered inputs to `computeResearchResult`.
+4. **Target:** only
+   `email_scraper/src/aws-pipeline/keyword-intelligence/service.js::aggregateMarket`;
+   no export, signature, caller, handler, contract, key, or repository change.
+5. **Interface/schema:** read `anchor_screen` through existing `readManifest`
+   using `KEYWORD_ARTIFACT_SHORTLIST_MANIFEST` and
+   `keywordShortlistManifestSchema`. Define the exact comparison key as
+   `keyword.trim().toLowerCase()`. Public and artifact schemas remain unchanged.
+6. **Algorithm:** after the existing validated expansion-manifest read and
+   before `computeResearchResult`: (a) read the validated anchor shortlist;
+   (b) build its ordered keyword array and distinct normalized-key set `K`;
+   (c) map every `expansionManifest.bySeed` member to the same seed with its
+   keywords filtered in original order to keys in `K`, retaining shared
+   keywords under every original seed; (d) filter the US anchor metrics in
+   original order to `K`; (e) compute the distinct normalized keys represented
+   by each filtered input and call the existing invariant failure if either set
+   is not exactly `K`; (f) call `computeResearchResult` with only that filtered
+   expansion, filtered `US` metrics, and the unchanged eight market arrays.
+7. **Operations:** existing aggregation claim/lease → validated anchor task
+   read → eight validated market-task reads → validated expansion-manifest
+   read → one validated shortlist-manifest read → in-memory projection →
+   existing calculation → existing immutable market/result puts → existing
+   fenced publication. No network/provider work occurs in aggregation.
+8. **Atomicity/recovery:** the added read is inside the existing monitored
+   aggregation boundary; publication and selection retain the existing final
+   fenced transaction. A failure before publication leaves result/selection
+   invisible and is recovered from the same immutable manifests.
+9. **Identity/formulas:** use only the existing stage identity, generation,
+   `keywordStageInputFingerprint`, manifest content fingerprint, and produced
+   timestamp validation performed by `readManifest`; normalized membership is
+   exactly `trim().toLowerCase()` and does not create a new durable identity.
+10. **Failure/replay/concurrency:** missing/corrupt/mismatched shortlist or set
+    inequality fails closed before any result put/publication. Duplicate,
+    reordered, restarted, expired, or stale-owner aggregate checks retain the
+    existing monitor/fence outcomes. Exact replay recomputes the identical
+    result and fingerprint.
+11. **Dependencies/bounds:** shortlist length `1..200`; anchor metrics `1..300`;
+    final expansion/US universe exactly shortlist length; result rows exactly
+    shortlist length and at most `200`; selection at most `100`; one added S3
+    read; zero added provider calls, sends, attempts, writes, reservations, or
+    database operations.
+12. **Callers/obsolete behavior:** only market aggregation consumes the new
+    projection. Remove the obsolete direct use of all expansion candidates and
+    all US anchor metrics as the final calculation universe. Preserve the
+    300-keyword anchor screen, 200-keyword market requests, full immutable
+    anchor artifact, provider cost, ordering, provenance, and result schema.
+13. **Tests/cases/controls:** `KI-W6-CT2` supplies the focused component
+    regression. Existing sole W6 registration `W6-FLOW-05` must observe
+    300 screened, 200 shortlisted, exactly 200 published and default 100;
+    existing `W6-NC-05` must still falsify the unchanged durable-visibility
+    oracle after a 201st/300th leaked row. No new W6 case/control ID or second
+    registration is permitted.
+14. **Output:** corrected production service consumed by `KI-W6-CT2`, V3, the
+    keyword-worker build, and later W7 packaging.
+15. **Non-goals:** no result post-truncation, rank change, shortlist-limit
+    change, candidate pre-cap, seed-lineage collapse, artifact mutation,
+    provider/API/frontend/schema/config/repository/handler/recovery/build edit,
+    or live action.
+
+- [ ] `KI-W6-CT1` Implement the exact `aggregateMarket` projection above in
+  one `KI-W6-C104` leaf. Evidence: ___
+
+##### Task block `KI-W6-CT2` — focused aggregation regression and substitute fidelity
+
+1. **Task:** update only the existing non-database aggregation scaffold and add
+   one focused regression proving a 300-candidate anchor plus durable
+   200-keyword shortlist publishes exactly those 200 result rows.
+2. **Requirements/decisions:** same as `KI-W6-CT1`; `SCN-KI-041`;
+   `W6-FLOW-04/05/06`; `W6-NC-05`.
+3. **Source:**
+   `email_scraper/test/keyword-intelligence-worker-flow.test.js::aggregationScaffold`
+   currently supplies no anchor shortlist manifest because the old production
+   aggregator did not read one, and its three-candidate fixture cannot expose
+   300→200 leakage.
+4. **Target:** only that file's `aggregationScaffold` support symbols and one
+   additive `SCN-KI-041` test; all R3/R4 registrations and assertions remain.
+5. **Interface/schema:** extend the private scaffold options with exact
+   `candidates` and `shortlist` arrays defaulting to the existing
+   `AGG_CANDIDATES`; expose the exact `publishResearchResult` input through the
+   returned private holder. No production or exported test interface changes.
+6. **Algorithm:** use `candidates` for expansion manifest, anchor request, and
+   anchor metrics; use `shortlist` for all eight market task request
+   fingerprints and market metrics; create and store a strict
+   `keyword-shortlist-manifest-v1` at the anchor manifest key with the existing
+   anchor-stage input fingerprint/produced time, and assign its key,
+   fingerprint, and produced time to the anchor stage; capture the final
+   publication input without changing its return outcome.
+7. **Operations:** all storage remains the existing in-memory strict
+   `S3ArtifactStore`; no database, subprocess, HTTP, provider, AWS, or workspace
+   artifact write is added by the test.
+8. **Atomicity/recovery:** the scaffold continues to exercise the production
+   aggregate message and repository publication seam; it makes no atomicity
+   claim beyond the existing component parity ledger.
+9. **Identity/formulas:** for `SCN-KI-041`, define candidates exactly as
+   `Array.from({length:300},(_,index)=>` followed by the template literal
+   `` `seed one candidate ${String(index + 1).padStart(3, "0")}` `` and `)`;
+   define the durable shortlist as `candidates.slice(0, 200)` in original
+   order, and compare normalized `trim().toLowerCase()` sets. Existing artifact
+   keys/fingerprints remain the production formulas.
+10. **Failure/replay/concurrency:** preserve every existing R3/R4 lease,
+    lost-owner, terminal/found/conflict/not-found, and no-dispatch assertion.
+    The new regression is a normal terminal market aggregation only; V3 retains
+    restart/duplicate/fence proof.
+11. **Dependencies/bounds:** exact input/output counts are 300/200/200/100;
+    component execution is non-database and performs zero external calls.
+12. **Callers/obsolete behavior:** existing scaffold callers receive byte-
+    equivalent three-item defaults and continue to pass. The obsolete missing-
+    shortlist substitute is removed because production now consumes that
+    artifact.
+13. **Tests/cases/controls:** the additive test must assert outcome
+    `published`, captured final result length exactly `200`, normalized result
+    keys exactly equal the durable shortlist keys, zero result key outside the
+    shortlist, and default selection length exactly `100`. It is supplemental
+    and must not register/activate `W6-FLOW-05`; the sole causal registration
+    stays in S105. Existing `W6-NC-05` remains the enforcement control.
+14. **Output:** component regression/fidelity evidence consumed by the
+    corrected W6 assessment and backend regression.
+15. **Non-goals:** no existing case-ID membership/digest change, no accepted
+    R3/R4 oracle weakening, no DB fixture, timeout increase, retry, frontend,
+    manifest, package, production, or second-file edit.
+
+- [ ] `KI-W6-CT2` Implement the exact scaffold/regression update above in one
+  `KI-W6-C105` leaf after C104 is accepted. Evidence: ___
+
+##### Scenario `SCN-KI-041` — final result cannot escape the shortlist
+
+```yaml
+scenario_id: SCN-KI-041
+requirements: [REQ-KI-002, REQ-KI-003, REQ-KI-023, REQ-KI-024]
+decisions: [DEC-KI-024, DEC-KI-038, DEC-KI-039]
+preconditions: market stage ready under a live aggregation token; immutable expansion manifest has 300 unique candidates; immutable anchor result has all 300 US metrics; immutable anchor shortlist has the first 200; eight market artifacts contain those same 200
+inputs: strict in-memory artifact schemas and actual processKeywordMessage aggregate path
+actions: process one market aggregate check; capture the publishResearchResult input; then rely on the existing W6-NC-05 mutation during V3
+activation_witnesses: validated shortlist-manifest get occurs; computeResearchResult output reaches publishResearchResult; causal V3 later observes the fenced durable result
+oracle: component result keys equal the 200 shortlist keys and exclude all other anchor keys; causal V3 observes rowCount 200 and defaultSelectionItemCount 100
+call_and_operation_counts: one extra shortlist get; zero extra provider calls queue sends attempts writes reservations or database operations; existing maximum totals remain 19 calls 23 keyword objects 42 base sends and 0.49200000 USD
+negative_control: W6-NC-05 mutates captured durable visibility with an escaped row and the unchanged oracle fails, then a fresh witness passes
+parity_class: component plus existing local_e2e W6-FLOW-05
+cleanup: component memory is discarded; V3 uses its existing schema/temp cleanup and absence witness
+```
+
+##### Corrected frozen assessment schedule
+
+- [ ] `KI-W6-CV1` After C104/C105 acceptance, run once from `email_scraper/`:
+  `node --check src/aws-pipeline/keyword-intelligence/service.js` and
+  `node --test --test-isolation=none test/keyword-intelligence-worker-flow.test.js`.
+  Require zero failures, `SCN-KI-041` activation and the exact
+  300/200/200/100 assertions; existing R3/R4 cases remain green. Evidence: ___
+- [ ] `KI-W6-CV2` Reuse the already-passing frontend `npm run check` only after
+  `git -C frontend status --porcelain` is empty and
+  `git -C frontend rev-parse HEAD` equals
+  `a39663c8f99d9cc3c4aa1301ff088d5f4a24e7fd`, the committed tree containing
+  the passed V2 inputs. Do not rebuild Next for backend-only C104/C105.
+  Evidence: ___
+- [ ] `KI-W6-CV3` Run the corrected V3 emitted-browser/isolated-schema command
+  once with the standing sandbox policy. Require the unchanged 26-case/13-
+  control certificate, exact 19/23/42/`$0.49200000` topology, 300 anchor,
+  200 shortlist, 200 durable/UI rows, default 100, complete cleanup and zero
+  residual schema. Earlier failed V3 attempts remain diagnostic and are not
+  acceptance. Evidence: ___
+- [ ] `KI-W6-CV4` From `email_scraper/`, run `npm test` once and
+  `npm run check:secrets` once after the final backend freeze; require zero
+  failures and a clean secret scan. Do not run the full opted-in DB suite.
+  Evidence: ___
+- [ ] `KI-W6-CV5` From `email_scraper/`, run
+  `node scripts/build-keyword-worker.js` exactly twice. Require byte-identical
+  keyword ZIP hashes, preserved sibling artifacts, no forbidden/stale members,
+  ZIP at most 45 MiB, unzipped at most 200 MiB, and cold import exporting a
+  function `handler`; then run
+  `node --test --test-isolation=none test/aws-pipeline-packaging.test.js` once
+  with zero failures. Do not run the seven-handler build or measure scripts.
+  Evidence: ___
+- [ ] `KI-W6-CV6` Recompute the seven-path scope digest, current file hashes,
+  exact 26-ID/group/global equality, 13 controls, substitute limits, privacy,
+  and W7 package/resource handoff. Require all non-C104/C105 accepted W6 files
+  byte-identical to these accepted SHA-256 values: research dashboard
+  `68a7ec84d77a955122dfb9ca1767ab1a52c2a2f2125db5c34581e5e9af8f5984`,
+  dashboard browser test
+  `17ae402882f64fd8da6aba61161343f119aa1b7a62edbed0cbf97d9bbe0896b7`,
+  backend E2E helper
+  `7571818027b54bc812d4395d0eb1eec65616b1b939c90baae27fefdb619867c6`,
+  W6 manifest
+  `ea3a5471e33f5dcc656a6b522e8d379f596caad158c0bd3ff2315e93d145e475`,
+  and causal browser test
+  `fc88c77ebb1bf8f62cafa600afbe5d789cd7a688899a552cff93a0ec0ada0a8f`;
+  require no out-of-scope source change.
+  Evidence: ___
+
+Only CV1, CV3, CV4, CV5, and CV6 are invalidated by C104/C105. The previously
+passing frontend build is not invalidated unless its complete inputs change.
+An edit after any corrected gate reruns only that gate and its dependent gates;
+sandbox/channel invalidation follows the standing identical-recovery rule.
+
+- [ ] `KI-W6-CH1` Window agent records accepted C104/C105, the personally
+  executed `KI-W6-I102`, exact seven-file final set/digest, corrected gates,
+  reused frontend-build dependency proof, superseded failed V3 attempts, and
+  a complete `WINDOW-AGENT-INTEGRATION-PASS`. Evidence: ___
+- [ ] `KI-W6-CH2` Window agent stops `READY_FOR_PARENT_REVIEW`; no KI-W7,
+  provider, AWS, production, destructive, commit, push, A1–A8, schema,
+  migration, package, or frontend action occurs. Evidence: ___
+
 ### `KI-W7` — Infrastructure source only
 
 ```yaml
@@ -4934,6 +5180,41 @@ explicit W8 approval.
   browser/provider/AWS action. Evidence: `SRC-KI-040`; `CHG-KI-056`;
   `EV-KI-A-081`.
 
+### 4.13 KI-W6 in-flight shortlist correction readiness
+
+- [x] `RW6C-001` The 300-row result is classified as a production aggregation
+  defect against A1/DEC-KI-038, not a test-oracle defect. Evidence:
+  `SRC-KI-041`; `DEC-KI-039`; `EV-KI-A-088`.
+- [x] `RW6C-002` The remedy is mechanically fixed: read the immutable shortlist,
+  project per-seed expansion and US metrics by exact normalized membership,
+  require set equality, and preserve every provider/task/artifact/public
+  contract. Evidence: `DEC-KI-039`; `KI-W6-CT1`; `EV-KI-A-088`.
+- [x] `RW6C-003` The expanded W6 set is exactly seven paths with digest
+  `c3bfe436aba49d52de26298ac74eb30e061d392144dfffbb6954ee792c908bdc`;
+  C104 and C105 each own one added file and I102 owns no implementation file.
+  Evidence: `KI-W6-PCA-01`; `EV-KI-A-088`.
+- [x] `RW6C-004` Both corrective tasks contain all fifteen fields, exact
+  intermediate order, preserved behavior, failure/replay outcomes, local
+  checks, and successor boundaries. Evidence: `KI-W6-CT1/CT2`;
+  `SCN-KI-041`; `EV-KI-A-088`.
+- [x] `RW6C-005` Enforcement membership remains the existing 26 cases and 13
+  controls: `W6-FLOW-05`/`W6-NC-05` own the final-row invariant and the focused
+  component regression cannot create a duplicate registration. Evidence:
+  `DEC-KI-039`; corrected gate schedule; `EV-KI-A-088`.
+- [x] `RW6C-006` Gate invalidation is risk-proportionate: reuse the unchanged
+  frontend build by full-input hashes; rerun the focused component, causal V3,
+  backend regression/secrets, and worker package only after final backend
+  freeze; never run the full DB or seven-handler build suites. Evidence:
+  `KI-W6-CV1`–`CV6`; `EV-KI-A-088`.
+- [x] `RW6C-007` The worker source change invalidates the old service hash, so
+  W7 must consume the newly deterministic two-build package/size/startup proof
+  rather than the unchanged-hash claim from original V6. Evidence:
+  `KI-W6-CV5/CV6`; `DEC-KI-039`; `EV-KI-A-088`.
+- [x] `RW6C-008` Recursive authority stops before leaf dispatch: only the
+  window agent may append C104/C105/I102 to S1/S2/S3 and return them for parent
+  decomposition review; KI-W7 remains prohibited. Evidence: A5 state 149;
+  `CHG-KI-061`; `EV-KI-A-088`.
+
 ## 5. Final independent review (not assigned to implementation agents)
 
 - [ ] `KI-FR-1` Independently inspect current source/diff, active hashes, every accepted window, and changed-file scope.
@@ -4948,20 +5229,22 @@ explicit W8 approval.
 Checked mandatory parent-standard items: **93**. Checked recursive KI-R4
 items: **10**. Checked W4 authoring supplements: **12**. Checked KI-R5
 corrective supplements: **12**. Checked KI-W6 reauthoring supplements: **12**.
+Checked KI-W6 in-flight corrective supplements: **8**.
 Unchecked required authoring items: **0**.
 
 KI-R5 is accepted and closed by `EV-KI-A-080` / `CHG-KI-055`; A5 accepts
 through KI-R5. The reauthored KI-W6 is decision-complete and
-enforcement-complete: `SRC-KI-038`–`040`, `DEC-KI-038`, five complete 15-field
-tasks, one exact five-file set/digest, a literal 26-case matrix, thirteen
-falsification controls, bounded substitute claims, one causal maximum scenario,
-and an invalidation-aware one-build/one-schema frozen schedule close every
-implementation and acceptance choice identified by the parent review.
+enforcement-complete as amended: `SRC-KI-038`–`041`, `DEC-KI-038/039`, the
+five accepted initial files plus two complete corrective 15-field tasks, one
+exact seven-file set/digest, the unchanged literal 26-case matrix and thirteen
+falsification controls, bounded substitute claims, and the corrected focused,
+causal, regression, privacy and worker-package gate schedule close the observed
+300-row escape without changing product intent or provider economics.
 
-A5 state 142 is the unassigned authoring boundary. It pins the reauthored A3/A4,
-accepts through KI-R5, names KI-W6 as next, authorizes no agent/window/file/action,
-and keeps `may_start_successor:false`. The state-108 decomposition remains
-immutable and unusable. A later explicit parent CAS may assign one named
-`KI-W6-WINDOW-AGENT` to create only the three fresh `REAUTHORED` coordination
-artifacts and return for decomposition review; this authoring pass neither
-assigns/decomposes nor implements KI-W6.
+A5 state 149 is the parent correction-authoring boundary. It keeps
+`ASG-KI-W6-WA-02` assigned only to the window agent's three coordination
+artifacts and authorizes that agent to append C104/C105/I102, then return for
+parent decomposition review before leaf dispatch. It accepts only through
+KI-R5, keeps `may_start_successor:false`, and prohibits KI-W7. No
+implementation, leaf, test, build, database, provider, AWS or production action
+is performed by this parent amendment.

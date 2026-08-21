@@ -1,6 +1,6 @@
 # Keyword Intelligence Decision Ledger (`A3`)
 
-**Revision:** `KI-DL-14`  
+**Revision:** `KI-DL-15`  
 **Status:** locked decisions; not an assignment
 
 This is the sole authority for implementation-affecting choices and
@@ -1879,6 +1879,54 @@ estimates them. This specification decision is not paid-call authorization.
 - **Tasks/scenarios:** `KI-W6-T1`–`T5`; `SCN-KI-018`; all `W6-*` cases and
   `W6-NC-01`–`13`.
 
+### `DEC-KI-039` — Final calculation is projected from the durable shortlist
+
+- **Requirements:** `REQ-KI-002`, `REQ-KI-003`, `REQ-KI-023`,
+  `REQ-KI-024`, `INV-KI-004`, `INV-KI-005`, `INV-KI-014`.
+- **Locked choice:** the anchor stage continues to screen and persist all
+  `1..300` US candidates. The market aggregator must additionally read the
+  validated immutable `keyword-shortlist-manifest-v1` produced by the
+  `anchor_screen` stage and must project both the per-seed expansion input and
+  the reused US metrics to exactly that manifest's `1..200` keywords before
+  calling `computeResearchResult`. The remaining eight market artifacts are
+  already requested from that same shortlist. The published result therefore
+  contains exactly the shortlist cardinality, at most `200`, while the default
+  selection remains at most `100`.
+- **Normalization/formula:** define
+  `key(keyword)=keyword.trim().toLowerCase()`. Define `S` as the unique ordered
+  `shortlistManifest.keywords` and `K={key(x)|x in S}`. For each expansion
+  `bySeed` member, retain its original seed and original keyword order but keep
+  only keywords whose key is in `K`; retain a keyword under every original seed
+  that supplied it. Filter the US anchor metrics in original provider order by
+  the same `K`. Before calculation, the distinct keys represented by the
+  filtered expansion and the distinct keys represented by the filtered US
+  metrics must each equal `K`; mismatch fails through the existing invariant/
+  artifact-contract path and publishes nothing. Pass only the filtered
+  expansion and filtered US metrics, plus the unchanged eight market metrics,
+  to `computeResearchResult`.
+- **Durability and operations:** the shortlist is reconstructed only from its
+  existing fingerprint-validated S3 manifest through `readManifest`; no queue
+  body, task request, array truncation, S3 listing, in-memory prior-stage value,
+  or result post-truncation is authoritative. The change adds one validated S3
+  read during market aggregation and adds no provider call, queue send,
+  attempt, task, artifact write, database write, reservation, transaction, key,
+  timestamp, retry, lease, or public interface.
+- **Failure/replay/concurrency:** missing, corrupt, fingerprint-mismatched, or
+  incomplete shortlist evidence fails before result/selection publication
+  under the existing aggregation lease monitor. Duplicate/reordered aggregate
+  checks and stale owners retain the existing fencing/idempotency behavior; an
+  exact replay reads the same immutable shortlist and computes the same result
+  fingerprint.
+- **Rejected:** accepting 300 final rows; changing `shortlistLimit`; capping
+  before the US overview; taking the first 200 expansion entries independently
+  of the ranked manifest; truncating `result.keywords` after calculation;
+  collapsing all shortlist keywords onto one seed; mutating any accepted
+  artifact; or changing provider economics.
+- **Evidence:** `SRC-KI-030`, `SRC-KI-041`; A1 `REQ-KI-024`; `DEC-KI-006`,
+  `DEC-KI-024`, `DEC-KI-038`.
+- **Tasks/scenarios:** `KI-W6-CT1`, `KI-W6-CT2`; `SCN-KI-041`;
+  existing `W6-FLOW-04`, `W6-FLOW-05`, `W6-FLOW-06`, and `W6-NC-05`.
+
 ## 2. Lifecycle transition tables
 
 ### Research and stage transitions
@@ -1895,7 +1943,7 @@ estimates them. This specification decision is not paid-call authorization.
 | expansion aggregate | all 2–10 expansion tasks terminal; one owner | validate exact US task set/artifacts; put candidate manifest; atomically complete expansion and create one anchor-screen task | one `US:0` task message then check | existing manifest/task set must match | derive from S3 listing; cap before screen |
 | anchor aggregate | anchor task terminal; one owner | validate anchor artifact; run exact screening/rank; put 1–200 shortlist manifest; atomically complete anchor and create exact eight non-US tasks | eight ordered market task messages then check | existing shortlist/task set must match | ranking without anchor metrics; second US call |
 | renew aggregation lease | aggregator; aggregating + exact token + expiry>now | conditional expiry=now+120s only | none | count zero is lost | revive expired/terminal/wrong-token stage; change owner/token/attempt/counters |
-| market aggregate | all eight market tasks terminal; one owner | validate exact artifacts plus US anchor metrics; rerun nine-market calculation; put market manifest/result; final fenced transaction publishes result/default selection and completes research | none | completed result is immutable no-op | changed shortlist; partial result visibility |
+| market aggregate | all eight market tasks terminal; one owner | validate exact artifacts plus the durable shortlist; project expansion and reused US metrics to that shortlist; rerun the at-most-200-row nine-market calculation; put market manifest/result; final fenced transaction publishes result/default selection and completes research | none | completed result is immutable no-op | changed/bypassed shortlist; 300-row leakage; partial result visibility |
 | recovery | recovery Lambda; overdue durable row | conditional reclaim/dispatch bookkeeping only | identity task/check messages | duplicates commute | provider call; mutation of terminal row |
 
 ### Selection, handoff, and query transitions

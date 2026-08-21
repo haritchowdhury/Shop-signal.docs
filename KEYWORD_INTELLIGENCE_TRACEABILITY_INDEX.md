@@ -1,6 +1,6 @@
 # Keyword Intelligence Traceability Index (`A8`)
 
-**Revision:** `KI-TR-12`
+**Revision:** `KI-TR-13`
 
 This is the sole authority for mechanical requirement/source/decision/task/test
 closure. The other artifacts are `A1`
@@ -159,9 +159,11 @@ digest is `fe48d14ebec1dffa058cf91cfa9ec10982d4ceaa4c63e0cb9280cabf39a4a59b`.
 Every backend route/handoff/query branch by `KI-W4`; every frontend route/proxy/dashboard
 surface by `KI-W5`, except the two successful dashboard navigation expressions
 and the one accepted R5-FIN-01 destination oracle now uniquely owned by
-`KI-W6-T1/T2`. KI-W6 additionally owns only its new helper, literal manifest and
-causal browser harness; their exact five-path digest is
-`d28ae17864073639580d7650bb03c03474d5370a5034b632cf412e1e3cf3d0bb`.
+`KI-W6-T1/T2`. KI-W6 initially owned its new helper, literal manifest and
+causal browser harness; `SRC-KI-041`/`DEC-KI-039` add only
+`service.js::aggregateMarket` and the aggregation scaffold/additive
+`SCN-KI-041` symbols. The complete seven-path digest is
+`c3bfe436aba49d52de26298ac74eb30e061d392144dfffbb6954ee792c908bdc`.
 Only additive SAM/build/config/runtime-config symbols named in the
 W7 header by `KI-W7`; and only approved
 external resources plus A5/A6 updates by `KI-W8`. Each owner traces to the
@@ -237,10 +239,10 @@ repeated successful stateful gates are outside W4.
 |---|---|---|---|---|---|
 | successful handoff opens API JSON instead of workspace | `SRC-KI-038` | `DEC-KI-038` workspace route from encoded `run.runId`; API `statusUrl` unchanged | `KI-W6-T1/T2` | `W6-NAV-01`–`03`; `NC-01` | V1 source/oracle inventory; V3 causal Chrome route; only R5-FIN-01 destination superseded |
 | real authenticated frontend/backend causality absent from R5 | `SRC-KI-036/039` | one emitted Next/auth-client/proxy/backend/Prisma chain; no application-API interception | `KI-W6-T3/T5` | `W6-FLOW-01/02/06`; `W6-RES-01`; `NC-02/09/12` | V2 sole build; V3 one causal stateful run; substitute ledger caps claims |
-| maximum keyword research and durable UI visibility | accepted W2/W3/R4/R5 evidence; `SRC-KI-039` | exact 19-call, 300/200/default-100, `$0.492` topology and fenced result | `KI-W6-T3/T5` | `W6-FLOW-03`–`07`; `W6-RES-02/03`; `NC-03`–`05` | V3 exact call/artifact/attempt/visibility counts; V5 independent trace recompute |
+| maximum keyword research and durable UI visibility | accepted W2/W3/R4/R5 evidence; `SRC-KI-039/041` | `DEC-KI-038/039`: exact 19-call, 300-screen→200-durable-shortlist→200-final/default-100, `$0.492` topology and fenced result | `KI-W6-T3/T5`, `KI-W6-CT1/CT2` | `SCN-KI-018/041`; `W6-FLOW-03`–`07`; `W6-RES-02/03`; `NC-03`–`05` | CV1 component projection; CV3 causal exact call/artifact/attempt/visibility counts; CV5 emitted worker; CV6 independent trace recompute |
 | saved selection to immutable run/query lineage | accepted W4/R5 evidence | numeric-v1 minimal mutation, saved-only handoff, same-key retry, immutable snapshot | `KI-W6-T1/T3/T5` | `W6-NAV-02`; `W6-FLOW-07`–`09/13`; `NC-06` | V3 real SQL/browser proof; V5 exact Run/RunQuery/snapshot sets |
 | query confirmation to downstream stable-domain boundary | existing query-review/Google-parser/discovery/domain source | exactly 100 validator/searchPage calls, 1,000 parsed occurrences, 100 per-query tasks, 1,000 stable hosts/run stores/lead tasks; stop before lead fetch; do not claim the bypassed Google transport/artifact wrapper | `KI-W6-T3/T5` | `W6-FLOW-10`–`12`; `W6-RES-02/04`; `NC-07/08` | V3 actual validator/parser/services with deterministic boundaries; V5 exact identity/count and substitute-limit recompute |
-| coverage, anti-vacuity, scope and obsolete runtime | `SRC-KI-040`; parent standard E6–E8 | literal 26-case/13-control manifest, unique registration/activation, exact five-file/integrated-entry inventory | `KI-W6-T4/T5` | `W6-CONF-01`–`06`; `NC-10`–`13` | V1 manifest/source; V3 certificate; V5/V6 independent scope/evidence proof |
+| coverage, anti-vacuity, scope and obsolete runtime | `SRC-KI-040/041`; parent standard E6–E8 | literal 26-case/13-control manifest, unique registration/activation, exact seven-file/integrated-entry inventory; SCN-KI-041 is supplemental and never a second case registration | `KI-W6-T4/T5`, `KI-W6-CT1/CT2` | `W6-CONF-01`–`06`; `NC-10`–`13` | corrected V1/CV1 source; CV3 certificate; CV5/CV6 package/scope/evidence proof |
 
 The authoritative W6 groups contain `3/13/4/6` members with digests
 `103df262…`, `14aa36ae…`, `fc83e2c6…`, `b8180b2f…`; the 26-member global digest
@@ -263,3 +265,4 @@ is the mechanical expansion used for completeness checks:
 | `REQ-KI-010`–`013`; `INV-KI-010/011/015` | `KI-W6-T3/T5` | `W6-FLOW-09`–`12`; 100 query identities, validation/parser calls and 1,000 stable domains | `KI-W6-V3/V5` |
 | `REQ-KI-015`–`017` | `KI-W6-T1/T2/T3/T5` | `W6-NAV-01`–`03`, `W6-FLOW-07`–`09/13`, `W6-RES-01`; saved-only/same-key/immutable owner-scoped handoff | `KI-W6-V1/V3/V5` |
 | `REQ-KI-019/020`; all `EXC-KI-001`–`008` and `AUTH-KI-001`–`004/006/007` applicable locally | W6 header, `KI-W6-T3/T5`, A5 | `W6-CONF-01`–`06`, `W6-NC-09`–`13`; exact scope, obsolete-runtime, substitute and authority closure | `KI-W6-P1`–`P6`, `V1/V3/V5/V6`, `H1`–`H6` |
+| `REQ-KI-002/003/023/024`; `INV-KI-004/005/014` corrective overlay | `KI-W6-CT1/CT2` under `DEC-KI-039` | `SCN-KI-041`; existing sole `W6-FLOW-05` registration and `W6-NC-05` control; 300 anchor keys project through the durable 200-keyword manifest to exactly 200 final keys/default 100 | `KI-W6-CV1/CV3/CV5/CV6`, `KI-W6-CH1/CH2` |

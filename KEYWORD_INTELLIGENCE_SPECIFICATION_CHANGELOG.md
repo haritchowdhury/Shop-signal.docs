@@ -993,3 +993,19 @@ compatibility_or_migration_effect: none — decomposition approval and recursive
 authorization_effect: KI-W6-WINDOW-AGENT may acknowledge approval in S2/S3 and manage the approved sequential leaves and I101; no leaf is assigned by this parent transition.
 resumption_state: A5 state 148 DECOMPOSITION_APPROVED under ASG-KI-W6-WA-02; S2 must record approval and become READY before S101 dispatch.
 ```
+
+```yaml
+change_id: CHG-KI-061
+timestamp: 2026-08-21T12:56:40+05:30
+trigger_evidence: [SRC-KI-041, EV-KI-A-088]
+reason: The causal maximum W6 run proved that production market aggregation bypassed the durable 200-keyword shortlist during final calculation and therefore published 300 rows despite the accepted 300-screen to 200-shortlist to 200-final contract.
+old_revision: A2 KI-DD-5; A3 KI-DL-14 / ef4153677807c80dfa9a09c0ffe0ba5a5127681fe6706e17ff6cd48869fdbd31; A4 KI-CL-20 / 8fe18271bf368a283246d55807dcc4612e118c725e5aabeb6188962a7abf5f4e; A8 KI-TR-12; A5 state 148; five-path W6 parent scope; unchanged-worker-hash V6 premise
+new_revision: A2 KI-DD-6 / cd0aca4b66e52f7953e2e411d0415df408ab5ccbbda4f83c9f9267c7c64db8ca; A3 KI-DL-15 / 4bb1201594bc4a33bf868f19dd73c6777d046cdbb8ae70ef2cc8972dd6c342ad; A4 KI-CL-21 / a499afe117ee9b9dba07ab1a420d8a9bae824d6d5d7419374427f9cc0687fa63; A8 KI-TR-13 / 2d0987b1ff7014d4561a9edd4ac5cec711b7893f420ea0de448c8bb564c909ed; A5 state 149; seven-path W6 parent scope; corrected worker-package proof required
+changed_requirements: []
+changed_decisions: [DEC-KI-039 projects per-seed expansion and reused US metrics from the immutable validated shortlist before final calculation, final rows equal shortlist cardinality at most 200, one extra validated S3 read and no other operation count changes, old worker hash evidence is replaced by a new deterministic package proof]
+affected_windows: [KI-W6 remains active and unaccepted; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: [all failed W6 V3 attempts remain diagnostic; original W6 V6 unchanged-service-hash premise is invalidated when C104 edits service.js; the passed frontend V2 build remains reusable only under the exact committed-input proof]
+compatibility_or_migration_effect: no product-contract schema migration API provider queue task artifact format key cost selection or historical compatibility change; this corrects current v1 calculation to the already accepted shortlist contract.
+authorization_effect: KI-W6-WINDOW-AGENT may edit only S1/S2/S3 to append decision-complete and execution-complete C104 then C105 and zero-write I102 and return for parent decomposition review; no leaf dispatch or implementation action is yet authorized.
+resumption_state: A5 state 149 READY under ASG-KI-W6-WA-02; stop at AWAITING_PARENT_DECOMPOSITION_REVIEW before C104 assignment.
+```

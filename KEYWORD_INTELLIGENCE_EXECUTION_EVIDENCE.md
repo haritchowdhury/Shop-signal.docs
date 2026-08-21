@@ -5095,3 +5095,105 @@ planned_stop: READY_FOR_PARENT_REVIEW after KI-W6 window-agent integration asses
   does not itself assign a leaf or execute a gate.
 - **No execution:** no implementation, leaf, test/build/browser/database/
   provider/AWS/production/destructive/commit/push or KI-W7 action; `$0.00`.
+
+### `EV-KI-A-088` — KI-W6 300-row escape diagnosis and corrective authoring
+
+- **Timestamp / phase:** 2026-08-21T12:56:40+05:30 / independent parent
+  contradiction review, decision closure, corrective-window authoring, and
+  coordination-only reassignment.
+- **Observed failure and root cause:** the window agent's continued V3 reached
+  the real emitted-browser → Next → backend → Prisma → keyword worker
+  publication path with 300 anchor candidates and a durable 200-keyword
+  shortlist, but observed
+  `{visible:true,rowCount:300,defaultSelectionItemCount:100}`. Independent
+  source review confirmed `aggregateMarket` reads the full expansion manifest
+  and 300-row US anchor artifact, never reads the anchor shortlist manifest,
+  and passes the unfiltered inputs to `computeResearchResult`, which retains
+  every discovered anchor-backed row. This is `SRC-KI-041`; it contradicts A1
+  `REQ-KI-024` and `DEC-KI-038`, so the 200-row oracle is preserved.
+- **Locked correction:** `DEC-KI-039` requires one existing validated shortlist
+  read and exact `trim().toLowerCase()` membership projection of both per-seed
+  expansion and reused US metrics before final calculation. Both projected key
+  sets must equal the durable shortlist. Seed provenance/order, the 300-row
+  anchor screen/artifact, eight 200-row market calls, result schema, default-
+  100 selection, fencing, retry, cost and every public interface remain
+  unchanged. Accepting 300 rows, result post-truncation, pre-screen capping and
+  first-200-by-expansion-order are explicitly rejected.
+- **Corrective scope and recursive order:** A4 `KI-CL-21` adds exactly
+  `service.js::aggregateMarket` and
+  `keyword-intelligence-worker-flow.test.js::aggregationScaffold` plus additive
+  `SCN-KI-041` to the five accepted W6 files. Independent sorted-member-plus-LF
+  recomputation gives the seven-path digest
+  `c3bfe436aba49d52de26298ac74eb30e061d392144dfffbb6954ee792c908bdc`;
+  the two new baselines are `c37a038f…` and `f0e8be1a…`. The window agent must
+  author C104 → C105 → zero-write I102 and return for renewed parent
+  decomposition review before assigning either leaf.
+- **Enforcement and gate closure:** the required W6 registry remains exactly 26
+  cases and 13 controls; the existing sole `W6-FLOW-05` registration and
+  `W6-NC-05` control own the leaked-row invariant. `SCN-KI-041` is a
+  supplemental component regression and cannot register that ID again. The
+  corrected assessment reuses the committed unchanged frontend build, runs one
+  focused component gate, one corrected causal V3 database/browser gate, one
+  backend regression and secret scan, and two deterministic keyword builds plus
+  the unchanged packaging test. It forbids the full opted-in DB suite,
+  duplicate Next build, and seven-handler build/measure.
+- **Mechanical authoring audit:** A4 contains 15/15 fields for each of
+  `KI-W6-CT1/CT2`; eight `RW6C-*` readiness items are checked; A8 maps the exact
+  corrective contract set, owners, scenario, existing cases/control and gates.
+  Unresolved payloads, implementation choices, interfaces, parent-scope
+  members, coverage cases, controls, substitute claims and gate ambiguities are
+  all zero. Standards remain byte-equal to their A5 pins.
+- **Revisions:** A2 `KI-DD-6`
+  `cd0aca4b66e52f7953e2e411d0415df408ab5ccbbda4f83c9f9267c7c64db8ca`;
+  A3 `KI-DL-15`
+  `4bb1201594bc4a33bf868f19dd73c6777d046cdbb8ae70ef2cc8972dd6c342ad`;
+  A4 `KI-CL-21`
+  `a499afe117ee9b9dba07ab1a420d8a9bae824d6d5d7419374427f9cc0687fa63`;
+  A8 `KI-TR-13`
+  `2d0987b1ff7014d4561a9edd4ac5cec711b7893f420ea0de448c8bb564c909ed`;
+  A5 CAS 148→149, SHA-256
+  `49795fe367d86347b27bdf7aee8e7b730e18c7ecbbd136e3acf5be7de69d2620`.
+- **No execution:** the parent changed only A2/A3/A4/A5/A6/A7/A8
+  documentation. No S1/S2/S3, implementation, leaf, test, build, database,
+  browser, provider, AWS, production, destructive, commit, push or KI-W7 action
+  occurred; cost `$0.00`.
+
+```yaml
+certificate: AUTHORING-READY
+artifact_paths:
+  A1: KEYWORD_INTELLIGENCE_PRODUCT_CONTRACT.md
+  A2: KEYWORD_INTELLIGENCE_DISCOVERY_DOSSIER.md
+  A3: KEYWORD_INTELLIGENCE_DECISION_LEDGER.md
+  A4: KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md
+  A5: ACTIVE_EXECUTION_STATE.md
+  A6: KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md
+  A7: KEYWORD_INTELLIGENCE_SPECIFICATION_CHANGELOG.md
+  A8: KEYWORD_INTELLIGENCE_TRACEABILITY_INDEX.md
+revisions:
+  standard: cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb523ede32848
+  contract: 8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c
+  decision: 4bb1201594bc4a33bf868f19dd73c6777d046cdbb8ae70ef2cc8972dd6c342ad
+  checklist: a499afe117ee9b9dba07ab1a420d8a9bae824d6d5d7419374427f9cc0687fa63
+checked_authoring_items: 101
+unchecked_required_items: 0
+unresolved_evidence_references: 0
+unresolved_payload_contracts: 0
+delegated_implementation_decisions: 0
+unowned_source_members: 0
+unowned_plan_members: 0
+unproven_competing_owner_pairs: 0
+anti_vacuity_failures: 0
+mistake_conformance_failures: 0
+planned_coverage_cases: 26
+unmapped_coverage_cases: 0
+duplicate_coverage_case_ids: 0
+critical_invariants_without_negative_control: 0
+test_substitutes_without_fidelity_disposition: 0
+unresolved_accepted_evidence_invalidations: 0
+frozen_gate_ambiguities: 0
+predictable_gates: [one focused non-database component gate, one corrected isolated-schema emitted-browser gate, one backend regression and secret scan, two keyword-worker builds and one packaging test]
+requester_actions_before_start: []
+authorized_first_window: KI-W6 window-agent corrective decomposition only
+planned_stop: AWAITING_PARENT_DECOMPOSITION_REVIEW before C104 leaf dispatch
+audit_evidence: [SRC-KI-041, DEC-KI-039, KI-W6-PCA-01, SCN-KI-041, RW6C-001 through RW6C-008]
+```
