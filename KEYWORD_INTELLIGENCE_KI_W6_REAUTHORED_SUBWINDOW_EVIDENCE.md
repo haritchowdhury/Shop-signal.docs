@@ -1859,3 +1859,282 @@ market-task fan-out, and the final `computeResearchResult` retains the 300
 anchor-backed rows. The current S105 oracle simultaneously requires 200 final
 rows. This is an authoritative contract/acceptance contradiction outside the
 two-file corrective mechanism; V3 remains blocked pending a parent decision.
+
+---
+
+## `EV-KI-W6-R22` — State-149 shortlist-correction decomposition readiness
+
+- **Timestamp:** 2026-08-21T13:25:00+05:30
+- **Actor/role:** `KI-W6-WINDOW-AGENT`; coordination authoring only.
+- **Authority:** state 149 / `ASG-KI-W6-WA-02` authorizes S1/S2/S3 reconciliation,
+  C104→C105→I102 authoring, and return for parent review only. Its pins were
+  rechecked: contract `8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c`,
+  decision `4bb1201594bc4a33bf868f19dd73c6777d046cdbb8ae70ef2cc8972dd6c342ad`,
+  checklist `a499afe117ee9b9dba07ab1a420d8a9bae824d6d5d7419374427f9cc0687fa63`,
+  and active state `49795fe367d86347b27bdf7aee8e7b730e18c7ecbbd136e3acf5be7de69d2620`.
+- **Diagnosis:** V3 reached fenced publication with `rowCount:300`; DEC-KI-039
+  fixes this as an `aggregateMarket` production defect, not an oracle defect.
+- **Authored artifacts:** S1 revision
+  `c305f7eb42dcef07ba19d7044d52b85bdc4e629458b7b363c49ce90e9cd1c69e`
+  contains C104, C105, and I102. S2 state 14 revision
+  `32a162502cee6e30643451909f3acc1a1b8afa5453d8b399e37e36067e50ade7`
+  is `AWAITING_PARENT_DECOMPOSITION_REVIEW`. The 26 existing cases and 13
+  existing controls are unchanged. C104/C105 baselines equal parent-pinned
+  hashes `c37a038f189470ad1d2eca6626f515b9f0c45bd60de470d84c4b72fa497637b5`
+  and `f0e8be1a29d9ed5d85a657b8e73083f6c603ca30b18121701b3a33a7c1938510`.
+- **Verification:** `git diff --check` exits 0. Only the three authorized
+  coordination artifacts (S1/S2 and this S3 entry) changed; no
+  implementation/test/build/browser/database/provider/AWS/production/
+  destructive/commit/push/KI-W7 action occurred. Cost `$0.00`.
+
+### Corrective readiness certificate — `KI-W6-C104`
+
+```yaml
+certificate: CORRECTIVE-SUBWINDOW-READY
+parent_window_id: KI-W6
+corrective_subwindow_id: KI-W6-C104
+window_agent_identity: KI-W6-WINDOW-AGENT
+trigger_evidence: [EV-KI-W6-R20, continued V3 Attempt B, EV-KI-W6-R22]
+root_cause: aggregateMarket supplies all expansion candidates and US anchor metrics to computeResearchResult without reading/projecting the immutable shortlist.
+governing_parent_requirements: [REQ-KI-002, REQ-KI-003, REQ-KI-023, REQ-KI-024, INV-KI-004, INV-KI-005, INV-KI-014]
+governing_parent_decisions: [DEC-KI-006, DEC-KI-024, DEC-KI-038, DEC-KI-039]
+corrected_prior_subwindows: [KI-W6-I101]
+writable_file: email_scraper/src/aws-pipeline/keyword-intelligence/service.js
+starting_file_digest: c37a038f189470ad1d2eca6626f515b9f0c45bd60de470d84c4b72fa497637b5
+predecessors: [KI-W6-I101]
+invalidated_evidence: [failed V3 acceptance attempts, old service-hash proof, original V6 unchanged-service claim]
+invalidated_gates: [CV1, CV3, CV4, CV5, CV6]
+unresolved_parent_decisions: []
+expanded_parent_scope_required: false
+section_7_fields_complete: true
+single_file_write_set: true
+unresolved_execution_choices: []
+next_integration_assessment_id: KI-W6-I102
+status: READY
+```
+
+### Corrective readiness certificate — `KI-W6-C105`
+
+```yaml
+certificate: CORRECTIVE-SUBWINDOW-READY
+parent_window_id: KI-W6
+corrective_subwindow_id: KI-W6-C105
+window_agent_identity: KI-W6-WINDOW-AGENT
+trigger_evidence: [EV-KI-W6-R22, KI-W6-C104]
+root_cause: aggregationScaffold lacks the shortlist manifest newly consumed by aggregateMarket and its three-item fixture cannot prove the 300-to-200 boundary.
+governing_parent_requirements: [REQ-KI-002, REQ-KI-003, REQ-KI-023, REQ-KI-024, INV-KI-004, INV-KI-005, INV-KI-014]
+governing_parent_decisions: [DEC-KI-024, DEC-KI-038, DEC-KI-039]
+corrected_prior_subwindows: [KI-W6-I101]
+writable_file: email_scraper/test/keyword-intelligence-worker-flow.test.js
+starting_file_digest: f0e8be1a29d9ed5d85a657b8e73083f6c603ca30b18121701b3a33a7c1938510
+predecessors: [KI-W6-C104 ACCEPTED_FOR_INTEGRATION]
+invalidated_evidence: [old aggregation-scaffold substitute-fidelity evidence]
+invalidated_gates: [CV1, CV3, CV4, CV5, CV6]
+unresolved_parent_decisions: []
+expanded_parent_scope_required: false
+section_7_fields_complete: true
+single_file_write_set: true
+unresolved_execution_choices: []
+next_integration_assessment_id: KI-W6-I102
+status: READY
+```
+
+### I102 readiness and disposition
+
+I102 has no implementation write authority. It reruns CV1/CV3/CV4/CV5/CV6;
+CV2 remains reusable only with the exact clean-frontend/committed-HEAD proof.
+The causal V3 oracle remains 19 calls, 23 immutable objects, 42 sends,
+`$0.49200000`, 300 anchor, 200 shortlist, 200 durable/UI rows, default 100,
+complete cleanup, and the unchanged 26 cases/13 controls. Full DB suites,
+Prisma generate/validate, seven-handler builds, and duplicate frontend builds
+remain prohibited.
+
+**Disposition:** `AWAITING_PARENT_DECOMPOSITION_REVIEW`. No C104/C105
+assignment, execution, test, gate, or successor work is authorized. KI-W7
+remains prohibited.
+
+---
+
+## `EV-KI-W6-R23` — State-150 superseding corrective-decomposition readiness
+
+- **Timestamp:** 2026-08-21T13:35:00+05:30
+- **Actor/role:** `KI-W6-WINDOW-AGENT`; documentation-only reconciliation.
+- **Authority:** A5 state 150 / `ASG-KI-W6-WA-02`, `EV-KI-A-089` F15–F18,
+  and `CHG-KI-062`. No product decision, implementation design, scope,
+  coverage membership, or gate changed.
+- **F15 corrected:** C104's literal clean combined-repository baseline is
+  `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`;
+  C105's literal one-member post-C104 baseline is
+  `55d5f0b43f8cc3466478169f48d23cb546f829f4f597c393c326621f9d7be9e0`.
+- **F16 corrected:** both leaf `read_only_scope` arrays now name only canonical
+  workspace-relative paths or exact, resolvable parent-document sections.
+- **F17 corrected:** C105 now explicitly lists `REQ-KI-002/003/023/024`,
+  `INV-KI-004/005/014`, `DEC-KI-006/024/038/039`, `KI-W6-CT2`,
+  `SCN-KI-041`, `W6-FLOW-04/05/06`, and `W6-NC-05`.
+- **F18 corrected:** C104-C2 and C105-C2 now contain exact `node
+  --input-type=module -e` commands, working directories, source bounds,
+  activation assertions, fail conditions, exit result, read-only write set,
+  and explicit forbidden operations. They are LOCAL_NOW inspections only.
+- **Revisions:** S1 is
+  `6b7e90944a9167b24d42c61fcb26b3d7e692bae6b7319b48d94c86503b4b93b2`;
+  S2 state 15 is
+  `1659b93c6a716ffcc611c414ddc98cc62dc83eda1ae13d2399dfb662537dae59`.
+  R22's readiness claims are superseded only to the F15–F18 extent named by
+  `CHG-KI-062`; its diagnosis, algorithm, seven-path scope, sequence, case/
+  control registry, and gate plan remain valid.
+- **Verification:** `git diff --check` exits 0; both nested repositories are
+  clean. No implementation/test/build/browser/database/provider/AWS/
+  production/destructive/commit/push/KI-W7 action occurred. Cost `$0.00`.
+
+```yaml
+certificate: CORRECTIVE-DECOMPOSITION-READY
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-02
+window_agent_identity: KI-W6-WINDOW-AGENT
+trigger_evidence: [EV-KI-A-089, CHG-KI-062]
+supersedes: [EV-KI-W6-R22 C104/C105 section_7_fields_complete and READY claims]
+corrective_subwindows: [KI-W6-C104, KI-W6-C105]
+next_integration_assessment_id: KI-W6-I102
+governing_trace:
+  KI-W6-C104:
+    requirements: [REQ-KI-002, REQ-KI-003, REQ-KI-023, REQ-KI-024]
+    invariants: [INV-KI-004, INV-KI-005, INV-KI-014]
+    decisions: [DEC-KI-006, DEC-KI-024, DEC-KI-038, DEC-KI-039]
+    task_scenario_case_control: [KI-W6-CT1, SCN-KI-041, W6-FLOW-05, W6-NC-05]
+  KI-W6-C105:
+    requirements: [REQ-KI-002, REQ-KI-003, REQ-KI-023, REQ-KI-024]
+    invariants: [INV-KI-004, INV-KI-005, INV-KI-014]
+    decisions: [DEC-KI-006, DEC-KI-024, DEC-KI-038, DEC-KI-039]
+    task_scenario_case_control: [KI-W6-CT2, SCN-KI-041, W6-FLOW-04, W6-FLOW-05, W6-FLOW-06, W6-NC-05]
+repository_change_set_digests:
+  KI-W6-C104: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  KI-W6-C105: 55d5f0b43f8cc3466478169f48d23cb546f829f4f597c393c326621f9d7be9e0
+section_7_fields_complete: true
+single_file_write_sets: true
+unresolved_parent_decisions: []
+expanded_parent_scope_required: false
+unresolved_execution_choices: []
+leaf_dispatch_authorized: false
+integration_gate_execution_authorized: false
+may_start_successor: false
+status: AWAITING_PARENT_DECOMPOSITION_REVIEW
+```
+
+**Disposition:** the corrected C104→C105→I102 package is returned for renewed
+parent decomposition review. C104/C105 remain `UNASSIGNED`; I102 remains
+unstarted; KI-W7 remains prohibited.
+
+---
+
+## `EV-KI-W6-R24` — State-151 anti-vacuity corrective-decomposition readiness
+
+- **Timestamp:** 2026-08-21T13:35:09+05:30
+- **Actor/role:** `KI-W6-WINDOW-AGENT`; documentation-only reconciliation.
+- **Authority:** A5 state 151 / `ASG-KI-W6-WA-02`, `EV-KI-A-090` F19–F20,
+  and `CHG-KI-063`. Only C104-C2, C105-C2, and dependent readiness records
+  changed. The product correction, test design, canonical scopes, explicit
+  governing IDs, digests, sequence, case/control membership, and I102 schedule
+  remain unchanged.
+- **F19 corrected:** C104-C2 now locates one guarded `invariant()` witness for
+  `projectedExpansion` and a different guarded witness for
+  `projectedUsMetrics`. Each witness requires its projection and
+  `shortlistKeys` in the guard condition, follows that projection's normalized
+  `new Set`/`keywordKey` construction, and occurs before
+  `computeResearchResult`. The unrelated anchor-context invariant cannot
+  satisfy either witness.
+- **F20 corrected:** C105-C2 now bounds the one `SCN-KI-041` source block from
+  its `test("SCN-KI-041:...")` declaration to the next test or EOF. Inside
+  that block it requires literal 300/200 output witnesses, the exact captured
+  default-selection oracle `holder.publishedInput.selectionItems.length ===
+  100`, normalized result/shortlist set equality, and the exact zero-result-key
+  outside-shortlist assertion. Later source cannot satisfy an SCN-KI-041
+  witness.
+- **Revisions:** S1 is
+  `b99633447c17163f6e883d71388b0200a345d2c0ced51252b8d03a8fba3b6b38`;
+  S2 state 16 is
+  `6abda9af61c54653c5de0e3abaea4fa279c5b9bdf08dc3f41b42a359b1eb6bed`.
+  R23's F18 and `section_7_fields_complete` readiness claims are superseded
+  only to the F19/F20 extent defined by `CHG-KI-063`; F15–F17 and all
+  substantive correction decisions remain valid.
+- **Verification:** `git diff --check` exits 0; both nested repositories are
+  clean. No implementation/test/build/browser/database/provider/AWS/
+  production/destructive/commit/push/KI-W7 action occurred. Cost `$0.00`.
+
+```yaml
+certificate: CORRECTIVE-DECOMPOSITION-READY
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-02
+window_agent_identity: KI-W6-WINDOW-AGENT
+trigger_evidence: [EV-KI-A-090, CHG-KI-063]
+supersedes: [EV-KI-W6-R23 F18 and section_7_fields_complete readiness claims]
+corrective_subwindows: [KI-W6-C104, KI-W6-C105]
+next_integration_assessment_id: KI-W6-I102
+repository_change_set_digests:
+  KI-W6-C104: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  KI-W6-C105: 55d5f0b43f8cc3466478169f48d23cb546f829f4f597c393c326621f9d7be9e0
+f19_c104_c2_independent_guards: [projectedExpansion, projectedUsMetrics]
+f20_c105_c2_bounded_oracles: [default_selection_length_100, zero_result_key_outside_shortlist]
+section_7_fields_complete: true
+single_file_write_sets: true
+unresolved_parent_decisions: []
+expanded_parent_scope_required: false
+unresolved_execution_choices: []
+leaf_dispatch_authorized: false
+integration_gate_execution_authorized: false
+may_start_successor: false
+status: AWAITING_PARENT_DECOMPOSITION_REVIEW
+```
+
+**Disposition:** the state-151-corrected C104→C105→I102 package is returned
+for renewed parent decomposition review. C104/C105 remain `UNASSIGNED`; I102
+remains unstarted; KI-W7 remains prohibited.
+
+---
+
+## `EV-KI-W6-R25` — State-152 approval acknowledgement and C104 dispatch
+
+- **Timestamp:** 2026-08-21T13:41:36+05:30
+- **Parent/window authority:** A5 state 152 `DECOMPOSITION_APPROVED`,
+  `ASG-KI-W6-WA-02`, `EV-KI-A-091`, and `CHG-KI-064`. The approved S1 revision
+  is exactly `b99633447c17163f6e883d71388b0200a345d2c0ced51252b8d03a8fba3b6b38`.
+- **Dispatch:** S2 state 17 records `KI-W6-C104` as the sole active assignment:
+  `ASG-KI-W6-C104` to `KI-W6-C104-LEAF-AGENT`. Its sole writable file is
+  `email_scraper/src/aws-pipeline/keyword-intelligence/service.js`; its frozen
+  baseline is `c37a038f189470ad1d2eca6626f515b9f0c45bd60de470d84c4b72fa497637b5`
+  and its repository change-set baseline is
+  `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`.
+- **Frozen local acceptance:** C104 may perform only C104-C1 and C104-C2 and
+  return one certificate to the window agent at `AWAITING_WINDOW_REVIEW`.
+  C104-C2 includes both independent projection-specific equality-guard
+  witnesses before `computeResearchResult`; no C105 test execution is allowed
+  during the prescribed intermediate state.
+- **Sequence hold:** C105 remains `UNASSIGNED` pending independent C104
+  acceptance; I102 remains unstarted pending acceptance of both C104 and C105.
+  No implementation, local check, gate, external operation, or leaf evidence
+  has occurred under `ASG-KI-W6-C104` at dispatch time.
+- **State revision:** S2 state 17 is
+  `39c654caf8c1d62b3897af1558e40f3d343614621fa0679dbca240c6550faee2`.
+  This record changes no product decision, coverage ID, manifest membership,
+  S1 task, or authority outside the approved dispatch.
+
+```yaml
+certificate: CORRECTIVE-SUBWINDOW-DISPATCHED
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-02
+subwindow_id: KI-W6-C104
+assignment_id: ASG-KI-W6-C104
+assigned_agent: KI-W6-C104-LEAF-AGENT
+writable_file: email_scraper/src/aws-pipeline/keyword-intelligence/service.js
+starting_file_digest: c37a038f189470ad1d2eca6626f515b9f0c45bd60de470d84c4b72fa497637b5
+starting_repository_change_set_digest: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+required_local_checks: [C104-C1, C104-C2]
+predecessors: [KI-W6-I101]
+successor_reservation: C105 after independent C104 acceptance only
+integration_assessment_reservation: I102 after C104 and C105 acceptance only
+external_mutations: []
+prohibited_actions_observed: []
+status: READY
+```
+
+**Disposition:** C104 is dispatched and awaits its leaf evidence. C105,
+I102, and KI-W7 remain prohibited from starting.

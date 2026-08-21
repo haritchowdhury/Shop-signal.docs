@@ -5197,3 +5197,116 @@ authorized_first_window: KI-W6 window-agent corrective decomposition only
 planned_stop: AWAITING_PARENT_DECOMPOSITION_REVIEW before C104 leaf dispatch
 audit_evidence: [SRC-KI-041, DEC-KI-039, KI-W6-PCA-01, SCN-KI-041, RW6C-001 through RW6C-008]
 ```
+
+### `EV-KI-A-089` — KI-W6 corrective-decomposition parent review
+
+- **Timestamp / phase:** 2026-08-21T13:15:38+05:30 / independent parent
+  review of the state-149 `C104 -> C105 -> I102` decomposition.
+- **Substantive result:** the proposed production correction, focused scaffold
+  regression, sequential dependency, seven-path scope, unchanged 26-case / 13-
+  control registry, and corrected assessment invalidation schedule faithfully
+  implement `DEC-KI-039` and `KI-CL-21`. No parent product, architecture,
+  interface, case-membership, scope, or gate decision is missing.
+- **`F15` — repository baseline digests:** C104 incorrectly places the
+  pre-append S1 document revision `3487d71a...` in
+  `starting_repository_change_set_digest`; C105 places a future-certificate
+  prose reference where Section 7.1 requires a literal SHA-256. Under the
+  already-frozen combined-repository, workspace-relative,
+  sorted-member-plus-LF formula, the exact values are the clean-set digest
+  `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+  for C104 and the one-member
+  `email_scraper/src/aws-pipeline/keyword-intelligence/service.js` digest
+  `55d5f0b43f8cc3466478169f48d23cb546f829f4f597c393c326621f9d7be9e0`
+  for C105.
+- **`F16` — canonical read authority:** the two leaf blocks use shorthand such
+  as `A1 decision/checklist/contract/state`, `pipeline.js`, `service.js`, and
+  `contracts.js`. Those strings are not exact canonical paths or resolvable
+  document-section references and therefore fail the sub-window standard's
+  exact authority boundary.
+- **`F17` — mechanical trace:** C105 says it uses the “same” requirements,
+  invariants, and decisions as C104. Section 7.2 requires the literal IDs in
+  the leaf block; the parent-fixed IDs already exist in `KI-W6-CT2` and must be
+  copied without interpretation.
+- **`F18` — executable local inspection:** C104-C2 and C105-C2 name desired
+  source properties but provide neither exact commands nor a fully mechanical
+  inspection protocol with setup, activation witness, assertions, forbidden
+  outcomes, expected write set, and result. Their `section_7_fields_complete`
+  readiness claims are therefore premature.
+- **Disposition / authority:** `CORRECTION_REQUIRED`, documentation only. A5
+  CAS 149→150 (revision
+  `ca4128194c044f202f2448a3c547b02ff4cff348eda31520c4567dbf787630d9`)
+  authorizes the window agent to correct exactly F15–F18 in S1,
+  reconcile S2/S3, append a superseding readiness certificate, and return for
+  renewed parent review. C104/C105 remain unassigned; I102 remains unstarted.
+  No implementation/test/build/browser/database/provider/AWS/production/
+  destructive/commit/push/KI-W7 action is authorized.
+- **Preservation:** A1–A4 and A8 remain byte-unchanged; accepted S101–S105
+  history remains valid; no implementation file was changed and cost is
+  `$0.00`.
+
+### `EV-KI-A-090` — KI-W6 state-150 renewed decomposition review
+
+- **Timestamp / phase:** 2026-08-21T13:27:48+05:30 / renewed independent
+  parent review of C104, C105, and I102.
+- **Resolved findings:** F15 is correct: independent recomputation produced
+  clean-set digest `e3b0c442...` and post-C104 one-path digest `55d5f0b4...`.
+  F16 is correct: both read scopes now contain canonical paths or resolvable
+  document sections. F17 is correct: C105 literally lists every governing
+  requirement, invariant, decision, task, scenario, case, and control ID.
+- **`F19` — C104-C2 false-positive path:** the command requires at least two
+  textual `invariant()` calls in `aggregateMarket`, but current source already
+  contains the unrelated anchor-context `invariant()` call. An implementation
+  adding only one of the two required shortlist set-equality guards would
+  therefore pass. The inspection must freeze and witness the two new equality
+  guards independently and prove both precede `computeResearchResult`.
+- **`F20` — C105-C2 false-positive path:** the command claims to activate the
+  exact default-100 and no-leaked-key assertions, but checks only the substring
+  `defaultSelection` and `trim().toLowerCase()` and never checks a literal 100
+  assertion or the result-outside-shortlist rejection. Its slice also extends
+  from `SCN-KI-041` through the rest of the file, allowing unrelated later text
+  to satisfy witnesses. It must bound the single scenario block and assert the
+  exact default-selection-length-100 and zero-escaped-result-key oracles.
+- **Disposition / authority:** `CORRECTION_REQUIRED`, documentation only. A5
+  CAS 150→151 authorizes only the F19/F20 inspection corrections and dependent
+  S1/S2/S3 readiness reconciliation. The production correction, test design,
+  scope, sequence, IDs, digests, and I102 schedule are unchanged. C104/C105
+  remain unassigned and I102 remains unstarted.
+- **No execution:** no implementation/test/build/browser/database/provider/
+  AWS/production/destructive/commit/push/KI-W7 action occurred; both nested
+  repositories remain clean; cost `$0.00`.
+
+### `EV-KI-A-091` — KI-W6 corrective-decomposition final parent approval
+
+- **Timestamp / phase:** 2026-08-21T13:37:44+05:30 / renewed independent
+  parent decomposition review and recursive-execution approval.
+- **Reviewed package:** S1
+  `b99633447c17163f6e883d71388b0200a345d2c0ced51252b8d03a8fba3b6b38`,
+  S2 state 16
+  `6abda9af61c54653c5de0e3abaea4fa279c5b9bdf08dc3f41b42a359b1eb6bed`,
+  and S3 through `EV-KI-W6-R24`
+  `90c2c45525112d4d9aecb527213156135e69d592cdc275e1b26d3b601be9be7e`.
+- **F19 acceptance:** C104-C2 bounds `aggregateMarket`, locates exactly one
+  guard for `projectedExpansion` and exactly one different guard for
+  `projectedUsMetrics`, requires each condition to name its projection and
+  `shortlistKeys`, witnesses normalized-set construction, and proves both
+  guards precede `computeResearchResult`. The pre-existing anchor-context
+  invariant cannot satisfy either guard.
+- **F20 acceptance:** C105-C2 bounds the sole `SCN-KI-041` test block before
+  inspecting it and requires literal 300-candidate, 200-shortlist, 200-result,
+  default-selection-100, normalized set-equality, and zero-result-key-outside-
+  shortlist assertions. Text in later tests cannot satisfy those witnesses.
+- **Complete review result:** F15–F20 are resolved. The exact two-leaf
+  sequence, single-file ownership, repository baselines, canonical read
+  scopes, explicit trace IDs, intermediate-state boundary, non-vacuous local
+  checks, unchanged 26 cases / 13 controls, seven-path scope, and I102 CV1–CV6
+  schedule satisfy the pinned parent and sub-window standards. Unresolved
+  parent decisions and execution choices are zero.
+- **Disposition / authority:** `APPROVED`. A5 CAS 151→152, revision
+  `84e35abf369bfcaf11069b0a21e17744b160da48329f53dde5cb3c52ea4f8b00`,
+  records the approved S1 revision. The window agent may acknowledge approval
+  in S2/S3 and then dispatch only C104; C105 follows only after independent
+  C104 acceptance, and I102 follows only after both corrections are accepted.
+  This parent action does not itself assign a leaf or execute a gate.
+- **Boundary:** no implementation/test/build/browser/database/provider/AWS/
+  production/destructive/commit/push/KI-W7 action occurred; both nested
+  repositories were clean and `git diff --check` passed; cost `$0.00`.

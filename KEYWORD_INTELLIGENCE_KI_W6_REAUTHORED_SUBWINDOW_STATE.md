@@ -9,7 +9,7 @@ authority lives in `S1`
 (`KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_CHECKLIST.md`).
 
 ```yaml
-state_version: 13
+state_version: 17
 parent_window_id: KI-W6
 parent_assignment_id: ASG-KI-W6-WA-02
 window_agent_identity: KI-W6-WINDOW-AGENT
@@ -18,34 +18,34 @@ parent_standard_revision: cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb5
 subwindow_standard_path: PROJECT_AGNOSTIC_WINDOW_AGENT_SUBWINDOW_AUTHORING_STANDARD.md
 subwindow_standard_revision: 84e7590e74589f308c70dc9b0b67f7e9da395fafb1e5786202ecd1ca15be56e9
 parent_contract_revision: 8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c
-parent_decision_revision: ef4153677807c80dfa9a09c0ffe0ba5a5127681fe6706e17ff6cd48869fdbd31
-parent_checklist_revision: 8fe18271bf368a283246d55807dcc4612e118c725e5aabeb6188962a7abf5f4e
+parent_decision_revision: 4bb1201594bc4a33bf868f19dd73c6777d046cdbb8ae70ef2cc8972dd6c342ad
+parent_checklist_revision: a499afe117ee9b9dba07ab1a420d8a9bae824d6d5d7419374427f9cc0687fa63
 parent_state_path: ACTIVE_EXECUTION_STATE.md
-parent_state_revision: 162221c05be37ac06bb8cf742dffb39bb6e3bbae124a2b25dbcc4ab2e39a4046
+parent_state_revision: 84e35abf369bfcaf11069b0a21e17744b160da48329f53dde5cb3c52ea4f8b00
 decomposition_path: KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_CHECKLIST.md
-decomposition_revision: bf92d2515a3dde37e7e577308ee69b224fe21498434ef831612536a841475134
+decomposition_revision: b99633447c17163f6e883d71388b0200a345d2c0ced51252b8d03a8fba3b6b38
 evidence_path: KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_EVIDENCE.md
 decomposition_status: READY
-integration: 'I101 = PARENT_BLOCKED (EV-KI-W6-R20): V1/V2/V4/V6 pass; V3 fails on the frozen obsolete-runtime oracle (KeywordSearchVolume provenance comment in the shipped keyword-dashboard.module.css, transitively inside the A4 T5 inventory); parent decision required (scope expansion vs oracle amendment); secondary non-blocking S105 failure-path diagnostics defect recorded'
-current_subwindow: NONE  # I101 executed -> PARENT_BLOCKED
-current_assignment_id: NONE
-assigned_agent: UNASSIGNED
-subwindow_type: NONE
-authorized_write_file: NONE
-authorized_read_scope: []
-authorized_actions: [assign KI-W6-S101 to one named leaf agent, then manage only the approved strict sequence and independent reviews defined by S1, author one-file corrective leaves only inside the parent five-file scope for already-decided implementation defects, execute I101 only after all five leaves are accepted, return READY_FOR_PARENT_REVIEW]
-prohibited_actions: [window-agent implementation-file edits, parallel or out-of-order leaves, multi-file leaves, direct parent-leaf communication, leaf subdelegation, edits to A1-A8 or any parent artifact, reuse or citation of the invalidated state-108 KI-W6 decomposition, KI-W7 work, provider calls, AWS operations, production database writes, destructive shared cleanup, commits/pushes, gate repetition outside approved invalidation and sandbox-recovery rules]
+integration: 'I101 = CORRECTION_REQUIRED: V3 reached publication and proved the 300-row durable-result defect. State 152 approves the C104 -> C105 -> I102 corrective decomposition; C104 alone is now assigned under its frozen single-file block.'
+current_subwindow: KI-W6-C104
+current_assignment_id: ASG-KI-W6-C104
+assigned_agent: KI-W6-C104-LEAF-AGENT
+subwindow_type: CORRECTION
+authorized_write_file: email_scraper/src/aws-pipeline/keyword-intelligence/service.js
+authorized_read_scope: [KEYWORD_INTELLIGENCE_PRODUCT_CONTRACT.md, KEYWORD_INTELLIGENCE_DECISION_LEDGER.md §DEC-KI-039, KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md §KI-W6 in-flight corrective amendment — final result shortlist projection, ACTIVE_EXECUTION_STATE.md, email_scraper/src/keyword-intelligence/pipeline.js, email_scraper/src/keyword-intelligence/config.js, email_scraper/src/aws-pipeline/keyword-intelligence/contracts.js, email_scraper/src/aws-pipeline/keyword-intelligence/keys.js, email_scraper/src/aws-pipeline/keyword-intelligence/handler.js, email_scraper/src/aws-pipeline/keyword-intelligence/recovery.js, email_scraper/src/keyword-intelligence/repository.js, email_scraper/test/keyword-intelligence-worker-flow.test.js]
+authorized_actions: [modify aggregateMarket only as frozen in KI-W6-C104, run C104-C1 and C104-C2 only, return one FILE-SUBWINDOW-EXECUTED certificate to the window agent, stop at AWAITING_WINDOW_REVIEW]
+prohibited_actions: [window-agent implementation-file edits, any file other than email_scraper/src/aws-pipeline/keyword-intelligence/service.js, all other service symbols exports signatures callers contracts keys repository handler recovery build test fixture manifest frontend schema config changes, C105 assignment or execution before independent C104 acceptance, I102 execution, parallel or out-of-order leaves, multi-file leaves, direct parent-leaf communication, leaf subdelegation, edits to A1-A8 or any parent artifact, reuse or citation of the invalidated state-108 KI-W6 decomposition, new or changed W6 coverage IDs or manifest membership, edits outside the seven-path KI-CL-21 parent scope, KI-W7 work, provider calls, AWS operations, production database writes, destructive shared cleanup, commits/pushes, gate repetition outside approved invalidation and sandbox-recovery rules]
 execution_environment_policy:
   sandbox_escalation_for_authorized_local_actions: true
   automatic_identical_recovery_after_proven_environment_invalidation: true
   recovery_limit_per_invalidated_execution: 1
   external_authority_expansion: false
 may_start_successor: false
-current_status: PARENT_BLOCKED
+current_status: READY
 accepted_subwindows: [KI-W6-S101, KI-W6-S102, KI-W6-S103, KI-W6-S104, KI-W6-S105]
-next_subwindow: NONE  # parent decision required on the obsolete-runtime oracle contradiction before any corrective window
+next_subwindow: KI-W6-C104  # only this assigned leaf may begin; C105 requires independent C104 acceptance
 blocker: null
-last_updated: 2026-08-21T01:35:00+05:30
+last_updated: 2026-08-21T13:37:44+05:30
 ```
 
 ## Sub-window registry
@@ -57,24 +57,22 @@ last_updated: 2026-08-21T01:35:00+05:30
 | `KI-W6-S103` | FILE | `email_scraper/test/helpers/keyword-intelligence-e2e-harness.js` | ACCEPTED | `KI-W6-S103-LEAF-AGENT` | `ASG-KI-W6-S103` (executed; certificate + `EV-KI-W6-R17` in S3) |
 | `KI-W6-S104` | FILE | `email_scraper/test/fixtures/keyword-intelligence/ki-w6-enforcement-manifest-v1.json` | ACCEPTED | `KI-W6-S104-LEAF-AGENT` | `ASG-KI-W6-S104` (executed; certificate + `EV-KI-W6-R18` in S3) |
 | `KI-W6-S105` | FILE | `frontend/test/browser/keyword-intelligence-e2e.mjs` | ACCEPTED | `KI-W6-S105-LEAF-AGENT` | `ASG-KI-W6-S105` (executed; certificate + `EV-KI-W6-R19` in S3) |
-| `KI-W6-I101` | INTEGRATION_ASSESSMENT | (none; gates V1–V6) | NOT_STARTED | RESERVED (`KI-W6-WINDOW-AGENT`) | NONE |
+| `KI-W6-I101` | INTEGRATION_ASSESSMENT | (none; gates V1–V6) | CORRECTION_REQUIRED | `KI-W6-WINDOW-AGENT` | `ASG-KI-W6-WA-02` (V3 publication witness; superseded by I102) |
+| `KI-W6-C104` | CORRECTION | `email_scraper/src/aws-pipeline/keyword-intelligence/service.js` | READY | `KI-W6-C104-LEAF-AGENT` | `ASG-KI-W6-C104` |
+| `KI-W6-C105` | CORRECTION | `email_scraper/test/keyword-intelligence-worker-flow.test.js` | AWAITING_PARENT_DECOMPOSITION_REVIEW | UNASSIGNED | NONE |
+| `KI-W6-I102` | INTEGRATION_ASSESSMENT | (none; CV1–CV6) | AWAITING_PARENT_DECOMPOSITION_REVIEW | RESERVED (`KI-W6-WINDOW-AGENT`) | NONE |
 
-Counters: accepted 0/5 file leaves; corrections 0; integration assessments
-0/1; no leaf assigned. Planned five-path set digest
-`d28ae17864073639580d7650bb03c03474d5370a5034b632cf412e1e3cf3d0bb`;
-execution order `S101 → S102 → S103 → S104 → S105 → I101` (strictly
-sequential; parallel leaves prohibited).
+Counters: accepted initial file leaves 5/5; accepted corrective leaves 0/2;
+integration assessments passed 0/2; corrective leaves accepted 0/2; only C104 is assigned. The accepted
+five-path history remains `d28ae17864073639580d7650bb03c03474d5370a5034b632cf412e1e3cf3d0bb`.
+The current authorized corrective plan is strictly sequential:
+`C104 → window review → C105 → window review → I102`; parallel leaves are
+prohibited.
 
-Boundary: this is the parent-approved fifth-corrected decomposition package
-(`KI-W6-REAUTHORED-DECOMP-6`) reconciled under A5 state 147 to A4
-`KI-CL-20` after `EV-KI-A-082` `F1`–`F5`, `EV-KI-A-083` `F6`–`F9`,
-`EV-KI-A-084` `F10`–`F12`, `EV-KI-A-085` `F13`, and `EV-KI-A-086` `F14`;
-it supersedes the unapproved DECOMP-1/2/3/4/5 drafts, whose claims and
-certificates are historical only. The package
-was approved by `EV-KI-A-087` and A5 state 148. `decomposition_status: READY`;
-the next permitted action is window-agent assignment of S101 to one named leaf
-agent. No implementation leaf has yet been assigned or dispatched. Only the
-parent performs git commits. The
-requester provides/validates the isolated `TEST_DATABASE_URL` opt-in for V3;
-sandbox escalation for already-authorized local commands is standing per the
-inherited E8.1 policy above.
+Boundary: state 152 approves the frozen C104→C105→I102 corrective sequence.
+Only C104 is assigned now; C105 remains unassigned until the window agent
+independently accepts exact C104 evidence, and I102 remains unstarted until
+both corrections are accepted. No implementation has yet been executed under
+this assignment; no browser/database gate, provider/AWS/production/destructive
+action, commit, push, or KI-W7 work is authorized. Only the parent performs
+commits.

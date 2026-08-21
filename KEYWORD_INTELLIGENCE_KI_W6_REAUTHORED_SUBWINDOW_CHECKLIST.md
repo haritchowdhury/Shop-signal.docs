@@ -1874,3 +1874,241 @@ the intervening corrections.)
 End of `S1` (corrected per `EV-KI-A-082`–`EV-KI-A-086`, `F1`–`F14`). Decomposition status and
 live assignment state live only in `S2`; execution evidence lives only in
 `S3`.
+
+---
+
+## 10. State-149 corrective decomposition (awaiting parent review)
+
+This appendix is authorized solely by A5 state 149 and the pinned
+`KI-DD-6` / `KI-DL-15` / `KI-CL-21` / `KI-TR-13` package. It preserves the
+accepted five-file history, the exact 26 W6 cases, and all 13 controls. The
+only additional parent-scope files are `service.js` and `worker-flow.test.js`;
+the seven-path sorted-member-plus-LF digest is
+`c3bfe436aba49d52de26298ac74eb30e061d392144dfffbb6954ee792c908bdc`.
+No leaf may be assigned until renewed parent decomposition approval.
+
+### `KI-W6-C104` — durable-shortlist final calculation projection
+
+```yaml
+subwindow_id: KI-W6-C104
+type: CORRECTION
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-02
+assigned_agent: UNASSIGNED
+predecessors: [KI-W6-I101]
+successor_reserved_for: WINDOW-AGENT
+writable_file: email_scraper/src/aws-pipeline/keyword-intelligence/service.js
+file_operation: MODIFY
+starting_file_digest: c37a038f189470ad1d2eca6626f515b9f0c45bd60de470d84c4b72fa497637b5
+starting_repository_change_set_digest: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+read_only_scope: [KEYWORD_INTELLIGENCE_PRODUCT_CONTRACT.md, KEYWORD_INTELLIGENCE_DECISION_LEDGER.md §DEC-KI-039, KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md §KI-W6 in-flight corrective amendment — final result shortlist projection, ACTIVE_EXECUTION_STATE.md, email_scraper/src/keyword-intelligence/pipeline.js, email_scraper/src/keyword-intelligence/config.js, email_scraper/src/aws-pipeline/keyword-intelligence/contracts.js, email_scraper/src/aws-pipeline/keyword-intelligence/keys.js, email_scraper/src/aws-pipeline/keyword-intelligence/handler.js, email_scraper/src/aws-pipeline/keyword-intelligence/recovery.js, email_scraper/src/keyword-intelligence/repository.js, email_scraper/test/keyword-intelligence-worker-flow.test.js]
+authorized_actions: [modify aggregateMarket only as specified below, run C104 LOCAL_NOW checks, return one certificate to the window agent]
+prohibited_actions: [all other service symbols, exports, signatures, callers, contracts, keys, repository, handler, recovery, build, test, fixture, manifest, frontend, schema, config, provider, AWS, production, destructive action, commit, push, parent communication, subdelegation, successor work]
+may_start_successor: false
+```
+
+**Trace and root cause.** `EV-KI-W6-R20` and the later V3 witness prove that
+`aggregateMarket` reads the 300-member expansion manifest and US anchor
+artifact, but not the durable shortlist, before `computeResearchResult`.
+`REQ-KI-002/003/023/024`, `INV-KI-004/005/014`,
+`DEC-KI-006/024/038/039`, `KI-W6-CT1`, `SCN-KI-041`, `W6-FLOW-05`, and
+`W6-NC-05` determine the correction; no earlier accepted leaf is rewritten.
+
+**Exact ordered transformation.** At `service.js:979` in `aggregateMarket`,
+after the existing validated expansion-manifest read and before the unchanged
+calculation: (1) read `anchor_screen` with existing `readManifest`,
+`KEYWORD_ARTIFACT_SHORTLIST_MANIFEST`, and
+`keywordShortlistManifestSchema`; (2) create the ordered shortlist and
+distinct `K` using exactly `keyword.trim().toLowerCase()`; (3) filter every
+`bySeed` keyword in original seed/order, retaining shared members under every
+original seed; (4) filter US metrics in original order; (5) compute each
+filtered input's distinct normalized keys and invoke the existing invariant
+failure unless each equals `K`; (6) call the existing calculation with the
+projected expansion, projected US metrics, and unchanged eight market arrays.
+Keep the existing claim/lease, artifact reads, immutable writes and fenced
+publication. The added read remains inside the monitored boundary. Missing,
+corrupt, mismatched, or unequal input fails closed before publication; replay,
+duplicate, reorder, restart, expired lease and stale-owner behavior remains.
+Bounds are shortlist `1..200`, anchor `1..300`, final expansion/US/result
+equal to shortlist and at most `200`, selection at most `100`. It adds one S3
+read and zero provider calls, sends, attempts, writes, reservations, database
+operations, cost, or public/artifact-schema changes. It must not post-truncate,
+re-rank, pre-cap, collapse lineage, mutate artifacts, or alter provenance.
+
+For C104-C2's reproducible inspection, the implementation uses these exact
+local names: `keywordKey`, `shortlistManifest`, `shortlistKeys`,
+`projectedExpansion`, `projectedUsMetrics`, and `projectedOverview`. The
+calculation call has the literal members `expansion: projectedExpansion` and
+`overview: projectedOverview`; equality failures call `invariant()` before
+that call. These names are private to `aggregateMarket` and add no export.
+
+**Intermediate state and checks.** C104 makes production correct but causes
+the old scaffold (which supplies no shortlist manifest) to remain incomplete;
+only C104 static checks may run before C105. This is local-only and resolved
+solely by C105. `C104-C1` (`LOCAL_NOW`): from `email_scraper/`,
+`node --check src/aws-pipeline/keyword-intelligence/service.js`, exit 0.
+`C104-C2` (`LOCAL_NOW`): from `email_scraper/`, after C104's edit and before
+any C105 edit, run exactly:
+
+```sh
+node --input-type=module -e 'import { readFileSync } from "node:fs"; import assert from "node:assert/strict"; const s=readFileSync("src/aws-pipeline/keyword-intelligence/service.js","utf8"); const a=s.indexOf("async function aggregateMarket("); const b=s.indexOf("\nasync function failStage(",a); assert.ok(a>=0&&b>a,"aggregateMarket bounds"); const f=s.slice(a,b); const once=(x)=>assert.equal(f.split(x).length-1,1,x); once("KEYWORD_ARTIFACT_SHORTLIST_MANIFEST"); once("keywordShortlistManifestSchema"); for(const x of ["const keywordKey = (keyword) => keyword.trim().toLowerCase();","shortlistManifest","shortlistKeys","projectedExpansion","projectedUsMetrics","projectedOverview","expansion: projectedExpansion","overview: projectedOverview"]) assert.ok(f.includes(x),x); const calc=f.indexOf("computeResearchResult({"); assert.ok(calc>=0,"calculation"); assert.ok(f.indexOf("KEYWORD_ARTIFACT_SHORTLIST_MANIFEST")<calc,"shortlist before calculation"); const guardFor=(projection)=>{ const declaration=f.indexOf(`const ${projection}`); assert.ok(declaration>=0,`${projection} declaration`); const re=new RegExp(`if\\s*\\((?=[^{};]*${projection})(?=[^{};]*shortlistKeys)[^{};]*\\)\\s*\\{?\\s*invariant\\(\\);?\\s*\\}?`,"g"); const matches=[...f.matchAll(re)]; assert.equal(matches.length,1,`${projection} one equality guard`); const guard=matches[0].index; assert.ok(guard>declaration&&guard<calc,`${projection} guard before calculation`); const pre=f.slice(declaration,guard); assert.ok(pre.includes("new Set("),`${projection} normalized set`); assert.ok(pre.includes("keywordKey"),`${projection} normalized key`); return guard; }; const expansionGuard=guardFor("projectedExpansion"); const usMetricsGuard=guardFor("projectedUsMetrics"); assert.notEqual(expansionGuard,usMetricsGuard,"independent equality guards");'
+```
+
+Expected result is exit `0`; stdout/stderr is not asserted. Activation is the
+bounded function extraction, exactly one shortlist contract/schema member, all
+eight required projection members, shortlist-before-calculation order, and two
+distinct projection-specific `if (...) invariant()` equality guards. Each guard
+must name its own projected input and `shortlistKeys`, follow that projected
+input's normalized `new Set`/`keywordKey` construction, and precede
+`computeResearchResult`; the pre-existing anchor-context invariant cannot match
+either witness. Missing/duplicate members, missing projection, wrong order,
+missing/duplicated projection guard, shared guard, or an unnormalized guard
+fails. The command is
+read-only with expected workspace write set `[]`; it must not run tests,
+providers, queues, artifact storage, databases, or builds.
+Required=registered=executed IDs `[C104-C1, C104-C2]`; no local control;
+`W6-NC-05` is deferred to I102. The inherited one-identical-command sandbox
+recovery is allowed only for proven sandbox/channel invalidation.
+
+- [ ] P1 Pins, identity, writable file, baseline, and predecessor evidence match.
+- [ ] P2 Protected dirty state matches baseline.
+- [ ] T1 Apply the six ordered transformations and no other service edit.
+- [ ] V1 Execute C104-C1/C104-C2 with witnesses.
+- [ ] V2 Prove the attributable changed set is only `service.js`.
+- [ ] V3 Prove local-ID equality with zero skips/duplicates/unexpected IDs.
+- [ ] H1 Return diff, ending digest, commands, outcomes, and C105 obligation.
+- [ ] H2 Confirm no prohibited/second-file/successor/external/parent action.
+- [ ] H3 Stop at `AWAITING_WINDOW_REVIEW`.
+
+### `KI-W6-C105` — aggregation-scaffold shortlist regression
+
+```yaml
+subwindow_id: KI-W6-C105
+type: CORRECTION
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-02
+assigned_agent: UNASSIGNED
+predecessors: [KI-W6-C104 ACCEPTED_FOR_INTEGRATION]
+successor_reserved_for: WINDOW-AGENT
+writable_file: email_scraper/test/keyword-intelligence-worker-flow.test.js
+file_operation: MODIFY
+starting_file_digest: f0e8be1a29d9ed5d85a657b8e73083f6c603ca30b18121701b3a33a7c1938510
+starting_repository_change_set_digest: 55d5f0b43f8cc3466478169f48d23cb546f829f4f597c393c326621f9d7be9e0
+read_only_scope: [KEYWORD_INTELLIGENCE_PRODUCT_CONTRACT.md, KEYWORD_INTELLIGENCE_DECISION_LEDGER.md §DEC-KI-039, KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md §KI-W6 in-flight corrective amendment — final result shortlist projection, ACTIVE_EXECUTION_STATE.md, email_scraper/src/aws-pipeline/keyword-intelligence/service.js::aggregateMarket post-C104, email_scraper/src/aws-pipeline/keyword-intelligence/contracts.js, email_scraper/src/aws-pipeline/keyword-intelligence/keys.js]
+authorized_actions: [modify aggregationScaffold support symbols and add SCN-KI-041 only, run C105 LOCAL_NOW checks, return one certificate to the window agent]
+prohibited_actions: [R3/R4 registration or assertion changes, production edits, existing case-ID membership/digest changes, database fixture, timeout/retry change, frontend, manifest, package, provider, AWS, production, destructive action, commit, push, parent communication, subdelegation, successor work]
+may_start_successor: false
+```
+
+**Trace and exact transformation.** This sequentially implements
+`KI-W6-CT2` / `SCN-KI-041` under `REQ-KI-002/003/023/024`,
+`INV-KI-004/005/014`, and `DEC-KI-006/024/038/039`. Its explicit affected
+W6 cases are `W6-FLOW-04`, `W6-FLOW-05`, and `W6-FLOW-06`; its explicit
+control is `W6-NC-05`. It is supplemental to, never a duplicate registration
+of, S105's `W6-FLOW-05`, while `W6-NC-05` remains unchanged. At
+`aggregationScaffold` (current line 529), add private `candidates` and
+`shortlist` options defaulting to `AGG_CANDIDATES`. Use candidates for the
+expansion manifest, anchor request and anchor metrics; use shortlist for all
+eight market-task fingerprints and metrics. Store strict
+`keyword-shortlist-manifest-v1` at the anchor manifest key with existing
+anchor input fingerprint/produced time, assign its key/fingerprint/time to the
+anchor stage, and return a private holder of the exact
+`publishResearchResult` input without changing the outcome.
+
+For C105-C2's reproducible inspection, the private holder assignment is
+exactly `holder.publishedInput = input`; the one additive test contains the
+literal identifier `SCN-KI-041`. These names do not change an exported or
+production interface.
+
+Add only `SCN-KI-041`: construct
+`Array.from({length:300},(_,index)=>` with
+`` `seed one candidate ${String(index + 1).padStart(3, "0")}` ``, take
+`candidates.slice(0, 200)`, drive actual production aggregation, and assert
+`published`, captured result length `200`, normalized
+`trim().toLowerCase()` set equality with shortlist, no escaped result key, and
+default selection `100`. Existing three-item defaults and R3/R4 lease,
+lost-owner, outcome, and no-dispatch assertions remain byte/semantically
+preserved. This is in-memory only: zero database, subprocess, HTTP, provider,
+AWS, or workspace-artifact write. C105 closes C104's temporary scaffold gap;
+the first component execution is CV1 at I102.
+
+**Checks.** `C105-C1` (`LOCAL_NOW`): from `email_scraper/`,
+`node --check test/keyword-intelligence-worker-flow.test.js`, exit 0.
+`C105-C2` (`LOCAL_NOW`): from `email_scraper/`, after C105's edit, run exactly:
+
+```sh
+node --input-type=module -e 'import { readFileSync } from "node:fs"; import assert from "node:assert/strict"; const s=readFileSync("test/keyword-intelligence-worker-flow.test.js","utf8"); const a=s.indexOf("async function aggregationScaffold("); const b=s.indexOf("\nasync function runAggregationCase(",a); assert.ok(a>=0&&b>a,"aggregationScaffold bounds"); const f=s.slice(a,b); for(const x of ["candidates = AGG_CANDIDATES","shortlist = AGG_CANDIDATES","KEYWORD_ARTIFACT_SHORTLIST_MANIFEST","keywordShortlistManifestSchema","anchorStage.manifestS3Key","anchorStage.manifestFingerprint","anchorStage.manifestProducedAt","holder.publishedInput = input"]) assert.ok(f.includes(x),x); assert.equal((s.match(/SCN-KI-041/g)??[]).length,1,"one SCN-KI-041"); const start=s.indexOf("test(\"SCN-KI-041:"); const next=s.indexOf("\ntest(",start+1); const end=next<0?s.length:next; assert.ok(start>=0&&end>start,"SCN-KI-041 test block bounds"); const q=s.slice(start,end); const c=q.replace(/\\s+/g,""); for(const x of ["Array.from({length:300}","candidates.slice(0,200)","assert.equal(holder.publishedInput.result.keywords.length,200)","assert.equal(holder.publishedInput.selectionItems.length,100)","constresultKeys=newSet(holder.publishedInput.result.keywords.map((entry)=>entry.keyword.trim().toLowerCase()))","constshortlistKeys=newSet(shortlist.map((keyword)=>keyword.trim().toLowerCase()))","assert.deepEqual([...resultKeys].sort(),[...shortlistKeys].sort())","assert.equal([...resultKeys].filter((key)=>!shortlistKeys.has(key)).length,0)"]) assert.ok(c.includes(x),x);'
+```
+
+Expected result is exit `0`; stdout/stderr is not asserted. Activation is the
+bounded scaffold and the one complete `test("SCN-KI-041:...")` block, exactly
+one SCN-KI-041, both defaults, strict shortlist manifest, all three anchor-stage
+metadata assignments, captured publication input, and literal 300/200/200/100
+assertions. Within that one block it requires the exact
+`holder.publishedInput.selectionItems.length === 100` assertion and both the
+normalized result/shortlist set-equality assertion and the exact zero
+`[...resultKeys].filter((key) => !shortlistKeys.has(key)).length` assertion.
+Missing members, duplicate scenario, an unbounded/later witness, non-strict
+manifest, missing capture, wrong cardinality/default oracle, or a missing
+escaped-result-key rejection fails. The command is read-only with expected workspace write set
+`[]`; it must not run tests, databases, subprocesses, HTTP, providers, AWS, or
+builds. Required=registered=executed `[C105-C1, C105-C2]`, zero
+skips/duplicates/unexpected, no local control; I102 owns the suite and
+controls. The identical sandbox-recovery policy applies.
+
+- [ ] P1 Pins, identity, writable file, baseline, and C104 acceptance match.
+- [ ] P2 Protected dirty state matches the recorded post-C104 baseline.
+- [ ] T1 Apply only the scaffold and SCN-KI-041 transformation.
+- [ ] V1 Execute C105-C1/C105-C2 with witnesses.
+- [ ] V2 Prove the attributable changed set is only `worker-flow.test.js`.
+- [ ] V3 Prove local-ID equality with zero skips/duplicates/unexpected IDs.
+- [ ] H1 Return diff, ending digest, commands, outcomes, and I102 obligation.
+- [ ] H2 Confirm no prohibited/second-file/successor/external/parent action.
+- [ ] H3 Stop at `AWAITING_WINDOW_REVIEW`.
+
+### `KI-W6-I102` — corrected integration assessment
+
+```yaml
+subwindow_id: KI-W6-I102
+type: INTEGRATION_ASSESSMENT
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-02
+assigned_agent: KI-W6-WINDOW-AGENT
+predecessors: [KI-W6-C104 ACCEPTED_FOR_INTEGRATION, KI-W6-C105 ACCEPTED_FOR_INTEGRATION]
+authorized_write_file: NONE
+assembled_set_digest: c3bfe436aba49d52de26298ac74eb30e061d392144dfffbb6954ee792c908bdc
+invalidated_gates: [CV1, CV3, CV4, CV5, CV6]
+reusable_gate: CV2 only with its complete-input proof
+prohibited_actions: [implementation edit, leaf delegation, KI-W7, provider, AWS, production, destructive action, commit, push, full opted-in DB suite, Prisma generate/validate, seven-handler build/measure, duplicate frontend build]
+may_start_successor: false
+```
+
+I102 personally accepts C104/C105, verifies the seven-file scope,
+requirement→decision→file→subwindow→assertion trace, exact unchanged
+26-case/13-control membership, substitute fidelity, privacy and all
+prohibitions. It then executes the frozen `KI-CL-21` schedule exactly:
+
+- CV1: once from `email_scraper/`, `node --check src/aws-pipeline/keyword-intelligence/service.js` and `node --test --test-isolation=none test/keyword-intelligence-worker-flow.test.js`; zero failures, SCN-KI-041 activation, exact 300/200/200/100, R3/R4 green.
+- CV2: reuse passed frontend `npm run check` only with empty frontend porcelain and HEAD `a39663c8f99d9cc3c4aa1301ff088d5f4a24e7fd`; do not rebuild.
+- CV3: one corrected frozen V3 emitted-browser/isolated-schema run: unchanged 26/13 certificate, 19/23/42/`$0.49200000`, 300 anchor, 200 shortlist, 200 durable/UI rows, default 100, complete cleanup, zero residual schema.
+- CV4: once each from `email_scraper/`, `npm test` and `npm run check:secrets`; zero failures and clean scan.
+- CV5: exactly two `node scripts/build-keyword-worker.js` runs; identical ZIP hashes, preserved siblings, no forbidden/stale members, ZIP <=45 MiB, unzipped <=200 MiB, cold import exports `handler`; then one `node --test --test-isolation=none test/aws-pipeline-packaging.test.js` with zero failures.
+- CV6: recompute seven-path digest/current hashes, exact 26-ID group/global equality, 13 controls, substitute limits, privacy and W7 handoff; five non-C104/C105 hashes equal the five KI-CL-21 literals and no out-of-scope source differs.
+
+Every gate requires witnesses; the thirteen controls include W6-NC-05
+pass→fail→fresh-pass. Later edits rerun only affected/dependent gates. One
+identical escalated recovery is permitted solely for proven sandbox/channel
+invalidation. `PASS` requires I1–I10 and ends `READY_FOR_PARENT_REVIEW`;
+failed behavior is `CORRECTION_REQUIRED`; missing decision/scope is
+`PARENT_BLOCKED`.
+
+- [ ] I1 Independently accept all listed leaf/corrective evidence.
+- [ ] I2 Verify actual assembled set equals the parent-authorized seven paths.
+- [ ] I3 Verify complete traceability to current source and assertions.
+- [ ] I4 Execute CV1–CV6 with exact witnesses/outcomes.
+- [ ] I5 Verify required=registered=executed coverage with zero defects.
+- [ ] I6 Execute all controls and verify their required falsifications.
+- [ ] I7 Verify substitute/accepted-test integrity and CV2 reuse proof.
+- [ ] I8 Verify no prohibited, successor, external, destructive, secret, or scope action.
+- [ ] I9 Independently inspect source and complete diff.
+- [ ] I10 Record PASS, CORRECTION_REQUIRED, or PARENT_BLOCKED in S3.

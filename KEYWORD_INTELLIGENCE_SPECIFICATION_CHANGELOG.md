@@ -1009,3 +1009,51 @@ compatibility_or_migration_effect: no product-contract schema migration API prov
 authorization_effect: KI-W6-WINDOW-AGENT may edit only S1/S2/S3 to append decision-complete and execution-complete C104 then C105 and zero-write I102 and return for parent decomposition review; no leaf dispatch or implementation action is yet authorized.
 resumption_state: A5 state 149 READY under ASG-KI-W6-WA-02; stop at AWAITING_PARENT_DECOMPOSITION_REVIEW before C104 assignment.
 ```
+
+```yaml
+change_id: CHG-KI-062
+timestamp: 2026-08-21T13:15:38+05:30
+trigger_evidence: [EV-KI-W6-R22, EV-KI-A-089]
+reason: The state-149 C104/C105/I102 package is substantively correct but its two leaf authority blocks contain non-literal repository baselines, shorthand read scopes, one inherited-ID reference, and non-executable inspection checks, so it does not yet satisfy mandatory sub-window Sections 7.1 through 7.4.
+old_revision: A5 state 149; S1 corrective appendix c305f7eb42dcef07ba19d7044d52b85bdc4e629458b7b363c49ce90e9cd1c69e; C104/C105 marked readiness-complete
+new_revision: A5 state 150 READY for F15-F18 documentation-only reconciliation
+changed_requirements: []
+changed_decisions: []
+affected_windows: [KI-W6 corrective decomposition only; KI-W7 remains prohibited]
+invalidated_evidence: [EV-KI-W6-R22 C104/C105 section_7_fields_complete and status READY claims; its root-cause diagnosis, correction algorithm, scope, sequence and gate plan remain valid]
+compatibility_or_migration_effect: none — recursive execution-authority precision only; no product runtime interface schema package provider case registry or gate behavior changes.
+authorization_effect: KI-W6-WINDOW-AGENT may edit only S1/S2/S3 to correct F15-F18 and return for parent review; no leaf assignment, implementation, gate, external action, commit or push is authorized.
+resumption_state: A5 state 150 READY under ASG-KI-W6-WA-02 for documentation correction only; stop again at AWAITING_PARENT_DECOMPOSITION_REVIEW before C104 dispatch.
+```
+
+```yaml
+change_id: CHG-KI-063
+timestamp: 2026-08-21T13:27:48+05:30
+trigger_evidence: [EV-KI-W6-R23, EV-KI-A-090]
+reason: The state-150 correction fixed baselines scopes and trace IDs, but its C104-C2 count can be satisfied by one pre-existing unrelated invariant plus one new guard, while C105-C2 does not witness the claimed default-100 or no-leak assertions and can match unrelated later source.
+old_revision: A5 state 150; S1 corrective appendix 6b7e90944a9167b24d42c61fcb26b3d7e692bae6b7319b48d94c86503b4b93b2; EV-KI-W6-R23 readiness claim
+new_revision: A5 state 151 READY for F19-F20 documentation-only anti-vacuity correction
+changed_requirements: []
+changed_decisions: []
+affected_windows: [KI-W6 corrective decomposition only; KI-W7 remains prohibited]
+invalidated_evidence: [EV-KI-W6-R23 F18 and section_7_fields_complete claims only; F15-F17 and every substantive correction decision remain valid]
+compatibility_or_migration_effect: none — local inspection enforcement only; no product runtime interface schema package provider case registry scope sequence or gate behavior change.
+authorization_effect: KI-W6-WINDOW-AGENT may edit only S1/S2/S3 to make C104-C2 and C105-C2 non-vacuous and return for parent review; no leaf assignment implementation gate external action commit or push is authorized.
+resumption_state: A5 state 151 READY under ASG-KI-W6-WA-02 for documentation correction only; stop again at AWAITING_PARENT_DECOMPOSITION_REVIEW before C104 dispatch.
+```
+
+```yaml
+change_id: CHG-KI-064
+timestamp: 2026-08-21T13:37:44+05:30
+trigger_evidence: [EV-KI-W6-R24, EV-KI-A-091]
+reason: The state-151 package closes the final two anti-vacuity gaps by independently witnessing both projection-specific production guards and bounding the focused regression before requiring its exact default-100 and no-leak assertions.
+old_revision: A5 state 151 documentation correction; S1 b99633447c17163f6e883d71388b0200a345d2c0ced51252b8d03a8fba3b6b38 awaiting renewed parent review
+new_revision: A5 state 152 DECOMPOSITION_APPROVED / 84e35abf369bfcaf11069b0a21e17744b160da48329f53dde5cb3c52ea4f8b00; approved S1 b99633447c17163f6e883d71388b0200a345d2c0ced51252b8d03a8fba3b6b38
+changed_requirements: []
+changed_decisions: []
+affected_windows: [KI-W6 only; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: []
+compatibility_or_migration_effect: none — recursive decomposition approval only; no product runtime interface schema package provider case registry scope sequence or gate behavior change.
+authorization_effect: KI-W6-WINDOW-AGENT may acknowledge approval in S2/S3, dispatch only C104 first, independently review it, then dispatch C105, independently review it, and personally execute I102; no leaf is assigned by this parent transition.
+resumption_state: A5 state 152 DECOMPOSITION_APPROVED under ASG-KI-W6-WA-02; S2 must record approval and become READY before C104 dispatch; stop READY_FOR_PARENT_REVIEW before KI-W7.
+```
