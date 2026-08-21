@@ -1,6 +1,6 @@
 # Keyword Intelligence Decision Ledger (`A3`)
 
-**Revision:** `KI-DL-15`  
+**Revision:** `KI-DL-16`
 **Status:** locked decisions; not an assignment
 
 This is the sole authority for implementation-affecting choices and
@@ -1926,6 +1926,38 @@ estimates them. This specification decision is not paid-call authorization.
   `DEC-KI-024`, `DEC-KI-038`.
 - **Tasks/scenarios:** `KI-W6-CT1`, `KI-W6-CT2`; `SCN-KI-041`;
   existing `W6-FLOW-04`, `W6-FLOW-05`, `W6-FLOW-06`, and `W6-NC-05`.
+
+### `DEC-KI-040` — Maximum component fixture preserves stage identity and per-seed bounds
+
+- **Requirements:** `REQ-KI-001`, `REQ-KI-002`, `REQ-KI-003`, `REQ-KI-023`,
+  `REQ-KI-024`, `INV-KI-004`, `INV-KI-005`, `INV-KI-014`; correction evidence
+  `SRC-KI-042`.
+- **Locked choice:** production contracts and C104 remain unchanged. The
+  component scaffold must store `keyword-shortlist-manifest-v1` with the exact
+  anchor-stage fingerprint
+  `keywordStageInputFingerprint({researchId,generation,stage:"anchor_screen",tasks:[anchorTask]})`
+  in both the manifest header and `putImmutable.inputFingerprint`. A task
+  fingerprint is never a stage-manifest identity.
+- **Maximum fixture:** SCN-KI-041 uses exactly five ordered seeds named
+  `seed 1` through `seed 5`. Each `bySeed` member contains exactly 60 ordered,
+  unique strings: its seed itself followed by 59 strings
+  `<seed> candidate <NN>` where `NN` is `01` through `59`. Flattening the five
+  members in seed/order produces exactly 300 distinct candidates. The durable
+  shortlist is exactly `candidates.slice(0,200)`.
+- **Scaffold parity:** its private seed-aware option defaults to the existing
+  one-seed three-candidate behavior. Under the five-seed fixture it constructs
+  ten ordered expansion tasks (suggestions then related for each seed), stage
+  counters equal ten, preserves each candidate's exact supplying-seed list in
+  the expansion manifest, and changes no production/exported interface.
+- **Acceptance:** the complete non-database worker-flow file must pass, including
+  R3-G11–G15 and SCN-KI-041's exact 5/60/300/200/200/100 witnesses. The earlier
+  30-pass/7-fail CV1 is diagnostic and superseded only by a fresh complete pass.
+- **Rejected:** raising/removing the 60-per-seed schema bound; one seed with 300
+  keywords; changing C104 to expect a task fingerprint; weakening `readManifest`;
+  changing product source, case IDs, manifest membership, provider economics,
+  or the causal V3 oracle.
+- **Tasks/scenarios:** `KI-W6-CT3`; corrected `SCN-KI-041`; existing
+  `W6-FLOW-04/05/06` and `W6-NC-05`; `KI-W6-CV7`–`CV12`.
 
 ## 2. Lifecycle transition tables
 

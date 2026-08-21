@@ -1073,3 +1073,19 @@ compatibility_or_migration_effect: none — execution-provenance classification 
 authorization_effect: KI-W6-WINDOW-AGENT may record the requester attribution, accept C104 from its existing independent review if no other defect exists, and then dispatch C105; no source/history rewrite rerun or direct parent leaf acceptance is authorized.
 resumption_state: A5 state 153 READY under ASG-KI-W6-WA-02; C105 remains unassigned until the window agent records C104 ACCEPTED_FOR_INTEGRATION; stop READY_FOR_PARENT_REVIEW before KI-W7.
 ```
+
+```yaml
+change_id: CHG-KI-066
+timestamp: 2026-08-21T14:20:05+05:30
+trigger_evidence: [EV-KI-W6-R28, SRC-KI-042, EV-KI-A-093]
+reason: I102 exposed that the accepted component scaffold used a task fingerprint for a stage manifest and encoded the 300-candidate maximum as one seed despite the immutable 60-per-seed contract.
+old_revision: A2 KI-DD-6; A3 KI-DL-15 / 4bb1201594bc4a33bf868f19dd73c6777d046cdbb8ae70ef2cc8972dd6c342ad; A4 KI-CL-21 / a499afe117ee9b9dba07ab1a420d8a9bae824d6d5d7419374427f9cc0687fa63; A8 KI-TR-13; A5 state 153; I102 PARENT_BLOCKED
+new_revision: A2 KI-DD-7 / 8095243aa7482b49e0991a8cafae0235cf87894d39d1a9e2007f3c234978e9e2; A3 KI-DL-16 / e59252cb3798fbdae805f43f33f69bf22de083c67d9a000632f5a1d2208e5a6c; A4 KI-CL-22 / bb823eca63520b6e0a8cd3b90b37fd9063813ee692c49d5c83bcc355cb1c0025; A8 KI-TR-14 / 31bd8df4912b2cf7d569316c08398d993d60b486ff7b175ad96362f220be28b5; A5 state 154 / 8e5624d405967500a14a1cf9c1384c70beaeba45bcc615efa37b416adc15bdad
+changed_requirements: []
+changed_decisions: [DEC-KI-040 preserves stage-manifest fingerprint identity, preserves the 60-per-seed schema, represents the 300 maximum as five seeds times 60, and assigns one test-file correction plus a fresh assessment]
+affected_windows: [KI-W6 remains active; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: [I102 CV1 failure remains diagnostic; C105 shortlist-fingerprint and one-seed-SCN assertions are superseded; C104 production evidence and all other C105 work remain valid]
+compatibility_or_migration_effect: none — test substitute correction only; no production runtime interface artifact schema package provider queue cost or persistent behavior change.
+authorization_effect: KI-W6-WINDOW-AGENT may copy the literal C106/I103 blocks into S1/S2/S3, certify identity, dispatch/review C106, then execute I103 and continue to handoff without another parent prompt if all gates pass.
+resumption_state: A5 state 154 READY under ASG-KI-W6-WA-02; stop READY_FOR_PARENT_REVIEW after I103 and before KI-W7.
+```

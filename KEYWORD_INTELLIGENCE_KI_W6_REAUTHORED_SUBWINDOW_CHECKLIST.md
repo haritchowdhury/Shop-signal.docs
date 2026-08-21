@@ -1869,6 +1869,155 @@ once this package is parent-approved.)
 unchanged §5.1 gates by exact reference and listing every gate invalidated by
 the intervening corrections.)
 
+### 9.3 State-154 literal second-correction transcription (`KI-CL-22`)
+
+This block is a literal operational transcription of A4 `KI-CL-22`'s second
+in-flight corrective amendment. It supersedes only C105's scaffold fingerprint
+and one-seed SCN-KI-041 fixture shape plus failed I102/CV1. C104 production
+source, the existing seven-path W6 scope/digest, 26 case IDs, 13 controls,
+frontend-build reuse, causal V3 oracle, provider economics, schemas, and every
+public interface remain unchanged. Before dispatch, the window agent certified
+same writable file, formulas, checks, order, prohibitions, and gates against
+the A4 literal; any divergence, new decision, or scope expansion stops.
+
+#### Task block `KI-W6-CT3` / sub-window `KI-W6-C106`
+
+1. **Task:** correct only the existing component scaffold and SCN-KI-041 so
+   their stored identities and maximum candidate shape satisfy the unchanged
+   production schemas.
+2. **Requirements/decisions:** `REQ-KI-001`, `REQ-KI-002`, `REQ-KI-003`,
+   `REQ-KI-023`, `REQ-KI-024`, `INV-KI-004`, `INV-KI-005`, `INV-KI-014`,
+   `DEC-KI-024`, `DEC-KI-038`, `DEC-KI-039`, `DEC-KI-040`, `SRC-KI-042`.
+3. **Source:** current SHA-256
+   `f549f9ac16e2c31957dd3a03b11d54da15972f4af23ebcfecb6f8c16f8955d9f`;
+   R28 proves five R3 market cases fail on task-vs-stage fingerprint and
+   SCN-KI-041 fails the strict 60-per-seed parser.
+4. **Target:** only
+   `email_scraper/test/keyword-intelligence-worker-flow.test.js`, limited to
+   `aggregationScaffold` support statements and the one existing SCN-KI-041
+   block. No other R3/R4 test, registration or assertion changes.
+5. **Private interface:** add option `bySeed = null`. Define exactly
+   `expansionBySeed = bySeed ?? [{ seed: "seed one", keywords: candidates }]`
+   and `seeds = expansionBySeed.map((entry) => entry.seed)`. No export or
+   production interface changes.
+6. **Stage/task shape:** set expansion-stage expected/terminal/succeeded counts
+   to `seeds.length * 2`. Construct exactly two ordered expansion tasks per seed
+   in seed-index order, `suggestions` then `related`, using that seed in the
+   request and task-input payload. Default callers therefore retain two tasks;
+   the maximum fixture has ten.
+7. **Expansion manifest:** retain its existing strict schema and stage
+   fingerprint. Store `seeds`, `bySeed: expansionBySeed`, and the existing
+   ordered `candidates`. Derive each candidate's `seeds` array by scanning
+   `expansionBySeed` in seed order and retaining every entry whose exact
+   `keywords` array contains that candidate; zero supplying seeds is invalid
+   through the existing schema. Do not collapse all candidates to one seed.
+8. **Shortlist manifest identity:** after `[anchorTask]` exists, compute exactly
+   `anchorStageInputFingerprint = keywordStageInputFingerprint({ researchId,
+   generation, stage: "anchor_screen", tasks: [anchorTask] })`. Use that value
+   for both `shortlistManifest.inputFingerprint` and the shortlist
+   `putImmutable.inputFingerprint`. Keep the anchor task artifact on
+   `anchorTask.inputFingerprint`; these identities are deliberately different.
+9. **Maximum fixture:** replace the one-seed candidate expression with exactly
+   five seeds `seed 1`…`seed 5`. For each seed, its 60-keyword member is
+   `[seed, ...59 strings]`, where string `n` is
+   `` `${seed} candidate ${String(n + 1).padStart(2, "0")}` `` for zero-based
+   `n=0..58`. `candidates = expansionBySeed.flatMap(entry => entry.keywords)`;
+   assert five members, every member length 60, candidate length and distinct
+   count 300; `shortlist = candidates.slice(0, 200)`.
+10. **Scenario assertions:** call the actual production aggregate path with
+    `{stage:"market_overview", candidates, shortlist, bySeed: expansionBySeed}`
+    and preserve the existing `published`, result 200, default selection 100,
+    normalized shortlist equality and zero escaped-key assertions.
+11. **Failure/replay/concurrency:** existing R3/R4 outcome, lease, lost-owner,
+    replay and no-dispatch cases remain unchanged and must all pass. A task
+    fingerprint in the shortlist manifest, one `bySeed` member over 60, wrong
+    stage counts, missing provenance, duplicate/leaked result key or changed
+    existing assertion fails acceptance.
+12. **Operations/bounds:** in-memory test only; five seeds, 60 each, 300
+    candidates, 200 shortlist/result, 100 default. Zero database, subprocess,
+    HTTP, provider, AWS, production, artifact-file, package or schema write.
+13. **Checks:** from `email_scraper/`, run C106-C1
+    `node --check test/keyword-intelligence-worker-flow.test.js`, then C106-C2
+    `node --test --test-isolation=none test/keyword-intelligence-worker-flow.test.js`.
+    Require exit 0, 37 tests pass, zero fail/skip, R3-G11–G15 pass, SCN-KI-041
+    executes once, and exact 5/60/300/200/200/100 witnesses. Expected workspace
+    write set is empty. The prior 30/7 result cannot be reused.
+14. **Output:** corrected test substitute consumed by I103; C105's failed
+    fingerprint/one-seed evidence is superseded, while its other accepted
+    scaffold work remains.
+15. **Non-goals:** no `service.js`, contract, key, config, repository, handler,
+    frontend, browser harness, fixture manifest, case ID/digest, timeout,
+    provider, database, AWS, commit, push or KI-W7 change.
+
+```yaml
+subwindow_id: KI-W6-C106
+type: CORRECTION
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-02
+assigned_agent: KI-W6-C106-LEAF-AGENT
+predecessors: [KI-W6-I102 PARENT_BLOCKED]
+successor_reserved_for: WINDOW-AGENT
+writable_file: email_scraper/test/keyword-intelligence-worker-flow.test.js
+file_operation: MODIFY
+starting_file_digest: f549f9ac16e2c31957dd3a03b11d54da15972f4af23ebcfecb6f8c16f8955d9f
+starting_repository_change_set_digest: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+read_only_scope: [KEYWORD_INTELLIGENCE_PRODUCT_CONTRACT.md, KEYWORD_INTELLIGENCE_DECISION_LEDGER.md §DEC-KI-040, KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md §KI-W6 second in-flight corrective amendment, ACTIVE_EXECUTION_STATE.md, email_scraper/src/aws-pipeline/keyword-intelligence/service.js::readManifest, email_scraper/src/aws-pipeline/keyword-intelligence/contracts.js::keywordExpansionManifestSchema, email_scraper/src/aws-pipeline/keyword-intelligence/keys.js::keywordStageInputFingerprint]
+authorized_actions: [perform KI-W6-CT3 in the one writable file, run C106-C1 and C106-C2 once, return evidence only to the window agent]
+prohibited_actions: [second-file edit, existing R3/R4 assertion or registration edit, production schema package config timeout provider database AWS commit push parent communication subdelegation successor or KI-W7 action]
+may_start_successor: false
+```
+
+- [ ] `C106-P1` Pins, assignment, clean baseline and predecessor match.
+- [ ] `C106-P2` The attributable changed-file set is exactly the writable file.
+- [ ] `C106-T1` Apply all ordered CT3 transformations and no other edit.
+- [ ] `C106-V1` Run C106-C1/C2 once with the exact witnesses and zero skips.
+- [ ] `C106-H1` Return diff, ending digest, commands and outcomes to the window agent.
+- [ ] `C106-H2` Confirm zero prohibited/external/successor action and stop for review.
+
+#### Integration assessment `KI-W6-I103`
+
+I103 is owned personally by the window agent, writes no implementation file,
+and begins only after independent C106 acceptance. It supersedes failed I102
+and uses these exact ordered gates:
+
+- [ ] `KI-W6-CV7` From `email_scraper/`, once run
+  `node --check src/aws-pipeline/keyword-intelligence/service.js` followed by
+  `node --test --test-isolation=none test/keyword-intelligence-worker-flow.test.js`.
+  Require 37 pass, zero fail/skip, R3/R4 green and exact SCN-KI-041
+  5/60/300/200/200/100 activation.
+- [ ] `KI-W6-CV8` Reuse the passed frontend build only if frontend porcelain is
+  empty and HEAD remains `a39663c8f99d9cc3c4aa1301ff088d5f4a24e7fd`; otherwise stop for dependency adjudication. Do not rebuild.
+- [ ] `KI-W6-CV9` From `frontend/`, once run
+  `ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node test/browser/keyword-intelligence-e2e.mjs`
+  with the existing isolated `TEST_DATABASE_URL` sourced without logging.
+  Require the unchanged 26-case/13-control certificate, exact 19 calls, 23
+  keyword objects, 42 sends, `$0.49200000`, five seeds, 300 anchor, 200
+  shortlist/result/UI, default 100, complete cleanup and zero residual schema.
+- [ ] `KI-W6-CV10` From `email_scraper/`, once run `npm test`, then
+  `npm run check:secrets`; require zero failures and clean scan. Do not opt into
+  the full database suite.
+- [ ] `KI-W6-CV11` From `email_scraper/`, run
+  `node scripts/build-keyword-worker.js` exactly twice; require identical ZIP
+  hashes, preserved siblings, no forbidden/stale members, ZIP ≤45 MiB,
+  unzipped ≤200 MiB and cold-imported function `handler`; then run once
+  `node --test --test-isolation=none test/aws-pipeline-packaging.test.js` with
+  zero failures. Do not run seven-handler build/measure.
+- [ ] `KI-W6-CV12` Recompute the unchanged seven-path digest, current hashes,
+  exact 26-ID/group/global equality, 13 controls, substitute limits, privacy,
+  scope and W7 handoff. Require only C104 and the C105/C106-owned test file to
+  differ from the five accepted initial hashes and no out-of-scope source.
+- [ ] `KI-W6-CH3` Record C106 acceptance, I103 gates, superseded I102 failure,
+  requester commit provenance, exact final files/digests and one
+  `WINDOW-AGENT-INTEGRATION-PASS` certificate.
+- [ ] `KI-W6-CH4` Stop `READY_FOR_PARENT_REVIEW`; do not begin KI-W7.
+
+Sandbox or channel invalidation permits the standing one identical escalated
+recovery. An observable product/test failure is not such an invalidation. If
+C106 and all I103 gates pass, the window agent continues through CH3/CH4
+without another parent prompt. A new decision, scope expansion or unresolved
+contract contradiction stops; a mechanically determined same-scope defect uses
+the standard's new one-file corrective-subwindow path.
+
 ---
 
 End of `S1` (corrected per `EV-KI-A-082`–`EV-KI-A-086`, `F1`–`F14`). Decomposition status and

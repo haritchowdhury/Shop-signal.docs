@@ -1,6 +1,6 @@
 # Keyword Intelligence Traceability Index (`A8`)
 
-**Revision:** `KI-TR-13`
+**Revision:** `KI-TR-14`
 
 This is the sole authority for mechanical requirement/source/decision/task/test
 closure. The other artifacts are `A1`
@@ -266,3 +266,4 @@ is the mechanical expansion used for completeness checks:
 | `REQ-KI-015`–`017` | `KI-W6-T1/T2/T3/T5` | `W6-NAV-01`–`03`, `W6-FLOW-07`–`09/13`, `W6-RES-01`; saved-only/same-key/immutable owner-scoped handoff | `KI-W6-V1/V3/V5` |
 | `REQ-KI-019/020`; all `EXC-KI-001`–`008` and `AUTH-KI-001`–`004/006/007` applicable locally | W6 header, `KI-W6-T3/T5`, A5 | `W6-CONF-01`–`06`, `W6-NC-09`–`13`; exact scope, obsolete-runtime, substitute and authority closure | `KI-W6-P1`–`P6`, `V1/V3/V5/V6`, `H1`–`H6` |
 | `REQ-KI-002/003/023/024`; `INV-KI-004/005/014` corrective overlay | `KI-W6-CT1/CT2` under `DEC-KI-039` | `SCN-KI-041`; existing sole `W6-FLOW-05` registration and `W6-NC-05` control; 300 anchor keys project through the durable 200-keyword manifest to exactly 200 final keys/default 100 | `KI-W6-CV1/CV3/CV5/CV6`, `KI-W6-CH1/CH2` |
+| `REQ-KI-001`, `REQ-KI-002`, `REQ-KI-003`, `REQ-KI-023`, `REQ-KI-024`; `INV-KI-004`, `INV-KI-005`, `INV-KI-014` fixture-correction overlay | `KI-W6-CT3` under `DEC-KI-040` | corrected supplemental `SCN-KI-041`; five seeds × 60 unique ordered candidates; anchor-stage manifest fingerprint; unchanged `W6-FLOW-04`, `W6-FLOW-05`, `W6-FLOW-06` and `W6-NC-05` | `KI-W6-CV7`, `KI-W6-CV9`, `KI-W6-CV10`, `KI-W6-CV11`, `KI-W6-CV12`, `KI-W6-CH3`, `KI-W6-CH4` |

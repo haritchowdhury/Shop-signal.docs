@@ -5347,3 +5347,64 @@ audit_evidence: [SRC-KI-041, DEC-KI-039, KI-W6-PCA-01, SCN-KI-041, RW6C-001 thro
 - **No parent mutation:** only A5/A6/A7 documentation changed; no source,
   test, build, browser, database, provider, AWS, production, destructive,
   commit, push, or KI-W7 action was performed by the parent; cost `$0.00`.
+
+### `EV-KI-A-093` — I102 contract diagnosis and direct C106/I103 authorization
+
+- **Timestamp / phase:** 2026-08-21T14:20:05+05:30 / parent diagnosis,
+  decision closure, exact corrective authoring, and continuation assignment.
+- **Independent diagnosis:** R28's 30-pass/7-fail CV1 is reproducible from the
+  current contracts. `readManifest` derives an anchor-stage fingerprint from
+  `[anchorTask]`, while C105 stored the shortlist under the task fingerprint;
+  `keywordExpansionManifestSchema` allows at most five seeds and 60 keywords
+  per `bySeed` member, while old SCN-KI-041 supplied one member of 300. These
+  are test-scaffold defects; C104's production projection and the schemas are
+  correct.
+- **Locked resolution:** `DEC-KI-040` preserves production and uses five
+  ordered seeds × 60 unique ordered keywords. Each member begins with its seed
+  and has 59 deterministic suffixes, yielding 300 distinct candidates and the
+  first 200 as shortlist. The shortlist manifest uses the exact anchor-stage
+  fingerprint in both header and immutable-store expectation. The scaffold
+  creates two expansion tasks per seed and preserves candidate seed lineage.
+- **Exact execution package:** A4 `KI-CL-22` contains the complete one-file
+  `KI-W6-CT3` / `KI-W6-C106` task, literal baseline and authority block,
+  runtime checks, intermediate/failure behavior, and zero-write `KI-W6-I103`
+  gates CV7–CV12. The W6 scope remains the existing seven paths; coverage
+  remains 26 cases/13 controls; no new case or manifest member exists.
+- **Requester continuation:** the requester expressly instructed the parent to
+  authorize C106 and I103 and continue when no further problem occurs. Because
+  the parent has authored their literal content, A5 state 154 permits the
+  window agent to transcribe/certify those blocks in S1/S2/S3 and dispatch C106
+  without another parent-decomposition review. Any divergence, new decision or
+  scope expansion still stops.
+- **Revisions:** A2 `KI-DD-7`
+  `8095243aa7482b49e0991a8cafae0235cf87894d39d1a9e2007f3c234978e9e2`;
+  A3 `KI-DL-16`
+  `e59252cb3798fbdae805f43f33f69bf22de083c67d9a000632f5a1d2208e5a6c`;
+  A4 `KI-CL-22`
+  `bb823eca63520b6e0a8cd3b90b37fd9063813ee692c49d5c83bcc355cb1c0025`;
+  A8 `KI-TR-14`
+  `31bd8df4912b2cf7d569316c08398d993d60b486ff7b175ad96362f220be28b5`;
+  A5 CAS 153→154
+  `8e5624d405967500a14a1cf9c1384c70beaeba45bcc615efa37b416adc15bdad`.
+- **No execution:** the parent changed only A2–A8 documentation. No S1/S2/S3,
+  source, test, build, browser, database, provider, AWS, production,
+  destructive, commit, push, or KI-W7 action occurred; cost `$0.00`.
+
+```yaml
+certificate: AUTHORING-READY
+window: KI-W6
+correction: KI-W6-C106
+assessment: KI-W6-I103
+required_changed_file: email_scraper/test/keyword-intelligence-worker-flow.test.js
+starting_file_digest: f549f9ac16e2c31957dd3a03b11d54da15972f4af23ebcfecb6f8c16f8955d9f
+starting_repository_change_set_digest: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+unresolved_parent_decisions: 0
+unresolved_execution_choices: 0
+unmapped_requirements: 0
+unmapped_cases: 0
+coverage_membership_changes: 0
+parent_scope_expansion: false
+authorized_first_action: window agent transcribes C106 and I103 exactly into S1/S2/S3
+authorized_first_implementation: C106 only after exact transcription certificate
+planned_stop: READY_FOR_PARENT_REVIEW after I103; before KI-W7
+```

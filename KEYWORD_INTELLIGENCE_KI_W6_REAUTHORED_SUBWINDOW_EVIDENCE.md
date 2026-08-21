@@ -2284,3 +2284,134 @@ status: READY
 
 **Disposition:** C104 is accepted. C105 is dispatched and awaits leaf
 evidence; I102 and KI-W7 remain prohibited from starting.
+
+---
+
+## `EV-KI-W6-R27` — C105 independent window-agent acceptance
+
+- **Timestamp:** 2026-08-21T14:10:00+05:30
+- **Actor/role:** `KI-W6-WINDOW-AGENT` (independent leaf review)
+- **Predecessor:** `KI-W6-C104` accepted; C105 assignment, writable path,
+  starting digest, and change-set digest matched S2/S1.
+- **Ending digest:** `f549f9ac16e2c31957dd3a03b11d54da15972f4af23ebcfecb6f8c16f8955d9f`.
+- **Independent checks:** C105-C1 `node --check` passed; C105-C2 exact
+  bounded-source inspection passed. Required = registered = executed
+  `[C105-C1, C105-C2]`; zero skips, duplicates, unexpected IDs, or local
+  controls.
+- **Independent diff/scope review:** the only changed path relative to the
+  C104 commit is `test/keyword-intelligence-worker-flow.test.js`; diff is
+  `42` additions / `11` deletions; whitespace check passed. The scaffold
+  separates candidates from the shortlist, captures strict shortlist
+  metadata/publication input, and adds only `SCN-KI-041` with the required
+  300/200/200/100 assertions.
+- **Commit provenance:** repository history contains requester-authored
+  commit `adf416662e3aae581328478b70dfe828d3191e8b` (`C105`). No history
+  repair, reset, amend, push, or additional agent commit was performed by
+  the window agent; this is recorded as requester-owned provenance rather
+  than a leaf action.
+- **Disposition:** `ACCEPTED_FOR_INTEGRATION`.
+- **State transition:** S2 state 20; `KI-W6-I102` is now reserved for the
+  window-agent's independent integration assessment. No I102 execution is
+  included in this acceptance.
+- **External actions/cost:** none; `$0.00`.
+
+---
+
+## `EV-KI-W6-R28` — I102 CV1 failure and parent-level specification blocker
+
+- **Timestamp:** 2026-08-21T14:22:00+05:30
+- **Actor/role:** `KI-W6-WINDOW-AGENT` (independent integration assessment)
+- **Authority:** A5 state 153 / `ASG-KI-W6-WA-02`; C104 and C105 were already
+  accepted (`R26`/state-153 disposition and `R27` C105 review). I102 has no
+  implementation-write authority.
+- **Exact CV1 command:** from `email_scraper/`,
+  `node --check src/aws-pipeline/keyword-intelligence/service.js && node --test --test-isolation=none test/keyword-intelligence-worker-flow.test.js`.
+  The syntax check passed; the component test exited `1` with `37` tests,
+  `30` pass, `7` fail, `0` skipped.
+- **Decisive failures:** `R3-G11` through `R3-G15` each throw
+  `PIPELINE_ARTIFACT_CONFLICT` from `readManifest()` at
+  `service.js:998`; `SCN-KI-041` throws `PIPELINE_ARTIFACT_INVALID` while
+  storing the expansion manifest at the scaffold's line 605. Thus R3/R4 are
+  not green and the required 300/200/200/100 runtime activation is not
+  established.
+- **Independent source diagnosis:** C105 stores the anchor shortlist manifest
+  with `anchorTask.inputFingerprint` (`worker-flow.test.js:632,639`), while
+  `readManifest()` mechanically derives and requires
+  `keywordStageInputFingerprint({ researchId, generation, stage:
+  "anchor_screen", tasks: manifestContext.tasks })` (`service.js:772-789`).
+  This fingerprint mismatch produces the five R3 artifact conflicts.
+  Separately, the required `SCN-KI-041` passes 300 candidates through the
+  scaffold's one `expansionManifest.bySeed[0].keywords` list
+  (`worker-flow.test.js:601`), but the frozen
+  `keywordExpansionManifestSchema` caps that list at `60`
+  (`contracts.js:238`). This produces the invalid artifact before C104 can
+  execute its shortlist projection.
+- **Why this stops rather than opens C106:** changing the task fingerprint to
+  the already-defined stage fingerprint is mechanical, but making the required
+  *one-seed / 300-keyword* scenario valid requires a parent choice that either
+  changes the frozen scenario shape or the frozen manifest contract. The
+  window agent cannot choose between those materially different contract/test
+  designs. No corrective leaf is authored.
+- **Scope/provenance checks:** current raw SHA-256 digests are
+  `service.js = b85ce80098792faf7c781effe648d86452f61b857a8cd737b037940fdce12b02`
+  and `worker-flow.test.js = f549f9ac16e2c31957dd3a03b11d54da15972f4af23ebcfecb6f8c16f8955d9f`.
+  The C104→C105 diff names only `test/keyword-intelligence-worker-flow.test.js`;
+  that diff and the root worktree pass `git diff --check`. Both nested
+  repositories are clean. No provider, AWS, production-database,
+  destructive, secret, history, commit, or KI-W7 action occurred.
+- **Coverage/controls:** CV1 executed once and failed; no CV2-CV6 command was
+  executed, no control was rerun, and no coverage membership/digest changed.
+  This is not a sandbox or channel invalidation, so no identical recovery is
+  permitted.
+- **Disposition:** `PARENT_BLOCKED`. S2 state 21 records `STOP` and the exact
+  parent decision needed. KI-W7 remains prohibited.
+
+---
+
+## `EV-KI-W6-R29` — State-154 C106/I103 literal transcription and C106 dispatch
+
+- **Timestamp / role:** 2026-08-21T14:30:00+05:30 / `KI-W6-WINDOW-AGENT`
+  decomposition and dispatch.
+- **Authority:** A5 state 154 / `ASG-KI-W6-WA-02`, A4 `KI-CL-22`,
+  `DEC-KI-040`, `KI-DD-7`, `KI-DL-16`, and `KI-TR-14`. The parent explicitly
+  authorizes literal transcription into S1/S2/S3, one C106 dispatch, independent
+  review, then I103 CV7–CV12. KI-W7 remains prohibited.
+- **Exact-transcription certificate:** S1 §9.3 contains the C106 task block,
+  one-file assignment, checks, non-goals, and I103 CV7–CV12/CH3/CH4 in the
+  same order, with the same formulas, bounds, prohibitions, gates, starting
+  file digest, and empty repository change-set digest as A4. The only
+  assignment completion is replacing A4's `UNASSIGNED` leaf placeholder with
+  `KI-W6-C106-LEAF-AGENT`; no implementation-affecting content changed.
+- **C106 dispatch:** `ASG-KI-W6-C106` assigns only
+  `email_scraper/test/keyword-intelligence-worker-flow.test.js` to
+  `KI-W6-C106-LEAF-AGENT`. Starting digest is
+  `f549f9ac16e2c31957dd3a03b11d54da15972f4af23ebcfecb6f8c16f8955d9f`;
+  starting backend change-set digest is
+  `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`.
+  C106-C1 and C106-C2 each run once; C106 must stop at
+  `AWAITING_WINDOW_REVIEW` for independent review.
+- **Current baseline:** before dispatch, the assigned file matched its frozen
+  digest, both nested repositories had empty porcelain, and `git diff --check`
+  passed. S1/S2/S3 were the only coordination writes. No source/test leaf edit,
+  command gate, provider, AWS, production/database, destructive, commit, push,
+  secret, cost, or KI-W7 action occurred in this dispatch record.
+- **Disposition:** `CORRECTIVE-SUBWINDOW-DISPATCHED`; S2 state 22 is `READY`
+  for C106. I103 is reserved and unstarted.
+
+```yaml
+certificate: CORRECTIVE-SUBWINDOW-DISPATCHED
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-02
+subwindow_id: KI-W6-C106
+assignment_id: ASG-KI-W6-C106
+assigned_agent: KI-W6-C106-LEAF-AGENT
+writable_file: email_scraper/test/keyword-intelligence-worker-flow.test.js
+starting_file_digest: f549f9ac16e2c31957dd3a03b11d54da15972f4af23ebcfecb6f8c16f8955d9f
+starting_repository_change_set_digest: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+required_local_cases: [C106-C1, C106-C2]
+predecessors: [KI-W6-I102 PARENT_BLOCKED]
+integration_assessment_reservation: KI-W6-I103 after independent C106 acceptance only
+external_mutations: []
+prohibited_actions_observed: []
+status: READY
+```
