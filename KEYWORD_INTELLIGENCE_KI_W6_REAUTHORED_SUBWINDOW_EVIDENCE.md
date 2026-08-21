@@ -2138,3 +2138,149 @@ status: READY
 
 **Disposition:** C104 is dispatched and awaits its leaf evidence. C105,
 I102, and KI-W7 remain prohibited from starting.
+
+---
+
+## `EV-KI-W6-R26` — C104 independent window review: parent-blocked provenance
+
+- **Timestamp:** 2026-08-21T13:50:18+05:30
+- **Window/sub-window/assignment:** `KI-W6` / `KI-W6-C104` /
+  `ASG-KI-W6-C104`; reviewer `KI-W6-WINDOW-AGENT` under A5 state 152.
+- **Frozen revisions:** parent state
+  `84e35abf369bfcaf11069b0a21e17744b160da48329f53dde5cb3c52ea4f8b00`;
+  contract `8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c`;
+  decision `4bb1201594bc4a33bf868f19dd73c6777d046cdbb8ae70ef2cc8972dd6c342ad`;
+  parent checklist `a499afe117ee9b9dba07ab1a420d8a9bae824d6d5d7419374427f9cc0687fa63`;
+  S1 `b99633447c17163f6e883d71388b0200a345d2c0ced51252b8d03a8fba3b6b38`;
+  and S2 state 18
+  `8b70d60feed1e3680441bdfec231b6b6dcf61af62ce8c96eae84d9297a4fd3eb`.
+- **Reported leaf result:** the received C104 completion report identifies only
+  `email_scraper/src/aws-pipeline/keyword-intelligence/service.js`, reports
+  C104-C1/C104-C2 and `git diff --check` passing, ending SHA-256
+  `b85ce80098792faf7c781effe648d86452f61b857a8cd737b037940fdce12b02`,
+  and claims no commit.
+- **Independent source/digest review:** current `aggregateMarket` reads the
+  strict shortlist manifest, creates normalized shortlist keys, projects
+  expansion and US metrics, applies distinct guards before
+  `computeResearchResult`, and supplies the projected expansion/overview.
+  `sha256sum email_scraper/src/aws-pipeline/keyword-intelligence/service.js`
+  returned exactly the reported ending digest.
+- **Independent local checks:** from `email_scraper/`, C104-C1
+  `node --check src/aws-pipeline/keyword-intelligence/service.js` passed.
+  The byte-for-byte frozen C104-C2 `node --input-type=module -e` inspection in
+  S1 passed: it activated the bounded `aggregateMarket` extraction, exact one
+  shortlist contract/schema references, both distinct projection-specific
+  equality guards, normalized-set witnesses, and pre-calculation ordering.
+  `git diff --check` passed at both root and backend scope. A compound status
+  command ended after those successful checks because `git -C frontend` was
+  resolved relative to `email_scraper/`; the immediate corrected root-relative
+  status query completed successfully and both nested worktrees were clean.
+- **Provenance conflict:** read-only Git inspection reports backend `HEAD`
+  `9eff81490d15f6c001bf30121133f538addb81bf`, author `Harit`, subject `C104`,
+  with exactly one file changed (`service.js`, 26 insertions, 3 deletions).
+  `HEAD:service.js` has the same ending digest, while the frozen C104 baseline
+  was `c37a038f189470ad1d2eca6626f515b9f0c45bd60de470d84c4b72fa497637b5`.
+  This directly conflicts with the submitted no-commit claim and prevents the
+  required no-prohibited-action evidence from being established. The review
+  does not attribute that commit to a particular actor.
+- **Scope/negative result:** current backend and frontend porcelain are clean;
+  the observed commit contains only the C104 writable file. No C105/I102,
+  provider, AWS, database, destructive, or KI-W7 action was observed during
+  review. No external mutation or cost occurred during review.
+- **Disposition:** `PARENT_BLOCKED`. S2 state 18 preserves the source and
+  evidence, stops successor work, and awaits parent disposition of the
+  commit-provenance conflict. C104 is not accepted; C105 remains unassigned;
+  I102 remains unstarted.
+
+```yaml
+certificate: WINDOW-AGENT-FILE-REVIEW
+parent_window_id: KI-W6
+subwindow_id: KI-W6-C104
+assignment_id: ASG-KI-W6-C104
+reviewer: KI-W6-WINDOW-AGENT
+starting_file_digest: c37a038f189470ad1d2eca6626f515b9f0c45bd60de470d84c4b72fa497637b5
+ending_file_digest: b85ce80098792faf7c781effe648d86452f61b857a8cd737b037940fdce12b02
+starting_repository_change_set_digest: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+observed_head: 9eff81490d15f6c001bf30121133f538addb81bf
+observed_head_changed_files: [email_scraper/src/aws-pipeline/keyword-intelligence/service.js]
+local_checks: [C104-C1 PASS, C104-C2 PASS, git-diff-check PASS]
+required_local_cases: [C104-C1, C104-C2]
+registered_local_cases: [C104-C1, C104-C2]
+executed_local_cases: [C104-C1, C104-C2]
+skipped_local_cases: []
+duplicate_case_ids: []
+unexpected_case_ids: []
+missing_activation_witnesses: []
+prohibited_actions_observed: [backend committed HEAD C104 9eff81490d15f6c001bf30121133f538addb81bf; actor attribution unresolved]
+external_mutations: []
+cost_usd: '0.00'
+successor_work_started: false
+status: PARENT_BLOCKED
+```
+
+**Parent action required:** determine whether the committed backend `HEAD`
+`C104` revision is authorized parent-owned provenance or an impermissible leaf
+commit. Until that disposition, no C104 acceptance, C105 dispatch, I102 gate,
+or KI-W7 action may begin.
+
+---
+
+## `EV-KI-W6-R27` — State-153 C104 acceptance and C105 dispatch
+
+- **Timestamp:** 2026-08-21T13:54:41+05:30
+- **Authority/disposition:** A5 state 153, `EV-KI-A-092`, and `CHG-KI-065`
+  classify backend commit `9eff81490d15f6c001bf30121133f538addb81bf` as
+  requester-owned provenance. It contains exactly C104's reviewed file and
+  matches R26's accepted ending digest; it is neither a prohibited leaf action
+  nor a window-agent action. No source, Git history, local check, or gate rerun
+  is authorized or required by this disposition.
+- **C104 acceptance:** R26's independent source inspection, ending digest
+  `b85ce80098792faf7c781effe648d86452f61b857a8cd737b037940fdce12b02`,
+  C104-C1 pass, C104-C2 pass, exact one-file commit scope, zero skipped/
+  duplicate/unexpected local IDs, and no external mutation/cost are accepted
+  unchanged. `KI-W6-C104` is `ACCEPTED_FOR_INTEGRATION`.
+- **C105 dispatch:** S2 state 19 assigns only `KI-W6-C105` /
+  `ASG-KI-W6-C105` to `KI-W6-C105-LEAF-AGENT`. Its sole writable file is
+  `email_scraper/test/keyword-intelligence-worker-flow.test.js`; frozen starting
+  file digest is `f0e8be1a29d9ed5d85a657b8e73083f6c603ca30b18121701b3a33a7c1938510`
+  and repository change-set digest is
+  `55d5f0b43f8cc3466478169f48d23cb546f829f4f597c393c326621f9d7be9e0`.
+  It may run only C105-C1/C105-C2 and must stop at `AWAITING_WINDOW_REVIEW`.
+- **Sequence hold:** I102 remains unstarted until independent C105 acceptance.
+  No C105 implementation, local check, gate, provider, AWS, database,
+  destructive, commit, push, or KI-W7 action occurred at dispatch time.
+- **State revision:** S2 state 19 is
+  `927fbec7ee3e77ac79d433e5acbd1d46f86bc5a2d1faecd2dce1cd212ed7242b`.
+
+```yaml
+certificate: WINDOW-AGENT-FILE-ACCEPTED
+parent_window_id: KI-W6
+subwindow_id: KI-W6-C104
+assignment_id: ASG-KI-W6-C104
+reviewer: KI-W6-WINDOW-AGENT
+ending_file_digest: b85ce80098792faf7c781effe648d86452f61b857a8cd737b037940fdce12b02
+local_checks: [C104-C1 PASS, C104-C2 PASS, git-diff-check PASS]
+provenance_disposition: requester-owned commit 9eff81490d15f6c001bf30121133f538addb81bf accepted by EV-KI-A-092
+status: ACCEPTED_FOR_INTEGRATION
+```
+
+```yaml
+certificate: CORRECTIVE-SUBWINDOW-DISPATCHED
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-02
+subwindow_id: KI-W6-C105
+assignment_id: ASG-KI-W6-C105
+assigned_agent: KI-W6-C105-LEAF-AGENT
+writable_file: email_scraper/test/keyword-intelligence-worker-flow.test.js
+starting_file_digest: f0e8be1a29d9ed5d85a657b8e73083f6c603ca30b18121701b3a33a7c1938510
+starting_repository_change_set_digest: 55d5f0b43f8cc3466478169f48d23cb546f829f4f597c393c326621f9d7be9e0
+required_local_checks: [C105-C1, C105-C2]
+predecessors: [KI-W6-C104 ACCEPTED_FOR_INTEGRATION]
+integration_assessment_reservation: I102 after independent C105 acceptance only
+external_mutations: []
+prohibited_actions_observed: []
+status: READY
+```
+
+**Disposition:** C104 is accepted. C105 is dispatched and awaits leaf
+evidence; I102 and KI-W7 remain prohibited from starting.

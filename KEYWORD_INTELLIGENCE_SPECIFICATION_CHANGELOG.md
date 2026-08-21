@@ -1057,3 +1057,19 @@ compatibility_or_migration_effect: none — recursive decomposition approval onl
 authorization_effect: KI-W6-WINDOW-AGENT may acknowledge approval in S2/S3, dispatch only C104 first, independently review it, then dispatch C105, independently review it, and personally execute I102; no leaf is assigned by this parent transition.
 resumption_state: A5 state 152 DECOMPOSITION_APPROVED under ASG-KI-W6-WA-02; S2 must record approval and become READY before C104 dispatch; stop READY_FOR_PARENT_REVIEW before KI-W7.
 ```
+
+```yaml
+change_id: CHG-KI-065
+timestamp: 2026-08-21T13:52:46+05:30
+trigger_evidence: [EV-KI-W6-R26, EV-KI-A-092]
+reason: C104's reviewed bytes were committed by the requester between leaf execution and window review; the generic no-commit prohibition applies to agents and must not misclassify the requester's owner-controlled commit as a leaf violation.
+old_revision: A5 state 152 DECOMPOSITION_APPROVED; S2 state 18 PARENT_BLOCKED on unresolved actor attribution for backend commit 9eff81490d15f6c001bf30121133f538addb81bf
+new_revision: A5 state 153 READY / 7b4f43dd62b3262303921878d525908a09689a842cfcf5150d13c3427d772cd8; requester-owned provenance adjudicated
+changed_requirements: []
+changed_decisions: []
+affected_windows: [KI-W6 only; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: [EV-KI-W6-R26 PARENT_BLOCKED disposition only; its source review local checks digests scope findings and negative results remain valid]
+compatibility_or_migration_effect: none — execution-provenance classification only; no product runtime interface schema package provider case registry scope sequence or gate behavior change.
+authorization_effect: KI-W6-WINDOW-AGENT may record the requester attribution, accept C104 from its existing independent review if no other defect exists, and then dispatch C105; no source/history rewrite rerun or direct parent leaf acceptance is authorized.
+resumption_state: A5 state 153 READY under ASG-KI-W6-WA-02; C105 remains unassigned until the window agent records C104 ACCEPTED_FOR_INTEGRATION; stop READY_FOR_PARENT_REVIEW before KI-W7.
+```

@@ -5310,3 +5310,40 @@ audit_evidence: [SRC-KI-041, DEC-KI-039, KI-W6-PCA-01, SCN-KI-041, RW6C-001 thro
 - **Boundary:** no implementation/test/build/browser/database/provider/AWS/
   production/destructive/commit/push/KI-W7 action occurred; both nested
   repositories were clean and `git diff --check` passed; cost `$0.00`.
+
+### `EV-KI-A-092` — C104 requester-commit provenance disposition
+
+- **Timestamp / phase:** 2026-08-21T13:52:46+05:30 / independent parent
+  disposition of `EV-KI-W6-R26`'s sole provenance blocker.
+- **Observed repository fact:** backend HEAD and `origin/main` are
+  `9eff81490d15f6c001bf30121133f538addb81bf`, parent
+  `a423e5a3e267084aa2977d9100ebdd89e9490051`, subject `C104`, authored and
+  committed by `Harit <ch.harit1995@gmail.com>` at
+  `2026-08-21T13:48:08+05:30`. Its complete changed-file set is exactly
+  `src/aws-pipeline/keyword-intelligence/service.js`, 26 insertions and 3
+  deletions; current and committed file SHA-256 is the R26-reviewed
+  `b85ce80098792faf7c781effe648d86452f61b857a8cd737b037940fdce12b02`.
+- **Requester/agent boundary:** the requester previously established that the
+  requester alone performs commits. The workspace identity, commit author and
+  committer are the requester identity, and the committed bytes exactly equal
+  the leaf output independently reviewed in R26. The C104 leaf's “no commit”
+  statement is therefore interpreted correctly as “the leaf agent performed
+  no commit”; it is not contradicted by the requester's later commit. Agent
+  commit/push prohibitions do not prohibit an owner/requester action.
+- **Implementation review:** the commit is confined to C104's one writable
+  file and implements the strict shortlist read, normalized projection of
+  expansion and US metrics, two independent equality guards, and projected
+  calculation inputs. R26 independently reran C104-C1 and the frozen C104-C2;
+  both passed with all activation witnesses. No C105/I102, provider, AWS,
+  database, destructive, or KI-W7 action is present. The trailing newline
+  normalization changes no symbol or behavior.
+- **Disposition / authority:** the provenance blocker is resolved. A5 CAS
+  152→153, revision
+  `7b4f43dd62b3262303921878d525908a09689a842cfcf5150d13c3427d772cd8`,
+  authorizes the window agent to record this parent disposition, complete its
+  C104 acceptance from the existing reviewed evidence, and only then dispatch
+  C105. This parent action does not directly accept C104 on the window agent's
+  behalf, assign C105, execute a gate, or modify repository history.
+- **No parent mutation:** only A5/A6/A7 documentation changed; no source,
+  test, build, browser, database, provider, AWS, production, destructive,
+  commit, push, or KI-W7 action was performed by the parent; cost `$0.00`.
