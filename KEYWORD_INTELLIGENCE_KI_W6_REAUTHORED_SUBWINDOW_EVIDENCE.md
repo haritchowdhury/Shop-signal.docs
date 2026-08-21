@@ -1669,3 +1669,193 @@ parent decision requires escalation). Gate evidence V1/V2/V4/V6 remains
 valid; V3/V5 must rerun after the parent decision. External mutations
 beyond the five owned files: none. Cost: `$0.00` (one local gate run; no
 paid provider, AWS, or production action).
+
+---
+
+## `EV-KI-W6-R21` — Parent decision (b) recorded; S1 oracle re-frozen
+
+- **Timestamp:** 2026-08-21T01:50:00+05:30
+- **Actor/role:** `KI-W6-WINDOW-AGENT` (recording parent decision resolving the
+  `EV-KI-W6-R20` blocker)
+- **Parent decision (user, parent authority):** option **(b)** — amend the
+  obsolete-runtime oracle definition with a frozen comment-stripping rule
+  and re-freeze the affected S105 assertions. The A4 `KI-CL-20`-side
+  mirroring of this decision (A4 text, A5 CAS, A6 evidence, A7 changelog)
+  belongs to the parent session; the window agent does not edit A-artifacts
+  and records the decision's window-side mechanical trace here.
+- **Frozen comment-stripping rule (now part of the S1 S105 step 9 oracle):**
+  before `FORBIDDEN_LOCAL_PATH_PATTERNS` / `FORBIDDEN_RUNTIME_HOSTS` are
+  applied to a resolved inventory member's contents, strip comments —
+  `.css`: non-greedy `/* … */` block comments; `.js/.mjs/.ts/.tsx`: the
+  same block comments plus full-line `//` line comments (optional leading
+  whitespace; `^`-anchored per line so protocol separators inside strings
+  are never touched); all other files (including `.json`) are scanned
+  verbatim; member **paths** are matched unstripped. The rule is
+  deterministic, fail-closed toward real code (trailing same-line comments
+  remain scanned), and applies identically to the S105 implementation and
+  the `I101`/`I102` gate rerun.
+- **Rationale preserved for review:** the sole real-tree hit was the
+  provenance *comment* "Ports KeywordSearchVolume/dashboard/index.html…"
+  at `frontend/components/keyword-intelligence/keyword-dashboard.module.css:2`;
+  the shipped module does not wire the obsolete standalone runtime.
+- **Scope of the corrective window `KI-W6-C101` (one file, inside the
+  parent five-file scope):** (A) implement the frozen stripping rule at the
+  `obsoleteExclusion` content checks; (B) fix the already-diagnosed
+  `EV-KI-W6-R20` failure-path diagnostics defect so the `schema-absence`
+  cleanup step reports `ok` when no harness schema was ever created and
+  `failed` only when a created schema survives its drop verification.
+- **S1 amendments applied with this decision:** S105 step 9 oracle text;
+  new check `S105-C12`; `V1-12` row extended to C12. New S1 revision is
+  recorded in S2 state v14.
+- **External mutations/cost:** coordination files only; `$0.00`.
+
+---
+
+## Corrective sub-window readiness certificate — `KI-W6-C101`
+
+```yaml
+certificate: CORRECTIVE-SUBWINDOW-READY
+parent_window_id: KI-W6
+subwindow_id: KI-W6-C101
+type: FILE
+corrects: [EV-KI-W6-R20 blocker (parent decision (b) recorded in EV-KI-W6-R21), EV-KI-W6-R20 secondary failure-path diagnostics defect]
+writable_file: frontend/test/browser/keyword-intelligence-e2e.mjs
+file_operation: MODIFY
+predecessors: [KI-W6-S105]
+starting_file_digest: 25b30bba733e4d77e3912ae1079448065e035e1e9f58b91887d874430595e7b0
+decomposition_revision: 3487d71a761f990adc23e2b0c1221fd33f0dd6c7c943a96fea6452fded6b7533
+authorized_actions:
+  - "insert the frozen helper after the two FORBIDDEN list literals: const stripComments = (filePath, text) => { if (filePath.endsWith(\".css\")) return text.replace(/\\/\\*[\\s\\S]*?\\*\\//g, \"\"); if (/\\.(js|mjs|ts|tsx)$/u.test(filePath)) return text.replace(/\\/\\*[\\s\\S]*?\\*\\//g, \"\").replace(/^[ \\t]*\\/\\/[^\\n]*/gm, \"\"); return text; };"
+  - "inside obsoleteExclusion, replace the two content checks with const content = stripComments(member.path, member.content || \"\"); then member.path.includes(pattern) || content.includes(pattern) and content.includes(host)"
+  - "schema-absence cleanup step: return ok when no harness schema was ever created (harness === null and harnessCloseState.result === null); otherwise keep the existing zero-row absence assertion"
+prohibited_actions: [every other edit, oracle weakening beyond the frozen stripping rule, pattern-list changes, build/browser/database execution during the leaf]
+parent_findings_unresolved: []
+status: READY_FOR_DISPATCH
+```
+
+Dispatch follows immediately (single corrective leaf, window-agent managed).
+
+---
+
+## Corrective sub-window readiness certificates — `KI-W6-C102` and `KI-W6-C103`
+
+```yaml
+certificate: CORRECTIVE-SUBWINDOW-READY
+parent_window_id: KI-W6
+subwindow_id: KI-W6-C102
+type: FILE
+corrects: "V3 run 2 cleanup failure: Prisma raw queries cannot deserialize the information_schema `name`/`sql_identifier` column type on the DIRECT (non-pooler) connection, regardless of row count (empirically reproduced this session: direct zero-row uncast THROWS; direct one-row uncast THROWS; ::text cast OK both) — the accepted isolated-postgres.js helper itself casts every catalog select ::text (current_schema()::text at line 71) for this exact reason"
+writable_file: email_scraper/test/helpers/keyword-intelligence-e2e-harness.js
+file_operation: MODIFY
+starting_file_digest: 93ee3a3b31275a84babe27e3b37519bb4b86e3bd1571485f3bf3486c3b8c5a26
+authorized_actions:
+  - "in close(), replace the absence-query EXECUTION with the ::text-cast wrapper subquery selecting from the frozen SCHEMA_ABSENCE_QUERY constant: const rows = await admin.$queryRawUnsafe(`SELECT schema_name::text AS schema_name FROM (${SCHEMA_ABSENCE_QUERY.replace(/;\\s*$/, \"\")}) kiw6_absence_probe`, schema);"
+  - "the frozen constant literal (S103-C11) and the absenceWitness { query: SCHEMA_ABSENCE_QUERY, rowCount: 0 } contract stay byte-identical; the wrapper selects exactly the frozen query's rows with only the Prisma-safe column cast"
+prohibited_actions: [every other edit, constant changes, witness changes, new raw queries]
+```
+
+```yaml
+certificate: CORRECTIVE-SUBWINDOW-READY
+parent_window_id: KI-W6
+subwindow_id: KI-W6-C103
+type: FILE
+corrects: "V3 run 2 main failure: first-seed Add lost to the React hydration race — the e2e used a fixed 150ms wait instead of the accepted dashboard.mjs pattern, which confirms every Add with a chip-count waitFor (dashboard.mjs:1131-1133: setInputValue -> click Add -> waitFor '1/5')"
+writable_file: frontend/test/browser/keyword-intelligence-e2e.mjs
+file_operation: MODIFY
+starting_file_digest: 7976b705eb44d7e9b75cd8fa5b475e86224e687ecd281ad041194f98ddbe7822
+authorized_actions:
+  - "replace the seed loop's fixed await wait(150) with the accepted per-seed confirmation: await waitFor(cdp, `document.querySelector('#seed-chip-count')?.textContent.includes('${seedIndex + 1}/5')`, `seed chip ${seedIndex + 1}/5`) via for (const [seedIndex, seed] of SEEDS.entries())"
+prohibited_actions: [every other edit, oracle changes, selector changes]
+```
+
+Environmental note recorded with these certificates: the user (parent/requester
+authority) committed the five-file W6 work as frontend `0bb0376` and backend
+`ecc1a71` ("KI-W6"); the pinned V6 baseline commits still resolve and the
+V6-1/V6-2/V6-3 diffs remain exact with the five W6 paths excluded. The
+window agent commits nothing.
+
+---
+
+## `KI-W6-C103` amendment 1 — bounded re-attempt drive mechanism
+
+V3 run 3 (post-C103) failed deterministically at seed 1/5: the per-seed
+waitFor correctly converted the hydration race into a deterministic
+failure. Root cause at component level confirmed: `research-form.tsx` is a
+controlled input (`manualInput` state via `addManualSeeds()`); an
+InputEvent dispatched before React hydration completes never reaches React
+state, so Add is a no-op. `dashboard.mjs` uses the same immediate sequence
+(its R5 pass predates current build state and is not re-executed in W6).
+Authorized amendment (drive mechanism only; no oracle change — the final
+`5/5` waitFor, the exactly-one-create-POST assertion, and all case oracles
+are unchanged): wrap each seed's setInputValue+Add in up to three attempts,
+each confirmed by the short-timeout (1500 ms) chip-count waitFor; throw if
+unconfirmed after the third attempt. Component-level duplicate-seed
+skipping makes a redundant attempt a no-op.
+
+---
+
+## `KI-W6-C103` amendment 2 — controlled-input state settle
+
+The isolated browser probe reproduced the form behavior: the exact native
+setter/InputEvent plus JS click succeeds when a short settle occurs between
+input dispatch and click; the e2e clicked immediately after dispatch. The
+controlled `manualInput` state therefore had not committed before
+`addManualSeeds()` read it. Add exactly `await wait(100);` between
+`setInputValue` and the Add click in the bounded per-seed attempt loop.
+This changes only the browser drive timing; per-seed chip confirmation,
+final 5/5 oracle, one-create-POST oracle, and all coverage/control semantics
+remain unchanged.
+
+---
+
+## Continued V3 attempts after `EV-KI-W6-R21` (records preserved)
+
+These records are append-only continuation evidence. They do not replace
+`EV-KI-W6-R20` or `EV-KI-W6-R21`, and no certificate was emitted.
+
+### Attempt A — anchor behavior reached
+
+- **Command:** from `frontend/`, `ALLOW_DATABASE_TESTS=true
+  KI_W6_SKIP_BUILD=1 node --env-file=../email_scraper/.env
+  test/browser/keyword-intelligence-e2e.mjs`
+- **Outcome:** seed creation passed after the bounded trusted-input drive;
+  browser/auth/startup and isolated-schema cleanup passed; failure was
+  `anchor drain must make one request and store one artifact`.
+- **Diagnostics:** `wallTimeMs=177577`, `casesExecuted=0`,
+  `controlsExecuted=0`, `droppedSchema` was removed successfully,
+  cleanup steps were `browser:ok`, `next-server:ok`, `auth-server:ok`,
+  `backend-server:ok`, `schema-absence:ok`, `temp-root:ok`.
+- **Interpretation:** the anchor provider call was reached; the harness
+  report counted the anchor task artifact together with the required
+  anchor-stage shortlist manifest.
+
+### Attempt B — corrected artifact and queue accounting
+
+- **Changes exercised:** task-result artifact reports exclude aggregate
+  `manifest.json`/`result.json` objects; the overall immutable-put oracle
+  still counts the complete trace and remains `23`; the keyword fault driver
+  prepares initialization before applying duplicate/reorder faults; the
+  expansion report retains the pre-drain initialization sends.
+- **Intermediate outcomes:** anchor artifact assertion passed and the frozen
+  `42` queue-send assertion passed. Two retries independently hit the known
+  isolated-DB Prisma interactive-transaction timeout
+  (`keywordResearch.updateMany`, 5-second timeout); cleanup was successful in
+  both cases. One retry reached publication and failed the next assertion.
+- **Decisive outcome:** `publishedSnapshot.keywordResult` was
+  `{visible:true,rowCount:300,defaultSelectionItemCount:100}` while the frozen
+  S105 oracle requires `rowCount=200`; no certificate was emitted.
+- **Diagnostics:** decisive run `wallTimeMs=153284`,
+  `casesExecuted=0`, `controlsExecuted=0`, cleanup fully successful, and the
+  disposable schema was dropped and absence-verified.
+
+### Current blocker
+
+The production provider formula frozen by S1/A4 is the same formula used by
+the authoritative worker fixtures: overview items use
+`main_intent = index % 3 === 0 ? "transactional" : "commercial"`. It therefore
+does not create informational rows. The production aggregator receives 300
+US anchor metrics, applies the 200-item shortlist only to the subsequent
+market-task fan-out, and the final `computeResearchResult` retains the 300
+anchor-backed rows. The current S105 oracle simultaneously requires 200 final
+rows. This is an authoritative contract/acceptance contradiction outside the
+two-file corrective mechanism; V3 remains blocked pending a parent decision.

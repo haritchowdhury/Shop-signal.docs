@@ -1436,7 +1436,18 @@ items 1–15 verbatim. Frozen recipe with verified anchors:
    and
    `const FORBIDDEN_LOCAL_PATH_PATTERNS = [".py", "sqlite", "KeywordSearchVolume", "data/raw", "data/output", "output.json", "file://"];`
    Provider URLs in backend adapters are not CDN hits. The standalone project
-   is outside the roots and never scanned.
+   is outside the roots and never scanned. **Frozen comment-stripping rule
+   (parent decision (b) recorded in `EV-KI-W6-R21`; applies to this scan
+   only):** before either pattern list is applied to a resolved member's
+   contents, strip comments — `.css` members lose non-greedy `/* … */`
+   block comments; `.js/.mjs/.ts/.tsx` members lose the same block
+   comments plus full-line `//` line comments (optional leading
+   whitespace, line-anchored, so protocol separators inside strings are
+   never touched); every other file (including `.json`) is scanned
+   verbatim; member paths are matched unstripped. The rule is implemented
+   by the single helper
+   `const stripComments = (filePath, text) => …` applied at both content
+   checks inside `obsoleteExclusion` (`S105-C12`).
 10. **Privacy.** Screenshots and review files are forbidden
     (`Page.captureScreenshot` never sent; no `review-evidence` writes).
     Temporary logs live under one `mkdtemp` directory and are deleted only by
@@ -1537,6 +1548,7 @@ items 1–15 verbatim. Frozen recipe with verified anchors:
 | S105-C9 | `grep -cF 'const CLEANUP_ORDER = ["browser", "next-server", "auth-server", "backend-server", "schema-absence", "temp-root"];' frontend/test/browser/keyword-intelligence-e2e.mjs` | exactly `1` |
 | S105-C10 | `grep -cF 'absenceWitness' frontend/test/browser/keyword-intelligence-e2e.mjs` | exactly `1` (the e2e asserts the harness positive absence witness) |
 | S105-C11 | `grep -cF 'await harness.restartBackend();' frontend/test/browser/keyword-intelligence-e2e.mjs` | exactly `2` (restart A and restart B; neither causal point may be omitted or merged) |
+| S105-C12 | `grep -cF 'const stripComments = (filePath, text) =>' frontend/test/browser/keyword-intelligence-e2e.mjs` and `grep -cF 'const content = stripComments(member.path, member.content || "");' frontend/test/browser/keyword-intelligence-e2e.mjs` | exactly `1` each (frozen comment-stripping rule; `EV-KI-W6-R21`) |
 
 `DEFERRED_TO_INTEGRATION`: execution of all 26 cases, 13 controls, digest
 recomputation, certificate emission, schema lifecycle assertions — V3 only.
@@ -1582,7 +1594,7 @@ root; each must produce exactly its expected result:
 | V1-9 | `git -C email_scraper status --porcelain` | exactly two lines: `?? test/fixtures/keyword-intelligence/ki-w6-enforcement-manifest-v1.json` and `?? test/helpers/keyword-intelligence-e2e-harness.js` |
 | V1-10 | `git -C frontend status --porcelain` | exactly three lines: ` M components/keyword-intelligence/research-dashboard.tsx`, ` M test/browser/keyword-intelligence-dashboard.mjs`, `?? test/browser/keyword-intelligence-e2e.mjs` |
 | V1-11 | S103-C1 through S103-C16 exact commands | `1`/`1`/`1`/0/`1`/`1`/`1`/`1`/`1` each/0/`1`/`1`/`1`/`1` each/`1` each/`1` each/`1` per the S103 table |
-| V1-12 | S105-C1 through S105-C11 exact commands | exit 0 / `1` / `1` / `1` each / `1` each / 0 / `1` each / 0 / `1` / `1` / `2` per the S105 table |
+| V1-12 | S105-C1 through S105-C12 exact commands | exit 0 / `1` / `1` / `1` each / `1` each / 0 / `1` each / 0 / `1` / `1` / `2` / `1` each per the S105 table |
 
 Invalidation: any edit to any of the five owned files.
 
