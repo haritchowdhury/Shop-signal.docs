@@ -6445,3 +6445,55 @@ isolated_database_gate: 1/0/0
 provider_or_aws_cost_usd: 0.00
 successor_authority: false
 ```
+
+### `EV-KI-A-109` — KI-W6 downstream diagnostic correction authoring readiness
+
+- **Independent finding:** inspection of `EV-KI-W6-R68`, the browser finally
+  block, helper `close()` and coordinator `claimTask()` confirms only that the
+  first drain remained pending until schema destruction. The post-drop Prisma
+  error cannot establish a row-lock wait. Production timeout/lock changes are
+  therefore rejected pending discriminating evidence.
+- **Locked correction:** `SRC-KI-054`, `DEC-KI-052`, C127/C128 and I116 define
+  one active drain, safe per-message lifecycle, immediate rejection ownership,
+  safe durable/activity diagnostics, bounded settlement before exact-schema
+  destruction, two deterministic source falsifications and one causal rerun.
+- **Scope:** exactly the committed helper SHA
+  `c363fb61ac3ce2bd13a2551e56ba8e1aa8589931870ffb6627037b76ed7411e6`
+  followed by the committed browser SHA
+  `0adfd85433fb8dca6c8f3988443e8b729edb7afca62717b0827b37970785d164`;
+  production remains read-only. Existing 26/13 and final 35/17 case/control
+  memberships and digests are unchanged.
+- **Falsification/readiness:** removing the prescribed rejection observer or
+  ordering schema drop before bounded settlement is explicitly required to
+  fail local enforcement. The causal gate is once-only and escalatable; an
+  observable failure is not retry authority. All six `RW6O-*` authoring boxes
+  are checked, no payload unknown, implementation choice, case/control member,
+  substitute claim, production behavior or requester prerequisite remains.
+
+```yaml
+certificate: AUTHORING-READY
+artifact_paths: {A1: KEYWORD_INTELLIGENCE_PRODUCT_CONTRACT.md, A2: KEYWORD_INTELLIGENCE_DISCOVERY_DOSSIER.md, A3: KEYWORD_INTELLIGENCE_DECISION_LEDGER.md, A4: KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md, A5: ACTIVE_EXECUTION_STATE.md, A6: KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md, A7: KEYWORD_INTELLIGENCE_SPECIFICATION_CHANGELOG.md, A8: KEYWORD_INTELLIGENCE_TRACEABILITY_INDEX.md}
+revisions: {standard: cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb523ede32848, contract: 8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c, decision: bb6a62165581590304b8e58e642f842c2966af0d31947c07c1eaf6ef8cd5eed9, checklist: 5161088fb966cd614211cd07d1ea8a6bb3f37a2056c9d0fff2e606579a24be8a}
+checked_authoring_items: 6
+unchecked_required_items: 0
+unresolved_evidence_references: 0
+unresolved_payload_contracts: 0
+delegated_implementation_decisions: 0
+unowned_source_members: 0
+unowned_plan_members: 0
+unproven_competing_owner_pairs: 0
+anti_vacuity_failures: 0
+mistake_conformance_failures: 0
+planned_coverage_cases: 26
+unmapped_coverage_cases: 0
+duplicate_coverage_case_ids: 0
+critical_invariants_without_negative_control: 0
+test_substitutes_without_fidelity_disposition: 0
+unresolved_accepted_evidence_invalidations: 0
+frozen_gate_ambiguities: 0
+predictable_gates: [one isolated causal browser gate requiring sandbox escalation and TEST_DATABASE_URL]
+requester_actions_before_start: []
+authorized_first_window: KI-W6-C127
+planned_stop: KI-W6 parent review before KI-W7
+audit_evidence: [SRC-KI-054, DEC-KI-052, EV-KI-A-109]
+```

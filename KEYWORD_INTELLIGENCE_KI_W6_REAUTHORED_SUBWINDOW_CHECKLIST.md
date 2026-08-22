@@ -4133,3 +4133,222 @@ an observable assertion, Prisma, cleanup or product failure is not retried.
 - [x] `RW6N-006` Reuse/invalidation boundaries are exact. Evidence: CV70/CV71.
 - [x] `RW6N-007` Expensive gates, recovery and stop are frozen. Evidence: I114.
 - [x] `RW6N-008` The window agent owns reconciliation/review/assessment only; no leaf or KI-W7. Evidence: A5 state 169.
+
+### Thirteenth corrective sequence — parent-direct `KI-W6-C125`/`C126`, then window-agent `KI-W6-I115`
+
+This append-only sequence supersedes only failed I114 CV71. The requester
+directed the parent to implement the diagnosed correction and hand the
+remaining W6 assessment back to the window agent.
+
+#### Parent-direct `KI-W6-C125` — one-file repository correction
+
+- [x] `C125-P1` Verify `src/prisma-run-repository.js` starts at SHA-256
+  `d4995ef9e177dbf9f0fad5c199b9c8f5e63fd37122919ba256aa1282f842db27`.
+- [x] `C125-T1` In `saveQueryValidation` only, enforce an array of at most 100
+  unique IDs; retain the live lease-fenced Run stage update; select the scoped
+  schema; replace the per-row loop with one typed `jsonb_to_recordset` update;
+  preserve nullable/omitted JSON semantics; set `updatedAt=now`; require exact
+  returned-ID reconciliation; and pass exactly
+  `{maxWait:5_000,timeout:30_000}` to this transaction only.
+- [x] `C125-V1` `node --check src/prisma-run-repository.js` and a source oracle
+  prove one bulk update, no per-row database loop, exact profile and exact
+  reconciliation. Negative controls removing the returned-ID check and
+  restoring a per-row update must falsify the oracle.
+- [x] `C125-H1` No schema/package/provider/AWS/frontend/commit/KI-W7 action.
+
+#### Parent-direct `KI-W6-C126` — one-file focused regression
+
+- [x] `C126-P1` Verify `test/prisma-run-repository.integration.test.js` starts
+  at SHA-256
+  `f19d7c86127846b8f38c9d02f4eae7b6498357786bfec7afb8186b3117e08eb0`.
+- [x] `C126-T1` Add one focused isolated-schema scenario proving 100 unique
+  query rows persist with exact values; an unreconciled ID rolls back all row
+  mutations and the Run stage; a lost lease mutates nothing; and cleanup drops
+  and verifies absence of the disposable schema. Add a transaction-spy oracle
+  proving the exact 30-second profile and one bulk mutation.
+- [x] `C126-V1` Run syntax, the non-DB profile oracle, then the single named DB
+  scenario once with the isolated test URL. Require zero skip/failure and
+  schema absence. A sequential/default-timeout source substitute must fail the
+  operation/profile oracle without depending on host timing.
+- [x] `C126-H1` No full DB suite, provider/AWS/production/commit/KI-W7 action.
+
+#### Window-agent assessment `KI-W6-I115`
+
+The window agent reconciles and independently reviews C125/C126, then runs the
+focused non-DB and single DB checks once, followed by one fresh causal browser
+gate. If it passes, continue the previously frozen CV72–CV75/CH14 closure. A
+proven environment invalidation permits the standards-defined identical
+elevated recovery; an observable product/test failure is diagnosed and handled
+under the existing correction rule. No leaf is required for the already
+parent-applied files, no commit is permitted, and KI-W7 remains prohibited.
+
+- [x] `KI-W6-CV76` Independent two-file diff/source/profile/privacy review. Evidence: `EV-KI-W6-R67`.
+- [x] `KI-W6-CV77` Focused non-DB profile oracle and one isolated-schema 100-row
+  regression, with zero skips and verified schema absence. Evidence: `EV-KI-W6-R67`.
+- [ ] `KI-W6-CV78` One fresh unchanged causal browser command; require all
+  existing 26 cases/13 controls, 100 validations, 100 discovery tasks, 1,000
+  domains/leads, cleanup and schema absence.
+- [ ] `KI-W6-CV79` On CV78 success, resume CV72–CV75 exactly and append the
+  consolidated `READY_FOR_PARENT_REVIEW` handoff.
+
+##### Thirteenth-correction readiness
+
+- [x] `RW6O-001` Exact failure location and causal boundary are observed. Evidence: `SRC-KI-053`.
+- [x] `RW6O-002` Transaction, batching, reconciliation and timeout choices are parent-locked. Evidence: `DEC-KI-051`.
+- [x] `RW6O-003` Production and test ownership are two exact single-file units. Evidence: C125/C126.
+- [x] `RW6O-004` Rollback, lost-fence, operation-count and timing-independent controls are mandatory. Evidence: C126.
+- [x] `RW6O-005` Provider economics and established downstream behavior are unchanged. Evidence: `DEC-KI-051`.
+- [x] `RW6O-006` Stateful reruns and stop boundaries are exact. Evidence: I115.
+- [x] `RW6O-007` Parent implements; window agent independently reviews and assesses. Evidence: requester instruction/A5.
+- [x] `RW6O-008` KI-W7 remains prohibited. Evidence: A5.
+## KI-W6 fourteenth corrective sequence — observable and cleanup-safe downstream drain
+
+```yaml
+correction_sequence: [KI-W6-C127, KI-W6-C128, KI-W6-I116]
+trigger: [SRC-KI-054, EV-KI-W6-R68]
+decision: DEC-KI-052
+objective: classify the first downstream stall without changing production behavior and make failure cleanup deterministic
+assigned_agent_policy: window agent launches and independently reviews two sequential single-file leaves, then personally executes I116
+authorized_write_scope:
+  - email_scraper/test/helpers/keyword-intelligence-e2e-harness.js (C127 only)
+  - frontend/test/browser/keyword-intelligence-e2e.mjs (C128 only)
+  - KI-W6 S1/S2/S3 coordination artifacts
+read_only_scope: [A1-A8, A5, EV-KI-W6-R68, accepted C119-C126 evidence, coordinator repository and discovery/domain services]
+prohibited_actions: [production source edit, schema/migration/package/config edit, provider/AWS/production action, raw SQL/query/connection/secret logging, commit/push, KI-W7]
+successor: STOP_FOR_PARENT_REVIEW
+may_start_successor: false
+```
+
+### `KI-W6-C127` — single-file downstream lifecycle and cleanup seam
+
+1. **Trace/owner:** `REQ-KI-010`–`015`, `INV-KI-004/005/010/015`,
+   `SRC-KI-054`, `DEC-KI-052`; writable file only
+   `email_scraper/test/helpers/keyword-intelligence-e2e-harness.js`, starting
+   SHA-256 `c363fb61ac3ce2bd13a2551e56ba8e1aa8589931870ffb6627037b76ed7411e6`.
+2. **Interface:** preserve every existing export and add only
+   `readDownstreamDiagnostics`. `drainDownstream()` still returns a promise of
+   the existing report on success and rejects with the original error on
+   failure; a second concurrent call throws `HarnessPreflightError` before work.
+3. **Algorithm:** wrap the existing drain body without changing queue choice,
+   limits, processors, fault positions, counts or returned report. Track one
+   active drain and active message. Emit the three DEC-KI-052 lifecycle events.
+   Attach a rejection observer synchronously when the active promise is made.
+4. **Diagnostics:** implement exactly the DEC-KI-052 safe projection. Direct
+   durable reads use the already validated generated schema name and the admin
+   connection. Activity rows expose only `state`, `wait_event_type`, and
+   `wait_event`; they exclude the admin probe itself and never include query,
+   PID, URL or connection fields. Sort all returned classifications
+   lexicographically by their three nullable strings. Each failed diagnostic
+   member is exactly `"unavailable"`.
+5. **Cleanup order:** `close()` performs the bounded 5-second pre-drop outcome
+   wait/diagnostic capture before `DROP SCHEMA`; it then performs the existing
+   exact drop and absence proof, performs the bounded 5-second post-drop
+   observation, and returns `downstreamCleanup` with the exact three-state
+   settlement discriminator. It attaches no timer that can retain the process.
+6. **Preserve/forbid:** preserve auth, backend, scheduler, provider substitutes,
+   queue contents, database semantics and cleanup target. No production edit,
+   retry, cancellation, timeout-policy or raw diagnostic payload.
+7. **Local proof:** `node --check
+   test/helpers/keyword-intelligence-e2e-harness.js`; `git diff --check --
+   test/helpers/keyword-intelligence-e2e-harness.js`; deterministic source
+   assertions must pass on the final file and fail after either removing the
+   immediate rejection observer or moving `DROP SCHEMA` before the pre-drop
+   settlement call.
+
+```yaml
+subwindow_id: KI-W6-C127
+type: CORRECTION
+assigned_agent: UNASSIGNED
+predecessors: [KI-W6-I115 CV76/CV77 pass, CV78 diagnostic fail]
+writable_file: email_scraper/test/helpers/keyword-intelligence-e2e-harness.js
+starting_file_digest: c363fb61ac3ce2bd13a2551e56ba8e1aa8589931870ffb6627037b76ed7411e6
+may_start_successor: false
+```
+
+- [x] `C127-P1` Verify assignment, starting digest, predecessor and one-file scope. Evidence: starting SHA-256 `c363fb61…` verified against working tree AND `git show HEAD:` bytes; predecessors I115 CV76/CV77 pass + CV78 diagnostic fail confirmed in S3 R67/R68; `git status --porcelain` shows exactly one modified file (the leaf).
+- [x] `C127-T1` Apply all seven C127 fields exactly. Evidence: final SHA-256 `974376b6…` (+140/−7, one file); window-agent line review of the full diff confirmed: all existing exports preserved + only `readDownstreamDiagnostics` added; concurrent-drain `HarnessPreflightError` before work; drain body moved to `runDownstreamDrain` with queue choice/3000-2000 limits/processors/fault positions/counts/report unchanged and original error rethrown; `message-start`/`message-complete`/`message-failed` events carry queueClass/type/deliveryId + sanitized name/code/repo-relative frame (same regex class as backend-log projection); synchronous `drained.catch(()=>{})` observer at promise creation; diagnostics freeze `{active,recentTrace(20),durable,activity}` with per-member `"unavailable"`, admin connection, validated schema name, two grouped count queries, `pg_stat_activity` projecting ONLY state/wait_event_type/wait_event with `pid <> pg_backend_pid()` internal exclusion and null-first lexicographic sort; close() = stops → bounded 5s pre-drop settle + one-shot diagnostics → exact DROP + absence proof → bounded 5s post-drop observation → `downstreamCleanup` `{drainStarted,settlement[,diagnostics]}` with exactly `settled-before-drop`/`settled-after-drop`/`still-pending`; unref'd always-cleared timer; `droppedSchema`/`absenceWitness`/`closeMemo` preserved.
+- [x] `C127-V1` Run the three local proofs and both falsification controls. Evidence: `node --check` OK; `git diff --check` clean; leaf script `/tmp/opencode/kiw6-c127-proof.mjs` 7/7 PASS + control A (observer removed) FAIL(i) + control B (drop moved first) FAIL(ii); window agent's INDEPENDENT script `/tmp/opencode/kiw6-c127-window-review.mjs` (separate authorship) 7/7 PASS on the real file and reproduced both controls failing as required on fresh /tmp copies; real file untouched by controls.
+- [x] `C127-H1` Return to the window agent and stop for independent review. Evidence: leaf reported zero file-side deviations; window agent independently verified digests, diff, proofs and controls; C127 ACCEPTED (EV-KI-W6-R69).
+
+### `KI-W6-C128` — single-file causal wait and failure-safe promise ownership
+
+1. **Trace/owner:** same requirement/decision set; writable file only
+   `frontend/test/browser/keyword-intelligence-e2e.mjs`, starting SHA-256
+   `0adfd85433fb8dca6c8f3988443e8b729edb7afca62717b0827b37970785d164`.
+2. **Dependency:** accepted C127 interface. No fallback when the seam is absent.
+3. **Promise ownership:** declare the downstream outcome holder before the main
+   try. At the existing call site, synchronously map the drain promise to
+   `{outcome:"fulfilled",value}` / `{outcome:"rejected",error}` and retain it
+   through finally. Do not start a second drain.
+4. **Wait:** replace only `waitForTrace(..."first domain-check emission"...)`
+   with the DEC-KI-052 three-outcome loop and the same 120000 ms deadline. A
+   rejection fails immediately with safe name/code/frame; a deadline captures
+   and reports `readDownstreamDiagnostics()` once. Do not change the domain
+   event predicate, later injections, counts, cases, controls or certificates.
+5. **Success:** after the fault injections, require the retained outcome to be
+   fulfilled before using its value as the existing downstream report.
+6. **Finally:** before `harness.close`, make the retained outcome observable to
+   cleanup; copy the helper's returned `downstreamCleanup` safe projection into
+   `KI_W6_DIAGNOSTICS`. Never serialize an Error, SQL, query, PID, connection,
+   URL, token, cookie, keyword or payload.
+7. **Local proof:** `node --check test/browser/keyword-intelligence-e2e.mjs`;
+   `git diff --check -- test/browser/keyword-intelligence-e2e.mjs`; exact-source
+   assertions verify immediate outcome mapping, three-outcome wait, diagnostic
+   capture and cleanup projection while preserving all 26 case IDs, 13 control
+   IDs and their digests.
+
+```yaml
+subwindow_id: KI-W6-C128
+type: CORRECTION
+assigned_agent: UNASSIGNED
+predecessors: [KI-W6-C127 accepted]
+writable_file: frontend/test/browser/keyword-intelligence-e2e.mjs
+starting_file_digest: 0adfd85433fb8dca6c8f3988443e8b729edb7afca62717b0827b37970785d164
+may_start_successor: false
+```
+
+- [x] `C128-P1` Verify accepted C127, starting digest and one-file scope. Evidence: C127 ACCEPTED (EV-KI-W6-R69, final `974376b6…`); starting SHA-256 `0adfd854…` verified working tree AND `git show HEAD:`; frontend `git status --porcelain` shows exactly one modified file.
+- [x] `C128-T1` Apply all seven C128 fields exactly. Evidence: final SHA-256 `1e7b0c10…` (+50/−5, one file); window-agent line review confirmed: holder `downstreamOutcome` + `safeDownstreamErrorProjection` (identical regex guards to C127) declared before the main try; synchronous `.then` mapping to `{outcome:"fulfilled",value}`/`{outcome:"rejected",error}` at the single `drainDownstream()` call (error object retained in memory only); DEC-KI-052 three-outcome loop replaces ONLY the legacy wait with verbatim domain predicate, rejected-outcome throw, `message-failed` throw (event's sanitized fields), 120000 ms deadline → exactly one `readDownstreamDiagnostics()` serialized safe projection, 50 ms poll; success path bounded-settle then requires fulfilled and reuses the retained value with 100/1000/1000 asserts byte-identical; finally records plain-string `downstreamOutcome` before the CLEANUP_ORDER loop and copies `downstreamCleanup` after it; no Error/SQL/PID/connection/URL/token/cookie/keyword/payload serialization; readiness assert + both domain-check fault injections + cases/controls/certificates untouched.
+- [x] `C128-V1` Run the local proofs and prove registry/digest preservation. Evidence: `node --check` OK; `git diff --check` clean; leaf script `/tmp/opencode/ki-w6-c128-proof.mjs` 14/14 PASS + control A (mapping deleted) fails (i) + control B (double capture) fails (iii); window agent independent checks: 26 case + 13 control ID sets identical to HEAD, all digest/certificate/manifest lines identical, exactly one `readDownstreamDiagnostics()` call site, synchronous mapping verified, legacy label absent; real file untouched by controls.
+- [x] `C128-H1` Return to the window agent and stop for independent review. Evidence: leaf reported zero deviations; window agent independently verified digests, diff, proofs, controls and registry preservation; C128 ACCEPTED (EV-KI-W6-R70).
+
+### `KI-W6-I116` — window-agent integration assessment
+
+`I116` has zero implementation-write authority. After independently accepting
+C127 then C128, run in order:
+
+- [x] `CV80` Re-run both syntax/diff/source-falsification proofs; verify the
+  combined changed set is exactly the two planned files and no production file
+  differs from the committed C125/C126 baseline. Evidence: both files pass `node --check`, `git diff --check`, leaf assertion scripts AND the window agent's independently authored assertion scripts (C127 7/7, C128 14/14 + window-agent checks); `git status --porcelain` in both repos shows exactly `test/helpers/keyword-intelligence-e2e-harness.js` (`974376b6…`) and `test/browser/keyword-intelligence-e2e.mjs` (`1e7b0c10…`); `git diff --name-only HEAD` confirms no production file differs from the committed C125/C126 baseline (`934fbc9`/`5322982`). (EV-KI-W6-R71)
+- [ ] `CV81` From `frontend/`, run exactly once with authorized sandbox
+  escalation: `ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node
+  test/browser/keyword-intelligence-e2e.mjs`. A pass requires the existing
+  26/13 certificate, 100 validators, 100 discovery tasks, 1,000 stable domains
+  and cleanup/absence. A failure stops with every DEC-KI-052 diagnostic member;
+  it grants no retry or production edit. Evidence: ___
+- [ ] `CV82` Only after CV81 passes, run the previously unexecuted CV79 and
+  resume CV72–CV75/CH14 exactly as frozen; reuse a prior passing gate only when
+  its complete input hash set is byte-identical. Evidence: ___
+- [ ] `CV83` Recompute required=registered=executed=activated equality, zero
+  skips/duplicates/unexpected members, browser 26/13 and final 35/17 digests;
+  verify privacy, scope, clean nested worktrees, zero provider/AWS cost and zero
+  residual `kiw6_` schemas. Evidence: ___
+- [ ] `I116-H1` Append one consolidated handoff, CAS A5 to
+  `READY_FOR_PARENT_REVIEW`, and stop before KI-W7. Evidence: ___
+
+### Fourteenth-correction readiness
+
+- [x] `RW6O-001` Root cause is classified only to the evidence boundary; no
+  production mitigation is guessed. Evidence: `SRC-KI-054`, `DEC-KI-052`.
+- [x] `RW6O-002` Both implementation tasks are single-file, sequential and
+  mechanically complete. Evidence: C127/C128 blocks above.
+- [x] `RW6O-003` Promise ownership, failure, diagnostics, cleanup ordering,
+  privacy and timeout bounds are exact. Evidence: `DEC-KI-052`.
+- [x] `RW6O-004` Existing behavioral registrations, controls and digests are
+  unchanged; the correction prevents vacuous teardown evidence. Evidence:
+  `DEC-KI-052`, I116 CV81/CV83.
+- [x] `RW6O-005` Stateful execution is once-only, escalatable, and a real
+  observable failure cannot be relabelled as environment invalidation.
+  Evidence: I116 CV81; parent standard E8/E8.1.
+- [x] `RW6O-006` Authority is bounded to KI-W6 and stops before KI-W7.
+  Evidence: window header and A5 assignment.

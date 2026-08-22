@@ -4470,3 +4470,306 @@ cost_usd: 0.00
 next_action: PARENT_DECISION_REQUIRED
 status: PARENT_BLOCKED
 ```
+
+---
+
+## `EV-KI-W6-R67` — `KI-W6-I115` reconciliation of C125/C126 + independent review + focused regressions (CV76/CV77 PASS)
+
+- **Authority verified:** A5 state 176 pins all match recomputed hashes
+  (standards unchanged; decision `4498f18a…`; checklist `fc48c365…`; S1 base
+  `e9ef07a2…`). Assignment `ASG-KI-W6-WA-10`. Thirteenth section (67 lines)
+  transcribed byte-exact into S1 (empty diff certified); S2 → I115
+  IN_PROGRESS, blocker cleared.
+- **Committed baselines:** both worktrees clean. email_scraper `934fbc9`
+  (db-fix) = `src/prisma-run-repository.js` + harness + integration test;
+  frontend `5322982` (db fix) = browser test only. Beyond C125/C126 the
+  commits carry the committed C124 bytes plus parent observability additions
+  (harness: fixture google secrets for the research pipeline, sanitized
+  `backend-log` recording for `queue_drain_failed`/`run_failed`/lease/confirm
+  events with regex-validated name/code/frame only; browser: `/start` 202
+  asserted at BOTH backend trace and browser netlog, backend-log failure
+  detection in both wait loops, durable-state stalled diagnostics on timeout,
+  discovery floor moved to the confirm floor).
+- **CV76.1 baselines:** `git show 70af619:src/prisma-run-repository.js` =
+  `d4995ef9…` (C125-P1 pin ✓); `git show
+  70af619:test/prisma-run-repository.integration.test.js` = `f19d7c86…`
+  (C126-P1 pin ✓). Current: `54d5f422…` / `7a64121a…`. `node --check` passes
+  both.
+- **CV76.2 C125 source review (every C125-T1 item):** bounded-100 +
+  unique-ID enforcement (`requireBoundedBatch`/`requireUniqueBatchKeys`,
+  pre-existing helpers at lines 223/229); live lease fence retained
+  (`activeLeaseWhere` + `requireLeaseMutation`); `selectBulkSchema` (line 286)
+  scopes the raw statement; per-row loop replaced by ONE typed
+  `jsonb_to_recordset` UPDATE with `writeProbeSummary`/`writeProbeResults`
+  CASE flags preserving omitted-JSON semantics; `updatedAt = ${now}`; exact
+  returned-ID reconciliation (count + uniqueness + subset →
+  `PIPELINE_INPUT_CONFLICT`); profile `{maxWait:5_000,timeout:30_000}` on
+  this transaction only (the only other occurrence, line 2838 AWS finalize,
+  pre-existed at baseline line 2801 — untouched by C125).
+- **CV76.3 negative controls (independently executed):** the committed
+  oracle's built-in controls (returned-ID check → `false`; profile → `{}`
+  → `false`) passed inside the focused run; my scratch per-row restoration
+  (re-inserting `for (const row of rows)` + `transaction.runQuery.updateMany`
+  into `saveQueryValidation`) is REJECTED by the structure oracle
+  (`oracle accepts per-row-restored source: false`). Scratch copy only.
+- **CV76.4 privacy:** harness logger emits only regex-validated
+  errorName/errorCode/errorFrame (`[A-Za-z…]{0,79}` / `[A-Z…]{0,31}` /
+  src-or-test frame path) — no raw bodies, messages, credentials; new
+  PIPELINE_SECRETS members are fixture literals (`kiw6-google-api-key`);
+  C125 passes the batch as a bound parameter (never logged); C126 uses
+  synthetic fixtures; browser diagnostics dump run state/stage/confirmed
+  flag only.
+- **CV77.1 non-DB oracle:** `node --test --test-name-pattern="query
+  validation bulk path" test/prisma-run-repository.integration.test.js` →
+  1 test / 1 pass / 0 fail / 0 skipped (source-structure + spy: exact
+  `{maxWait:5000,timeout:30000}` deepEqual, exactly ONE `UPDATE "RunQuery"`
+  statement).
+- **CV77.2 isolated DB scenario:** `ALLOW_DATABASE_TESTS=true node -r
+  dotenv/config --test --test-concurrency=1 --test-name-pattern="query
+  validation persists 100 rows atomically"
+  test/prisma-run-repository.integration.test.js` → 1 test / 1 pass / 0
+  fail / 0 skipped (22.5 s): 100 rows persisted with exact values including
+  omitted-JSON retention (`probeSummary {retained:true}` for sequence 0),
+  unreconciled ID rolls back ALL row mutations and the Run stage
+  (`PIPELINE_INPUT_CONFLICT`), stale lease mutates nothing
+  (`RunLeaseLostError`), disposable schema dropped and absence verified
+  in-test.
+- **Disposition:** CV76 PASS, CV77 PASS.
+
+---
+
+## `EV-KI-W6-R68` — `KI-W6-I115` CV78: confirm/dispatch fully repaired; first claimTask hang in downstream drain (PARENT_BLOCKED)
+
+- **Command (from `frontend/`):** `ALLOW_DATABASE_TESTS=true
+  KI_W6_SKIP_BUILD=1 node test/browser/keyword-intelligence-e2e.mjs` → exit 1,
+  `ok:false`, wallTime 419183 ms (longest yet), peakChildRssKb chrome 277876 /
+  next 210936 (new maxima), consoleErrors 2, pageExceptions 0,
+  networkRequests 219, cleanupStepsDone all ok (droppedSchema
+  `kiw6_mt4elq868b0af09fe237b18f`, schema-absence verified), host load 7.53 at
+  diagnosis.
+- **Substantial repair PROVEN before the failure (R65/R66 blockers resolved):**
+  the selection-advance phase passed; `/start` returned 202 at BOTH the backend
+  trace and the browser netlog (new assertions passed); the C124 `2/1/1/0`
+  witness passed; all 100 production validator calls completed and the run
+  reached terminal confirmation (`queriesConfirmedAt` non-null — W6-FLOW-10),
+  which is the FIRST completed in-flow exercise of C125's one-statement
+  `jsonb_to_recordset` bulk write with the 30-second profile; all 100 discovery
+  deliveries dispatched and 100 durable discovery tasks registered
+  (W6-FLOW-11); the duplicate/reorder discovery fault injections ran. The
+  parent's PIPELINE_SECRETS google fixture additions demonstrably unblocked the
+  R66 zero-validation failure.
+- **Observable failure:** `Timed out waiting for trace condition: first
+  domain-check emission` (browser test line 1238, 120 s budget) — after
+  `const downstreamPromise = harness.drainDownstream();` (line 1234,
+  fire-and-forget), ZERO domain-kind SQS events appeared. During the ENTIRE
+  wait no assertion fired and no `backend-log` event was recorded (the new
+  backend-log detection covers only the confirm/dispatch loops, not this
+  wait).
+- **Secondary teardown crash (mechanism, not cause):** after the timeout, all
+  cleanup steps completed, THEN the process crashed with
+  `PrismaClientUnknownRequestError: Response from the Engine was empty` from
+  `drainDownstream` (harness line 746 `await processDiscoveryMessage`) →
+  `claimTask` `$transaction` (`pipeline-coordinator-repository.js:224`) →
+  `lockedTask` `$queryRaw SELECT … FOR UPDATE` (line 69). The rejection
+  surfacing only at teardown proves the raw query HUNG through the 120 s wait
+  and failed when the schema drop / engine shutdown aborted it — the crash is
+  a cleanup race (the `downstreamPromise` is never settled/awaited before the
+  schema drop), masking the in-flight state.
+- **Diagnosis boundary:** the hang sits in the FIRST discovery message's
+  coordinator `claimTask` (`selectSchema` → `lockedTask` FOR UPDATE →
+  `lockedStage` → `lockedRun`) — code unchanged by every authorized delta
+  (C124 witness, C125 `saveQueryValidation` — which completed successfully
+  MINUTES earlier in this same run, C126 test-only, harness secrets/logger,
+  browser observability). The identical drain path fully PASSED in R62
+  (reached FLOW-13). Sequential drain ⇒ no self-contention; no concurrent
+  coordinator writer exists at that point in the flow. No prior occurrence of
+  `Response from the Engine was empty` exists anywhere in the evidence corpus.
+  No trace-tail/stalled-snapshot diagnostic exists for this wait (the
+  observability the parent added stops at the dispatch loop), so the
+  discriminating runtime evidence (how far the drain got, whether the query
+  reached the engine, lock waits) was not captured.
+- **Disposition:** a Prisma-level failure with an unobservable middle. The
+  frozen rule (I115 preamble; prior gates) is explicit: an observable
+  assertion/Prisma/cleanup failure is NOT retried; the one identical recovery
+  requires PROVEN environment invalidation, which cannot be established here
+  (no fixed budget exceeded, no channel proof, first occurrence, and a
+  plausible deterministic lock/driver cause cannot be excluded). No fix is
+  writable inside I115 scope (prohibited: harness/browser/source edits).
+  `PARENT_BLOCKED`; CV79 not run (stop-on-failure).
+
+```yaml
+certificate: INTEGRATION-ASSESSMENT-PARENT-BLOCKED
+parent_window_id: KI-W6
+integration_assessment_id: KI-W6-I115
+correction_leaves: [KI-W6-C125 parent-direct ACCEPTED via independent review (54d5f422…; CV76), KI-W6-C126 parent-direct ACCEPTED via independent review (7a64121a…; CV76/CV77)]
+gates_passed: [CV76, CV77, CV78-partial: start-202/202 + 2/1/1/0 witness + 100 validations + C125 bulk-write in-flow success + terminal confirmation + 100 dispatches + 100 durable discovery tasks + duplicate/reorder discovery fault points]
+gates_failed: [CV78 — first domain-check emission: downstream drain claimTask hang >120s with zero domain events; PrismaClientUnknownRequestError (Response from the Engine was empty) at teardown]
+gates_not_run: [CV79, and resumed CV72–CV75 closure]
+root_cause_files: [src/aws-pipeline/repositories/pipeline-coordinator-repository.js:69/224 (lockedTask raw FOR UPDATE, no lock/statement timeout — read-only), test/helpers/keyword-intelligence-e2e-harness.js:746 (drainDownstream; promise unsettled before schema drop), frontend/test/browser/keyword-intelligence-e2e.mjs:1234-1238 (domain wait lacks backend-log detection, stalled-snapshot and trace-tail diagnostics)]
+governing_parent_decision: DEC-KI-051 (its observability additions end at the dispatch loop; the downstream drain wait remains blind)
+expanded_parent_scope_required: true
+cleanup_verified: true (all steps ok; post-cleanup crash is the hung drain rejecting at teardown)
+external_mutations: [isolated disposable test schema only, dropped and verified absent]
+cost_usd: 0.00
+next_action: PARENT_DECISION_REQUIRED
+status: PARENT_BLOCKED
+```
+
+---
+
+## `EV-KI-W6-R69` — `KI-W6-C127` delegated leaf implemented and independently ACCEPTED
+
+- **Authority:** A5 state 177 / `ASG-KI-W6-WA-11`; fourteenth correction transcribed
+  byte-exact into S1 (checklist lines 7454–7604; S1 `92852e81…` → `178a813f…`
+  → post-C127-boxes); DEC-KI-052 governing decision verified in the ledger
+  (`bb6a6216…`).
+- **Leaf:** single-file `email_scraper/test/helpers/keyword-intelligence-e2e-harness.js`,
+  starting SHA-256 `c363fb61…` (verified working tree AND `git show HEAD:`),
+  final SHA-256 `974376b62054db589d3847950abe95a6be39939b04d8ca953f30eeebb641791f`
+  (+140/−7, one file; no other file touched).
+- **Independent review (window agent, not leaf-reported):** full `git diff`
+  inspected line-by-line against all seven C127 fields — interface preserved +
+  exactly one new export `readDownstreamDiagnostics`; concurrent-drain
+  `HarnessPreflightError` before work with settlement auto-release (sequential
+  drains still possible); drain algorithm/limits/processors/fault
+  positions/counts/report unchanged, original error rethrown; three DEC-KI-052
+  lifecycle events (`downstream-message` message-start/complete/failed) with
+  queueClass, type discriminator, monotonic deliveryId, and the same sanitized
+  name/code/repository-relative-frame projection as the backend-log events;
+  synchronous rejection observer (`drained.catch(() => {})`) at promise
+  creation; diagnostics = frozen `{active, recentTrace(≤20), durable, activity}`
+  with per-member `"unavailable"` fallback (others never suppressed),
+  administration connection + validated generated schema, grouped stage/task
+  counts, `pg_stat_activity` exposing ONLY state/wait_event_type/wait_event
+  (own probe excluded internally via `pid <> pg_backend_pid()`, never returned),
+  null-first lexicographic three-key sort, never throws; `close()` reordered
+  stops → bounded 5 s pre-drop settle + one-shot diagnostics → unchanged exact
+  `DROP SCHEMA` + absence proof → bounded 5 s post-drop observation → frozen
+  `downstreamCleanup` with exactly `settled-before-drop`/`settled-after-drop`/
+  `still-pending` (+ diagnostics only when captured at the pre-drop deadline);
+  `settleWithin` timer unref'd and cleared on both settle paths (cannot retain
+  the process); `droppedSchema`/`absenceWitness`/`closeMemo` semantics
+  preserved; no retry/cancellation/timeout-policy/raw payload anywhere.
+- **Proofs:** `node --check` OK; `git diff --check` clean. Leaf assertions
+  (`/tmp/opencode/kiw6-c127-proof.mjs`) 7/7 PASS. Window agent's separately
+  authored assertions (`/tmp/opencode/kiw6-c127-window-review.mjs`) 7/7 PASS
+  (one reviewer-side regex bug against escaped `\"` quote literals was fixed in
+  the reviewer script only; the file was correct). Falsification controls
+  reproduced by BOTH scripts on fresh /tmp copies: removing the immediate
+  rejection observer fails only assertion (i); moving `DROP SCHEMA` before the
+  pre-drop settlement call fails only assertion (ii); real file untouched.
+- **Status:** C127 ACCEPTED. C128 next; I116 CV80–CV83 pending.
+
+---
+
+## `EV-KI-W6-R70` — `KI-W6-C128` delegated leaf implemented and independently ACCEPTED
+
+- **Leaf:** single-file `frontend/test/browser/keyword-intelligence-e2e.mjs`, starting
+  SHA-256 `0adfd854…` (verified working tree AND `git show HEAD:`), final SHA-256
+  `1e7b0c105af93988b959eb5c614b0e436a72e3789ee5b1d71186a487cb117268`
+  (+50/−5, one file; harness untouched).
+- **Independent review (window agent):** full diff inspected — holder
+  `downstreamOutcome` + local `safeDownstreamErrorProjection` (regex guards
+  identical to C127's) declared before the main try; synchronous outcome
+  mapping at the single drain call (no await between call and `.then`);
+  three-outcome DEC-KI-052 loop with verbatim domain predicate, immediate
+  rejected-outcome and `message-failed` failures (sanitized name/code/frame
+  only), unchanged 120000 ms deadline with EXACTLY ONE
+  `readDownstreamDiagnostics()` capture serialized into the failure message;
+  success path performs the bounded settle wait, requires `fulfilled`, and
+  reuses the retained value with the 100/1000/1000 asserts and all downstream
+  code byte-identical; finally records the plain-string outcome before the
+  cleanup loop and copies `downstreamCleanup` after it. No Error object, SQL,
+  query text, PID, connection metadata, URL, token, cookie, keyword or payload
+  is serialized anywhere in the new code.
+- **Proofs:** `node --check` OK; `git diff --check` clean; leaf assertions
+  (`/tmp/opencode/ki-w6-c128-proof.mjs`) 14/14 PASS with both falsification
+  controls failing exactly their targeted assertions on fresh /tmp copies;
+  window agent independently confirmed 26 case IDs + 13 control IDs identical
+  to HEAD, all certificate/registry/digest/manifest lines identical, single
+  diagnostics call site, and legacy wait label removed.
+- **Status:** C128 ACCEPTED. I116 CV80–CV83 begin next (window agent, zero
+  implementation-write authority).
+
+---
+
+## `EV-KI-W6-R71` — `KI-W6-I116`: CV80 PASS; CV81 fail (504) → ONE identical E8.1 recovery → downstream deadline fail with COMPLETE DEC-KI-052 diagnostics (PARENT_BLOCKED)
+
+- **CV80 PASS:** both files re-passed every proof (syntax, diff-check, leaf +
+  window-agent independent assertions, both falsification controls per file);
+  combined changed set is exactly the two planned files; `git diff --name-only
+  HEAD` proves no production file differs from the committed C125/C126 baseline
+  (`934fbc9` backend / `5322982` frontend).
+- **CV81 first execution (fail, environmental):** exit 1, `ok:false`,
+  wallTime 238431 ms, `mainError "Timed out waiting for stale save conflict
+  banner"` — the stale-revision selection PUT returned **504** (Next→backend
+  proxy timeout; the identical first PUT had returned 200 moments earlier);
+  `downstreamOutcome:"not-started"`, `downstreamCleanup:{drainStarted:false,
+  settlement:"settled-before-drop"}` (C127 discriminator proven on a
+  no-drain run), all cleanup steps ok, schema `kiw6_mt4fz…` dropped +
+  absence verified. The failing phase is untouched by C127/C128 (proven: the
+  drain seam was never reached) and passed in R62/R64/R66/R68; host evidence:
+  8-core host at load 5.64–8.13 saturated by non-test processes (VS Code
+  renderer ~50% CPU + 1.1 GB, user Chrome ~21%, opencode ~27% + 1.7 GB).
+  Classified the R65-proven environmental 504 class ⇒ ONE identical E8.1
+  elevated recovery authorized by A5
+  `automatic_identical_recovery_after_proven_environment_invalidation`
+  (limit 1).
+- **CV81 E8.1 recovery (fail — with the complete diagnostic package the
+  fourteenth correction was built to produce):** exit 1, `ok:false`,
+  wallTime 513575 ms (longest ever), `mainError "KI downstream wait deadline
+  exceeded after 120000 ms"` carrying the full safe projection. Every
+  DEC-KI-052 diagnostic member is present:
+  - **Phase/outcome:** downstream first-domain-emission wait; drain outcome
+    `pending` at the deadline, `downstreamOutcome:"pending"`,
+    `downstreamCleanup:{drainStarted:true, settlement:"settled-after-drop",
+    diagnostics:<captured>}` — the pre-drop 5 s settle elapsed pending, the
+    one-shot diagnostic capture fired, the drop aborted nothing silently, and
+    the drain settled only after the drop, all recorded exactly as specified.
+  - **Counts:** discovery stage `collecting`; tasks 92 pending / 1 processing
+    / 7 succeeded after the 120 s budget (~8 of 100 messages; ~15 s/message).
+  - **Safe trace (last 20):** lifecycle events show the drain PROGRESSING —
+    `message-complete` deliveryId 162, 163, `message-start` 164 — with
+    manifest `get-validated`, per-query `domains.json` get-missing →
+    put-immutable, and `aggregation.check` sends cycling correctly,
+    interleaved with browser `GET /api/runs/…` 200 polls.
+  - **Activity classification:** exactly two test-database sessions, both
+    `state:idle, wait_event_type:Client, wait_event:ClientRead` — **no lock,
+    no waiting query, no DB-side stall**: the database is waiting on the
+    client.
+  - **Cleanup settlement + schema absence:** all cleanup steps ok; schema
+    `kiw6_mt4g6…` dropped + absence verified; post-run probe:
+    `residual kiw6_% schemas = 0`.
+- **Classification (evidence-bounded):** the R68-era "stall" is now OBSERVED,
+  not inferred — the sequential in-process downstream drain is functionally
+  correct (every message completes, S3 writes validate, aggregation checks
+  send) but CPU-starved: on an 8-core host at load ~8 dominated by non-test
+  processes, each discovery message takes ~10–15 s versus the ~1.2 s/message
+  the unchanged 120000 ms first-emission budget requires (R62 passed it), so
+  the 100-message discovery stage cannot complete inside the budget. This is
+  a host-capacity/wall-clock failure, NOT a coordinator lock (activity probe
+  disproves the R68 lock hypothesis) and NOT a C127/C128/C125/C126 defect.
+  Per CV81's frozen text the failure grants no retry, and the E8.1 recovery
+  limit for this execution is exhausted; RW6O-005 forbids relabelling the
+  observed failure as a fresh environment invalidation to obtain another.
+- **Not run (blocked):** CV82 (CV79 + CV72–CV75/CH14), CV83, I116-H1 CAS.
+
+```yaml
+certificate: INTEGRATION-ASSESSMENT-PARENT-BLOCKED
+parent_window_id: KI-W6
+integration_assessment_id: KI-W6-I116
+correction_leaves: [KI-W6-C127 ACCEPTED (c363fb61… -> 974376b6…; EV-KI-W6-R69), KI-W6-C128 ACCEPTED (0adfd854… -> 1e7b0c10…; EV-KI-W6-R70)]
+gates_passed: [CV80]
+gates_failed: [CV81 execution 1 — environmental 504 at selection-save phase (drain not started; changed set proven unexercised; host 8 cores at load 5.6-8.1), CV81 E8.1 recovery — downstream first-domain-emission 120 s deadline exceeded with complete DEC-KI-052 diagnostics: drain progressing at ~15 s/message under CPU starvation, 92/1/7 discovery counts, activity idle/Client/ClientRead (no DB lock), cleanup settled-after-drop, schema absence verified]
+gates_not_run: [CV82, CV83, I116-H1 CAS]
+root_cause_files: []
+root_cause_classification: host CPU saturation slows the sequential in-process drain ~12x past the unchanged 120 s first-emission budget; database exonerated by pg_stat_activity (client-bound waits only)
+governing_parent_decision: DEC-KI-052 (its failure clause: full diagnostic package delivered; parent chooses next step)
+expanded_parent_scope_required: true
+parent_options: [(a) rerun CV81 once on an idle/quiesced host (user prerequisite — no code change; identical command, fresh assignment), (b) raise the first-emission budget via a new correction leaf (changes a frozen literal), (c) both]
+cleanup_verified: true (both runs; residual kiw6_ schemas = 0)
+external_mutations: [isolated disposable test schemas only, both dropped and verified absent]
+cost_usd: 0.00
+next_action: PARENT_DECISION_REQUIRED
+status: PARENT_BLOCKED
+```

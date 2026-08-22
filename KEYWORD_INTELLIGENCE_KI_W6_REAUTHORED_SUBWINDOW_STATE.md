@@ -23,11 +23,11 @@ parent_checklist_revision: 642025513288ae76dd448b7064e1d15fc6c57b688909206c96275
 parent_state_path: ACTIVE_EXECUTION_STATE.md
 parent_state_revision: 164
 decomposition_path: KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_CHECKLIST.md
-decomposition_revision: 60eff30f430b95f341ebc024128624a3b49bf113545d4860cae4eec96afe61a6
+decomposition_revision: c2bfcb3f9d74d9550d2a93cc8b2d26a1144a5223ada4106befd86ac0f875c5fa
 evidence_path: KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_EVIDENCE.md
 decomposition_status: READY
 integration: 'Parent history preserved: C107-C111 and CV26/CV32 as recorded; seventh correction C112-C117 accepted with I109 CV36-CV38 pass and CV39 preserved as diagnostic evidence (EV-KI-W6-R52); parent SRC-KI-048/DEC-KI-046/KI-CL-28 resolve the harness-oracle defect. The eighth correction C118/I110 is transcribed into S1 under ASG-KI-W6-WA-05 and executes sequentially here.'
-current_subwindow: KI-W6-I114
+current_subwindow: STOP
 current_assignment_id: ASG-KI-W6-WA-08
 assigned_agent: KI-W6-WINDOW-AGENT
 subwindow_type: INTEGRATION_ASSESSMENT
@@ -44,8 +44,8 @@ may_start_successor: false
 current_status: BLOCKED
 accepted_subwindows: [KI-W6-S101, KI-W6-S102, KI-W6-S103, KI-W6-S104, KI-W6-S105, KI-W6-C104, KI-W6-C105, KI-W6-C106, KI-W6-C107, KI-W6-C108, KI-W6-C109, KI-W6-C112, KI-W6-C113, KI-W6-C114, KI-W6-C115, KI-W6-C116, KI-W6-C117, KI-W6-C118]
 next_subwindow: STOP
-blocker: 'I114 CV71 failed (EV-KI-W6-R65/R66). Attempt 1: environmental 504 BACKEND_TIMEOUT at the selection-advance phase (code byte-identical to four prior passes; one E8.1 recovery claimed and validated — the recovery passed that phase AND the C124 2/1/1/0 witness). Recovery failure: after the live callback was flushed, ZERO google/search-page events in the 120s confirm wait — the flush-outcome contract is unsatisfied by a second, downstream blocker: either POST /api/runs/{runId}/start did not return 202 (browser test asserts only the request trace, never the response status) so the run never reached state queued, or drainQueue threw and was silently caught as queue_drain_failed (server.js:1638-1640) inside the never-yet-exercised confirm/drain path (server.js:1089/1165, prisma-run-repository.js:1484). Discriminating runtime evidence exists in the harness trace and browser netlog but is not dumped on failure. Every fix requires editing the correction files and/or production files — outside I114 zero-implementation-write authority. E8.1 exhausted; no retry. CV72-CV75/CH13-CH14 not run.'
-last_updated: 2026-08-22T17:55:00+05:30
+blocker: 'I116 CV81 failed twice within its frozen allowance (EV-KI-W6-R71). Execution 1: environmental 504 at selection-save (R65 class; drain never started; changed set proven unexercised; 8-core host at load 5.6-8.1) -> ONE identical E8.1 recovery authorized and used. Recovery: the fourteenth correction delivered its complete purpose — the 120 s first-domain-emission deadline captured every DEC-KI-052 diagnostic member: drain PROGRESSING (lifecycle message-complete 162/163, message-start 164; S3 put/get and aggregation.check cycling), discovery 92 pending/1 processing/7 succeeded, activity probe shows BOTH test-db sessions idle/Client/ClientRead (NO database lock — R68 lock hypothesis disproven), cleanup settled-after-drop with one-shot diagnostics, schema absence verified, residual kiw6_ schemas 0. Classification: host CPU starvation slows the sequential drain ~12x (~15 s/message vs ~1.2 s in passing R62) past the unchanged frozen 120000 ms budget. Not a C125-C128 defect. CV81 grants no retry; E8.1 exhausted; RW6O-005 forbids relabelling as fresh invalidation. Parent options: rerun once on a quiesced host (no code change), raise the frozen budget via new correction leaf, or both. CV82/CV83/I116-H1 not run.'
+last_updated: 2026-08-23T00:05:00+05:30
 ```
 
 ## Sub-window registry
@@ -90,7 +90,11 @@ last_updated: 2026-08-22T17:55:00+05:30
 | `KI-W6-C122` | CORRECTION | `email_scraper/test/helpers/keyword-intelligence-e2e-harness.js` | ACCEPTED_FOR_INTEGRATION | `KI-W6-C122-LEAF-AGENT` | `ASG-KI-W6-C122` (EV-KI-W6-R60; ending digest `d9a76ceb…`) |
 | `KI-W6-C123` | CORRECTION | `frontend/test/browser/keyword-intelligence-e2e.mjs` | ACCEPTED_FOR_INTEGRATION | `KI-W6-C123-LEAF-AGENT` | `ASG-KI-W6-C123` (EV-KI-W6-R61; ending digest `448921c7…`) |
 | `KI-W6-I113` | INTEGRATION_ASSESSMENT | (none; CV64–CV69, CH13) | PARENT_BLOCKED | `KI-W6-WINDOW-AGENT` | `ASG-KI-W6-WA-08` (CV64 pass; CV65 deterministic exactly-1-vs-2 seam contract failure — EV-KI-W6-R62/R63; superseded by twelfth correction DEC-KI-050/C124) |
-| `KI-W6-I114` | INTEGRATION_ASSESSMENT | (none; CV70–CV75, CH14) | PARENT_BLOCKED | `KI-W6-WINDOW-AGENT` | `ASG-KI-W6-WA-09` (CV70 pass; CV65-sequel CV71 failed: env 504 then deterministic flush-outcome zero-validations — EV-KI-W6-R65/R66) |
+| `KI-W6-I114` | INTEGRATION_ASSESSMENT | (none; CV70–CV75, CH14) | PARENT_BLOCKED | `KI-W6-WINDOW-AGENT` | `ASG-KI-W6-WA-09` (CV70 pass; CV71 failed — EV-KI-W6-R65/R66; superseded by thirteenth correction DEC-KI-051/C125/C126) |
+| `KI-W6-I115` | INTEGRATION_ASSESSMENT | (none; CV76–CV79) | PARENT_BLOCKED | `KI-W6-WINDOW-AGENT` | `ASG-KI-W6-WA-10` (CV76/CV77 pass; CV78 failed at first domain-check emission — claimTask hang + teardown Prisma crash — EV-KI-W6-R68) |
+| `KI-W6-C127` | CORRECTION | `email_scraper/test/helpers/keyword-intelligence-e2e-harness.js` | ACCEPTED | (delegated leaf) | `ASG-KI-W6-WA-11` (start `c363fb61…` → final `974376b6…`; independent review EV-KI-W6-R69) |
+| `KI-W6-C128` | CORRECTION | `frontend/test/browser/keyword-intelligence-e2e.mjs` | ACCEPTED | (delegated leaf) | `ASG-KI-W6-WA-11` (start `0adfd854…` → final `1e7b0c10…`; independent review EV-KI-W6-R70) |
+| `KI-W6-I116` | INTEGRATION_ASSESSMENT | (none; CV80–CV83) | PARENT_BLOCKED | `KI-W6-WINDOW-AGENT` | `ASG-KI-W6-WA-11` (CV80 pass; CV81 fail 504 -> E8.1 recovery fail at downstream deadline with complete DEC-KI-052 diagnostics — host CPU starvation, no DB lock — EV-KI-W6-R71) |
 
 Counters: accepted initial file leaves 5/5; accepted window-agent corrective
 leaves 6/6 plus parent-executed C110/C111 preserved. The eighth correction is

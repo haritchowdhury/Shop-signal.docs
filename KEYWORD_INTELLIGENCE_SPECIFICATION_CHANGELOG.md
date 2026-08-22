@@ -1310,3 +1310,19 @@ invalidated_evidence: [I114 CV71 remains diagnostic; prior accepted C124 behavio
 compatibility_or_migration_effect: none — no schema/public payload/provider/AWS/cost change
 authorization_effect: requester authorizes the parent to apply C125/C126; the window agent later performs I115 independent review and assessment
 ```
+
+```yaml
+change_id: CHG-KI-081
+timestamp: 2026-08-22T21:20:00+05:30
+trigger_evidence: [EV-KI-W6-R68, SRC-KI-054]
+reason: I115 CV78 left drainDownstream pending, then destroyed its disposable schema; the resulting post-drop Prisma error cannot distinguish a database lock, engine/connection failure, harness schedule issue or another cause, and therefore cannot support a production timeout change.
+old_revision: A2 1e5b201a29eef2fae59fc8f14cceb58a14bc46b06ef96a1a9b5bcc0c6e56e768; A3 4498f18a1eb2c834efa06fc0995b2cecfbc2fa6e34ea3db5110a98b4834eef80; A4 fc48c365b41367f3e9fcfdff89d7d730b4378ed11b5b1a7b8c705fd31ed6148e; A8 d7e14e81982d80802ff4a19f7c6baf2ceb31cf43cb205968fd6d03513cd22bb6; A5 state 176
+new_revision: A2 90f50d323d2473bdaecf89037c82d50636fbf43dbea85486b1b34909a64d926f; A3 bb6a62165581590304b8e58e642f842c2966af0d31947c07c1eaf6ef8cd5eed9; A4 5161088fb966cd614211cd07d1ea8a6bb3f37a2056c9d0fff2e606579a24be8a; A8 fc919703689364b8f983d9f0277e369e9e9788c5da00e048e147900d8e9cfd0b; A5 state 177 READY
+changed_requirements: []
+changed_decisions: [DEC-KI-052 freezes single-drain ownership, sanitized lifecycle/activity evidence, bounded pre-drop settlement and exact diagnostic failure semantics before any production mitigation]
+affected_windows: [KI-W6 only; KI-W7 remains prohibited]
+invalidated_evidence: [I115 CV78 remains diagnostic; its inference that lockedTask was waiting on a row lock is explicitly rejected; CV76/CV77 and the proven CV78 prefix remain reusable by exact dependency hashes]
+compatibility_or_migration_effect: none — two test-harness files only; no product/API/schema/provider/AWS/cost/queue behavior change
+authorization_effect: KI-W6-WINDOW-AGENT may append C127/C128/I116 byte-exact to S1/S2/S3, sequentially assign and independently review two one-file leaves, personally execute I116, and stop for parent review; no production edit, commit, provider/AWS action or KI-W7 authority
+resumption_state: A5 state 177 READY under ASG-KI-W6-WA-11; execute C127, C128, I116 and stop before KI-W7
+```

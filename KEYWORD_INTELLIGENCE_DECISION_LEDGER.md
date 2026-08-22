@@ -2705,6 +2705,51 @@ the supplied clock. This one maximum-scale transaction uses
 a broader timeout. The correction changes no provider batching, provider call
 count, reservation, public API, schema, queue, artifact or AWS behavior.
 
+### `DEC-KI-052` — Downstream diagnosis precedes any coordinator timeout change
+
+- **Requirements/evidence:** `REQ-KI-010`–`015`,
+  `INV-KI-004/005/010/015`, `SRC-KI-054`, `EV-KI-W6-R68`.
+- **Locked choice:** CV78 is a harness observability/cleanup defect with an
+  unclassified underlying stall. Do not edit the coordinator repository, add a
+  retry, or set a database timeout from the teardown error.
+- **Helper lifecycle:** permit one active `drainDownstream`. Around every
+  dequeued discovery/domain message, record sanitized `message-start`,
+  `message-complete`, or `message-failed` with queue class, discriminator,
+  monotonic delivery ID, safe error name/code and repository-relative frame.
+  Immediately convert the drain promise to the fulfilled outcome union
+  `{outcome:"fulfilled",value}` or `{outcome:"rejected",error}`; no rejection
+  may escape after teardown.
+- **Diagnostic seam:** export `readDownstreamDiagnostics()`, returning active
+  lifecycle/message, the last twenty downstream/backend-log/SQS trace entries,
+  schema-qualified durable task/stage counts through the administration
+  connection, and only `state`, `wait_event_type`, `wait_event` classifications
+  for active test-database sessions. Never return PID, query text, SQL,
+  connection metadata or payload values. A failed member is the fixed safe
+  marker `unavailable`, without suppressing other members.
+- **Browser wait:** replace only the first-domain-emission wait with a loop that
+  observes a domain SQS event, a rejected outcome, or `message-failed`. At the
+  unchanged 120-second deadline capture the diagnostic seam once and fail with
+  its safe projection. A domain event continues through the unchanged
+  partial-terminal fault point and ultimately requires the fulfilled report.
+- **Cleanup:** retain the outcome outside the main try. Before schema drop, wait
+  at most 5 seconds for it; if pending, capture diagnostics and keep its
+  rejection observed. After the exact-schema drop, wait at most 5 seconds and
+  record exactly `settled-before-drop`, `settled-after-drop`, or
+  `still-pending`. Cleanup cannot pass merely because the drop aborted work.
+- **Falsification:** source enforcement rejects removal of the immediate
+  rejection observer and rejects schema drop ordered before the pre-drop
+  settlement/diagnostic step. Existing cases, controls and digests are
+  unchanged.
+- **Assessment:** after sequential one-file `C127` and `C128`, run the unchanged
+  causal browser command once. Pass resumes preserved closure gates. Failure is
+  usable only with phase, outcome, counts, safe trace/activity classification,
+  cleanup settlement and schema-absence evidence; only then may a parent choose
+  a production correction.
+- **Rejected:** inferred row-lock diagnosis; global/coordinator timeouts;
+  unchanged blind retry; raw SQL/query/connection logging.
+- **Tasks/scenarios:** `KI-W6-C127`, `KI-W6-C128`, `KI-W6-I116`; existing
+  `SCN-KI-018`, `W6-FLOW-11/12`, `W6-RES-02/04`, `W6-NC-08`.
+
 ## 4. KI-R5 D1–D13 delta ledger
 
 - **D1 interfaces/payloads:** `DEC-KI-034` and `PAY-KI-008` supersede only the

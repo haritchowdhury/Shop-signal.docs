@@ -258,6 +258,19 @@ limitations: The failure proves the 100-row persistence defect, not live provide
 privacy: Only safe error name/code/repository-relative frame, row counts and schema-absence evidence were retained; no raw error, SQL, URL, header, token, cookie, body, keyword or user data.
 ```
 
+### `SRC-KI-054` — CV78 teardown masks the first downstream operation
+
+```yaml
+evidence_id: SRC-KI-054
+classification: OBSERVED
+claim: I115 CV78 started drainDownstream without retaining a failure-safe cleanup handle, waited 120 seconds for the first domain delivery, then dropped the disposable schema while the first discovery message was still pending. The resulting Prisma "Response from the Engine was empty" appeared only after schema destruction. This proves an unsettled downstream operation and a cleanup race; it does not prove that PostgreSQL was waiting on a row lock, identify a blocking transaction, or justify changing production coordinator timeouts.
+source: EV-KI-W6-R68; email_scraper/test/helpers/keyword-intelligence-e2e-harness.js::drainDownstream/close SHA-256 c363fb61ac3ce2bd13a2551e56ba8e1aa8589931870ffb6627037b76ed7411e6; frontend/test/browser/keyword-intelligence-e2e.mjs downstream wait/finally SHA-256 0adfd85433fb8dca6c8f3988443e8b729edb7afca62717b0827b37970785d164; email_scraper/src/aws-pipeline/repositories/pipeline-coordinator-repository.js::claimTask read-only inspection
+observed_at: 2026-08-22
+environment: local causal browser harness with isolated disposable Neon schema; no provider, AWS or production operation
+limitations: The underlying 120-second stall is not yet classified. Production lock_timeout, statement_timeout, retry, or coordinator transaction changes remain unsupported until a diagnostic run distinguishes lock wait, connection/engine failure, harness scheduling, or another failure.
+privacy: Only synthetic task identity classes, safe error name, operation phase, counts, wait classification and repository-relative frames may be recorded; no SQL text, connection URL, token, cookie, header, provider body, keyword text or user data.
+```
+
 ## 6. Post-W5 corrective discovery
 
 | Evidence ID | Class | Precise claim | Exact source/revision | Limitations | Privacy |
