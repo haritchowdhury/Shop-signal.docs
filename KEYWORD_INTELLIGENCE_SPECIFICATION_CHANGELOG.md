@@ -1121,3 +1121,131 @@ compatibility_or_migration_effect: none — one test-harness symbol only; no pro
 authorization_effect: KI-W6-WINDOW-AGENT may transcribe C107/I104 into S1/S2/S3, dispatch and review one C107 leaf, then execute I104 and continue to READY_FOR_PARENT_REVIEW only if every frozen gate passes; no parent artifact edit by the window agent and no KI-W7 action.
 resumption_state: A5 state 156 READY under ASG-KI-W6-WA-02; preserve C106/CV7/CV8, execute C107 then I104, stop before KI-W7.
 ```
+
+```yaml
+change_id: CHG-KI-069
+timestamp: 2026-08-21T15:41:31+05:30
+trigger_evidence: [EV-KI-W6-R36, SRC-KI-044, EV-KI-A-096]
+reason: I104 CV15 reached the real final research publication and failed observably because publishResearchResult inherited Prisma's implicit approximately five-second interactive-transaction timeout; earlier W6 maximum runs localized the same expiry to final keywordResearch.updateMany.
+old_revision: A2 KI-DD-8 / 66a85fa6918193635e438dac1dd21986d0fd75fbfba791386a7f140470a9bd68; A3 KI-DL-17 / 4d7e4aa311286d997b2498f7af46fa0a32426d1cbace5e1d1f3db340009168b7; A4 KI-CL-23 / d47d0dd73b7efd357a7fc196ee64bfba2c2e5b0e4f818ea6e8180054e1f36eae; A8 KI-TR-15 / e4fb208e39e60f41f87f0b398b5979aa1702fce7e6124a7f2260c2a7d844a9bc; A5 state 156; I104 CV15 failed
+new_revision: A2 KI-DD-9 / ad08f6e75f575d7b5fcdc1ed666299cd2f8026da9266862a7a6fa3ebc353d5df; A3 KI-DL-18 / 2a360a3df33d62c30abeaaa1bde9c45f93fc7db8cc5648749853222789ce0617; A4 KI-CL-24 / ed004c5f6168a61a3af950dba4a1f636c75a473a953234be72174e1154f1411a; A8 KI-TR-16 / b53842caa3511fa61797fc26bf416ffbee93f2b4ddd76be36cd79416645a2d87; A5 state 157 READY
+changed_requirements: []
+changed_decisions: [DEC-KI-042 locks publication-only maxWait 5000ms and timeout 30000ms, deterministic insufficient-timeout rollback, maximum delayed success, a separate two-case transaction registry, and one fresh causal assessment]
+affected_windows: [KI-W6 remains active; blocked I104 is superseded by C108 C109 I105; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: [I104 CV15 failure remains diagnostic; any prior claim that implicit publication timeout is sufficient is superseded; CV7 CV8 CV13 CV14 and C107 remain accepted; CV16-CV18 never ran]
+compatibility_or_migration_effect: none — private repository transaction options and one permanent isolated test only; no public interface payload schema migration result selection provider cost queue frontend or historical format change.
+authorization_effect: KI-W6-WINDOW-AGENT may append exact C108 C109 I105 subordinate blocks, dispatch and independently review sequential one-file C108 then C109, personally run I105 once per frozen gate policy, and stop READY_FOR_PARENT_REVIEW; agents cannot commit and no KI-W7 action is authorized.
+resumption_state: A5 state 157 READY under new corrective assignment ASG-KI-W6-WA-03; preserve accepted prior gates, execute C108 then C109 then I105, stop before KI-W7.
+```
+
+```yaml
+change_id: CHG-KI-070
+timestamp: 2026-08-21T16:46:27+05:30
+trigger_evidence: [EV-KI-W6-R41, EV-KI-A-097]
+reason: I105 CV21 completed in the execution channel without any returned exit status TAP certificate decisive diagnostics or cleanup witness; this is execution-channel loss rather than an observable behavioral result.
+old_revision: A5 state 157 READY; C108/C109 accepted; I105 CV19/CV20 passed; CV21 UNOBSERVABLE
+new_revision: A5 state 158 READY; one final observable identical elevated CV21 transport recovery authorized
+changed_requirements: []
+changed_decisions: []
+affected_windows: [KI-W6 only; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: []
+compatibility_or_migration_effect: none — gate transport and evidence retention only; the CV21 command environment selection fixtures transaction cases control digests and acceptance values are unchanged.
+authorization_effect: KI-W6-WINDOW-AGENT may record state 158 in S2/S3, prove the E8.1 read-only postconditions, and make exactly one final elevated CV21 attempt with durable complete output and exit capture; only an observable CV21 pass permits CV22-CV24 and CH7/CH8, while failure or renewed unobservability stops without another attempt.
+resumption_state: A5 state 158 READY under ASG-KI-W6-WA-03; preserve C108/C109/CV19/CV20; stop READY_FOR_PARENT_REVIEW after I105 and before KI-W7.
+```
+
+```yaml
+change_id: CHG-KI-071
+timestamp: 2026-08-21T16:53:54+05:30
+trigger_evidence: [EV-KI-W6-R42, EV-KI-A-098]
+reason: The state-158 durable log grew to two sequential passing cases over approximately 85 seconds but the outer runner ended before Node completed the four-case suite or the wrapper persisted its exit; durable redirection alone was insufficient without a frozen long-lived execution session.
+old_revision: A5 state 158 READY; CV21 state-158 recovery renewed-unobservable after an underspecified outer execution lifetime
+new_revision: A5 state 159 READY; one final identical CV21 run authorized in a persistent session with exact 600000ms outer deadline and durable stdout stderr exit capture
+changed_requirements: []
+changed_decisions: []
+affected_windows: [KI-W6 only; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: []
+compatibility_or_migration_effect: none — execution transport lifetime and evidence retention only; the Node command environment selection test timeouts fixtures cases controls digests and acceptance behavior remain unchanged.
+authorization_effect: KI-W6-WINDOW-AGENT may record state 159 in S2/S3, repeat the read-only process/schema preflight, and perform exactly one final CV21 attempt inside a persistent elevated 600000ms session polled through exit; only observable four-pass success permits CV22-CV24 and CH7/CH8, while any other result stops without another CV21 attempt.
+resumption_state: A5 state 159 READY under ASG-KI-W6-WA-03; preserve C108/C109/CV19/CV20; stop READY_FOR_PARENT_REVIEW after I105 and before KI-W7.
+```
+
+```yaml
+change_id: CHG-KI-072
+timestamp: 2026-08-21T17:03:47+05:30
+trigger_evidence: [EV-KI-W6-R43, SRC-KI-045, EV-KI-A-099]
+reason: The state-159 capture ultimately completed with an observable Prisma P2010 failure caused solely by SCN-KI-042 selecting PostgreSQL pg_sleep's unsupported void result; the requester then directed the parent to take over and finish KI-W6.
+old_revision: A2 KI-DD-9; A3 KI-DL-18; A4 KI-CL-24; A8 KI-TR-16; A5 state 159 under ASG-KI-W6-WA-03; CV21 failed 3/1
+new_revision: A2 KI-DD-10 / b7e1fc025a1ad7168e0b68ca10afd43377437476e9ccca5bb48ca5e28a6d6d03; A3 KI-DL-19 / 06f1abddc730dffb9d3913c334c81c3ee5ccc6c49d661777523283585ff533bc; A4 KI-CL-25 / 1e3a13b79e4847804b106a64ef4dd1b3761b61c8ffaba8fa2b6e51bf809ca43c; A8 KI-TR-17 / 2d0ff0ef0dd5239b2827201a307175db5a1ef036274f08cb60a494feddb3e9a4; A5 state 160 IN_PROGRESS
+changed_requirements: []
+changed_decisions: [DEC-KI-043 changes only the ignored delay-query result from PostgreSQL void to a supported text column while preserving the same 21-second sleep and injection boundary]
+affected_windows: [KI-W6 only; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: [state-159 CV21 cannot satisfy acceptance; its three passing cases remain diagnostic; C108 C109 CV19 CV20 remain accepted]
+compatibility_or_migration_effect: none — test-probe result typing and executor ownership only; no production interface persistence transaction timeout lease package provider case registry or digest change.
+authorization_effect: requester-authorized parent directly owns exact one-expression C110 and personally runs ordered I106 CV25-CV30; no window-agent or leaf assignment, commit, provider, AWS, production or KI-W7 authority is created.
+resumption_state: A5 state 160 IN_PROGRESS under ASG-KI-W6-PARENT-01; execute C110 then I106, stop READY_FOR_PARENT_REVIEW before KI-W7.
+```
+
+```yaml
+change_id: CHG-KI-073
+timestamp: 2026-08-21T17:19:38+05:30
+trigger_evidence: [SRC-KI-046, EV-KI-A-100]
+reason: Parent CV26 passed completely, but CV27 proved the causal revision-advance script consumed a nonexistent selection.items alias, saved zero items and made the page-aware checked/unchecked swap impossible.
+old_revision: A2 KI-DD-10 / b7e1fc025a1ad7168e0b68ca10afd43377437476e9ccca5bb48ca5e28a6d6d03; A3 KI-DL-19 / 06f1abddc730dffb9d3913c334c81c3ee5ccc6c49d661777523283585ff533bc; A4 KI-CL-25 / 1e3a13b79e4847804b106a64ef4dd1b3761b61c8ffaba8fa2b6e51bf809ca43c; A8 KI-TR-17 / 2d0ff0ef0dd5239b2827201a307175db5a1ef036274f08cb60a494feddb3e9a4; A5 state 160; CV26 passed and CV27 failed
+new_revision: A2 KI-DD-11 / 251ac2f2a44e84242943aea23b14fb777b726e720a50bb97f072834c52884da1; A3 KI-DL-20 / 3868b97405a25c284f01ad05e37c5978fe464abcbeca59291dde2a1ff3802d8a; A4 KI-CL-26 / 1a00409103b10e23016990a9e929287266ee1d272962a23dcdba268463a23e58; A8 KI-TR-18 / 205efbd650d08f54546d65ea3189c50663ead63ad67f7bd45d46a8d26314062c; A5 state 161 IN_PROGRESS
+changed_requirements: []
+changed_decisions: [DEC-KI-044 consumes the accepted serialized selection array directly in the causal revision-advance script]
+affected_windows: [KI-W6 only; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: [failed CV27 only; CV26 remains accepted by disjoint-path proof]
+compatibility_or_migration_effect: none — one browser-test consumer expression only; no product API UI persistence package registry digest or runtime behavior change.
+authorization_effect: parent may execute exact C111 and I107 CV31-CV35; CV26 must not repeat; later gates remain pass-conditional and KI-W7 remains prohibited.
+resumption_state: A5 state 161 IN_PROGRESS under ASG-KI-W6-PARENT-01; execute C111 then fresh CV32-CV35, stop before KI-W7.
+```
+
+```yaml
+change_id: CHG-KI-074
+timestamp: 2026-08-21T17:56:37+05:30
+trigger_evidence: [EV-KI-A-101, SRC-KI-047, EV-KI-A-102]
+reason: I107 CV32 failed observably in settleAttempt under Prisma's implicit interactive-transaction lifetime, and the parent audit found all 18 new-KI transaction paths lacked a complete workload-profile policy while recoverKeywordWork validated but did not forward its 100-item limit.
+old_revision: A2 KI-DD-11 / 251ac2f2a44e84242943aea23b14fb777b726e720a50bb97f072834c52884da1; A3 KI-DL-20 / 3868b97405a25c284f01ad05e37c5978fe464abcbeca59291dde2a1ff3802d8a; A4 KI-CL-26 / 1a00409103b10e23016990a9e929287266ee1d272962a23dcdba268463a23e58; A8 KI-TR-18 / 205efbd650d08f54546d65ea3189c50663ead63ad67f7bd45d46a8d26314062c; A5 state 162 BLOCKED
+new_revision: A2 KI-DD-12 / a62cae0406e0058f46eccc19e01fada5d5cbb8780c25de3d1f44edd6118430ba; A3 KI-DL-21 / 1e931353808f7fef708763f668f24d9779f9a20ba115b445bc6571c9662cc283; A4 KI-CL-27 / fbc3a615f1710b76eaf78ffeef27642c9303644aa6998d77042372fe0596566a; A8 KI-TR-19 / 78eb572daabe10d1739dc09ab2e343f76289eee5fea48127a9bb82c3a719e5b0; A5 state 163 READY
+changed_requirements: []
+changed_decisions: [DEC-KI-045 freezes all 18 transaction profiles, set-based repository operation ceilings, a one-statement throttle claim, required bounded recover(now,{limit}), deterministic three-read merge/slice, exact coverage and unchanged provider economics]
+affected_windows: [KI-W6 only; blocked I107 is superseded by sequential C112-C116 and window-agent assessment I108; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: [CV32 remains diagnostic and invalidates causal acceptance after C111; repository.js changes require the four CV26 database cases to reexecute inside CV38; C110 and C111 bytes and prior local acceptance remain preserved]
+compatibility_or_migration_effect: none — no public payload schema migration provider call volume cost formula queue artifact frontend product established-pipeline or AWS behavior changes; only new-KI repository internals, bounded recovery caller and focused tests change.
+authorization_effect: KI-W6-WINDOW-AGENT may mechanically append C112-C116 and I108 to the existing reauthored S1/S2/S3, launch and independently review its own sequential one-file leaf agents, personally run I108 after all leaves are accepted, create a single-file corrective leaf only when the frozen parent decision already determines the correction, and stop READY_FOR_PARENT_REVIEW; no parallel leaf, window-agent implementation, commit, provider, AWS, production or KI-W7 action is authorized.
+resumption_state: A5 state 163 READY under ASG-KI-W6-WA-04; execute C112 then C113 then C114 then C115 then C116 then I108; stop before KI-W7.
+```
+
+```yaml
+change_id: CHG-KI-075
+timestamp: 2026-08-21T20:13:42+05:30
+trigger_evidence: [EV-KI-W6-R52, SRC-KI-048, EV-KI-A-103]
+reason: I109 CV39 reached the selection phase and proved the accumulating browser netlog necessarily contains both the deliberate expected-revision-1 advance and the expected-revision-2 final CAS, while the frozen unpartitioned oracle incorrectly required only one successful selection PUT and selected index zero as the final request.
+old_revision: A2 KI-DD-12 / a62cae0406e0058f46eccc19e01fada5d5cbb8780c25de3d1f44edd6118430ba; A3 KI-DL-21 / 1e931353808f7fef708763f668f24d9779f9a20ba115b445bc6571c9662cc283; A4 KI-CL-27 / fbc3a615f1710b76eaf78ffeef27642c9303644aa6998d77042372fe0596566a; A8 KI-TR-19 / 78eb572daabe10d1739dc09ab2e343f76289eee5fea48127a9bb82c3a719e5b0; A5 state 163; I109 CV36-CV38 passed and CV39 failed
+new_revision: A2 KI-DD-13 / 7ba3fe9afedfea7773010ec2b206ddb6c0987fc3bdc2831bfe8fcbfd8bb25d69; A3 KI-DL-22 / d6132eecb4ab8a1c6594aa2efb1a423567c798a11f658a2c7df078793b6c0912; A4 KI-CL-28 / 642025513288ae76dd448b7064e1d15fc6c57b688909206c96275ecca119463b; A8 KI-TR-20 / aeed2af2770545af5436ff2a85a83b2076eccc17ddf5f0045359a5c7b4b9d143; A5 state 164 READY
+changed_requirements: []
+changed_decisions: [DEC-KI-046 freezes exactly two successful selection PUTs partitioned by expectedRevision 1 and 2 and identifies only the revision-2 entry as the final CAS]
+affected_windows: [KI-W6 only; failed I109 CV39 is superseded only after C118 and successful I110; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: [I109 CV39 remains diagnostic; C111 whole-file digest is superseded by C118 while its array-consumer behavior is preserved; I109 CV36-CV38 remain reusable by exact disjoint-dependency proof]
+compatibility_or_migration_effect: none — one browser-test assertion block only; no product API UI repository transaction persistence provider cost queue artifact schema package build-input case control or digest change.
+authorization_effect: KI-W6-WINDOW-AGENT may append decision/execution-complete C118 and I110 subordinate blocks, assign and independently review one C118 leaf owning only the browser test, personally execute I110, and stop READY_FOR_PARENT_REVIEW; no window-agent implementation, commit, provider, AWS, production or KI-W7 authority is created.
+resumption_state: A5 state 164 READY under ASG-KI-W6-WA-05; execute C118 then I110 CV44-CV49/CH10; stop before KI-W7.
+```
+
+```yaml
+change_id: CHG-KI-076
+timestamp: 2026-08-21T22:04:07+05:30
+trigger_evidence: [EV-KI-W6-R54, SRC-KI-049]
+reason: I110 CV45 passed the corrected selection and handoff path but proved the protected /runs workspace is unreachable because the browser substitute has no Neon session-token cookie and the loopback get-session response omits the session member required by the installed middleware.
+old_revision: A2 KI-DD-13 / 7ba3fe9afedfea7773010ec2b206ddb6c0987fc3bdc2831bfe8fcbfd8bb25d69; A3 KI-DL-22 / d6132eecb4ab8a1c6594aa2efb1a423567c798a11f658a2c7df078793b6c0912; A4 KI-CL-28 / 642025513288ae76dd448b7064e1d15fc6c57b688909206c96275ecca119463b; A8 KI-TR-20 / aeed2af2770545af5436ff2a85a83b2076eccc17ddf5f0045359a5c7b4b9d143; A5 state 164; C118/CV44 passed and fresh CV45 failed at /runs redirect
+new_revision: A2 KI-DD-14 / 893ae23d0c5366735c06b8c89f14a63fc69ffed79ddb5bcf92577fe944ac2678; A3 KI-DL-23 / 7e0594d675faf572391b3bc03d6b09f8720cfe6295b447b693ea4a9965862512; A4 KI-CL-29 / 94468aa949564ac96f80a7e30f088629cc51604cfd05eac53eee9d90dbdc4af3; A8 KI-TR-21 / 4f8596d8230ec27764122bc600d3ca891e41c5fc5f02fff8ed8f4ee3570481fc; A5 state 165 READY
+changed_requirements: []
+changed_decisions: [DEC-KI-047 freezes the production-faithful local auth substitute: opaque browser session-token cookie, complete deterministic loopback session envelope, installed SDK-owned session cache/middleware decision, exact claim limits and owner/null behavior]
+affected_windows: [KI-W6 only; C118 remains accepted; failed I110 CV45 is superseded only after C119/C120 and successful I111; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: [fresh I110 CV45 remains diagnostic; I109 CV36-CV38 and I110 CV44 remain reusable only through the exact I111 dependency proof]
+compatibility_or_migration_effect: none — two test-harness files only; no production proxy auth route component API persistence schema package provider cost queue artifact established-pipeline or AWS behavior changes.
+authorization_effect: KI-W6-WINDOW-AGENT may append decision/execution-complete C119 C120 and I111 subordinate blocks, assign and independently review the two sequential single-file leaves, personally execute I111, and stop READY_FOR_PARENT_REVIEW; no window-agent implementation, commit, provider, AWS, production or KI-W7 authority is created.
+resumption_state: A5 state 165 READY under ASG-KI-W6-WA-06; execute C119 then C120 then I111 CV50-CV57/CH11; stop before KI-W7.
+```

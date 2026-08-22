@@ -2603,3 +2603,1456 @@ external_mutations: []
 prohibited_actions_observed: []
 status: READY
 ```
+
+---
+
+## `EV-KI-W6-R35` — Independent C107 review and I104/CV13 acceptance
+
+- **Timestamp / role:** 2026-08-21T15:19:15+05:30 /
+  `KI-W6-WINDOW-AGENT` independent corrective-leaf review.
+- **Authority and baseline:** A5 state 156 / `ASG-KI-W6-WA-02`, `KI-CL-23`,
+  `DEC-KI-041`, `SRC-KI-043`, and predecessor `EV-KI-W6-R33`. The frozen
+  frontend baseline was commit `a39663c8f99d9cc3c4aa1301ff088d5f4a24e7fd`,
+  starting file digest `fc88c77ebb1bf8f62cafa600afbe5d789cd7a688899a552cff93a0ec0ada0a8f`,
+  and empty change-set digest
+  `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`.
+- **Provenance:** the current frontend HEAD is requester-owned commit
+  `6c1563e99b8101c020ef9e07b828069391941fcb` (`Harit`, subject `C107`), with
+  parent `a39663c8f99d9cc3c4aa1301ff088d5f4a24e7fd`. This matches the returned
+  ending digest and is compatible with the leaf's no-commit claim: the leaf did
+  not create this requester-owned commit.
+- **Attributable diff:** `git diff --name-status a39663c8f99d9cc3c4aa1301ff088d5f4a24e7fd..HEAD`
+  reports exactly `M test/browser/keyword-intelligence-e2e.mjs`; its sole
+  zero-context hunk is lines 684–747 inside `swapOneSelectionItemViaUi`.
+  The helper preserves its async no-argument private interface, exact checkbox
+  selector, both call sites (current lines 1009 and 1222), and all other
+  registries, oracle/control/certificate/cleanup/diagnostic symbols.
+- **Algorithm inspection:** it inventories at most eight real pages using
+  ordered label signatures, rejects empty/repeated labels, records distinct
+  checked and unchecked candidates with pages, proves every enabled pagination
+  transition changed signature, removes before adding, waits for the actual
+  checkbox state after each event, and requires exact text `100 of 200 selected`.
+  The maximum path is seven inventory, seven return, and seven forward clicks
+  (21), with exactly two checkbox changes. No timeout, product, API, state,
+  identity, fixture, registry, case/control, or caller change is present.
+- **C107 local checks independently rerun once from `frontend/`:**
+  `node --check test/browser/keyword-intelligence-e2e.mjs` — PASS (exit 0);
+  `git diff --check -- test/browser/keyword-intelligence-e2e.mjs` — PASS
+  (exit 0).
+- **CV13 membership check:** the sole parent-baseline hunk proves all
+  non-helper bytes, including the 26 registered case entries and 13 control
+  registrations, are byte-identical. Static inventory also reports 19 unique
+  `W6-FLOW`/`W6-CONF` IDs and 13 unique `W6-NC` IDs; both helper call sites
+  remain present.
+- **Disposition:** `KI-W6-C107` is `ACCEPTED_FOR_INTEGRATION`; I104/CV13 is
+  PASS and CV14 is next. No browser, build, database, provider, AWS,
+  production, destructive, secret, commit, push, successor, or KI-W7 action
+  was performed by this review; cost `$0.00`.
+
+```yaml
+certificate: WINDOW-AGENT-FILE-ACCEPTED
+parent_window_id: KI-W6
+subwindow_id: KI-W6-C107
+assignment_id: ASG-KI-W6-C107
+reviewer: KI-W6-WINDOW-AGENT
+ending_file_digest: aff4c6174decfc34189fd509cbea84c885cfbb433f061d606f7829c935d25b44
+requester_owned_commit: 6c1563e99b8101c020ef9e07b828069391941fcb
+local_checks: [C107-V1 node-check PASS, C107-V1 git-diff-check PASS]
+required_registered_executed: [26 unchanged parent-baseline bytes]
+negative_controls: [13 unchanged parent-baseline bytes]
+helper_call_sites: [1009, 1222]
+external_mutations: []
+status: ACCEPTED_FOR_INTEGRATION
+```
+
+---
+
+## `EV-KI-W6-R36` — I104 CV14 pass and CV15 observable failure
+
+- **Timestamp / role:** 2026-08-21T15:24:36+05:30 /
+  `KI-W6-WINDOW-AGENT` integration assessment.
+- **Authority:** A5 state 156 / `ASG-KI-W6-WA-02`, accepted C107 / R35, and
+  `KI-W6-I104`. CV14 must precede CV15; one identical elevated recovery is
+  permitted only after a proven environment-only invalidation. An observable
+  CV15 failure stops CV16–CV18 and CH5/CH6.
+- **CV14 (PASS):** from `frontend/`, `test -f .next/BUILD_ID` exited 0. The
+  exact command `git diff --name-only
+  a39663c8f99d9cc3c4aa1301ff088d5f4a24e7fd -- .
+  ':(exclude)test/browser/keyword-intelligence-e2e.mjs'` also exited 0 and
+  printed no path. The accepted Next build was reused; no check or build ran.
+- **CV15 first invocation (environment-invalidated):** the exact frozen
+  command from `frontend/`, `ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node
+  test/browser/keyword-intelligence-e2e.mjs`, returned exit 1 after 240 ms
+  with `mainError: "[object ErrorEvent]"`, zero network requests, zero cases,
+  zero controls, and successful browser/Next/auth/backend/schema-absence/temp
+  cleanup. This happened before a workflow assertion and met the state-156
+  environment-only recovery condition.
+- **CV15 one authorized elevated identical recovery (observable failure):**
+  the unchanged command ran once under the authorized local elevation and
+  returned exit 1 after 202287 ms. Its complete terminal diagnostic reports
+  `mainError: "Transaction API error: Transaction not found. Transaction ID is
+  invalid, refers to an old closed transaction Prisma doesn't have information
+  about anymore, or was obtained before disconnecting."`; `buildSkipped: true`;
+  one Chrome process; desktop/mobile viewports; peak RSS kB `next: 188572`,
+  `chrome: 274916`; 66 network requests; zero console errors/page exceptions;
+  zero executed cases/controls. Cleanup fully succeeded for browser,
+  next-server, auth-server, backend-server, schema-absence, and temp-root; the
+  isolated schema `kiw6_mt2rrioc0c3c588594858024` was dropped. No database URL
+  was logged.
+- **Disposition:** `I104` is `BLOCKED` at CV15. The elevated recovery is
+  consumed; this is an observable workflow/database-harness failure, not an
+  environment-only invalidation. CV16–CV18, CH5/CH6, a further CV15 run,
+  corrective implementation, and KI-W7 did not start. No provider, AWS,
+  production, destructive, commit, push, or paid action occurred; cost `$0.00`.
+
+```yaml
+certificate: I104-CV15-OBSERVABLE-FAILURE
+parent_window_id: KI-W6
+integration_assessment_id: KI-W6-I104
+cv13: PASS
+cv14: PASS
+cv15_initial: ENVIRONMENT_INVALIDATED
+cv15_elevated_recovery: FAIL
+exit_code: 1
+wall_time_ms: 202287
+main_error: Transaction API error: Transaction not found
+network_requests: 66
+cases_executed: 0
+controls_executed: 0
+cleanup: [browser:ok, next-server:ok, auth-server:ok, backend-server:ok, schema-absence:ok, temp-root:ok]
+dropped_schema: kiw6_mt2rrioc0c3c588594858024
+next_actions: STOP_FOR_PARENT_DISPOSITION
+external_mutations: []
+status: BLOCKED
+```
+
+---
+
+## `EV-KI-W6-R37` — State-157 C108/C109/I105 transcription and C108 dispatch
+
+- **Timestamp / role:** 2026-08-21T16:18:00+05:30 /
+  `KI-W6-WINDOW-AGENT` decomposition and sequential dispatch.
+- **Authority:** A5 state 157 / `ASG-KI-W6-WA-03`; `SRC-KI-044`,
+  `DEC-KI-042`, A4 `KI-CL-24`, `KI-TR-16`, `EV-KI-A-096`, and `CHG-KI-069`.
+  The authority permits literal C108/C109/I105 transcription, exactly one C108
+  dispatch, independent C108 review, then C109 only after acceptance, followed
+  by personal I105. KI-W7 remains prohibited.
+- **Pin and predecessor check:** A5 SHA-256 is
+  `a96c530ed9a1aa35811ec5b071539be0ed150dd6d2146e550a332d0dc236bde4`;
+  A1/A3/A4 SHA-256 pins respectively match
+  `8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c`,
+  `2a360a3df33d62c30abeaaa1bde9c45f93fc7db8cc5648749853222789ce0617`,
+  and `ed004c5f6168a61a3af950dba4a1f636c75a473a953234be72174e1154f1411a`.
+  Backend HEAD is `a411d4b967942228809e85c7a9780c4ad004bf3c`; the backend and
+  frontend porcelain were empty. C108's source and C109's test baselines match
+  their frozen SHA-256 values
+  `be134a3fe039008a9509e940184337e14b276d6bd0e68b6c0830b03e2a68bf48` and
+  `e1572edeaac65612421fe4b6ae20e979f2aeed16ed94e0b8229b1a6f94856bcc`.
+  Root `git diff --check` passed.
+- **Exact-transcription certificate:** S1 now contains the complete C108 CT5,
+  C109 CT6 and I105 CV19–CV24/CH7/CH8 parent trace, including all fixed
+  options, commands, bounds, frozen digests, separate-registry members,
+  sequential predecessor condition, environment-recovery stop rule and KI-W7
+  prohibition. The only operational completion is recording C108's distinct
+  dispatch assignment below; no implementation-affecting task content was
+  altered. R36 remains an observable failure and is superseded only for the
+  execution path specified by C108/C109/I105.
+- **C108 dispatch:** `ASG-KI-W6-C108` assigns only
+  `email_scraper/src/keyword-intelligence/repository.js` to
+  `KI-W6-C108-LEAF-AGENT`. Its permitted transformation is the private
+  publication-only `maxWait:5_000` and `timeout:30_000` transaction option
+  path described in CT5. It must run exactly the two C108 local commands and
+  stop `AWAITING_WINDOW_REVIEW`. C109 and I105 are reserved and unstarted.
+- **Boundary:** this record and S1/S2 are the only window-agent changes. No
+  source or test leaf edit, database, build, browser, provider, AWS,
+  production, destructive, commit, push, credential, cost, or KI-W7 action
+  occurred in this dispatch record.
+- **Disposition:** `CORRECTIVE-SUBWINDOW-DISPATCHED`; S2 state 30 is `READY`
+  for C108.
+
+```yaml
+certificate: CORRECTIVE-SUBWINDOW-DISPATCHED
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-03
+subwindow_id: KI-W6-C108
+assignment_id: ASG-KI-W6-C108
+assigned_agent: KI-W6-C108-LEAF-AGENT
+writable_file: email_scraper/src/keyword-intelligence/repository.js
+starting_file_digest: be134a3fe039008a9509e940184337e14b276d6bd0e68b6c0830b03e2a68bf48
+starting_repository_change_set_digest: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+required_local_commands: [node --check src/keyword-intelligence/repository.js, git diff --check -- src/keyword-intelligence/repository.js]
+predecessors: [KI-W6-C107 accepted, KI-W6-I104 CV13/CV14 passed, EV-KI-W6-R36]
+integration_assessment_reservation: KI-W6-I105 after independent C108 and C109 acceptance only
+external_mutations: []
+prohibited_actions_observed: []
+status: READY
+```
+
+---
+
+## `EV-KI-W6-R38` — Independent C108 acceptance and C109 dispatch
+
+- **Timestamp / role:** 2026-08-21T16:25:00+05:30 /
+  `KI-W6-WINDOW-AGENT` independent corrective-leaf review and sequential
+  dispatch.
+- **Authority and baseline:** A5 state 157 / `ASG-KI-W6-WA-03`, `KI-CL-24`,
+  `DEC-KI-042`, `SRC-KI-044`, and `EV-KI-W6-R36`. C108's frozen source digest
+  was `be134a3fe039008a9509e940184337e14b276d6bd0e68b6c0830b03e2a68bf48` at
+  backend HEAD `a411d4b967942228809e85c7a9780c4ad004bf3c`.
+- **Provenance and attributable diff:** requester-owned commit
+  `21de6c9f51dd768e520958e3d8119bd484753c4f` (`Harit`, `C108`) has that
+  baseline as its sole parent and changes only
+  `src/keyword-intelligence/repository.js`, ending SHA-256
+  `359a26f75ba7d605a1c13a5e969ef9ce0a49d0533eb6abe3fa1d6f5bd288c2b5`.
+- **CT5 acceptance:** the exact 13-insertion/4-deletion hunk adds only the
+  fixed 5,000/30,000 private constants, optional helper branch and sole
+  publication options. Nineteen `_transaction` callers exist; only
+  `publishResearchResult()` has the second argument. The two direct Prisma
+  transaction calls are the helper's mutually exclusive one- and two-argument
+  branches; all atomic publication behavior is otherwise unchanged.
+- **Independent local checks:** `node --check
+  src/keyword-intelligence/repository.js` and `git diff --check --
+  src/keyword-intelligence/repository.js` passed from `email_scraper/`.
+- **C109 dispatch:** `ASG-KI-W6-C109` assigns only
+  `email_scraper/test/keyword-intelligence-repository.integration.test.js` to
+  `KI-W6-C109-LEAF-AGENT`, starting digest
+  `e1572edeaac65612421fe4b6ae20e979f2aeed16ed94e0b8229b1a6f94856bcc`.
+  Database execution remains reserved to I105/CV21.
+
+```yaml
+certificate: WINDOW-AGENT-FILE-ACCEPTED_AND_SUCCESSOR_DISPATCHED
+accepted_subwindow_id: KI-W6-C108
+ending_file_digest: 359a26f75ba7d605a1c13a5e969ef9ce0a49d0533eb6abe3fa1d6f5bd288c2b5
+requester_owned_commit: 21de6c9f51dd768e520958e3d8119bd484753c4f
+local_checks: [C108-V1 node-check PASS, C108-V1 git-diff-check PASS]
+option_bearing_callers: [publishResearchResult only]
+successor_subwindow_id: KI-W6-C109
+status: C108_ACCEPTED_C109_READY
+```
+
+---
+
+## `EV-KI-W6-R39` — C109 independent review requires one in-scope helper correction
+
+- **Timestamp / role:** 2026-08-21T16:31:00+05:30 /
+  `KI-W6-WINDOW-AGENT` independent C109 review.
+- **Provenance:** requester-owned commit
+  `de9a3fb65a6d0aff00fd33b9adbcf42807e48913` has C108 as its sole parent and
+  changes only `test/keyword-intelligence-repository.integration.test.js`,
+  ending SHA-256
+  `42ae3d725280f05634dc6d86492c17c65751ab0f66b40adad2436ee4ccf572a0`.
+- **Accepted portions:** additive `SCN-KI-042`, literal `W6-TXN-01`,
+  `W6-TXN-02`, and `W6-NC-14`, their exact digest
+  `dd72e2292dac7c33d2250be7af0770401bde67695176d1b76c530b9c7bc10d39`,
+  isolated `setupRepo` lifecycle, 200/default-100 negative/positive fixtures,
+  exact production-option witness, 20-second negative override, literal
+  `pg_sleep(21.000)`, P2028 rollback equality, delayed terminal result and
+  exact replay are present; existing test bytes are otherwise unchanged.
+- **Rejected CT6 point:** `withPublicationTransactionProbe` stores
+  `client.$transaction.bind(client)` and restores that new wrapper in `finally`.
+  CT6 requires the original client `$transaction` property, invoked with its
+  client receiver, to be restored exactly in `finally`. The same C109 one-file
+  scope must repair only that helper restoration point. I105 does not start.
+
+```yaml
+certificate: C109-REVIEW-CORRECTION-REQUIRED
+subwindow_id: KI-W6-C109
+assignment_id: ASG-KI-W6-C109
+ending_file_digest_under_review: 42ae3d725280f05634dc6d86492c17c65751ab0f66b40adad2436ee4ccf572a0
+accepted_registry: [W6-TXN-01, W6-TXN-02, W6-NC-14]
+accepted_registry_digest: dd72e2292dac7c33d2250be7af0770401bde67695176d1b76c530b9c7bc10d39
+required_correction: retain original client.$transaction property; invoke with client receiver; restore original property in finally
+blocked_gates: [KI-W6-CV19, KI-W6-CV20, KI-W6-CV21, KI-W6-CV22, KI-W6-CV23, KI-W6-CV24]
+status: CORRECTION_REQUIRED
+```
+
+---
+
+## `EV-KI-W6-R40` — C109 acceptance and I105 CV19/CV20 pass
+
+- **Timestamp / role:** 2026-08-21T16:38:00+05:30 /
+  `KI-W6-WINDOW-AGENT` corrected-C109 review and integration preflight.
+- **Correction review:** only the original-property helper point changed from
+  C109 commit `de9a3fb65a6d0aff00fd33b9adbcf42807e48913`: the current
+  uncommitted test digest is
+  `9ba39e9cac703fc7df6d24268a4a1f8d870ce8d056e4556ee9218c80c698599d`.
+  `withPublicationTransactionProbe` stores `client.$transaction` itself,
+  invokes `originalTransaction.call(client, ...)`, and restores that exact
+  property in `finally`. All previously accepted C109 additions, IDs, digest,
+  deterministic delay and isolated-schema cleanup remain unchanged.
+- **CV19/CV20 inspection:** C108 remains the sole source diff from its frozen
+  baseline, with only its two private constants, optional helper argument,
+  preserved no-options path and one publication options object. C109 remains
+  additive to its C108 baseline except the intended final newline and three-line
+  original-property repair; all existing tests are byte-identical. Required,
+  registered and activation-gated members are exactly `W6-TXN-01/02`, with
+  `W6-NC-14`; the transaction digest remains
+  `dd72e2292dac7c33d2250be7af0770401bde67695176d1b76c530b9c7bc10d39`.
+- **Independent local checks:** from `email_scraper/`, each ran once and
+  passed: `node --check src/keyword-intelligence/repository.js`; `git diff
+  --check -- src/keyword-intelligence/repository.js`; `node --check
+  test/keyword-intelligence-repository.integration.test.js`; and `git diff
+  --check -- test/keyword-intelligence-repository.integration.test.js`.
+- **Disposition:** C109 is `ACCEPTED_FOR_INTEGRATION`; I105 CV19 and CV20 are
+  PASS. CV21 is next. No database, build, browser, provider, AWS, production,
+  destructive, commit, push, successor, or KI-W7 action occurred in this
+  preflight.
+
+```yaml
+certificate: C109-ACCEPTED_I105-CV19-CV20-PASS
+accepted_subwindow_id: KI-W6-C109
+ending_file_digest: 9ba39e9cac703fc7df6d24268a4a1f8d870ce8d056e4556ee9218c80c698599d
+local_checks: [CV19 C108 node-check PASS, CV19 C108 git-diff-check PASS, CV20 C109 node-check PASS, CV20 C109 git-diff-check PASS]
+transaction_registry: [W6-TXN-01, W6-TXN-02]
+transaction_registry_digest: dd72e2292dac7c33d2250be7af0770401bde67695176d1b76c530b9c7bc10d39
+negative_control: W6-NC-14
+next_gate: KI-W6-CV21
+status: READY
+```
+
+---
+
+## `EV-KI-W6-R41` — I105 CV21 execution certificate unavailable
+
+- **Timestamp / role:** 2026-08-21T16:40:00+05:30 /
+  `KI-W6-WINDOW-AGENT` stateful integration assessment.
+- **Authority:** A5 state 157 / `ASG-KI-W6-WA-03` and `KI-W6-I105`. CV21 is
+  one stateful isolated-database run; it may start elevated, but missing,
+  partial, reconstructed, summary-only or failed evidence cannot be accepted
+  and prohibits CV22–CV24.
+- **Invocation:** from `email_scraper/`, the exact frozen command was invoked
+  once under the authorized local escalation:
+  `ALLOW_DATABASE_TESTS=true node -r dotenv/config --test --test-isolation=none --test-concurrency=1 --test-name-pattern='publishResearchResult (requires|rollback)|SCN-KI-022: stale owners|SCN-KI-042' test/keyword-intelligence-repository.integration.test.js`.
+  The execution channel reported process completion after approximately 34
+  seconds but returned no terminal TAP output or diagnostic payload: no exit
+  code, pass/fail/skip totals, registry execution witness, P2028 rollback
+  witness, delayed replay result, or isolated-schema cleanup/absence evidence.
+- **Disposition:** CV21 is `UNOBSERVABLE`, not PASS and not an inferred product
+  failure. The one invocation is consumed; no CV21 rerun/recovery, CV22–CV24,
+  CH7, or CH8 ran. Parent disposition is required to establish a permitted
+  observable recovery path. No provider, AWS, production, destructive, commit,
+  push, paid, or KI-W7 action occurred.
+
+```yaml
+certificate: I105-CV21-EXECUTION-CERTIFICATE-UNAVAILABLE
+parent_window_id: KI-W6
+integration_assessment_id: KI-W6-I105
+cv19: PASS
+cv20: PASS
+cv21: UNOBSERVABLE
+invocations: 1
+execution_channel_completion: true
+terminal_output_available: false
+exit_code_available: false
+case_counts_available: false
+cleanup_evidence_available: false
+next_actions: STOP_FOR_PARENT_DISPOSITION
+external_mutations: []
+status: BLOCKED
+```
+
+---
+
+## `EV-KI-W6-R42` — State-158 CV21 recovery renewed-unobservable
+
+- **Timestamp / role:** 2026-08-21T16:50:00+05:30 /
+  `KI-W6-WINDOW-AGENT` final authorized CV21 recovery assessment.
+- **Authority and preflight:** A5 state 158 / `ASG-KI-W6-WA-03` superseded
+  R41's transport invalidation with one identical elevated recovery only.
+  Before it, read-only inspection found no matching Node test process and the
+  authorized direct isolated-database query confirmed no
+  `kiw6_txn042_*` disposable schema remained. No database URL was printed.
+- **Recovery invocation and durable capture:** the exact frozen CV21 command
+  and selection ran once under elevation, with stdout, stderr and intended exit
+  status redirected under a fresh `/tmp/kiw6-cv21-state158.*` directory. The
+  capture contains exactly one stdout line:
+  `✔ publishResearchResult requires completed stages, deep-equal W2 default selection, and publishes atomically with revision one (41288.488584ms)`.
+  `stderr.log` is empty. No matching test process remains. Critically, the
+  wrapper never wrote its `exit-status` file and stdout contains no remaining
+  selected test results or final TAP totals.
+- **Disposition:** this is partial durable evidence, not a usable CV21 result:
+  it cannot prove the required exact four pass/zero fail/zero skip counts,
+  `W6-TXN-01/02` execution, `W6-NC-14` falsification, P2028 rollback, delayed
+  replay, or complete disposable-schema cleanup. State 158 consumes the only
+  recovery, so CV21 remains `UNOBSERVABLE`; no second recovery, CV22–CV24,
+  CH7, or CH8 ran. Parent disposition is required. No provider, AWS,
+  production, destructive, commit, push, paid, or KI-W7 action occurred.
+
+```yaml
+certificate: I105-CV21-STATE158-RECOVERY-RENEWED-UNOBSERVABLE
+parent_window_id: KI-W6
+integration_assessment_id: KI-W6-I105
+cv21_initial: EXECUTION_CHANNEL_INVALIDATED
+cv21_state158_recovery: RENEWED_UNOBSERVABLE
+recovery_invocations: 1
+preflight_process_absence: PASS
+preflight_schema_absence: PASS
+capture_directory: /tmp/kiw6-cv21-state158.KP3m7L
+captured_selected_passes: 1
+captured_selected_pass_name: publishResearchResult requires completed stages, deep-equal W2 default selection, and publishes atomically with revision one
+captured_selected_pass_duration_ms: 41288.488584
+stderr_empty: true
+exit_status_available: false
+complete_tap_available: false
+required_four_case_certificate_available: false
+cleanup_certificate_available: false
+next_actions: STOP_FOR_PARENT_DISPOSITION
+external_mutations: []
+status: BLOCKED
+```
+
+---
+
+## `EV-KI-W6-R43` — State-159 final persistent-session transport unobservability
+
+- **Timestamp / role:** 2026-08-21T16:57:00+05:30 /
+  `KI-W6-WINDOW-AGENT` final authorized CV21 transport attempt.
+- **Authority and preflight:** A5 state 159 / `ASG-KI-W6-WA-03` authorized one
+  identical CV21 command in a persistent session with a fixed 600,000 ms outer
+  deadline. Read-only preflight found no matching process and zero
+  `kiw6_txn042_*` schemas without printing a database URL.
+- **Attempt:** fresh capture directory `/tmp/kiw6-cv21-state159.JPCZ5y` was
+  created. The literal Node command was wrapped only by the authorized deadline
+  with separate stdout/stderr and an immediate post-return exit-status write.
+  The terminal interface returned only the capture directory and no persistent
+  session identifier. Immediate polling found no timeout/Node process; both
+  capture files were empty and no `exit-status` file exists.
+- **Disposition:** no observable CV21 session or result exists. This is neither
+  a pass nor behavioral failure, but state 159 marks it final; no retry,
+  CV22–CV24, CH7, or CH8 ran. Parent disposition is required.
+
+```yaml
+certificate: I105-CV21-STATE159-PERSISTENT-SESSION-UNOBSERVABLE
+parent_window_id: KI-W6
+integration_assessment_id: KI-W6-I105
+cv21_state159_attempts: 1
+outer_deadline_ms: 600000
+preflight_process_absence: PASS
+preflight_schema_absence: PASS
+capture_directory: /tmp/kiw6-cv21-state159.JPCZ5y
+persistent_session_identifier_available: false
+matching_process_after_launch: false
+stdout_bytes: 0
+stderr_bytes: 0
+exit_status_available: false
+cv21_verdict: UNOBSERVABLE
+next_actions: STOP_FOR_PARENT_DISPOSITION
+external_mutations: []
+status: BLOCKED
+```
+
+---
+
+## `EV-KI-W6-R44` — ASG-KI-W6-WA-04 intake, preflight CP23–CP26, and seventh-correction transcription
+
+- **Timestamp / role:** 2026-08-21T18:20:00+05:30 / `KI-W6-WINDOW-AGENT`
+  intake under A5 state 163, assignment `ASG-KI-W6-WA-04`.
+- **CP23 pin verification:** recomputed lowercase SHA-256 of all six pinned
+  artifacts; every value equals the A5 state-163 pin —
+  contract `8b17f85c…0522c`, decision ledger `1e931353…c283`, parent
+  checklist `fbc3a615…6566a`, parent standard `cda35201…2848`, sub-window
+  standard `84e7590e…56e9`, approved decomposition (S1 pre-append)
+  `83e2b793…e7aa`. A5 itself hashed `b38353a7…3c814f8a`. Assignment names
+  `KI-W6-WINDOW-AGENT`; authorized windows `[KI-W6]`; `stop_after: KI-W6`.
+- **CP24 predecessor verification:** parent A6 `EV-KI-A-100` preserves
+  C110 local checks plus CV26 accepted at four pass / zero fail / zero skip
+  with zero residual schemas, and C111 accepted locally with CV26 not
+  repeated; `EV-KI-A-101` preserves CV32 as the observable failed
+  provider-settlement diagnostic (`settleAttempt` default-timeout expiry)
+  with CV33–CV35 unexecuted. No subordinate relabelling occurred.
+- **CP25 baseline verification:** the five starting file digests equal the
+  parent CT9–CT13 baselines exactly —
+  `repository.js=359a26f7…88c2b5`, `recovery.js=3fcf9b47…0a14f0`,
+  `keyword-intelligence-repository.test.js=1a2168af…3a77a2`,
+  `keyword-intelligence-repository.integration.test.js=a278681e…cb271a5`,
+  `keyword-intelligence-recovery.test.js=22d2bade…a27075`; recomputed
+  sorted-LF five-path set digest equals the planned changed-file-set digest
+  `dd66e44200514702c82ad06da4c93b3dda30596048a1f569d5779642119f8130`.
+  Root owner-controlled relocation state is preserved (10 modified root docs,
+  nested repositories untracked, none staged); the only `email_scraper/`
+  change is the preserved requester/leaf-owned uncommitted integration test
+  whose digest equals the C115 baseline.
+- **CP26 isolation verification:** `TEST_DATABASE_URL` resolves through
+  `resolveDirectTestDatabaseUrl` (pooler→direct rewrite, identity-distinct
+  assertion against `DATABASE_URL` passed: distinct Neon host). Read-only
+  `pg_namespace` query on the resolved direct admin connection returned zero
+  `kiw6_%` schemas (credentials never printed). Delta audit for the stale S2
+  pins (state-36 era) recorded: the parent appended `SRC-KI-047`,
+  `DEC-KI-045`, the fifth/sixth parent-takeover corrections, and the seventh
+  correction to A2/A3/A4 and reassigned WA-04; S2 was reconciled to state 37
+  with all current pins.
+- **Coverage digest precomputation:** sorted-LF digests recomputed for
+  `W6-DB-01`–`07` = `073c0fa52135c9a271eea75264efc79fd6ebcb8d062ec73175dbb58a5333aa8f`
+  (7 members) and `W6-NC-15`–`17` =
+  `86562d5c606dc8867b40ecd46b6604e2f5a66a2553c41a20a23696cb48cdbec0`
+  (3 members); both equal the parent CV42 expectations.
+- **Transcription:** CT9–CT13 task text and CV36–CV43/CH9 gates were copied
+  verbatim from parent checklist §KI-W6 seventh correction into S1 (append
+  only) with Section-7 identity blocks (assignment IDs `ASG-KI-W6-C112`–
+  `ASG-KI-W6-C116`, exact starting digests, starting change set
+  `test/keyword-intelligence-repository.integration.test.js` sorted-LF digest
+  `68592b172551c23e0567c01db151a35afcda677947f2dc005debff7cffcf476a`).
+  Post-append S1 revision
+  `525d94bec19a40a3b028a49375abaf9fe67cb74cfb0e7c90c7672d509f5daddf`.
+  No file set, algorithm, interface, profile membership, operation ceiling,
+  case/control allocation, gate or stop rule diverged from the parent trace.
+- **Source intake:** window agent read both production targets in full and
+  confirmed the 18 `this._transaction(` call sites (initialize, claim,
+  recordAttempt, settleAttempt, markAttemptAmbiguous, deferTask, scheduleRetry,
+  terminalize, claimAggregator, publishCandidateManifest, publishShortlist,
+  publishResearchResult, failStage, saveSelection, createRun initial, createRun
+  reconciliation, recover, claimThrottle) and the unbounded
+  `repository.recover(now)` caller, matching `SRC-KI-047`.
+- **Limitations / deferred:** no implementation, test, database-behavior,
+  build, browser or package execution occurred. CV38/CV39/CV40/CV41 stateful
+  gates remain unexecuted and belong exclusively to I108.
+- **External mutations:** none (read-only queries plus S1/S2/S3 coordination
+  writes only). Cost `$0.00`.
+
+```yaml
+certificate: WINDOW-AGENT-INTAKE-PREFLIGHT
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-04
+preconditions_passed: [CP23, CP24, CP25, CP26]
+transcription_equal_to_parent_trace: true
+s1_revision: 525d94bec19a40a3b028a49375abaf9fe67cb74cfb0e7c90c7672d509f5daddf
+s2_state_version: 37
+first_subwindow: KI-W6-C112
+next_action: assign ASG-KI-W6-C112
+external_mutations: []
+status: READY
+```
+
+---
+
+## `EV-KI-W6-R45` — C112 leaf execution and independent window-agent review (ACCEPTED_FOR_INTEGRATION)
+
+- **Timestamp / role:** 2026-08-21T18:55:00+05:30 / `KI-W6-C112-LEAF-AGENT`
+  execution under `ASG-KI-W6-C112`, then independent
+  `KI-W6-WINDOW-AGENT` review.
+- **Leaf execution:** applied CT9 items 3–11 in
+  `email_scraper/src/keyword-intelligence/repository.js` only; starting digest
+  `359a26f75ba7d605a1c13a5e969ef9ce0a49d0533eb6abe3fa1d6f5bd288c2b5`
+  verified before edit; ending digest
+  `17e55ed257f5027325b650ff22a4af9d8d3b34d3008f49b26c1637c379899cf6`.
+  Leaf ran the three local proofs once and stopped `AWAITING_WINDOW_REVIEW`
+  with a complete report; no second file, database, build, browser, provider,
+  AWS, commit, push, successor or parent communication occurred.
+- **Window-agent independent verification (not summary acceptance):**
+  - recomputed ending digest equals
+    `17e55ed257f5027325b650ff22a4af9d8d3b34d3008f49b26c1637c379899cf6`;
+  - `git status --porcelain` shows exactly the one attributable file plus the
+    preserved requester-owned `test/keyword-intelligence-repository.integration.test.js`;
+  - re-ran `node --check` (exit 0) and `git diff --check` (exit 0);
+  - re-ran the deterministic extraction (script at `/tmp/opencode/`, outside
+    the workspace): 18 `this._transaction(` sites, exact 8 SHORT
+    (claim, deferTask, scheduleRetry, claimAggregator, failStage, saveSelection,
+    createRun P2002 reconciliation, claimThrottle) and 10 SCALE (initialize,
+    recordAttempt, settleAttempt, markAttemptAmbiguous, terminalize,
+    publishCandidateManifest, publishShortlist, publishResearchResult,
+    createRun initial, recover), zero option-less sites, no one-argument
+    `$transaction` branch, frozen 5000/15000 and 5000/30000 constants,
+    publication-only constants removed — OVERALL PASS;
+  - inspected the actual diff hunks for every CT9 item: context reads (one
+    relation-bearing read each), initialization (`createManyAndReturn` +
+    unsigned-UTF-8 `itemKey` sort, no reloads), claim/terminalize/
+    claimAggregator/settleAttempt (`updateManyAndReturn`, no rereads),
+    provider-ledger consolidation with preserved exposure aggregate and cache
+    conflict logic, `publishResearchResult` single research+generation-stages
+    read with unchanged two conditional writes and `FinalPublicationAbort`
+    mapping, handoff reads (research+handoff+Run one read; P2002
+    reconciliation handoff+Run one read), `recover(now,{limit})` with integer
+    1..100 guard, three `take:limit` reads and the DEC-KI-045
+    eligibility/rank/unsigned-ID merge/slice, and the single
+    inserted/updated/union CTE for `claimThrottle` with database-clock
+    timestamps; `MARKET_TASK_KEYS` byte-identical to HEAD; operation ceilings
+    match DEC-KI-045 (1/1/2/4/4/2/2/4/2/4/4/1/3 reads-writes per method).
+- **Dispositions of leaf-reported notes (no improvised behavior):**
+  1. `getStageContext` corner — with the mandated single stage read keyed by
+     the generation-derived `stageId`, a research that exists with a different
+     generation and no stage row for the queried generation now returns
+     `not_found` where the two-read predecessor returned `conflict`. All four
+     prescribed checks are preserved and the return union is unchanged; the
+     corner is the direct mechanical consequence of DEC-KI-045's
+     one-delegate-operation ceiling. Real behavior is exercised by C115/I108.
+  2. `recover(now, { limit } = {})` — an omitted second argument fails closed
+     via the existing `conflict()` idiom (integer guard rejects `undefined`);
+     the sole production caller passes `{limit}` (C113).
+  Both are mechanically determined; no parent-trace divergence found.
+- **Coverage:** no coverage cases execute in this leaf (unit/integration cases
+  belong to C114/C115/C116/I108); the 18/8/10 profile structure is the CT9
+  local activation witness for later `W6-DB-01` execution.
+- **External mutations:** none. Cost `$0.00`.
+
+```yaml
+certificate: FILE-SUBWINDOW-EXECUTED
+parent_window_id: KI-W6
+subwindow_id: KI-W6-C112
+assignment_id: ASG-KI-W6-C112
+agent_identity: KI-W6-C112-LEAF-AGENT
+writable_file: email_scraper/src/keyword-intelligence/repository.js
+starting_file_digest: 359a26f75ba7d605a1c13a5e969ef9ce0a49d0533eb6abe3fa1d6f5bd288c2b5
+ending_file_digest: 17e55ed257f5027325b650ff22a4af9d8d3b34d3008f49b26c1637c379899cf6
+attributable_changed_file_set: [email_scraper/src/keyword-intelligence/repository.js]
+required_local_cases: []
+registered_local_cases: []
+executed_local_cases: []
+negative_controls_expected: 0
+negative_controls_falsified: 0
+commands: [node --check src/keyword-intelligence/repository.js (exit 0), git diff --check -- src/keyword-intelligence/repository.js (exit 0), deterministic 18-site profile extraction (PASS 8/10)]
+deferred_integration_checks: [CV37, CV38, CV39, CV40, CV41]
+external_mutations: []
+prohibited_actions_observed: []
+successor_work_started: false
+direct_parent_communication: false
+status: AWAITING_WINDOW_REVIEW
+```
+
+```yaml
+certificate: WINDOW-AGENT-REVIEW-DISPOSITION
+parent_window_id: KI-W6
+subwindow_id: KI-W6-C112
+disposition: ACCEPTED_FOR_INTEGRATION
+review_evidence: EV-KI-W6-R45
+next_subwindow: KI-W6-C113
+next_assignment_id: ASG-KI-W6-C113
+```
+
+---
+
+## `EV-KI-W6-R46` — C113 leaf execution and independent window-agent review (ACCEPTED_FOR_INTEGRATION)
+
+- **Timestamp / role:** 2026-08-21T19:20:00+05:30 / `KI-W6-C113-LEAF-AGENT`
+  execution under `ASG-KI-W6-C113`, then independent
+  `KI-W6-WINDOW-AGENT` review.
+- **Leaf execution:** one hunk in
+  `email_scraper/src/aws-pipeline/keyword-intelligence/recovery.js` only;
+  starting digest
+  `3fcf9b47c5def5ef2729fe7c844661fd17919978ec0f64156de29ac1050a14f0`
+  verified; ending digest
+  `714e40daf68eb01bd43d71b76c446dad516ee5d0c2da51c57a4d85489d651df3`.
+  The diff replaces `recover(now)` with exactly `recover(now, { limit })` and
+  adds the sum-over-`limit` `PipelineInvariantError("PIPELINE_INPUT_CONFLICT")`
+  guard after the `outcome !== "found"` check and before the first `sendOne`.
+  Everything else preserved: `{now, limit=100}` validation, queue URL parser,
+  list orders, sequential sends, four message shapes, fingerprints, return
+  object, safe errors. The validated-but-ignored limit is removed.
+- **Window-agent independent verification:** recomputed ending digest equals
+  the leaf claim; re-ran `node --check` (exit 0) and file-scoped
+  `git diff --check` (exit 0); inspected the actual hunk; `git status
+  --porcelain` shows the attributable delta is exactly the one writable file
+  beside the two preserved pre-existing modifications (accepted C112
+  `repository.js` and requester-owned integration test), both untouched.
+- **Coverage:** no cases execute in this leaf (`W6-DB-06` activation is
+  C115/I108; `W6-NC-17` falsification is C116). Behavioral proof deliberately
+  deferred per CT10 items 6–7.
+- **External mutations:** none. Cost `$0.00`.
+
+```yaml
+certificate: FILE-SUBWINDOW-EXECUTED
+parent_window_id: KI-W6
+subwindow_id: KI-W6-C113
+assignment_id: ASG-KI-W6-C113
+agent_identity: KI-W6-C113-LEAF-AGENT
+writable_file: email_scraper/src/aws-pipeline/keyword-intelligence/recovery.js
+starting_file_digest: 3fcf9b47c5def5ef2729fe7c844661fd17919978ec0f64156de29ac1050a14f0
+ending_file_digest: 714e40daf68eb01bd43d71b76c446dad516ee5d0c2da51c57a4d85489d651df3
+attributable_changed_file_set: [email_scraper/src/aws-pipeline/keyword-intelligence/recovery.js]
+required_local_cases: []
+registered_local_cases: []
+executed_local_cases: []
+negative_controls_expected: 0
+negative_controls_falsified: 0
+commands: [node --check src/aws-pipeline/keyword-intelligence/recovery.js (exit 0), git diff --check -- src/aws-pipeline/keyword-intelligence/recovery.js (exit 0)]
+deferred_integration_checks: [CV37, CV38, CV40, CV41]
+external_mutations: []
+prohibited_actions_observed: []
+successor_work_started: false
+direct_parent_communication: false
+status: AWAITING_WINDOW_REVIEW
+```
+
+```yaml
+certificate: WINDOW-AGENT-REVIEW-DISPOSITION
+parent_window_id: KI-W6
+subwindow_id: KI-W6-C113
+disposition: ACCEPTED_FOR_INTEGRATION
+review_evidence: EV-KI-W6-R46
+next_subwindow: KI-W6-C114
+next_assignment_id: ASG-KI-W6-C114
+```
+
+---
+
+## `EV-KI-W6-R47` — C114 leaf execution and independent window-agent review (ACCEPTED_FOR_INTEGRATION)
+
+- **Timestamp / role:** 2026-08-21T19:55:00+05:30 / `KI-W6-C114-LEAF-AGENT`
+  execution under `ASG-KI-W6-C114`, then independent
+  `KI-W6-WINDOW-AGENT` review.
+- **Leaf execution:** purely additive edit to
+  `email_scraper/test/keyword-intelligence-repository.test.js` (657
+  insertions, 0 deletions); starting digest
+  `1a2168af81e97f9b0cd239d594362e8a0856754f6b0783efa8c2f134843a77a2`
+  verified; ending digest
+  `87c5fa819f52ce48774fe44e4addc6a29b4e3d34a7ec3a6feb39cf6107d55bce`.
+  Added one top-level test exactly named `SCN-KI-043 unit: explicit
+  transaction profiles and consolidated contexts` containing a literal
+  required registry `["W6-DB-01","W6-DB-02"]`, control `["W6-NC-15"]`,
+  deterministic string/template/comment-aware source scanner, profile oracle,
+  sorted-LF digest helper, and faithful fake Prisma delegates with operation
+  spies and a `$transaction` options recorder.
+- **Case results:** `W6-DB-01` executed — 18-site multiset with exact 8-SHORT/
+  10-SCALE partition, frozen 5000/15000 and 5000/30000 constants, zero
+  option-less sites, single `client.$transaction(callback, options)`
+  dispatch, no provider/S3/SQS symbols inside any transaction callback;
+  activation witness is successful parsing of every call. `W6-DB-02`
+  executed — `getTaskContext` exactly 1 op, `getStageContext` exactly 1 op
+  with ordered tasks, `claim` ≤2 ops receiving SHORT, `claimAggregator` ≤2 ops
+  receiving SHORT, projections deep-equal the worker shapes. `W6-NC-15`
+  falsified — an in-memory source copy with one options argument stripped
+  makes the unchanged oracle throw; production bytes proven unedited by
+  source SHA equality. Registered/executed equality asserted with digest
+  `bdac823dcc377ac262913efa9e3cb91c22f09f893efc3d812107c948a83dfea6`
+  (= sha256 of `W6-DB-01\nW6-DB-02\n`).
+- **Window-agent independent verification:** recomputed ending digest equals
+  the claim; re-ran `node --check` (0), file-scoped `git diff --check` (0),
+  and the exact focused invocation — tests 1 / pass 1 / fail 0 / skipped 0;
+  inspected the added assertions (registry literals at test lines 184–186,
+  activation witnesses, op-ceiling asserts at lines 739/758/776/797, NC-15
+  throw + disk-integrity assert at lines 830–834); `git diff --stat` confirms
+  657 insertions and zero deletions (existing tests preserved
+  byte-for-byte); `git status --porcelain` attributable delta is exactly the
+  one test file beside the three preserved pre-existing modifications.
+- **Substitute fidelity:** source parsing proves call-site structure only;
+  fake delegates prove repository control flow and option propagation only.
+  Real SQL/atomicity/row-equality claims remain with C115/I108 (CT11 item 8).
+- **External mutations:** none. Cost `$0.00`.
+
+```yaml
+certificate: FILE-SUBWINDOW-EXECUTED
+parent_window_id: KI-W6
+subwindow_id: KI-W6-C114
+assignment_id: ASG-KI-W6-C114
+agent_identity: KI-W6-C114-LEAF-AGENT
+writable_file: email_scraper/test/keyword-intelligence-repository.test.js
+starting_file_digest: 1a2168af81e97f9b0cd239d594362e8a0856754f6b0783efa8c2f134843a77a2
+ending_file_digest: 87c5fa819f52ce48774fe44e4addc6a29b4e3d34a7ec3a6feb39cf6107d55bce
+attributable_changed_file_set: [email_scraper/test/keyword-intelligence-repository.test.js]
+required_local_cases: [W6-DB-01, W6-DB-02]
+registered_local_cases: [W6-DB-01, W6-DB-02]
+executed_local_cases: [W6-DB-01, W6-DB-02]
+skipped_local_cases: []
+duplicate_case_ids: []
+unexpected_case_ids: []
+missing_activation_witnesses: []
+negative_controls_expected: 1
+negative_controls_falsified: 1
+commands: [node --check test/keyword-intelligence-repository.test.js (exit 0), git diff --check -- test/keyword-intelligence-repository.test.js (exit 0), node --test --test-isolation=none --test-name-pattern='SCN-KI-043 unit: explicit transaction profiles and consolidated contexts' test/keyword-intelligence-repository.test.js (1 pass/0 fail/0 skip)]
+deferred_integration_checks: [CV37, CV38]
+external_mutations: []
+prohibited_actions_observed: []
+successor_work_started: false
+direct_parent_communication: false
+status: AWAITING_WINDOW_REVIEW
+```
+
+```yaml
+certificate: WINDOW-AGENT-REVIEW-DISPOSITION
+parent_window_id: KI-W6
+subwindow_id: KI-W6-C114
+disposition: ACCEPTED_FOR_INTEGRATION
+review_evidence: EV-KI-W6-R47
+next_subwindow: KI-W6-C115
+next_assignment_id: ASG-KI-W6-C115
+```
+
+---
+
+## `EV-KI-W6-R48` — C115 leaf execution and independent window-agent review (ACCEPTED_FOR_INTEGRATION)
+
+- **Timestamp / role:** 2026-08-21T20:45:00+05:30 / `KI-W6-C115-LEAF-AGENT`
+  execution under `ASG-KI-W6-C115`, then independent
+  `KI-W6-WINDOW-AGENT` review.
+- **Leaf execution:** purely additive append to
+  `email_scraper/test/keyword-intelligence-repository.integration.test.js`;
+  starting digest
+  `a278681ee25a2a955f010ceda54f6a3571f8aa782b5edc9aae20b27b7cb271a5`
+  verified; ending digest
+  `c50b1e707cca6bd577560aec1c3b7ac87cb157f8f6fe4172d001445eb6e07424`.
+  Added ONE top-level test exactly named `SCN-KI-043: set-based transaction
+  ceilings and bounded recovery` (guarded by the file's existing
+  database-enable flag) with a non-mutating operation-counting Proxy
+  (delegate ops per model.method, raw SQL statements excluding `set_config`,
+  `$transaction` options via structuredClone) and the `W6-NC-16`
+  extra-read wrapper.
+- **Registered/enforced content:** literal required registry
+  `["W6-DB-03","W6-DB-04","W6-DB-05","W6-DB-06","W6-DB-07"]`, control
+  `["W6-NC-16"]`, pinned sorted-LF case digest asserted in-file
+  `5e80c31a18622c0466176aa8668ff82e00ef6e90a15484eb1fc2710f0ce14261`.
+  W6-DB-03 fenced attempts/settlement ceilings/rollback with exact op logs
+  and SCALE; W6-DB-04 terminal/publication fencing, once-only counters,
+  conditional ready transition, replay set equality, stale-owner zero
+  visibility, ≤4-op mutation branches; W6-DB-05 ten-task five-seed
+  initialization with `createManyAndReturn` and no reload, 100-item handoff
+  (1 Run/100 RunQuery/1 handoff, SCALE), same-key replay, unequal conflict;
+  W6-DB-06 120 seeded eligible members, exactly three bounded reads, exact
+  deterministic first 100, member 101 never returned, limit-7 exact prefix
+  (executed first for read-determinism; set equality is order-independent);
+  W6-DB-07 five concurrent throttle claims — one raw statement per
+  invocation, exactly one claimant, four delayed at the same boundary, an
+  exact-due subsequent claim, SHORT profile on every invocation; W6-NC-16
+  reintroduced extra delegate read makes the unchanged ceiling witness throw,
+  then the unwrapped production path passes.
+- **Window-agent independent verification:** recomputed ending digest;
+  re-proved pure additivity — `head -n 2066 | sha256sum` of the ending file
+  equals the starting digest, so every pre-existing test/oracle (including
+  C110's `SCN-KI-042` deterministic 20/21-second proof, `SCN-KI-022`
+  stale-owner tests, all `publishResearchResult` tests) is byte-identical;
+  re-ran `node --check` (exit 0) and file-scoped `git diff --check`
+  (exit 0); inspected the registry literals and per-case assertions in the
+  actual file (test at line 2169, registry/digest at 2170–2178, W6-DB-06
+  three-read and member-101 witnesses at 2266–2294); `git status
+  --porcelain` attributable delta is exactly the one test file beside the
+  three preserved pre-existing modifications. The diff-vs-HEAD "1 deletion"
+  is pre-existing C110-era baseline content, not a leaf edit, proven by the
+  prefix hash.
+- **Deferred:** the single database execution of this registry belongs
+  exclusively to I108/CV38 (CT12 item 11). No database, prisma, build,
+  browser or provider command ran in this leaf.
+- **External mutations:** none. Cost `$0.00`.
+
+```yaml
+certificate: FILE-SUBWINDOW-EXECUTED
+parent_window_id: KI-W6
+subwindow_id: KI-W6-C115
+assignment_id: ASG-KI-W6-C115
+agent_identity: KI-W6-C115-LEAF-AGENT
+writable_file: email_scraper/test/keyword-intelligence-repository.integration.test.js
+starting_file_digest: a278681ee25a2a955f010ceda54f6a3571f8aa782b5edc9aae20b27b7cb271a5
+ending_file_digest: c50b1e707cca6bd577560aec1c3b7ac87cb157f8f6fe4172d001445eb6e07424
+attributable_changed_file_set: [email_scraper/test/keyword-intelligence-repository.integration.test.js]
+required_local_cases: [W6-DB-03, W6-DB-04, W6-DB-05, W6-DB-06, W6-DB-07]
+registered_local_cases: [W6-DB-03, W6-DB-04, W6-DB-05, W6-DB-06, W6-DB-07]
+executed_local_cases: [] # database execution deferred to I108/CV38 by CT12 item 11
+deferred_reason: single-database-gate ownership
+negative_controls_expected: 1
+negative_controls_falsified: 0 # NC-16 falsification runs at CV38 with the database
+commands: [node --check test/keyword-intelligence-repository.integration.test.js (exit 0), git diff --check -- test/keyword-intelligence-repository.integration.test.js (exit 0)]
+deferred_integration_checks: [CV38]
+external_mutations: []
+prohibited_actions_observed: []
+successor_work_started: false
+direct_parent_communication: false
+status: AWAITING_WINDOW_REVIEW
+```
+
+```yaml
+certificate: WINDOW-AGENT-REVIEW-DISPOSITION
+parent_window_id: KI-W6
+subwindow_id: KI-W6-C115
+disposition: ACCEPTED_FOR_INTEGRATION
+review_evidence: EV-KI-W6-R48
+next_subwindow: KI-W6-C116
+next_assignment_id: ASG-KI-W6-C116
+```
+
+---
+
+## `EV-KI-W6-R49` — C116 leaf execution and independent window-agent review (ACCEPTED_FOR_INTEGRATION)
+
+- **Timestamp / role:** 2026-08-21T21:15:00+05:30 / `KI-W6-C116-LEAF-AGENT`
+  execution under `ASG-KI-W6-C116`, then independent
+  `KI-W6-WINDOW-AGENT` review.
+- **Leaf execution:** edit to
+  `email_scraper/test/keyword-intelligence-recovery.test.js` (+159/−2);
+  starting digest
+  `22d2bade7c316bed275057a5c20c78df516b64de99f6d960254a916283a27075`
+  verified; ending digest
+  `41240b256c2041a62deaab7f1d09e3fa9cba8e97ec953f3ed1bee7812115b2f6`.
+  Updated the faithful repository mock to `recover(now, { limit })` with a
+  forwarded-value assertion and call recorder; preserved every existing
+  message/order/error test; added one top-level test exactly named
+  `SCN-KI-043 recovery caller: forwards bound and rejects over-return` with
+  the 100-member positive oracle (exactly 100 ordered exact-shape sends,
+  counts `{30,50,20,sent:100}`, repository saw `{limit:100}`), the `limit:1`
+  small-limit oracle, the `W6-NC-17` over-return control (101 = `limit+1`
+  rejected as `PipelineInvariantError` `PIPELINE_INPUT_CONFLICT` with zero
+  sends, proven at the post-repository guard via the call record), and
+  invalid-input preservation (0/101/12.5 → zero repository and zero send
+  calls). Control registry frozen `["W6-NC-17"]` with `W6-DB-06` asserted
+  not registered here.
+- **Window-agent independent verification:** recomputed ending digest;
+  re-ran `node --check` (0), file-scoped `git diff --check` (0), the exact
+  focused invocation (tests 1 / pass 1 / fail 0 / skipped 0) and the full
+  file suite (tests 5 / pass 5 / fail 0 / skipped 0); inspected the registry
+  literals (lines 151–156) and the falsified-control push (line 285);
+  `git status --porcelain` attributable delta is exactly the one file beside
+  the four preserved pre-existing modifications.
+- **Substitute fidelity:** mocks prove caller propagation and the
+  zero-send over-return guard only; real repository ordering/bounds belong
+  to C115/I108 (CT13 item 8).
+- **External mutations:** none. Cost `$0.00`.
+
+```yaml
+certificate: FILE-SUBWINDOW-EXECUTED
+parent_window_id: KI-W6
+subwindow_id: KI-W6-C116
+assignment_id: ASG-KI-W6-C116
+agent_identity: KI-W6-C116-LEAF-AGENT
+writable_file: email_scraper/test/keyword-intelligence-recovery.test.js
+starting_file_digest: 22d2bade7c316bed275057a5c20c78df516b64de99f6d960254a916283a27075
+ending_file_digest: 41240b256c2041a62deaab7f1d09e3fa9cba8e97ec953f3ed1bee7812115b2f6
+attributable_changed_file_set: [email_scraper/test/keyword-intelligence-recovery.test.js]
+required_local_cases: []
+registered_local_controls: [W6-NC-17]
+falsified_local_controls: [W6-NC-17]
+negative_controls_expected: 1
+negative_controls_falsified: 1
+commands: [node --check (0), git diff --check (0), focused pattern run (1/0/0), full file run (5/5/0)]
+deferred_integration_checks: [CV37, CV40]
+external_mutations: []
+prohibited_actions_observed: []
+successor_work_started: false
+direct_parent_communication: false
+status: AWAITING_WINDOW_REVIEW
+```
+
+```yaml
+certificate: WINDOW-AGENT-REVIEW-DISPOSITION
+parent_window_id: KI-W6
+subwindow_id: KI-W6-C116
+disposition: ACCEPTED_FOR_INTEGRATION
+review_evidence: EV-KI-W6-R49
+next_subwindow: KI-W6-I108
+next_assignment_id: ASG-KI-W6-WA-04
+```
+
+---
+
+## `EV-KI-W6-R50` — I108 CV38 failed assessment evidence and diagnosis
+
+- **Timestamp / role:** 2026-08-21T21:55:00+05:30 / `KI-W6-WINDOW-AGENT`
+  personal execution of I108 gate CV38 under `ASG-KI-W6-WA-04`.
+- **Command (exactly once):** `ALLOW_DATABASE_TESTS=true node -r dotenv/config
+  --test --test-isolation=none --test-concurrency=1 --test-name-pattern='SCN-KI-043:
+  set-based transaction ceilings and bounded recovery|publishResearchResult
+  (requires|rollback)|SCN-KI-022: stale owners|SCN-KI-042'
+  test/keyword-intelligence-repository.integration.test.js`.
+- **Observed result:** FAIL (observable assertion failures, not sandbox or
+  channel invalidation):
+  1. `W6-DB-06` line 2293 — `limit:7` prefix deepEqual failed: returned task
+     IDs were not `expectedTaskIds.slice(0,7)`.
+  2. Registry assertion line 2779 — `registered.length` 6 !== 5.
+- **Diagnosis (root cause, both in the C115 leaf's appended test block only;
+  production repository untouched and behaving exactly per DEC-KI-045):**
+  1. The test seeded task/stage eligibility timestamps by insertion index,
+     but candidate IDs are content-derived hashes, so id-ascending order does
+     not equal eligibility order. DEC-KI-045 locks recovery to three
+     `take:limit` reads ordered by `id: "asc"`, then eligibility merge/slice
+     over the inspected candidates. At `limit:100` every member is inspected
+     (120 ≤ 300) so assertions passed; at `limit:7` the id-prefix inspected
+     subset is not the eligibility-lowest subset, so the global-prefix
+     expectation cannot hold under index-seeded eligibility. The parent's
+     "a second smaller limit returns its exact prefix" is deterministically
+     satisfiable only by seeding eligibility by each row's id-ascending rank
+     within its class.
+  2. Line 2759 pushes the control `W6-NC-16` into the case `registered`
+     array, inflating the case count to 6.
+- **Cleanup:** post-failure read-only `pg_namespace` probe returned zero
+  `kiw6_%`/`kiw6-%` schemas — the after-hook dropped the disposable schema
+  despite the assertion failure.
+- **Governing parent rules:** checklist §seventh correction `W6-DB-06`
+  (CT12 item 6) and `DEC-KI-045` recovery interface/bound. The remedy is a
+  test-only correction mechanically determined by those rules; no production,
+  helper, case membership, digest, schema, or interface change is required.
+- **Invalidation:** CV38 is failed evidence; CV39–CV41 never ran and remain
+  unexecuted. CV37's inputs (unit/recovery test files and both production
+  files) are untouched by the correction and are reusable at reassessment
+  with dependency proof. The integration-test ending digest will change.
+- **External mutations:** isolated disposable test schema only (dropped,
+  verified). Cost `$0.00`.
+
+```yaml
+certificate: INTEGRATION-ASSESSMENT-FAILED
+parent_window_id: KI-W6
+integration_assessment_id: KI-W6-I108
+gate: KI-W6-CV38
+observed_failures: [W6-DB-06 limit-7 prefix mismatch, registered 6 !== 5]
+root_cause_file: email_scraper/test/keyword-intelligence-repository.integration.test.js
+governing_parent_requirements: [KI-W6-CT12 item 6]
+governing_parent_decisions: [DEC-KI-045]
+correctable_within_parent_scope: true
+corrective_subwindow: KI-W6-C117
+next_integration_assessment_id: KI-W6-I109
+preserved_gates: [CV36 partial path-set proof, CV37 with dependency proof]
+status: CORRECTION_REQUIRED
+```
+
+---
+
+```yaml
+certificate: CORRECTIVE-SUBWINDOW-READY
+parent_window_id: KI-W6
+corrective_subwindow_id: KI-W6-C117
+window_agent_identity: KI-W6-WINDOW-AGENT
+trigger_evidence: [EV-KI-W6-R50]
+root_cause: C115 test block seeded W6-DB-06 eligibility by insertion index although DEC-KI-045 locks recovery inspection to take:limit id-ascending reads over hash-derived ids, and pushed the W6-NC-16 control into the case registry
+governing_parent_requirements: [KI-W6-CT12 item 6]
+governing_parent_decisions: [DEC-KI-045]
+corrected_prior_subwindows: [KI-W6-C115]
+writable_file: email_scraper/test/keyword-intelligence-repository.integration.test.js
+starting_file_digest: c50b1e707cca6bd577560aec1c3b7ac87cb157f8f6fe4172d001445eb6e07424
+predecessors: [failed KI-W6-I108 CV38, accepted KI-W6-C115]
+invalidated_evidence: [CV38 attempt of 2026-08-21T21:55 (EV-KI-W6-R50)]
+invalidated_gates: [KI-W6-CV38]
+unresolved_parent_decisions: []
+expanded_parent_scope_required: false
+section_7_fields_complete: true
+single_file_write_set: true
+unresolved_execution_choices: []
+next_integration_assessment_id: KI-W6-I109
+status: READY
+```
+
+---
+
+## `EV-KI-W6-R51` — C117 corrective leaf execution and independent window-agent review (ACCEPTED_FOR_INTEGRATION)
+
+- **Timestamp / role:** 2026-08-21T22:35:00+05:30 / `KI-W6-C117-LEAF-AGENT`
+  execution under `ASG-KI-W6-C117`, then independent
+  `KI-W6-WINDOW-AGENT` review.
+- **Leaf execution:** exactly the two prescribed fixes in
+  `email_scraper/test/keyword-intelligence-repository.integration.test.js`;
+  starting digest (accepted C115 ending)
+  `c50b1e707cca6bd577560aec1c3b7ac87cb157f8f6fe4172d001445eb6e07424`
+  verified; ending digest
+  `91db4db5ed7aab091f1bbe39c92c517dbfc122bae9b0316696fd6e75374a0264`.
+  Fix A: `taskPlan`/`readyPlan`/`expiredPlan` built with final hash-derived
+  ids, sorted by unsigned UTF-8, iterated with rank-seeded eligibility
+  (`nextAttemptAt: atSecond(1+taskRank)`, `updatedAt: atSecond(41+readyRank)`,
+  `aggregationLeaseExpiresAt: atSecond(61+expiredRank)`), expected arrays
+  derived in sorted (id = eligibility) order; initializations unchanged.
+  Fix B: `registeredControls` array declared beside `registered`; the
+  `W6-NC-16` push moved there; closing assertions extended to
+  `registeredControls` set equality and zero duplicates while
+  `registered.length === 5`, registered = executed = required and the
+  executed digest `5e80c31a…4261` remain.
+- **Window-agent independent verification:** recomputed ending digest;
+  re-proved the prefix hash — `head -n 2066 | sha256sum` equals
+  `a278681ee25a2a955f010ceda54f6a3571f8aa782b5edc9aae20b27b7cb271a5`
+  (all pre-C115 content byte-identical); re-ran `node --check` (exit 0) and
+  file-scoped `git diff --check` (exit 0); inspected the actual rank-seeding
+  and control-registry code (lines 2181, 2239–2269, 2772, 2803–2805);
+  `git status --porcelain` attributable delta is exactly the one file beside
+  the four preserved pre-existing modifications. Assertion semantics,
+  case/control membership, the digest, production bytes and helpers are
+  unchanged.
+- **External mutations:** none. Cost `$0.00`.
+
+```yaml
+certificate: FILE-SUBWINDOW-EXECUTED
+parent_window_id: KI-W6
+subwindow_id: KI-W6-C117
+assignment_id: ASG-KI-W6-C117
+agent_identity: KI-W6-C117-LEAF-AGENT
+writable_file: email_scraper/test/keyword-intelligence-repository.integration.test.js
+starting_file_digest: c50b1e707cca6bd577560aec1c3b7ac87cb157f8f6fe4172d001445eb6e07424
+ending_file_digest: 91db4db5ed7aab091f1bbe39c92c517dbfc122bae9b0316696fd6e75374a0264
+attributable_changed_file_set: [email_scraper/test/keyword-intelligence-repository.integration.test.js]
+required_local_cases: []
+negative_controls_expected: 0
+negative_controls_falsified: 0
+commands: [node --check (exit 0), git diff --check (exit 0)]
+deferred_integration_checks: [KI-W6-I109 CV38 rerun]
+external_mutations: []
+prohibited_actions_observed: []
+successor_work_started: false
+direct_parent_communication: false
+status: AWAITING_WINDOW_REVIEW
+```
+
+```yaml
+certificate: WINDOW-AGENT-REVIEW-DISPOSITION
+parent_window_id: KI-W6
+subwindow_id: KI-W6-C117
+disposition: ACCEPTED_FOR_INTEGRATION
+review_evidence: EV-KI-W6-R51
+next_subwindow: KI-W6-I109
+next_assignment_id: ASG-KI-W6-WA-04
+```
+
+---
+
+## `EV-KI-W6-R52` — I109 reassessment: CV38 PASS, CV39 observable harness failure (PARENT_BLOCKED)
+
+- **Timestamp / role:** 2026-08-21T23:55:00+05:30 / `KI-W6-WINDOW-AGENT`
+  personal execution of reassessment `KI-W6-I109` under `ASG-KI-W6-WA-04`
+  (new ID after the C117 correction, per sub-window standard §10 rule 8).
+
+### Gates reused with dependency proof
+
+- **CV36 (re-verified):** the assembled changed-path set in `email_scraper/`
+  is exactly the five authorized paths; sorted-LF path-set digest
+  `dd66e44200514702c82ad06da4c93b3dda30596048a1f569d5779642119f8130`
+  (unchanged by C117 — same path set); per-file ending digests:
+  repository `17e55ed2…99cf6`, recovery `714e40da…51df3`, unit test
+  `87c5fa81…55bce`, integration test `91db4db5…a0264` (post-C117), recovery
+  test `41240b25…5b2f6`. 18/8/10 profile partition re-proven (C112 proof
+  re-execution during review). Zero diff on service.js,
+  dataforseo-labs-adapter.js, prisma-run-repository.js, api.js,
+  prisma/schema.prisma — no established-pipeline/provider boundary change.
+  The frontend dirty file remains only the requester-owned C111 browser
+  test (C111 expression verified present).
+- **CV37 (reused):** inputs are `test/keyword-intelligence-repository.test.js`
+  (`87c5fa81…55bce`, unchanged since the I108 CV37 pass at 2026-08-21), the
+  recovery test (`41240b25…5b2f6`, unchanged) and both production files
+  (unchanged since their I108 digests). C117 touched only the integration
+  test file. Dependency comparison proves the asserted path unchanged →
+  prior result 2 pass / 0 fail / 0 skip is reused (parent standard §9.3).
+
+### Gates executed at I109
+
+- **CV38 (fresh, once):** `ALLOW_DATABASE_TESTS=true node -r dotenv/config
+  --test --test-isolation=none --test-concurrency=1 --test-name-pattern='SCN-KI-043:
+  set-based transaction ceilings and bounded recovery|publishResearchResult
+  (requires|rollback)|SCN-KI-022: stale owners|SCN-KI-042'
+  test/keyword-intelligence-repository.integration.test.js` →
+  **tests 11 / pass 11 / fail 0 / skipped 0** (~417s): five matching
+  top-level tests plus the six SCN-KI-043 subtests; `W6-DB-03`–`07` executed
+  with digest `5e80c31a…4261`; `W6-NC-16` falsified; `W6-TXN-01/02` and
+  `W6-NC-14` reexecuted; exact rollback, operation counts, 18 profiles,
+  100-bound recovery observed. Post-run read-only `pg_namespace` probe:
+  zero residual `kiw6_` schemas.
+- **CV39 (fresh, once):** `ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node
+  test/browser/keyword-intelligence-e2e.mjs` from `frontend/` → **FAIL**
+  (observable assertion failure): `exactly one successful final CAS save is
+  permitted, saw 2` (harness line 1012). Diagnostics JSON captured:
+  `ok:false`, wallTime 232364 ms, buildSkipped, cleanupStepsDone all ok
+  (browser/next-server/auth-server/backend-server/schema-absence/temp-root),
+  droppedSchema `kiw6_mt31oe4m499f3586af8b803d`, casesExecuted 0,
+  controlsExecuted 0, consoleErrors 1, networkRequests 156. Complete
+  cleanup verified; no residual state remains.
+
+### CV39 diagnosis (structural, from harness source — production code exonerated)
+
+1. The harness netlog is a page-context `globalThis.__kiNetLog` array whose
+   observer patches `globalThis.fetch` and archives/restores entries through
+   `sessionStorage` across every navigation (harness lines 337–348+), so it
+   accumulates from session start.
+2. The selection flow's first step is the harness's OWN explicit
+   "server-side revision advance" `PUT /api/keyword-research/:id/selection`
+   executed via page `fetch` (lines 982–1004) and asserted to return 200.
+   That request necessarily appears in the netlog as
+   `method:"PUT", url ends "/selection", responseStatus:200`.
+3. The final-CAS filter (line 1011) counts every such entry. Therefore
+   `savedEntries.length ≥ 2` structurally — the harness's own advance save
+   plus the UI's final CAS — and the assertion `=== 1` can never pass once
+   the flow reaches this phase. The downstream assertions (revision 3 at
+   line 1016 and `expectedRevisionSent === 2` at line 1025) are keyed to
+   `savedEntries[0]`, which under accumulation is the advance entry.
+4. Reachability history: every prior full-flow browser attempt
+   (CV15/R36, CV21 state-158/159, CV27, CV32) failed at or before the
+   provider-settlement transaction timeout — the exact defect C112 repairs —
+   so the selection-CAS phase had never executed in any recorded gate. The
+   latent double-count became observable only after CV38 proved the
+   corrected transactions on the real database.
+5. The one stale-409 assertion immediately before (line 1005) passed with
+   exactly one 409, consistent with revision flow 1→2 (harness advance),
+   stale 409 (UI), 2→3 (final CAS); the durable revision after the run is
+   not in conflict with repository CAS semantics. No repository defect is
+   indicated: `saveSelection` retains its exact revision predicate (proven
+   by CV38's W6-DB-03/04 replay and fencing subtests).
+
+### Boundary determination
+
+- The failing file is `frontend/test/browser/keyword-intelligence-e2e.mjs`,
+  which is NOT in the A5 state-163 authorized write scope (five backend
+  files + three coordination artifacts only) and is not in the frozen
+  five-path changed set `dd66e442…`. No parent CT block or decision
+  mechanically determines a browser-harness correction (the seventh
+  correction's browser premise is "the unchanged 26 browser cases/13
+  controls"). Per sub-window standard §5.2 (no corrective sub-window without
+  an existing governing parent decision inside scope) and §9.5, the
+  disposition is `PARENT_BLOCKED`. CV40–CV43 and CH9 are not run (later
+  gates cannot run after failure; RW6G-005 convention).
+
+```yaml
+certificate: INTEGRATION-ASSESSMENT-PARENT-BLOCKED
+parent_window_id: KI-W6
+integration_assessment_id: KI-W6-I109
+supersedes: KI-W6-I108 (failed CV38, corrected by C117; preserved as EV-KI-W6-R50)
+gates_passed: [CV36 re-verified, CV37 reused with dependency proof, CV38 fresh 11/11/0]
+gates_failed: [CV39 structural harness double-count of the harness's own revision-advance PUT]
+gates_not_run: [CV40, CV41, CV42, CV43, CH9]
+root_cause_file: frontend/test/browser/keyword-intelligence-e2e.mjs (outside authorized scope)
+governing_parent_decision: NONE — parent decision required (browser-harness correction authority and method)
+expanded_parent_scope_required: true
+cleanup_verified: true
+external_mutations: [isolated disposable test schemas only, all dropped and verified absent]
+cost_usd: 0.00
+next_action: PARENT_DECISION_REQUIRED
+status: PARENT_BLOCKED
+```
+
+---
+
+## `EV-KI-W6-R53` — `KI-W6-C118` leaf acceptance and `KI-W6-CV44`/`CV45` dependency proof
+
+- **Timestamp / role:** 2026-08-21T21:20:00+05:30 / `KI-W6-WINDOW-AGENT`
+  under `ASG-KI-W6-WA-05` (A5 state 164; all six content pins verified by
+  sha256: both standards, contract `8b17f85c…`, decision ledger
+  `d6132eec…`, checklist `6420255132…`, S1 base `bf269145…`, browser
+  baseline `f7f055e6…`, singleton path-set digest `3dd42302…` recomputed by
+  sorted-LF convention).
+- **S1/S2 reconciliation:** CT14/C118/I110 transcribed into S1 by byte-exact
+  `sed` extraction of parent-checklist lines 6442–6626 (new S1 digest
+  `412b2c4d1f8ac180bcfb8cf7a4f7b1404d857a88e6d77f42b636ae953181d526`);
+  S2 advanced to state 38 under `ASG-KI-W6-WA-05`.
+- **Leaf `KI-W6-C118`** (`KI-W6-C118-LEAF-AGENT`, single file
+  `frontend/test/browser/keyword-intelligence-e2e.mjs`, baseline
+  `f7f055e6…` verified by the leaf and independently by the window agent):
+  applied exactly the CT14 item-6 ordered block replacement. Ending digest
+  `4fece32a44ab0276e71a813add6e75919453d9a46cb03f8a35c5d84f6fe146f3`.
+  Local-now checks passed twice (leaf + independent window-agent re-run):
+  `node --check test/browser/keyword-intelligence-e2e.mjs` exit 0; the
+  literal CT14 source assertion printed `KI_W6_C118_SOURCE_OK`.
+- **`CV44` PASS (independent inspection):** total working-tree diff of the
+  file = 10 lines (7+/3−): one pre-existing C111 hunk
+  (`Array.isArray(research.selection)`, present in the `f7f055e6` baseline)
+  plus exactly the six-line C118 block; `const savedBody =
+  savedEntries[0].requestBody || {};` and every following assertion
+  byte-identical; netlog mechanism, `saveSelectionViaUi`/
+  `swapOneSelectionItemViaUi` helpers, and `W6-FLOW-07`/`W6-NC-06`
+  registrations untouched; frontend `git status` shows exactly the one
+  attributable path (singleton set `3dd42302…`). C118 ACCEPTED.
+- **`CV45` reuse dependency proof:** the five accepted backend files are
+  byte-identical to their `EV-KI-W6-R52` digests (repository `17e55ed2…`,
+  recovery `714e40da…`, unit test `87c5fa81…`, integration test
+  `91db4db5…`, recovery test `41240b25…`); C118 changed no backend input or
+  asserted path ⇒ I109 CV36–CV38 reuse valid.
+
+## `EV-KI-W6-R54` — `KI-W6-I110` `CV45` fresh causal browser gate FAILED (PARENT_BLOCKED)
+
+- **Command (once, from `frontend/`):** `ALLOW_DATABASE_TESTS=true
+  KI_W6_SKIP_BUILD=1 node test/browser/keyword-intelligence-e2e.mjs` →
+  **observable failure** (no retry; not sandbox/channel invalidation).
+  Diagnostics: `ok:false`, wallTime 301596 ms, buildSkipped, port 4357,
+  cleanupStepsDone all ok (browser/next-server/auth-server/backend-server/
+  schema-absence/temp-root), droppedSchema `kiw6_mt32p34rcc61c10e90a92848`,
+  consoleErrors 2, pageExceptions 0, networkRequests 163. Post-run probe:
+  **zero residual `kiw6_` schemas**.
+- **Progress vs I109/CV39:** the C118-partitioned final-CAS oracle PASSED —
+  the netlog shows the revision-1 advance PUT 200, one stale 409, the
+  revision-2 final CAS PUT 200 carrying exactly 100 items, durable revision
+  3, then finalize: first POST /runs aborted at the response stage (W6-NAV-02
+  intervention), Retry POST /runs 200 creating `run_GNy6hKCV…` with
+  `keywordSelectionRevision: 3` — every prior recorded attempt died before
+  this phase.
+- **Observable failure:** `waitFor(location.pathname ===
+  "/runs/run_GNy6hKCV…")` ("run workspace navigation") timed out with the
+  document at `http://127.0.0.1:4357/sign-in` (sign-in page rendered).
+- **Root cause (structural, from product/SDK source — not C118, not the
+  repository):**
+  1. `frontend/proxy.ts` (Next.js 16 middleware replacement, matcher
+     `/runs/:path*`, commit `b8d0472` "added auth", 2026-07-31) runs
+     `getAuth().middleware({loginUrl: "/sign-in"})`.
+  2. The Neon Auth middleware processor requires a browser
+     `__Secure-neon-auth.session_token` cookie; with no token it yields
+     `{session: null}` and a deterministic `redirect_login` to `/sign-in`.
+  3. The W6 harness's auth substitute is a loopback `GET /get-session`
+     returning `{user:{id}}` — it never sets a session cookie, and its
+     declared boundary explicitly does not claim "cookie cryptography";
+     the browser test never signs in, so the cookie can never exist.
+  4. All `/api/*` calls authenticate via server-side `sessionUserId()`
+     (satisfied by the loopback regardless of cookies) — hence create/
+     probe/settlement/CAS/finalize all succeeded. The first document/RSC
+     navigation to `/runs/{runId}` is the first request the proxy governs;
+     it 307-redirected to `/sign-in` (fetch followed the redirect, so the
+     netlog shows final 200 at the original URL), the client router landed
+     on `/sign-in`, and the workspace wait timed out.
+  5. Reachability: the workspace phase was never reached in any recorded
+     attempt (CV15/R36, CV21, CV27, CV32 failed earlier; CV39 failed at the
+     pre-C118 oracle), so this latent environment/spec conflict was
+     unobservable until C112+C118 advanced the flow.
+- **Scope determination:** the fix requires one of (a) harness/loopback
+  establishing a signed session cookie (edit to
+  `email_scraper/test/helpers/keyword-intelligence-e2e-harness.js` — a
+  backend test file, prohibited by A5 state 164), (b) a browser-test
+  sign-in/cookie step (edit to the `.mjs` beyond the single authorized CT14
+  block — prohibited), or (c) changing `proxy.ts`/product auth (prohibited
+  product change). None is mechanically determined by `DEC-KI-046`/CT14,
+  and the harness's own boundary disclaimer ("mustNotClaim … cookie
+  cryptography") contradicts the checklist-expected workspace navigation
+  under the product's proxy — authoritative documents conflict after
+  applying their authority. Per sub-window standard §9.5 and the A5
+  prohibited-actions list (backend test edits, product auth change, gate/
+  command change without parent return), disposition is `PARENT_BLOCKED`.
+  CV46–CV49 and CH10 are not run (stop-on-failure).
+
+```yaml
+certificate: INTEGRATION-ASSESSMENT-PARENT-BLOCKED
+parent_window_id: KI-W6
+integration_assessment_id: KI-W6-I110
+correction_leaf: KI-W6-C118 (ACCEPTED; ending digest 4fece32a…)
+gates_passed: [CV44 independent inspection, CV45 reuse dependency proof]
+gates_failed: [CV45 fresh causal browser run — /runs/* proxy redirects cookie-less browser to /sign-in]
+gates_not_run: [CV46, CV47, CV48, CV49, CH10]
+root_cause_files: [frontend/proxy.ts, @neondatabase/auth middleware, test/helpers/keyword-intelligence-e2e-harness.js auth substitute (all outside ASG-KI-W6-WA-05 write scope)]
+governing_parent_decision: NONE — DEC-KI-046 covers only the final-CAS oracle partition; this defect is disjoint
+expanded_parent_scope_required: true
+cleanup_verified: true (all steps ok; zero residual kiw6_ schemas)
+external_mutations: [isolated disposable test schema only, dropped and verified absent]
+cost_usd: 0.00
+next_action: PARENT_DECISION_REQUIRED
+status: PARENT_BLOCKED
+```
+
+---
+
+## `EV-KI-W6-R55` — `KI-W6-C119` leaf acceptance (ninth correction, `ASG-KI-W6-WA-06`)
+
+- **Timestamp / role:** 2026-08-21T22:30:00+05:30 / `KI-W6-WINDOW-AGENT` under
+  `ASG-KI-W6-WA-06` (A5 state 165; standards `cda35201…`/`84e7590e…`, contract
+  `8b17f85c…`, decision `7e0594d6…`, checklist `94468aa9…`, correction base
+  S1 `039c6b91…` all verified by sha256; delegable two-file set digest
+  `4f0d4bef…` and harness singleton `7549f43f…` verified by sorted-LF
+  convention).
+- **S1/S2 reconciliation:** CT15/CT16/I111 (checklist lines 6628–6856)
+  transcribed byte-exact into S1 (new S1 digest
+  `65b0542c0d843269e2a44bcb5a396d45e78061e5e503901c1ae536ab6d481d2e`); S2
+  advanced to state 39; I110 marked `SUPERSEDED_BY_I111` (EV-KI-W6-R54
+  preserved as diagnostic per CV52).
+- **Leaf `KI-W6-C119`** (`KI-W6-C119-LEAF-AGENT`, single file
+  `email_scraper/test/helpers/keyword-intelligence-e2e-harness.js`, baseline
+  `75718180…` verified by leaf and window agent): applied exactly CT15 items
+  4–7 — four session constants after `NEON_AUTH_COOKIE_SECRET_VALUE`;
+  `authSessionBody()` after `setAuthOwner` (null for `none`, existing
+  owner-A/owner-B id mapping, exact frozen DEC-KI-047 session+user envelope);
+  `/get-session` body replaced by `const body = authSessionBody();` with
+  trace/status/content-type/JSON/404/lifecycle preserved; frozen
+  `browserSessionCookie` seam added before the harness return with
+  `browserSessionCookie, ownerId` adjacency. Ending digest
+  `cbcd304aea6657bef10d73644d81e253396fe3f4f3f112f9dc03e020f0c7db74`.
+  Local-now checks passed twice (leaf + independent window-agent re-run):
+  `node --check` exit 0; `KI_W6_C119_SOURCE_OK`.
+- **Independent review:** diff = 33+/2− confined to the authorized file;
+  no other harness behavior, trace shape, owner mapping, or server lifecycle
+  change; no secret/date/session-body exposure beyond the seam. C119
+  ACCEPTED_FOR_INTEGRATION.
+
+---
+
+## `EV-KI-W6-R56` — `KI-W6-C120` leaf acceptance (ninth correction, `ASG-KI-W6-WA-06`)
+
+- **Timestamp / role:** 2026-08-22T12:05:00+05:30 / `KI-W6-WINDOW-AGENT` under
+  `ASG-KI-W6-WA-06`; C119 accepted first (EV-KI-W6-R55); browser baseline
+  `4fece32a…` verified by leaf (with reverse-application proof) and window
+  agent.
+- **Leaf `KI-W6-C120`** (`KI-W6-C120-LEAF-AGENT`, single file
+  `frontend/test/browser/keyword-intelligence-e2e.mjs`): applied exactly CT16
+  items 4–6 — (1) authentication ledger member's three text fields replaced
+  with the exact DEC-KI-047 literals (member key/order and all other entries
+  preserved); (2) after `W6-FLOW-07` activation and before
+  `armRunsResponseAbort()`: `sessionAuthFloor` capture, exactly one
+  `Network.setCookie` with the frozen seven fields, `success === true`,
+  one `Network.getCookies` verification of exactly one installed cookie with
+  `secure`/`httpOnly` true; (3) after the 100-input workspace wait:
+  `protectedWorkspaceAuthEvents` slice filtered to owner-a/`get-session`/200
+  with length > 0; (4) immediately before
+  `harness.setAuthOwner(harness.otherOwnerId)` (after the W6-FLOW-13
+  restart-B snapshot witness): sorted Neon-cookie names deep-equal exactly
+  `["__Secure-neon-auth.local.session_data","__Secure-neon-auth.session_token"]`,
+  per-cookie `Network.deleteCookies` with only name+url, then zero remaining
+  Neon-auth names. Assertion style adapted to the file's existing boolean
+  `assert`/`arrayEqual` helpers with every required literal substring present.
+  Ending digest
+  `72fe4f99420b854b537d82b769ffee71866203ff5872321538de6210faf97347`.
+- **Local-now checks passed twice** (leaf + independent window-agent re-run):
+  `node --check` exit 0; `KI_W6_C120_SOURCE_OK` (enforcing exactly one
+  `Network.setCookie` and no `Network.clearBrowserCookies`).
+- **Independent review (CV50/CV51 substance):** all three insertion anchors
+  verified by direct read (W6-FLOW-07→install block→abort arm;
+  100-input-wait→auth witness; snapshot witness→Neon deletion→owner switch);
+  no cookie value literal, no cookie/header logging (`rg` confirms the token
+  value appears nowhere in the file); C107/C111/C118 witnesses intact; no
+  product/proxy/auth-route/case/control/manifest edit; browser gate NOT run in
+  the leaf. C120 ACCEPTED_FOR_INTEGRATION.
+
+---
+
+## `EV-KI-W6-R57` — `KI-W6-I111` gates CV50–CV52 pass; CV53 FAILED at W6-FLOW-09 badge oracle (PARENT_BLOCKED)
+
+- **Timestamp / role:** 2026-08-22T12:40:00+05:30 / `KI-W6-WINDOW-AGENT` under
+  `ASG-KI-W6-WA-06`.
+- **CV50 PASS:** C119 independently reviewed from baseline `75718180…`
+  (EV-KI-W6-R55) — only the exact constants, `authSessionBody`, endpoint
+  replacement and frozen seam; both local checks passed; mode A/B/null, trace
+  and server behavior exact.
+- **CV51 PASS:** C120 independently reviewed from baseline `4fece32a…`
+  (EV-KI-W6-R56) — only the exact ledger wording and cookie blocks; both local
+  checks passed; C107/C111/C118 witnesses present; no product/proxy/route/
+  case/control/manifest edit.
+- **CV52 PASS:** the five backend correction files remain byte-identical to
+  `EV-KI-W6-R52` (repository `17e55ed2…`, recovery `714e40da…`, unit
+  `87c5fa81…`, integration `91db4db5…`, recovery test `41240b25…`); C119/C120
+  touched none of their commands/imports/asserted paths. Failed I110 CV45
+  remains diagnostic, not acceptance.
+- **CV53 FAILED (once, no retry):** from `frontend/`,
+  `ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node
+  test/browser/keyword-intelligence-e2e.mjs` → exit 1,
+  `ok:false`, wallTime 289231 ms, port 4357, consoleErrors 3, pageExceptions 0,
+  networkRequests 188, cleanupStepsDone all ok (browser/next-server/
+  auth-server/backend-server/schema-absence/temp-root), droppedSchema
+  `kiw6_mt3zzlu688106d249cb8a71d`,
+  `mainError:"keyword source lineage must remain unchanged"`.
+- **Ninth-correction objective ACHIEVED:** the run exceeded every prior
+  recorded attempt — the CDP-seeded session token carried the browser through
+  the real `proxy.ts` middleware to `/runs/<runId>` (no `/sign-in`), the
+  workspace loaded exactly 100 inputs, the protected owner-A `get-session`
+  witness passed, handoff oracles passed (W6-FLOW-08), and the edit/save/
+  reorder/reload persistence assertions passed (`afterValues` deep-equal to
+  the swapped+" emporium" projection) — i.e., W6-FLOW-09's identity/order/
+  zero-add-delete substance held up to the failing assertion.
+- **Root cause (product-contract vs literal test oracle):** the failing
+  assertion (browser test line 1153) requires the sorted `.query-badge`
+  multiset to be unchanged after editing all 100 query texts. The product
+  contract defines `QuerySource = "generated" | "user_added" | "user_edited"`
+  (`frontend/lib/api-types.ts:13`) and `components/query-editor.tsx:73`
+  intentionally sets `source:"user_edited"` for any edited `generated` row
+  (rendered badge text "user edited"). Editing all 100 queries therefore
+  legitimately flips every `generated` badge to `user edited"; the literal
+  multiset equality is unsatisfiable through the real product. `INV-KI-015`
+  ("editing query text does not break that lineage") and W6-FLOW-09's
+  "keyword source lineage remains" are satisfied by row identity persistence
+  (proven), not by label immutability. The assertion had never executed in
+  any recorded attempt (CV15/R36, CV21, CV27, CV32, CV39 failed earlier;
+  CV45 failed at the navigation this correction fixed).
+- **Scope determination:** the only candidate fix is editing the W6-FLOW-09
+  oracle in `frontend/test/browser/keyword-intelligence-e2e.mjs` (line ~1153
+  and the `captured.workspace.badgesPreserved` member) — that file's write
+  authority under A5 state 165 ended with accepted C120, and changing a case
+  witness without parent return is explicitly prohibited. No existing decision
+  (DEC-KI-038…047) governs this oracle. Disposition: `PARENT_BLOCKED`;
+  CV54–CV57 and CH11 not run (stop-on-failure). Suggested correction shape
+  for the parent (decision required): expect the exact provenance flip —
+  sorted after-badges equal sorted before-badges with each `generated`
+  mapped to `user edited` (`user_added` preserved) — or redefine the witness
+  as row-identity preservation with the label flip asserted exactly.
+
+```yaml
+certificate: INTEGRATION-ASSESSMENT-PARENT-BLOCKED
+parent_window_id: KI-W6
+integration_assessment_id: KI-W6-I111
+correction_leaves: [KI-W6-C119 ACCEPTED (cbcd304a…), KI-W6-C120 ACCEPTED (72fe4f99…)]
+gates_passed: [CV50, CV51, CV52]
+gates_failed: [CV53 — W6-FLOW-09 badge-multiset oracle contradicts product QuerySource edit-provenance contract]
+gates_not_run: [CV54, CV55, CV56, CV57, CH11]
+root_cause_files: [frontend/test/browser/keyword-intelligence-e2e.mjs (oracle, line ~1153), frontend/lib/api-types.ts:13, frontend/components/query-editor.tsx:73 (both read-only product contract)]
+governing_parent_decision: NONE for this oracle
+expanded_parent_scope_required: true
+cleanup_verified: true (all steps ok; schema dropped + absence verified)
+external_mutations: [isolated disposable test schema only, dropped and verified absent]
+cost_usd: 0.00
+next_action: PARENT_DECISION_REQUIRED
+status: PARENT_BLOCKED
+```

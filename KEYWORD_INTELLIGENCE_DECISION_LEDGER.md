@@ -1,6 +1,6 @@
 # Keyword Intelligence Decision Ledger (`A3`)
 
-**Revision:** `KI-DL-17`
+**Revision:** `KI-DL-23`
 **Status:** locked decisions; not an assignment
 
 This is the sole authority for implementation-affecting choices and
@@ -2009,6 +2009,344 @@ estimates them. This specification decision is not paid-call authorization.
   output; or relabelling R33 as an environment failure.
 - **Tasks/scenarios:** `KI-W6-CT4`; existing `W6-FLOW-07`, `W6-FLOW-13`,
   `W6-NC-06`; `KI-W6-CV13`–`CV18`.
+
+### `DEC-KI-042` — Final research publication has a publication-only 30-second transaction ceiling
+
+- **Requirements:** `REQ-KI-002`, `REQ-KI-005`, `REQ-KI-024`;
+  `INV-KI-004`, `INV-KI-005`, `INV-KI-006`, `INV-KI-014`; correction
+  evidence `SRC-KI-044`.
+- **Locked choice:** preserve one atomic, generation/token/lease-fenced
+  `publishResearchResult()` transaction. Extend the private `_transaction`
+  seam to accept an optional Prisma interactive-transaction options object,
+  preserving the current one-argument call for every other repository
+  operation. Only `publishResearchResult()` supplies
+  `{maxWait:5_000, timeout:30_000}`. Both values are private fixed constants;
+  neither is configurable or exported.
+- **Bound derivation:** the aggregation owner renews immediately before final
+  publication to `now + 120_000 ms`, then stops the 40,000 ms heartbeat. A
+  maximum 5,000 ms acquisition wait plus 30,000 ms transaction ceiling remains
+  strictly below the renewed lease duration. The 30,000 ms value is a rollback
+  safety deadline for the existing maximum 200-row result/default-100 write,
+  not permission for provider/network work inside the transaction, a changed
+  lease, a retry, or a relaxed performance claim.
+- **Atomic ordering:** retain the existing ordered reads and predicates;
+  conditionally complete the market stage first, then conditionally complete
+  research with result, fingerprint, default selection and revision one in the
+  same transaction. Any expiry/error after the stage write rolls back every
+  member. `FinalPublicationAbort` mappings, completed replay, stale-token loss,
+  visibility and immutable result semantics remain unchanged.
+- **Deterministic proof:** one permanent isolated-database scenario uses the
+  real repository and maximum 200-row/default-100 payload. Its transaction
+  proxy must first observe the production request options exactly. For
+  `W6-TXN-01`/`W6-NC-14`, it substitutes only the test transaction timeout with
+  20,000 ms and injects one literal `SELECT pg_sleep(21.000)` immediately before the
+  first final `keywordResearch.updateMany`, after the market-stage update; the
+  expected Prisma `P2028`/closed-transaction failure must leave the complete
+  research and market-stage rows deep-equal to their pre-call snapshots. For
+  `W6-TXN-02`, the same 21,000 ms delay with the unmodified production options
+  must publish exactly 200 result rows/default 100, complete both rows once,
+  and return `found` on exact replay. Existing stale-owner publication proof is
+  rerun in the same focused gate.
+- **Coverage:** the existing emitted-browser manifest remains exactly 26 cases
+  and thirteen controls. The separate transaction registry is exactly
+  `W6-TXN-01`, `W6-TXN-02`, digest
+  `dd72e2292dac7c33d2250be7af0770401bde67695176d1b76c530b9c7bc10d39`,
+  with control `W6-NC-14`. I105 merges the two registries to 28 cases, digest
+  `c1e4d65b0df7fd1fd86f71420e4ba5e9c6d12cc72b3f24885c71d5283dcf5c75`,
+  and fourteen controls, digest
+  `4f2c8489518c5845c52e9336a47f5cc0b90dcdd9dfa70db7614814d87c173af6`.
+- **Substitute fidelity:** overriding the timeout and injecting `pg_sleep` is
+  an isolated negative-control seam proving rollback and option propagation;
+  it does not prove normal production latency. The positive uses the real
+  Prisma transaction and real isolated Postgres with only the fixed delay; the
+  subsequent causal emitted-browser run exercises the unmodified production
+  client and supplies local-E2E parity.
+- **Rejected:** a global timeout increase; changing the lease/heartbeat;
+  retrying publication inside the repository; moving writes outside the
+  transaction; chunk/partial publication; changing result/selection bounds;
+  relying on naturally slow infrastructure; weakening CV15; another browser,
+  schema, provider, AWS or production change.
+- **Tasks/scenarios:** `KI-W6-CT5`, `KI-W6-CT6`; `SCN-KI-042`;
+  `W6-TXN-01/02`, `W6-NC-14`; `KI-W6-CV19`–`CV24`.
+
+### `DEC-KI-043` — The deterministic sleep probe returns a Prisma-supported column
+
+- **Requirements:** unchanged `REQ-KI-002`, `REQ-KI-005`, `REQ-KI-024` and
+  `INV-KI-004`, `INV-KI-005`, `INV-KI-006`, `INV-KI-014`; evidence
+  `SRC-KI-045`.
+- **Locked correction:** in `withPublicationTransactionProbe`, replace only
+  `$queryRawUnsafe("SELECT pg_sleep(21.000)")` with
+  `$queryRawUnsafe("SELECT ''::text AS slept FROM pg_sleep(21.000)")`.
+  PostgreSQL still executes the same 21-second sleep at the same first final
+  result-bearing `keywordResearch.updateMany` boundary, but Prisma receives one
+  supported text column rather than an unsupported `void` column.
+- **Preserved behavior:** the 20,000 ms negative timeout, production
+  5,000/30,000 ms options, transaction wrapper/restoration, post-stage-write
+  injection point, P2028 rollback oracle, 200/default-100 positive publication,
+  exact replay, case/control membership and every digest remain unchanged.
+- **Invalidation:** the state-159 `3/1` result is diagnostic and invalidates
+  only the old probe expression and CV21. C108 production evidence, C109's other
+  assertions, CV19/CV20 and the three passing focused cases remain valid. A
+  fresh complete focused gate and causal emitted-browser gate remain mandatory.
+- **Rejected:** changing the delay, timeout, production source, transaction
+  boundary, registry, case IDs, database helper, fixture or acceptance count;
+  relabelling P2010 as a production failure; accepting partial prior output.
+- **Tasks/scenarios:** `KI-W6-CT7` / `KI-W6-C110`; unchanged `SCN-KI-042`,
+  `W6-TXN-01/02`, `W6-NC-14`; `KI-W6-I106`.
+
+### `DEC-KI-044` — The causal revision advance consumes the serialized selection array
+
+- **Requirements:** `REQ-KI-007`, `REQ-KI-008`, `REQ-KI-009`,
+  `REQ-KI-014`, `REQ-KI-015`; `INV-KI-010`; evidence `SRC-KI-046`.
+- **Locked correction:** in the one browser-evaluated revision-advance script,
+  replace exactly
+  `const items = (research.selection && research.selection.items) || [];` with
+  `const items = Array.isArray(research.selection) ? research.selection : [];`.
+  This consumes the already-locked numeric-v1 API representation and rejects a
+  non-array substitute by producing the existing empty-list fail-closed path.
+- **Preserved behavior:** retain the 100-item precondition, mutate only item 99's
+  keyword with the existing ` curated` suffix, PUT the same minimal mutation at
+  the same expected revision, cause exactly one stale 409 in the open page,
+  reload, then exercise C107's page-aware checked/unchecked swap and final
+  100-item CAS. No API, component, selection, case/control or digest changes.
+- **Invalidation:** CV26 remains accepted because a browser-test-only hunk cannot
+  affect repository.js or the integration test. CV27 is invalid and must run
+  once fresh; its complete cleanup remains diagnostic evidence.
+- **Rejected:** accepting zero items, reading an `.items` alias, changing the
+  serializer, product UI, default selection, page size, pagination helper,
+  selection cap, revision sequence, cases, controls or build inputs.
+- **Tasks/scenarios:** `KI-W6-CT8` / `KI-W6-C111`; existing `W6-FLOW-07`,
+  `W6-FLOW-13`, `W6-NC-06`; `KI-W6-I107`.
+
+### `DEC-KI-045` — KI repository set-based transaction policy and bounded recovery
+
+- **Requirements:** `REQ-KI-002`, `REQ-KI-005`, `REQ-KI-022`,
+  `REQ-KI-024`; `INV-KI-004`, `INV-KI-005`, `INV-KI-006`,
+  `INV-KI-014`; evidence `SRC-KI-047` and `EV-KI-A-101`.
+- **Scope:** this decision applies only to the new Keyword Intelligence
+  repository and recovery caller. The established discovery, lead, traffic,
+  CrUX and final-publication repositories remain byte-read-only. There is no
+  schema, migration, payload, provider, queue, artifact, cost, lease-duration,
+  retry, result, selection, frontend or AWS behavior change.
+- **Boundary rule:** preserve separate durable boundaries for task claim,
+  cache/throttle/reservation, paid HTTP, attempt settlement, immutable S3 put,
+  task terminalization and aggregation publication. No provider, S3 or SQS
+  operation may enter a database transaction. Database-only reads and writes
+  inside one existing logical transition may be joined, returned from the
+  conditional write, or set-loaded without changing its return union,
+  idempotency, fencing, rollback or visibility semantics.
+- **Complete transaction-policy set:** all 18 `_transaction` invocations pass
+  one explicit frozen options object and no implicit-options branch remains.
+  `maxWait` is `5_000` ms for both profiles. The short constant-count profile
+  has `timeout:15_000`; it is used exactly by `claim`, `deferTask`,
+  `scheduleRetry`, `claimAggregator`, `failStage`, `saveSelection`, the
+  `createRun` uniqueness-reconciliation transaction and `claimThrottle`. The
+  scale-bearing profile has `timeout:30_000`; it is used exactly by
+  `initialize`, `recordAttempt`, `settleAttempt`, `markAttemptAmbiguous`,
+  `terminalize`, `publishCandidateManifest`, `publishShortlist`,
+  `publishResearchResult`, the initial `createRun` transaction and `recover`.
+  Acquisition plus transaction ceilings are respectively 20 seconds and 35
+  seconds, strictly below the 60-second task and 120-second aggregation leases.
+  These are rollback safety ceilings, not performance targets or retry
+  authority.
+- **Repository consolidation:** use one relation-bearing read wherever the
+  same immutable graph was previously loaded separately: task plus stage plus
+  research plus latest attempt; stage plus research plus ordered tasks; attempt
+  plus task; and handoff plus run. Use `updateManyAndReturn` for conditional
+  task/stage updates whose row was immediately reread, require exactly one
+  returned row, and use that returned row. Use `createManyAndReturn` for new
+  stage tasks, sort returned rows by unsigned UTF-8 `itemKey`, and remove the
+  post-create task reload. `recordAttempt` retains one research-wide exposure
+  aggregate and atomic attempt/task writes; `settleAttempt` retains immutable
+  cache conflict detection and atomic cost/cache settlement; `terminalize`
+  retains the live token/expiry predicate and exact once-only stage counters.
+  Final publication keeps the already-proven 30-second profile and all-or-none
+  stage/research writes. Run handoff keeps one `Run`, one `createMany` of at
+  most 100 `RunQuery` rows and one handoff row in the same transaction.
+- **Throttle:** replace the update/insert/select sequence with one
+  schema-selected SQL statement composed of data-modifying CTEs. It returns
+  exactly one row tagged `claimed` with the newly reserved `nextAllowedAt`, or
+  `delayed` with the existing future value. The two-second provider gap,
+  database clock authority and no-attempt-on-delay behavior are unchanged.
+- **Recovery interface and bound:** repository signature becomes exactly
+  `recover(now, {limit})`; `limit` is required integer `1..100`.
+  `recoverKeywordWork({now,limit=100},runtime)` passes that exact value and
+  rejects any repository result whose three list lengths sum above `limit`
+  before dispatch. The repository performs exactly three bounded set reads,
+  each with `take:limit`: queued initializations; due/expired tasks including
+  stage; ready/expired aggregation stages including ordered tasks. Candidate
+  eligibility time is research `createdAt`; pending-task
+  `nextAttemptAt ?? updatedAt`; processing-task `leaseExpiresAt`; ready-stage
+  `updatedAt`; aggregating-stage `aggregationLeaseExpiresAt`. Sort candidates
+  by ascending eligibility time, then type rank `task=0`, `stage=1`,
+  `initialization=2`, then unsigned UTF-8 candidate ID; return the first
+  `limit`. Duplicate delivery remains harmless through existing claims and
+  fences. No cursor, durable recovery marker or deletion is introduced.
+- **Operation ceilings:** after correction, `getTaskContext` and
+  `getStageContext` each issue one Prisma delegate operation; `claim` at most
+  two; `recordAttempt` at most four; `settleAttempt` at most four;
+  `deferTask` and `scheduleRetry` at most two each; `terminalize` at most four;
+  `claimAggregator` at most two; each stage publication at most four on its
+  mutation branch; `claimThrottle` exactly one SQL statement; and recovery
+  exactly three bounded delegate reads with at most 300 inspected top-level
+  candidates and at most 100 returned/dispatchable members. No database call
+  is permitted inside an input/task/result classification loop.
+- **Enforcement:** `SCN-KI-043` owns cases `W6-DB-01`–`W6-DB-07`, sorted-LF
+  digest `073c0fa52135c9a271eea75264efc79fd6ebcb8d062ec73175dbb58a5333aa8f`,
+  and controls `W6-NC-15`–`W6-NC-17`, digest
+  `86562d5c606dc8867b40ecd46b6604e2f5a66a2553c41a20a23696cb48cdbec0`.
+  Acceptance fails when one transaction lacks its exact profile, one removed
+  redundant operation returns, or recovery returns/dispatches member 101.
+  Existing attempt replay, settlement rollback, exact-expiry ownership,
+  publication rollback, 100-item handoff and causal 26-case browser evidence
+  remain required.
+- **Alternatives rejected:** a repository-global implicit 30-second default;
+  changing the established pipeline; combining paid HTTP/S3/SQS with database
+  work; batching distinct provider task identities into one ledger row;
+  changing the evidenced `$0.49200000` maximum; unbounded recovery; raising
+  Lambda/lease/queue limits; retrying timed-out transactions automatically; or
+  accepting elapsed-time success without operation-count enforcement.
+- **Tasks/scenarios:** `KI-W6-CT9`–`CT13`, corrections `KI-W6-C112`–`C116`,
+  `SCN-KI-043`, and parent assessment `KI-W6-I108`.
+
+### `DEC-KI-046` — The causal final-CAS witness is partitioned by expected revision
+
+- **Requirements:** `REQ-KI-007`, `REQ-KI-008`, `REQ-KI-009`,
+  `REQ-KI-014`, `REQ-KI-015`; `INV-KI-010`; evidence `SRC-KI-048` and
+  `EV-KI-W6-R52`.
+- **Locked correction:** preserve both successful selection mutations and
+  distinguish their roles from their already-captured strict request bodies.
+  At the existing final-save assertion in
+  `frontend/test/browser/keyword-intelligence-e2e.mjs`, first collect
+  `successfulSelectionEntries` using the existing method, URL suffix and HTTP
+  200 predicates. Require its length to equal exactly two. From that array,
+  collect `advanceEntries` where
+  `entry.requestBody?.expectedRevision === 1` and require exactly one; collect
+  `savedEntries` where `entry.requestBody?.expectedRevision === 2` and require
+  exactly one. Continue to derive `savedBody` only from `savedEntries[0]`.
+  The prior unpartitioned `savedEntries` filter and its incorrect length-one
+  assertion are removed.
+- **Oracle:** the complete selection witness is exactly revision `1 -> 2` by
+  the deliberate harness advance, one stale UI request returning 409, then
+  revision `2 -> 3` by one successful UI final CAS. Before finalization there
+  are exactly two successful selection PUTs total, exactly one request in each
+  expected-revision partition, the final partition carries exactly 100 items,
+  and durable revision is exactly three. Any missing, duplicate, additional,
+  mis-revisioned or wrongly selected successful request fails.
+- **Preserved behavior and evidence:** retain C107's page-aware two-checkbox
+  swap, C111's `Array.isArray(research.selection)` consumer, the accumulated
+  navigation-persistent netlog, the exact stale-409 assertion, final 100-item
+  payload assertion, durable revision-three assertion, handoff, post-handoff
+  mutation, 26 browser cases, 13 browser controls, every case/control digest,
+  provider-substitute counts, cleanup and substitute-fidelity limits. This is
+  an accepted-test oracle correction only; no product source, API, database,
+  provider, cost, queue, artifact, schema, build input or public behavior
+  changes.
+- **Invalidation:** failed I109/CV39 remains diagnostic. C112–C117 and I109
+  CV36–CV38 remain accepted/reusable by exact dependency proof because C118
+  changes only the browser test. The earlier C111 whole-file digest is
+  superseded by C118, but its one-expression behavior must remain present and
+  is rechecked. CV39 and every later pending final gate require a fresh
+  assessment after C118; no prior failed browser attempt is acceptance.
+- **Enforcement:** existing `W6-FLOW-07` is the sole case registration and
+  existing `W6-NC-06` remains its falsification control; neither membership nor
+  digest changes. The already-observed unpartitioned filter is the decisive
+  counterexample: with the required advance and final saves it selects two and
+  fails. Local source inspection must prove the exact total and revision
+  partitions; the fresh causal browser gate must execute the production route,
+  UI save, durable CAS and complete unchanged certificate.
+- **Alternatives rejected:** deleting the deliberate advance; expecting only
+  one successful selection PUT in the accumulated log; clearing or truncating
+  the netlog; selecting the last entry by position alone; weakening the count
+  to `>=1`; ignoring extra successes; changing the API/UI/repository CAS;
+  changing revisions, item count, cases, controls, digests or the browser
+  command.
+- **Tasks/scenarios:** `KI-W6-CT14` / `KI-W6-C118`; existing
+  `SCN-KI-018`, `W6-FLOW-07`, `W6-FLOW-13`, `W6-NC-06`; assessment
+  `KI-W6-I110`.
+
+### `DEC-KI-047` — Protected run-workspace proof uses the installed middleware with an opaque local session token
+
+- **Requirements:** `REQ-KI-002`, `REQ-KI-015`, `REQ-KI-016`,
+  `REQ-KI-017`; `INV-KI-010`, `INV-KI-011`; evidence `SRC-KI-049` and
+  `EV-KI-W6-R54`.
+- **Locked boundary:** production `frontend/proxy.ts`, `getAuth()`, the
+  `/runs/:path*` matcher, `/sign-in`, application auth routes, and Neon Auth
+  package code are read-only. The local W6 substitute uses the installed
+  `@neondatabase/auth@0.4.2-beta` middleware exactly as shipped. It supplies
+  only the two inputs that the prior harness omitted: one opaque browser
+  `__Secure-neon-auth.session_token` cookie and one complete deterministic
+  `/get-session` session+user envelope. The SDK, not test code, performs any
+  session-data cache signing and the protected-route decision.
+- **Harness session contract:** in
+  `email_scraper/test/helpers/keyword-intelligence-e2e-harness.js`, define the
+  exact constants
+  `NEON_AUTH_SESSION_COOKIE_NAME="__Secure-neon-auth.session_token"`,
+  `NEON_AUTH_SESSION_COOKIE_VALUE="kiw6-local-session-token"`,
+  `AUTH_SESSION_CREATED_AT="2026-08-21T00:00:00.000Z"`, and
+  `AUTH_SESSION_EXPIRES_AT="2099-01-01T00:00:00.000Z"`. For authenticated
+  `authMode`, `/get-session` returns exactly
+  `{session:{id:"kiw6-session-"+authMode,userId,token:NEON_AUTH_SESSION_COOKIE_VALUE,expiresAt:AUTH_SESSION_EXPIRES_AT,createdAt:AUTH_SESSION_CREATED_AT,updatedAt:AUTH_SESSION_CREATED_AT},user:{id:userId,name:authMode==="owner-a"?"KIW6 Owner A":"KIW6 Owner B",email:authMode+"@kiw6.invalid",emailVerified:true,createdAt:AUTH_SESSION_CREATED_AT,updatedAt:AUTH_SESSION_CREATED_AT}}`;
+  `userId` is the existing owner selected by `authMode`. Mode `none` still
+  returns JSON `null`. The response status/content type, auth trace event,
+  `setAuthOwner` semantics and all other helper behavior stay unchanged.
+  Export one frozen test seam named `browserSessionCookie` with exactly
+  `{name:NEON_AUTH_SESSION_COOKIE_NAME,value:NEON_AUTH_SESSION_COOKIE_VALUE}`
+  in the existing frozen harness result.
+- **Browser installation:** in
+  `frontend/test/browser/keyword-intelligence-e2e.mjs`, immediately after the
+  existing `W6-FLOW-07` activation and before
+  `const abortDone = armRunsResponseAbort()`, capture
+  `sessionAuthFloor = harness.trace().length` and call `Network.setCookie` once with
+  `{name:harness.browserSessionCookie.name,value:harness.browserSessionCookie.value,url:baseUrl,path:"/",secure:true,httpOnly:true,sameSite:"Lax"}`.
+  Require its returned `success` to equal `true`; call `Network.getCookies`
+  once for `[baseUrl]` and require exactly one cookie whose name equals the
+  seam name and whose `secure` and `httpOnly` fields are both `true`. Never
+  compare, emit or record the token value. Keep the cookie installed through
+  the last owner-A `/runs/<id>` reload and immutable-snapshot witness. Before
+  the existing `harness.setAuthOwner(harness.otherOwnerId)` call, call
+  `Network.getCookies` for `[baseUrl]`, select cookies whose names start with
+  `"__Secure-neon-auth."`, require their sorted names to equal exactly
+  `["__Secure-neon-auth.local.session_data","__Secure-neon-auth.session_token"]`,
+  delete each selected cookie with one `Network.deleteCookies` call using only
+  `{name:cookie.name,url:baseUrl}`, then call `Network.getCookies` once more
+  and require zero cookie name with that prefix. This prevents the SDK's
+  owner-A session-data cache from masking the later owner-B/null partitions.
+  Mode `none` must still yield the existing 401/API denial and protected-route
+  denial.
+- **Substitute ledger:** replace only the authentication entry with:
+  `actual: "installed Neon Auth server client and /runs middleware against deterministic loopback /get-session, with one CDP-seeded opaque local session token"`;
+  `mayProve: "actual auth-client and middleware calls, protected-workspace routing, cookie transport, and owner propagation/denial branches"`;
+  `mustNotClaim: "live Neon Auth availability, external token issuance or validation, credential verification, cookie-cryptography assurance, or external session security"`.
+  No other substitute claim changes.
+- **Oracle:** after the same successful handoff retry, the client-generated
+  navigation reaches exactly `/runs/<encoded runId>` through the real Next
+  proxy, the document never visits `/sign-in`, the existing workspace loads
+  exactly 100 query inputs, and the existing owner/restart/snapshot checks
+  pass. At least one `auth` trace at or after `sessionAuthFloor` with
+  `op:"get-session"`, mode `owner-a`, and status 200 exists before workspace
+  readiness. The trace and
+  browser diagnostics contain neither cookie value nor Cookie/Set-Cookie
+  header. The SDK-created session-data cookie and seeded token both exist
+  through the last owner-A protected reload, then both are absent before the
+  owner-B/null partitions. Removing the browser token, returning the old
+  user-only envelope, leaving either Neon cookie across the owner switch,
+  returning `null`, or changing the expected route must make the existing
+  navigation/auth assertions fail.
+- **Coverage and invalidation:** existing `W6-NAV-01`, `W6-FLOW-01`,
+  `W6-RES-01`, `W6-NC-02`, and `W6-NC-12` own this strengthened witness. No
+  case/control/manifest/digest changes. C118 and I110 CV44 plus the CV45
+  backend reuse proof remain accepted. The failed fresh CV45 run remains
+  diagnostic. A new assessment must run the causal browser gate and every
+  still-pending final gate; prior browser output is not acceptance.
+- **Alternatives rejected:** weakening/removing the `/runs` proxy; bypassing
+  middleware for tests; navigating to the JSON `statusUrl`; manually minting
+  the SDK's private signed session-data JWT; implementing a fake email sign-in
+  protocol; changing application auth routes; treating `/sign-in` as success;
+  logging the token; or claiming live/external authentication.
+- **Tasks/scenarios:** `KI-W6-CT15` / `KI-W6-C119`, then `KI-W6-CT16` /
+  `KI-W6-C120`; existing `SCN-KI-018`, `W6-NAV-01`, `W6-FLOW-01`,
+  `W6-RES-01`, `W6-NC-02`, `W6-NC-12`; assessment `KI-W6-I111`.
 
 ## 2. Lifecycle transition tables
 

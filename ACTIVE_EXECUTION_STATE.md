@@ -1,25 +1,25 @@
-state_version: 156
+state_version: 165
 standard_path: PROJECT_AGNOSTIC_DECISION_COMPLETE_CHECKLIST_AUTHORING_STANDARD.md
 standard_revision: cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb523ede32848
 subwindow_standard_path: PROJECT_AGNOSTIC_WINDOW_AGENT_SUBWINDOW_AUTHORING_STANDARD.md
 subwindow_standard_revision: 84e7590e74589f308c70dc9b0b67f7e9da395fafb1e5786202ecd1ca15be56e9
-standard_adoption: KI-R5 is accepted; KI-W6 remains active; C106 and I103 CV7/CV8 remain accepted; R33's observable CV9 failure is a one-symbol paginated-selection harness defect; DEC-KI-041 and KI-CL-23 authorize C107 then I104 without changing product behavior or W6 coverage membership
+standard_adoption: KI-R5 is accepted; KI-W6 remains active; C112-C118 are accepted by the window agent; I109 CV36-CV38 and I110 CV44 plus its backend-reuse proof pass; failed fresh I110 CV45 is preserved diagnostic evidence; SRC-KI-049 DEC-KI-047 and KI-CL-29 decision-completely and enforcement-completely resolve the protected-workspace auth-substitute gap without changing production auth or coverage membership; ASG-KI-W6-WA-06 delegates sequential C119 C120 and window-agent-owned I111 under both current standards; KI-W7 remains prohibited
 contract_path: KEYWORD_INTELLIGENCE_PRODUCT_CONTRACT.md
 contract_revision: 8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c
 decision_path: KEYWORD_INTELLIGENCE_DECISION_LEDGER.md
-decision_revision: 4d7e4aa311286d997b2498f7af46fa0a32426d1cbace5e1d1f3db340009168b7
+decision_revision: 7e0594d675faf572391b3bc03d6b09f8720cfe6295b447b693ea4a9965862512
 checklist_path: KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md
-checklist_revision: d47d0dd73b7efd357a7fc196ee64bfba2c2e5b0e4f818ea6e8180054e1f36eae
+checklist_revision: 94468aa949564ac96f80a7e30f088629cc51604cfd05eac53eee9d90dbdc4af3
 current_window: KI-W6
-current_assignment_id: ASG-KI-W6-WA-02
+current_assignment_id: ASG-KI-W6-WA-06
 assigned_agent: KI-W6-WINDOW-AGENT
 authorized_windows: [KI-W6]
 approved_decomposition_path: KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_CHECKLIST.md
-approved_decomposition_revision: b99633447c17163f6e883d71388b0200a345d2c0ced51252b8d03a8fba3b6b38
-correction_decomposition_base_revision: b9d3bc22b724a1673cb06b49e17aef5b99b759842be6bf2c550c898bc49d0af8
-authorized_write_scope: [KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_CHECKLIST.md append-only exact C107 I104 transcription by window agent, KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_STATE.md, KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_EVIDENCE.md, frontend/test/browser/keyword-intelligence-e2e.mjs::swapOneSelectionItemViaUi through KI-W6-C107 leaf only]
-authorized_actions: [record the state-156 parent disposition in S2 S3, preserve C106 CV7 CV8 acceptance unchanged, append the literal KI-CL-23 C107 I104 blocks to S1 and certify exact transcription, dispatch exactly one C107 leaf owning only swapOneSelectionItemViaUi, independently review C107 and its two local checks, personally execute I104 CV13 through CV18 in order, use standing sandbox escalation and at most one identical recovery only for a proven environment-invalidated authorized local command, on complete pass append CH5 CH6 and stop READY_FOR_PARENT_REVIEW, write diagnostics only under tmp without logging TEST_DATABASE_URL]
-prohibited_actions: [window-agent implementation-file edits, direct parent-leaf communication, leaf subdelegation, edits to A1-A8 by the window agent, second leaf or second implementation file, edits outside swapOneSelectionItemViaUi, changes to production source component view-model API schema contract config service key repository handler manifest case IDs case digests selection count page size timeout package or build input, changing CV15 command environment database input cases controls or oracle, accepting missing partial reconstructed summary-only or failed CV15 evidence, continuing CV16-CV18 after observable CV15 failure, KI-W7 work, provider calls, AWS operations, production database writes, destructive shared cleanup, agent commits or pushes, full opted-in database suite, Prisma generate or validate, seven-handler build or measure, duplicate frontend build]
+approved_decomposition_revision: 039c6b910526e7ae77bd2bd5c52f68a6dd4e241ab84edd458c54488f7ab6771f
+correction_decomposition_base_revision: 039c6b910526e7ae77bd2bd5c52f68a6dd4e241ab84edd458c54488f7ab6771f
+authorized_write_scope: [email_scraper/test/helpers/keyword-intelligence-e2e-harness.js through C119 only, frontend/test/browser/keyword-intelligence-e2e.mjs through C120 only, KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_CHECKLIST.md coordination append/reconciliation only, KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_STATE.md, KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_EVIDENCE.md append-only, test-created disposable schemas/temp files and gitignored keyword build outputs during I111 only]
+authorized_actions: [mechanically transcribe KI-CL-29 CT15 CT16 C119 C120 and I111 into the existing subordinate artifacts and certify equality with the parent trace, launch and independently review exactly one single-file C119 leaf then exactly one single-file C120 leaf, personally execute I111 CV50-CV57 and CH11 after both leaves are accepted, reuse I109 CV36-CV38 and I110 CV44 only after the exact disjoint-dependency and digest proof, start authorized local commands elevated when required, use one standards-defined identical recovery only after proven sandbox or channel invalidation, append subordinate evidence, set subordinate state READY_FOR_PARENT_REVIEW and stop]
+prohibited_actions: [parallel leaf execution, window-agent implementation edits, leaf-to-parent communication, third implementation file, production proxy auth route component API repository database provider cost queue artifact schema migration package build-input established-pipeline edit, manual signed session-data JWT, fake sign-in protocol, route protection bypass, token or Cookie or Set-Cookie value logging, changed session contract case control digest gate browser command or stop rule without parent return, full opted-in database suite, Prisma generate or validate, A1-A8 edit, provider AWS production destructive action, commits or pushes, KI-W7 work]
 execution_environment_policy:
   sandbox_escalation_for_authorized_local_actions: true
   automatic_identical_recovery_after_proven_environment_invalidation: true
@@ -32,4 +32,4 @@ next_window: KI-W6
 stop_after: KI-W6
 blocker: null
 user_gates: []
-last_updated: 2026-08-21T15:05:00+05:30
+last_updated: 2026-08-21T22:04:07+05:30

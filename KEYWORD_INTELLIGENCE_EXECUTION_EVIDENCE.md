@@ -5546,3 +5546,598 @@ authorized_first_action: window agent transcribes C107 and I104 exactly into S1/
 authorized_first_implementation: C107 only after exact transcription certificate
 planned_stop: READY_FOR_PARENT_REVIEW after I104; before KI-W7
 ```
+
+### `EV-KI-A-096` — R36 diagnosis and C108/C109/I105 authorization
+
+- **Timestamp / phase:** 2026-08-21T15:41:31+05:30 / independent parent
+  diagnosis, decision/enforcement compilation and continuation assignment.
+- **Accepted predecessor:** C107 is independently accepted; I104 CV13 and CV14
+  pass. `EV-KI-W6-R36` records an observable elevated CV15 failure after
+  202,287 ms and 66 requests with Prisma `Transaction API error: Transaction
+  not found`, zero cases/controls and complete process/schema cleanup. It is not
+  relabelled as sandbox invalidation and does not satisfy CV15.
+- **Causal evidence:** current repository SHA-256
+  `be134a3fe039008a9509e940184337e14b276d6bd0e68b6c0830b03e2a68bf48`
+  shows generic `_transaction()` passes no Prisma options and final
+  `publishResearchResult()` uses it. The earlier W6 maximum causal attempts
+  independently localized two default-five-second expiries to final
+  `keywordResearch.updateMany`. Current service/repository source proves the
+  aggregation lease is renewed to 120,000 ms immediately before publication,
+  with a 40,000 ms monitor interval and no provider/network operation inside
+  the transaction. G-R30/G-R31 supplies the accepted analogous 30,000 ms
+  publication-safety precedent with `maxWait:5,000`.
+- **Locked correction:** `SRC-KI-044`, `DEC-KI-042` and A4 `KI-CL-24` prescribe
+  exactly two sequential one-file leaves. C108 changes only the private
+  repository transaction seam/constants/publication call so only final
+  publication receives `{maxWait:5_000,timeout:30_000}`. C109 changes only the
+  repository integration test and adds a permanent deterministic real-Prisma
+  scenario: a test-only 20,000 ms timeout plus one in-transaction 21,000 ms
+  `pg_sleep` must fail P2028 and roll back the already-attempted stage write;
+  the identical delay under production options must publish the maximum 200
+  rows/default 100 and replay `found`.
+- **Enforcement:** the separate exact transaction registry is
+  `[W6-TXN-01,W6-TXN-02]`, digest
+  `dd72e2292dac7c33d2250be7af0770401bde67695176d1b76c530b9c7bc10d39`,
+  with `W6-NC-14`. The existing browser manifest stays 26/13 and bytewise
+  unchanged. I105 merges the registries to 28 cases/digest
+  `c1e4d65b0df7fd1fd86f71420e4ba5e9c6d12cc72b3f24885c71d5283dcf5c75`
+  and fourteen controls/digest
+  `4f2c8489518c5845c52e9336a47f5cc0b90dcdd9dfa70db7614814d87c173af6`.
+  The test-proxy claim is restricted to timeout propagation and rollback; a
+  fresh unmodified-client causal E2E remains mandatory.
+- **Frozen sequence:** after independent C108/C109 review, I105 runs one
+  four-test focused isolated-DB gate, one fresh causal emitted-browser gate,
+  then only on causal pass `npm test`, secret scan, two deterministic keyword
+  builds, one packaging test and final scope/coverage closure. Successful
+  prior CV7/CV8/CV13/CV14 evidence is reused only by exact dependency proof.
+  Observable failure stops; E8.1 permits only one identical recovery after a
+  proven environment invalidation.
+- **Mechanical closure:** source/test baselines are respectively
+  `be134a3…` and `e1572ede…`; their exact path-set digest is
+  `0e9215fefca073914b7c198ef548b947b5325d323d7c39f39ffbfdf918009aa9`.
+  Backend and frontend worktrees were clean; root dirty state contained only
+  the window-agent S2/S3 files before parent-artifact edits. Ten correction-
+  readiness items are checked, zero are unchecked, zero payload facts or
+  implementation choices remain unresolved, and the parent-standard
+  counterexamples for global timeout, nondeterministic slowness, partial
+  publication, vacuous registration, substitute overclaim, repeated stateful
+  gates and sandbox relabelling are rejected by the literal tasks/gates.
+- **Mechanical lint:** the final read-only Node lint recomputed every A5
+  standard/contract/decision/checklist/S1-base pin, the two-file path digest,
+  the 2/28 case digests, the fourteen-control digest, ten `RW6F-*` items and
+  unique new dossier/decision/change definitions; it printed
+  `KI_W6_C108_C109_I105_PARENT_LINT_OK`. `git diff --check` passed and both
+  nested repository status sets were empty. An earlier draft invocation was
+  invalid because an unquoted backtick in the shell command was interpreted by
+  Bash; it changed no file or state and supplied no evidence. The corrected
+  single-quoted invocation is the cited result.
+- **Authority:** A5 CAS 156→157 creates corrective reassignment
+  `ASG-KI-W6-WA-03`. The window agent may
+  append the exact C108/C109/I105 trace to S1/S2/S3, sequentially dispatch and
+  review the two leaves, personally execute I105, and stop
+  `READY_FOR_PARENT_REVIEW`. Requester-owned exact commits are provenance, not
+  agent violations; agents may not commit. KI-W7 remains prohibited.
+- **Authoring diagnostics / no mutation:** two guarded no-database selector
+  probes ran against the unchanged integration file. The default-isolation
+  invocation exposed that the parent process selected only the file wrapper;
+  the corrected identical pattern with `--test-isolation=none` selected exactly
+  the three currently existing named tests, all guarded-skipped because
+  `ALLOW_DATABASE_TESTS` was absent. This mechanically froze CV21 so the added
+  SCN-KI-042 becomes the fourth selected case. No implementation, leaf,
+  database, build, browser, provider, AWS, production, destructive, commit or
+  push action occurred; external cost `$0.00`.
+- **Revisions:** A2 `KI-DD-9`
+  `ad08f6e75f575d7b5fcdc1ed666299cd2f8026da9266862a7a6fa3ebc353d5df`;
+  A3 `KI-DL-18`
+  `2a360a3df33d62c30abeaaa1bde9c45f93fc7db8cc5648749853222789ce0617`;
+  A4 `KI-CL-24`
+  `ed004c5f6168a61a3af950dba4a1f636c75a473a953234be72174e1154f1411a`;
+  A8 `KI-TR-16`
+  `b53842caa3511fa61797fc26bf416ffbee93f2b4ddd76be36cd79416645a2d87`;
+  A5 state 157
+  `a96c530ed9a1aa35811ec5b071539be0ed150dd6d2146e550a332d0dc236bde4`.
+
+```yaml
+certificate: AUTHORING-READY
+window: KI-W6
+corrections: [KI-W6-C108, KI-W6-C109]
+assessment: KI-W6-I105
+artifact_paths:
+  A1: KEYWORD_INTELLIGENCE_PRODUCT_CONTRACT.md
+  A2: KEYWORD_INTELLIGENCE_DISCOVERY_DOSSIER.md
+  A3: KEYWORD_INTELLIGENCE_DECISION_LEDGER.md
+  A4: KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md
+  A5: ACTIVE_EXECUTION_STATE.md
+  A6: KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md
+  A7: KEYWORD_INTELLIGENCE_SPECIFICATION_CHANGELOG.md
+  A8: KEYWORD_INTELLIGENCE_TRACEABILITY_INDEX.md
+required_changed_files: [email_scraper/src/keyword-intelligence/repository.js, email_scraper/test/keyword-intelligence-repository.integration.test.js]
+required_changed_file_set_digest: 0e9215fefca073914b7c198ef548b947b5325d323d7c39f39ffbfdf918009aa9
+checked_authoring_items: 10
+unchecked_required_items: 0
+unresolved_evidence_references: 0
+unresolved_payload_contracts: 0
+delegated_implementation_decisions: 0
+unowned_source_members: 0
+unowned_plan_members: 0
+unproven_competing_owner_pairs: 0
+anti_vacuity_failures: 0
+mistake_conformance_failures: 0
+planned_coverage_cases: 28
+unmapped_coverage_cases: 0
+duplicate_coverage_case_ids: 0
+critical_invariants_without_negative_control: 0
+test_substitutes_without_fidelity_disposition: 0
+unresolved_accepted_evidence_invalidations: 0
+frozen_gate_ambiguities: 0
+transaction_case_count: 2
+transaction_case_digest: dd72e2292dac7c33d2250be7af0770401bde67695176d1b76c530b9c7bc10d39
+combined_case_count: 28
+combined_case_digest: c1e4d65b0df7fd1fd86f71420e4ba5e9c6d12cc72b3f24885c71d5283dcf5c75
+combined_negative_control_count: 14
+combined_negative_control_digest: 4f2c8489518c5845c52e9336a47f5cc0b90dcdd9dfa70db7614814d87c173af6
+predictable_gates: [one focused isolated-database four-test gate, one causal emitted-browser isolated-schema gate, one backend regression, one secret scan, two keyword-worker builds, one packaging test, final read-only closure]
+requester_actions_before_start: []
+authorized_first_action: window agent authors exact C108 C109 I105 subordinate blocks and certifies parent-trace identity
+authorized_first_implementation: C108 only after subordinate readiness
+planned_stop: READY_FOR_PARENT_REVIEW after I105; before KI-W7
+```
+
+### `EV-KI-A-097` — CV21 execution-channel recovery disposition
+
+- **Timestamp / role:** 2026-08-21T16:46:27+05:30 / parent agent.
+- **Trigger:** `EV-KI-W6-R41` records that I105 CV21 used the exact frozen
+  elevated command and the execution channel reported process completion, but
+  returned no exit code, TAP totals, registry execution, rollback/replay, or
+  disposable-schema cleanup certificate. It is therefore an unobservable
+  transport attempt, not a pass and not an observable product/test failure.
+- **Standard disposition:** parent standard E8.1 and sub-window standard 9.3.1
+  classify execution-channel loss separately from a behavioral failure. The
+  unavailable result does not satisfy CV21 and does not authorize CV22, but it
+  permits one identical recovery after read-only postconditions prove that no
+  matching process, workspace/external mutation, usable result, or selected-
+  test disposable schema remains.
+- **Recovery protocol:** A5 CAS 157→158 authorizes the same window agent to run
+  exactly one final elevated CV21 recovery with the literal KI-CL-24 command,
+  environment, test selection and behavioral oracle unchanged. The execution
+  transport must durably retain complete stdout/stderr and the real process
+  exit under `/tmp` so a channel-return failure cannot erase the verdict; the
+  transport wrapper may not change Node arguments, timeout, fixtures,
+  resources, selection or acceptance behavior and must not expose
+  `TEST_DATABASE_URL`.
+- **Continuation:** an observable exact four-pass/zero-fail/zero-skip CV21 with
+  all transaction registry, rollback, replay and schema-absence witnesses may
+  continue to CV22–CV24 and CH7/CH8. An observable failure or renewed
+  unobservability stops with no further CV21 attempt. C108/C109 and CV19/CV20
+  remain accepted; no implementation, test, database, build, browser,
+  provider, AWS, production, destructive, commit, push or KI-W7 action was
+  performed by the parent; external cost `$0.00`.
+
+```yaml
+certificate: EXECUTION-CHANNEL-RECOVERY-AUTHORIZED
+window: KI-W6
+assessment: KI-W6-I105
+gate: KI-W6-CV21
+trigger: EV-KI-W6-R41
+prior_result: UNOBSERVABLE
+behavioral_failures_observed: 0
+authorized_recoveries: 1
+recovery_identity: exact command environment selection inputs and oracle
+required_capture: complete stdout stderr real exit and cleanup witness retained under tmp
+continuation_on_pass: [KI-W6-CV22, KI-W6-CV23, KI-W6-CV24, KI-W6-CH7, KI-W6-CH8]
+stop_on: [observable failure, renewed unobservability]
+successor_authority: false
+state: 158
+```
+
+### `EV-KI-A-098` — CV21 outer-runner lifetime correction
+
+- **Timestamp / role:** 2026-08-21T16:53:54+05:30 / parent agent.
+- **New mechanical evidence:** after `EV-KI-W6-R42` was recorded, read-only
+  inspection of `/tmp/kiw6-cv21-state158.KP3m7L/stdout.log` found two complete
+  selected passes, not one: the atomic publication case at `41288.488584ms`
+  and rollback case at `43081.9676ms`. The file grew for approximately 85
+  seconds after capture-directory creation; stderr remained empty, no Node test
+  process remained and the wrapper never reached its exit-status write. This
+  proves the outer execution lifetime ended during the still-progressing
+  unchanged suite. It supplies no test verdict and does not falsify CV21.
+- **Missing constraint:** state 158 required durable capture but did not freeze
+  an outer-runner lifetime long enough for four sequential migration-backed
+  cases. The process was therefore terminated before Node could execute the
+  remaining cases, print totals, run final cleanup, return to the wrapper or
+  persist `$?`.
+- **Disposition:** A5 CAS 158→159 authorizes one separately justified transport
+  recovery. The literal KI-CL-24 Node command, environment, selection, inputs,
+  test timeouts and oracles remain byte-for-byte unchanged. Only its execution
+  transport changes: one persistent elevated session with an exact `600000ms`
+  outer deadline, fresh separate stdout/stderr files, immediate real-exit
+  persistence after Node returns, and polling of that same session through
+  terminal completion. A detached unpolled process or shorter runner is not
+  permitted.
+- **Boundary:** before launch, read-only checks must again prove no matching
+  process and no selected-test disposable schema. The state-159 run is the last
+  CV21 attempt. Observable four-pass success permits CV22–CV24; any failure,
+  renewed unobservability or missing exit file stops. No implementation, test,
+  database, build, browser, provider, AWS, production, destructive, commit,
+  push or KI-W7 action was performed by the parent; external cost `$0.00`.
+
+```yaml
+certificate: OUTER-RUNNER-LIFETIME-CORRECTION-AUTHORIZED
+window: KI-W6
+assessment: KI-W6-I105
+gate: KI-W6-CV21
+trigger: EV-KI-W6-R42
+independent_environmental_invalidation: outer runner ended while durable stdout was still growing
+captured_passes: 2
+behavioral_failures_observed: 0
+node_command_change: none
+outer_execution_deadline_ms: 600000
+session_policy: persistent and polled through terminal completion
+required_capture: separate complete stdout stderr and real Node exit status
+remaining_cv21_attempts_after_state159_run: 0
+successor_authority: false
+state: 159
+```
+
+### `EV-KI-A-099` — Observable CV21 failure and parent takeover assignment
+
+- **Timestamp / role:** 2026-08-21T17:03:47+05:30 / parent agent.
+- **Recovered final state-159 result:** the previously empty/partial capture
+  completed under `/tmp/kiw6-cv21-state159.JPCZ5y`: exit `1`, four tests, three
+  pass, one fail, zero skip, duration `252699.325302ms`, empty stderr. The
+  pre-existing atomic publication, rollback and stale-owner tests passed.
+  `SCN-KI-042` failed with Prisma `P2010` because the test probe attempted to
+  deserialize the `void` column returned by `SELECT pg_sleep(21.000)`.
+- **Diagnosis:** this is no longer an execution-channel blocker. The production
+  publication transaction was not the failing surface. `SRC-KI-045` and
+  `DEC-KI-043` freeze the one-expression test-only repair: select one supported
+  text literal from the same `pg_sleep(21.000)` relation, preserving the delay,
+  injection point, negative timeout and every behavioral oracle.
+- **Requester override:** the requester explicitly directed the parent to take
+  over and finish KI-W6 if no new blocker appears. A2 advances to `KI-DD-10`, A3
+  to `KI-DL-19`, A4 to `KI-CL-25`, A8 to `KI-TR-17`, and A5 CAS 159→160 creates
+  `ASG-KI-W6-PARENT-01`. The parent owns exact C110 and ordered I106 CV25–CV30;
+  the window agent and leaves receive no new assignment.
+- **Initial C110 implementation:** only the frozen query expression changed in
+  `email_scraper/test/keyword-intelligence-repository.integration.test.js`,
+  from baseline `9ba39e9c…` to `a278681e…`. `node --check` and targeted `git
+  diff --check` passed. No stateful gate had run at this evidence point.
+- **Boundary:** later gates remain conditional and stop on an observable
+  failure. No production source, schema, package, provider, AWS, production,
+  destructive, commit, push or KI-W7 action occurred; external cost `$0.00`.
+
+```yaml
+certificate: PARENT-TAKEOVER-AUTHORIZED
+window: KI-W6
+correction: KI-W6-C110
+assessment: KI-W6-I106
+assignment: ASG-KI-W6-PARENT-01
+baseline_test_digest: 9ba39e9cac703fc7df6d24268a4a1f8d870ce8d056e4556ee9218c80c698599d
+corrected_test_digest: a278681ee25a2a955f010ceda54f6a3571f8aa782b5edc9aae20b27b7cb271a5
+state159_result: {pass: 3, fail: 1, skip: 0, exit: 1}
+failed_surface: test-only void result deserialization
+next_gate: KI-W6-CV26
+successor_authority: false
+state: 160
+```
+
+### `EV-KI-A-100` — C110/CV26 pass and causal selection-array correction
+
+- **Timestamp / role:** 2026-08-21T17:19:38+05:30 / parent agent executing
+  the requester-authorized KI-W6 takeover.
+- **C110/CV26:** C110 changed only the frozen delay query result expression;
+  syntax and diff checks passed. The exact focused CV26 command then completed
+  in one persistent elevated session: four tests, four pass, zero fail/skip,
+  exit zero, duration `273738.102547ms`. It proved atomic publication,
+  injected rollback, corrected `SCN-KI-042` 20/21-second paths, exact replay
+  and stale-owner fencing. A separate read-only query returned
+  `CV26_RESIDUAL_SCHEMA_COUNT=0`.
+- **CV27 observable failure:** the unchanged causal browser command exited one
+  after `198033ms`, 154 network requests and complete browser/server/schema/tmp
+  cleanup. It failed before case acceptance because the keyword table could not
+  expose both selection states by page eight.
+- **Diagnosis:** the deliberate revision-advance script reads
+  `research.selection.items`, but the accepted serializer returns `selection`
+  as the array. It therefore produced `items=[]`, saved an empty revision and
+  reloaded all rows unchecked. This mechanically explains the impossible
+  checked-row search without implicating product pagination or selection.
+- **Correction/authority:** `SRC-KI-046`, `DEC-KI-044`, `KI-CL-26` and
+  `KI-TR-18` freeze C111's one-expression array consumer. The browser file
+  changes from `aff4c617…` to `f7f055e6…`; syntax/diff checks pass. A5 CAS
+  160→161 preserves CV26 and authorizes parent I107 CV31–CV35 only.
+- **Boundary:** no Next rebuild is needed because C111 is a test-only file.
+  No production source, schema, package, provider, AWS, production,
+  destructive, commit, push or KI-W7 action occurred; external cost `$0.00`.
+
+```yaml
+certificate: C111-AUTHORING-READY
+window: KI-W6
+correction: KI-W6-C111
+assessment: KI-W6-I107
+assignment: ASG-KI-W6-PARENT-01
+cv26: {pass: 4, fail: 0, skip: 0, residualSchemas: 0}
+cv27: {status: FAILED, cleanup: PASS, casesAccepted: 0, controlsAccepted: 0}
+baseline_browser_digest: aff4c6174decfc34189fd509cbea84c885cfbb433f061d606f7829c935d25b44
+corrected_browser_digest: f7f055e62f0e2c3c438bdaf739253f0cc917803a8a5115306773066b137fce6f
+next_gate: KI-W6-CV32
+successor_authority: false
+state: 161
+```
+
+### `EV-KI-A-101` — I107 CV32 provider-settlement transaction blocker
+
+- **Timestamp / role:** 2026-08-21T17:25:42+05:30 / parent agent executing
+  the requester-authorized KI-W6 takeover.
+- **Preserved acceptance:** C110 local checks and CV26 remain accepted at four
+  pass / zero fail / zero skip with zero residual selected-test schemas. C111's
+  exact one-expression diff from `aff4c617…` to `f7f055e6…` passes syntax and
+  diff checks; CV26 was not repeated.
+- **CV32 outcome:** the exact causal browser command exited one after
+  `127829ms` and 60 network requests. It accepted zero cases/controls and
+  reported no console/page exception. Browser, Next, auth, backend, isolated
+  schema and temporary-root cleanup all passed; the disposable schema was
+  absent.
+- **Failure:** Prisma raised `Transaction API error: Transaction not found`
+  during `prisma.keywordResearchProviderAttempt.findUnique()`. Read-only source
+  tracing places that call at the first ledger read inside
+  `PrismaKeywordResearchRepository.settleAttempt()`. The generic `_transaction`
+  uses Prisma's implicit approximately five-second lifetime after the
+  schema-local `set_config`; unlike final publication, settlement supplies no
+  explicit options.
+- **Disposition:** this is an observable production-transaction failure, not a
+  browser-harness or sandbox invalidation. A5 CAS 161→162 stops KI-W6 before
+  CV33–CV35. No timeout broadening or rerun is authorized until a new parent
+  decision defines the exact provider-ledger transaction scope, bound and
+  regression proof. No provider, AWS, production, destructive, commit, push or
+  KI-W7 action occurred; external cost `$0.00`.
+
+```yaml
+certificate: KI-W6-PARENT-BLOCKED
+window: KI-W6
+assessment: KI-W6-I107
+gate: KI-W6-CV32
+result: FAILED
+requests_before_failure: 60
+failed_method: PrismaKeywordResearchRepository.settleAttempt
+failed_operation: keywordResearchProviderAttempt.findUnique
+cleanup: PASS
+accepted_cases: 0
+accepted_controls: 0
+preserved_gates: [KI-W6-CV26]
+pending_gates: [KI-W6-CV33, KI-W6-CV34, KI-W6-CV35]
+successor_authority: false
+state: 162
+```
+
+### `EV-KI-A-102` — Seventh-correction authoring and window-agent handoff
+
+- **Timestamp / role:** 2026-08-21T17:56:37+05:30 / parent agent.
+- **Diagnosis:** read-only inventory confirmed 18 `_transaction` call sites in
+  the new Keyword Intelligence repository, only final publication with explicit
+  options, repeated reads after conditional writes, and a recovery caller that
+  validates `limit` but invokes unbounded `recover(now)`. The established
+  discovery/lead/traffic/CrUX pipeline is outside this finding and scope.
+- **Decision:** `SRC-KI-047` and `DEC-KI-045` freeze 8 short and 10 scale
+  transaction profiles, exact set-based operation ceilings, one-statement
+  throttle reservation, required `recover(now,{limit})`, deterministic
+  three-read merge/slice and the hard 100-dispatch caller guard. Provider HTTP,
+  S3, queue, fencing, attempt identity and the evidenced `$0.49200000` maximum
+  are unchanged.
+- **Executable sequence:** A4 `KI-CL-27` defines sequential single-file
+  `C112` repository source, `C113` recovery caller, `C114` unit enforcement,
+  `C115` isolated integration enforcement, `C116` recovery enforcement, then
+  window-agent-owned zero-write `I108`. The five planned paths have sorted-LF
+  digest `dd66e44200514702c82ad06da4c93b3dda30596048a1f569d5779642119f8130`.
+- **Enforcement:** seven cases `W6-DB-01`–`07` digest
+  `073c0fa52135c9a271eea75264efc79fd6ebcb8d062ec73175dbb58a5333aa8f`
+  and three controls `W6-NC-15`–`17` digest
+  `86562d5c606dc8867b40ecd46b6604e2f5a66a2553c41a20a23696cb48cdbec0`
+  have unique owners, literal activation/falsification mechanisms and frozen
+  local/database/causal/regression/package commands. Database and browser gates
+  run only after the last relevant edit.
+- **Delegation:** A5 state 163 assigns `ASG-KI-W6-WA-04` to
+  `KI-W6-WINDOW-AGENT`. It may transcribe the parent blocks into the three
+  existing reauthored coordination artifacts, launch its own leaf agents only
+  sequentially, review each leaf and personally execute I108. Leaves report to
+  that window agent, not the parent. The window agent has no implementation
+  write authority.
+- **Boundary:** this parent performed documentation and assignment only. No
+  source/test implementation, leaf launch, test, build, database, provider,
+  AWS, production, destructive, commit, push or KI-W7 action occurred; external
+  cost `$0.00`.
+
+```yaml
+certificate: KI-W6-SEVENTH-CORRECTION-AUTHORING-READY
+window: KI-W6
+assignment: ASG-KI-W6-WA-04
+assigned_agent: KI-W6-WINDOW-AGENT
+sequence: [KI-W6-C112, KI-W6-C113, KI-W6-C114, KI-W6-C115, KI-W6-C116, KI-W6-I108]
+planned_changed_file_count: 5
+planned_changed_file_set_digest: dd66e44200514702c82ad06da4c93b3dda30596048a1f569d5779642119f8130
+case_count: 7
+control_count: 3
+parallel_leaves: false
+window_agent_may_launch_own_leaves: true
+window_agent_may_implement_leaf_work: false
+successor_authority: false
+state: 163
+```
+
+### `EV-KI-A-103` — Eighth-correction authoring and window-agent reassignment
+
+- **Timestamp / role:** 2026-08-21T20:13:42+05:30 / parent agent.
+- **Primary verification:** the parent inspected current A5, the on-disk W6
+  subordinate artifacts, `EV-KI-W6-R52`, the complete browser netlog producer
+  and the selection flow at lines 982–1025. On disk, S1 hashes
+  `bf269145514182381a437e360f0549dfc86be677af42b3b00d1a35cb1b092b91`,
+  S2 hashes `c77c97bd7c3838eedb9015232c12c9b0038fa689195432104c8cb80600b2f659`
+  and records state 37/BLOCKED, and S3 hashes
+  `175b5878d921fa17aad60ca0d075a4ee0c563489578f4419091864b5de92c818`.
+  The handoff's “state 38” label is a summary typo; the authoritative S2 file
+  is internally single-state and its blocker/evidence references are coherent.
+- **Diagnosis:** the accumulated netlog correctly contains two successful
+  selection PUTs. The harness-created advance has `expectedRevision:1`; the
+  UI final save has `expectedRevision:2`. The old method/URL/status-only filter
+  therefore fails at length two and would read the wrong request at index zero.
+  Starting revision one, the single stale 409 and ending durable revision three
+  are mutually consistent; CV38's real-database CAS/fencing evidence remains
+  accepted. This is not a production repository defect.
+- **Decision and exact correction:** `SRC-KI-048` / `DEC-KI-046` require exactly
+  two successful selection PUTs total, exactly one expected-revision-1 advance,
+  exactly one expected-revision-2 final CAS, and derive `savedBody` only from
+  the latter. Clearing/truncating the netlog, positional selection, relaxed
+  counts and product CAS changes are forbidden.
+- **Executable sequence:** A4 `KI-CL-28` defines the one-file C118 leaf followed
+  by window-agent-owned I110. The browser file baseline is
+  `f7f055e62f0e2c3c438bdaf739253f0cc917803a8a5115306773066b137fce6f`;
+  the singleton sorted-LF path digest is
+  `3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867`.
+  C107's page-aware helper and C111's array consumer are frozen preserved
+  witnesses.
+- **Enforcement/invalidation:** browser 26 cases/digest
+  `d81bab26bc5aadd19c162156c13890611b2fc5a6d0dcb917234453d568ffb4d4`
+  and 13 controls/digest
+  `cfc5ff10479640aac3f43eaf1c2987ce2f2796335496f88ba82abeff3d56df72`
+  remain unchanged; `W6-FLOW-07` and `W6-NC-06` own the corrected witness.
+  The old broad filter is captured falsification evidence. I109 CV39 is
+  diagnostic; CV36–CV38 may be reused only after exact disjoint-dependency
+  proof. The C111 whole-file digest is superseded by C118, not its behavior.
+- **Readiness:** all eight `RW6J-*` items are checked with resolvable evidence;
+  no payload unknown, unowned file, new coverage member, unresolved interface,
+  execution choice, substitute claim or parent-level decision remains. The
+  standards' missing/weak-oracle and accepted-test invalidation counterexamples
+  are rejected by the exact total/partition assertions and fresh CV45.
+- **Boundary:** parent documentation and assignment only. No implementation,
+  leaf launch, test, build, database, provider, AWS, production, destructive,
+  commit, push or KI-W7 action occurred; external cost `$0.00`.
+
+```yaml
+certificate: KI-W6-EIGHTH-CORRECTION-AUTHORING-READY
+window: KI-W6
+assignment: ASG-KI-W6-WA-05
+assigned_agent: KI-W6-WINDOW-AGENT
+sequence: [KI-W6-C118, KI-W6-I110]
+revisions:
+  standard: cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb523ede32848
+  subwindow_standard: 84e7590e74589f308c70dc9b0b67f7e9da395fafb1e5786202ecd1ca15be56e9
+  contract: 8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c
+  decision: d6132eecb4ab8a1c6594aa2efb1a423567c798a11f658a2c7df078793b6c0912
+  checklist: 642025513288ae76dd448b7064e1d15fc6c57b688909206c96275ecca119463b
+checked_authoring_items: 8
+unchecked_required_items: 0
+unresolved_evidence_references: 0
+unresolved_payload_contracts: 0
+delegated_implementation_decisions: 0
+unowned_source_members: 0
+unowned_plan_members: 0
+anti_vacuity_failures: 0
+mistake_conformance_failures: 0
+planned_changed_file_count: 1
+planned_changed_file_set_digest: 3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867
+new_coverage_cases: 0
+final_planned_case_count: 35
+unmapped_coverage_cases: 0
+duplicate_coverage_case_ids: 0
+critical_invariants_without_negative_control: 0
+test_substitutes_without_fidelity_disposition: 0
+unresolved_accepted_evidence_invalidations: 0
+frozen_gate_ambiguities: 0
+predictable_gates: [one causal browser/isolated-schema gate, backend regression and secret scan, two keyword builds and packaging gate]
+requester_actions_before_start: []
+parallel_leaves: false
+window_agent_may_launch_own_leaves: true
+window_agent_may_implement_leaf_work: false
+successor_authority: false
+state: 164
+```
+
+### `EV-KI-A-104` — Ninth-correction authoring and window-agent reassignment
+
+- **Trigger verified:** `EV-KI-W6-R54` is reproducible from current source.
+  C118's revision-partitioned oracle is present at browser SHA-256
+  `4fece32a44ab0276e71a813add6e75919453d9a46cb03f8a35c5d84f6fe146f3`.
+  `frontend/proxy.ts` protects `/runs/:path*`; the installed
+  `@neondatabase/auth@0.4.2-beta` middleware checks for
+  `__Secure-neon-auth.session_token` and then requires a non-null `session`
+  from `/get-session`. The browser sets no such cookie and helper SHA-256
+  `7571818027b54bc812d4395d0eb1eec65616b1b939c90baae27fefdb619867c6`
+  returns only `{user:{id}}` for authenticated modes. The redirect is therefore
+  a local substitute gap, not evidence of a product proxy, handoff, navigation,
+  repository or database defect.
+- **Decision:** `SRC-KI-049` / `DEC-KI-047` preserve production auth and freeze
+  the narrow substitute completion. C119 makes the loopback response a complete
+  deterministic session+user envelope and exports one opaque cookie seam.
+  C120 seeds that opaque token into the browser cookie jar through CDP before
+  navigation and updates the substitute claim. The installed SDK remains the
+  only session-cache signer and protected-route decision maker. The token and
+  SDK-created session-data cookie are both deleted and absence-proven before
+  the owner-B/null partitions so cached owner-A state cannot make them vacuous.
+  No signed JWT, sign-in emulation, proxy bypass or token-value evidence is
+  permitted.
+- **Executable sequence:** A4 `KI-CL-29` defines sequential one-file C119 then
+  C120 and window-agent-owned I111. Exact baselines, path-set digests, literal
+  interfaces, local checks, positive/negative ownership, once-only causal gate,
+  accepted-evidence reuse, final regression/build/coverage/privacy gates and
+  stop boundary are frozen. Browser 26/13 and final combined 35/17 memberships
+  and digests are unchanged.
+- **Mechanical checks:** planned paths are exactly
+  `email_scraper/test/helpers/keyword-intelligence-e2e-harness.js` and
+  `frontend/test/browser/keyword-intelligence-e2e.mjs`; per-member-LF set digest
+  is `4f0d4befb9a6d1cdb039108cf271c25ed23265436fdf856866e93caeef179628`.
+  C119 singleton digest is
+  `7549f43fbf304b87491bb6d7758f09ea4b9d237153c7fe7ff2554fef5f125fe4`;
+  C120 singleton digest is
+  `3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867`.
+  Parent authoring `git diff --check` and the A5 pin/assignment verification
+  pass after the state update. One initial read-only SDK assertion searched for
+  the runtime-composed full cookie name as a source literal and failed; the
+  corrected assertion checked the literal prefix plus the two suffix
+  expressions and passed. It changed no file or authority.
+- **Authority:** A5 state 165 assigns `ASG-KI-W6-WA-06` to
+  `KI-W6-WINDOW-AGENT`. The window agent may transcribe C119/C120/I111 into S1,
+  dispatch and independently review the two leaves sequentially, execute I111
+  personally and return `READY_FOR_PARENT_REVIEW`. It may not implement a leaf,
+  edit A1–A8, commit, start KI-W7, or change production auth.
+- **Boundary:** parent documentation and assignment only. No implementation,
+  leaf launch, test, build, browser, database, provider, AWS, production,
+  destructive, commit, push or KI-W7 action occurred; cost `$0.00`.
+
+```yaml
+certificate: KI-W6-NINTH-CORRECTION-AUTHORING-READY
+window: KI-W6
+assignment: ASG-KI-W6-WA-06
+assigned_agent: KI-W6-WINDOW-AGENT
+sequence: [KI-W6-C119, KI-W6-C120, KI-W6-I111]
+revisions:
+  standard: cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb523ede32848
+  subwindow_standard: 84e7590e74589f308c70dc9b0b67f7e9da395fafb1e5786202ecd1ca15be56e9
+  contract: 8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c
+  decision: 7e0594d675faf572391b3bc03d6b09f8720cfe6295b447b693ea4a9965862512
+  checklist: 94468aa949564ac96f80a7e30f088629cc51604cfd05eac53eee9d90dbdc4af3
+checked_authoring_items: 8
+unchecked_required_items: 0
+unresolved_evidence_references: 0
+unresolved_payload_contracts: 0
+delegated_implementation_decisions: 0
+unowned_source_members: 0
+unowned_plan_members: 0
+anti_vacuity_failures: 0
+mistake_conformance_failures: 0
+planned_changed_file_count: 2
+planned_changed_file_set_digest: 4f0d4befb9a6d1cdb039108cf271c25ed23265436fdf856866e93caeef179628
+new_coverage_cases: 0
+final_planned_case_count: 35
+unmapped_coverage_cases: 0
+duplicate_coverage_case_ids: 0
+critical_invariants_without_negative_control: 0
+test_substitutes_without_fidelity_disposition: 0
+unresolved_accepted_evidence_invalidations: 0
+frozen_gate_ambiguities: 0
+predictable_gates: [one causal browser/isolated-schema gate, backend regression and secret scan, two keyword builds and packaging gate]
+requester_actions_before_start: []
+parallel_leaves: false
+window_agent_may_launch_own_leaves: true
+window_agent_may_implement_leaf_work: false
+successor_authority: false
+state: 165
+```
