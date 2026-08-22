@@ -1297,3 +1297,16 @@ compatibility_or_migration_effect: none — two test-harness assertion blocks on
 authorization_effect: the requester directly authorized parent C124 implementation in the two existing correction files; after local enforcement, KI-W6-WINDOW-AGENT receives only S1/S2/S3 reconciliation, independent C124 review, I114 CV70-CV75/CH14 and stop authority; no leaf, implementation edit, commit, provider, AWS, production or KI-W7 authority.
 resumption_state: A5 state 169 READY under ASG-KI-W6-WA-09; reconcile/review parent-direct C124, execute I114 and stop before KI-W7.
 ```
+
+```yaml
+change_id: CHG-KI-080
+timestamp: 2026-08-22T19:15:00+05:30
+trigger_evidence: [SRC-KI-053, requester direct implementation instruction]
+reason: Stable causal execution completed all 100 validators but saveQueryValidation expired with P2028 during its per-row update loop before discovery dispatch.
+changed_requirements: []
+changed_decisions: [DEC-KI-051 freezes set-based exact-reconciled validation persistence and a path-specific 30-second transaction budget]
+affected_windows: [KI-W6 only; KI-W7 remains prohibited]
+invalidated_evidence: [I114 CV71 remains diagnostic; prior accepted C124 behavior remains reusable through exact dependency proof]
+compatibility_or_migration_effect: none — no schema/public payload/provider/AWS/cost change
+authorization_effect: requester authorizes the parent to apply C125/C126; the window agent later performs I115 independent review and assessment
+```

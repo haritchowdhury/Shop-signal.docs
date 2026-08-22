@@ -2689,6 +2689,22 @@ hashed by existing policy, seeds/keywords, request/response bodies, URLs,
 credentials, raw errors, and result content. S3/Neon retention follows A1;
 provider normalized cache expires seven days.
 
+### `DEC-KI-051` — Set-based maximum query-validation persistence
+
+`PrismaRunRepository.saveQueryValidation()` keeps its existing live Run lease
+fence and all-or-none transaction, but normalizes at most 100 unique query IDs
+and persists them with one schema-scoped `UPDATE ... FROM
+jsonb_to_recordset(...) RETURNING id`. The returned IDs must equal the complete
+input ID set exactly; a missing, duplicate, foreign-run or otherwise
+unreconciled row raises `PIPELINE_INPUT_CONFLICT` and rolls back the Run stage
+and every query mutation. Null `probeSummary`/`probeResults` inputs retain the
+existing stored JSON exactly as the former Prisma `undefined` writes did; all
+other scalar/null semantics remain unchanged, and raw SQL sets `updatedAt` to
+the supplied clock. This one maximum-scale transaction uses
+`{maxWait: 5_000, timeout: 30_000}`. No other repository transaction receives
+a broader timeout. The correction changes no provider batching, provider call
+count, reservation, public API, schema, queue, artifact or AWS behavior.
+
 ## 4. KI-R5 D1–D13 delta ledger
 
 - **D1 interfaces/payloads:** `DEC-KI-034` and `PAY-KI-008` supersede only the

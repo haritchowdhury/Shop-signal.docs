@@ -4315,3 +4315,158 @@ cost_usd: 0.00
 next_action: PARENT_DECISION_REQUIRED
 status: PARENT_BLOCKED
 ```
+
+---
+
+## `EV-KI-W6-R64` — `KI-W6-I114` reconciliation of parent-direct C124 + independent review (CV70 PASS)
+
+- **Authority verified:** A5 state 169 pins all match recomputed hashes
+  (standards `cda35201…`/`84e7590e…`, contract `8b17f85c…`, decision
+  `c3143cd5…`, checklist `b8c6512c…`, S1 base `18a674c6…`). Assignment
+  `ASG-KI-W6-WA-09`, authorized actions exclude leaf dispatch and
+  implementation-file edits; KI-W7 prohibited.
+- **S1 transcription certified:** KI-CL-32 twelfth-correction section (118
+  lines) transcribed byte-exact into S1 (empty diff vs source region); S1
+  digest now `60eff30f…`; S2 advanced to `KI-W6-I114 IN_PROGRESS`,
+  blocker cleared.
+- **CV70.1 baselines/endings/digest:** `git show
+  70af6198…:test/helpers/keyword-intelligence-e2e-harness.js` = `d9a76ceb…`;
+  `git show 3d97150f…:test/browser/keyword-intelligence-e2e.mjs` =
+  `448921c7…`; current endings `bc38c632…` (helper) and `8105d204…`
+  (browser) equal the C124 pins; sorted member+LF two-path digest =
+  `4f0d4bef…` (pin).
+- **CV70.2 diffs:** helper exactly 7 insertions/5 deletions; browser exactly
+  3 insertions/2 deletions (17 diff lines total); `git diff --check` clean in
+  both repositories; each repository dirty set is exactly its one owned file.
+- **CV70.3 syntax/source/negative controls:** `node --check` passes both
+  files. Independent exact-source checker verifies, in accepted order, the
+  helper's `pendingBefore !== 2` throw (`expected one stale and one live
+  run-start callback, saw <n>`), `scheduledCallbacks.pop()`,
+  `discardedStaleCallbacks = scheduledCallbacks.length`,
+  `scheduledCallbacks.length = 0`, single `liveCallback()`, zero-remain
+  check, frozen `{pendingBefore,discardedStaleCallbacks,flushedCallbacks:1,
+  pendingAfter}` witness, `op:"flush-run-start-schedule"` trace, and the
+  browser's ordered `2/1/1/0` assertion with message `run start must discard
+  one stale callback and flush exactly one live callback`, invocation after
+  `googlePairsFloor`, `captured.confirmationDrain` clone. Negative control 1
+  (scratch `pop()`→`shift()`) FAILS the checker (FIFO invocation rejected);
+  negative control 2 (scratch browser with the
+  `discardedStaleCallbacks === 1` line deleted) FAILS the checker (missing
+  stale witness rejected). Scratch copies under `/tmp/opencode` only; real
+  files untouched by controls.
+- **CV70.4 markers:** checker revalidates C119 auth constants/envelope seam,
+  C120 `Network.setCookie`, C121 provenance-oracle members, C122 seam export,
+  C123 invocation position — all present in the current bytes.
+- **CV70.5 registries:** browser manifest `ki-w6-enforcement-manifest-v1.json`
+  self-consistent (26 unique cases/13 unique controls, globalDigest matches
+  recomputation); DB `W6-DB-01`–`07` digest `073c0fa5…` and
+  `W6-NC-15`–`17` digest `86562d5c…` match pins; final 35 cases digest
+  `c5ead2a6…` and 17 controls digest `62566fd9…` match pins. No
+  case/control/registry/manifest/certificate member changed.
+- **Disposition:** CV70 PASS. I113 CV65 diagnostics preserved above (R62/R63);
+  C124 accepted as reconciled/independently reviewed.
+
+---
+
+## `EV-KI-W6-R65` — `KI-W6-I114` CV71 first attempt: 504 at untouched selection-advance phase; E8.1 recovery claimed
+
+- **Command (from `frontend/`):** `ALLOW_DATABASE_TESTS=true
+  KI_W6_SKIP_BUILD=1 node test/browser/keyword-intelligence-e2e.mjs` → exit 1,
+  `ok:false`, wallTime 200298 ms, `mainError:"the server-side revision
+  advance must succeed, saw 504"`, consoleErrors 1, pageExceptions 0,
+  networkRequests 131, cleanupStepsDone all ok (droppedSchema
+  `kiw6_mt4aoy1p14e0437e07feaf8e`, schema-absence verified).
+- **Failure location:** the in-page selection-advance evaluate
+  (`keyword-intelligence-e2e.mjs` ~975–1002) — GET of the 100-item
+  selection then PUT `/selection` with `expectedRevision:1`, both proxied by
+  the Next API route whose fixed `timeoutMs: 10_000` aborts to 504
+  `BACKEND_TIMEOUT`. The run had already passed auth, navigation, first
+  dashboard (W6-FLOW-06 activation precedes this step's evidence capture),
+  and the 30s keyword-table wait — the backend and proxy were serving this
+  same session moments earlier.
+- **Environment-invalidation proof (E8.1 basis):** this phase's code is
+  byte-identical (modulo C124's later 3/2 witness diff) to the phase that
+  PASSED in `EV-KI-W6-R57`, `R59`, `R62`, and `R63` — four prior executions.
+  Every authorized delta (C124 witness, C122/C123 seam, C121 oracle,
+  C119/C120 auth) either sits later in the flow or was already exercised
+  successfully earlier in THIS run. No assertion of product logic fired; the
+  sole failure is the fixed 10-second proxy deadline under measured strain:
+  peakChildRssKb chrome 268828 / next 201752 (same magnitude as the R62
+  invalidated run 269640/190640), host load average 5.42/6.17/5.11 with
+  11.6/15.8 GiB RAM used at diagnosis time. This is the same signature class
+  the parent already accepted as sandbox invalidation in R62→R63 (the
+  recovery passed the exact 504'd phase).
+- **Disposition:** proven sandbox performance invalidation of this execution,
+  not an assertion/Prisma/cleanup/product failure — ONE identical E8.1
+  elevated recovery is claimed for CV71 (limit: one per invalidated
+  execution). If the recovery fails anywhere, no further retry: correction
+  loop or parent escalation with both data points.
+
+---
+
+## `EV-KI-W6-R66` — `KI-W6-I114` CV71 E8.1 recovery: witness 2/1/1/0 PASSED, flushed drain produced zero validations (PARENT_BLOCKED)
+
+- **Recovery run (identical command):** exit 1, `ok:false`, wallTime 410242 ms,
+  `mainError:"timed out waiting for the 100 production validator calls, saw
+  0"`, consoleErrors 2, pageExceptions 0, networkRequests 193, cleanupStepsDone
+  all ok (droppedSchema `kiw6_mt4aungme61defe93e53c0c6`, schema-absence
+  verified).
+- **Recovery validation of R65:** every earlier phase passed this time —
+  auth/navigation, both dashboards, the selection advance that 504'd in R65
+  (200), the stale-409 conflict flow, reload, workspace provenance oracle
+  (W6-FLOW-09), and the C124 seam itself: `flushRunStartSchedule()` executed
+  and the `2/1/1/0` witness assertion PASSED (two parked, one stale
+  discarded, one live flushed, zero remaining). The R65 504 is thereby
+  confirmed environmental.
+- **Observable failure (new, at the flush OUTCOME):** after the live
+  callback ran, ZERO `google/search-page` events appeared in the 120s
+  confirm wait. This is the same terminal symptom as pre-C122 CV59, but now
+  WITH the flush proven executed — so a second blocker sits downstream of
+  the seam.
+- **Source analysis (why this is not locally resolvable):** the chain is
+  sound on paper — POST `/api/runs/{runId}/start` → `confirmQueryRevision`
+  writes `state:"queued"` (`prisma-run-repository.js:1484-1494`) → the live
+  B1 callback resets `drainScheduled` and fires `drainQueue`
+  (`server.js:1650-1658`) → `claimNextQueuedRun` claims `state:"queued"`
+  (`prisma-run-repository.js:1069-1073`) → `executeRun` calls
+  `researchQueryValidationPipeline` (`server.js:1089/1165`) → 100
+  `google/search-page` events. Zero events therefore means exactly one of:
+  (i) the `/start` response was NOT 202 (409 revision conflict / 422 invalid
+  list / proxy abort) so the run never became queued — the browser test
+  matches ONLY the request trace event (`keyword-intelligence-e2e.mjs`
+  ~1162) and never asserts the response status; or (ii) `drainQueue` threw
+  inside `claimNextQueuedRun`/`executeRun` and was silently caught
+  (`server.js:1638-1640` logs `queue_drain_failed`, invisible to the wait
+  loop); or (iii) the pipeline threw before its first google call. The
+  harness trace and browser netlog contain the discriminating evidence but
+  are not dumped on failure, and no further run is authorized.
+- **Not environmental:** the flush itself ran synchronously (witness
+  passed); the first google event would be emitted within milliseconds of
+  the pipeline starting; total silence for 120s plus a clean 202-less
+  middle is a deterministic flow failure, not a deadline abort. E8.1 is
+  exhausted for CV71; per the frozen rule and the R65 commitment, no retry —
+  correction loop or parent escalation only.
+- **Scope determination:** every candidate fix (assert the `/start` response
+  status, surface `queue_drain_failed`/trace tail on confirm timeout, or fix
+  a product defect in the confirm/drain path) requires editing the two
+  correction files and/or production files — all outside I114's zero
+  implementation-file write authority. Disposition: `PARENT_BLOCKED`;
+  CV72–CV75 and CH14 not run (stop-on-failure).
+
+```yaml
+certificate: INTEGRATION-ASSESSMENT-PARENT-BLOCKED
+parent_window_id: KI-W6
+integration_assessment_id: KI-W6-I114
+correction_leaves: [KI-W6-C124 parent-direct ACCEPTED via reconciliation/independent review (EV-KI-W6-R64; endings bc38c632…/8105d204…)]
+gates_passed: [CV70]
+gates_failed: [CV71 — attempt 1 environmental 504 (R65, E8.1 claimed and validated by recovery); recovery failed deterministically at flush outcome: witness 2/1/1/0 passed, 0 validator calls in 120s (R66)]
+gates_not_run: [CV72, CV73, CV74, CV75, CH14]
+root_cause_files: [frontend/test/browser/keyword-intelligence-e2e.mjs ~1162 (no /start response-status assertion; confirm loop blind to queue_drain_failed), email_scraper/src/server.js:1638-1640 (silent queue_drain_failed catch), confirm/drain/pipeline path server.js:1089/1165 + prisma-run-repository.js:1484 (unverified middle)]
+governing_parent_decision: DEC-KI-050 (C124 accepted, but the flush-outcome contract lacks observability or a product defect remains in the never-yet-exercised confirm/drain path)
+expanded_parent_scope_required: true
+cleanup_verified: true (both runs; schema-absence ok)
+external_mutations: [isolated disposable test schemas only, dropped and verified absent]
+cost_usd: 0.00
+next_action: PARENT_DECISION_REQUIRED
+status: PARENT_BLOCKED
+```

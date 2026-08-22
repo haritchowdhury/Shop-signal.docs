@@ -245,6 +245,19 @@ limitations: CV65 attempt one was environment-invalidated by an unrelated fixed 
 privacy: Callback counts, source control flow and synthetic cleanup evidence only; no token, cookie value, header, provider body, keyword text or user data retained.
 ```
 
+### `SRC-KI-053` — Maximum query validation expires in sequential persistence
+
+```yaml
+evidence_id: SRC-KI-053
+classification: OBSERVED
+claim: After the local harness reached a confirmed 202/202 run start and completed all 100 production validator calls, executeRun failed before discovery dispatch with Prisma P2028 at prisma-run-repository.js:1822. saveQueryValidation holds the live Run lease fence inside Prisma's default interactive-transaction timeout and then performs one RunQuery.updateMany per row; at the accepted 100-query bound this is 101 sequential mutations and the transaction expires before dispatchConfirmedQueries. The stable failure reproduced after the internet-invalidated attempt; the interrupted disposable schema was dropped by exact name and verified absent.
+source: email_scraper/src/prisma-run-repository.js::saveQueryValidation at SHA-256 d4995ef9e177dbf9f0fad5c199b9c8f5e63fd37122919ba256aa1282f842db27; local W6 causal-browser diagnostics on 2026-08-22
+observed_at: 2026-08-22
+environment: local emitted Next/browser, actual backend and isolated disposable Neon test schema; synthetic provider substitutes only
+limitations: The failure proves the 100-row persistence defect, not live provider, AWS or production behavior. The interrupted network run is invalidated; the later stable P2028 run is authoritative.
+privacy: Only safe error name/code/repository-relative frame, row counts and schema-absence evidence were retained; no raw error, SQL, URL, header, token, cookie, body, keyword or user data.
+```
+
 ## 6. Post-W5 corrective discovery
 
 | Evidence ID | Class | Precise claim | Exact source/revision | Limitations | Privacy |

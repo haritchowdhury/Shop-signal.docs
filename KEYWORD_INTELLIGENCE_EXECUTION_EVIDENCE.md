@@ -6397,3 +6397,51 @@ window_agent_may_launch_leaves: false
 successor_authority: false
 provider_or_aws_cost_usd: 0.00
 ```
+
+### `EV-KI-A-108` — Parent-direct maximum query-validation persistence correction
+
+- **Diagnosis:** stable causal W6 execution observed start `202/202`, all 100
+  validator calls, then `run_failed/PrismaClientKnownRequestError/P2028` at
+  `src/prisma-run-repository.js:1822` before any discovery dispatch.
+  `saveQueryValidation()` held the live Run fence while issuing 100 sequential
+  `RunQuery.updateMany()` statements under Prisma's default transaction
+  timeout. The earlier internet-invalidated run is excluded; its one residual
+  disposable schema was dropped by exact name and verified absent.
+- **C125 implementation:** starting source SHA
+  `d4995ef9e177dbf9f0fad5c199b9c8f5e63fd37122919ba256aa1282f842db27`
+  became
+  `54d5f422431ec1914855b2ae5cc07ff30e9ab428f11601a7703d589ee21cef13`.
+  The method now bounds/uniquifies 100 rows, retains the live lease fence,
+  selects the scoped schema, performs one typed `UPDATE ... FROM
+  jsonb_to_recordset`, preserves omitted JSON values, sets `updatedAt`, checks
+  exact returned-ID equality and uses only
+  `{maxWait:5_000,timeout:30_000}`. Syntax and diff checks passed.
+- **C126 verification:** starting test SHA
+  `f19d7c86127846b8f38c9d02f4eae7b6498357786bfec7afb8186b3117e08eb0`
+  became
+  `7a64121a723cbd23e0c62f8b5b759518074d8b47df9e5d8054be7c6833f1b143`.
+  The non-DB source/profile/operation oracle passed `1/1`; its missing
+  reconciliation and default-timeout controls falsified. The first isolated
+  run exposed only a test-oracle mistake—`RunLeaseLostError` has a class name
+  but no code—and still executed cleanup. After correcting that assertion, the
+  identical named isolated gate passed `1/1`, proving 100-row persistence,
+  retained JSON, mismatch rollback of rows and Run stage, stale-lease no-op,
+  and final schema absence.
+- **Scope/cost:** production changes are exactly
+  `src/prisma-run-repository.js` and its focused integration test. Existing W6
+  helper/browser diagnostics remain untouched at SHAs `c363fb61…` and
+  `0adfd854…`. No schema, migration, package, build, provider, AWS, production,
+  commit, push or KI-W7 action occurred; paid-provider cost is `$0.00`.
+
+```yaml
+certificate: KI-W6-THIRTEENTH-CORRECTION-PARENT-DIRECT-HANDOFF
+window: KI-W6
+completed_corrections: [KI-W6-C125, KI-W6-C126]
+next_assessment: KI-W6-I115
+source_ending_sha256: 54d5f422431ec1914855b2ae5cc07ff30e9ab428f11601a7703d589ee21cef13
+test_ending_sha256: 7a64121a723cbd23e0c62f8b5b759518074d8b47df9e5d8054be7c6833f1b143
+non_database_gate: 1/0/0
+isolated_database_gate: 1/0/0
+provider_or_aws_cost_usd: 0.00
+successor_authority: false
+```

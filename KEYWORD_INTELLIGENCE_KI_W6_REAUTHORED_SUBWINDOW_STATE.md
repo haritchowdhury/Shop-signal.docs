@@ -23,14 +23,14 @@ parent_checklist_revision: 642025513288ae76dd448b7064e1d15fc6c57b688909206c96275
 parent_state_path: ACTIVE_EXECUTION_STATE.md
 parent_state_revision: 164
 decomposition_path: KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_CHECKLIST.md
-decomposition_revision: 18a674c6518c602ef0ac107247be9518128f24f2c7ecd04213e10431caa67db5
+decomposition_revision: 60eff30f430b95f341ebc024128624a3b49bf113545d4860cae4eec96afe61a6
 evidence_path: KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_EVIDENCE.md
 decomposition_status: READY
 integration: 'Parent history preserved: C107-C111 and CV26/CV32 as recorded; seventh correction C112-C117 accepted with I109 CV36-CV38 pass and CV39 preserved as diagnostic evidence (EV-KI-W6-R52); parent SRC-KI-048/DEC-KI-046/KI-CL-28 resolve the harness-oracle defect. The eighth correction C118/I110 is transcribed into S1 under ASG-KI-W6-WA-05 and executes sequentially here.'
-current_subwindow: STOP
+current_subwindow: KI-W6-I114
 current_assignment_id: ASG-KI-W6-WA-08
 assigned_agent: KI-W6-WINDOW-AGENT
-subwindow_type: STOP
+subwindow_type: INTEGRATION_ASSESSMENT
 authorized_write_file: NONE
 authorized_read_scope: [A1-A8, KI-W6 S1/S2/S3, accepted C112-C117 source/diff/evidence, KEYWORD_INTELLIGENCE_DECISION_LEDGER.md §DEC-KI-046, SRC-KI-048, EV-KI-W6-R52, email_scraper nested repository, frontend nested repository]
 authorized_actions: [leaf applies exactly CT14 item-6 ordered block replacement with its two local-now checks; window agent then personally executes I110: CV44 inspection, CV45 dependency-proof reuse of I109 CV36-CV38 plus one fresh causal browser gate, CV46-CV49, CH10; append S3 evidence; set READY_FOR_PARENT_REVIEW and stop]
@@ -44,8 +44,8 @@ may_start_successor: false
 current_status: BLOCKED
 accepted_subwindows: [KI-W6-S101, KI-W6-S102, KI-W6-S103, KI-W6-S104, KI-W6-S105, KI-W6-C104, KI-W6-C105, KI-W6-C106, KI-W6-C107, KI-W6-C108, KI-W6-C109, KI-W6-C112, KI-W6-C113, KI-W6-C114, KI-W6-C115, KI-W6-C116, KI-W6-C117, KI-W6-C118]
 next_subwindow: STOP
-blocker: 'I113 CV65 failed deterministically at the C122/C123 seam (EV-KI-W6-R63): createLeadServer parks one queueDrain callback per backend server instance at creation (server.js:2205) and the browser test restarts the backend before the keyword drains (line 900), so exactly TWO callbacks are parked at the confirm boundary — DEC-KI-049/CT18 strict pendingBefore===1 is unsatisfiable in this flow. First parked callback belongs to the closed server #1 (dead repository, throw silently caught); only the last (live server #2) runs the confirm validations. Fix requires re-freezing the seam contract (count 2 / flush-last / instance-scoped) in both correction files — outside accepted C122/C123 scope, prohibited by A5 state 167 without parent return. The one E8.1 recovery was used for the R62 environmental 504 and validated it (phase passed on rerun). CV66-CV69/CH13 not run.'
-last_updated: 2026-08-22T16:45:00+05:30
+blocker: 'I114 CV71 failed (EV-KI-W6-R65/R66). Attempt 1: environmental 504 BACKEND_TIMEOUT at the selection-advance phase (code byte-identical to four prior passes; one E8.1 recovery claimed and validated — the recovery passed that phase AND the C124 2/1/1/0 witness). Recovery failure: after the live callback was flushed, ZERO google/search-page events in the 120s confirm wait — the flush-outcome contract is unsatisfied by a second, downstream blocker: either POST /api/runs/{runId}/start did not return 202 (browser test asserts only the request trace, never the response status) so the run never reached state queued, or drainQueue threw and was silently caught as queue_drain_failed (server.js:1638-1640) inside the never-yet-exercised confirm/drain path (server.js:1089/1165, prisma-run-repository.js:1484). Discriminating runtime evidence exists in the harness trace and browser netlog but is not dumped on failure. Every fix requires editing the correction files and/or production files — outside I114 zero-implementation-write authority. E8.1 exhausted; no retry. CV72-CV75/CH13-CH14 not run.'
+last_updated: 2026-08-22T17:55:00+05:30
 ```
 
 ## Sub-window registry
@@ -89,7 +89,8 @@ last_updated: 2026-08-22T16:45:00+05:30
 | `KI-W6-I112` | INTEGRATION_ASSESSMENT | (none; CV58–CV63, CH12) | SUPERSEDED_BY_I113 | `KI-W6-WINDOW-AGENT` | `ASG-KI-W6-WA-07` (CV58 pass; failed CV59 diagnostic superseded by DEC-KI-049 eleventh correction — EV-KI-W6-R59) |
 | `KI-W6-C122` | CORRECTION | `email_scraper/test/helpers/keyword-intelligence-e2e-harness.js` | ACCEPTED_FOR_INTEGRATION | `KI-W6-C122-LEAF-AGENT` | `ASG-KI-W6-C122` (EV-KI-W6-R60; ending digest `d9a76ceb…`) |
 | `KI-W6-C123` | CORRECTION | `frontend/test/browser/keyword-intelligence-e2e.mjs` | ACCEPTED_FOR_INTEGRATION | `KI-W6-C123-LEAF-AGENT` | `ASG-KI-W6-C123` (EV-KI-W6-R61; ending digest `448921c7…`) |
-| `KI-W6-I113` | INTEGRATION_ASSESSMENT | (none; CV64–CV69, CH13) | PARENT_BLOCKED | `KI-W6-WINDOW-AGENT` | `ASG-KI-W6-WA-08` (CV64 pass; CV65 deterministic exactly-1-vs-2 seam contract failure — EV-KI-W6-R62/R63) |
+| `KI-W6-I113` | INTEGRATION_ASSESSMENT | (none; CV64–CV69, CH13) | PARENT_BLOCKED | `KI-W6-WINDOW-AGENT` | `ASG-KI-W6-WA-08` (CV64 pass; CV65 deterministic exactly-1-vs-2 seam contract failure — EV-KI-W6-R62/R63; superseded by twelfth correction DEC-KI-050/C124) |
+| `KI-W6-I114` | INTEGRATION_ASSESSMENT | (none; CV70–CV75, CH14) | PARENT_BLOCKED | `KI-W6-WINDOW-AGENT` | `ASG-KI-W6-WA-09` (CV70 pass; CV65-sequel CV71 failed: env 504 then deterministic flush-outcome zero-validations — EV-KI-W6-R65/R66) |
 
 Counters: accepted initial file leaves 5/5; accepted window-agent corrective
 leaves 6/6 plus parent-executed C110/C111 preserved. The eighth correction is

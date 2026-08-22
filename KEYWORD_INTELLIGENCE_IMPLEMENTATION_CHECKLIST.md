@@ -7319,6 +7319,74 @@ an observable assertion, Prisma, cleanup or product failure is not retried.
 
 ## 5. Final independent review (not assigned to implementation agents)
 
+### Thirteenth corrective sequence — parent-direct `KI-W6-C125`/`C126`, then window-agent `KI-W6-I115`
+
+This append-only sequence supersedes only failed I114 CV71. The requester
+directed the parent to implement the diagnosed correction and hand the
+remaining W6 assessment back to the window agent.
+
+#### Parent-direct `KI-W6-C125` — one-file repository correction
+
+- [x] `C125-P1` Verify `src/prisma-run-repository.js` starts at SHA-256
+  `d4995ef9e177dbf9f0fad5c199b9c8f5e63fd37122919ba256aa1282f842db27`.
+- [x] `C125-T1` In `saveQueryValidation` only, enforce an array of at most 100
+  unique IDs; retain the live lease-fenced Run stage update; select the scoped
+  schema; replace the per-row loop with one typed `jsonb_to_recordset` update;
+  preserve nullable/omitted JSON semantics; set `updatedAt=now`; require exact
+  returned-ID reconciliation; and pass exactly
+  `{maxWait:5_000,timeout:30_000}` to this transaction only.
+- [x] `C125-V1` `node --check src/prisma-run-repository.js` and a source oracle
+  prove one bulk update, no per-row database loop, exact profile and exact
+  reconciliation. Negative controls removing the returned-ID check and
+  restoring a per-row update must falsify the oracle.
+- [x] `C125-H1` No schema/package/provider/AWS/frontend/commit/KI-W7 action.
+
+#### Parent-direct `KI-W6-C126` — one-file focused regression
+
+- [x] `C126-P1` Verify `test/prisma-run-repository.integration.test.js` starts
+  at SHA-256
+  `f19d7c86127846b8f38c9d02f4eae7b6498357786bfec7afb8186b3117e08eb0`.
+- [x] `C126-T1` Add one focused isolated-schema scenario proving 100 unique
+  query rows persist with exact values; an unreconciled ID rolls back all row
+  mutations and the Run stage; a lost lease mutates nothing; and cleanup drops
+  and verifies absence of the disposable schema. Add a transaction-spy oracle
+  proving the exact 30-second profile and one bulk mutation.
+- [x] `C126-V1` Run syntax, the non-DB profile oracle, then the single named DB
+  scenario once with the isolated test URL. Require zero skip/failure and
+  schema absence. A sequential/default-timeout source substitute must fail the
+  operation/profile oracle without depending on host timing.
+- [x] `C126-H1` No full DB suite, provider/AWS/production/commit/KI-W7 action.
+
+#### Window-agent assessment `KI-W6-I115`
+
+The window agent reconciles and independently reviews C125/C126, then runs the
+focused non-DB and single DB checks once, followed by one fresh causal browser
+gate. If it passes, continue the previously frozen CV72–CV75/CH14 closure. A
+proven environment invalidation permits the standards-defined identical
+elevated recovery; an observable product/test failure is diagnosed and handled
+under the existing correction rule. No leaf is required for the already
+parent-applied files, no commit is permitted, and KI-W7 remains prohibited.
+
+- [ ] `KI-W6-CV76` Independent two-file diff/source/profile/privacy review.
+- [ ] `KI-W6-CV77` Focused non-DB profile oracle and one isolated-schema 100-row
+  regression, with zero skips and verified schema absence.
+- [ ] `KI-W6-CV78` One fresh unchanged causal browser command; require all
+  existing 26 cases/13 controls, 100 validations, 100 discovery tasks, 1,000
+  domains/leads, cleanup and schema absence.
+- [ ] `KI-W6-CV79` On CV78 success, resume CV72–CV75 exactly and append the
+  consolidated `READY_FOR_PARENT_REVIEW` handoff.
+
+##### Thirteenth-correction readiness
+
+- [x] `RW6O-001` Exact failure location and causal boundary are observed. Evidence: `SRC-KI-053`.
+- [x] `RW6O-002` Transaction, batching, reconciliation and timeout choices are parent-locked. Evidence: `DEC-KI-051`.
+- [x] `RW6O-003` Production and test ownership are two exact single-file units. Evidence: C125/C126.
+- [x] `RW6O-004` Rollback, lost-fence, operation-count and timing-independent controls are mandatory. Evidence: C126.
+- [x] `RW6O-005` Provider economics and established downstream behavior are unchanged. Evidence: `DEC-KI-051`.
+- [x] `RW6O-006` Stateful reruns and stop boundaries are exact. Evidence: I115.
+- [x] `RW6O-007` Parent implements; window agent independently reviews and assesses. Evidence: requester instruction/A5.
+- [x] `RW6O-008` KI-W7 remains prohibited. Evidence: A5.
+
 - [ ] `KI-FR-1` Independently inspect current source/diff, active hashes, every accepted window, and changed-file scope.
 - [ ] `KI-FR-2` Re-run representative nonempty local E2E, maximum scale, payload negative controls, ownership/lease races, and emitted builds.
 - [ ] `KI-FR-3` If W8 occurred, independently validate deployed hashes, applied capabilities, one canary trace, cost, privacy, and mutation scope.
@@ -7343,12 +7411,13 @@ Checked KI-W6 ninth-correction supplements: **8**.
 Checked KI-W6 tenth-correction supplements: **8**.
 Checked KI-W6 eleventh-correction supplements: **8**.
 Checked KI-W6 twelfth-correction supplements: **8**.
+Checked KI-W6 thirteenth-correction supplements: **8**.
 Unchecked required authoring items: **0**.
 
 KI-R5 is accepted and closed by `EV-KI-A-080` / `CHG-KI-055`; A5 accepts
 through KI-R5. The reauthored KI-W6 is decision-complete and
-enforcement-complete as amended through the twelfth correction:
-`SRC-KI-038`–`052`, `DEC-KI-038`–`050`, the preserved accepted W6 history,
+enforcement-complete as amended through the thirteenth correction:
+`SRC-KI-038`–`053`, `DEC-KI-038`–`051`, the preserved accepted W6 history,
 sequential one-file C112–C116 ownership plus C117, exact 18-path profile membership,
 literal operation ceilings, bounded recovery, seven new cases, three
 falsification controls and literal once-only assessment commands close the
@@ -7370,8 +7439,14 @@ only the live-server callback and freezes witness `2/1/1/0`. I114 owns the
 fresh causal gate and remaining regression/build/coverage/scope closure without
 changing product behavior, fault positions, cases, controls or digests.
 
-A5 supplies the live authority. Its current state assigns the twelfth-correction
+Parent-direct C125/C126 replace only the maximum query-validation persistence
+N+1 with one exactly reconciled set-based update and a path-specific 30-second
+transaction budget. The lease fence, rollback boundary, public behavior,
+provider economics, cases and controls remain unchanged. I115 independently
+reviews this correction and resumes the causal and remaining closure gates.
+
+A5 supplies the live authority. Its current state assigns the thirteenth-correction
 assessment to the KI-W6 window agent, which may reconcile the already-applied
-parent-direct C124, independently review it, personally execute I114 and stop
+parent-direct C125/C126, independently review them, personally execute I115 and stop
 `READY_FOR_PARENT_REVIEW`. The
 window agent cannot edit implementation, launch a leaf, commit or begin KI-W7.
