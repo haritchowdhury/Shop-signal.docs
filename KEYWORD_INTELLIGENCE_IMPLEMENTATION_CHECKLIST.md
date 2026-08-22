@@ -1,6 +1,6 @@
 # Keyword Intelligence Decision-Complete Execution Checklist (`A4`)
 
-**Checklist revision:** `KI-CL-29`
+**Checklist revision:** `KI-CL-31`
 **Package status:** `AUTHORING-READY`; assignable only by a one-window `A5`
 assignment  
 **Execution status authority:** only `ACTIVE_EXECUTION_STATE.md`
@@ -6854,6 +6854,350 @@ enters the correction loop and is not relabeled or retried as transport.
 - [x] `RW6K-008` The window agent may manage C119→C120→I111 only, may not
   implement leaves, commit or start KI-W7. Evidence: A5 assignment.
 
+### Tenth corrective sequence — `KI-W6-C121` then `KI-W6-I112`
+
+This append-only correction supersedes only I111's failed CV53 badge oracle.
+C119 and C120 remain accepted inputs subject to the same-file revalidation
+below. It changes no product behavior and does not authorize KI-W7.
+
+```yaml
+finding: KI-W6-R57-F1
+source: SRC-KI-050
+decision: DEC-KI-048
+violated_invariant: INV-KI-015 was misclassified as immutable source-label equality rather than stable row identity plus truthful edit provenance
+sequence: [KI-W6-C121, KI-W6-I112]
+changed_file_set: [frontend/test/browser/keyword-intelligence-e2e.mjs]
+changed_file_set_digest_sorted_member_plus_lf_sha256: 3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867
+browser_baseline_sha256: 72fe4f99420b854b537d82b769ffee71866203ff5872321538de6210faf97347
+frontend_baseline_commit: a234a9eaf0e58e5ad4c74d49e8f861ae3516c7fd
+backend_baseline_commit: 4d68993b13aeaab0b70ed544cfa575e2a73b0652
+new_cases: 0
+new_controls: 0
+browser_cases_controls: 26/13 unchanged
+final_cases_controls: 35/17 unchanged
+provider_or_aws_cost_usd: 0.00
+```
+
+#### `KI-W6-CT17` / `KI-W6-C121` — exact edit-provenance transition oracle
+
+1. **Owner:** compile into one leaf `KI-W6-C121`; the window agent reviews it.
+2. **Writable file/baseline:** only
+   `frontend/test/browser/keyword-intelligence-e2e.mjs`, SHA-256
+   `72fe4f99420b854b537d82b769ffee71866203ff5872321538de6210faf97347`
+   at frontend commit `a234a9eaf0e58e5ad4c74d49e8f861ae3516c7fd`.
+   Singleton path digest is
+   `3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867`.
+3. **Consumes:** `SRC-KI-050`, `DEC-KI-048`, accepted C119/C120 and diagnostic
+   `EV-KI-W6-R57`; no discovery or behavior choice remains.
+4. **Exact edit:** immediately after
+   `const beforeBadges = await queryRowBadges();`, insert:
+
+   ```js
+   assert(beforeBadges.length === 100 && beforeBadges.every((badge) => badge === "generated"), "keyword-research handoff rows must begin with generated provenance");
+   ```
+
+   Replace only the later assertion whose message is
+   `"keyword source lineage must remain unchanged"` with:
+
+   ```js
+   const expectedEditedBadges = beforeBadges.map((badge) => badge === "generated" ? "user edited" : badge);
+   const swappedExpectedBadges = [expectedEditedBadges[1], expectedEditedBadges[0], ...expectedEditedBadges.slice(2)];
+   assert(arrayEqual(afterBadges, swappedExpectedBadges), "edited query provenance must change from generated to user edited and follow the persisted reorder");
+   ```
+
+   In the immediately following `captured.workspace`, replace only
+   `badgesPreserved: true` with `provenanceTransitionVerified: true`.
+5. **Preserve:** `queryRowBadges`, both value arrays, edit-all-100, first-row
+   move, save/reload, `expectedOrder`, `swapped`, every count/text/order/
+   persistence/zero-add-delete assertion, the `W6-FLOW-09` activation literal,
+   C107/C111/C118/C120 blocks, auth/cookie lifecycle, registries, certificate,
+   cleanup and all later phases.
+6. **Enforcement:** zero/non-100 or any non-generated pre-edit badge fails;
+   unchanged, wrong, missing, extra or wrongly reordered post-edit badges fail.
+   Sorted/set/count/permissive alternatives are prohibited.
+7. **Local-now checks:** from `frontend/`, run exactly:
+
+   ```bash
+   node --check test/browser/keyword-intelligence-e2e.mjs
+   node -e 'const fs=require("node:fs"),a=require("node:assert/strict");const s=fs.readFileSync("test/browser/keyword-intelligence-e2e.mjs","utf8");for(const x of ["beforeBadges.length === 100 && beforeBadges.every((badge) => badge === \"generated\")","const expectedEditedBadges = beforeBadges.map((badge) => badge === \"generated\" ? \"user edited\" : badge);","const swappedExpectedBadges = [expectedEditedBadges[1], expectedEditedBadges[0], ...expectedEditedBadges.slice(2)];","arrayEqual(afterBadges, swappedExpectedBadges)","provenanceTransitionVerified: true"]){if(!s.includes(x))throw new Error("KI_W6_C121_SOURCE_INVALID:"+x)}for(const x of ["keyword source lineage must remain unchanged","badgesPreserved: true"]){if(s.includes(x))throw new Error("KI_W6_C121_STALE_ORACLE:"+x)}const before=["generated","user added","user edited"];const projected=before.map((badge)=>badge==="generated"?"user edited":badge);const expected=[projected[1],projected[0],...projected.slice(2)];a.deepEqual(expected,["user added","user edited","user edited"]);a.throws(()=>a.deepEqual(["user added","generated","user edited"],expected));console.log("KI_W6_C121_SOURCE_AND_NEGATIVE_CONTROL_OK")'
+   ```
+
+   Require both exits zero and the literal final marker. The leaf does not run
+   the causal browser gate.
+8. **Output/non-goals:** one corrected test oracle. No helper, production code,
+   API, database, schema, fixture, manifest, registry, package, build input,
+   provider, AWS, production, commit, push or KI-W7 action.
+
+- [ ] `C121-P1` Verify assignment, accepted inputs, baseline and scope. Evidence: ___
+- [ ] `C121-T1` Apply item 4 exactly and preserve item 5. Evidence: ___
+- [ ] `C121-V1` Run both local-now checks. Evidence: ___
+- [ ] `C121-H1` Return diff/digest/preservation proof; stop for window review. Evidence: ___
+
+#### Window-agent assessment `KI-W6-I112`
+
+I112 has zero implementation-file write authority and begins only after C121
+is independently accepted.
+
+- [ ] `KI-W6-CV58` Review C121 from its baseline, run its two checks and prove
+  one-file scope. Re-run C120's CT16-item-8 source-preservation check and require
+  all cookie/auth markers plus C107/C111/C118 witnesses. Verify no case/control/
+  registry/manifest/certificate member changed. Supersede only C120's old
+  whole-file digest/CV51 source review, not its accepted auth behavior.
+- [ ] `KI-W6-CV59` Reuse I111 CV50/CV52 only after the C119 helper and five
+  backend files rehash byte-equal to `EV-KI-W6-R55/R57`; keep failed CV53
+  diagnostic. Run once from `frontend/`:
+  `ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node test/browser/keyword-intelligence-e2e.mjs`.
+  Require exit zero, unchanged 26-case/13-control certificate, every CV53 auth/
+  cookie/navigation/provider/artifact/cost/cleanup witness, and W6-FLOW-09 with
+  exactly 100 pre-edit `generated` badges, 100 post-edit `user edited` badges in
+  persisted swapped order, all texts edited, zero add/delete and later restart/
+  snapshot deep equality.
+- [ ] `KI-W6-CV60` After CV59, run once from `email_scraper/`: `npm test`, then
+  `npm run check:secrets`; require zero failures and clean scan.
+- [ ] `KI-W6-CV61` From `email_scraper/`, run
+  `node scripts/build-keyword-worker.js` exactly twice; require byte-identical
+  ZIPs, sibling preservation, no forbidden/stale members, ZIP <=45 MiB,
+  unzipped <=200 MiB and cold import exporting function `handler`; then run
+  once `node --test --test-isolation=none test/aws-pipeline-packaging.test.js`
+  with zero failures.
+- [ ] `KI-W6-CV62` Recompute unchanged browser 26/13 and DB 7/3 registries and
+  digests; final cases exactly 35/digest
+  `c5ead2a638d7f5481178730958d83b582e42aeb265536696555eaf1a08b5d5f9`
+  and controls exactly 17/digest
+  `62566fd91c96579a60c9f512c27cf94afdabdbc000a967a3251b177f9710c2f5`;
+  require exact required=registered=executed equality, zero skips/duplicates/
+  unexpected/unactivated members and every control falsified.
+- [ ] `KI-W6-CV63` Verify C121 changed only its browser test; C119 helper and
+  all production/proxy/auth/API/repository/schema/package/build-input bytes
+  retain accepted baselines; no token/header/private value in evidence and no
+  provider/AWS/production/destructive/commit/push/KI-W7 action.
+- [ ] `KI-W6-CH12` Append I112 certificate to S3, supersede failed I111 CV53
+  and only C120's prior whole-file digest, set S2 `READY_FOR_PARENT_REVIEW`,
+  return one consolidated handoff, and stop before KI-W7.
+
+CV59 is the sole fresh stateful browser/database gate and may start elevated.
+Only a proven sandbox/channel invalidation permits one identical E8.1 recovery;
+an observable assertion, Prisma, cleanup or product failure is not retried.
+
+##### Tenth-correction readiness
+
+- [x] `RW6L-001` Impossible oracle, not product defect. Evidence: `SRC-KI-050`.
+- [x] `RW6L-002` Identity/provenance distinction is exact. Evidence: `DEC-KI-048`.
+- [x] `RW6L-003` One file, baseline, anchors and edit are exact. Evidence: CT17.
+- [x] `RW6L-004` Oracle is non-vacuous/order-sensitive and falsified locally. Evidence: CT17.
+- [x] `RW6L-005` Cases, controls and digests are unchanged. Evidence: CV62.
+- [x] `RW6L-006` Invalidation/reuse boundaries are exact. Evidence: CV58/CV59.
+- [x] `RW6L-007` Gates, recovery, cleanup and stop are frozen. Evidence: I112.
+- [x] `RW6L-008` Window agent manages C121→I112 only; no commit/KI-W7. Evidence: A5 state 166.
+
+### Eleventh corrective sequence — `KI-W6-C122`, `KI-W6-C123`, then `KI-W6-I113`
+
+This append-only correction supersedes only I112's failed CV59 harness-
+orchestration attempt. C121 remains accepted. It changes no production behavior,
+case/control membership, provider economics or locked downstream fault schedule,
+and does not authorize KI-W7.
+
+```yaml
+finding: KI-W6-R59-F1
+source: SRC-KI-051
+decision: DEC-KI-049
+violated_invariant: the causal browser harness must execute the production run-start callback before measuring confirmation while preserving later discovery/domain fault partitions
+sequence: [KI-W6-C122, KI-W6-C123, KI-W6-I113]
+changed_file_set: [email_scraper/test/helpers/keyword-intelligence-e2e-harness.js, frontend/test/browser/keyword-intelligence-e2e.mjs]
+changed_file_set_digest_sorted_member_plus_lf_sha256: 4f0d4befb9a6d1cdb039108cf271c25ed23265436fdf856866e93caeef179628
+helper_baseline_sha256: cbcd304aea6657bef10d73644d81e253396fe3f4f3f112f9dc03e020f0c7db74
+browser_baseline_sha256: 8d89bb198390c3f7baf431ccd3405693c5003eb8a9ee4f0e7ccd75c254d507d0
+helper_expected_ending_sha256: d9a76cebad80650f5a601012eaaa4715e16a6b6ce334000c98a56470ab6fa6fe
+browser_expected_ending_sha256: 448921c77cb0a1619e004d2c8587faa53e0598736605d95a0c7ff9fbf4e13b99
+backend_baseline_commit: 4d68993b13aeaab0b70ed544cfa575e2a73b0652
+frontend_baseline_commit: a234a9eaf0e58e5ad4c74d49e8f861ae3516c7fd
+new_cases: 0
+new_controls: 0
+browser_cases_controls: 26/13 unchanged
+final_cases_controls: 35/17 unchanged
+provider_or_aws_cost_usd: 0.00
+```
+
+#### `KI-W6-CT18` / `KI-W6-C122` — one-shot run-start schedule seam
+
+1. **Owner/order:** compile into one leaf `KI-W6-C122`; the window agent reviews
+   and accepts it before assigning C123.
+2. **Writable file/baseline:** only
+   `email_scraper/test/helpers/keyword-intelligence-e2e-harness.js`, SHA-256
+   `cbcd304aea6657bef10d73644d81e253396fe3f4f3f112f9dc03e020f0c7db74`
+   at backend commit `4d68993b13aeaab0b70ed544cfa575e2a73b0652`. Singleton
+   path digest is
+   `7549f43fbf304b87491bb6d7758f09ea4b9d237153c7fe7ff2554fef5f125fe4`.
+3. **Consumes:** `SRC-KI-051`, `DEC-KI-049`, the existing
+   `scheduledCallbacks`, `schedule`, `flushSchedule`, `record`, `nowMs` and
+   `HarnessPreflightError` symbols. Do not discover or select another seam.
+4. **Exact edit:** immediately after the unchanged `flushSchedule` definition,
+   add exactly:
+
+   ```js
+   const flushRunStartSchedule = () => {
+     const pendingBefore = scheduledCallbacks.length;
+     if (pendingBefore !== 1) {
+       throw new preflightError(`expected exactly one parked run-start callback, saw ${pendingBefore}`);
+     }
+     const callback = scheduledCallbacks.shift();
+     callback();
+     const pendingAfter = scheduledCallbacks.length;
+     if (pendingAfter !== 0) {
+       throw new preflightError(`run-start flush left ${pendingAfter} parked callbacks`);
+     }
+     const witness = Object.freeze({ pendingBefore, flushedCallbacks: 1, pendingAfter });
+     record({ kind: "harness", op: "flush-run-start-schedule", at: nowMs(), ...witness });
+     return witness;
+   };
+   ```
+
+   In the sole final `Object.freeze` return, insert only
+   `flushRunStartSchedule` between `restartBackend` and `drainDownstream`.
+5. **Interface/failure:** export exactly the synchronous signature and frozen
+   return described by DEC-KI-049. Zero/multiple pending callbacks or a callback
+   that synchronously parks another callback throws `HarnessPreflightError`.
+   Invoke the callback once without awaiting it; the existing causal trace and
+   durable waits own asynchronous completion and failure evidence.
+6. **Preserve:** `schedule`, `flushSchedule`, `setIntervalFn`, `clearIntervalFn`,
+   `drainKeywordWork`, `drainDownstream`, queue order/IDs, all fault injection,
+   auth/session values, provider fixtures, cleanup, schema isolation and every
+   production file. No new timer, poller or queue consumer.
+7. **Local-now checks:** from `email_scraper/`, run exactly:
+
+   ```bash
+   node --check test/helpers/keyword-intelligence-e2e-harness.js
+   node -e 'const fs=require("node:fs"),a=require("node:assert/strict"),{createHash}=require("node:crypto");const s=fs.readFileSync("test/helpers/keyword-intelligence-e2e-harness.js","utf8");const check=(x)=>{for(const v of ["const flushRunStartSchedule = () => {","if (pendingBefore !== 1)","const callback = scheduledCallbacks.shift();","callback();","if (pendingAfter !== 0)","op: \"flush-run-start-schedule\"","restartBackend, flushRunStartSchedule, drainDownstream"]){if(!x.includes(v))throw new Error("KI_W6_C122_SOURCE_INVALID:"+v)}if((x.match(/const flushRunStartSchedule =/g)||[]).length!==1)throw new Error("KI_W6_C122_DUPLICATE")};check(s);a.throws(()=>check(s.replace("    callback();","    void callback;")));const digest=createHash("sha256").update(s).digest("hex");a.equal(digest,"d9a76cebad80650f5a601012eaaa4715e16a6b6ce334000c98a56470ab6fa6fe");console.log("KI_W6_C122_SOURCE_AND_NEGATIVE_CONTROL_OK")'
+   ```
+
+8. **Output/non-goals:** exact ending SHA-256
+   `d9a76cebad80650f5a601012eaaa4715e16a6b6ce334000c98a56470ab6fa6fe`.
+   No browser, product, database schema, fixture, manifest, registry, package,
+   provider, AWS, production, commit, push or KI-W7 action.
+
+- [ ] `C122-P1` Verify assignment, baseline and one-file scope. Evidence: ___
+- [ ] `C122-T1` Apply item 4 exactly and preserve item 6. Evidence: ___
+- [ ] `C122-V1` Run both local-now checks and match the ending digest. Evidence: ___
+- [ ] `C122-H1` Return diff/digest/preservation proof; stop for window review. Evidence: ___
+
+#### `KI-W6-CT19` / `KI-W6-C123` — invoke the seam at the confirmation boundary
+
+1. **Owner/order:** after C122 is independently accepted, compile into one leaf
+   `KI-W6-C123`; the window agent reviews it before I113.
+2. **Writable file/baseline:** only
+   `frontend/test/browser/keyword-intelligence-e2e.mjs`, accepted C121 SHA-256
+   `8d89bb198390c3f7baf431ccd3405693c5003eb8a9ee4f0e7ccd75c254d507d0`.
+   Singleton path digest is
+   `3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867`.
+3. **Consumes:** the exact C122 frozen export and existing run-start,
+   `googlePairsFloor`, confirmation, discovery, fault-injection and downstream
+   symbols. C123 makes no orchestration choice.
+4. **Exact edit:** immediately after
+   `const googlePairsFloor = harness.trace().length;` and before
+   `const confirmDeadline = Date.now() + 120000;`, add exactly:
+
+   ```js
+   const runStartSchedule = harness.flushRunStartSchedule();
+   assert(
+     runStartSchedule.pendingBefore === 1 &&
+       runStartSchedule.flushedCallbacks === 1 &&
+       runStartSchedule.pendingAfter === 0,
+     "run start must flush exactly one parked queue-drain callback"
+   );
+   captured.confirmationDrain = structuredClone(runStartSchedule);
+   ```
+
+5. **Ordered behavior:** retain the observed run-start POST first; capture the
+   Google trace floor; flush exactly once; validate/store the witness; then run
+   the unchanged 100-call wait, confirmation terminal assertion, 100-delivery
+   wait, duplicate/reorder discovery injection, later `drainDownstream`, partial
+   domain-check sample, domain-check injections and 1,000-domain assertions.
+6. **Preserve:** every C107/C111/C118/C120/C121 edit and oracle; the C121
+   generated→user-edited order witness; all auth/cookie lifecycle; the existing
+   `W6-FLOW-10`–`12` registrations, `W6-NC-07/08`, 26/13 registries, certificate,
+   cleanup, browser command and downstream fault positions. Do not start
+   `drainDownstream` earlier.
+7. **Local-now checks:** from `frontend/`, run exactly:
+
+   ```bash
+   node --check test/browser/keyword-intelligence-e2e.mjs
+   node -e 'const fs=require("node:fs"),a=require("node:assert/strict"),{createHash}=require("node:crypto");const s=fs.readFileSync("test/browser/keyword-intelligence-e2e.mjs","utf8");const check=(x)=>{for(const v of ["const googlePairsFloor = harness.trace().length;","const runStartSchedule = harness.flushRunStartSchedule();","runStartSchedule.pendingBefore === 1","runStartSchedule.flushedCallbacks === 1","runStartSchedule.pendingAfter === 0","captured.confirmationDrain = structuredClone(runStartSchedule);","const confirmDeadline = Date.now() + 120000;"]){if(!x.includes(v))throw new Error("KI_W6_C123_SOURCE_INVALID:"+v)}if((x.match(/harness\.flushRunStartSchedule\(\)/g)||[]).length!==1)throw new Error("KI_W6_C123_CALL_COUNT");const order=["run start request","const googlePairsFloor = harness.trace().length;","const runStartSchedule = harness.flushRunStartSchedule();","const confirmDeadline = Date.now() + 120000;","oracles.googleValidation(captured.confirmation);","const discoveryFloor = harness.trace().length;","await harness.injectCapturedDefect(\"duplicate-next-discovery-message\")","const downstreamPromise = harness.drainDownstream();"].map(v=>x.indexOf(v));if(order.some(v=>v<0)||order.some((v,i)=>i>0&&v<=order[i-1]))throw new Error("KI_W6_C123_ORDER")};check(s);a.throws(()=>check(s.replace("const runStartSchedule = harness.flushRunStartSchedule();","const runStartSchedule = { pendingBefore: 1, flushedCallbacks: 1, pendingAfter: 0 };")));const digest=createHash("sha256").update(s).digest("hex");a.equal(digest,"448921c77cb0a1619e004d2c8587faa53e0598736605d95a0c7ff9fbf4e13b99");console.log("KI_W6_C123_SOURCE_AND_NEGATIVE_CONTROL_OK")'
+   ```
+
+8. **Output/non-goals:** exact ending SHA-256
+   `448921c77cb0a1619e004d2c8587faa53e0598736605d95a0c7ff9fbf4e13b99`.
+   No helper/product/API/database/schema/fixture/manifest/registry/package/
+   provider/AWS/production/commit/push/KI-W7 action.
+
+- [ ] `C123-P1` Verify accepted C122, C121 baseline and one-file scope. Evidence: ___
+- [ ] `C123-T1` Apply item 4 at the exact item-5 boundary. Evidence: ___
+- [ ] `C123-V1` Run both local-now checks and match the ending digest. Evidence: ___
+- [ ] `C123-H1` Return diff/digest/preservation proof; stop for window review. Evidence: ___
+
+#### Window-agent assessment `KI-W6-I113`
+
+I113 has zero implementation-file write authority and begins only after C122
+and C123 are independently accepted.
+
+- [ ] `KI-W6-CV64` Review C122 from helper baseline `cbcd304a…` and C123 from
+  browser baseline `8d89bb19…`; require exact endings `d9a76ceb…` and
+  `448921c7…`, the two-file path-set digest `4f0d4bef…`, both leaves' local
+  checks, and no third implementation path. Revalidate every accepted C119
+  auth/session marker and C120/C121 cookie/provenance marker. Prove no
+  case/control/registry/manifest/certificate member changed. Supersede only
+  C119's helper whole-file digest and C121's browser whole-file digest/source
+  review, not their accepted behavior.
+- [ ] `KI-W6-CV65` Preserve I112 CV58 and its five-production-file dependency
+  proof after exact rehash; keep failed CV59 diagnostic. From `frontend/`, run
+  once, elevated when needed:
+  `ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node test/browser/keyword-intelligence-e2e.mjs`.
+  Require exit zero and the unchanged 26-case/13-control certificate. Require
+  the run-start POST precedes one safe `flush-run-start-schedule` trace with
+  witness exactly `1/1/0`; then exactly 100 validator/parser calls, 1,000
+  occurrences, terminal confirmation, 100 discovery deliveries/tasks, the
+  unchanged duplicate/reorder fault points, 1,000 stable domains/lead tasks,
+  all C119–C121 auth/navigation/provenance witnesses, and complete schema-
+  absence cleanup. Zero, multiple, reordered or late flushes fail.
+- [ ] `KI-W6-CV66` After CV65, run once from `email_scraper/`: `npm test`, then
+  `npm run check:secrets`; require zero failures and a clean scan.
+- [ ] `KI-W6-CV67` From `email_scraper/`, run
+  `node scripts/build-keyword-worker.js` exactly twice; require byte-identical
+  ZIPs, sibling preservation, no forbidden/stale members, ZIP <=45 MiB,
+  unzipped <=200 MiB and cold import exporting function `handler`; then run
+  once `node --test --test-isolation=none test/aws-pipeline-packaging.test.js`
+  with zero failures.
+- [ ] `KI-W6-CV68` Recompute unchanged browser 26/13 and DB 7/3 registries and
+  digests; final cases exactly 35/digest
+  `c5ead2a638d7f5481178730958d83b582e42aeb265536696555eaf1a08b5d5f9`
+  and controls exactly 17/digest
+  `62566fd91c96579a60c9f512c27cf94afdabdbc000a967a3251b177f9710c2f5`;
+  require required=registered=executed equality, zero skips/duplicates/
+  unexpected/unactivated members and every control falsified.
+- [ ] `KI-W6-CV69` Verify exactly the two correction files differ from their
+  parent baselines; all production/proxy/auth/API/repository/schema/package/
+  build-input bytes retain accepted baselines; no token/cookie/header/private
+  value in evidence and no provider/AWS/production/destructive/commit/push/
+  KI-W7 action.
+- [ ] `KI-W6-CH13` Append the I113 enforcement/integration certificate to S3,
+  supersede failed I112 CV59 and only the two prior whole-file digest/source
+  reviews named in CV64, set S2 `READY_FOR_PARENT_REVIEW`, return one
+  consolidated handoff, and stop before KI-W7.
+
+CV65 is the sole fresh stateful browser/database gate and may start elevated.
+Only a proven sandbox/channel invalidation permits one identical E8.1 recovery;
+an observable assertion, Prisma, cleanup or product failure is not retried.
+
+##### Eleventh-correction readiness
+
+- [x] `RW6M-001` The deadlock and sole callback path are source-proven. Evidence: `SRC-KI-051` / `EV-KI-W6-R59`.
+- [x] `RW6M-002` Test-harness correction, not product behavior, is exact. Evidence: `DEC-KI-049`.
+- [x] `RW6M-003` Two sequential single-file leaves have exact baselines, edits, interfaces and endings. Evidence: CT18/CT19.
+- [x] `RW6M-004` The flush is one-shot, ordered after the start witness and before the Google floor's wait. Evidence: CT18/CT19.
+- [x] `RW6M-005` Existing cases, controls, fault partitions and digests are unchanged and non-vacuous. Evidence: CV65/CV68.
+- [x] `RW6M-006` Accepted-test invalidation and source-marker revalidation are exact. Evidence: CV64/CV65.
+- [x] `RW6M-007` Stateful gate, recovery, cleanup, regressions and stop are frozen. Evidence: I113.
+- [x] `RW6M-008` Window agent manages C122→C123→I113 only; no commit/KI-W7. Evidence: A5 state 167.
+
 ## 5. Final independent review (not assigned to implementation agents)
 
 - [ ] `KI-FR-1` Independently inspect current source/diff, active hashes, every accepted window, and changed-file scope.
@@ -6877,12 +7221,14 @@ Checked KI-W6 sixth-correction supplements: **8**.
 Checked KI-W6 seventh-correction supplements: **10**.
 Checked KI-W6 eighth-correction supplements: **8**.
 Checked KI-W6 ninth-correction supplements: **8**.
+Checked KI-W6 tenth-correction supplements: **8**.
+Checked KI-W6 eleventh-correction supplements: **8**.
 Unchecked required authoring items: **0**.
 
 KI-R5 is accepted and closed by `EV-KI-A-080` / `CHG-KI-055`; A5 accepts
 through KI-R5. The reauthored KI-W6 is decision-complete and
-enforcement-complete as amended through the ninth correction:
-`SRC-KI-038`–`049`, `DEC-KI-038`–`047`, the preserved accepted W6 history,
+enforcement-complete as amended through the eleventh correction:
+`SRC-KI-038`–`051`, `DEC-KI-038`–`049`, the preserved accepted W6 history,
 sequential one-file C112–C116 ownership plus C117, exact 18-path profile membership,
 literal operation ceilings, bounded recovery, seven new cases, three
 falsification controls and literal once-only assessment commands close the
@@ -6892,10 +7238,15 @@ adds the one-file C118 harness-oracle correction and I110 assessment without
 changing the existing browser or combined case/control sets. CT15/CT16 add the
 two-file local auth-substitute completion and I111 assessment without changing
 production auth or the existing browser/combined case-control sets.
+CT17 adds the one-file C121 exact generated-to-user-edited provenance oracle
+and I112 assessment without changing product behavior or case/control sets.
+CT18/CT19 add the two-file one-shot run-start schedule seam/caller and I113
+assessment without changing production scheduling, downstream fault positions
+or case/control sets.
 
-A5 supplies the live authority. Its current state assigns the ninth correction
-to the KI-W6 window agent, which may append and manage C119 then C120, review
-each single-file leaf, personally execute I111 and stop
+A5 supplies the live authority. Its current state assigns the eleventh correction
+to the KI-W6 window agent, which may append and manage C122 then C123,
+independently review both single-file leaves, personally execute I113 and stop
 `READY_FOR_PARENT_REVIEW`. The
 window agent cannot implement leaf work itself, run leaves in parallel, contact
 the parent through leaf agents, commit, or begin KI-W7. No implementation,

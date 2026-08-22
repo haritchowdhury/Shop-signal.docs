@@ -1,6 +1,6 @@
 # Keyword Intelligence Decision Ledger (`A3`)
 
-**Revision:** `KI-DL-23`
+**Revision:** `KI-DL-25`
 **Status:** locked decisions; not an assignment
 
 This is the sole authority for implementation-affecting choices and
@@ -2347,6 +2347,118 @@ estimates them. This specification decision is not paid-call authorization.
 - **Tasks/scenarios:** `KI-W6-CT15` / `KI-W6-C119`, then `KI-W6-CT16` /
   `KI-W6-C120`; existing `SCN-KI-018`, `W6-NAV-01`, `W6-FLOW-01`,
   `W6-RES-01`, `W6-NC-02`, `W6-NC-12`; assessment `KI-W6-I111`.
+
+### `DEC-KI-048` — Workspace lineage preserves identity while edit provenance changes exactly
+
+- **Requirements:** `REQ-KI-010`–`REQ-KI-015`; `INV-KI-010/015`; evidence
+  `SRC-KI-050` and `EV-KI-W6-R57`.
+- **Locked interpretation:** selection-item/RunQuery identity, query source and
+  query text are distinct fields. `INV-KI-015` requires the same 100 durable
+  RunQuery identities to survive text edits; it does not require the mutable
+  `source` provenance label to remain `generated`. The accepted handoff creates
+  all 100 rows with `source="generated"`. Editing every row through the real
+  `QueryEditor` must change every displayed badge to `user edited`; the first
+  two badges must follow the same persisted first-row swap as their query rows.
+- **Exact C121 oracle:** in
+  `frontend/test/browser/keyword-intelligence-e2e.mjs`, after loading
+  `beforeBadges`, require exactly 100 members and require every member to equal
+  `"generated"`. After the existing edit/save/reload, construct
+  `expectedEditedBadges = beforeBadges.map((badge) => badge === "generated" ?
+  "user edited" : badge)` and
+  `swappedExpectedBadges = [expectedEditedBadges[1],
+  expectedEditedBadges[0], ...expectedEditedBadges.slice(2)]`. Require
+  `arrayEqual(afterBadges, swappedExpectedBadges)`. Retain the existing exact
+  100-row count, all-text-edited, swapped-order, persistence and zero-add/delete
+  assertions. Replace only `captured.workspace.badgesPreserved:true` with
+  `captured.workspace.provenanceTransitionVerified:true`; retain its other
+  members and the existing `W6-FLOW-09` activation literal.
+- **Enforcement:** the pre-edit all-generated assertion makes the transition
+  non-vacuous. The order-sensitive equality fails for an unchanged generated
+  label, a missing or extra badge, a wrong label, a label detached from the
+  swapped row, or a product regression that no longer persists edit provenance.
+  A file-local negative control must feed an unchanged generated badge into the
+  frozen projection and prove the equality throws before the fresh causal gate.
+  Existing `W6-FLOW-09` remains the sole case registration and `W6-NC-06`
+  remains its row-identity/add-delete falsification control; no manifest,
+  registry, case/control membership or digest changes.
+- **Invalidation and reuse:** failed I111 CV53 remains diagnostic. C119 and its
+  CV50 proof are unchanged. C120's auth behavior is retained, but its prior
+  whole-file ending digest and CV51 source review are superseded by C121; the
+  new review must prove every C120 cookie/auth marker remains byte-present
+  outside the one C121 hunk. I111 CV52 backend reuse remains valid only after
+  the same five backend files are rehashed byte-equal. CV54–CV57 were never run.
+- **Alternatives rejected:** preserving the pre-edit badge multiset; removing
+  badge coverage; checking only sorted counts; accepting either generated or
+  user edited; changing QueryEditor, QuerySource, RunQuery creation, product
+  persistence, case/control membership, or the browser command.
+- **Tasks/scenarios:** `KI-W6-CT17` / `KI-W6-C121`; existing
+  `SCN-KI-018`, `W6-FLOW-09`, `W6-FLOW-13`, `W6-NC-06`; assessment
+  `KI-W6-I112`.
+
+### `DEC-KI-049` — Flush exactly the parked run-start callback before confirmation accounting
+
+- **Requirements:** `REQ-KI-010`–`REQ-KI-015`; `INV-KI-010/015`; evidence
+  `SRC-KI-051` and `EV-KI-W6-R59`.
+- **Locked correction boundary:** this is a local causal-harness orchestration
+  defect, not a product scheduler, validation, queue, database or provider
+  defect. Preserve `src/server.js`, its injected `schedule` contract, the
+  manual scheduler, the inert interval substitute, `drainDownstream`, every
+  discovery/domain fault-injection location and the existing 26-case/13-control
+  browser registry. Correct it with two sequential single-file leaves only:
+  `KI-W6-C122` owns the backend harness export and `KI-W6-C123` owns the browser
+  invocation.
+- **Exact C122 interface and behavior:** in
+  `email_scraper/test/helpers/keyword-intelligence-e2e-harness.js`, add the
+  synchronous private callable
+  `flushRunStartSchedule(): Readonly<{pendingBefore:number,
+  flushedCallbacks:1,pendingAfter:number}>` immediately after the unchanged
+  `flushSchedule`. It reads `scheduledCallbacks.length` and throws
+  `HarnessPreflightError("expected exactly one parked run-start callback, saw
+  <n>")` unless it equals one; removes that sole callback with `shift()`;
+  invokes it exactly once; rereads the length and throws
+  `HarnessPreflightError("run-start flush left <n> parked callbacks")` unless
+  it equals zero; freezes the exact witness
+  `{pendingBefore,flushedCallbacks:1,pendingAfter}`; records exactly one safe
+  event `{kind:"harness",op:"flush-run-start-schedule",at:nowMs(),...witness}`;
+  and returns the witness. Export that callable in the existing frozen harness
+  object immediately between `restartBackend` and `drainDownstream`. Do not
+  change `flushSchedule`, `schedule`, timers, queue processing or production
+  source.
+- **Exact C123 caller/order:** in
+  `frontend/test/browser/keyword-intelligence-e2e.mjs`, preserve the existing
+  click and observed POST `/api/runs/${runId}/start`. Immediately after
+  `const googlePairsFloor = harness.trace().length;` and before constructing
+  `confirmDeadline`, invoke `const runStartSchedule =
+  harness.flushRunStartSchedule();`; require, in order, `pendingBefore===1`,
+  `flushedCallbacks===1`, and `pendingAfter===0` with message `run start must
+  flush exactly one parked queue-drain callback`; then store
+  `captured.confirmationDrain = structuredClone(runStartSchedule)`. Preserve
+  the following waits and exact W6-FLOW-10/11/12 assertions. The Google floor
+  is deliberately captured before the flush so no validator event can escape
+  accounting.
+- **Failure/enforcement semantics:** zero or multiple parked callbacks fail
+  before the browser may claim confirmation; a callback that is not invoked,
+  invokes twice, remains queued, is invoked before the start witness, or is
+  invoked after the Google floor/deadline boundary fails the local structural
+  oracle or the causal browser gate. The existing W6-FLOW-10 activation proves
+  100 actual validator/parser calls and `W6-NC-07` falsifies a missing member;
+  W6-FLOW-11/12 and W6-NC-08 continue proving downstream dispatch and Neon
+  completion. No new case/control ID or digest is introduced.
+- **Invalidation and reuse:** accepted C121 remains the browser baseline at
+  SHA-256 `8d89bb198390c3f7baf431ccd3405693c5003eb8a9ee4f0e7ccd75c254d507d0`.
+  C119's helper behavior remains accepted, but its helper whole-file digest is
+  superseded by C122 and every auth/cookie/session marker must be revalidated.
+  I112 CV58 and its C121/C120 source-preservation proof remain reusable only
+  after the exact baseline checks; failed CV59 remains diagnostic. CV60-CV63
+  never ran and must execute after the fresh causal pass.
+- **Alternatives rejected:** real timers; changing production `queueDrain` or
+  `schedule`; broadening `flushSchedule`; invoking `drainDownstream` before
+  confirmation; relocating discovery/domain fault injections; sleeping longer;
+  accepting zero calls; bypassing the real validator/parser; or changing the
+  browser command, registries, cases, controls, manifests or digests.
+- **Tasks/scenarios:** `KI-W6-CT18` / `KI-W6-C122`, then `KI-W6-CT19` /
+  `KI-W6-C123`; existing `SCN-KI-018`, `W6-FLOW-10`–`12`, `W6-NC-07/08`;
+  assessment `KI-W6-I113`.
 
 ## 2. Lifecycle transition tables
 

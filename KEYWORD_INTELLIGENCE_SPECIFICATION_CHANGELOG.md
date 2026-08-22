@@ -1249,3 +1249,35 @@ compatibility_or_migration_effect: none — two test-harness files only; no prod
 authorization_effect: KI-W6-WINDOW-AGENT may append decision/execution-complete C119 C120 and I111 subordinate blocks, assign and independently review the two sequential single-file leaves, personally execute I111, and stop READY_FOR_PARENT_REVIEW; no window-agent implementation, commit, provider, AWS, production or KI-W7 authority is created.
 resumption_state: A5 state 165 READY under ASG-KI-W6-WA-06; execute C119 then C120 then I111 CV50-CV57/CH11; stop before KI-W7.
 ```
+
+```yaml
+change_id: CHG-KI-077
+timestamp: 2026-08-22T12:55:00+05:30
+trigger_evidence: [EV-KI-W6-R57, SRC-KI-050, EV-KI-A-105]
+reason: I111 CV53 reached the real protected run workspace and passed 100-row edit/save/reorder/reload, but the frozen W6-FLOW-09 assertion incorrectly required source badges to remain unchanged even though the accepted product contract changes every edited generated row to user_edited.
+old_revision: A2 KI-DD-14 / 893ae23d0c5366735c06b8c89f14a63fc69ffed79ddb5bcf92577fe944ac2678; A3 KI-DL-23 / 7e0594d675faf572391b3bc03d6b09f8720cfe6295b447b693ea4a9965862512; A4 KI-CL-29 / 94468aa949564ac96f80a7e30f088629cc51604cfd05eac53eee9d90dbdc4af3; A8 KI-TR-21 / 4f8596d8230ec27764122bc600d3ca891e41c5fc5f02fff8ed8f4ee3570481fc; A5 state 165; C119/C120 and CV50-CV52 passed; CV53 failed
+new_revision: A2 KI-DD-15 / 7babdd89ac2ad27b5095c11a217f3ce0f259c34bf03bb8806fe2b2b49f5aec2f; A3 KI-DL-24 / 6c7269d18765a1d1eac22f564b553396ffd987965ff1c81c0867af147671aa95; A4 KI-CL-30 / 85ab5e27726f17023c85b9fe8626f55897d1d037fea2a532e15c255311bc1a52; A8 KI-TR-22 / c60f90b3a57ac3f61e77e8d8da5b29ec74e71f2aa72c67f996f4aba5d9247321; A5 state 166 READY
+changed_requirements: []
+changed_decisions: [DEC-KI-048 distinguishes stable RunQuery identity from mutable source provenance and freezes the exact order-sensitive 100 generated to 100 user-edited witness]
+affected_windows: [KI-W6 only; failed I111 CV53 is superseded only after C121 and successful I112; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: [I111 CV53 remains diagnostic; C120 auth behavior remains accepted but its whole-file digest and CV51 source review require superseding C121/CV58 proof; I111 CV50/CV52 are reusable only by exact digest/dependency proof]
+compatibility_or_migration_effect: none — one browser-test oracle and captured evidence member only; no product API UI QuerySource persistence identity schema package provider cost queue artifact build input established pipeline or AWS behavior changes.
+authorization_effect: KI-W6-WINDOW-AGENT may append decision/execution-complete C121 and I112 subordinate blocks, assign and independently review one C121 leaf owning only the browser test, personally execute I112, and stop READY_FOR_PARENT_REVIEW; no window-agent implementation, commit, provider, AWS, production or KI-W7 authority is created.
+resumption_state: A5 state 166 READY under ASG-KI-W6-WA-07; execute C121 then I112 CV58-CV63/CH12; stop before KI-W7.
+```
+
+```yaml
+change_id: CHG-KI-078
+timestamp: 2026-08-22T15:20:00+05:30
+trigger_evidence: [EV-KI-W6-R59, SRC-KI-051, EV-KI-A-106]
+reason: I112 CV59 passed the C121 provenance correction and observed a successful run-start POST, but the harness's manual schedule retained the sole drainQueue callback while the browser waited for validation and discovery before invoking the only existing flushSchedule caller; exactly zero validator calls were therefore inevitable.
+old_revision: A2 KI-DD-15 / 7babdd89ac2ad27b5095c11a217f3ce0f259c34bf03bb8806fe2b2b49f5aec2f; A3 KI-DL-24 / 6c7269d18765a1d1eac22f564b553396ffd987965ff1c81c0867af147671aa95; A4 KI-CL-30 / 85ab5e27726f17023c85b9fe8626f55897d1d037fea2a532e15c255311bc1a52; A8 KI-TR-22 / c60f90b3a57ac3f61e77e8d8da5b29ec74e71f2aa72c67f996f4aba5d9247321; A5 state 166; C121/CV58 passed and CV59 failed
+new_revision: A2 KI-DD-16 / e6b685c2a6ed18d30ea80b1a283cd65ddadf5cf4e251f42f5f48bb78247fbcf2; A3 KI-DL-25 / d76b38110c150df950d5c3543baf341fc295a5361e084f9711b6dd5df295bf2c; A4 KI-CL-31 / 1af45c801740352b6d65de919ce9f3f73763635ca6e4f363b9b9886929f7822b; A8 KI-TR-23 / d6ddeca6b7ac0affced743ff3e1e293a8000d6ee35a25655a6b2f87f01a83808; A5 state 167 READY
+changed_requirements: []
+changed_decisions: [DEC-KI-049 freezes a two-file test-only one-shot run-start schedule flush and its exact caller boundary, witness, ordering and failure semantics]
+affected_windows: [KI-W6 only; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: [I112 CV59 remains diagnostic; C119 helper whole-file digest and C121 browser whole-file digest/source review are superseded only after C122/C123 and CV64; C121 behavior and I112 CV58 remain accepted subject to exact hash/marker proof]
+compatibility_or_migration_effect: none — two causal test-harness files only; no production scheduler, timer, queue, validation, API, database, schema, provider, cost, package, registry, case, control or digest change.
+authorization_effect: KI-W6-WINDOW-AGENT may transcribe CT18/CT19/I113 into S1/S2/S3, sequentially assign and independently review one C122 helper leaf then one C123 browser leaf, personally execute I113 CV64-CV69/CH13, and stop READY_FOR_PARENT_REVIEW; no window-agent implementation, commit, provider, AWS, production or KI-W7 authority is created.
+resumption_state: A5 state 167 READY under ASG-KI-W6-WA-08; execute C122 then C123 then I113; stop before KI-W7.
+```

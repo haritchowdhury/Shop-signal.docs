@@ -6141,3 +6141,185 @@ window_agent_may_implement_leaf_work: false
 successor_authority: false
 state: 165
 ```
+
+### `EV-KI-A-105` — Tenth-correction authoring and window-agent reassignment
+
+- **Trigger verified:** `EV-KI-W6-R57` matches committed current source. The
+  browser file at SHA-256 `72fe4f99420b854b537d82b769ffee71866203ff5872321538de6210faf97347`
+  edits all 100 inputs, swaps the first two, saves/reloads successfully, then
+  compares sorted pre/post badge multisets for equality. `QuerySource` and
+  `QueryEditor` require an edited generated row to become `user_edited`; the
+  handoff writer creates keyword-research rows as generated. Therefore the
+  equality is impossible under correct product behavior. Backend commit
+  `4d68993b13aeaab0b70ed544cfa575e2a73b0652` and frontend commit
+  `a234a9eaf0e58e5ad4c74d49e8f861ae3516c7fd` were clean after the requester
+  committed the accepted C119/C120 work.
+- **Decision:** `SRC-KI-050` / `DEC-KI-048` distinguish immutable row identity
+  from mutable edit provenance. C121 changes one browser-test hunk: require 100
+  generated pre-edit badges, project each generated badge to `user edited`,
+  apply the same first-row swap, require order-sensitive equality, and rename
+  only the captured witness member. Every product, identity, text, count,
+  persistence, auth, ownership, downstream and cleanup assertion is preserved.
+- **Enforcement:** the oracle fails on an unchanged generated label, wrong
+  label, missing/extra label or wrong row order. The exact local negative
+  control passed (`KI_W6_C121_NEGATIVE_CONTROL_OK`). No sorted/set/count-only
+  alternative is allowed. Existing W6-FLOW-09/W6-NC-06 and all 26/13 browser
+  plus 35/17 combined memberships/digests remain unchanged.
+- **Executable sequence:** A4 `KI-CL-30` defines one-file C121 followed by
+  window-agent-owned I112 CV58-CV63/CH12. Same-file C120 digest review is
+  explicitly superseded and revalidated; C119 and backend evidence may be
+  reused only by exact hashes. CV59 is the sole fresh causal browser/database
+  gate; later regression/build/coverage/privacy gates are pass-conditional.
+- **Mechanical checks:** parent authoring `git diff --check` passed; standards,
+  contract and A2/A3/A4/A8 hashes matched; the singleton path digest recomputed
+  to `3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867`;
+  `KI_W6_PARENT_CORRECTION_10_MECHANICS_OK` and the projection negative control
+  passed. Required IDs/references resolve, all eight readiness boxes are
+  checked, and no implementation-affecting choice remains delegated.
+- **Authority:** A5 state 166, SHA-256
+  `960581e9fbdb2b0ff690a83f6f3ff9257c78e282df7360eb886cc5c1ba0c94e8`,
+  assigns `ASG-KI-W6-WA-07` to `KI-W6-WINDOW-AGENT`. It may transcribe C121/
+  I112 into S1/S2/S3, assign and independently review one C121 leaf, execute
+  I112 personally and return `READY_FOR_PARENT_REVIEW`. It may not implement
+  the leaf, edit A1-A8, commit, start KI-W7 or change product behavior.
+- **Boundary:** parent documentation and assignment only. No implementation,
+  leaf launch, test suite, browser, database, build, provider, AWS, production,
+  destructive, commit, push or KI-W7 action occurred; cost `$0.00`.
+
+```yaml
+certificate: KI-W6-TENTH-CORRECTION-AUTHORING-READY
+window: KI-W6
+assignment: ASG-KI-W6-WA-07
+assigned_agent: KI-W6-WINDOW-AGENT
+sequence: [KI-W6-C121, KI-W6-I112]
+revisions:
+  standard: cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb523ede32848
+  subwindow_standard: 84e7590e74589f308c70dc9b0b67f7e9da395fafb1e5786202ecd1ca15be56e9
+  contract: 8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c
+  discovery: 7babdd89ac2ad27b5095c11a217f3ce0f259c34bf03bb8806fe2b2b49f5aec2f
+  decision: 6c7269d18765a1d1eac22f564b553396ffd987965ff1c81c0867af147671aa95
+  checklist: 85ab5e27726f17023c85b9fe8626f55897d1d037fea2a532e15c255311bc1a52
+  traceability: c60f90b3a57ac3f61e77e8d8da5b29ec74e71f2aa72c67f996f4aba5d9247321
+  state: 960581e9fbdb2b0ff690a83f6f3ff9257c78e282df7360eb886cc5c1ba0c94e8
+  decomposition_base: dbcc49a40a7bd4cdeb5161ae3c85dce8a25c11b715b959cc1bcfec7ae93b09e8
+checked_authoring_items: 8
+unchecked_required_items: 0
+unresolved_evidence_references: 0
+unresolved_payload_contracts: 0
+delegated_implementation_decisions: 0
+unowned_source_members: 0
+unowned_plan_members: 0
+anti_vacuity_failures: 0
+mistake_conformance_failures: 0
+planned_changed_file_count: 1
+planned_changed_file_set_digest: 3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867
+new_coverage_cases: 0
+final_planned_case_count: 35
+unmapped_coverage_cases: 0
+duplicate_coverage_case_ids: 0
+critical_invariants_without_negative_control: 0
+test_substitutes_without_fidelity_disposition: 0
+unresolved_accepted_evidence_invalidations: 0
+frozen_gate_ambiguities: 0
+predictable_gates: [one causal browser/isolated-schema gate, backend regression and secret scan, two keyword builds and packaging gate]
+requester_actions_before_start: []
+parallel_leaves: false
+window_agent_may_launch_own_leaves: true
+window_agent_may_implement_leaf_work: false
+successor_authority: false
+state: 166
+```
+
+### `EV-KI-A-106` — Eleventh-correction authoring and window-agent reassignment
+
+- **Trigger verified:** `EV-KI-W6-R59` matches current source and durable
+  diagnostic output. The accepted C121 browser file at SHA-256
+  `8d89bb198390c3f7baf431ccd3405693c5003eb8a9ee4f0e7ccd75c254d507d0`
+  reaches and records POST `/api/runs/<runId>/start` and then observes zero
+  Google validation events. `src/server.js::queueDrain` passes the sole
+  `drainQueue` callback to the injected scheduler. The harness scheduler only
+  appends that callback; its intervals are inert; and its only current
+  `flushSchedule` call is inside `drainDownstream`, which the browser starts
+  after waiting for validation and discovery. The failure is therefore a
+  deterministic test-orchestration deadlock, not a production defect.
+- **Decision:** `SRC-KI-051` / `DEC-KI-049` choose the bounded two-file route.
+  C122 adds one synchronous, preconditioned harness seam that consumes exactly
+  one parked callback and returns/records witness `1/1/0`. C123 calls it exactly
+  once after the observed start request and Google trace floor but before the
+  confirmation deadline. Existing downstream drain timing and all discovery/
+  domain fault-injection positions remain byte-prescribed.
+- **Decision/enforcement completeness:** CT18 and CT19 freeze both exact source
+  insertions, signatures, safe errors, caller order, baselines, expected ending
+  hashes, one-file leaf scopes and local negative controls. The fresh browser
+  gate requires the flush trace plus the existing 100 validation calls, 1,000
+  occurrences, 100 discovery tasks and 1,000-domain Neon proof. Existing
+  W6-FLOW-10–12 and W6-NC-07/08 remain authoritative; no case/control/
+  registry/manifest/digest changes.
+- **Invalidation:** C121 and I112 CV58 remain accepted subject to exact hash/
+  marker proof. Failed I112 CV59 remains diagnostic. C119's helper whole-file
+  digest and C121's browser whole-file digest/source review are superseded only
+  after C122/C123 and CV64; their behavior is revalidated rather than rerun as a
+  different contract. CV60-CV63 were never executed.
+- **Mechanical audit:** current baselines rehashed exactly; the two-path
+  sorted-member-plus-LF digest recomputed to
+  `4f0d4befb9a6d1cdb039108cf271c25ed23265436fdf856866e93caeef179628`;
+  applying both prescribed edits in memory produced exact ending hashes
+  `d9a76cebad80650f5a601012eaaa4715e16a6b6ce334000c98a56470ab6fa6fe`
+  and `448921c77cb0a1619e004d2c8587faa53e0598736605d95a0c7ff9fbf4e13b99`;
+  `KI_W6_PARENT_CORRECTION_11_MECHANICS_OK` and `git diff --check` passed.
+  Eight readiness boxes are checked, all references resolve and no
+  implementation-affecting choice remains delegated.
+- **Authority:** A5 state 167, SHA-256
+  `8396555bfb440772405f2570d795b27186c83d57215f8a4941cc9031de6fe49e`,
+  assigns `ASG-KI-W6-WA-08` to `KI-W6-WINDOW-AGENT`. It may transcribe
+  C122/C123/I113 into S1/S2/S3; sequentially assign and review the two
+  single-file leaves; execute I113 itself; and return
+  `READY_FOR_PARENT_REVIEW`. It may not implement either leaf, move fault
+  injections, edit production, commit or begin KI-W7.
+- **Boundary:** parent documentation and assignment only. No implementation,
+  leaf launch, test suite, browser, database, build, provider, AWS, production,
+  destructive, commit, push or KI-W7 action occurred; cost `$0.00`.
+
+```yaml
+certificate: KI-W6-ELEVENTH-CORRECTION-AUTHORING-READY
+window: KI-W6
+assignment: ASG-KI-W6-WA-08
+assigned_agent: KI-W6-WINDOW-AGENT
+sequence: [KI-W6-C122, KI-W6-C123, KI-W6-I113]
+revisions:
+  standard: cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb523ede32848
+  subwindow_standard: 84e7590e74589f308c70dc9b0b67f7e9da395fafb1e5786202ecd1ca15be56e9
+  contract: 8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c
+  discovery: e6b685c2a6ed18d30ea80b1a283cd65ddadf5cf4e251f42f5f48bb78247fbcf2
+  decision: d76b38110c150df950d5c3543baf341fc295a5361e084f9711b6dd5df295bf2c
+  checklist: 1af45c801740352b6d65de919ce9f3f73763635ca6e4f363b9b9886929f7822b
+  traceability: d6ddeca6b7ac0affced743ff3e1e293a8000d6ee35a25655a6b2f87f01a83808
+  state: 8396555bfb440772405f2570d795b27186c83d57215f8a4941cc9031de6fe49e
+  decomposition_base: b6a6504dac4819c7ad009dedb870270f1d5e3847b415a7d95e42c605a1066d86
+checked_authoring_items: 8
+unchecked_required_items: 0
+unresolved_evidence_references: 0
+unresolved_payload_contracts: 0
+delegated_implementation_decisions: 0
+unowned_source_members: 0
+unowned_plan_members: 0
+anti_vacuity_failures: 0
+mistake_conformance_failures: 0
+planned_changed_file_count: 2
+planned_changed_file_set_digest: 4f0d4befb9a6d1cdb039108cf271c25ed23265436fdf856866e93caeef179628
+new_coverage_cases: 0
+final_planned_case_count: 35
+unmapped_coverage_cases: 0
+duplicate_coverage_case_ids: 0
+critical_invariants_without_negative_control: 0
+test_substitutes_without_fidelity_disposition: 0
+unresolved_accepted_evidence_invalidations: 0
+frozen_gate_ambiguities: 0
+predictable_gates: [one causal browser/isolated-schema gate, backend regression and secret scan, two keyword builds and packaging gate]
+requester_actions_before_start: []
+parallel_leaves: false
+window_agent_may_launch_own_leaves: true
+window_agent_may_implement_leaf_work: false
+successor_authority: false
+state: 167
+```

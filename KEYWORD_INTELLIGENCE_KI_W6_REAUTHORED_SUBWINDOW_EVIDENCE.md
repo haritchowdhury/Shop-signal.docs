@@ -4056,3 +4056,262 @@ cost_usd: 0.00
 next_action: PARENT_DECISION_REQUIRED
 status: PARENT_BLOCKED
 ```
+
+---
+
+## `EV-KI-W6-R58` — `KI-W6-C121` leaf acceptance (tenth correction, `ASG-KI-W6-WA-07`)
+
+- **Timestamp / role:** 2026-08-22T13:25:00+05:30 / `KI-W6-WINDOW-AGENT` under
+  `ASG-KI-W6-WA-07` (A5 state 166; standards `cda35201…`/`84e7590e…`,
+  contract `8b17f85c…`, decision `6c7269d1…`, checklist `85ab5e27…`, S1
+  base `dbcc49a4…` all verified; browser baseline `72fe4f99…` at committed
+  frontend `a234a9e` / backend `4d68993` verified clean).
+- **S1/S2 reconciliation:** CT17/C121/I112 (checklist lines 6857–6991)
+  transcribed byte-exact into S1 (digest
+  `566b9e2ff55fc854ed544985846e7e5e6d156dd3ebf923908393aaf07af21fc3`); S2
+  advanced to state 40; I111 marked `SUPERSEDED_BY_I112`.
+- **Leaf `KI-W6-C121`** (`KI-W6-C121-LEAF-AGENT`, single file
+  `frontend/test/browser/keyword-intelligence-e2e.mjs`, baseline `72fe4f99…`
+  verified): applied exactly CT17 item 4 — pre-edit assertion requiring
+  exactly 100 `generated` badges; the immutable-badge oracle replaced by the
+  order-sensitive provenance transition (`expectedEditedBadges` map, swapped
+  expectation, `arrayEqual(afterBadges, swappedExpectedBadges)`);
+  `badgesPreserved: true` renamed `provenanceTransitionVerified: true`. Ending
+  digest `8d89bb198390c3f7baf431ccd3405693c5003eb8a9ee4f0e7ccd75c254d507d0`.
+- **CV58 independent review:** both local-now checks re-run by the window
+  agent (`node --check` exit 0; `KI_W6_C121_SOURCE_AND_NEGATIVE_CONTROL_OK`
+  with embedded negative control); C120's CT16-item-8 source check re-run —
+  every cookie/auth marker preserved (one `Network.setCookie`, no
+  `Network.clearBrowserCookies`); C107/C111/C118 witnesses present; diff =
+  4+/2− confined to the three exact edits plus the inserted pre-edit
+  assertion; no case/control/registry/manifest/certificate member changed;
+  only the browser test is dirty. C121 ACCEPTED_FOR_INTEGRATION.
+
+---
+
+## `EV-KI-W6-R59` — `KI-W6-I112` gates CV58 pass; CV59 FAILED at W6-FLOW-10 confirm orchestration (PARENT_BLOCKED)
+
+- **Timestamp / role:** 2026-08-22T13:55:00+05:30 / `KI-W6-WINDOW-AGENT` under
+  `ASG-KI-W6-WA-07` (A5 state 166).
+- **CV58 PASS (EV-KI-W6-R58):** C121 reviewed from committed baseline
+  `72fe4f99…`; both checks re-run; C120 CT16-item-8 preservation check re-run
+  (all cookie/auth markers + C107/C111/C118 witnesses); no case/control/
+  registry/manifest/certificate change; only C120's superseded whole-file
+  digest replaced.
+- **CV59 dependency proof PASS:** C119 helper `cbcd304a…` and the five backend
+  files (repository `17e55ed2…`, recovery `714e40da…`, unit `87c5fa81…`,
+  integration `91db4db5…`, recovery test `41240b25…`) rehash byte-equal to
+  R55/R57; failed I111 CV53 kept diagnostic; I111 CV50/CV52 reuse valid.
+- **CV59 fresh browser gate FAILED (once, no retry):** from `frontend/`,
+  `ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node
+  test/browser/keyword-intelligence-e2e.mjs` → exit 1, `ok:false`, wallTime
+  390581 ms, port 4357, consoleErrors 2, pageExceptions 0, networkRequests
+  216, cleanupStepsDone all ok (browser/next-server/auth-server/backend-server/
+  schema-absence/temp-root), droppedSchema `kiw6_mt40tjg0310573f358944c7b`,
+  `mainError:"timed out waiting for the 100 production validator calls, saw 0"`.
+- **Tenth-correction objective ACHIEVED:** the run advanced beyond every prior
+  attempt — W6-FLOW-09 now fully passes (100 pre-edit `generated` badges
+  verified, edit/reorder/save/reload persisted, 100 post-edit `user edited`
+  badges in swapped order via the C121 oracle), "Find my stores" clicked, the
+  POST `/api/runs/{runId}/start` request was observed — then died at the
+  W6-FLOW-10 validator wait.
+- **Root cause (deterministic, from production/harness source — never-reached
+  phase, disjoint from C121/DEC-KI-048):** the run-start handler flips the run
+  to `queued/scraping/queued_query_validation` and calls `queueDrain()`
+  (`src/server.js:1944`), which parks `drainQueue()` in the harness's manual
+  `schedule` queue (`scheduledCallbacks` array, harness lines 439–447;
+  `setIntervalFn` is a recorded stub — no real timers). `drainQueue()`
+  (`src/server.js:1588-1641`) is the ONLY caller of `executeRun`, which is the
+  ONLY caller of the injected `researchQueryValidationPipeline`
+  (`src/server.js:1089/1165`) that emits the 100 `google/search-page` events.
+  `flushSchedule()` is invoked only inside `drainDownstream`'s loop (harness
+  line 691); `drainKeywordWork` covers only research stages
+  (expansion/anchor-screen/markets/settle). Between the start request and the
+  120-second validator wait the browser test calls nothing that flushes, so
+  `drainQueue()` never executes regardless of wall-clock time: exactly 0
+  validator calls. The start itself succeeded code-certainly: the preceding
+  save already passed the identical `validateResearchBackedQueryList` on the
+  same stored rows (PUT /queries 200, persisted swap + provenance flip
+  verified), `isRelevant` permits the " emporium" suffix (shared source-keyword
+  tokens), and the component sends the post-save `querySet.revision`.
+  W6-FLOW-11's "downstream discovery dispatch" wait depends on the same never-
+  flushed drain.
+- **Scope determination:** every candidate fix exceeds the C121 assignment:
+  (a) export a flush/confirmation-drain seam from the harness (backend test
+  file — outside A5 state 166's authorized write scope, `frontend/...mjs
+  through C121 only`); (b) start `drainDownstream()` before the FLOW-10 wait
+  and relocate the discovery fault injections (browser file, but a changed
+  case/gate orchestration and the W6-FLOW-11/12 partition sampling design —
+  prohibited without parent return). No decision DEC-KI-038…048 governs this
+  orchestration gap. Disposition: `PARENT_BLOCKED`; CV60–CV63 and CH12 not run
+  (stop-on-failure).
+
+```yaml
+certificate: INTEGRATION-ASSESSMENT-PARENT-BLOCKED
+parent_window_id: KI-W6
+integration_assessment_id: KI-W6-I112
+correction_leaf: KI-W6-C121 (ACCEPTED; ending digest 8d89bb19…)
+gates_passed: [CV58, CV59 dependency proof]
+gates_failed: [CV59 fresh browser gate — parked drainQueue never flushed; 0 validator calls]
+gates_not_run: [CV60, CV61, CV62, CV63, CH12]
+root_cause_files: [frontend/test/browser/keyword-intelligence-e2e.mjs (orchestration gap), email_scraper/test/helpers/keyword-intelligence-e2e-harness.js (no flush export), src/server.js queueDrain/drainQueue (read-only product)]
+governing_parent_decision: NONE for this orchestration gap
+expanded_parent_scope_required: true
+cleanup_verified: true (all steps ok incl. schema-absence)
+external_mutations: [isolated disposable test schema only, dropped and verified absent]
+cost_usd: 0.00
+next_action: PARENT_DECISION_REQUIRED
+status: PARENT_BLOCKED
+```
+
+---
+
+## `EV-KI-W6-R60` — `KI-W6-C122` leaf acceptance (eleventh correction, `ASG-KI-W6-WA-08`)
+
+- **Timestamp / role:** 2026-08-22T15:50:00+05:30 / `KI-W6-WINDOW-AGENT` under
+  `ASG-KI-W6-WA-08` (A5 state 167; standards `cda35201…`/`84e7590e…`,
+  contract `8b17f85c…`, decision `d76b3811…`, checklist `1af45c80…`, S1 base
+  `b6a6504d…` all verified; two-file path-set digest `4f0d4bef…` verified).
+- **S1/S2 reconciliation:** CT18/CT19/I113 (checklist lines 6993–7199)
+  transcribed byte-exact into S1 (digest
+  `443efbad8cc126f0d4c3f6ac7575a3feaa2a1fca9fe7f26ac874fb757767d661`); S2
+  advanced to state 41; I112 marked `SUPERSEDED_BY_I113`.
+- **Leaf `KI-W6-C122`** (`KI-W6-C122-LEAF-AGENT`, single file
+  `email_scraper/test/helpers/keyword-intelligence-e2e-harness.js`, baseline
+  `cbcd304a…` verified): added exactly the DEC-KI-049 one-shot seam after
+  `flushSchedule` (strict 1-pending pre-check, single non-awaited invocation,
+  strict 0-pending post-check, frozen witness, `harness/flush-run-start-schedule`
+  trace) and exported `flushRunStartSchedule` between `restartBackend` and
+  `drainDownstream`. Ending digest matches the spec pin exactly:
+  `d9a76cebad80650f5a601012eaaa4715e16a6b6ce334000c98a56470ab6fa6fe`.
+- **Local-now checks passed twice** (leaf + independent window-agent re-run):
+  `node --check` exit 0; `KI_W6_C122_SOURCE_AND_NEGATIVE_CONTROL_OK`
+  (embedded negative control + digest equality). Diff = 15+/1− confined to
+  the seam and the one export insertion; `schedule`/`flushSchedule`/timers/
+  drains/fault/auth/provider/cleanup behavior untouched. C122
+  ACCEPTED_FOR_INTEGRATION.
+
+---
+
+## `EV-KI-W6-R61` — `KI-W6-C123` leaf acceptance (eleventh correction, `ASG-KI-W6-WA-08`)
+
+- **Timestamp / role:** 2026-08-22T16:05:00+05:30 / `KI-W6-WINDOW-AGENT`.
+- **Leaf `KI-W6-C123`** (`KI-W6-C123-LEAF-AGENT`, single file
+  `frontend/test/browser/keyword-intelligence-e2e.mjs`, baseline `8d89bb19…`
+  verified): inserted exactly the CT19 item-4 block between
+  `googlePairsFloor` and `confirmDeadline` — one `harness.flushRunStartSchedule()`
+  invocation, strict `1/1/0` witness assertion,
+  `captured.confirmationDrain = structuredClone(runStartSchedule)`. Ending
+  digest matches the spec pin exactly:
+  `448921c77cb0a1619e004d2c8587faa53e0598736605d95a0c7ff9fbf4e13b99`.
+- **Local-now checks passed twice** (leaf + independent window-agent re-run):
+  `node --check` exit 0; `KI_W6_C123_SOURCE_AND_NEGATIVE_CONTROL_OK`
+  (order chain run-start→floor→flush→deadline→googleValidation→discoveryFloor→
+  discovery injection→drainDownstream; single call count; negative control;
+  digest equality). C123 ACCEPTED_FOR_INTEGRATION.
+- **CV64 independent review PASS:** endings equal the two spec pins
+  (`d9a76ceb…` helper, `448921c7…` browser); two-file path-set digest
+  `4f0d4bef…` verified; marker revalidation — C119 auth/session constants +
+  envelope + `browserSessionCookie` seam present; C120 ledger wording, single
+  `Network.setCookie`, install/verify/delete blocks present; C121
+  generated→user-edited oracle present; `restartBackend, flushRunStartSchedule,
+  drainDownstream` export adjacency present; no case/control/registry/
+  manifest/certificate member changed; no third implementation path (frontend
+  worktree: only the browser test; backend worktree: only the helper). Only
+  the superseded C119/C121 whole-file digests are replaced; their accepted
+  behavior stands.
+
+---
+
+## `EV-KI-W6-R62` — `KI-W6-I113` CV65 first attempt: 504 at untouched first-dashboard phase; E8.1 recovery claimed
+
+- **Command (identical, from `frontend/`):** `ALLOW_DATABASE_TESTS=true
+  KI_W6_SKIP_BUILD=1 node test/browser/keyword-intelligence-e2e.mjs` → exit 1,
+  `ok:false`, wallTime 334130 ms, cleanupStepsDone all ok (schema dropped +
+  absence verified, droppedSchema `kiw6_mt499q96c2bc40943cf4d81d`),
+  consoleErrors 4, pageExceptions 0.
+- **Eleventh-correction objective ACHIEVED before the failure:** the flush
+  witness passed (`1/1/0` — C122/C123 accepted), W6-FLOW-10 (100 validator/
+  parser calls, terminal confirmation), W6-FLOW-11 (100 discovery deliveries),
+  W6-FLOW-12 (1,000 stable domains/shops/run stores/lead tasks, duplicate/
+  reorder fault points), and the W6-FLOW-13 restart/snapshot deep-equality all
+  executed (the run reached the post-handoff snapshot-mutation phase).
+- **Observable failure:** `Timed out waiting for reloaded dashboard after
+  conflict` (browser test line 1008 — the FIRST-dashboard reload-after-409
+  wait, pre-finalize). The reloaded page's `GET /api/keyword-research/{id}`
+  returned 504 `BACKEND_TIMEOUT` — the Next API route's fixed `timeoutMs:
+  10_000` (lib/backend-proxy.ts:24,57,93) aborted while the backend was
+  proven responsive to the IDENTICAL request twice earlier in the same
+  process (initial dashboard GET 200; advanceOutcome's in-page GET 200), and
+  the two selection PUTs in between returned 200 and the expected 409.
+- **Environment-invalidation proof (E8.1 basis):** the failing phase's code is
+  byte-identical to the code that PASSED in `EV-KI-W6-R57` and `EV-KI-W6-R59`
+  — C122 added an inert seam (never invoked before the confirm phase), C123's
+  block sits after this phase, C121's oracle is later, and C119/C120 were
+  already in place for R57/R59. No authorized delta can cause this failure.
+  The signature is a fixed 10-second deadline abort under measured sandbox
+  strain (peakChildRssKb chrome 269640/next 190640; wallTime stretched to
+  334s; the dashboard SSR of 200 rows + charts runs in the same Next process
+  that must serve the API route within 10s). Backend, auth loopback, and
+  session paths all served identical traffic seconds earlier. Disposition:
+  proven sandbox performance invalidation of this execution, not a product/
+  assertion/Prisma/cleanup defect — one identical elevated recovery is
+  claimed under A5 state 167 / E8.1. If the recovery fails at any point, no
+  further retry: correction loop or parent escalation.
+
+---
+
+## `EV-KI-W6-R63` — `KI-W6-I113` CV65 E8.1 recovery run: deterministic seam-contract failure (PARENT_BLOCKED)
+
+- **Recovery run (identical command, from `frontend/`):** exit 1, `ok:false`,
+  wallTime 308173 ms, cleanupStepsDone all ok (droppedSchema
+  `kiw6_mt49l6te1fb69643a6339b6b`, schema-absence verified), consoleErrors 2,
+  pageExceptions 0, `mainError:"expected exactly one parked run-start
+  callback, saw 2"`.
+- **Recovery validation of R62:** the run passed the exact phase that failed
+  with the 504 in the first attempt (first-dashboard reload-after-conflict)
+  and advanced to the C123 flush — confirming the 504 was sandbox strain, not
+  a code defect. No further retry will be made.
+- **Observable failure:** the C122 seam threw at the C123 invocation because
+  `scheduledCallbacks.length === 2`.
+- **Root cause (deterministic, source-proven):** `createLeadServer` calls
+  `queueDrain()` once at server creation (`src/server.js:2205`), parking one
+  callback per backend server instance (request-driven `queueDrain`s at 1722/
+  1750/1944 all early-return while `drainScheduled` stays true — nothing
+  resets it absent a flush). The browser test restarts the backend BEFORE the
+  keyword drain stages (`frontend/test/browser/keyword-intelligence-e2e.mjs`
+  line 900, the W6-RES-01 duplicate/reorder fault partition: `await
+  harness.restartBackend();`), so the harness has had exactly TWO backend
+  server instances (initial + restart-A), each parking one startup callback.
+  At the C123 confirm boundary the deterministic count is therefore 2 —
+  DEC-KI-049/CT18's `pendingBefore !== 1 → throw` can never hold in this
+  flow. Additional mechanics for the parent's fix design: the first parked
+  callback belongs to the CLOSED server #1 whose `drainQueue` closure binds
+  the replaced repository backed by a disconnected Prisma client (its throw
+  is caught by drainQueue's internal catch and silently logged); only the
+  LAST parked callback (live server #2) claims the queued run and executes
+  the 100 confirm validations.
+- **Scope determination:** the fix changes the frozen C122 seam contract
+  (count and/or which callbacks are flushed) and/or the C123 witness — both
+  files' write authority ended with accepted C122/C123, and the seam
+  interface is pinned by DEC-KI-049/CT18/CT19 with exact ending digests. No
+  delegated decision covers it. Disposition: `PARENT_BLOCKED`; CV66–CV69 and
+  CH13 not run (stop-on-failure).
+
+```yaml
+certificate: INTEGRATION-ASSESSMENT-PARENT-BLOCKED
+parent_window_id: KI-W6
+integration_assessment_id: KI-W6-I113
+correction_leaves: [KI-W6-C122 ACCEPTED (d9a76ceb…), KI-W6-C123 ACCEPTED (448921c7…)]
+gates_passed: [CV64, CV65 dependency/marker proof, CV65 flush-integration progression (FLOW-10/11/12/13 witnessed in R62 before its environmental 504)]
+gates_failed: [CV65 — seam contract exactly-1 vs deterministic 2 parked startup callbacks]
+gates_not_run: [CV66, CV67, CV68, CV69, CH13]
+root_cause_files: [src/server.js:2205 (startup queueDrain, read-only), frontend/test/browser/keyword-intelligence-e2e.mjs:900 (restartBackend before drains), harness scheduledCallbacks design]
+governing_parent_decision: DEC-KI-049 (contract mechanically unsatisfiable as frozen)
+expanded_parent_scope_required: true
+cleanup_verified: true (both runs; schema-absence ok)
+external_mutations: [isolated disposable test schemas only, dropped and verified absent]
+cost_usd: 0.00
+next_action: PARENT_DECISION_REQUIRED
+status: PARENT_BLOCKED
+```

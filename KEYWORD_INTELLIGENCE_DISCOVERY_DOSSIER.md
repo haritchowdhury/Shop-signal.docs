@@ -1,7 +1,7 @@
 # Keyword Intelligence Discovery Dossier (`A2`)
 
-**Revision:** `KI-DD-14`
-**Observed at:** `2026-08-21`
+**Revision:** `KI-DD-16`
+**Observed at:** `2026-08-22`
 **Environment:** local workspace `/home/harit/Email Scrapper`; no network,
 provider, database, AWS, or production operation was performed.
 
@@ -205,6 +205,32 @@ There are **zero unknown consumed payload fields** in the supported one-shape
 contract. `SRC-KI-025` and `SRC-KI-026` are predictable execution/readiness
 gates, not payload discovery tasks. `SRC-KI-029` is resolved by
 `SRC-KI-030`–`032`; no cost-policy decision remains open.
+
+### `SRC-KI-050` — W6 workspace lineage witness contradicts the accepted edit-provenance contract
+
+```yaml
+evidence_id: SRC-KI-050
+classification: OBSERVED
+claim: The accepted keyword-research handoff creates every RunQuery with source="generated"; QuerySource admits generated, user_added and user_edited; QueryEditor changes a generated row to user_edited whenever its text is edited while preserving user_added/user_edited; I111 edits all 100 rows and swaps the first two. The current W6-FLOW-09 browser oracle nevertheless requires the sorted badge multiset to remain byte-equal, so it must fail after the correct 100 generated -> 100 user edited transition even though row count, text, reorder and durable persistence pass.
+source: frontend commit a234a9eaf0e58e5ad4c74d49e8f861ae3516c7fd; frontend/lib/api-types.ts:13 SHA-256 e91b62a2ead26d6693c2ff47cd4dcc89778f287784620614d0296fb6a59fcec4; frontend/components/query-editor.tsx:68-78 SHA-256 f955737d19ba47c256a598aa118e2a1f07a8e70294911e4ed920d65a2bad4229; email_scraper/src/prisma-run-repository.js createRun handoff mapping; frontend/test/browser/keyword-intelligence-e2e.mjs:1127-1156 SHA-256 72fe4f99420b854b537d82b769ffee71866203ff5872321538de6210faf97347; EV-KI-W6-R57
+observed_at: 2026-08-22
+environment: local committed backend 4d68993b13aeaab0b70ed544cfa575e2a73b0652 and frontend a234a9eaf0e58e5ad4c74d49e8f861ae3516c7fd; no provider, AWS or production operation
+limitations: The failed CV53 is diagnostic rather than acceptance. It reached the real workspace and observed the product transition, but later CV54-CV57 gates remain unexecuted.
+privacy: Synthetic harness rows and source labels only; no cookie value, header, credential, provider body or user data inspected or recorded.
+```
+
+### `SRC-KI-051` — W6 run confirmation is parked behind an unflushed test scheduler
+
+```yaml
+evidence_id: SRC-KI-051
+classification: OBSERVED
+claim: The production run-start handler successfully calls queueDrain(), but the W6 harness injects a manual schedule(callback) implementation that only appends the drainQueue callback to scheduledCallbacks. Its setIntervalFn is also inert. The only current flushSchedule() caller is drainDownstream(), while the browser waits for all 100 validation calls and all 100 discovery dispatches before starting drainDownstream(). Consequently the callback that alone reaches executeRun(), validateResearchBackedConfirmedQueryRows(), and dispatchConfirmedQueries() is never invoked; the observable CV59 outcome is exactly zero validator calls after a successful POST /api/runs/<runId>/start.
+source: email_scraper/src/server.js::queueDrain/drainQueue/executeRun and POST /api/runs/:id/start; email_scraper/test/helpers/keyword-intelligence-e2e-harness.js::schedule/flushSchedule/setIntervalFn/drainDownstream SHA-256 cbcd304aea6657bef10d73644d81e253396fe3f4f3f112f9dc03e020f0c7db74 at backend commit 4d68993b13aeaab0b70ed544cfa575e2a73b0652; frontend/test/browser/keyword-intelligence-e2e.mjs run-start-to-confirmation sequence SHA-256 8d89bb198390c3f7baf431ccd3405693c5003eb8a9ee4f0e7ccd75c254d507d0; EV-KI-W6-R59
+observed_at: 2026-08-22
+environment: local emitted Next/browser plus actual backend and isolated disposable schema; no live provider, AWS or production operation
+limitations: CV59 is diagnostic rather than acceptance. It proves the test scheduler deadlock, not a product queueDrain defect. CV60-CV63 were not run.
+privacy: Source control flow, synthetic event counts and disposable-schema cleanup only; no token, cookie value, header, provider body, keyword text or user data retained.
+```
 
 ## 6. Post-W5 corrective discovery
 
