@@ -1,6 +1,6 @@
 # Keyword Intelligence Traceability Index (`A8`)
 
-**Revision:** `KI-TR-23`
+**Revision:** `KI-TR-24`
 
 This is the sole authority for mechanical requirement/source/decision/task/test
 closure. The other artifacts are `A1`
@@ -278,3 +278,4 @@ is the mechanical expansion used for completeness checks:
 | `REQ-KI-002`, `REQ-KI-015`, `REQ-KI-016`, `REQ-KI-017`; `INV-KI-010/011` protected-workspace auth-substitute overlay | `SRC-KI-049`; `KI-W6-CT15/CT16` under `DEC-KI-047` | existing `SCN-KI-018`, `W6-NAV-01`, `W6-FLOW-01`, `W6-RES-01`, `W6-NC-02/12`; opaque local session token plus complete deterministic session envelope drives the installed Neon middleware to the real `/runs/<id>` workspace while owner-B/null denial remains; no product auth edit and browser 26/13 plus final 35/17 memberships/digests unchanged | `KI-W6-CV50`–`CV57`, `KI-W6-CH11` |
 | `REQ-KI-010`–`REQ-KI-015`; `INV-KI-010/015` workspace edit-provenance overlay | `SRC-KI-050`; `KI-W6-CT17` under `DEC-KI-048` | existing `SCN-KI-018`, `W6-FLOW-09/13`, `W6-NC-06`; exactly 100 generated pre-edit badges become 100 user-edited badges in the persisted first-row-swap order while the same 100 rows/text lineage and zero add/delete persist; browser 26/13 plus final 35/17 memberships/digests unchanged | `KI-W6-CV58`–`CV63`, `KI-W6-CH12` |
 | `REQ-KI-010`–`REQ-KI-015`; `INV-KI-010/015` run-start scheduler overlay | `SRC-KI-051`; `KI-W6-CT18/CT19` under `DEC-KI-049` | existing `SCN-KI-018`, `W6-FLOW-10`–`12`, `W6-NC-07/08`; exactly one parked run-start callback is flushed after the observed start POST and Google trace floor but before confirmation waiting, producing witness 1/1/0, 100 actual validator/parser calls, 100 discovery tasks and the unchanged later fault-partitioned 1,000-domain proof; browser 26/13 plus final 35/17 memberships/digests unchanged | `KI-W6-CV64`–`CV69`, `KI-W6-CH13` |
+| `REQ-KI-010`–`REQ-KI-015`; `INV-KI-010/015` restart-aware run-start scheduler overlay | `SRC-KI-052`; parent-direct `KI-W6-C124` under `DEC-KI-050` | existing `SCN-KI-018`, `W6-FLOW-10`–`12`, `W6-NC-07/08`; after the required server-A→server-B restart, exactly two FIFO callbacks exist, exactly one closed-server callback is discarded, exactly one live-server callback is invoked and zero remain, producing witness 2/1/1/0 before the unchanged 100-validator/100-discovery/1,000-domain proof; no case/control/digest change | `KI-W6-CV70`–`CV75`, `KI-W6-CH14` |

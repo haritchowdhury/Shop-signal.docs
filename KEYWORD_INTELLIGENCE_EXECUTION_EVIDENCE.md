@@ -6323,3 +6323,77 @@ window_agent_may_implement_leaf_work: false
 successor_authority: false
 state: 167
 ```
+
+### `EV-KI-A-107` — Requester-authorized parent-direct C124 and I114 reassignment
+
+- **Trigger and authority:** the window-agent handoff `EV-KI-W6-R60`–`R63`
+  was checked against the accepted C122/C123 source. The required W6-RES-01
+  restart constructs server B while the shared manual scheduler still contains
+  server A's construction callback, so `pendingBefore===2` is deterministic.
+  The requester then explicitly instructed the parent to ship the exact fix and
+  hand control back to the window agent. A5 state 168 bounded the direct edit to
+  the two existing test-harness assertion blocks.
+- **Implementation:** in
+  `email_scraper/test/helpers/keyword-intelligence-e2e-harness.js`, the seam now
+  requires two callbacks, pops the newest/live server-B callback, records one
+  remaining stale member, clears that stale member without invoking it, invokes
+  the live callback once and records frozen witness `2/1/1/0`. In
+  `frontend/test/browser/keyword-intelligence-e2e.mjs`, only the corresponding
+  witness assertion/message changed. The Google-floor/caller boundary,
+  downstream drain and every fault-injection position are unchanged.
+- **Exact source evidence:** helper baseline
+  `d9a76cebad80650f5a601012eaaa4715e16a6b6ce334000c98a56470ab6fa6fe`
+  at backend commit `70af619814ec026e51dccb985b0fc0f732169309` became
+  `bc38c6320e4ceb4e14f0f781d08923ec2271388330f0dbb1bdf0761c7ec11557`
+  with 7 insertions/5 deletions. Browser baseline
+  `448921c77cb0a1619e004d2c8587faa53e0598736605d95a0c7ff9fbf4e13b99`
+  at frontend commit `3d97150f4736ce2ee3e6c754c67206d271479639` became
+  `8105d20460cdb09607e58f2a425063eeb39eae8585f621178fa9f8e036b8b231`
+  with 3 insertions/2 deletions. The unchanged two-path sorted-LF digest is
+  `4f0d4befb9a6d1cdb039108cf271c25ed23265436fdf856866e93caeef179628`.
+- **Local enforcement:** both `node --check` invocations passed; the combined
+  exact-source/hash checker printed
+  `KI_W6_C124_PARENT_DIRECT_SOURCE_AND_NEGATIVE_CONTROLS_OK`; substituting
+  `shift()` for `pop()` and deleting the stale-discard assertion each falsified
+  that checker; both nested `git diff --check` invocations passed; backend and
+  frontend status each name exactly their one C124 path.
+- **Authoring closure:** `SRC-KI-052`, `DEC-KI-050`, KI-CL-32 and KI-TR-24
+  freeze the two-callback provenance, live-only selection, `2/1/1/0` witness,
+  exact baselines/endings, preservation boundary, negative controls and I114
+  gates. Revisions are A2
+  `7e7437f940143766d2bc85c22e67057622a8f839ddadb44623d8577344557515`,
+  A3 `c3143cd5e7b6d8d7ea9cd5635b85d82d415946cc46be9735f4702d727c776f4b`,
+  A4 `b8c6512c29a65ba97a4b2a5b94a338e4f33a06c58a18e7b8a9cc903dc232023a`
+  and A8 `73dc7d331412afd159a822dc5c8f60895e9cafbaa8caff13fae3175f417b78fa`.
+- **Handoff:** A5 state 169, SHA-256
+  `7e5fa028b67763aa1bcfd45cb93b20938c99f60e00ce2889061e8dc5763616a7`,
+  assigns `ASG-KI-W6-WA-09`. The window agent may reconcile C124/I114 into
+  S1/S2/S3, independently review the already-applied patch, execute only I114
+  CV70–CV75/CH14 and stop `READY_FOR_PARENT_REVIEW`. It may not edit
+  implementation, launch a leaf, commit or begin KI-W7.
+- **Boundary:** no stateful browser/database gate, test suite, build, provider,
+  AWS, production, destructive, commit, push or KI-W7 action occurred; cost
+  `$0.00`. The user remains the committer.
+
+```yaml
+certificate: KI-W6-TWELFTH-CORRECTION-PARENT-DIRECT-HANDOFF
+window: KI-W6
+completed_correction: KI-W6-C124
+next_assessment: KI-W6-I114
+assignment: ASG-KI-W6-WA-09
+assigned_agent: KI-W6-WINDOW-AGENT
+state: 169
+state_revision: 7e5fa028b67763aa1bcfd45cb93b20938c99f60e00ce2889061e8dc5763616a7
+helper_ending_sha256: bc38c6320e4ceb4e14f0f781d08923ec2271388330f0dbb1bdf0761c7ec11557
+browser_ending_sha256: 8105d20460cdb09607e58f2a425063eeb39eae8585f621178fa9f8e036b8b231
+planned_changed_file_count: 2
+planned_changed_file_set_digest: 4f0d4befb9a6d1cdb039108cf271c25ed23265436fdf856866e93caeef179628
+new_cases: 0
+new_controls: 0
+browser_cases_controls: 26/13
+final_cases_controls: 35/17
+window_agent_may_edit_implementation: false
+window_agent_may_launch_leaves: false
+successor_authority: false
+provider_or_aws_cost_usd: 0.00
+```

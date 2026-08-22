@@ -1,6 +1,6 @@
 # Keyword Intelligence Decision Ledger (`A3`)
 
-**Revision:** `KI-DL-25`
+**Revision:** `KI-DL-26`
 **Status:** locked decisions; not an assignment
 
 This is the sole authority for implementation-affecting choices and
@@ -2459,6 +2459,47 @@ estimates them. This specification decision is not paid-call authorization.
 - **Tasks/scenarios:** `KI-W6-CT18` / `KI-W6-C122`, then `KI-W6-CT19` /
   `KI-W6-C123`; existing `SCN-KI-018`, `W6-FLOW-10`–`12`, `W6-NC-07/08`;
   assessment `KI-W6-I113`.
+
+### `DEC-KI-050` — Discard the closed-server callback and invoke only the live-server callback
+
+- **Requirements:** `REQ-KI-010`–`REQ-KI-015`; `INV-KI-010/015`; evidence
+  `SRC-KI-052` and `EV-KI-W6-R60`–`R63`. This supersedes only DEC-KI-049's
+  one-callback cardinality and witness; the accepted seam, caller boundary and
+  every product/downstream constraint remain unchanged.
+- **Exact scheduler state:** at the confirmation boundary the shared FIFO
+  `scheduledCallbacks` array must contain exactly two members. Index zero is
+  the construction callback captured by closed server A before W6-RES-01;
+  index one is the construction callback captured by current live server B.
+  Server B's start request sets its existing `drainRequested` flag but cannot
+  append a third callback while `drainScheduled` is true.
+- **Exact parent-direct correction:** the requester authorizes the parent to
+  modify only the accepted C122/C123 files. In `flushRunStartSchedule`, require
+  `pendingBefore===2`; remove the live callback with `pop()`; set
+  `discardedStaleCallbacks` to the remaining length; clear the array; invoke
+  the live callback exactly once; require `pendingAfter===0`; and freeze/record
+  exactly `{pendingBefore,discardedStaleCallbacks,flushedCallbacks:1,
+  pendingAfter}`. In the browser require the exact witness `2/1/1/0` and retain
+  the existing captured member and ordering.
+- **Failure semantics:** zero, one, three or more pending callbacks fail before
+  invocation. A FIFO `shift()` invocation, two invocations, failure to discard
+  exactly one stale member, any remaining member, an early/late invocation or
+  a moved downstream fault point fails the structural or causal gate. The
+  discarded callback is never invoked against its closed server/disconnected
+  repository. The live callback remains the only invoked run-start callback.
+- **Preservation:** no production scheduler/timer/repository/database/provider,
+  `flushSchedule`, `drainDownstream`, queue order, fault injection, registry,
+  case/control, manifest, digest, browser command or product behavior changes.
+  C122/C123 behavior outside the two replaced assertion blocks remains
+  accepted. The parent runs only syntax, exact-source, negative-control, hash
+  and diff-scope checks; the window agent owns the fresh causal/stateful gate
+  and all remaining I114 gates.
+- **Alternatives rejected:** invoking both callbacks and relying on the stale
+  callback's swallowed failure; retaining the stale callback for a later broad
+  flush; real timers; instance plumbing in production; starting downstream
+  drain early; moving fault injections; or weakening the exact two-member
+  precondition.
+- **Tasks/scenarios:** parent-direct `KI-W6-C124`; existing `SCN-KI-018`,
+  `W6-FLOW-10`–`12`, `W6-NC-07/08`; window-agent assessment `KI-W6-I114`.
 
 ## 2. Lifecycle transition tables
 

@@ -1,6 +1,6 @@
 # Keyword Intelligence Discovery Dossier (`A2`)
 
-**Revision:** `KI-DD-16`
+**Revision:** `KI-DD-17`
 **Observed at:** `2026-08-22`
 **Environment:** local workspace `/home/harit/Email Scrapper`; no network,
 provider, database, AWS, or production operation was performed.
@@ -230,6 +230,19 @@ observed_at: 2026-08-22
 environment: local emitted Next/browser plus actual backend and isolated disposable schema; no live provider, AWS or production operation
 limitations: CV59 is diagnostic rather than acceptance. It proves the test scheduler deadlock, not a product queueDrain defect. CV60-CV63 were not run.
 privacy: Source control flow, synthetic event counts and disposable-schema cleanup only; no token, cookie value, header, provider body, keyword text or user data retained.
+```
+
+### `SRC-KI-052` — The required backend restart leaves one stale callback before the live run-start callback
+
+```yaml
+evidence_id: SRC-KI-052
+classification: OBSERVED
+claim: C122 and C123 correctly exposed the manual run-start scheduler, but I113 CV65 proved its exact one-callback precondition cannot hold in the accepted causal flow. createLeadServer calls queueDrain once at construction. The browser's required W6-RES-01 restart closes server A and constructs server B before confirmation, while the shared manual scheduler retains server A's callback and appends server B's callback. Request-driven queueDrain calls on server B do not append another callback because its drainScheduled guard is already true. Thus the confirmation boundary contains exactly two FIFO callbacks: the first belongs to closed server A and its disconnected repository; the last belongs to live server B and is the only callback that can claim the queued run.
+source: email_scraper/src/server.js::createLeadServer/queueDrain/drainQueue; email_scraper/test/helpers/keyword-intelligence-e2e-harness.js::schedule/buildBackendServer/restartBackend/flushRunStartSchedule SHA-256 d9a76cebad80650f5a601012eaaa4715e16a6b6ce334000c98a56470ab6fa6fe at backend commit 70af619814ec026e51dccb985b0fc0f732169309; frontend/test/browser/keyword-intelligence-e2e.mjs::W6-RES-01 restart and confirmation boundary SHA-256 448921c77cb0a1619e004d2c8587faa53e0598736605d95a0c7ff9fbf4e13b99 at frontend commit 3d97150f4736ce2ee3e6c754c67206d271479639; EV-KI-W6-R60-R63
+observed_at: 2026-08-22
+environment: local emitted Next/browser plus actual backend and isolated disposable schemas; no live provider, AWS or production operation
+limitations: CV65 attempt one was environment-invalidated by an unrelated fixed proxy timeout after traversing FLOW-10 through FLOW-13. Its authorized recovery passed that phase and failed deterministically at pendingBefore=2 before invoking the live callback. Later I113 gates did not run.
+privacy: Callback counts, source control flow and synthetic cleanup evidence only; no token, cookie value, header, provider body, keyword text or user data retained.
 ```
 
 ## 6. Post-W5 corrective discovery

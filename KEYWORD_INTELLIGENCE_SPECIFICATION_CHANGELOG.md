@@ -1281,3 +1281,19 @@ compatibility_or_migration_effect: none — two causal test-harness files only; 
 authorization_effect: KI-W6-WINDOW-AGENT may transcribe CT18/CT19/I113 into S1/S2/S3, sequentially assign and independently review one C122 helper leaf then one C123 browser leaf, personally execute I113 CV64-CV69/CH13, and stop READY_FOR_PARENT_REVIEW; no window-agent implementation, commit, provider, AWS, production or KI-W7 authority is created.
 resumption_state: A5 state 167 READY under ASG-KI-W6-WA-08; execute C122 then C123 then I113; stop before KI-W7.
 ```
+
+```yaml
+change_id: CHG-KI-079
+timestamp: 2026-08-22T16:49:55+05:30
+trigger_evidence: [EV-KI-W6-R60, EV-KI-W6-R61, EV-KI-W6-R62, EV-KI-W6-R63, SRC-KI-052, requester direct parent-fix instruction]
+reason: Accepted C122/C123 exposed the run-start scheduler, but I113 CV65 proved the required W6-RES-01 backend restart deterministically leaves two FIFO callbacks at confirmation: one stale callback captured by closed server A and one live callback captured by server B. DEC-KI-049's exact one-callback precondition was therefore unsatisfiable.
+old_revision: A2 KI-DD-16 / e6b685c2a6ed18d30ea80b1a283cd65ddadf5cf4e251f42f5f48bb78247fbcf2; A3 KI-DL-25 / d76b38110c150df950d5c3543baf341fc295a5361e084f9711b6dd5df295bf2c; A4 KI-CL-31 / 1af45c801740352b6d65de919ce9f3f73763635ca6e4f363b9b9886929f7822b; A8 KI-TR-23 / d6ddeca6b7ac0affced743ff3e1e293a8000d6ee35a25655a6b2f87f01a83808; A5 state 167; C122/C123/CV64 passed and CV65 failed at pendingBefore=2
+new_revision: A2 KI-DD-17 / 7e7437f940143766d2bc85c22e67057622a8f839ddadb44623d8577344557515; A3 KI-DL-26 / c3143cd5e7b6d8d7ea9cd5635b85d82d415946cc46be9735f4702d727c776f4b; A4 KI-CL-32 / b8c6512c29a65ba97a4b2a5b94a338e4f33a06c58a18e7b8a9cc903dc232023a; A8 KI-TR-24 / 73dc7d331412afd159a822dc5c8f60895e9cafbaa8caff13fae3175f417b78fa; A5 state 168 parent-direct implementation followed by state 169 window-agent assessment handoff
+changed_requirements: []
+changed_decisions: [DEC-KI-050 supersedes only the one-callback cardinality and witness with exact two pending one discarded stale one invoked live zero remaining semantics]
+affected_windows: [KI-W6 only; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: [I113 CV65 remains diagnostic; C122/C123 whole-file digest/source reviews are superseded by parent-direct C124 and must be independently revalidated in CV70; their seam placement and caller boundary remain accepted]
+compatibility_or_migration_effect: none — two test-harness assertion blocks only; no production scheduler timer queue validation API database schema provider cost package registry case control digest or product behavior change.
+authorization_effect: the requester directly authorized parent C124 implementation in the two existing correction files; after local enforcement, KI-W6-WINDOW-AGENT receives only S1/S2/S3 reconciliation, independent C124 review, I114 CV70-CV75/CH14 and stop authority; no leaf, implementation edit, commit, provider, AWS, production or KI-W7 authority.
+resumption_state: A5 state 169 READY under ASG-KI-W6-WA-09; reconcile/review parent-direct C124, execute I114 and stop before KI-W7.
+```

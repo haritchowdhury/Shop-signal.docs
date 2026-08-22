@@ -1,6 +1,6 @@
 # Keyword Intelligence Decision-Complete Execution Checklist (`A4`)
 
-**Checklist revision:** `KI-CL-31`
+**Checklist revision:** `KI-CL-32`
 **Package status:** `AUTHORING-READY`; assignable only by a one-window `A5`
 assignment  
 **Execution status authority:** only `ACTIVE_EXECUTION_STATE.md`
@@ -7198,6 +7198,125 @@ an observable assertion, Prisma, cleanup or product failure is not retried.
 - [x] `RW6M-007` Stateful gate, recovery, cleanup, regressions and stop are frozen. Evidence: I113.
 - [x] `RW6M-008` Window agent manages C122→C123→I113 only; no commit/KI-W7. Evidence: A5 state 167.
 
+### Twelfth corrective sequence — parent-direct `KI-W6-C124`, then window-agent `KI-W6-I114`
+
+This append-only correction supersedes only DEC-KI-049's unsatisfiable
+one-callback witness and I113's failed CV65. The requester explicitly directed
+the parent to ship the exact two-file test-harness fix and return the remaining
+assessment to the window agent. No leaf or product implementation is involved.
+
+```yaml
+finding: KI-W6-R63-F1
+source: SRC-KI-052
+decision: DEC-KI-050
+sequence: [KI-W6-C124-parent-direct, KI-W6-I114-window-agent]
+changed_file_set: [email_scraper/test/helpers/keyword-intelligence-e2e-harness.js, frontend/test/browser/keyword-intelligence-e2e.mjs]
+changed_file_set_digest_sorted_member_plus_lf_sha256: 4f0d4befb9a6d1cdb039108cf271c25ed23265436fdf856866e93caeef179628
+helper_baseline_sha256: d9a76cebad80650f5a601012eaaa4715e16a6b6ce334000c98a56470ab6fa6fe
+browser_baseline_sha256: 448921c77cb0a1619e004d2c8587faa53e0598736605d95a0c7ff9fbf4e13b99
+helper_expected_ending_sha256: bc38c6320e4ceb4e14f0f781d08923ec2271388330f0dbb1bdf0761c7ec11557
+browser_expected_ending_sha256: 8105d20460cdb09607e58f2a425063eeb39eae8585f621178fa9f8e036b8b231
+backend_baseline_commit: 70af619814ec026e51dccb985b0fc0f732169309
+frontend_baseline_commit: 3d97150f4736ce2ee3e6c754c67206d271479639
+new_cases: 0
+new_controls: 0
+browser_cases_controls: 26/13 unchanged
+final_cases_controls: 35/17 unchanged
+provider_or_aws_cost_usd: 0.00
+```
+
+#### Parent-direct `KI-W6-C124` — restart-aware live-callback selection
+
+1. **Authority/scope:** A5 state 168 plus the requester's direct instruction
+   authorize the parent to change only the two paths in the YAML block above,
+   then run syntax/source/digest/diff checks. No S1/S2/S3 edit, leaf dispatch,
+   stateful gate or successor work belongs to C124.
+2. **Helper edit:** starting from exact SHA `d9a76ceb…`, replace only the C122
+   cardinality/removal/witness lines so `pendingBefore!==2` throws
+   `expected one stale and one live run-start callback, saw <n>`; select the
+   live callback with `scheduledCallbacks.pop()`; set
+   `discardedStaleCallbacks=scheduledCallbacks.length`; clear the array; invoke
+   `liveCallback()` once; preserve the zero-remain check; and freeze/record
+   `{pendingBefore,discardedStaleCallbacks,flushedCallbacks:1,pendingAfter}`.
+   Exact ending SHA is `bc38c632…`; exact diff is 7 insertions/5 deletions.
+3. **Browser edit:** starting from exact SHA `448921c7…`, change only the C123
+   witness assertion to require, in order, `pendingBefore===2`,
+   `discardedStaleCallbacks===1`, `flushedCallbacks===1`, and
+   `pendingAfter===0`, with message `run start must discard one stale callback
+   and flush exactly one live callback`. Exact ending SHA is `8105d204…`;
+   exact diff is 3 insertions/2 deletions.
+4. **Preserve:** the seam/caller position, trace op, captured member, Google
+   floor, confirmation/discovery waits, every later fault injection and drain,
+   C119–C123 auth/provenance behavior, all cases/controls/registries/digests,
+   cleanup and every production file. Do not invoke the stale callback.
+5. **Local enforcement:** both `node --check` commands pass. The exact-source
+   checker must find the `2/pop/discard/clear/live/2-1-1-0` members in their
+   accepted order, fail after substituting `shift()` for `pop()`, fail after
+   deleting the discarded-stale assertion, and match both ending hashes.
+   `git diff --check` passes and each nested diff names only its owned file.
+
+- [x] `C124-P1` Exact C122/C123 baselines and two-file scope verified. Evidence: `EV-KI-A-107`.
+- [x] `C124-T1` Exact helper and browser replacements applied. Evidence: `EV-KI-A-107`.
+- [x] `C124-V1` Syntax, source, two negative controls, hashes and diff scope passed. Evidence: `EV-KI-A-107`.
+- [x] `C124-H1` No test/build/database/provider/AWS/production/commit/KI-W7 action occurred. Evidence: `EV-KI-A-107`.
+
+#### Window-agent assessment `KI-W6-I114`
+
+I114 has zero implementation-file write authority. The window agent first
+transcribes/reconciles this exact parent correction in S1/S2/S3, independently
+reviews the already-applied two-file patch, and then executes these gates in
+order. No leaf is launched.
+
+- [ ] `KI-W6-CV70` Recompute the exact two baselines/endings, two-path digest,
+  source members, 7/5 and 3/2 diffs, syntax and both negative controls. Require
+  exactly the helper and browser paths dirty relative to the pinned commits.
+  Revalidate every accepted C119–C123 auth/cookie/provenance/scheduler marker
+  and prove no case/control/registry/manifest/certificate member changed.
+- [ ] `KI-W6-CV71` Preserve I113 CV64 and failed CV65 diagnostics. From
+  `frontend/`, run once, elevated when needed:
+  `ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node test/browser/keyword-intelligence-e2e.mjs`.
+  Require exit zero, the unchanged 26-case/13-control certificate, exactly one
+  `flush-run-start-schedule` trace with witness `2/1/1/0`, 100 validator/parser
+  calls, 1,000 occurrences, terminal confirmation, 100 discovery tasks, the
+  unchanged duplicate/reorder fault points, 1,000 stable domains/lead tasks,
+  all auth/navigation/provenance/restart witnesses and schema-absence cleanup.
+- [ ] `KI-W6-CV72` After CV71, run once from `email_scraper/`: `npm test`, then
+  `npm run check:secrets`; require zero failures and a clean scan.
+- [ ] `KI-W6-CV73` From `email_scraper/`, run
+  `node scripts/build-keyword-worker.js` exactly twice; require byte-identical
+  ZIPs, sibling preservation, no forbidden/stale members, ZIP <=45 MiB,
+  unzipped <=200 MiB and cold import exporting function `handler`; then run
+  once `node --test --test-isolation=none test/aws-pipeline-packaging.test.js`
+  with zero failures.
+- [ ] `KI-W6-CV74` Recompute unchanged browser 26/13 and DB 7/3 registries and
+  digests; final cases exactly 35/digest
+  `c5ead2a638d7f5481178730958d83b582e42aeb265536696555eaf1a08b5d5f9`
+  and controls exactly 17/digest
+  `62566fd91c96579a60c9f512c27cf94afdabdbc000a967a3251b177f9710c2f5`;
+  require required=registered=executed equality and every control falsified.
+- [ ] `KI-W6-CV75` Verify only the two C124 files differ from the pinned
+  commits; all production/proxy/auth/API/repository/schema/package/build-input
+  bytes retain accepted baselines; evidence contains no secret/private value;
+  no provider/AWS/production/destructive/commit/push/KI-W7 action occurred.
+- [ ] `KI-W6-CH14` Append the I114 certificate to S3, supersede only failed
+  I113 CV65 and the C122/C123 whole-file digest/source reviews, set S2
+  `READY_FOR_PARENT_REVIEW`, return one consolidated handoff and stop.
+
+CV71 is the sole fresh stateful browser/database gate and may start elevated.
+Only a proven sandbox/channel invalidation permits one identical E8.1 recovery;
+an observable assertion, Prisma, cleanup or product failure is not retried.
+
+##### Twelfth-correction readiness
+
+- [x] `RW6N-001` The exact two-callback state and ordering are source/evidence proven. Evidence: `SRC-KI-052`.
+- [x] `RW6N-002` The stale/live choice and failure semantics are parent-locked. Evidence: `DEC-KI-050`.
+- [x] `RW6N-003` Exact baselines, replacements, endings and diff sizes are frozen. Evidence: C124 items 1–3.
+- [x] `RW6N-004` Two independent negative controls reject FIFO invocation and a missing stale witness. Evidence: C124-V1.
+- [x] `RW6N-005` Stateful causality, cleanup and existing coverage remain non-vacuous. Evidence: CV71/CV74.
+- [x] `RW6N-006` Reuse/invalidation boundaries are exact. Evidence: CV70/CV71.
+- [x] `RW6N-007` Expensive gates, recovery and stop are frozen. Evidence: I114.
+- [x] `RW6N-008` The window agent owns reconciliation/review/assessment only; no leaf or KI-W7. Evidence: A5 state 169.
+
 ## 5. Final independent review (not assigned to implementation agents)
 
 - [ ] `KI-FR-1` Independently inspect current source/diff, active hashes, every accepted window, and changed-file scope.
@@ -7223,12 +7342,13 @@ Checked KI-W6 eighth-correction supplements: **8**.
 Checked KI-W6 ninth-correction supplements: **8**.
 Checked KI-W6 tenth-correction supplements: **8**.
 Checked KI-W6 eleventh-correction supplements: **8**.
+Checked KI-W6 twelfth-correction supplements: **8**.
 Unchecked required authoring items: **0**.
 
 KI-R5 is accepted and closed by `EV-KI-A-080` / `CHG-KI-055`; A5 accepts
 through KI-R5. The reauthored KI-W6 is decision-complete and
-enforcement-complete as amended through the eleventh correction:
-`SRC-KI-038`–`051`, `DEC-KI-038`–`049`, the preserved accepted W6 history,
+enforcement-complete as amended through the twelfth correction:
+`SRC-KI-038`–`052`, `DEC-KI-038`–`050`, the preserved accepted W6 history,
 sequential one-file C112–C116 ownership plus C117, exact 18-path profile membership,
 literal operation ceilings, bounded recovery, seven new cases, three
 falsification controls and literal once-only assessment commands close the
@@ -7244,11 +7364,14 @@ CT18/CT19 add the two-file one-shot run-start schedule seam/caller and I113
 assessment without changing production scheduling, downstream fault positions
 or case/control sets.
 
-A5 supplies the live authority. Its current state assigns the eleventh correction
-to the KI-W6 window agent, which may append and manage C122 then C123,
-independently review both single-file leaves, personally execute I113 and stop
+Parent-direct C124 supersedes only DEC-KI-049's one-callback assumption after
+the required backend restart: it discards the closed-server callback, invokes
+only the live-server callback and freezes witness `2/1/1/0`. I114 owns the
+fresh causal gate and remaining regression/build/coverage/scope closure without
+changing product behavior, fault positions, cases, controls or digests.
+
+A5 supplies the live authority. Its current state assigns the twelfth-correction
+assessment to the KI-W6 window agent, which may reconcile the already-applied
+parent-direct C124, independently review it, personally execute I114 and stop
 `READY_FOR_PARENT_REVIEW`. The
-window agent cannot implement leaf work itself, run leaves in parallel, contact
-the parent through leaf agents, commit, or begin KI-W7. No implementation,
-leaf, test, build, database, provider, AWS or production action is performed by
-this parent authoring amendment.
+window agent cannot edit implementation, launch a leaf, commit or begin KI-W7.
