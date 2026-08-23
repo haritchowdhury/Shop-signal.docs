@@ -2918,6 +2918,51 @@ count, reservation, public API, schema, queue, artifact or AWS behavior.
   agent records this command supersession it must accept or reject C148 from
   its actual bytes, then continue I120 without another decomposition review.
 
+### `DEC-KI-056` — Observe the real domain-aggregation message discriminator
+
+- **Evidence:** `SRC-KI-057`; I120 CV94. Production and the strict message
+  schema emit `type:"aggregation.check"`; no W6 producer emits a type beginning
+  `domain`.
+- **Exact correction:** in
+  `frontend/test/browser/keyword-intelligence-e2e.mjs`, replace only
+  `(event.messageTypes || []).some((type) => String(type).startsWith("domain"))`
+  with `(event.messageTypes || []).includes("aggregation.check")`. Preserve the
+  surrounding `event.kind === "sqs"` guard, trace floor, progress watchdog,
+  timeout, diagnostics, cases, controls and every other byte.
+- **Semantics:** this observes the first real domain-aggregation trigger after
+  discovery completion. It changes no producer, payload, queue, domain count,
+  task count, pipeline behavior or timeout. Existing `W6-FLOW-11/12` and their
+  controls remain the sole coverage registrations; no new case/control exists.
+- **Execution:** requester directly authorizes the one-file C149 bytes. The
+  window agent independently reconciles/reviews C149, then personally runs a
+  fresh I121 causal gate and, on success, the pending CV95-CV97/CH16 closure.
+  A new observable failure outside this exact file/decision returns to parent.
+
+### `DEC-KI-057` — Durable handoff identity is the sole commit signal
+
+- **Evidence:** `SRC-KI-058`; I121 CV99; `DEC-KI-035/038` atomic same-key
+  handoff contract.
+- **Authoritative waiter:** `waitForDurableHandoffCommit` accepts exactly
+  `{clientRequestId,expectedSelectionRevision}` and polls
+  `harness.readDurableState()` unconditionally. It returns only when the latest
+  durable handoff has both exact values and its associated Run has exactly 100
+  RunQueries. HTTP trace presence/absence and response status never gate the
+  database read or acceptance.
+- **Interception:** the response-stage handler stores the sanitized numeric
+  `responseStatusCode`, parses the intercepted POST body, validates the string
+  client key and safe-integer revision, stores that identity, and stores the
+  returned durable snapshot before calling `Fetch.failRequest`. Parse/identity/
+  durability failure remains `durable-handoff-commit` failure.
+- **Post-abort proof:** require the browser-netlog request identity to equal the
+  intercepted identity; require the stored durable handoff ID/revision and
+  100-query Run. The response-finish trace becomes diagnostic-only boolean and
+  the intercepted numeric status is diagnostic-only. Same-key retry, UI state,
+  30-second durability ceiling, response abort, cases/controls and all later
+  behavior remain unchanged.
+- **Ownership/execution:** requester authorizes parent-direct one-file C150 in
+  the existing browser test, layered on accepted C149. The window agent reviews
+  it independently and runs fresh I122; no production or harness-helper edit.
+
 ## 4. KI-R5 D1–D13 delta ledger
 
 - **D1 interfaces/payloads:** `DEC-KI-034` and `PAY-KI-008` supersede only the
@@ -2966,3 +3011,71 @@ count, reservation, public API, schema, queue, artifact or AWS behavior.
 - **D13 observability/privacy:** no request body or keyword is logged. Safe UI
   distinguishes definitive failure from retry-required ambiguity. CSV textual
   cells are neutralized without changing stored data or numeric cells.
+
+## `DEC-KI-058` — close W6 by composing the real discovery bridge with accepted scale proofs
+
+**Source:** `SRC-KI-059`; `EV-KI-W6-TC25`; requester direction to avoid an
+unbounded browser simulation of the already-proven downstream pipeline.
+
+**Decision:** W6 closure shall replace only the unproved browser assertion from
+100 strict discovery artifacts to 1,000 durable domains with a deterministic,
+isolated-database bridge. It shall not replace the accepted browser evidence
+through durable handoff, workspace, run start, 100 validation calls and 100
+discovery dispatches, and it shall not replace the established 1,000-domain
+traffic and 1,000-domain/12,000-outcome final-publication corpora.
+
+The implementation and proof are fixed as follows:
+
+1. `processDiscoveryMessage` accepts a third, optional dependency object whose
+   only permitted member is `resolveStoreIdentityFn`. The object must be a plain
+   object; unknown members and a defined non-function resolver fail before the
+   manifest read with `PIPELINE_INPUT_CONFLICT`. The selected resolver is
+   `dependencies.resolveStoreIdentityFn ?? resolveStoreIdentity`. Production
+   callers remain two-argument callers and therefore retain the real resolver.
+2. The focused discovery proof passes the real `resolveStoreIdentity` through
+   that seam with only its existing `fetch` dependency replaced by a
+   deterministic no-network function. One strict query with ten unique
+   `*.myshopify.com/products/result-*` probe results must yield ten strict,
+   distinct stores, one immutable artifact, one terminal transition and one
+   aggregation check, with exactly ten injected fetches and zero live network,
+   provider or AWS operations. The default expression and invalid-dependency
+   behavior are source/runtime enforced.
+3. The bridge proof uses the real `processDomainAggregation`, coordinator,
+   `PrismaRunRepository`, strict artifact parsers and one disposable migrated
+   schema. It supplies one confirmed manifest with 100 ordered queries and 100
+   succeeded strict query-discovery artifacts, ten unique stable identities per
+   artifact. It must publish exactly 1,000 Shops, 1,000 RunStores, one completed
+   discovery stage, one lead stage with expected count 1,000, 1,000 lead tasks
+   and 1,000 `lead.domain` dispatch messages. Results remain unavailable.
+4. The same maximum fixture proves transaction rollback after a deliberately
+   conflicting diagnostic and proves stale aggregation-token rejection: zero
+   run-specific RunStores, lead stage/tasks or rollback-only Shops may become
+   visible; discovery remains aggregating and the Run remains at
+   `aws_discovery` with `resultsAvailable:false`.
+5. The browser's 1,000-domain/lead assertion is superseded, not weakened, by
+   the bridge's exact 1,000-domain database/dispatch witness. No fresh causal
+   browser run is required. Previously accepted browser witnesses are reusable
+   only after exact input-hash checks; prior downstream scale evidence is
+   reusable only where the changed discovery-worker branch is not in its
+   dependency closure.
+6. No frontend, browser harness, resolver implementation, payload/schema,
+   migration, package, queue, retry, lease, provider, AWS or production behavior
+   change is authorized. The deterministic fetch exists only in tests and may
+   never be selected by the production runtime.
+
+**Coverage:** add `W6-DB-13` (default/injected resolver boundary), `W6-DB-14`
+(100 strict query artifacts → 1,000 durable domains/tasks/messages),
+`W6-DB-15` (maximum rollback and stale-fence invisibility), and falsification
+controls `W6-NC-22`–`24`. Their respective sorted-member-LF digests are
+`5342728a461b927afe37050b5f4e8df6df30f42698e3b75144f5872334e19600`
+and `97b186a9948a3fbb4077f1d6f4d39b2d635ad1325e37fb82cdb095661bfbe4ee`.
+The final W6 unions are exactly 43 cases/digest
+`5ef52fb9ed7a7cc182302cd2c2441712f5745f52948c4fb1f10b6e759c4dbe71`
+and 24 controls/digest
+`3bd895f41f3689c1c1d421d1ea0056c095e1d4cd57d3f90e3987f79104719707`.
+
+**Execution:** parent-authored single-file leaves C152 → parallel C153/C154 →
+window-agent-only I124. The requester explicitly directs the parent to perform
+the decomposition now; the window agent independently preflights, dispatches
+and reviews the frozen leaves without another decomposition phase. It stops
+only on PASS or a genuinely new failure outside this decision.

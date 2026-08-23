@@ -1406,3 +1406,51 @@ compatibility_or_migration_effect: none — local test-runner evidence transport
 authorization_effect: window agent records the exact S1/S2/S3 protocol supersession, accepts or rejects current C148 bytes, then continues I120 until PASS or another genuinely new parent-level blocker
 resumption_state: A5 state 188 READY under ASG-KI-W6-WA-15
 ```
+
+```yaml
+change_id: CHG-KI-087
+timestamp: 2026-08-23T23:55:00+05:30
+trigger_evidence: [I120 CV94, SRC-KI-057, requester direct-fix and rerun authorization]
+reason: The corrected discovery pipeline completed, but the causal browser waited for a domain-prefixed message type that the frozen producer/contract never emits; production correctly sends aggregation.check.
+old_revision: A2 425bedd9a7f429e2b145559d6d408fd161260a025382e047900f2112355316e0; A3 b8a5190b614967be2369e75c3a4e5aa49cfc8f21d9112fc984ab7387b1aca60f; A4 86914c48562e69fe08007930ab3973dc5dfa28f743bef3d98eb89a1ebc2d7e5d; A8 6e0b8fe0cc56917a3d4397fd6b3260b869a8045a3f39906e8aafcead0d17f5f2; A5 state 188; browser c035094b1276161c6d69e4aa87b25a02c4aa360e8a0aea606f72d2385650d55f
+new_revision: A2 6517626804cf63ccbcb324347ac813686eedf42210d08765b4ab6958265449dc; A3 9a65de538e00b7e353c03f0eaacece7c061534a67579ff7bc79509f9e6bfbf31; A4 e9b1126bdd2b7aaa77babd05e5e28d347a6500fdd6226bf934e8a6ce5dca1e7f; A8 108dbbe7eefe845ad460c45720d39d1647affa423d11b4c7eb6377cc24c90f3a; A5 state 189; browser 8a9cffc39e33689a69b0c89200b4cfae1af31ff410270dc1a867205acb4ce0b6
+changed_requirements: []
+changed_decisions: [DEC-KI-056 freezes exact aggregation.check trace observation]
+affected_windows: [KI-W6 only; KI-W7 remains prohibited]
+invalidated_evidence: [I120 CV94 remains diagnostic; CV91-CV93 and accepted C145-C148 remain valid; causal closure requires fresh I121 CV99]
+compatibility_or_migration_effect: none — one test-oracle expression only
+authorization_effect: requester-authorized parent C149 is ready for independent window-agent review; ASG-KI-W6-WA-16 runs I121 and stops at PASS or one new parent-level blocker
+resumption_state: A5 state 189 READY; window agent records/reviews C149 and executes CV98-CV101/CH17
+```
+
+```yaml
+change_id: CHG-KI-088
+timestamp: 2026-08-24T00:20:00+05:30
+trigger_evidence: [I121 CV99, SRC-KI-058, requester durable-signal-only correction and rerun authorization]
+reason: The ambiguous-handoff waiter checked durable state only after a backend response.finish trace and discarded the intercepted status; response.finish is not a transaction-commit signal and may be absent after proxy disconnect.
+old_revision: A2 6517626804cf63ccbcb324347ac813686eedf42210d08765b4ab6958265449dc; A3 9a65de538e00b7e353c03f0eaacece7c061534a67579ff7bc79509f9e6bfbf31; A4 e9b1126bdd2b7aaa77babd05e5e28d347a6500fdd6226bf934e8a6ce5dca1e7f; A8 108dbbe7eefe845ad460c45720d39d1647affa423d11b4c7eb6377cc24c90f3a; A5 state 189; browser after C149 8a9cffc39e33689a69b0c89200b4cfae1af31ff410270dc1a867205acb4ce0b6
+new_revision: A2 3a7fe1245b17a76b243e10de2ddaa9b5da22955aa767aefcf018cbd6ec82e319; A3 d3ab8cc4b14be088cd907aca1b1faf376e17948cf0254382b22ec28c6e488e13; A4 4a3000d4873deadc5693dc52e3166882a00470aed352d2a6a41da1a8fafd2111; A8 e68491f8ec23ac82b3391758f1d6f5a6b90d62e78a4aa5128e1fd143ce69fc4b; A5 state 190; browser 6de55e92cfe25c8caed683cacb5ba1ae9eee5f7696874e7e372cf7f50ec3767e
+changed_requirements: []
+changed_decisions: [DEC-KI-057 makes exact durable handoff identity plus 100 associated RunQueries the sole commit signal]
+affected_windows: [KI-W6 only; KI-W7 remains prohibited]
+invalidated_evidence: [I121 CV99 remains diagnostic; C145-C150 and prior focused gates remain valid; causal closure requires fresh I122 CV103]
+compatibility_or_migration_effect: none — browser harness observation only
+authorization_effect: ASG-KI-W6-WA-17 independently reviews parent C150 and runs I122 through final handoff or one new parent-level blocker
+resumption_state: A5 state 190 READY; window agent records/reviews C150 and executes CV102-CV105/CH18
+```
+
+```yaml
+change_id: CHG-KI-089
+timestamp: 2026-08-24T01:35:00+05:30
+trigger_evidence: [EV-KI-W6-TC25, SRC-KI-059, requester parent-direct decomposition instruction, EV-KI-A-117]
+reason: The causal W6 run proved its browser/provider substitutes only through 100 discovery dispatches; the production discovery worker then attempted real resolution of synthetic storefront hosts, yielding 100 strict empty-store artifacts and zero domains. Existing downstream 1,000-domain scale corpora begin after this missing boundary.
+old_revision: A2 3a7fe1245b17a76b243e10de2ddaa9b5da22955aa767aefcf018cbd6ec82e319; A3 d3ab8cc4b14be088cd907aca1b1faf376e17948cf0254382b22ec28c6e488e13; A4 4a3000d4873deadc5693dc52e3166882a00470aed352d2a6a41da1a8fafd2111; A8 e68491f8ec23ac82b3391758f1d6f5a6b90d62e78a4aa5128e1fd143ce69fc4b; S1 5a11a5163d81e72cbb93dd9d384d238b578db2d2645df431eb775a4ac4438253; A5 state 190
+new_revision: A2 022bd827f4827d3d543f48b502a6a5cbe5f74dbd54dd47b86b622463100a8d15; A3 4c32d520e379347f32046aae735ebe012f9c421d65e9faa67127e70f72e74747; A4 f177e81f1b40e4789fc7c0540685b15565e73145bc943ef4369629f8e59e5130; A8 36fe0aa2667f3cfa3091ddeca74c3d3c08720bd80a97d781d1c1b6c29d24f289; S1 1a028c0fda10e9c7d35360b284608b7ae10aa6a9fb8a966175d4db5239574ff3; A5 state 191
+changed_requirements: []
+changed_decisions: [DEC-KI-058 adds a production-default resolver seam, focused real-resolver/no-network proof, and real 100-query/1,000-domain isolated-DB bridge; it supersedes only the browser synthetic-storefront scale assertion]
+affected_windows: [KI-W6 only; KI-W7 remains prohibited]
+invalidated_evidence: [I123 CV107 remains diagnostic; its browser evidence through 100 discovery dispatches is retained; its zero-domain result is superseded only by SCN-KI-046; accepted downstream scale evidence remains reusable under exact unchanged-input proofs]
+compatibility_or_migration_effect: additive optional service dependency only; production two-argument callers retain the real resolver; no payload/schema/migration/frontend/provider/AWS behavior change
+authorization_effect: parent-authored C152-C154/I124 package is immediately dispatchable by KI-W6-WINDOW-AGENT without decomposition; window agent independently reviews leaves and stops at PASS or one new out-of-scope blocker
+resumption_state: A5 state 191 READY under ASG-KI-W6-WA-18; C152 then parallel C153/C154 then I124; stop before KI-W7
+```

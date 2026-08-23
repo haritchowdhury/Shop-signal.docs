@@ -297,6 +297,45 @@ limitations: The trace proves the discovery race and source-equivalent lead orde
 privacy: Safe method names, sequence numbers, state class, error code, file hashes, and schema-cleanup result only; no SQL, URL, credential, token, cookie, provider body, keyword text, domain list, or user data retained.
 ```
 
+### `SRC-KI-057` — causal browser waits for a message discriminator that production never emits
+
+```yaml
+evidence_id: SRC-KI-057
+classification: OBSERVED
+claim: I120 CV94 proved the C145-C148 terminal-lifecycle correction through 100 successful discovery tasks and discovery-stage completion, then waited 120 seconds because the browser oracle searched domain-aggregation queue trace events for a message type whose string starts with "domain". The frozen message contract and discovery worker emit type "aggregation.check" to that queue; therefore the predicate can never become true. The exact correction is a one-expression test-only replacement with messageTypes.includes("aggregation.check").
+source: KEYWORD_INTELLIGENCE_KI_W6_TRANSACTION_CLOCK_SUBWINDOW_EVIDENCE.md I120 CV94; frontend/test/browser/keyword-intelligence-e2e.mjs SHA-256 c035094b1276161c6d69e4aa87b25a02c4aa360e8a0aea606f72d2385650d55f lines 1266-1269; email_scraper/src/aws-pipeline/contracts/messages.js aggregationCheckMessageSchema; email_scraper/src/aws-pipeline/services/discovery-worker.js aggregation-check send; backend commit 9fc714ad9c96a396aa31426fc0d3c1e08da07050; frontend commit f981b34eeb79764a2e9e7ee96779f99907228a3f
+observed_at: 2026-08-23
+environment: local causal emitted-browser run using isolated disposable Neon schema and synthetic provider substitutes
+limitations: This proves a stale harness predicate only. It does not justify changing the production message contract, queue routing, worker behavior, counts, timeout, provider/AWS behavior, or product semantics.
+privacy: Message discriminator, counts, file paths/hashes and cleanup result only; no keyword, domain list, credential, URL, provider body or user data retained.
+```
+
+### `SRC-KI-058` — handoff waiter gates durable state behind a non-durable response-finish trace
+
+```yaml
+evidence_id: SRC-KI-058
+classification: OBSERVED
+claim: I121 CV99 reached the CDP response-stage pause for the first handoff but the current waiter checks readDurableState only after finding a harness HTTP event. That event is recorded on backend response.finish, not request arrival or transaction commit. If the 15-second Next proxy aborts the backend fetch, response.finish may be absent even when the backend later commits. The response-stage callback also receives responseStatusCode but discards it. The authoritative local handoff signal already exists in readDurableState: exact clientRequestId, exact selectionRevision, the associated Run, and exactly 100 RunQuery rows.
+source: frontend/test/browser/keyword-intelligence-e2e.mjs waitForDurableHandoffCommit/armRunsResponseAbort at C149 SHA-256 8a9cffc39e33689a69b0c89200b4cfae1af31ff410270dc1a867205acb4ce0b6; email_scraper/test/helpers/keyword-intelligence-e2e-harness.js backend response finish tracer lines 608-623 and readDurableState lines 909-989; frontend runs route 15000 ms proxy timeout; email_scraper/src/keyword-intelligence/repository.js 30000 ms SCALE_TRANSACTION_OPTIONS; EV-KI-W6-TC21
+observed_at: 2026-08-23
+environment: local emitted-browser run with isolated disposable Neon schema and synthetic provider substitutes
+limitations: The failed run does not prove whether its intercepted response was 2xx, 504 or another status, nor whether a late commit occurred, because the harness discarded those observations. It proves the waiter is non-authoritative, not a production regression.
+privacy: Status class, durable field names, timings and source paths only; no request ID value, URL, credential, keyword, domain, provider body or user row retained.
+```
+
+### `SRC-KI-059` — the W6 synthetic discovery boundary omitted storefront resolution
+
+```yaml
+evidence_id: SRC-KI-059
+classification: OBSERVED
+claim: I123 CV107 completed the durable handoff, 100 validation calls, 100 discovery tasks and the full 202-message drain, but produced zero stable domains. The W6 Google substitute supplies ten synthetic myshopify product URLs per query while processDiscoveryMessage hard-codes resolveStoreIdentity. That resolver performs real storefront fetches; each synthetic fetch failure is intentionally converted into an occurrence diagnostic, leaving a succeeded strict query-discovery artifact with zero stores. The real domain aggregator therefore correctly published zero domains. Existing 1,000-domain traffic and 1,000-domain/12,000-outcome final-publication corpora begin after storefront resolution and do not cover this missing discovery-to-domain bridge.
+source: EV-KI-W6-TC25; email_scraper/src/aws-pipeline/services/discovery-worker.js SHA-256 34013f07b18b5040d848eda6eff5abb53b5db0daf174dfea375fd6002bd9c212; email_scraper/src/domain-resolver.js resolveStoreIdentity; email_scraper/test/aws-pipeline-traffic.integration.test.js 1,000-domain corpus; email_scraper/test/aws-pipeline-final.integration.test.js runMaximumPublicationTrial 1,000-domain/12,000-outcome corpus; backend commit 9fc714ad9c96a396aa31426fc0d3c1e08da07050
+observed_at: 2026-08-23
+environment: local emitted-browser run with actual backend, isolated disposable Neon schema and synthetic Google/provider substitutes
+limitations: This proves a missing deterministic storefront-resolution seam and a missing 100-query-to-1,000-domain bridge proof. It does not establish a production resolver defect, justify bypassing strict identity resolution, or invalidate the accepted downstream 1,000-domain traffic/final scale corpora.
+privacy: Counts, method names, source hashes and safe error classification only; no live domain list, response body, URL credential, token, keyword, customer data, provider body or database URL retained.
+```
+
 ## 6. Post-W5 corrective discovery
 
 | Evidence ID | Class | Precise claim | Exact source/revision | Limitations | Privacy |

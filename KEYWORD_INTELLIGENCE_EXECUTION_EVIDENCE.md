@@ -2804,6 +2804,73 @@ requester_actions_before_start: []
 status: READY
 ```
 
+### `EV-KI-A-116` — KI-W6 durable-only handoff waiter shipped
+
+- **Direct correction:** requester-authorized C150 modifies only the existing
+  browser test, layered on C149. The waiter now polls durable state every cycle
+  and requires the exact intercepted client key, exact selection revision and
+  associated Run with 100 queries. HTTP response-finish trace is diagnostic
+  only. The CDP status, parsed request identity and matching durable snapshot
+  are retained before the deliberate response abort.
+- **Local verification:** ending SHA-256
+  `6de55e92cfe25c8caed683cacb5ba1ae9eee5f7696874e7e372cf7f50ec3767e`;
+  syntax/diff pass; exact source oracle passes, restoration of the former trace
+  gate falsifies it, and fresh source passes. C149's exact
+  `aggregation.check` predicate remains present.
+- **Authority:** `SRC-KI-058`, `DEC-KI-057`, CT29/C150 and I122 are complete.
+  A5 state 190 assigns `ASG-KI-W6-WA-17` to the same window-agent identity for
+  exact S1/S2/S3 transcription, independent C150 review, fresh CV102–CV105 and
+  CH18. No new decomposition review is required.
+- **Boundary:** no backend/helper/product source, timeout, payload, queue,
+  database schema, package or dependency changed. No provider/AWS/production,
+  commit/push or KI-W7 action; cost `$0.00`.
+
+```yaml
+certificate: PARENT-DIRECT-CORRECTION-READY
+window: KI-W6
+assignment: ASG-KI-W6-WA-17
+active_state: 190
+decision: DEC-KI-057
+correction: KI-W6-C150
+assessment: KI-W6-I122
+ending_digest: 6de55e92cfe25c8caed683cacb5ba1ae9eee5f7696874e7e372cf7f50ec3767e
+status: READY
+```
+
+### `EV-KI-A-115` — KI-W6 domain-aggregation trace predicate shipped
+
+- **Direct correction:** under requester authority, the parent changed exactly
+  one expression in `frontend/test/browser/keyword-intelligence-e2e.mjs` from
+  the impossible `domain*` message-type predicate to exact
+  `aggregation.check` membership. Baseline SHA-256 `c035094b…`; ending SHA-256
+  `8a9cffc39e33689a69b0c89200b4cfae1af31ff410270dc1a867205acb4ce0b6`;
+  diff `1/1`; no second frontend or backend path changed.
+- **Local proof:** syntax and diff checks pass; the exact old literal occurs
+  zero times and the new literal once; an in-memory inverse mutation falsifies
+  the unchanged source oracle and the fresh source passes.
+- **Authority:** `SRC-KI-057`, `DEC-KI-056`, CT28/C149 and I121 freeze the
+  one-file review and fresh causal continuation. A5 state 189 assigns the same
+  window-agent identity under new assignment `ASG-KI-W6-WA-16`; it must append
+  the exact C149/I121 subordinate record, independently review the parent bytes,
+  then run CV98–CV101/CH17 without another decomposition review.
+- **Boundary:** backend is clean at requester commit `9fc714ad…`; frontend
+  baseline is clean at `f981b34…` before the one-line parent edit. No provider,
+  AWS, production, paid, schema, package, product-source, commit, push or KI-W7
+  action occurred; cost `$0.00`.
+
+```yaml
+certificate: PARENT-DIRECT-CORRECTION-READY
+window: KI-W6
+assignment: ASG-KI-W6-WA-16
+active_state: 189
+decision: DEC-KI-056
+correction: KI-W6-C149
+assessment: KI-W6-I121
+planned_file_set_digest: 3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867
+ending_digest: 8a9cffc39e33689a69b0c89200b4cfae1af31ff410270dc1a867205acb4ce0b6
+status: READY
+```
+
 ### `EV-KI-A-114` — KI-W6 C148 nested-test evidence protocol corrected
 
 - **Observed distinction:** on Node `v24.14.1`, the frozen default-isolation
@@ -6754,4 +6821,60 @@ approved_first_leaf: KI-W6-C145
 approved_parallel_wave: [KI-W6-C146, KI-W6-C147]
 successor_authorized: false
 status: READY
+```
+
+### `EV-KI-A-117` — parent-authored W6 discovery bridge decomposition ready
+
+- **Diagnosis accepted:** `SRC-KI-059` and I123/CV107 prove that the causal
+  browser supplied synthetic storefront URLs without substituting the real
+  resolver's fetch boundary. Empty discovery artifacts and zero aggregated
+  domains were therefore correct consequences, not a downstream repository or
+  scale failure.
+- **Decision:** `DEC-KI-058` retains the already-proven browser chain through
+  100 discovery dispatches, closes the missing middle with a real
+  resolver/no-network focused proof plus a real isolated-DB
+  100-artifact→1,000-domain aggregation proof, and reuses the unchanged accepted
+  downstream 1,000-domain and 12,000-outcome corpora. It does not claim these
+  pieces are one monolithic end-to-end run.
+- **Requester exception:** the requester explicitly instructed the parent to
+  perform the subwindow decomposition and make it immediately dispatchable.
+  Accordingly C152 → parallel {C153,C154} → window-agent-only I124 is fully
+  authored in S1; the receiving window agent independently preflights,
+  dispatches and reviews it but does not decompose it or stop for decomposition
+  review.
+- **Decision/enforcement completeness:** the package owns exactly three paths,
+  sorted-LF digest
+  `36780bc47b3e5950c707525292655be1a10d8b39cbeff69ccea1023dcc5074e1`,
+  adds exact cases `W6-DB-13`–`15` and controls `W6-NC-22`–`24`, and freezes
+  final 43-case/24-control equality/digests. Interfaces, intermediate states,
+  algorithms, negative controls, cleanup, once-only gates, evidence reuse and
+  stop semantics are literal; unresolved and unmapped counts are zero.
+- **Boundary:** documentation/authority only. No implementation/test,
+  database/browser/build, network/provider/AWS/production, paid/destructive,
+  commit/push or KI-W7 action occurred. Paid cost `$0.00`.
+
+```yaml
+certificate: PARENT-DIRECT-DECOMPOSITION-READY
+window: KI-W6
+assignment: ASG-KI-W6-WA-18
+active_state: 191
+standard_revision: cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb523ede32848
+subwindow_standard_revision: 842c29550c06c22d63e0a058a27cb8a9ff6b538b3168d2c83a384890b44247f0
+discovery_revision: 022bd827f4827d3d543f48b502a6a5cbe5f74dbd54dd47b86b622463100a8d15
+decision_revision: 4c32d520e379347f32046aae735ebe012f9c421d65e9faa67127e70f72e74747
+checklist_revision: f177e81f1b40e4789fc7c0540685b15565e73145bc943ef4369629f8e59e5130
+traceability_revision: 36fe0aa2667f3cfa3091ddeca74c3d3c08720bd80a97d781d1c1b6c29d24f289
+decomposition_revision: 1a028c0fda10e9c7d35360b284608b7ae10aa6a9fb8a966175d4db5239574ff3
+planned_file_count: 3
+planned_file_set_digest: 36780bc47b3e5950c707525292655be1a10d8b39cbeff69ccea1023dcc5074e1
+first_leaf: KI-W6-C152
+parallel_after_c152: [KI-W6-C153, KI-W6-C154]
+integration_assessment: KI-W6-I124
+planned_cases: 43
+planned_controls: 24
+unresolved_decisions: 0
+unmapped_requirements: 0
+unmapped_cases: 0
+requester_prerequisites: []
+status: READY_FOR_DISPATCH
 ```

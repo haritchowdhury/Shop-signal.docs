@@ -8174,3 +8174,300 @@ not stop points; the sequence continues automatically through CH16.
 - [x] `RW6Q-007` Both command modes were executed on Node `v24.14.1`; only the
   exact non-isolated command exposes the nested results and complete certificate.
   Evidence: `EV-KI-W6-TC15`; `EV-KI-A-114`.
+
+## KI-W6 seventeenth corrective sequence — domain-aggregation trace predicate
+
+### `KI-W6-CT28` / `KI-W6-C149` — one-file direct correction
+
+1. **Trace:** `REQ-KI-010`–`REQ-KI-015`; `INV-KI-010/015`; `SRC-KI-057`;
+   `DEC-KI-056`; existing `SCN-KI-018`, `W6-FLOW-11/12`, `W6-NC-08`.
+2. **Owner/source/target:** requester-authorized parent-direct modification of
+   only `frontend/test/browser/keyword-intelligence-e2e.mjs`, starting SHA-256
+   `c035094b1276161c6d69e4aa87b25a02c4aa360e8a0aea606f72d2385650d55f` at
+   frontend commit `f981b34eeb79764a2e9e7ee96779f99907228a3f`.
+3. **Exact edit:** replace exactly once
+   `(event.messageTypes || []).some((type) => String(type).startsWith("domain"))`
+   with `(event.messageTypes || []).includes("aggregation.check")`; no other
+   source/test byte changes.
+4. **Preserve:** the SQS-kind guard, `downstreamFloor`, promise/error handling,
+   progress watchdog, absolute ceiling, diagnostics, cleanup, all 26 cases,
+   all 13 browser controls, combined 40/21 closure, and production files.
+5. **Local acceptance:** `node --check
+   test/browser/keyword-intelligence-e2e.mjs`; exact old occurrence = 0, exact
+   new occurrence = 1; in-memory inverse mutation must make the unchanged
+   source oracle fail and fresh real source pass; `git diff --check`; frontend
+   attributable changed set exactly the one file.
+- [ ] `KI-W6-T28` Window agent independently reconciles and accepts direct C149.
+
+### `KI-W6-I121` — fresh causal continuation and final closure
+
+- [ ] `KI-W6-CV98` Verify backend clean at committed C145-C148 commit
+  `9fc714ad9c96a396aa31426fc0d3c1e08da07050`, frontend baseline commit
+  `f981b34eeb79764a2e9e7ee96779f99907228a3f`, and exactly one attributable
+  frontend test-file edit with planned one-path sorted-LF digest
+  `3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867`.
+- [ ] `KI-W6-CV99` Run the unchanged durable causal command once with at least
+  75 minutes attached and complete stdout/stderr/status retention. Require
+  browser 26/26, controls 13/13, 100 discovery tasks, observed
+  `aggregation.check` domain trigger, 1,000 domains/leads, no terminal-heartbeat
+  lease loss, and complete process/schema/temp cleanup. One identical E8.1
+  recovery remains available only for a newly proven environment-invalidated
+  attempt; observable failure is not recoverable.
+- [ ] `KI-W6-CV100` Only after CV99 passes, execute the unchanged CV95 commands
+  exactly once: backend `npm test`, `npm run check:secrets`, `npm run
+  build:lambda`; frontend `npm run check`; require zero failures and no
+  unplanned output.
+- [ ] `KI-W6-CV101` Execute unchanged CV96 40-case/21-control equality/digest
+  closure and unchanged CV97 scope/privacy/cost/cleanup audit.
+- [ ] `KI-W6-CH17` Append the complete integration certificate, set subordinate
+  status `READY_FOR_PARENT_REVIEW`, return to parent and stop before KI-W7.
+
+Correction policy remains exact: the window agent may continue without return
+only for a mechanically governed omission confined to the C149 file. Any new
+observable failure outside `DEC-KI-056` or that one file is `PARENT_BLOCKED`.
+
+## KI-W6 eighteenth corrective sequence — durable-only handoff observation
+
+### `KI-W6-CT29` / `KI-W6-C150` — parent-direct one-file waiter correction
+
+1. **Trace:** `REQ-KI-015`–`017`; `INV-KI-010/011/015`; `SRC-KI-058`;
+   `DEC-KI-035/038/057`; existing `W6-NAV-02`, `W6-FLOW-08`, `W6-NC-06`.
+2. **Owner/source/target:** parent-direct edit only to
+   `frontend/test/browser/keyword-intelligence-e2e.mjs`, layered on accepted
+   C149 SHA-256 `8a9cffc39e33689a69b0c89200b4cfae1af31ff410270dc1a867205acb4ce0b6`.
+   Required ending SHA-256 is
+   `6de55e92cfe25c8caed683cacb5ba1ae9eee5f7696874e7e372cf7f50ec3767e`.
+3. **Exact transformation:** implement the complete `DEC-KI-057` waiter,
+   interception and post-abort proof. Remove the HTTP-trace gate and its hard
+   assertion; retain trace count only as diagnostic boolean. Store numeric
+   response status only for diagnostics. Preserve C149 exact predicate.
+4. **No alternatives:** do not change the 30-second waiter, 90-second pause
+   guard, 15-second product proxy, request/retry key, repository, route, helper,
+   response bytes, cases, controls, timeouts elsewhere or product behavior.
+5. **Local acceptance:** syntax/diff pass; exact source oracle proves the waiter
+   has zero `harness.trace()`/HTTP dependencies, unconditionally reads durable
+   state, compares both identity fields plus queryCount 100; handler records
+   status/body identity/snapshot before failRequest; later proof uses the stored
+   snapshot and contains no hard response-finish-trace assertion. In-memory
+   restoration of the former trace gate must falsify this oracle; fresh source
+   passes. Incremental C150 change remains inside the sole file.
+- [ ] `KI-W6-T29` Window agent independently reconstructs and accepts C150.
+
+### `KI-W6-I122` — fresh causal continuation and final closure
+
+- [ ] `KI-W6-CV102` Verify backend commit `9fc714ad…`, frontend baseline commit
+  `f981b34…`, exact C149+C150 sole-file diff, ending digest `6de55e92…`, C149
+  predicate preserved, and C150 source/inverse/fresh oracles.
+- [ ] `KI-W6-CV103` Run one fresh durable causal browser command with at least
+  75 minutes attached and retained stdout/stderr/status. Require 26/26 cases,
+  13/13 controls, exact durable handoff identity/100 queries independent of
+  HTTP trace, exact aggregation.check observation, 100 discovery tasks, 1,000
+  domains/leads, no terminal-heartbeat loss, and complete cleanup. One identical
+  E8.1 recovery is allowed only for a newly proven environmental invalidation.
+- [ ] `KI-W6-CV104` After CV103 passes, run unchanged backend `npm test`,
+  `npm run check:secrets`, `npm run build:lambda` and frontend `npm run check`
+  once; require zero failures/unplanned output.
+- [ ] `KI-W6-CV105` Run unchanged 40-case/21-control equality/digests and final
+  scope/privacy/cost/cleanup audit.
+- [ ] `KI-W6-CH18` Record integration pass, set `READY_FOR_PARENT_REVIEW`, hand
+  off to parent and stop before KI-W7.
+
+Only a mechanically governed omission confined to this browser test may open
+C151+/I123+ without parent return. A new observable failure outside
+`DEC-KI-057` or this file is `PARENT_BLOCKED`.
+
+## KI-W6 nineteenth corrective sequence — deterministic 1,000-domain bridge
+
+This section supersedes only I123/CV107's impossible synthetic-storefront
+portion. It is the parent authority for the already-decomposed C152–C154/I124
+package in `KEYWORD_INTELLIGENCE_KI_W6_SUBWINDOW_CHECKLIST.md`. The requester
+has explicitly directed the parent to author the subordinate package, so no
+window-agent decomposition or decomposition-review stop remains. The window
+agent must still independently preflight, dispatch and review every leaf.
+
+### Authority, scope and fixed DAG
+
+- **Decision/source:** `SRC-KI-059`, `DEC-KI-058`, `SCN-KI-046`.
+- **Exact initial changed set:**
+  `email_scraper/src/aws-pipeline/services/discovery-worker.js`,
+  `email_scraper/test/aws-pipeline-discovery.test.js`, and
+  `email_scraper/test/aws-pipeline-domain.integration.test.js`; sorted-path-LF
+  digest `36780bc47b3e5950c707525292655be1a10d8b39cbeff69ccea1023dcc5074e1`.
+- **Baselines:** respectively
+  `34013f07b18b5040d848eda6eff5abb53b5db0daf174dfea375fd6002bd9c212`,
+  `f76f1f35cc07843ec634bd464fffb16b7ab298f3646a657d70fee13be561d7f2`,
+  and `e1f10225fb301c9b798032e70fa2bc57c38de5e7374f8c419b7b3928104f3779`
+  at backend commit `9fc714ad9c96a396aa31426fc0d3c1e08da07050`.
+- **DAG:** C152 is sequential. After the window agent independently accepts
+  C152, C153 and C154 may run in parallel. I124 starts only after both are
+  independently accepted. Every correction leaf owns exactly one file; I124
+  owns no implementation file.
+- **Boundary:** no frontend/browser, schema/migration, package/dependency,
+  resolver implementation, queue/payload, lease/retry, provider/AWS/production,
+  paid/destructive, commit/push or KI-W7 action. Requester alone commits.
+
+### `KI-W6-CT30` / `KI-W6-C152` — production-safe resolver seam
+
+- [ ] Change only `processDiscoveryMessage` in the production discovery worker
+  to accept `dependencies = {}`; validate before the first artifact/database/
+  external operation that it is a non-null plain object with prototype exactly
+  `Object.prototype`, that its only key is `resolveStoreIdentityFn`, and that a
+  defined value is a function. Otherwise throw
+  `new PipelineInvariantError("PIPELINE_INPUT_CONFLICT")`.
+- [ ] Select exactly
+  `const resolveStoreIdentityFn = dependencies.resolveStoreIdentityFn ?? resolveStoreIdentity;`
+  and change only the existing `resolve:` callback to invoke that selected
+  function with `(result, identityConfig)`.
+- [ ] Preserve the production two-argument call sites and every other byte and
+  behavior. Do not expose the seam through runtime/config/environment or change
+  `resolveStoreIdentity`.
+- [ ] Local proof: syntax/diff pass; source oracle finds the exact validation,
+  fallback and selected call; runtime invalid plain/unknown/non-function inputs
+  throw before a manifest read; removing the fallback or permitting an unknown
+  key falsifies the unchanged oracle; fresh source passes.
+
+### `KI-W6-CT31` / `KI-W6-C153` — one-query resolver-boundary enforcement
+
+- [ ] Modify only `email_scraper/test/aws-pipeline-discovery.test.js`, preserving
+  its five existing tests. Import the real `resolveStoreIdentity` and add exact
+  case `W6-DB-13` plus control `W6-NC-22`.
+- [ ] `W6-DB-13` constructs one strict manifest query with ten accepted ranks,
+  URLs `https://w6-bridge-q001-rNN.myshopify.com/products/result-NN` for
+  `NN=01..10`, and passes a resolver function that calls real
+  `resolveStoreIdentity(result, config, {fetch: deterministicFetch})`.
+  `deterministicFetch` must accept only the exact URL, `purpose:"storefront"`
+  and `allowedHostnames:[hostname]`; it returns status 200, that URL as
+  `finalUrl`, `text/html`, `rendered:false`, `renderAttempted:false`, empty
+  render contract and null assessment. Its exact body is
+  `<!doctype html><html><head><link rel="canonical" href="${url}"><meta name="generator" content="Shopify"></head><body><script>Shopify.theme={};</script><main><h1>${query}</h1><a href="/products/result-${NN}">${query}</a><img src="https://cdn.shopify.com/w6-fixture.png"></main></body></html>`.
+  It returns no unrestricted/private body.
+- [ ] Assert exactly ten resolver/fetch calls; ten strict stores and distinct
+  stable/myshopify identities; one immutable query artifact; one succeeded
+  terminal; one aggregation check; zero global fetch/provider/AWS calls. Assert
+  invalid dependency shapes fail before manifest reads and source contains the
+  real default fallback.
+- [ ] `W6-NC-22` replaces the injected fetch with a throwing sentinel/removes
+  the selected seam in a non-mutating candidate. The unchanged ten-store/no-
+  network oracle must fail, then a fresh actual positive fixture must pass.
+- [ ] Exact command from backend:
+  `node --test --test-isolation=none test/aws-pipeline-discovery.test.js`;
+  require 7 pass, 0 fail, 0 skip and required=registered=executed=activated
+  `1/1/1/1`, control expected=falsified=fresh-pass `1/1/1`.
+
+### `KI-W6-CT32` / `KI-W6-C154` — real 100-query/1,000-domain database bridge
+
+- [ ] Modify only `email_scraper/test/aws-pipeline-domain.integration.test.js`;
+  preserve the existing G8 test and add `SCN-KI-046`, registering
+  `W6-DB-14`, `W6-DB-15`, `W6-NC-23` and `W6-NC-24` exactly once.
+- [ ] Use `createIsolatedTestSchema`, deploy migrations once, assert the scoped
+  schema before writes, use real `PipelineCoordinatorRepository`, real
+  `PrismaRunRepository`, real `processDomainAggregation` and strict artifact
+  parsers. Cleanup must drop the generated schema, query the administrator for
+  exact absence, then disconnect; residual schema is failure.
+- [ ] Build one confirmed manifest with 100 ordered query IDs `query_001`…
+  `query_100`. Register a 100-task discovery stage and seed its tasks as
+  succeeded test preconditions with exact input/artifact fingerprints and
+  stage terminal/succeeded counts 100/state ready. A validating in-memory
+  artifact store contains the strict manifest and 100 strict query-discovery
+  artifacts. Artifact `q=001..100` contains ten candidates `r=01..10`; every
+  candidate consistently replaces all hostname/domain/stable/URL/evidence and
+  occurrence fields from the accepted fixture with
+  `w6-bridge-qQQQ-rRR.myshopify.com`. The resulting 1,000 stable keys are
+  unique; no duplicate is permitted.
+- [ ] Invoke the real domain aggregator with only a deterministic stopped lease
+  monitor substitute (renewNow/stop/assertActive) and in-memory strict S3/SQS
+  adapters. Assert exactly 100 discovery artifact reads, 1,000 strict domain
+  candidate writes, one strict domain manifest write, one
+  `readAwsReuseInputs`, one `publishAwsDomainCheckpoint`, one 1,000-message
+  `sendMany`, and one 1,000-item `recordDispatch`.
+- [ ] Assert the database contains exactly 1,000 Shops, 1,000 run-specific
+  RunStores, 1,000 lead PipelineTasks and one lead stage with expected count
+  1,000; discovery is completed once, Run stage is `aws_lead`, and
+  `resultsAvailable` remains false. Every Shop/RunStore/task/message ID must
+  equal the production stable-identity derivation.
+- [ ] `W6-DB-15` repeats the maximum fixture in a separate run, using the
+  distinct hostname prefix `w6-rollback-qQQQ-rRR.myshopify.com`, with an existing
+  conflicting sequence-100000 diagnostic, requiring
+  `PIPELINE_INPUT_CONFLICT` after the publication transaction begins and full
+  rollback: zero run-specific RunStores, lead stage/tasks and rollback-only
+  Shops; discovery remains aggregating; Run remains `aws_discovery` and
+  unavailable. A separate wrong-token call rejects before any visibility.
+- [ ] `W6-NC-23` changes one captured candidate into a duplicate/999-member
+  witness; the unchanged exact-1,000 oracle fails, followed by fresh actual
+  success. `W6-NC-24` mutates the captured rollback projection to expose one
+  row/stage/task; the unchanged zero-visibility oracle fails, followed by a
+  fresh actual rollback witness. Controls do not mutate production or durable
+  positive fixtures.
+- [ ] Leaf-local checks are non-stateful only: `node --check
+  test/aws-pipeline-domain.integration.test.js`, `git diff --check`, exact
+  registry/source/cardinality literals, and non-mutating source controls. The
+  leaf and its independent review must not connect to a database. The exact
+  database command runs once only in I124/CV112 after all implementation edits
+  are frozen.
+
+### `KI-W6-I124` — compositional closure, no browser rerun
+
+- [ ] `KI-W6-CV110` Window agent independently reconstructs/reviews C152–C154;
+  require the exact three-path set/digest, baseline attribution, single-file
+  ownership, dependency order, syntax/diff and all local negative controls.
+- [ ] `KI-W6-CV111` Reuse C153's accepted focused non-database certificate only
+  after proving C152/C153 ending hashes and dependencies unchanged after C154;
+  do not repeat it. If an input changed, invalidate it and run the identical
+  focused command once.
+- [ ] `KI-W6-CV112` Run exactly once from backend:
+  `ALLOW_DATABASE_TESTS=true node -r dotenv/config --test --test-concurrency=1 --test-isolation=none test/aws-pipeline-domain.integration.test.js`.
+  Require 2 pass, 0 fail, 0 skip and the exact
+  case/control/cardinality/rollback/schema certificate. One identical E8.1
+  escalated recovery is automatic only after proven sandbox/network transport
+  invalidation.
+- [ ] `KI-W6-CV113` Do not rerun the causal browser. Verify frontend commit
+  `5e441aae7e2f3a132b2c7fc85bf1bc525d3d5cb6` and browser-file SHA-256
+  `2a07612d9f58c7b882573a3f3f8d7dbc99cc8a35ff3fdaea60ee10b7935601f6`.
+  Retain the prior causal evidence only through authenticated workspace,
+  durable handoff/100 RunQueries, run start, 100 validation/parser calls and
+  100 discovery dispatches. Supersede only its synthetic-storefront
+  1,000-domain assertion with `SCN-KI-046`. Reuse the accepted 1,000-domain
+  traffic and 1,000-domain/12,000-outcome final-publication evidence after
+  proving their files and post-resolution inputs unchanged.
+- [ ] `KI-W6-CV114` From backend run `npm test`, `npm run check:secrets` and
+  `npm run build:lambda` once after the final edit; require zero failure,
+  expected guarded database skips only, no secret finding, successful handler
+  build and clean tracked status. Frontend build/check evidence is reused only
+  after its exact unchanged commit/path proof.
+- [ ] `KI-W6-CV115` Recompute exact new sets: cases
+  `W6-DB-13`–`15` digest
+  `5342728a461b927afe37050b5f4e8df6df30f42698e3b75144f5872334e19600`,
+  controls `W6-NC-22`–`24` digest
+  `97b186a9948a3fbb4077f1d6f4d39b2d635ad1325e37fb82cdb095661bfbe4ee`,
+  final 43 cases digest
+  `5ef52fb9ed7a7cc182302cd2c2441712f5745f52948c4fb1f10b6e759c4dbe71`
+  and 24 controls digest
+  `3bd895f41f3689c1c1d421d1ea0056c095e1d4cd57d3f90e3987f79104719707`.
+  Require required=registered=executed=activated equality, no undeclared ID,
+  exact three-file diff, `$0.00`, zero live network/provider/AWS/production
+  action, privacy-safe evidence and no residual schema/build artifact.
+- [ ] `KI-W6-CH20` Append the consolidated integration certificate, set the
+  subordinate state `READY_FOR_PARENT_REVIEW`, return to parent and stop before
+  KI-W7. A mechanically determined correction confined to the three files may
+  be authored as C155+/I125+ by the window agent; any new behavior/contract,
+  additional file or external prerequisite is `PARENT_BLOCKED`.
+
+### Parent readiness certificate
+
+- [x] `KI-W6-RW1` All implementation interfaces, exact intermediates,
+  algorithms, failure semantics and non-goals are frozen by `DEC-KI-058` and
+  this section.
+- [x] `KI-W6-RW2` Three one-file leaves, starting digests, exact DAG and one
+  zero-write integration assessment are allocated; no duplicate owner or
+  delegated design choice remains.
+- [x] `KI-W6-RW3` Coverage cases/controls, expected members, commands, counts,
+  digests, falsification and fresh-positive proofs are literal.
+- [x] `KI-W6-RW4` The stateful/build gates are once-only, dependency-scoped,
+  cleanup-bound and automatically escalate only for proven sandbox transport
+  invalidation.
+- [x] `KI-W6-RW5` Substitute fidelity is explicit: real identity algorithm with
+  injected fetch at the unit boundary; strict post-resolution artifacts plus
+  real aggregator/repositories at the scale boundary; accepted downstream
+  scale corpora are not misrepresented as one monolithic E2E.
+- [x] `KI-W6-RW6` Requester-direct parent decomposition exception is recorded;
+  the package is ready for window-agent dispatch without a decomposition stop.

@@ -2103,3 +2103,801 @@ All other C148 and I120 text remains authoritative and unchanged. C148 remains
 the same one-file leaf with the same candidate bytes; the window agent now
 finishes its independent review under command 1 and, on acceptance, continues
 I120 automatically.
+
+## 14. State-189 seventeenth corrective sequence — domain-aggregation trace predicate
+
+`DEC-KI-056`, A5 state 189, `EV-KI-A-115`, and `CHG-KI-087` authorize this
+append-only parent-direct correction and assessment without another decomposition
+review. Accepted C145-C148 are committed at backend commit
+`9fc714ad9c96a396aa31426fc0d3c1e08da07050`; their implementation and evidence
+remain unchanged.
+
+### 14.1 `KI-W6-C149` — one-file parent-direct correction
+
+```yaml
+subwindow_id: KI-W6-C149
+type: CORRECTION
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-16
+implementation_owner: REQUESTER_AUTHORIZED_PARENT_DIRECT
+review_owner: KI-W6-WINDOW-AGENT
+predecessors: [KI-W6-C145, KI-W6-C146, KI-W6-C147, KI-W6-C148 independently accepted and requester committed]
+writable_file: frontend/test/browser/keyword-intelligence-e2e.mjs
+starting_digest: c035094b1276161c6d69e4aa87b25a02c4aa360e8a0aea606f72d2385650d55f
+baseline_commit: f981b34eeb79764a2e9e7ee96779f99907228a3f
+expected_ending_digest: 8a9cffc39e33689a69b0c89200b4cfae1af31ff410270dc1a867205acb4ce0b6
+expected_diff_stat: 1 insertion / 1 deletion
+planned_file_set_digest: 3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867
+may_start_successor: false
+```
+
+1. **Trace:** `REQ-KI-010`-`REQ-KI-015`; `INV-KI-010/015`;
+   `SRC-KI-057`; `DEC-KI-056`; existing `SCN-KI-018`, `W6-FLOW-11/12`,
+   `W6-NC-08`.
+2. **Exact edit:** replace exactly once
+   `(event.messageTypes || []).some((type) => String(type).startsWith("domain"))`
+   with `(event.messageTypes || []).includes("aggregation.check")`.
+3. **Preserve:** every other byte, including the SQS-kind guard,
+   `downstreamFloor`, promise/error handling, progress watchdog, absolute
+   ceiling, diagnostics, cleanup, all 26 browser cases, all 13 browser
+   controls, combined 40/21 closure, and every production file.
+4. **Local review:** from `frontend/`, run `node --check
+   test/browser/keyword-intelligence-e2e.mjs`; require the exact old occurrence
+   count `0` and new occurrence count `1`; reconstruct the candidate from the
+   baseline with only the exact replacement and require byte equality; invert
+   the replacement in memory and require the unchanged source oracle to fail,
+   then require the fresh real source to pass; run `git diff --check`; require
+   the attributable frontend path set to equal the one writable file and its
+   workspace-relative sorted-LF digest to equal the pinned digest.
+
+- [x] `P1` State 189, assignment, baseline commit/digest, candidate digest, and requester-direct authority match. Evidence: `EV-KI-W6-TC20`.
+- [x] `P2` Backend is clean at committed C145-C148 commit and frontend has exactly this one attributable test-file edit. Evidence: `EV-KI-W6-TC20`.
+- [x] `T1` Independently reconstruct the exact one-expression candidate; do not modify it. Evidence: baseline transform byte-equal in `EV-KI-W6-TC20`.
+- [x] `V1` Execute every local review oracle and require exact source/inverse/fresh activation. Evidence: `EV-KI-W6-TC20`.
+- [x] `V2` Prove ending digest, 1/1 diff and exact one-path digest. Evidence: `EV-KI-W6-TC20`.
+- [x] `V3` Prove the preserved event-kind guard, watchdog, diagnostics, cases, controls and closure literals remain byte-identical. Evidence: exact one-expression reconstruction in `EV-KI-W6-TC20`.
+- [x] `H1` Append independent review evidence and accept or reject the actual bytes. Evidence: accepted in `EV-KI-W6-TC20`.
+- [x] `H2` Confirm no second file, product, provider, AWS, database, schema, package, commit/push or KI-W7 action. Evidence: `EV-KI-W6-TC20`.
+- [x] `H3` On acceptance continue directly to I121; successful review is not a stop boundary. Evidence: I121 started in `EV-KI-W6-TC20`.
+
+### 14.2 `KI-W6-I121` — fresh causal continuation and final closure
+
+```yaml
+subwindow_id: KI-W6-I121
+type: INTEGRATION_ASSESSMENT
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-16
+assigned_agent: KI-W6-WINDOW-AGENT
+predecessors: [KI-W6-C149 independently accepted]
+authorized_write_file: NONE
+coordination_writes: [KEYWORD_INTELLIGENCE_KI_W6_TRANSACTION_CLOCK_SUBWINDOW_STATE.md, KEYWORD_INTELLIGENCE_KI_W6_TRANSACTION_CLOCK_SUBWINDOW_EVIDENCE.md]
+expected_backend_commit: 9fc714ad9c96a396aa31426fc0d3c1e08da07050
+expected_frontend_baseline_commit: f981b34eeb79764a2e9e7ee96779f99907228a3f
+expected_frontend_changed_file: frontend/test/browser/keyword-intelligence-e2e.mjs
+expected_frontend_changed_file_digest: 8a9cffc39e33689a69b0c89200b4cfae1af31ff410270dc1a867205acb4ce0b6
+planned_file_set_digest: 3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867
+required_case_count: 40
+required_case_digest: 334999de9923c0af40fa46b1c99eb92b03efce978585a71ff6b031092d105b71
+negative_control_count: 21
+negative_control_digest: 66921e9aae67f455bc35678da9b6ba659165dd037856d437b91c11b3c07fde80
+may_start_successor: false
+```
+
+Execute personally and sequentially. A passing gate is not a stop boundary:
+
+- [x] `KI-W6-CV98` Verify backend clean at committed C145-C148 commit
+  `9fc714ad9c96a396aa31426fc0d3c1e08da07050`, frontend baseline commit
+  `f981b34eeb79764a2e9e7ee96779f99907228a3f`, and exactly one attributable
+  frontend test-file edit with planned one-path sorted-LF digest
+  `3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867`.
+- [ ] `KI-W6-CV99` Run the unchanged durable causal command once with at least
+  75 minutes attached and complete stdout/stderr/status retention. Require
+  browser 26/26, controls 13/13, 100 discovery tasks, observed
+  `aggregation.check` domain trigger, 1,000 domains/leads, no terminal-heartbeat
+  lease loss, and complete process/schema/temp cleanup. One identical E8.1
+  recovery remains available only for a newly proven environment-invalidated
+  attempt; observable failure is not recoverable.
+- [ ] `KI-W6-CV100` Only after CV99 passes, execute the unchanged CV95 commands
+  exactly once: backend `npm test`, `npm run check:secrets`, `npm run
+  build:lambda`; frontend `npm run check`; require zero failures and no
+  unplanned output.
+- [ ] `KI-W6-CV101` Execute unchanged CV96 40-case/21-control equality/digest
+  closure and unchanged CV97 scope/privacy/cost/cleanup audit.
+- [ ] `KI-W6-CH17` Append the complete integration certificate, set subordinate
+  status `READY_FOR_PARENT_REVIEW`, return to parent and stop before KI-W7.
+
+`PASS` requires CV98-CV101 and CH17. A coding omission mechanically governed
+by `DEC-KI-056` and confined to the C149 file may use append-only C150+/I122+
+and continue without parent return. Any new observable failure outside that
+decision or one-file scope is `PARENT_BLOCKED`.
+
+## 15. State-190 eighteenth corrective sequence — durable-only handoff observation
+
+`DEC-KI-057`, A5 state 190, `EV-KI-A-116`, and `CHG-KI-088` authorize this
+append-only parent-direct correction and assessment without another decomposition
+review. C150 is layered on accepted C149 in the same single browser-test file.
+
+### 15.1 `KI-W6-C150` — parent-direct one-file waiter correction
+
+```yaml
+subwindow_id: KI-W6-C150
+type: CORRECTION
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-17
+implementation_owner: REQUESTER_AUTHORIZED_PARENT_DIRECT
+review_owner: KI-W6-WINDOW-AGENT
+predecessors: [KI-W6-C149 independently accepted]
+writable_file: frontend/test/browser/keyword-intelligence-e2e.mjs
+starting_digest: 8a9cffc39e33689a69b0c89200b4cfae1af31ff410270dc1a867205acb4ce0b6
+baseline_commit_before_C149_and_C150: f981b34eeb79764a2e9e7ee96779f99907228a3f
+candidate_commit: 9f0c4c53da4cc0268f5165d51c89a8a151237fdb
+expected_ending_digest: 6de55e92cfe25c8caed683cacb5ba1ae9eee5f7696874e7e372cf7f50ec3767e
+expected_combined_diff_stat_from_baseline: 40 insertions / 12 deletions
+planned_file_set_digest: 3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867
+may_start_successor: false
+```
+
+1. **Trace:** `REQ-KI-015`-`REQ-KI-017`; `INV-KI-010/011/015`;
+   `SRC-KI-058`; `DEC-KI-035/038/057`; existing `W6-NAV-02`,
+   `W6-FLOW-08`, `W6-NC-06`.
+2. **Authoritative waiter:** `waitForDurableHandoffCommit` accepts exactly
+   `{clientRequestId,expectedSelectionRevision}`, reads
+   `harness.readDurableState()` unconditionally on every cycle, and returns
+   only for exact durable handoff client ID, exact selection revision and its
+   associated Run with `queryCount === 100`. It has zero `harness.trace()` or
+   HTTP-gate dependency.
+3. **Interception:** retain numeric `responseStatusCode` for diagnostics; parse
+   the intercepted POST body; require string `clientRequestId` and safe-integer
+   `expectedSelectionRevision`; retain that identity and the returned durable
+   snapshot before `Fetch.failRequest`.
+4. **Post-abort proof:** require netlog request identity equal to intercepted
+   identity; require stored durable handoff ID/revision and 100-query Run.
+   Response-finish trace is diagnostic boolean only. Preserve C149's exact
+   `aggregation.check` predicate.
+5. **No alternatives:** preserve the 30-second waiter, 90-second pause guard,
+   15-second product proxy, request/retry key, repository, route, helper,
+   response bytes, cases, controls, all other timeouts and product behavior.
+6. **Local review:** syntax/diff pass; exact source oracle proves all fields and
+   ordering above; restoring the former trace-gated waiter in memory falsifies
+   it, then fresh source passes; ending digest, combined sole-file diff and
+   C149 predicate match exactly.
+
+- [x] `P1` State 190, assignment, parent revisions, commits and starting/ending digests match. Evidence: `EV-KI-W6-TC22`.
+- [x] `P2` Backend is clean at `9fc714ad…`; frontend candidate is clean at `9f0c4c53…`; only the sole test path differs from baseline `f981b34…`. Evidence: `EV-KI-W6-TC22`.
+- [x] `T1` Independently reconstruct/review every DEC-KI-057 transformation; do not modify the candidate. Evidence: byte-exact baseline reconstruction in `EV-KI-W6-TC22`.
+- [x] `V1` Run syntax, diff, exact source/inverse/fresh and C149-preservation oracles. Evidence: `EV-KI-W6-TC22`.
+- [x] `V2` Prove ending digest, 40/12 combined diff and exact one-path digest. Evidence: `EV-KI-W6-TC22`.
+- [x] `V3` Prove all product/helper/timeouts/cases/controls and nonowned bytes unchanged. Evidence: sole-file exact reconstruction in `EV-KI-W6-TC22`.
+- [x] `H1` Append independent review evidence and accept or reject actual bytes. Evidence: accepted in `EV-KI-W6-TC22`.
+- [x] `H2` Confirm no second file, provider/AWS/database/schema/package/commit/push/KI-W7 action. Evidence: `EV-KI-W6-TC22`.
+- [x] `H3` On acceptance continue directly to I122; successful review is not a stop boundary. Evidence: I122 started in `EV-KI-W6-TC22`.
+
+### 15.2 `KI-W6-I122` — fresh causal continuation and final closure
+
+```yaml
+subwindow_id: KI-W6-I122
+type: INTEGRATION_ASSESSMENT
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-17
+assigned_agent: KI-W6-WINDOW-AGENT
+predecessors: [KI-W6-C150 independently accepted]
+authorized_write_file: NONE
+coordination_writes: [KEYWORD_INTELLIGENCE_KI_W6_TRANSACTION_CLOCK_SUBWINDOW_STATE.md, KEYWORD_INTELLIGENCE_KI_W6_TRANSACTION_CLOCK_SUBWINDOW_EVIDENCE.md]
+expected_backend_commit: 9fc714ad9c96a396aa31426fc0d3c1e08da07050
+expected_frontend_commit: 9f0c4c53da4cc0268f5165d51c89a8a151237fdb
+expected_frontend_changed_file: frontend/test/browser/keyword-intelligence-e2e.mjs
+expected_frontend_changed_file_digest: 6de55e92cfe25c8caed683cacb5ba1ae9eee5f7696874e7e372cf7f50ec3767e
+planned_file_set_digest: 3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867
+required_case_count: 40
+required_case_digest: 334999de9923c0af40fa46b1c99eb92b03efce978585a71ff6b031092d105b71
+negative_control_count: 21
+negative_control_digest: 66921e9aae67f455bc35678da9b6ba659165dd037856d437b91c11b3c07fde80
+may_start_successor: false
+```
+
+- [x] `KI-W6-CV102` Verify backend commit `9fc714ad…`, frontend baseline commit
+  `f981b34…`, exact C149+C150 sole-file diff, ending digest `6de55e92…`, C149
+  predicate preserved, and C150 source/inverse/fresh oracles.
+- [ ] `KI-W6-CV103` Run one fresh durable causal browser command with at least
+  75 minutes attached and retained stdout/stderr/status. Require 26/26 cases,
+  13/13 controls, exact durable handoff identity/100 queries independent of
+  HTTP trace, exact aggregation.check observation, 100 discovery tasks, 1,000
+  domains/leads, no terminal-heartbeat loss, and complete cleanup. One identical
+  E8.1 recovery is allowed only for a newly proven environmental invalidation.
+- [ ] `KI-W6-CV104` After CV103 passes, run unchanged backend `npm test`,
+  `npm run check:secrets`, `npm run build:lambda` and frontend `npm run check`
+  once; require zero failures/unplanned output.
+- [ ] `KI-W6-CV105` Run unchanged 40-case/21-control equality/digests and final
+  scope/privacy/cost/cleanup audit.
+- [ ] `KI-W6-CH18` Record integration pass, set `READY_FOR_PARENT_REVIEW`, hand
+  off to parent and stop before KI-W7.
+
+Only a mechanically governed omission confined to this browser test may open
+C151+/I123+ without parent return. A new observable failure outside
+`DEC-KI-057` or this file is `PARENT_BLOCKED`.
+
+## 16. State-190 in-scope C151/I123 — progress-aware downstream settlement
+
+I122 CV103 proved C149 and C150, then failed only because the post-first-check
+settlement block retained a separate fixed 120-second deadline while the frozen
+causal workload was still making valid sequential progress. This is the exact
+mechanically governed, same-file omission authorized by A5 state 190.
+
+### 16.1 `KI-W6-C151` — one-file settle-watchdog correction
+
+```yaml
+subwindow_id: KI-W6-C151
+type: CORRECTION
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-17
+assignment_id: ASG-KI-W6-C151
+assigned_agent: KI-W6-LEAF-C151
+predecessors: [KI-W6-C150 independently accepted, KI-W6-CV102 PASS, KI-W6-CV103 observable in-scope failure]
+writable_file: frontend/test/browser/keyword-intelligence-e2e.mjs
+starting_digest: 6de55e92cfe25c8caed683cacb5ba1ae9eee5f7696874e7e372cf7f50ec3767e
+expected_ending_digest: 2a07612d9f58c7b882573a3f3f8d7dbc99cc8a35ff3fdaea60ee10b7935601f6
+planned_file_set_digest: 3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867
+may_start_successor: false
+```
+
+Replace exactly the seven-line block beginning
+`const downstreamSettleDeadline = Date.now() + 120000;` and ending at its
+`while (!downstreamOutcome.settled)` closing brace with one 31-line settle loop
+that:
+
+1. retains the same `while (!downstreamOutcome.settled)` and 50 ms poll;
+2. reads `harness.trace().slice(downstreamFloor)` every cycle;
+3. immediately throws a sanitized `message-failed after first domain-check
+   emission` error for the first downstream `message-failed` event;
+4. recomputes lifecycle start/complete events, updates the existing
+   `downstreamLifecycleCount`, `downstreamCompletedCount`, and
+   `downstreamLastProgressAt`, and writes the same four-field
+   `diagnostics.downstreamProgress` projection;
+5. fails after the existing `downstreamNoProgressLimitMs` only when lifecycle
+   progress has stopped, with exactly one `readDownstreamDiagnostics()` safe
+   projection;
+6. fails after the existing `downstreamAbsoluteLimitMs`, measured from the
+   unchanged `downstreamWaitStartedAt`, with exactly one safe diagnostics
+   projection; and
+7. contains no new duration literal, no reset of the absolute start, and no
+   fixed settle deadline.
+
+The exact source strings and expressions are those already used by the
+immediately preceding first-check watchdog: `downstream-message`,
+`message-start`, `message-complete`, `message-failed`, the four progress fields,
+the `120000` no-progress constant and `(100 * 30000) + 600000` absolute ceiling.
+Preserve C149, C150, the domain-check fault injections, downstream result
+assertions, all 26 cases/13 controls, cleanup and every other byte.
+
+The replacement block is literally:
+
+```js
+  while (!downstreamOutcome.settled) {
+    const downstreamEvents = harness.trace().slice(downstreamFloor);
+    const downstreamFailureEvent = downstreamEvents.find((event) => event.kind === "downstream-message" && event.op === "message-failed");
+    if (downstreamFailureEvent) {
+      throw new Error(`KI downstream drain message-failed after first domain-check emission: ${JSON.stringify({ name: downstreamFailureEvent.errorName, code: downstreamFailureEvent.errorCode, frame: downstreamFailureEvent.errorFrame })}`);
+    }
+    const lifecycleEvents = downstreamEvents.filter((event) => event.kind === "downstream-message" && (event.op === "message-start" || event.op === "message-complete"));
+    if (lifecycleEvents.length > downstreamLifecycleCount) {
+      downstreamLifecycleCount = lifecycleEvents.length;
+      downstreamCompletedCount = lifecycleEvents.filter((event) => event.op === "message-complete").length;
+      downstreamLastProgressAt = Date.now();
+    }
+    const downstreamElapsedMs = Date.now() - downstreamWaitStartedAt;
+    diagnostics.downstreamProgress = {
+      elapsedMs: downstreamElapsedMs,
+      lifecycleEvents: downstreamLifecycleCount,
+      completedMessages: downstreamCompletedCount,
+      completedMessagesPerSecond: downstreamElapsedMs > 0
+        ? Number((downstreamCompletedCount * 1000 / downstreamElapsedMs).toFixed(4))
+        : 0,
+    };
+    if (Date.now() - downstreamLastProgressAt > downstreamNoProgressLimitMs) {
+      const downstreamStallDiagnostics = await harness.readDownstreamDiagnostics();
+      throw new Error(`KI downstream made no lifecycle progress for ${downstreamNoProgressLimitMs} ms after first domain-check emission: ${JSON.stringify({ progress: diagnostics.downstreamProgress, diagnostics: downstreamStallDiagnostics })}`);
+    }
+    if (downstreamElapsedMs > downstreamAbsoluteLimitMs) {
+      const downstreamCeilingDiagnostics = await harness.readDownstreamDiagnostics();
+      throw new Error(`KI downstream exceeded the ${downstreamAbsoluteLimitMs} ms absolute safety ceiling after first domain-check emission: ${JSON.stringify({ progress: diagnostics.downstreamProgress, diagnostics: downstreamCeilingDiagnostics })}`);
+    }
+    await wait(50);
+  }
+```
+
+LOCAL_NOW from `frontend/`:
+
+1. `node --check test/browser/keyword-intelligence-e2e.mjs` and
+   `git diff --check` pass.
+2. SHA-256 equals the pinned ending digest; attributable path set is exactly
+   the writable file and its sorted-LF digest is pinned above.
+3. Source oracle requires zero `downstreamSettleDeadline`, two occurrences each
+   of lifecycle filtering/progress projection/no-progress/absolute-ceiling
+   guards (before and after first check), and C149/C150 exact markers.
+4. In-memory restoration of the seven-line fixed-deadline block falsifies the
+   unchanged oracle; fresh real source passes.
+
+- [x] `P1` State 190 authority, C150 baseline and exact one-file assignment match. Evidence: `EV-KI-W6-TC24`.
+- [x] `P2` Starting file digest and clean backend/frontend commits match. Evidence: `EV-KI-W6-TC24`.
+- [x] `T1` Apply exactly the frozen seven-line-to-31-line block replacement. Evidence: byte-exact reconstruction in `EV-KI-W6-TC24`.
+- [x] `V1` Execute syntax/diff/source/inverse/fresh checks with activation output. Evidence: `EV-KI-W6-TC24`.
+- [x] `V2` Prove exact ending digest and one attributable path/digest. Evidence: `EV-KI-W6-TC24`.
+- [x] `V3` Prove C149/C150, cases/controls/faults/cleanup and every sibling byte preserved. Evidence: `EV-KI-W6-TC24`.
+- [x] `H1` Return exact diff, ending digest, checks and I123 obligations only to window agent. Evidence: leaf handoff and independent review in `EV-KI-W6-TC24`.
+- [x] `H2` Confirm no second file, parent artifact, external action, commit/push or KI-W7 work. Evidence: `EV-KI-W6-TC24`.
+- [x] `H3` Stop at AWAITING_WINDOW_REVIEW; do not run browser/database/build/regression gates. Evidence: leaf stopped and window agent accepted in `EV-KI-W6-TC24`.
+
+### 16.2 `KI-W6-I123` — fresh causal continuation and final closure
+
+- [x] `KI-W6-CV106` Independently reconstruct/review C151; require exact
+  one-file digest, source/inverse/fresh activation, C149/C150 preservation and
+  clean backend commit `9fc714ad…`.
+- [ ] `KI-W6-CV107` Run one fresh durable causal browser command with at least
+  75 minutes and retained stdout/stderr/status. Require the complete CV103
+  contract plus a progress-aware settle: 26/26 cases, 13/13 controls, durable
+  handoff identity/100 queries, aggregation.check observation, 100 discovery
+  tasks, 1,000 domains/leads, no lease loss, no fixed-deadline failure, and
+  complete cleanup. One identical E8.1 recovery only follows newly proven
+  environment invalidation.
+- [ ] `KI-W6-CV108` After CV107 passes, run unchanged backend `npm test`,
+  `npm run check:secrets`, `npm run build:lambda`, and frontend `npm run check`
+  exactly once; require zero failures or unplanned output.
+- [ ] `KI-W6-CV109` Run unchanged 40-case/21-control equality/digests and final
+  scope/privacy/cost/cleanup audit.
+- [ ] `KI-W6-CH19` Record integration pass, set `READY_FOR_PARENT_REVIEW`, hand
+  off to parent and stop before KI-W7.
+
+I123 is window-agent-only with zero implementation-write authority. A further
+same-file mechanically governed omission may use C152+/I124+; a new failure
+outside this file or the frozen semantics is `PARENT_BLOCKED`.
+
+## 17. Parent-authored compositional 1,000-domain bridge package
+
+### 17.0 Operative authority and requester exception
+
+This section supersedes only the stopped I123/CV107 synthetic-storefront
+assertion. It implements `SRC-KI-059`, `DEC-KI-058` and the nineteenth KI-W6
+corrective sequence in A4. At the requester's explicit direction, the parent
+agent authored this complete subordinate package directly. This is a recorded
+exception only to the subwindow standard's role allocation: all single-file,
+decision-complete, execution-complete, enforcement-complete, evidence,
+independent-review and integration-assessment requirements remain binding.
+
+The receiving window agent does **not** decompose or return for decomposition
+review. It must:
+
+1. verify A5 state 191 and every pin/baseline below;
+2. reserve and dispatch C152 alone;
+3. independently review C152;
+4. after C152 acceptance, reserve/dispatch C153 and C154 in parallel or
+   sequentially at its discretion, without changing either contract;
+5. independently review both leaves;
+6. personally run I124; and
+7. stop only at `READY_FOR_PARENT_REVIEW` or one genuinely new parent-level
+   blocker. It must not communicate leaf results directly to the parent.
+
+The exact initial path set is:
+
+```text
+email_scraper/src/aws-pipeline/services/discovery-worker.js
+email_scraper/test/aws-pipeline-discovery.test.js
+email_scraper/test/aws-pipeline-domain.integration.test.js
+```
+
+Sorted-member-LF digest:
+`36780bc47b3e5950c707525292655be1a10d8b39cbeff69ccea1023dcc5074e1`.
+Backend baseline commit:
+`9fc714ad9c96a396aa31426fc0d3c1e08da07050`. Frontend unchanged commit:
+`5e441aae7e2f3a132b2c7fc85bf1bc525d3d5cb6`; unchanged browser file digest:
+`2a07612d9f58c7b882573a3f3f8d7dbc99cc8a35ff3fdaea60ee10b7935601f6`.
+
+New exact coverage registries:
+
+```text
+cases = [W6-DB-13, W6-DB-14, W6-DB-15]
+controls = [W6-NC-22, W6-NC-23, W6-NC-24]
+case_digest = 5342728a461b927afe37050b5f4e8df6df30f42698e3b75144f5872334e19600
+control_digest = 97b186a9948a3fbb4077f1d6f4d39b2d635ad1325e37fb82cdb095661bfbe4ee
+final_case_count = 43
+final_case_digest = 5ef52fb9ed7a7cc182302cd2c2441712f5745f52948c4fb1f10b6e759c4dbe71
+final_control_count = 24
+final_control_digest = 3bd895f41f3689c1c1d421d1ea0056c095e1d4cd57d3f90e3987f79104719707
+```
+
+No live storefront, Google, DataForSEO, CrUX, Browserless, AWS or production
+operation is permitted. Paid cost is `$0.00`. Requester alone commits.
+
+### 17.1 `KI-W6-C152` — one-file production resolver dependency
+
+```yaml
+subwindow_id: KI-W6-C152
+assignment_id: ASG-KI-W6-C152
+type: CORRECTION
+status_at_authoring: READY
+predecessors: [KI-W6-C151 accepted, KI-W6-I123 stopped PARENT_BLOCKED, A5 state 191]
+writable_file: email_scraper/src/aws-pipeline/services/discovery-worker.js
+starting_sha256: 34013f07b18b5040d848eda6eff5abb53b5db0daf174dfea375fd6002bd9c212
+read_scope: [the writable file, email_scraper/src/domain-resolver.js resolveStoreIdentity signature, DEC-KI-058, this block]
+prohibited: [second file, runtime/config/env seam, domain-resolver edit, payload/schema/queue/lease/retry behavior, network/provider/AWS/database/build/browser, commit/push, parent artifacts, KI-W7]
+```
+
+Exact transformation:
+
+1. Change the declaration to
+   `export async function processDiscoveryMessage(message, runtime, dependencies = {})`.
+2. As the first statements in the function, before `artifactStore.getValidated`,
+   require `dependencies !== null`, `typeof dependencies === "object"`,
+   `Object.getPrototypeOf(dependencies) === Object.prototype`, every member of
+   `Object.keys(dependencies)` equals `"resolveStoreIdentityFn"`, and
+   `dependencies.resolveStoreIdentityFn === undefined || typeof dependencies.resolveStoreIdentityFn === "function"`.
+   A failed predicate throws
+   `new PipelineInvariantError("PIPELINE_INPUT_CONFLICT")`.
+3. Immediately select
+   `const resolveStoreIdentityFn = dependencies.resolveStoreIdentityFn ?? resolveStoreIdentity;`.
+4. Replace exactly the existing callback body
+   `resolveStoreIdentity(result, identityConfig)` with
+   `resolveStoreIdentityFn(result, identityConfig)`.
+5. Preserve imports, all two-argument production callers and every other byte.
+
+Required intermediate states:
+
+- before edit: hard-coded real resolver, no dependency object;
+- after edit: invalid dependency fails before artifact/DB/external work;
+- production/default: selected function is the imported real resolver;
+- test override: only the selected resolver function changes; identityConfig,
+  scoring, artifact and terminal paths remain real;
+- terminal: exact ending digest is recorded by the leaf, not pre-guessed.
+
+LOCAL_NOW from backend:
+
+1. `node --check src/aws-pipeline/services/discovery-worker.js` passes.
+2. `git diff --check` passes and the leaf diff contains exactly the writable
+   file.
+3. A source oracle requires the exact signature, validation, fallback and
+   selected call, plus zero production call-site third arguments.
+4. A runtime preflight passes `null`, `[]`, `Object.create(null)`, an unknown
+   key and a non-function resolver; each must throw `PIPELINE_INPUT_CONFLICT`
+   before a manifest-read counter changes from zero.
+5. Non-mutating negative controls remove the fallback expression and allow an
+   unknown key; the unchanged oracle fails for each, then fresh source passes.
+
+- [ ] `P1` Verify authority, baseline commit/digest and clean attributable path.
+- [ ] `T1` Apply only steps 1–4 above.
+- [ ] `V1` Run all five LOCAL_NOW checks and record activation outputs.
+- [ ] `V2` Record exact ending digest, diff stat and prohibited-action audit.
+- [ ] `H1` Return diff/digest/checks only to the window agent.
+- [ ] `H2` Stop at `AWAITING_WINDOW_REVIEW`; do not start C153/C154/I124.
+
+Window-agent acceptance requires byte-level inspection, independent recreation
+from the starting blob, all LOCAL_NOW proofs, and exact one-file attribution.
+
+### 17.2 `KI-W6-C153` — focused resolver/default/injection enforcement
+
+```yaml
+subwindow_id: KI-W6-C153
+assignment_id: ASG-KI-W6-C153
+type: CORRECTION
+status_at_authoring: WAITING_FOR_C152_ACCEPTANCE
+predecessors: [KI-W6-C152 independently accepted]
+writable_file: email_scraper/test/aws-pipeline-discovery.test.js
+starting_sha256: f76f1f35cc07843ec634bd464fffb16b7ab298f3646a657d70fee13be561d7f2
+owned_cases: [W6-DB-13]
+owned_controls: [W6-NC-22]
+read_scope: [accepted C152, email_scraper/src/domain-resolver.js, strict discovery artifacts, existing test helpers/fixture, DEC-KI-058, this block]
+prohibited: [second file, production edit, global fetch monkeypatch, live network/provider/AWS/database/browser/build, commit/push, parent artifacts, KI-W7]
+```
+
+Exact fixture and oracle:
+
+1. Preserve the five existing top-level tests unchanged. Import
+   `resolveStoreIdentity` and add exactly two top-level tests, `W6-DB-13` and
+   `W6-NC-22`.
+2. Clone the accepted confirmed manifest, retain one query, and replace its
+   accepted results with ranks 1–10. For `NN = String(rank).padStart(2,"0")`,
+   each URL/title/snippet is respectively
+   `https://w6-bridge-q001-r${NN}.myshopify.com/products/result-${NN}`,
+   the query text, and the query text; rejectionReason is absent/empty exactly
+   as required by the strict manifest parser.
+3. Supply the C152 seam with
+   `(result, config) => resolveStoreIdentity(result, config, { fetch: deterministicFetch })`.
+   `deterministicFetch(url, config, options)` rejects unless URL equals one of
+   the ten inputs, `options.purpose === "storefront"`, and
+   `options.allowedHostnames` deep-equals `[new URL(url).hostname]`. It returns
+   `{status:200, finalUrl:url, contentType:"text/html", rendered:false,
+   renderAttempted:false, renderContractVersion:"", fetchAssessment:null}` and
+   exact body
+   `<!doctype html><html><head><link rel="canonical" href="${url}"><meta name="generator" content="Shopify"></head><body><script>Shopify.theme={};</script><main><h1>${query}</h1><a href="/products/result-${NN}">${query}</a><img src="https://cdn.shopify.com/w6-fixture.png"></main></body></html>`.
+   It neither calls nor replaces global fetch.
+4. Use the real discovery runtime path. Require exactly ten resolver/fetch
+   calls, ten strict stores, ten distinct stable keys and myshopify domains,
+   one immutable artifact write, one succeeded terminal, one aggregation check,
+   no live network/provider/AWS call and the normal recorded return.
+5. Also assert C152's invalid shapes fail before manifest reads and the source
+   default expression names imported `resolveStoreIdentity`.
+6. `W6-NC-22`: on a fresh fixture, use a sentinel injected resolver/fetch that
+   prevents the ten-store result; the unchanged W6-DB-13 oracle must throw.
+   Then rerun the untouched actual positive fixture and require pass. The
+   control may not attempt live network.
+7. Emit exactly one privacy-safe certificate with
+   `required/registered/executed/activated = 1/1/1/1`,
+   `controlExpected/controlFalsified/freshPositive = 1/1/1`, and the exact
+   one-member registry/digests from §17.0.
+
+LOCAL_NOW from backend:
+
+`node --test --test-isolation=none test/aws-pipeline-discovery.test.js`
+must report exactly 7 pass, 0 fail, 0 skip and the certificate above.
+`node --check test/aws-pipeline-discovery.test.js` and `git diff --check` pass;
+the leaf diff is exactly its writable file.
+
+- [ ] `P1` Verify C152 acceptance and the exact starting blob.
+- [ ] `T1` Add only the two frozen tests/import/helper code in this file.
+- [ ] `V1` Run LOCAL_NOW once after the final edit; record full totals and
+  certificate.
+- [ ] `V2` Prove W6-NC-22 falsification and fresh positive are non-vacuous.
+- [ ] `H1` Return exact diff/digest/certificate only to the window agent.
+- [ ] `H2` Stop at `AWAITING_WINDOW_REVIEW`; do not run C154/I124.
+
+### 17.3 `KI-W6-C154` — isolated 100-query/1,000-domain bridge
+
+```yaml
+subwindow_id: KI-W6-C154
+assignment_id: ASG-KI-W6-C154
+type: CORRECTION
+status_at_authoring: WAITING_FOR_C152_ACCEPTANCE
+predecessors: [KI-W6-C152 independently accepted]
+writable_file: email_scraper/test/aws-pipeline-domain.integration.test.js
+starting_sha256: e1f10225fb301c9b798032e70fa2bc57c38de5e7374f8c419b7b3928104f3779
+owned_cases: [W6-DB-14, W6-DB-15]
+owned_controls: [W6-NC-23, W6-NC-24]
+read_scope: [accepted C152, domain aggregator, coordinator/run repositories, strict artifact schemas, isolated-postgres helper, accepted discovery/provider fixtures, DEC-KI-058, this block]
+prohibited: [second file, production/schema/migration/package edit, live network/provider/AWS/browser/build, public-schema write/cleanup, commit/push, parent artifacts, KI-W7]
+```
+
+The leaf preserves the existing G8 top-level test byte-for-byte and adds one
+top-level `SCN-KI-046` test with these exact phases:
+
+1. Create `schema` by the exact expression
+   ``const schema = `kiw6_bridge_${Date.now()}_${process.pid}`;``, pass that exact
+   generated name to `createIsolatedTestSchema`, deploy migrations once,
+   instantiate real Prisma/coordinator/run repositories, and assert
+   `current_schema()` plus schema-local migration history before writes.
+2. Create one running AWS Run and one strict confirmed manifest with 100 ordered
+   queries `query_001`…`query_100`, sequence 0…99. Register one discovery stage
+   with those exact 100 tasks. Test setup then updates those registered tasks to
+   `succeeded` with their exact artifact keys/fingerprints and updates that
+   stage to ready with expected/terminal/succeeded counts all 100. It must not
+   call production terminal APIs to manufacture this precondition.
+3. A validating in-memory artifact store holds the strict manifest and 100
+   strict query-discovery artifacts. Starting from the accepted discovery
+   fixture, for `QQQ=001..100` and `RR=01..10`, replace consistently in
+   `identity`, `candidatePayload`, representative, occurrence, allowed hosts and
+   identity evidence every stable/myshopify/resolved hostname and URL with
+   `w6-bridge-q${QQQ}-r${RR}.myshopify.com` and
+   `https://w6-bridge-q${QQQ}-r${RR}.myshopify.com/products/result-${RR}`.
+   Parse every artifact before storing it.
+   Assert the pre-invocation union contains exactly 1,000 distinct stable keys.
+4. Invoke real `processDomainAggregation` once. The only service dependency is
+   `createLeaseMonitorFn`, returning a deterministic monitor whose
+   `renewNow/stop` resolve and whose `assertActive` passes; this substitutes
+   timer transport only, not fencing/repository semantics. Memory S3 validates
+   expected metadata/schema. Memory SQS validates `workMessageSchema` and
+   records the single batch.
+5. Require exactly 100 query-artifact reads, 1,000 domain-candidate writes, one
+   domain-manifest write, one `readAwsReuseInputs`, one
+   `publishAwsDomainCheckpoint`, one `sendMany` containing exactly 1,000 unique
+   `lead.domain` messages and one `recordDispatch` containing the same 1,000
+   IDs. No provider/network/AWS call is available.
+6. Query the real database: exactly 1,000 Shops matching production
+   `stableShopIdentity/shopIdForStableKey`, exactly 1,000 run-specific RunStores
+   matching `runStoreId`, one completed discovery stage, one collecting lead
+   stage with expected count 1,000, exactly 1,000 lead tasks, Run stage
+   `aws_lead`, `resultsAvailable:false`, and no duplicate identity/task/message.
+7. For W6-DB-15 create a second maximum run/stage/artifact set whose 1,000
+   otherwise-identical identities use the distinct prefix
+   `w6-rollback-q${QQQ}-r${RR}.myshopify.com`, and preinsert a `RunDiagnostic`
+   at sequence 100000 whose values conflict with the incoming
+   first diagnostic. Real aggregation must throw `PIPELINE_INPUT_CONFLICT`.
+   Afterwards require zero run-specific RunStores, lead stage, lead tasks and
+   rollback-only Shops; discovery remains `aggregating`; Run remains
+   `aws_discovery`, unavailable. A third wrong-token maximum publication call
+   must reject before any durable visibility.
+8. W6-NC-23 non-mutatingly changes the captured success witness to 999 members
+   by duplicating one identity; the unchanged exact cardinality/uniqueness
+   assertion must fail, then the fresh database success projection passes.
+   W6-NC-24 non-mutatingly changes the captured rollback projection to expose
+   one RunStore/lead member; the unchanged zero-visibility assertion must fail,
+   then a fresh actual rollback projection passes.
+9. In `finally`, disconnect scoped Prisma, drop only the exact generated schema,
+   run an administrator query for that exact name and require rowCount zero,
+   then disconnect administrator. Cleanup failure fails the test.
+10. Emit one privacy-safe certificate:
+   new cases required/registered/executed/activated `2/2/2/2`, controls
+   expected/falsified/fresh-positive `2/2/2`, counts `100/1000/1000/1000`,
+   rollback visibility zero, schema rowCount zero, paid cost `$0.00`.
+
+LOCAL_NOW is deliberately non-stateful. From backend run `node --check
+test/aws-pipeline-domain.integration.test.js`, `git diff --check`, and a
+file-local/source oracle requiring the exact SCN/case/control registries,
+100/1,000 literals, real service/repository/helper imports, rollback/stale-fence
+assertions and cleanup/absence query. Non-mutating in-memory source controls
+remove one registry ID and one cleanup absence assertion; the unchanged oracle
+must fail, then fresh source passes. Neither the leaf nor its independent review
+may connect to a database. I124/CV112 is the sole post-edit database execution.
+
+- [ ] `P1` Verify C152 acceptance, isolated URL distinct from production and
+  the exact starting blob.
+- [ ] `T1` Add only SCN-KI-046 and file-local helpers/imports.
+- [ ] `V1` Run only the frozen syntax/diff/source/falsification checks.
+- [ ] `V2` Prove the executable test text contains the exact cardinality,
+  rollback/fence, control and schema-absence oracles; do not claim runtime pass.
+- [ ] `H1` Return diff/digest/certificate only to the window agent.
+- [ ] `H2` Stop at `AWAITING_WINDOW_REVIEW`; do not run I124.
+
+### 17.4 `KI-W6-I124` — window-agent-only compositional closure
+
+```yaml
+subwindow_id: KI-W6-I124
+assignment_id: ASG-KI-W6-I124
+type: INTEGRATION_ASSESSMENT
+actor: KI-W6-WINDOW-AGENT
+writable_implementation_files: []
+predecessors: [KI-W6-C152, KI-W6-C153, KI-W6-C154 independently accepted]
+state_evidence_writes: [KEYWORD_INTELLIGENCE_KI_W6_TRANSACTION_CLOCK_SUBWINDOW_STATE.md, KEYWORD_INTELLIGENCE_KI_W6_TRANSACTION_CLOCK_SUBWINDOW_EVIDENCE.md append-only]
+prohibited: [implementation/test edit, browser rerun, live network/provider/AWS/production, commit/push, KI-W7]
+```
+
+Execute once, sequentially:
+
+1. `CV110` independently reconstruct all three leaves from their starting
+   blobs; require exact one-file ownership, no duplicate owner, changed set
+   exactly the three §17.0 paths/digest, syntax/diff pass, and every leaf-local
+   positive/negative-control oracle. If implementation differs from this frozen
+   algorithm, reject the leaf; do not repair during I124.
+2. `CV111` reuse the accepted C153 7/0/0 and exact `1/1/1/1` case plus
+   `1/1/1` control certificate only after proving C152/C153 ending hashes and
+   dependencies unchanged after C154. If and only if an input changed, invalidate
+   that certificate and run its identical focused command once.
+3. `CV112` run exactly once from backend:
+   `ALLOW_DATABASE_TESTS=true node -r dotenv/config --test --test-concurrency=1 --test-isolation=none test/aws-pipeline-domain.integration.test.js`.
+   Require 2/0/0, the exact case/control/cardinality/rollback/schema certificate
+   and administrator rowCount zero for the exact generated `schema` name. One
+   identical E8.1 recovery is allowed
+   only for proven environment invalidation; behavioral failure is not
+   recoverable.
+4. `CV113` do not run Chrome. Verify frontend commit and browser digest pinned
+   in §17.0. Retain earlier W6 browser evidence only for authenticated workspace,
+   durable handoff/100 associated RunQueries, run start, 100 validation/parser
+   calls and 100 discovery dispatches. Mark only the old synthetic-fetch
+   1,000-domain assertion superseded by SCN-KI-046. Verify the accepted
+   1,000-domain traffic corpus and 1,000-domain/12,000-outcome final corpus test
+   files/production dependencies are unchanged; record these as compositional
+   evidence, never as one monolithic 1,000-domain E2E.
+5. `CV114` from backend run once each: `npm test`, `npm run check:secrets`,
+   `npm run build:lambda`. Require zero failures/unplanned output, only expected
+   guarded DB skips, no secret finding, successful handler packaging and clean
+   tracked status. Reuse frontend check/build only after the exact unchanged
+   commit/path proof.
+6. `CV115` require new case/control registries equal the exact §17.0 sets and
+   digests. Merge with the accepted 40/21 sets and require exact 43/24 counts and
+   final digests. Every ID must register, execute and activate exactly once; no
+   unknown ID. Recompute exact three-file diff, privacy, `$0.00`, no external
+   operation, no residual schema/build output and no prohibited path.
+7. `CH20` append `WINDOW-AGENT-INTEGRATION-PASS`, set S2
+   `READY_FOR_PARENT_REVIEW`, return to parent and stop before KI-W7.
+
+A mechanically determined defect confined to one of the three paths and already
+dictated by `DEC-KI-058` may be decomposed by the window agent as C155+/I125+.
+Any behavior choice, fourth path, absent isolated database or external
+prerequisite is one concise `PARENT_BLOCKED` return.
+
+### 17.5 Dispatch-readiness audit
+
+- [x] One production leaf and two test leaves each own exactly one file.
+- [x] The DAG and parallel barrier are exact; I124 has zero implementation write
+  authority.
+- [x] Starting blobs, path-set digest, interfaces, algorithms, intermediates,
+  failure semantics and no-op boundaries are literal.
+- [x] Coverage registries, membership digests, counts, activation and three
+  independent falsification controls are exact.
+- [x] Stateful/build gates are once-only, environment-invalidated recovery is
+  bounded, and cleanup/absence witnesses are mandatory.
+- [x] Substitute fidelity and claim limits are explicit; no live resolver or
+  paid provider is used and no browser-scale simulation remains.
+- [x] Unmapped requirements/decisions/tasks/cases/controls and unresolved
+  interfaces/intermediates/execution choices/evidence references are all zero.
+- [x] Parent-direct authoring exception is requester-authorized; no subordinate
+  decomposition or parent decomposition-review stop remains.
+
+## 18. Requester-resumed cleanup-query correction after I124/CV112
+
+### 18.0 Trigger, diagnosis, and authority
+
+The requester supplied a fresh isolated database URL and explicitly authorized
+another I124 attempt after `EV-KI-W6-TC34`. That attempt passed the preserved G8
+test and reached `SCN-KI-046`, but the cleanup absence query selected PostgreSQL
+`pg_namespace.nspname` with internal type `name`. Prisma 6.19.3 rejected that
+column before returning the result with `P2010` / unsupported `name` type. The
+preceding exact-schema `DROP SCHEMA` completed. This is a test-oracle transport
+defect in the already-authorized C154 file; it changes no production behavior,
+database contract, schema, migration, or cleanup target.
+
+The current A5 authority explicitly permits `C155+` / `I125+` without parent
+return when a mechanically determined correction is confined to one of the
+three authorized files and dictated by `DEC-KI-058`. The required administrator
+absence proof already fixes the semantic query; PostgreSQL-to-Prisma type
+compatibility mechanically requires casting only the selected witness column to
+text.
+
+### 18.1 `KI-W6-C155` — serializable exact-schema absence witness
+
+```yaml
+subwindow_id: KI-W6-C155
+assignment_id: ASG-KI-W6-C155
+type: CORRECTION
+predecessors: [KI-W6-C154 accepted, I124 resumed CV112 failed after bridge execution at cleanup absence deserialization]
+writable_file: email_scraper/test/aws-pipeline-domain.integration.test.js
+starting_sha256: 2860a2315d2267bf61028ade7a8101aaa2c89f89d92ef92138609b1495b803f4
+read_scope: [the writable file cleanup finally block, Prisma P2010 unsupported-name failure, isolated-postgres text-cast precedent, DEC-KI-058, this block]
+prohibited: [second file, production/schema/migration/package change, database execution, browser/build/network/provider/AWS, commit/push, parent artifacts, KI-W7]
+```
+
+Exact transformation:
+
+1. In the single administrator absence query after the exact generated-schema
+   drop, replace only
+   `SELECT nspname FROM pg_namespace WHERE nspname = $1`
+   with
+   `SELECT nspname::text AS "nspname" FROM pg_namespace WHERE nspname = $1`.
+2. Preserve the parameterized exact-name predicate, `residual.length`, the
+   zero-row assertion, both disconnects, every scenario/case/control registry,
+   every production-path assertion, and every other byte.
+3. Do not connect to a database. `KI-W6-I125` exclusively owns the next
+   stateful execution.
+
+LOCAL_NOW from backend:
+
+- `node --check test/aws-pipeline-domain.integration.test.js` passes.
+- `git diff --check` passes and the attributable diff is exactly the writable
+  file with one replacement line.
+- A source oracle requires the exact text cast/alias, parameterized predicate,
+  `schema` argument, `residual.length`, and `assert.equal(schemaRowCount, 0)`.
+- A non-mutating negative control removes `::text AS "nspname"`; the unchanged
+  oracle fails, then fresh source passes.
+
+- [ ] `P1` Verify requester resumption, C154 accepted digest, current clean
+  backend commit and exact starting blob.
+- [ ] `T1` Apply only the one frozen query-string replacement.
+- [ ] `V1` Run the syntax, diff, source and falsification LOCAL_NOW gates without
+  a database connection.
+- [ ] `V2` Prove exact one-file attribution and every C154 registry/oracle remains
+  byte-identical outside the query string.
+- [ ] `H1` Return exact diff/digest/checks only to the window agent.
+- [ ] `H2` Stop at `AWAITING_WINDOW_REVIEW`; do not run I125.
+
+### 18.2 `KI-W6-I125` — post-C155 whole-window reassessment
+
+```yaml
+subwindow_id: KI-W6-I125
+assignment_id: ASG-KI-W6-I125
+type: INTEGRATION_ASSESSMENT
+actor: KI-W6-WINDOW-AGENT
+writable_implementation_files: []
+predecessors: [KI-W6-C152, KI-W6-C153, KI-W6-C154, KI-W6-C155 independently accepted]
+state_evidence_writes: [KEYWORD_INTELLIGENCE_KI_W6_TRANSACTION_CLOCK_SUBWINDOW_STATE.md, KEYWORD_INTELLIGENCE_KI_W6_TRANSACTION_CLOCK_SUBWINDOW_EVIDENCE.md append-only]
+prohibited: [implementation/test edit, browser rerun, live network/provider/AWS/production, commit/push, KI-W7]
+```
+
+`I125` must:
+
+1. Reperform CV110 for the four current file results, prove C155 changed only
+   the exact cleanup query string, and prove the assembled implementation/test
+   changed-file set remains the exact three §17.0 paths/digest.
+2. Reuse CV111 only after unchanged C152/C153 hashes and dependency closure.
+3. Run the exact CV112 database command once against the requester-supplied
+   isolated URL. Require 2/0/0, the exact `SCN-KI-046` certificate, and schema
+   row-count zero. A behavioral failure is not an identical recovery.
+4. If CV112 passes, execute CV113 through CV115 and CH20 exactly as §17.4.
+5. Record `READY_FOR_PARENT_REVIEW` only after every gate passes. A new failure
+   outside the three-file scope or not mechanically determined by DEC-KI-058 is
+   `PARENT_BLOCKED`.

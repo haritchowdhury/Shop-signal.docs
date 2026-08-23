@@ -984,6 +984,29 @@ paid_cost_usd: "0.00"
 status: DISCLOSED
 ```
 
+## `EV-KI-W6-TC43` — requester commit reconciliation after I125 stop
+
+```yaml
+evidence_id: EV-KI-W6-TC43
+timestamp: 2026-08-24T03:38:00+05:30
+actor: KI-W6-WINDOW-AGENT
+observed_backend_commit: 6a1b3a7823886cac43794df45b822c44f651c859
+prior_backend_commit: d07995e0c3712fe0e49c24f051f2703112aa72a9
+commit_actor: requester
+committed_path: email_scraper/test/aws-pipeline-domain.integration.test.js
+commit_diff_stat: {files: 1, insertions: 1, deletions: 1}
+committed_change: accepted C155 exact cleanup text cast only
+domain_integration_test_sha256: a3a2e1f55257e0c165b10ba8e5452c54249dd8b38f07e6bf76f5ebef74a9649c
+accepted_bytes_changed_by_commit: false
+backend_status: clean
+frontend_commit: 5e441aae7e2f3a132b2c7fc85bf1bc525d3d5cb6
+frontend_status: clean
+blocker_effect: none; I125 remains PARENT_BLOCKED at CV114 because the two required correction paths remain outside the authorized three-file scope
+agent_commit_or_push: false
+external_mutations: []
+status: RECONCILED
+```
+
 ## `EV-KI-W6-TC16` — DEC-KI-055 command protocol supersession recorded
 
 ```yaml
@@ -1018,6 +1041,999 @@ actor: KI-W6-WINDOW-AGENT
 claim: EV-KI-W6-TC18 is the complete I120 CV91-CV94 gate record and terminal blocker, but the patch anchor placed it physically near TC17 rather than after TC16.
 semantic_chronology_tail: [EV-KI-W6-TC16, EV-KI-W6-TC17, EV-KI-W6-TC18, EV-KI-W6-TC19]
 content_integrity: no prior evidence entry was deleted or rewritten; TC18 retains its full command, result, cleanup, localization and parent-disposition record
+implementation_or_test_effect: none
+external_mutations: []
+paid_cost_usd: "0.00"
+status: DISCLOSED
+```
+
+## `EV-KI-W6-TC20` — state-189 reconciliation, C149 acceptance and CV98 PASS
+
+```yaml
+evidence_id: EV-KI-W6-TC20
+timestamp: 2026-08-23T23:55:00+05:30
+actor: KI-W6-WINDOW-AGENT
+parent_window: KI-W6
+parent_assignment: ASG-KI-W6-WA-16
+parent_active_state: 189
+parent_active_state_revision: 85772f6b28264a4ae4a74e656a5d4d01192a3e5f3eebf498d22b2c96dfc65e58
+authority: [DEC-KI-056, EV-KI-A-115, CHG-KI-087]
+subwindow: KI-W6-C149
+implementation_owner: REQUESTER_AUTHORIZED_PARENT_DIRECT
+review_owner: KI-W6-WINDOW-AGENT
+baseline:
+  frontend_commit: f981b34eeb79764a2e9e7ee96779f99907228a3f
+  file_sha256: c035094b1276161c6d69e4aa87b25a02c4aa360e8a0aea606f72d2385650d55f
+candidate:
+  file_sha256: 8a9cffc39e33689a69b0c89200b4cfae1af31ff410270dc1a867205acb4ce0b6
+  diff_stat: 1 insertion / 1 deletion
+  exact_edit: replace the sole domain-prefix message-type predicate with `(event.messageTypes || []).includes("aggregation.check")`
+  attributable_path: frontend/test/browser/keyword-intelligence-e2e.mjs
+  attributable_path_set_digest: 3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867
+independent_review:
+  - State-189 pins, assignment, parent revisions, backend commit and frontend baseline all recomputed byte-equal.
+  - Transforming the baseline with only DEC-KI-056's exact replacement produced bytes equal to the candidate.
+  - `node --check test/browser/keyword-intelligence-e2e.mjs` and `git diff --check` passed.
+  - Exact old occurrence count is 0; exact new occurrence count is 1.
+  - In-memory inverse replacement falsified the unchanged source oracle; the fresh real source passed.
+  - Exact reconstruction proves the SQS-kind guard, trace floor, watchdog, ceiling, diagnostics, cleanup, 26 cases, 13 controls and all other bytes unchanged.
+  - Backend is clean at requester commit 9fc714ad9c96a396aa31426fc0d3c1e08da07050; frontend has exactly the one attributable path.
+review_disposition: ACCEPTED_FOR_INTEGRATION
+cv98:
+  status: PASS
+  backend_commit: 9fc714ad9c96a396aa31426fc0d3c1e08da07050
+  frontend_baseline_commit: f981b34eeb79764a2e9e7ee96779f99907228a3f
+  changed_path_count: 1
+  planned_path_digest: 3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867
+subordinate_decomposition_revision: ddfdd9503baf5360599e03ac2b463c06260a4f06f31fef10318fe8de8acc834c
+subordinate_state_transition: state 15 PARENT_BLOCKED -> state 16 IN_PROGRESS
+next_gate: KI-W6-CV99
+prohibited_actions_observed: []
+external_mutations: []
+paid_cost_usd: "0.00"
+status: IN_PROGRESS
+```
+
+## `EV-KI-W6-TC40` — I125 corrected isolated bridge and unchanged-composition proof pass
+
+```yaml
+evidence_id: EV-KI-W6-TC40
+timestamp: 2026-08-24T03:32:00+05:30
+actor: KI-W6-WINDOW-AGENT
+role: WINDOW-AGENT-INTEGRATION-ASSESSOR
+parent_window: KI-W6
+assessment: KI-W6-I125
+assignment: ASG-KI-W6-I125
+accepted_predecessors: [KI-W6-C152, KI-W6-C153, KI-W6-C154, KI-W6-C155]
+cv110:
+  status: PASS
+  current_file_hashes:
+    discovery_worker: 6e5c87054dd0c9a4d85744188e27baf3f24b8b159895f89453db49d2596835ef
+    discovery_test: fde5c7d3cc7353c3676adb3685637b3b84bca94f9f4675b100656d2b9f0f33ce
+    domain_integration_test: a3a2e1f55257e0c165b10ba8e5452c54249dd8b38f07e6bf76f5ebef74a9649c
+  c155_exact_one_line_cleanup_cast: PASS
+  exact_changed_file_set: [email_scraper/src/aws-pipeline/services/discovery-worker.js, email_scraper/test/aws-pipeline-discovery.test.js, email_scraper/test/aws-pipeline-domain.integration.test.js]
+  changed_file_set_digest: 36780bc47b3e5950c707525292655be1a10d8b39cbeff69ccea1023dcc5074e1
+  syntax_diff_and_leaf_oracles: PASS
+cv111:
+  status: PASS_REUSED
+  c152_c153_and_dependencies_unchanged: true
+  focused_certificate: {tests: 7/0/0, cases: 1/1/1/1, controls: 1/1/1}
+cv112:
+  command: ALLOW_DATABASE_TESTS=true node -r dotenv/config --test --test-concurrency=1 --test-isolation=none test/aws-pipeline-domain.integration.test.js
+  sandbox_privilege: elevated from start under inherited authorized-local policy
+  execution_count_for_I125: 1
+  exit: 0
+  totals: {tests: 2, pass: 2, fail: 0, skip: 0, duration_ms: 100523.826372}
+  preserved_g8: PASS
+  scn_ki_046: PASS
+  coverage:
+    cases: {required: 2, registered: 2, executed: 2, activated: 2}
+    local_case_digest: 781e64d60420ac6ddd741ea8a046489c44cd9e214e4bddf907a0d73a38e49ba7
+    package_case_digest: 5342728a461b927afe37050b5f4e8df6df30f42698e3b75144f5872334e19600
+    controls: {expected: 2, falsified: 2, fresh_positive: 2}
+    local_control_digest: 86c8b8431fc8414016eed1f66702017debe1b0d0cf7b6796bdbcbba9f3e38f6f
+    package_control_digest: 97b186a9948a3fbb4077f1d6f4d39b2d635ad1325e37fb82cdb095661bfbe4ee
+  cardinality: {queries: 100, stable_domains: 1000, shops: 1000, run_stores: 1000, lead_tasks: 1000, lead_messages: 1000}
+  rollback_visibility: 0
+  cleanup_exact_schema_row_count: 0
+  paid_cost_usd: "0.00"
+cv113:
+  status: PASS_UNCHANGED_COMPOSITION
+  frontend_commit: 5e441aae7e2f3a132b2c7fc85bf1bc525d3d5cb6
+  browser_sha256: 2a07612d9f58c7b882573a3f3f8d7dbc99cc8a35ff3fdaea60ee10b7935601f6
+  browser_rerun: false
+  traffic_test_sha256: 3f8af953c1bee9150cea9be422ac867c7a39737c3a4e8a4b6dcd4a737b78cdfd
+  final_test_sha256: 8ed2a61a5b272e2f3f8c8c937000056ab5f41dceda56c2b398791e8a70b30638
+  traffic_worker_sha256: 8c98d48850aecae56a5f4b18264617565a4cf7484147f4be68e500544536c4db
+  final_aggregator_sha256: be6ce8a7c2336ebe7df2d805c2ee311b9dc7943b13e49de8677564a4bd5e22f2
+  note: prior authenticated browser handoff evidence retained; only its synthetic-fetch scale assertion remains superseded by SCN-KI-046
+external_mutations: []
+provider_aws_production_actions: []
+prohibited_actions_observed: []
+status: IN_PROGRESS
+```
+
+## `EV-KI-W6-TC41` — I125/CV114 full-suite source-oracle blocker
+
+```yaml
+evidence_id: EV-KI-W6-TC41
+timestamp: 2026-08-24T03:36:00+05:30
+actor: KI-W6-WINDOW-AGENT
+role: WINDOW-AGENT-INTEGRATION-ASSESSOR
+parent_window: KI-W6
+assessment: KI-W6-I125
+assignment: ASG-KI-W6-I125
+preserved_passes: [CV110, CV111, CV112, CV113]
+cv114:
+  command: npm test
+  execution_count: 1
+  sandbox_privilege: elevated from start under inherited authorized-local policy
+  exit: 1
+  totals: {tests: 770, pass: 693, fail: 4, skip: 73}
+  failures:
+    - test: W6-DB-12 terminal lease boundary serializes renewals before terminalization
+      safe_error: processDiscoveryMessage calls the terminal lease helper exactly once; actual 0 expected 1
+    - test: W6-NC-21 direct renewal and post-terminal stop falsify W6-DB-12
+      safe_error: discovery helper call mutation target is unique; actual 0 expected 1
+    - test: KI_W6_TXN_CLOCK_ENFORCEMENT certificate
+      safe_error: W6-DB-12 did not execute, so the exact accepted registry certificate failed
+    - test: query validation bulk path has one scale transaction and rejects sequential/default-timeout controls
+      safe_error: default-timeout negative control remained accepted; actual true expected false at line 162
+diagnosis:
+  transaction_clock_oracle:
+    affected_tests: [W6-DB-12, W6-NC-21, KI_W6_TXN_CLOCK_ENFORCEMENT certificate]
+    cause: exportedAsyncFunctionSpan selects the first opening brace after the function marker; C152's frozen exact declaration contains dependencies = {}, so the accepted oracle treats that default object literal as the complete function span and cannot observe the unchanged terminal helper call
+    product_behavior_failure: false
+    required_correction_path: email_scraper/test/aws-pipeline-transaction-clock-enforcement.test.js
+  query_validation_oracle:
+    affected_test: query validation bulk path has one scale transaction and rejects sequential/default-timeout controls
+    cause: source.replace mutates the first identical transaction-options literal in prisma-run-repository.js, the frozen module constant, rather than the inline saveQueryValidation options inspected by acceptsBulkValidationSource
+    product_behavior_failure: false
+    required_correction_path: email_scraper/test/prisma-run-repository.integration.test.js
+scope_disposition:
+  authorized_three_file_correction_possible: false
+  fourth_or_later_path_required: true
+  behavior_choice_made: false
+  oracles_weakened_or_edited: false
+  classification: NEW_FAILURE_OUTSIDE_AUTHORIZED_THREE_FILE_SCOPE
+later_cv114_commands_unexecuted: [npm run check:secrets, npm run build:lambda]
+later_gates_unexecuted: [CV115, CH20]
+implementation_or_test_edits_after_failure: []
+browser_rerun: false
+external_mutations: []
+provider_aws_production_actions: []
+paid_cost_usd: "0.00"
+prohibited_actions_observed: []
+status: PARENT_BLOCKED
+```
+
+## `EV-KI-W6-TC38` — C155 leaf execution return
+
+```yaml
+evidence_id: EV-KI-W6-TC38
+timestamp: 2026-08-24T03:25:00+05:30
+actor: /root/ki_w6_c155_leaf
+role: IMPLEMENTATION-SUBAGENT
+parent_window: KI-W6
+subwindow: KI-W6-C155
+assignment: ASG-KI-W6-C155
+writable_file: email_scraper/test/aws-pipeline-domain.integration.test.js
+starting_sha256: 2860a2315d2267bf61028ade7a8101aaa2c89f89d92ef92138609b1495b803f4
+ending_sha256: a3a2e1f55257e0c165b10ba8e5452c54249dd8b38f07e6bf76f5ebef74a9649c
+attributable_changed_file_set: [email_scraper/test/aws-pipeline-domain.integration.test.js]
+exact_diff: one cleanup query-string replacement adding nspname::text AS nspname
+local_now:
+  syntax: PASS
+  diff_hygiene: PASS
+  one_file_and_unchanged_byte_oracle: PASS
+  source_oracle: PASS
+  no_cast_negative_control: FALSIFIED
+  fresh_source: PASS
+database_execution: false
+external_mutations: []
+paid_cost_usd: "0.00"
+prohibited_actions_observed: []
+successor_work_started: false
+direct_parent_communication: false
+status: AWAITING_WINDOW_REVIEW
+```
+
+## `EV-KI-W6-TC39` — C155 independent acceptance and I125 start
+
+```yaml
+evidence_id: EV-KI-W6-TC39
+timestamp: 2026-08-24T03:28:00+05:30
+actor: KI-W6-WINDOW-AGENT
+role: WINDOW-AGENT-REVIEWER
+reviewed_subwindow: KI-W6-C155
+assignment: ASG-KI-W6-C155
+independent_review:
+  ending_sha256: a3a2e1f55257e0c165b10ba8e5452c54249dd8b38f07e6bf76f5ebef74a9649c
+  exact_one_line_diff: PASS
+  text_cast_and_alias: PASS
+  exact_parameterized_schema_predicate_preserved: PASS
+  residual_length_and_zero_assertion_preserved: PASS
+  every_other_byte_preserved: PASS
+  syntax_and_diff: PASS
+  negative_control_and_fresh_positive: PASS 1/1
+  database_execution_by_leaf: false
+  prohibited_action_audit: PASS
+review_disposition: ACCEPTED_FOR_INTEGRATION
+accepted_subwindow: KI-W6-C155
+next_assessment: KI-W6-I125
+external_mutations: []
+paid_cost_usd: "0.00"
+```
+
+## `EV-KI-W6-TC36` — requester-resumed I124 reached cleanup-query deserialization defect
+
+```yaml
+evidence_id: EV-KI-W6-TC36
+timestamp: 2026-08-24T03:18:00+05:30
+actor: KI-W6-WINDOW-AGENT
+role: WINDOW-AGENT-INTEGRATION-ASSESSOR
+parent_window: KI-W6
+assessment: KI-W6-I124
+assignment: ASG-KI-W6-I124
+gate: CV112 requester-authorized fresh attempt
+command: ALLOW_DATABASE_TESTS=true node -r dotenv/config --test --test-concurrency=1 --test-isolation=none test/aws-pipeline-domain.integration.test.js
+sandbox_privilege: elevated from start under inherited authorized-local policy
+exit: 1
+totals: {tests: 2, pass: 1, fail: 1, skip: 0, duration_ms: 106499.614634}
+passed:
+  - G8 atomically checkpoints domains, preserves audits, fences visibility, and rolls back conflicts
+failed:
+  test: SCN-KI-046 bridges 100 strict discovery artifacts to 1,000 fenced durable lead tasks
+  duration_ms: 79360.947552
+  location: cleanup administrator absence query after exact-schema DROP
+  safe_error: {prisma: P2010, category: unsupported_PostgreSQL_name_deserialization}
+  exact_cause: SELECT nspname returns PostgreSQL internal type name, which Prisma 6.19.3 does not deserialize
+  expected: selected witness column cast to text while exact parameterized predicate and zero-row oracle remain unchanged
+cleanup_postcondition: exact generated schema DROP completed before the failing absence query; both Prisma clients disconnected
+classification: MECHANICALLY_CORRECTABLE_TEST_ORACLE_DEFECT
+governing_decision: DEC-KI-058 exact schema-absence witness
+root_cause_file: email_scraper/test/aws-pipeline-domain.integration.test.js
+expanded_parent_scope_required: false
+invalidated_gates: [CV112, CV113, CV114, CV115, CH20]
+implementation_or_test_edits_during_assessment: []
+browser_rerun: false
+provider_aws_production_actions: []
+paid_cost_usd: "0.00"
+status: CORRECTION_REQUIRED
+```
+
+## `EV-KI-W6-TC37` — C155/I125 corrective package ready and C155 reserved
+
+```yaml
+evidence_id: EV-KI-W6-TC37
+timestamp: 2026-08-24T03:20:00+05:30
+actor: KI-W6-WINDOW-AGENT
+role: WINDOW-AGENT-CORRECTION-AUTHOR
+certificate: CORRECTIVE-SUBWINDOW-READY
+parent_window: KI-W6
+corrective_subwindow: KI-W6-C155
+assignment: ASG-KI-W6-C155
+trigger_evidence: [EV-KI-W6-TC36]
+governing_parent_decisions: [DEC-KI-058]
+corrected_prior_subwindow: KI-W6-C154
+writable_file: email_scraper/test/aws-pipeline-domain.integration.test.js
+starting_sha256: 2860a2315d2267bf61028ade7a8101aaa2c89f89d92ef92138609b1495b803f4
+exact_change: cast only selected pg_namespace.nspname to text and preserve the exact parameterized predicate and zero-row oracle
+predecessors: [KI-W6-C154 accepted, requester-resumed I124 CV112 diagnostic]
+invalidated_gates: [CV112, CV113, CV114, CV115, CH20]
+unresolved_parent_decisions: []
+expanded_parent_scope_required: false
+single_file_write_set: true
+unresolved_execution_choices: []
+decomposition_revision: 7227aff90d71e0601aef25b393be24df10849809e603a1e5418795e61ffdd596
+next_integration_assessment: KI-W6-I125
+assigned_agent: /root/ki_w6_c155_leaf
+database_execution_by_leaf: false
+status: IN_PROGRESS
+```
+
+## `EV-KI-W6-TC21` — I121 CV99 stopped at a disjoint handoff-abort failure
+
+```yaml
+evidence_id: EV-KI-W6-TC21
+timestamp: 2026-08-23T21:09:55+05:30
+actor: KI-W6-WINDOW-AGENT
+parent_window: KI-W6
+parent_assignment: ASG-KI-W6-WA-16
+parent_active_state: 189
+integration_assessment: KI-W6-I121
+preserved_gate: KI-W6-CV98 PASS
+gate: KI-W6-CV99
+command: ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node test/browser/keyword-intelligence-e2e.mjs
+execution_transport:
+  mode: elevated durable PTY with 4500-second outer allowance
+  stdout_stderr_path: /tmp/ki-w6-i121-cv99.browser.log
+  stdout_stderr_sha256: c0aef60d720686c716c096fae9fc448af7cbca54b68988f27ec83a1f438293b0
+  exit_status_path: /tmp/ki-w6-i121-cv99.browser.status
+  exit_status_sha256: 4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865
+result:
+  status: PARENT_BLOCKED
+  exit: 1
+  wall_time_ms: 251390
+  main_error: response-stage abort did not complete cleanly; durable-handoff-commit Error at test/browser/keyword-intelligence-e2e.mjs:649:45
+  cases_executed: 0
+  controls_executed: 0
+  downstream_outcome: not-started
+  downstream_cleanup: {drainStarted: false, settlement: settled-before-drop}
+  network_requests: 155
+  console_errors: 1
+  page_exceptions: 0
+  cleanup_steps: [browser:ok, next-server:ok, auth-server:ok, backend-server:ok, schema-absence:ok, temp-root:ok]
+  dropped_schema: kiw6_mt5ywprs98fc150c9ba6ecae
+  residual_processes: 0
+classification:
+  observable_failure: true
+  environment_invalidation_proven: false
+  e8_1_recovery_used: false
+  e8_1_recovery_permitted: false
+  reason: The test reached its intentionally intercepted runs response, but the response-stage callback's separate waitForDurableHandoffCommit oracle did not observe both the backend POST trace and durable 100-query snapshot within its frozen 30000 ms.
+scope_proof:
+  - C149 changes only line 1268's aggregation-check predicate; the failure is line 649 during the earlier handoff partition.
+  - Diagnostics report downstreamOutcome not-started, proving the corrected predicate and downstream drain were never exercised.
+  - Candidate reconstruction proves no other browser byte changed; backend is clean at the pinned committed correction.
+  - Any retry, 30000 ms change, trace/durable observation change, handoff implementation change or second-file diagnosis exceeds DEC-KI-056/I121 authority.
+later_gates_unexecuted: [KI-W6-CV100, KI-W6-CV101, KI-W6-CH17]
+requested_parent_disposition: adjudicate the distinct response-stage durable-handoff observation failure and authorize either its exact correction or a new causal attempt; do not infer it from DEC-KI-056
+implementation_or_test_edits_after_failure: []
+provider_aws_production_actions: []
+external_mutations: []
+paid_cost_usd: "0.00"
+subordinate_state_transition: state 16 IN_PROGRESS -> state 17 PARENT_BLOCKED
+review_disposition: PARENT_BLOCKED
+```
+
+## `EV-KI-W6-TC22` — state-190 reconciliation, C150 acceptance and CV102 PASS
+
+```yaml
+evidence_id: EV-KI-W6-TC22
+timestamp: 2026-08-24T00:20:00+05:30
+actor: KI-W6-WINDOW-AGENT
+parent_window: KI-W6
+parent_assignment: ASG-KI-W6-WA-17
+parent_active_state: 190
+parent_active_state_revision: f4d4ed6ae177aa4ca492ca5cf5853051fc24eb5c5611a334035b68d5b1af6df0
+authority: [DEC-KI-057, EV-KI-A-116, CHG-KI-088]
+subwindow: KI-W6-C150
+implementation_owner: REQUESTER_AUTHORIZED_PARENT_DIRECT
+review_owner: KI-W6-WINDOW-AGENT
+baselines:
+  backend_commit: 9fc714ad9c96a396aa31426fc0d3c1e08da07050
+  frontend_pre_C149_C150_commit: f981b34eeb79764a2e9e7ee96779f99907228a3f
+  accepted_C149_digest: 8a9cffc39e33689a69b0c89200b4cfae1af31ff410270dc1a867205acb4ce0b6
+candidate:
+  frontend_commit: 9f0c4c53da4cc0268f5165d51c89a8a151237fdb
+  ending_digest: 6de55e92cfe25c8caed683cacb5ba1ae9eee5f7696874e7e372cf7f50ec3767e
+  combined_diff_stat_from_baseline: 40 insertions / 12 deletions
+  attributable_path: frontend/test/browser/keyword-intelligence-e2e.mjs
+  attributable_path_set_digest: 3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867
+independent_review:
+  - State-190 pins, parent revisions, commits and digests recomputed byte-equal; both nested worktrees are clean.
+  - Applying C149 plus every literal C150 transformation to the f981b34 baseline reconstructed the committed candidate byte-for-byte.
+  - Syntax and diff checks passed.
+  - The waiter accepts exact identity, reads durable state unconditionally, requires exact handoff ID/revision and 100-query Run, and contains no trace/HTTP gate.
+  - Handler order is response-status capture, POST-body parse/identity validation, identity storage, durable snapshot storage, then failRequest.
+  - Post-abort proof uses the stored durable snapshot; backend response-finish trace is diagnostic boolean only.
+  - Restoring a trace-gated waiter in memory falsified the unchanged source oracle; fresh real source passed.
+  - C149 exact aggregation.check predicate remains present once; product/helper/timeouts/cases/controls are unchanged outside the sole file.
+review_disposition: ACCEPTED_FOR_INTEGRATION
+cv102:
+  status: PASS
+  backend_commit: 9fc714ad9c96a396aa31426fc0d3c1e08da07050
+  frontend_commit: 9f0c4c53da4cc0268f5165d51c89a8a151237fdb
+  frontend_baseline_commit: f981b34eeb79764a2e9e7ee96779f99907228a3f
+  ending_digest: 6de55e92cfe25c8caed683cacb5ba1ae9eee5f7696874e7e372cf7f50ec3767e
+  planned_path_digest: 3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867
+subordinate_decomposition_revision: ebb27e03f0b7b02fdb6f6d6b8fcbefe5e9083ef82e788e59cf7b28a375221c22
+subordinate_state_transition: state 17 PARENT_BLOCKED -> state 18 IN_PROGRESS
+next_gate: KI-W6-CV103
+prohibited_actions_observed: []
+external_mutations: []
+paid_cost_usd: "0.00"
+status: IN_PROGRESS
+```
+
+## `EV-KI-W6-TC23` — CV103 in-scope settlement omission; C151 assigned
+
+```yaml
+evidence_id: EV-KI-W6-TC23
+timestamp: 2026-08-23T21:41:54+05:30
+actor: KI-W6-WINDOW-AGENT
+parent_assignment: ASG-KI-W6-WA-17
+parent_active_state: 190
+assessment: KI-W6-I122
+gate: KI-W6-CV103
+command: ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node test/browser/keyword-intelligence-e2e.mjs
+transport:
+  stdout_stderr_sha256: 30ad36190a2d410e20a757a443b917e72f641995d0515555e27f404e7b039b92
+  exit_status_sha256: 4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865
+result:
+  exit: 1
+  wall_time_ms: 459046
+  main_error: KI downstream drain did not settle before the bounded settle deadline
+  target_corrections_proven:
+    - C150 durable handoff identity/100-query response-abort partition passed.
+    - C149 exact aggregation.check observation passed and reached the domain-check fault partition.
+    - C145-C148 terminal lifecycle remained free of lease loss.
+  active_progress_witness:
+    lifecycle_events: 3
+    completed_messages: 1
+    durable_tasks: {pending: 90, processing: 1, succeeded: 9}
+    active_message: {queueClass: discovery, type: discovery.query, deliveryId: 166}
+    database_activity: idle/Client/ClientRead
+  downstream_outcome: pending
+  cleanup: [browser:ok, next-server:ok, auth-server:ok, backend-server:ok, schema-absence:ok, temp-root:ok]
+  dropped_schema: kiw6_mt5zxeso24340330516f7c4b
+classification:
+  disposition: CORRECTION_REQUIRED
+  rationale: the post-first-check block alone retained `Date.now() + 120000`; the workload was demonstrably progressing, so this is the mechanically governed same-file omission anticipated by state 190
+  parent_return_required: false
+correction:
+  subwindow: KI-W6-C151
+  assignment: ASG-KI-W6-C151
+  assigned_agent: KI-W6-LEAF-C151
+  writable_file: frontend/test/browser/keyword-intelligence-e2e.mjs
+  starting_digest: 6de55e92cfe25c8caed683cacb5ba1ae9eee5f7696874e7e372cf7f50ec3767e
+  expected_ending_digest: 2a07612d9f58c7b882573a3f3f8d7dbc99cc8a35ff3fdaea60ee10b7935601f6
+  exact_scope: replace only the seven-line fixed settle deadline with the frozen existing progress-watchdog and absolute-ceiling semantics
+  decomposition_revision: 6b48189c447d0fd7c066e395653a980946ea1a95e21906f36baadea47fd04801
+next_assessment: KI-W6-I123 after independent C151 acceptance
+provider_aws_production_actions: []
+external_mutations: []
+paid_cost_usd: "0.00"
+subordinate_state_transition: state 18 IN_PROGRESS -> state 19 C151 IN_PROGRESS
+status: IN_PROGRESS
+```
+
+## `EV-KI-W6-TC24` — C151 independently accepted; I123 started
+
+```yaml
+evidence_id: EV-KI-W6-TC24
+timestamp: 2026-08-23T21:50:00+05:30
+actor: KI-W6-WINDOW-AGENT
+parent_assignment: ASG-KI-W6-WA-17
+parent_active_state: 190
+subwindow: KI-W6-C151
+assignment: ASG-KI-W6-C151
+writable_file: frontend/test/browser/keyword-intelligence-e2e.mjs
+starting_digest: 6de55e92cfe25c8caed683cacb5ba1ae9eee5f7696874e7e372cf7f50ec3767e
+ending_digest: 2a07612d9f58c7b882573a3f3f8d7dbc99cc8a35ff3fdaea60ee10b7935601f6
+diff_stat: 27 insertions / 3 deletions
+attributable_path_set_digest: 3dd4230266485b5b217634b4558e3aa027264534ab8a13c52ddc2f227eca9867
+leaf_execution:
+  - applied only the frozen seven-line fixed-deadline to 31-line progress-aware settle replacement
+  - syntax, diff, ending digest, path-set, exact source, inverse restoration and fresh source checks passed
+  - ran no browser/database/build/regression gate and made no second-file/external/commit/successor change
+window_agent_independent_review:
+  - inspected the complete diff and reconstructed the candidate byte-for-byte from committed C150 with the literal S1 block
+  - exact baseline/ending/path digests pass; syntax and diff pass
+  - fixed settle deadline occurs zero times; pre- and post-first-check loops each contain trace/lifecycle/progress/no-progress/absolute-ceiling guards
+  - C149 aggregation.check and C150 durable-handoff markers remain exact
+  - restoring the seven-line block in memory equals C150 and falsifies the source oracle; fresh candidate passes
+review_disposition: ACCEPTED_FOR_INTEGRATION
+cv106: PASS
+subordinate_decomposition_revision: 5a11a5163d81e72cbb93dd9d384d238b578db2d2645df431eb775a4ac4438253
+subordinate_state_transition: state 19 C151 IN_PROGRESS -> state 20 I123 IN_PROGRESS
+next_gate: KI-W6-CV107
+provider_aws_production_actions: []
+external_mutations: []
+paid_cost_usd: "0.00"
+status: IN_PROGRESS
+```
+
+## `EV-KI-W6-TC25` — I123 stopped after localizing missing storefront-resolution substitution
+
+```yaml
+evidence_id: EV-KI-W6-TC25
+timestamp: 2026-08-23T22:20:00+05:30
+actor: KI-W6-WINDOW-AGENT
+parent_assignment: ASG-KI-W6-WA-17
+parent_active_state: 190
+assessment: KI-W6-I123
+gate: KI-W6-CV107
+command: ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node test/browser/keyword-intelligence-e2e.mjs
+transport:
+  stdout_stderr_path: /tmp/ki-w6-i123-cv107.browser.log
+  stdout_stderr_sha256: 5fb65488c03ee607c64081d9dde44433176319d42d4c3b676a0fe48ac05f3f03
+  exit_status_path: /tmp/ki-w6-i123-cv107.browser.status
+  exit_status_sha256: 4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865
+result:
+  exit: 1
+  wall_time_ms: 2171690
+  main_error: exactly 1000 stable domains must be aggregated, saw 0
+  target_corrections_proven:
+    - C150 durable-only handoff partition passed.
+    - C149 aggregation.check predicate passed.
+    - C151 removed the fixed settlement deadline; the drain ran to fulfilled completion.
+    - C145-C148 produced no terminal-heartbeat lease loss.
+  downstream_progress: {elapsedMs: 1891632, lifecycleEvents: 404, completedMessages: 202, completedMessagesPerSecond: 0.1068}
+  downstream_outcome: fulfilled
+  cases_executed: 0
+  controls_executed: 0
+  network_requests_browser: 595
+  console_errors: 2
+  page_exceptions: 0
+  cleanup: [browser:ok, next-server:ok, auth-server:ok, backend-server:ok, schema-absence:ok, temp-root:ok]
+  dropped_schema: kiw6_mt60nexb30596838efe86fbf
+localization:
+  harness_fixture: googleSearchPage creates ten synthetic `*.myshopify.com/products/result-*` links per query and parses them through the real Google parser
+  worker_path: processDiscoveryMessage passes `resolve: (result) => resolveStoreIdentity(result, identityConfig)` with no injectable resolution dependency
+  resolver_path: resolveStoreIdentity unconditionally calls the real fetchPage path for the result URL and retries its homepage on failure
+  failure_semantics: resolveStoresFromQueryPlans catches each resolution failure as an occurrence diagnostic; the task still succeeds with an artifact whose stores list is empty
+  aggregate_semantics: 100 succeeded empty-store artifacts correctly merge to zero domains; publishAwsDomainCheckpoint therefore creates zero shops/RunStores/lead tasks and completes the discovery stage
+  timing_witness: the approximately 31.5-minute 202-message drain is consistent with repeated synthetic storefront resolution attempts rather than the intended deterministic in-memory boundary
+classification:
+  disposition: PARENT_BLOCKED
+  coding_scope: outside DEC-KI-057 and the authorized browser-test file
+  substitute_fidelity_defect: the harness substitutes Google responses but not the production storefront identity fetch reached by those results
+  external_action_disclosure: backend attempted HTTP resolution of synthetic myshopify fixture hosts; DataForSEO/Google provider and AWS operations remained substituted/not called
+  paid_cost_usd: "0.00"
+required_parent_decision:
+  - authorize a production-safe optional resolver dependency on processDiscoveryMessage whose default remains resolveStoreIdentity
+  - authorize the harness helper to pass a deterministic resolver implemented by the real resolveStoreIdentity with an injected no-network fetch response for the synthetic host
+  - add focused default-path/injected-path enforcement, then run a fresh causal assessment; do not weaken the 1000-domain assertion
+later_gates_unexecuted: [KI-W6-CV108, KI-W6-CV109, KI-W6-CH19]
+implementation_or_test_edits_after_failure: []
+aws_provider_production_actions: []
+external_mutations: []
+subordinate_state_transition: state 20 I123 IN_PROGRESS -> state 21 PARENT_BLOCKED
+review_disposition: PARENT_BLOCKED
+```
+
+## `EV-KI-W6-TC26` — parent-direct C152–C154/I124 decomposition ready
+
+```yaml
+evidence_id: EV-KI-W6-TC26
+timestamp: 2026-08-24T01:35:00+05:30
+actor: PARENT-AGENT
+parent_assignment: ASG-KI-W6-WA-18
+parent_active_state: 191
+trigger: SRC-KI-059 and requester instruction that the parent perform the complete decomposition without dispatching the window agent in this session
+requester_exception:
+  rule_overridden: subwindow-standard role allocation requiring the window agent to author subordinate leaves
+  rules_preserved: [one writable file per correction, decision completeness, execution completeness, enforcement completeness, exact DAG, independent window-agent review, zero-write integration assessment, append-only evidence, live state, no leaf-to-parent communication]
+artifacts:
+  s1_path: KEYWORD_INTELLIGENCE_KI_W6_SUBWINDOW_CHECKLIST.md
+  s1_sha256: 1a028c0fda10e9c7d35360b284608b7ae10aa6a9fb8a966175d4db5239574ff3
+  s2_path: KEYWORD_INTELLIGENCE_KI_W6_TRANSACTION_CLOCK_SUBWINDOW_STATE.md
+  s2_sha256: 869f5c943c321233d839bd67772702cf9d24f03a23f44d988f4136ace4290f8a
+parent_pins:
+  standard: cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb523ede32848
+  subwindow_standard: 842c29550c06c22d63e0a058a27cb8a9ff6b538b3168d2c83a384890b44247f0
+  discovery: 022bd827f4827d3d543f48b502a6a5cbe5f74dbd54dd47b86b622463100a8d15
+  decision: 4c32d520e379347f32046aae735ebe012f9c421d65e9faa67127e70f72e74747
+  checklist: f177e81f1b40e4789fc7c0540685b15565e73145bc943ef4369629f8e59e5130
+  traceability: 36fe0aa2667f3cfa3091ddeca74c3d3c08720bd80a97d781d1c1b6c29d24f289
+  active_state: 21da71d5acb6cfd98144d80ef54e592d9e614702485fa6a10f8c854ac6285620
+backend_baseline:
+  commit: 9fc714ad9c96a396aa31426fc0d3c1e08da07050
+  discovery_worker: 34013f07b18b5040d848eda6eff5abb53b5db0daf174dfea375fd6002bd9c212
+  discovery_test: f76f1f35cc07843ec634bd464fffb16b7ab298f3646a657d70fee13be561d7f2
+  domain_integration_test: e1f10225fb301c9b798032e70fa2bc57c38de5e7374f8c419b7b3928104f3779
+frontend_unchanged:
+  commit: 5e441aae7e2f3a132b2c7fc85bf1bc525d3d5cb6
+  browser_sha256: 2a07612d9f58c7b882573a3f3f8d7dbc99cc8a35ff3fdaea60ee10b7935601f6
+decomposition:
+  first: KI-W6-C152
+  wave_4: [KI-W6-C153, KI-W6-C154]
+  barrier: C152 independently accepted before wave 4; both wave-4 leaves independently accepted before I124
+  assessment: KI-W6-I124
+  multi_file_leaves: 0
+  duplicate_file_owners: 0
+  unresolved_interfaces: 0
+  unresolved_intermediate_states: 0
+  unresolved_execution_choices: 0
+  unresolved_evidence_references: 0
+  unmapped_requirements: 0
+  unmapped_decisions: 0
+  unmapped_tasks: 0
+  unmapped_cases: 0
+  unmapped_controls: 0
+planned_changed_set:
+  count: 3
+  digest: 36780bc47b3e5950c707525292655be1a10d8b39cbeff69ccea1023dcc5074e1
+coverage:
+  new_cases: [W6-DB-13, W6-DB-14, W6-DB-15]
+  new_case_digest: 5342728a461b927afe37050b5f4e8df6df30f42698e3b75144f5872334e19600
+  new_controls: [W6-NC-22, W6-NC-23, W6-NC-24]
+  new_control_digest: 97b186a9948a3fbb4077f1d6f4d39b2d635ad1325e37fb82cdb095661bfbe4ee
+  final_case_count: 43
+  final_case_digest: 5ef52fb9ed7a7cc182302cd2c2441712f5745f52948c4fb1f10b6e759c4dbe71
+  final_control_count: 24
+  final_control_digest: 3bd895f41f3689c1c1d421d1ea0056c095e1d4cd57d3f90e3987f79104719707
+gate_policy:
+  browser_rerun: prohibited
+  isolated_database_runs: 1 after final C154 edit
+  regression_secret_build_runs: 1 each after final edit
+  sandbox_recovery: one identical elevated recovery only after proven environment invalidation
+  provider_aws_production_actions: []
+  paid_cost_usd: "0.00"
+dispatch:
+  window_agent_launched_by_parent_this_session: false
+  leaf_assigned_by_parent_this_session: false
+  receiving_window_agent_action: verify state-191 pins, assign C152, independently review it, dispatch/review wave 4, personally execute I124
+certificate: SUBWINDOW-DECOMPOSITION-READY
+status: READY_FOR_WINDOW_AGENT_DISPATCH
+```
+
+## `EV-KI-W6-TC27` — state-191 receiving preflight and C152 reservation
+
+```yaml
+evidence_id: EV-KI-W6-TC27
+timestamp: 2026-08-24T02:05:00+05:30
+actor: KI-W6-WINDOW-AGENT
+parent_window: KI-W6
+parent_assignment: ASG-KI-W6-WA-18
+subwindow: KI-W6-C152
+assignment: ASG-KI-W6-C152
+receiving_preflight:
+  active_state: {version: 191, sha256: 21da71d5acb6cfd98144d80ef54e592d9e614702485fa6a10f8c854ac6285620}
+  parent_standard_sha256: cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb523ede32848
+  subwindow_standard_sha256: 842c29550c06c22d63e0a058a27cb8a9ff6b538b3168d2c83a384890b44247f0
+  contract_sha256: 8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c
+  discovery_sha256: 022bd827f4827d3d543f48b502a6a5cbe5f74dbd54dd47b86b622463100a8d15
+  decision_sha256: 4c32d520e379347f32046aae735ebe012f9c421d65e9faa67127e70f72e74747
+  parent_checklist_sha256: f177e81f1b40e4789fc7c0540685b15565e73145bc943ef4369629f8e59e5130
+  traceability_sha256: 36fe0aa2667f3cfa3091ddeca74c3d3c08720bd80a97d781d1c1b6c29d24f289
+  decomposition_sha256: 1a028c0fda10e9c7d35360b284608b7ae10aa6a9fb8a966175d4db5239574ff3
+  backend_commit: 9fc714ad9c96a396aa31426fc0d3c1e08da07050
+  frontend_commit: 5e441aae7e2f3a132b2c7fc85bf1bc525d3d5cb6
+  backend_status: clean
+  frontend_status: clean
+  starting_file_sha256: 34013f07b18b5040d848eda6eff5abb53b5db0daf174dfea375fd6002bd9c212
+  discovery_test_sha256: f76f1f35cc07843ec634bd464fffb16b7ab298f3646a657d70fee13be561d7f2
+  domain_integration_test_sha256: e1f10225fb301c9b798032e70fa2bc57c38de5e7374f8c419b7b3928104f3779
+  browser_sha256: 2a07612d9f58c7b882573a3f3f8d7dbc99cc8a35ff3fdaea60ee10b7935601f6
+  planned_file_set_digest: 36780bc47b3e5950c707525292655be1a10d8b39cbeff69ccea1023dcc5074e1
+assignment:
+  leaf_identity: /root/ki_w6_c152_leaf
+  writable_file: email_scraper/src/aws-pipeline/services/discovery-worker.js
+  communication: leaf-to-window-agent-only
+  may_start_successor: false
+  status: IN_PROGRESS
+prohibited_actions_confirmed: [second-file edit, database, browser, build, live network, provider, AWS, production, commit, push, parent communication, KI-W7]
+external_mutations: []
+paid_cost_usd: "0.00"
+```
+
+## `EV-KI-W6-TC28` — C152 leaf execution return
+
+```yaml
+evidence_id: EV-KI-W6-TC28
+timestamp: 2026-08-24T02:14:00+05:30
+actor: /root/ki_w6_c152_leaf
+role: IMPLEMENTATION-SUBAGENT
+parent_window: KI-W6
+subwindow: KI-W6-C152
+assignment: ASG-KI-W6-C152
+revisions: {active_state: 191, decomposition: 1a028c0fda10e9c7d35360b284608b7ae10aa6a9fb8a966175d4db5239574ff3, decision: 4c32d520e379347f32046aae735ebe012f9c421d65e9faa67127e70f72e74747}
+writable_file: email_scraper/src/aws-pipeline/services/discovery-worker.js
+starting_sha256: 34013f07b18b5040d848eda6eff5abb53b5db0daf174dfea375fd6002bd9c212
+ending_sha256: 6e5c87054dd0c9a4d85744188e27baf3f24b8b159895f89453db49d2596835ef
+starting_repository_change_set_digest: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+attributable_changed_file_set: [email_scraper/src/aws-pipeline/services/discovery-worker.js]
+diff_stat: {files: 1, insertions: 10, deletions: 2}
+commands_and_outcomes:
+  - node --check src/aws-pipeline/services/discovery-worker.js: PASS
+  - git diff --check: PASS
+  - exact source and production-call-site oracle: PASS; handler remains a two-argument caller
+  - invalid dependency runtime preflight: PASS; five shapes each PIPELINE_INPUT_CONFLICT with zero manifest reads
+  - two non-mutating negative controls plus fresh source: PASS 2/2/1
+  - byte-preservation oracle: PASS; only the two prescribed transformation regions differ
+environment_invalidation:
+  first_attempt: supplemental nested git show failed with spawnSync git EPERM and produced no usable result or mutation
+  read_only_postcondition: same ending digest and exact one-file changed set
+  identical_escalated_recovery: PASS
+negative_controls: {expected: 2, falsified: 2, fresh_positive: 1}
+skipped_cases: []
+unexpected_cases: []
+external_mutations: []
+paid_cost_usd: "0.00"
+prohibited_actions_observed: []
+successor_work_started: false
+direct_parent_communication: false
+status: AWAITING_WINDOW_REVIEW
+```
+
+## `EV-KI-W6-TC29` — C152 independent acceptance and wave-4 reservation
+
+```yaml
+evidence_id: EV-KI-W6-TC29
+timestamp: 2026-08-24T02:18:00+05:30
+actor: KI-W6-WINDOW-AGENT
+role: WINDOW-AGENT-REVIEWER
+parent_window: KI-W6
+reviewed_subwindow: KI-W6-C152
+assignment: ASG-KI-W6-C152
+independent_review:
+  actual_sha256: 6e5c87054dd0c9a4d85744188e27baf3f24b8b159895f89453db49d2596835ef
+  actual_diff_stat: {files: 1, insertions: 10, deletions: 2}
+  actual_changed_file_set: [email_scraper/src/aws-pipeline/services/discovery-worker.js]
+  exact_transformation: PASS; signature, plain-object/key/function guard, imported fallback and selected callback match Section 17.1
+  preserved_behavior: PASS; only production handler call remains two-argument
+  syntax: PASS
+  diff_hygiene: PASS
+  runtime_preflight: PASS; five invalid shapes, zero manifest reads
+  negative_controls: PASS; fallback removal and unknown-key allowance each falsify the oracle, fresh source passes
+  prohibited_action_audit: PASS
+review_disposition: ACCEPTED_FOR_INTEGRATION
+accepted_subwindow: KI-W6-C152
+reserved_wave: KI-W6-WAVE-4
+wave_members:
+  - {subwindow: KI-W6-C153, assignment: ASG-KI-W6-C153, agent: /root/ki_w6_c153_leaf, writable_file: email_scraper/test/aws-pipeline-discovery.test.js}
+  - {subwindow: KI-W6-C154, assignment: ASG-KI-W6-C154, agent: /root/ki_w6_c154_leaf, writable_file: email_scraper/test/aws-pipeline-domain.integration.test.js}
+parallel_resource_proof: distinct files and commands; C154 is forbidden to connect to the database before I124; C153 is non-stateful; frozen accepted C152 is their only new dependency
+external_mutations: []
+paid_cost_usd: "0.00"
+```
+
+## `EV-KI-W6-TC30` — C153 leaf execution return
+
+```yaml
+evidence_id: EV-KI-W6-TC30
+timestamp: 2026-08-24T02:31:00+05:30
+actor: /root/ki_w6_c153_leaf
+role: IMPLEMENTATION-SUBAGENT
+parent_window: KI-W6
+subwindow: KI-W6-C153
+assignment: ASG-KI-W6-C153
+writable_file: email_scraper/test/aws-pipeline-discovery.test.js
+starting_sha256: f76f1f35cc07843ec634bd464fffb16b7ab298f3646a657d70fee13be561d7f2
+ending_sha256: fde5c7d3cc7353c3676adb3685637b3b84bca94f9f4675b100656d2b9f0f33ce
+accepted_dependency_sha256: {discovery_worker: 6e5c87054dd0c9a4d85744188e27baf3f24b8b159895f89453db49d2596835ef}
+starting_repository_change_set_digest: 3e6d3ef9917d3361885ff027b164a819b18ffecc097987d45c95b5eba12c8c4c
+attributable_changed_file_set: [email_scraper/test/aws-pipeline-discovery.test.js]
+diff_stat: {files: 1, insertions: 219, deletions: 0}
+commands_and_outcomes:
+  - node --test --test-isolation=none test/aws-pipeline-discovery.test.js: PASS 7 pass 0 fail 0 skip
+  - node --check test/aws-pipeline-discovery.test.js: PASS
+  - git diff --check: PASS
+activation_witnesses:
+  invalid_dependency_shapes: 5 each PIPELINE_INPUT_CONFLICT before zero manifest reads
+  positive: {resolver_calls: 10, deterministic_fetches: 10, strict_stores: 10, distinct_stable_keys: 10, distinct_myshopify_domains: 10, immutable_writes: 1, terminal_transitions: 1, aggregation_checks: 1}
+  default_expression: imported resolveStoreIdentity selected by nullish fallback
+  control: sentinel produced zero stores; unchanged oracle threw; fresh positive passed
+coverage:
+  required: [W6-DB-13]
+  registered: [W6-DB-13]
+  executed: [W6-DB-13]
+  activated: [W6-DB-13]
+  case_digest: 16c3ae0197bc816cf676cb918ebf93914b30ebd40024966fd0afc0e3b7da3694
+  controls: [W6-NC-22]
+  control_digest: e705d01d6de53d7659e5da3a2d0e44f89e7527206e0788d84d6684fb7361bb20
+  control_expected_falsified_fresh: 1/1/1
+skipped_cases: []
+duplicate_case_ids: []
+unexpected_case_ids: []
+missing_activation_witnesses: []
+external_mutations: []
+paid_cost_usd: "0.00"
+prohibited_actions_observed: []
+successor_work_started: false
+direct_parent_communication: false
+status: AWAITING_WINDOW_REVIEW
+```
+
+## `EV-KI-W6-TC31` — C153 independent acceptance
+
+```yaml
+evidence_id: EV-KI-W6-TC31
+timestamp: 2026-08-24T02:35:00+05:30
+actor: KI-W6-WINDOW-AGENT
+role: WINDOW-AGENT-REVIEWER
+reviewed_subwindow: KI-W6-C153
+assignment: ASG-KI-W6-C153
+independent_review:
+  current_sha256: fde5c7d3cc7353c3676adb3685637b3b84bca94f9f4675b100656d2b9f0f33ce
+  actual_changed_hunks: one import and one appended helper/test block only
+  preexisting_top_level_tests: five unchanged
+  exact_fixture: PASS; ranks 1-10 and frozen URL/body/config/host checks
+  real_path: PASS; processDiscoveryMessage plus real resolveStoreIdentity with only injected fetch
+  no_global_fetch_replacement: PASS
+  positive_oracle: PASS; exact 10/10/10 uniqueness and one write/terminal/check
+  invalid_dependency_oracle: PASS; five shapes before manifest reads
+  negative_control: PASS; sentinel falsifies unchanged oracle and fresh positive follows
+  certificate: PASS; exact 1/1/1/1 and 1/1/1 registries/digests
+  syntax_and_diff: PASS
+  one_file_attribution: PASS
+  prohibited_action_audit: PASS
+review_disposition: ACCEPTED_FOR_INTEGRATION
+accepted_subwindow: KI-W6-C153
+remaining_wave_member: KI-W6-C154
+external_mutations: []
+paid_cost_usd: "0.00"
+```
+
+## `EV-KI-W6-TC32` — C154 leaf execution return
+
+```yaml
+evidence_id: EV-KI-W6-TC32
+timestamp: 2026-08-24T02:46:00+05:30
+actor: /root/ki_w6_c154_leaf
+role: IMPLEMENTATION-SUBAGENT
+parent_window: KI-W6
+subwindow: KI-W6-C154
+assignment: ASG-KI-W6-C154
+writable_file: email_scraper/test/aws-pipeline-domain.integration.test.js
+starting_sha256: e1f10225fb301c9b798032e70fa2bc57c38de5e7374f8c419b7b3928104f3779
+ending_sha256: 2860a2315d2267bf61028ade7a8101aaa2c89f89d92ef92138609b1495b803f4
+accepted_dependency_sha256: {discovery_worker: 6e5c87054dd0c9a4d85744188e27baf3f24b8b159895f89453db49d2596835ef}
+attributable_changed_file_set: [email_scraper/test/aws-pipeline-domain.integration.test.js]
+diff_stat: {files: 1, insertions: 472, deletions: 1}
+local_now:
+  syntax: PASS
+  diff_hygiene: PASS
+  exact_source_oracle: PASS
+  registry_removal_control: FALSIFIED
+  cleanup_absence_removal_control: FALSIFIED
+  fresh_source: PASS
+  preexisting_G8_test_block: BYTE_IDENTICAL
+coverage:
+  required: [W6-DB-14, W6-DB-15]
+  registered: [W6-DB-14, W6-DB-15]
+  executed_runtime: []
+  local_case_digest: 781e64d60420ac6ddd741ea8a046489c44cd9e214e4bddf907a0d73a38e49ba7
+  controls: [W6-NC-23, W6-NC-24]
+  local_control_digest: 86c8b8431fc8414016eed1f66702017debe1b0d0cf7b6796bdbcbba9f3e38f6f
+  package_case_digest: 5342728a461b927afe37050b5f4e8df6df30f42698e3b75144f5872334e19600
+  package_control_digest: 97b186a9948a3fbb4077f1d6f4d39b2d635ad1325e37fb82cdb095661bfbe4ee
+  controls_expected_falsified_fresh: 2/2/1
+deferred_gate: I124 CV112 exclusively owns the one database execution and runtime activation
+database_connections_or_execution: false
+environment_invalidation: combined optional child-process git comparison received spawnSync git EPERM; top-level read-only source and git comparisons completed with no mutation
+external_mutations: []
+paid_cost_usd: "0.00"
+prohibited_actions_observed: []
+successor_work_started: false
+direct_parent_communication: false
+status: AWAITING_WINDOW_REVIEW
+```
+
+## `EV-KI-W6-TC33` — C154 independent acceptance and I124 start
+
+```yaml
+evidence_id: EV-KI-W6-TC33
+timestamp: 2026-08-24T02:52:00+05:30
+actor: KI-W6-WINDOW-AGENT
+role: WINDOW-AGENT-REVIEWER
+reviewed_subwindow: KI-W6-C154
+assignment: ASG-KI-W6-C154
+independent_review:
+  current_sha256: 2860a2315d2267bf61028ade7a8101aaa2c89f89d92ef92138609b1495b803f4
+  changed_file_attribution: PASS; only C154 file beyond independently owned C152/C153 files
+  preexisting_G8_test_block: BYTE_IDENTICAL
+  imports_and_appended_scenario_only: PASS
+  strict_fixture_generation: PASS; 100 ordered queries times 10 parsed unique identities
+  real_assembly_path: PASS; processDomainAggregation plus real coordinator/run repository and isolated helper
+  success_oracle: PASS; exact read/write/publication/dispatch and durable 1000-member assertions present
+  rollback_oracle: PASS; diagnostic conflict and zero visibility assertions present
+  stale_fence_oracle: PASS; wrong aggregation token rejects before durable visibility
+  cleanup_oracle: PASS; exact generated schema drop plus administrator absence query and zero row count
+  source_negative_controls: PASS 2/2 with fresh source
+  registry_digests: PASS; local and complete three-member sets exact
+  syntax_and_diff: PASS
+  prohibited_action_audit: PASS; database execution remains unused
+review_disposition: ACCEPTED_FOR_INTEGRATION
+accepted_wave: KI-W6-WAVE-4
+accepted_subwindows: [KI-W6-C153, KI-W6-C154]
+next_assessment: KI-W6-I124
+external_mutations: []
+paid_cost_usd: "0.00"
+```
+
+## `EV-KI-W6-TC34` — I124/CV112 blocked by isolated-database transfer quota
+
+```yaml
+evidence_id: EV-KI-W6-TC34
+timestamp: 2026-08-24T02:58:00+05:30
+actor: KI-W6-WINDOW-AGENT
+role: WINDOW-AGENT-INTEGRATION-ASSESSOR
+parent_window: KI-W6
+assessment: KI-W6-I124
+assignment: ASG-KI-W6-I124
+accepted_predecessors: [KI-W6-C152, KI-W6-C153, KI-W6-C154]
+cv110:
+  status: PASS
+  reconstructed_files:
+    - {path: email_scraper/src/aws-pipeline/services/discovery-worker.js, sha256: 6e5c87054dd0c9a4d85744188e27baf3f24b8b159895f89453db49d2596835ef}
+    - {path: email_scraper/test/aws-pipeline-discovery.test.js, sha256: fde5c7d3cc7353c3676adb3685637b3b84bca94f9f4675b100656d2b9f0f33ce}
+    - {path: email_scraper/test/aws-pipeline-domain.integration.test.js, sha256: 2860a2315d2267bf61028ade7a8101aaa2c89f89d92ef92138609b1495b803f4}
+  exact_changed_file_set: [email_scraper/src/aws-pipeline/services/discovery-worker.js, email_scraper/test/aws-pipeline-discovery.test.js, email_scraper/test/aws-pipeline-domain.integration.test.js]
+  changed_file_set_digest: 36780bc47b3e5950c707525292655be1a10d8b39cbeff69ccea1023dcc5074e1
+  one_file_ownership_and_oracles: PASS
+cv111:
+  status: PASS_REUSED
+  c152_sha256_unchanged: 6e5c87054dd0c9a4d85744188e27baf3f24b8b159895f89453db49d2596835ef
+  c153_sha256_unchanged: fde5c7d3cc7353c3676adb3685637b3b84bca94f9f4675b100656d2b9f0f33ce
+  dependency_change_after_c154: false
+  focused_certificate: {tests: 7/0/0, cases: 1/1/1/1, controls: 1/1/1}
+cv112:
+  command: ALLOW_DATABASE_TESTS=true node -r dotenv/config --test --test-concurrency=1 --test-isolation=none test/aws-pipeline-domain.integration.test.js
+  sandbox_privilege: elevated from start under inherited authorized-local policy
+  execution_count: 1
+  exit: 1
+  totals: {tests: 2, pass: 0, fail: 2, skip: 0}
+  observed_failure: both G8 and SCN-KI-046 failed in createIsolatedTestSchema before migrations or application writes
+  safe_error: {prisma: P2010, postgres: 53000, category: isolated_database_data_transfer_quota_exceeded}
+  expected: 2 pass 0 fail 0 skip plus exact bridge certificate and schema absence witness
+  activation: configured isolated database endpoint accepted connection but rejected CREATE SCHEMA for quota before returning a scoped schema
+  durable_postcondition: no createIsolatedTestSchema call returned and therefore no disposable schema, migration, application row or production write was created by either test
+  classification: REQUIRED_EXTERNAL_PREREQUISITE_UNAVAILABLE
+  identical_recovery_allowed: false
+  reason_no_recovery: this is neither sandbox denial nor execution-channel invalidation; the frozen one-run gate is consumed
+failed_assertion_diagnosis:
+  causal_path: isolated helper administrator CREATE SCHEMA -> database service quota rejection -> test cannot reach bridge behavior
+  root_cause_file: NONE
+  governed_correction_within_three_files: false
+  new_parent_decision_required: database quota restoration or a newly authorized isolated database prerequisite
+  invalidated_gates: [CV112, CV113, CV114, CV115, CH20]
+later_gates_unexecuted: [CV113, CV114, CV115, CH20]
+implementation_or_test_edits_after_failure: []
+browser_rerun: false
+provider_aws_production_actions: []
+external_mutations: []
+paid_cost_usd: "0.00"
+prohibited_actions_observed: []
+status: PARENT_BLOCKED
+```
+
+## `EV-KI-W6-TC35` — requester-authorized I124 database-prerequisite resumption
+
+```yaml
+evidence_id: EV-KI-W6-TC35
+timestamp: 2026-08-24T03:12:00+05:30
+actor: KI-W6-WINDOW-AGENT
+role: WINDOW-AGENT-INTEGRATION-ASSESSOR
+parent_window: KI-W6
+assessment: KI-W6-I124
+assignment: ASG-KI-W6-I124
+resumption_authority: requester explicitly stated that a new URL with fresh quota was configured, committed the code, and requested another attempt
+prior_blocker: EV-KI-W6-TC34 isolated database quota rejection before schema creation
+prerequisite_preflight:
+  test_database_url_present: true
+  production_database_url_present: true
+  exact_url_equality: false
+  values_printed_or_retained: false
+repository_delta:
+  prior_backend_commit: 9fc714ad9c96a396aa31426fc0d3c1e08da07050
+  current_backend_commit: d07995e0c3712fe0e49c24f051f2703112aa72a9
+  current_backend_status: clean
+  committed_paths:
+    - email_scraper/src/aws-pipeline/services/discovery-worker.js
+    - email_scraper/test/aws-pipeline-discovery.test.js
+    - email_scraper/test/aws-pipeline-domain.integration.test.js
+  accepted_file_hashes_unchanged: true
+  discovery_worker_sha256: 6e5c87054dd0c9a4d85744188e27baf3f24b8b159895f89453db49d2596835ef
+  discovery_test_sha256: fde5c7d3cc7353c3676adb3685637b3b84bca94f9f4675b100656d2b9f0f33ce
+  domain_integration_test_sha256: 2860a2315d2267bf61028ade7a8101aaa2c89f89d92ef92138609b1495b803f4
+authorization_boundary:
+  fresh_cv112_attempts: 1
+  browser_rerun: false
+  implementation_edits: false
+  provider_aws_production_actions: []
+  paid_cost_usd: "0.00"
+status: IN_PROGRESS
+```
+
+## `EV-KI-W6-TC42` — I125 evidence chronology and digest correction disclosure
+
+```yaml
+evidence_id: EV-KI-W6-TC42
+timestamp: 2026-08-24T03:37:00+05:30
+actor: KI-W6-WINDOW-AGENT
+claim: EV-KI-W6-TC40 and EV-KI-W6-TC41 are the complete I125 CV110-CV114 gate records, but their append patch matched an earlier IN_PROGRESS anchor and placed them physically before TC36-TC39 and TC35.
+semantic_chronology_tail: [EV-KI-W6-TC35, EV-KI-W6-TC36, EV-KI-W6-TC37, EV-KI-W6-TC38, EV-KI-W6-TC39, EV-KI-W6-TC40, EV-KI-W6-TC41, EV-KI-W6-TC42]
+digest_correction:
+  field: EV-KI-W6-TC40.cv113.traffic_worker_sha256
+  recorded_typo: 8c98d48850aecae56a5f4b18264617565a4cf7484147f4be68e500544536c4db
+  authoritative_sha256: 8c98d48850aecae56a5f4b18264617565b4cf7484147f4be68e500544536c4db
+  verification: direct sha256sum equals the §13.2 pinned digest
+content_integrity: no prior evidence entry was deleted or rewritten; TC40 and TC41 retain their complete gate and blocker records
 implementation_or_test_effect: none
 external_mutations: []
 paid_cost_usd: "0.00"
