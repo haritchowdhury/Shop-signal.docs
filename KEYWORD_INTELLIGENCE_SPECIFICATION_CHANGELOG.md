@@ -1454,3 +1454,19 @@ compatibility_or_migration_effect: additive optional service dependency only; pr
 authorization_effect: parent-authored C152-C154/I124 package is immediately dispatchable by KI-W6-WINDOW-AGENT without decomposition; window agent independently reviews leaves and stops at PASS or one new out-of-scope blocker
 resumption_state: A5 state 191 READY under ASG-KI-W6-WA-18; C152 then parallel C153/C154 then I124; stop before KI-W7
 ```
+
+```yaml
+change_id: CHG-KI-090
+timestamp: 2026-08-24T04:15:00+05:30
+trigger_evidence: [EV-KI-W6-TC41, requester direct fix and W6 closure authorization, EV-KI-W6-TC44, EV-KI-A-118]
+reason: The final full regression exposed two test-source oracles that selected the wrong JavaScript brace/literal after accepted production changes; neither was a product failure.
+changed_requirements: []
+changed_decisions: []
+affected_windows: [KI-W6 closed; KI-W7 remains unassigned and prohibited]
+implementation_effect: test-only C156 and C157; production bytes and behavior unchanged
+verification: [focused 11 pass 0 fail 2 guarded skips, npm test 697 pass 0 fail 73 guarded skips, secret scan PASS, lambda build PASS, isolated bridge 2 pass 0 fail, final 43 cases and 24 controls exact]
+compatibility_or_migration_effect: none
+authorization_effect: KI-W6 accepted_through; no successor authority
+requester_commit_pending_paths: [email_scraper/test/aws-pipeline-transaction-clock-enforcement.test.js, email_scraper/test/prisma-run-repository.integration.test.js]
+resumption_state: A5 state 193 COMPLETE; KI-W7 not assigned or started
+```

@@ -2901,3 +2901,69 @@ prohibited: [implementation/test edit, browser rerun, live network/provider/AWS/
 5. Record `READY_FOR_PARENT_REVIEW` only after every gate passes. A new failure
    outside the three-file scope or not mechanically determined by DEC-KI-058 is
    `PARENT_BLOCKED`.
+
+## 19. Parent-direct final source-oracle corrections and W6 closure
+
+The requester authorizes the parent to fix the two source-test defects reported
+by `EV-KI-W6-TC41` and finish the remaining W6 gates. No product behavior,
+production source, coverage membership or accepted database evidence changes.
+
+### 19.1 `KI-W6-C156` — exported-function body locator
+
+```yaml
+subwindow_id: KI-W6-C156
+type: CORRECTION
+writable_file: email_scraper/test/aws-pipeline-transaction-clock-enforcement.test.js
+starting_sha256: c604ba492300d488ca7476c61940a0dd606ebdf3b5e9b55ad25688150a195511
+```
+
+In `exportedAsyncFunctionSpan`, replace only the direct search for the first
+`{` after the marker with this algorithm: set `parametersOpen` to
+`start + marker.length - 1`; obtain `parameters` with
+`callTextFrom(source, parametersOpen)`; set `open` to
+`source.indexOf("{", parametersOpen + parameters.length)`. Preserve the
+existing absent-body guard and brace-depth scan. This makes the body locator
+skip C152's valid `dependencies = {}` default without weakening any W6-DB-12 or
+W6-NC-21 oracle.
+
+### 19.2 `KI-W6-C157` — method-scoped timeout negative control
+
+```yaml
+subwindow_id: KI-W6-C157
+type: CORRECTION
+writable_file: email_scraper/test/prisma-run-repository.integration.test.js
+starting_sha256: 7a64121a723cbd23e0c62f8b5b759518074d8b47df9e5d8054be7c6833f1b143
+```
+
+Inside the bulk-validation source test, compute the exact
+`saveQueryValidation` start/end boundaries already used by
+`acceptsBulkValidationSource`, require the method contains the transaction
+profile literal exactly once, replace that literal only inside the extracted
+method, reconstruct the complete source, and pass the reconstructed source to
+the unchanged negative assertion. Do not replace the module-level frozen
+constant and do not weaken `acceptsBulkValidationSource`.
+
+C156 and C157 are disjoint one-file corrections and may execute in parallel.
+Each requires syntax, `git diff --check`, its focused test, a non-mutating
+inverse control proving the old defect, and independent parent review.
+
+### 19.3 `KI-W6-I126` — final gates
+
+After both corrections pass:
+
+1. Run together, with database tests guarded off:
+   `node --test --test-isolation=none test/aws-pipeline-transaction-clock-enforcement.test.js test/prisma-run-repository.integration.test.js`.
+   Require zero failures; the integration file's database cases may skip only
+   because `ALLOW_DATABASE_TESTS` is absent, while its non-database bulk source
+   test must execute.
+2. Run `npm test` once and require zero failures with only guarded integration
+   skips.
+3. Run `npm run check:secrets` once and require success.
+4. Run `npm run build:lambda` once and require success with no tracked build
+   output or sibling damage.
+5. Reuse the already-passed CV112 bridge and CV113 composition evidence; verify
+   the final 43-case/24-control memberships and digests remain unchanged, both
+   nested worktrees contain only the two attributable test edits, paid cost is
+   `$0.00`, and no provider/AWS/browser/production operation occurred.
+6. Append final evidence, mark KI-W6 `READY_FOR_PARENT_REVIEW`, then the parent
+   accepts/closes KI-W6 and stops before KI-W7.

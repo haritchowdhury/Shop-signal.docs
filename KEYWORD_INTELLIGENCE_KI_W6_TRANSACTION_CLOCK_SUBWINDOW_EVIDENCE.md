@@ -984,6 +984,79 @@ paid_cost_usd: "0.00"
 status: DISCLOSED
 ```
 
+## `EV-KI-W6-TC44` — C156/C157 accepted and I126 final gates pass
+
+```yaml
+evidence_id: EV-KI-W6-TC44
+timestamp: 2026-08-24T04:12:00+05:30
+actor: PARENT-AGENT
+assignment: ASG-KI-W6-PARENT-CLOSE-01
+requester_authority: fix the two remaining source-oracle defects, run the remaining gates, and close KI-W6
+corrections:
+  - id: KI-W6-C156
+    file: email_scraper/test/aws-pipeline-transaction-clock-enforcement.test.js
+    starting_sha256: c604ba492300d488ca7476c61940a0dd606ebdf3b5e9b55ad25688150a195511
+    ending_sha256: aba0cf3697d13fcbf32f0abbe6271dd3929d7960583bf5ea001bf04391c8e8d6
+    diff: 3 insertions 1 deletion
+    result: exportedAsyncFunctionSpan now locates the body only after the complete parameter list, preserving W6-DB-12 and W6-NC-21
+  - id: KI-W6-C157
+    file: email_scraper/test/prisma-run-repository.integration.test.js
+    starting_sha256: 7a64121a723cbd23e0c62f8b5b759518074d8b47df9e5d8054be7c6833f1b143
+    ending_sha256: cb92f1dfa11887e74b846f7b1f611e14487b69e5bd671c4053c53bd07bf5e897
+    diff: 11 insertions 1 deletion
+    result: the default-timeout negative control mutates only saveQueryValidation and leaves the module constant untouched
+focused_gate:
+  command: node --test --test-isolation=none test/aws-pipeline-transaction-clock-enforcement.test.js test/prisma-run-repository.integration.test.js
+  totals: {tests: 13, pass: 11, fail: 0, skip: 2}
+  guarded_skips: [two database integration tests because ALLOW_DATABASE_TESTS was absent]
+  enforcement: {required: 5, registered: 5, executed: 5, failures: 0, controls_falsified: 4}
+full_regression:
+  restricted_attempt: {exit: 1, file_wrappers_failed: [keyword-intelligence-api.test.js, query-review-server.test.js, server.test.js], classification: localhost sandbox bind invalidation}
+  identical_escalated_recovery: {exit: 0, tests: 770, pass: 697, fail: 0, skip: 73}
+  command_unchanged: npm test
+secret_gate:
+  command: npm run check:secrets
+  result: PASS
+lambda_build_gate:
+  command: npm run build:lambda
+  result: PASS
+  tracked_build_output: []
+preserved_gates:
+  cv112: PASS; 2/2 isolated bridge including 100 queries to 1000 domains shops RunStores lead tasks and messages; rollback visibility zero; schema residual zero
+  cv113: PASS; browser evidence retained through 100 validation calls and 100 discovery dispatches; unchanged downstream 1000-domain and 12000-outcome corpora compose after the bridge
+final_coverage:
+  cases: 43
+  case_digest: 5ef52fb9ed7a7cc182302cd2c2441712f5745f52948c4fb1f10b6e759c4dbe71
+  controls: 24
+  control_digest: 3bd895f41f3689c1c1d421d1ea0056c095e1d4cd57d3f90e3987f79104719707
+scope:
+  backend_dirty_paths: [test/aws-pipeline-transaction-clock-enforcement.test.js, test/prisma-run-repository.integration.test.js]
+  frontend_dirty_paths: []
+  production_source_changes_in_this_correction: []
+  provider_aws_browser_production_actions: []
+  paid_cost_usd: "0.00"
+  commits_or_pushes: []
+subordinate_state_transition: state 32 PARENT_BLOCKED -> state 33 READY_FOR_PARENT_REVIEW
+certificate: WINDOW-AGENT-INTEGRATION-PASS
+status: PASS
+```
+
+## `EV-KI-W6-TC45` — parent acceptance synchronized
+
+```yaml
+evidence_id: EV-KI-W6-TC45
+timestamp: 2026-08-24T04:15:00+05:30
+actor: PARENT-AGENT
+parent_evidence: EV-KI-A-118
+active_state: {version: 193, sha256: d7715931685f421adfdeb931d73a797a258d831dad606dafdb87fe6612dd230f}
+subordinate_state: {version: 34, sha256: 11a50f9923e878be0fddb453ec07d65fede6cc8ef4daab7f0545893a798358d9, status: COMPLETE}
+accepted_through: KI-W6
+next_window: KI-W7
+successor_assigned_or_started: false
+requester_commit_pending_paths: [email_scraper/test/aws-pipeline-transaction-clock-enforcement.test.js, email_scraper/test/prisma-run-repository.integration.test.js]
+status: COMPLETE
+```
+
 ## `EV-KI-W6-TC43` — requester commit reconciliation after I125 stop
 
 ```yaml
@@ -2034,6 +2107,22 @@ digest_correction:
   authoritative_sha256: 8c98d48850aecae56a5f4b18264617565b4cf7484147f4be68e500544536c4db
   verification: direct sha256sum equals the §13.2 pinned digest
 content_integrity: no prior evidence entry was deleted or rewritten; TC40 and TC41 retain their complete gate and blocker records
+implementation_or_test_effect: none
+external_mutations: []
+paid_cost_usd: "0.00"
+status: DISCLOSED
+```
+
+## `EV-KI-W6-TC46` — final evidence chronology disclosure
+
+```yaml
+evidence_id: EV-KI-W6-TC46
+timestamp: 2026-08-24T04:16:00+05:30
+actor: PARENT-AGENT
+claim: The append anchors placed new final-gate EV-KI-W6-TC44 and parent-acceptance EV-KI-W6-TC45 physically after historical EV-KI-W6-TC15 and before the pre-existing EV-KI-W6-TC43. Their authoritative semantic order is after EV-KI-W6-TC43 and EV-KI-W6-TC42.
+semantic_chronology_tail: [EV-KI-W6-TC42, EV-KI-W6-TC43, EV-KI-W6-TC44, EV-KI-W6-TC45, EV-KI-W6-TC46]
+id_integrity: TC43 remains the pre-existing requester-commit reconciliation; TC44 is final gates; TC45 is parent acceptance; no duplicate IDs remain
+content_integrity: no historical entry was deleted or rewritten
 implementation_or_test_effect: none
 external_mutations: []
 paid_cost_usd: "0.00"

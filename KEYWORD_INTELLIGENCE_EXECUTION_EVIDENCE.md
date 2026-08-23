@@ -6878,3 +6878,42 @@ unmapped_cases: 0
 requester_prerequisites: []
 status: READY_FOR_DISPATCH
 ```
+
+### `EV-KI-A-118` — KI-W6 accepted and closed
+
+- **Product proof:** the corrected isolated bridge passed 2/2 and established
+  100 confirmed queries → 1,000 stable domains, Shops, RunStores, lead tasks and
+  queue messages through the real domain aggregator and repositories. Maximum
+  rollback and stale fencing exposed zero durable visibility; the disposable
+  schema was absent after cleanup.
+- **Final corrections:** C156 fixes only the source parser that mistook
+  `dependencies = {}` for a function body. C157 scopes its negative mutation to
+  `saveQueryValidation`. Both are test-only and preserve every production byte
+  and coverage oracle.
+- **Final gates:** focused 11 pass/0 fail/2 guarded skips; identical escalated
+  `npm test` 697 pass/0 fail/73 guarded skips after the restricted localhost
+  attempt was invalidated; secret scan passed; all Lambda packages built; final
+  43-case and 24-control digests matched exactly.
+- **Scope/privacy/cost:** only the two exact test files remain modified for the
+  requester to commit. Frontend is clean. No provider, AWS, browser, production,
+  non-isolated database, paid or destructive action occurred; cost `$0.00`.
+- **Acceptance:** parent accepts KI-W6. `accepted_through` advances to KI-W6.
+  KI-W7 is not assigned or started.
+
+```yaml
+certificate: PARENT-WINDOW-ACCEPTED
+window: KI-W6
+assignment: ASG-KI-W6-PARENT-CLOSE-01
+active_state: 193
+subordinate_evidence: EV-KI-W6-TC44
+focused: {pass: 11, fail: 0, skip: 2}
+regression: {pass: 697, fail: 0, skip: 73}
+isolated_bridge: {pass: 2, fail: 0, domains: 1000, rollback_visibility: 0, residual_schemas: 0}
+secret_scan: PASS
+lambda_build: PASS
+cases: {count: 43, digest: 5ef52fb9ed7a7cc182302cd2c2441712f5745f52948c4fb1f10b6e759c4dbe71}
+controls: {count: 24, digest: 3bd895f41f3689c1c1d421d1ea0056c095e1d4cd57d3f90e3987f79104719707}
+requester_commit_pending_paths: [email_scraper/test/aws-pipeline-transaction-clock-enforcement.test.js, email_scraper/test/prisma-run-repository.integration.test.js]
+successor_started: false
+status: COMPLETE
+```
