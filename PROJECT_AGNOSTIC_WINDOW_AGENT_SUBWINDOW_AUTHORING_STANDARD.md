@@ -3,7 +3,7 @@
 ## 0. Status, purpose, and authority
 
 This standard defines how a window agent converts one parent-authored,
-decision-complete implementation window into sequential, single-file
+decision-complete implementation window into dependency-safe, single-file
 sub-windows that lower-level implementation agents can execute mechanically.
 
 It supplements, and does not replace,
@@ -130,9 +130,11 @@ The window agent:
 
 - independently inspects the current working tree and primary source;
 - verifies that the parent window is complete enough to decompose;
-- compiles a sequential single-file dependency graph;
+- compiles a dependency-safe single-file graph and any explicitly authorized
+  parallel waves;
 - authors every implementation and corrective sub-window;
-- assigns exactly one active implementation sub-window at a time;
+- assigns either one active implementation sub-window or one explicitly
+  authorized wave of mutually independent single-file sub-windows;
 - reviews every returned file diff and its local evidence;
 - personally performs every whole-window assessment sub-window;
 - diagnoses integration failures before authoring corrections;
@@ -263,6 +265,30 @@ next_subwindow: exact ID | STOP
 blocker: null
 last_updated: ISO-8601
 ```
+
+When the parent assignment explicitly permits parallel leaves, replace the
+singular fields from `current_subwindow` through `current_status` above with:
+
+```yaml
+current_parallel_wave: WAVE-1 | null
+active_subwindows:
+  - subwindow_id: W1-S001
+    assignment_id: ASG-W1-S001
+    assigned_agent: exact identity
+    subwindow_type: FILE | CORRECTION
+    authorized_write_file: exact canonical path
+    authorized_read_scope: [exact paths, directories, symbols, or artifacts]
+    authorized_actions: []
+    prohibited_actions: []
+    may_start_successor: false
+    current_status: READY | IN_PROGRESS | AWAITING_WINDOW_REVIEW
+```
+
+Every member must have a distinct assignment and writable file. The fields
+before `current_subwindow`, plus `accepted_subwindows`, `next_subwindow`,
+`blocker`, and `last_updated`, remain singular window-level authority.
+`active_subwindows` becomes an empty list before an integration assessment or
+the next wave begins.
 
 Only the window agent may update `S2`. A lower-level agent's completion report
 does not itself change state or authorize a successor.
@@ -479,9 +505,9 @@ It is assigned to and personally executed by the window agent. It has:
 It is not delegated to a verifier subagent. It may update only the window
 agent's authorized coordination artifacts.
 
-### 5.4 Required sequential lifecycle
+### 5.4 Required dependency-safe lifecycle
 
-Only one sub-window may be active at a time:
+The default remains one active sub-window at a time:
 
 ```text
 DRAFT DECOMPOSITION
@@ -494,14 +520,36 @@ DRAFT DECOMPOSITION
   -> integration assessment by window agent
        -> PASS -> parent handoff
        -> CORRECTION_REQUIRED
-            -> one or more sequential single-file corrective sub-windows
+            -> one or more dependency-safe single-file corrective sub-windows
             -> window-agent review after each
             -> new integration assessment by window agent
             -> repeat until PASS or PARENT_BLOCKED
 ```
 
-Parallel implementation sub-windows are prohibited by this standard. Disjoint
-files do not create implied parallel authority.
+Parallel implementation sub-windows are permitted only when the parent
+assignment explicitly authorizes parallel execution and `S1` freezes each
+wave's exact members. A parallel wave is conforming only when:
+
+1. every member owns one distinct canonical writable file and one distinct
+   assignment ID;
+2. no member consumes an output, interface, generated artifact, mutable test
+   fixture, build output, database namespace, port, process, or other mutable
+   resource produced or owned by another member in the same wave;
+3. every cross-file interface consumed by the wave was frozen by the parent
+   before dispatch;
+4. each member's commands have disjoint workspace write sets and isolated
+   disposable runtime resources;
+5. `S2.active_subwindows` records the whole wave before any member begins;
+6. each member reports only to the window agent and stops at
+   `AWAITING_WINDOW_REVIEW`;
+7. the window agent independently reviews every member and accepts the entire
+   wave before assigning any dependent wave; and
+8. failed or blocked members prevent the next wave and follow the ordinary
+   correction or parent-escalation rules.
+
+File disjointness alone never implies parallel authority. Integration
+assessments are always executed personally and sequentially by the window
+agent after all implementation waves are accepted.
 
 ### 5.5 No automatic successor authority
 
@@ -554,8 +602,8 @@ acyclic.
 
 ### 6.1 Intermediate-state contract
 
-Because cross-file changes are sequential, each edge MUST define the permitted
-intermediate state after its producer file changes and before its consumers do.
+For each dependency edge and parallel-wave boundary, define the permitted
+intermediate state after producer files change and before their consumers do.
 Record:
 
 - which local checks must already pass;
@@ -891,7 +939,7 @@ proving non-applicability.
 - [ ] `SW-D03` Required changed-file set equals planned initial file set. Evidence: ___
 - [ ] `SW-D04` Every planned file has one initial sub-window and no initial sub-window owns more than one file. Evidence: ___
 - [ ] `SW-D05` Every file operation, starting digest, anchor, interface, preserved behavior, and forbidden edit is exact. Evidence: ___
-- [ ] `SW-D06` The dependency graph is complete, sequential, acyclic, and justified by named outputs. Evidence: ___
+- [ ] `SW-D06` The dependency graph is complete and acyclic; every sequential edge and authorized parallel wave is justified by named outputs plus disjoint-resource proof. Evidence: ___
 - [ ] `SW-D07` Every cross-file interface is frozen before dependent execution. Evidence: ___
 - [ ] `SW-D08` Every intermediate state has exact permitted checks, expected temporary failures, safety, resolver, and prohibitions. Evidence: ___
 - [ ] `SW-D09` Separate production, test, fixture, schema, configuration, manifest, and generated files have separate sub-windows. Evidence: ___
@@ -1162,7 +1210,10 @@ its document and state rules reject each applicable counterexample:
     sandbox privilege is required; or
 22. a changed command, observable assertion failure, surviving process,
     workspace/external mutation or external action is accepted as automatic
-    sandbox recovery.
+    sandbox recovery; or
+23. parallel leaves overlap a dependency, writable file, generated output,
+    database namespace, port, process, fixture, or other mutable resource, or
+    the next wave begins before every member is independently accepted.
 
 If any counterexample can still produce a passing readiness or handoff
 certificate, the standard has not been applied correctly and the decomposition
@@ -1175,7 +1226,8 @@ After authoring, report only:
 1. `AWAITING_PARENT_DECOMPOSITION_REVIEW` or `BLOCKED`;
 2. the three subordinate artifact paths and revisions;
 3. parent window and assignment IDs;
-4. initial sub-window count and exact ordered IDs;
+4. initial sub-window count, exact IDs, dependency order, and any authorized
+   parallel-wave memberships;
 5. exact planned changed-file set and digest;
 6. unmapped requirement, decision, task, scenario, and coverage counts;
 7. multi-file sub-window and duplicate-file-owner counts;

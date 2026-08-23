@@ -1,847 +1,1379 @@
-# KI-W6 Sub-Window Decomposition Checklist (`S1`)
+# KI-W6 Sub-Window Decomposition Checklist (`S1`, superseding revision)
 
-Frozen decomposition authored by `KI-W6-WINDOW-AGENT` under assignment
-`ASG-KI-W6-WA-01` (A5 state 108, `EV-KI-A-047`, `CHG-KI-024`). Once accepted
-by the parent, the sub-window blocks in §5 are immutable; corrections are
-appended under new `KI-W6-C***` IDs. This file records no execution status
-(`S2`) and no evidence (`S3`).
+This file supersedes, in full and by replacement, the state-108 decomposition
+(authored under `ASG-KI-W6-WA-01`, starting revision
+`a0e3e28b7d9e272cfa6b1eec79f224d2b156725d7ebc86b729bfe3067dd42d87`) under
+assignment `ASG-KI-W6-WA-14` (authored at A5 state 184 and approved for
+dispatch at A5 state 185). The superseded two-leaf
+`KI-W6-S001/S002` decomposition never became executable authority: its parent
+acceptance is absent and A5 state 183's continuation was itself superseded by
+`SRC-KI-055` and `DEC-KI-053`. Nothing in the superseded text grants authority
+here. This replacement is the fifteenth KI-W6 corrective sequence
+(`KI-W6-CLOCK-TXN-CLOSURE`): nine one-file leaves `KI-W6-C136`–`KI-W6-C144`
+in two explicitly authorized parallel waves, then window-agent-only
+integration assessment `KI-W6-I119`, decomposing parent tasks `KI-W6-CT20`
+through `KI-W6-CT23`. The historical reauthored decomposition
+(`KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_CHECKLIST.md`, revision
+`86b56ecaa579da2e4ec305c7c4800bbfb7b2666489dd9ceab72ca8ef0f11bc57`) remains
+read-only history. This file records no execution status (`S2`) and no
+evidence (`S3`); those are
+`KEYWORD_INTELLIGENCE_KI_W6_TRANSACTION_CLOCK_SUBWINDOW_STATE.md` and
+`KEYWORD_INTELLIGENCE_KI_W6_TRANSACTION_CLOCK_SUBWINDOW_EVIDENCE.md`.
+
+Once the parent accepts this decomposition, its sub-window blocks are
+immutable; corrections are appended under new `KI-W6-C145+` IDs.
 
 ## 0. Inherited authority and revision pins
 
 ```yaml
 parent_window_id: KI-W6
-parent_assignment_id: ASG-KI-W6-WA-01
+parent_assignment_id: ASG-KI-W6-WA-14
 window_agent_identity: KI-W6-WINDOW-AGENT
 parent_standard_path: PROJECT_AGNOSTIC_DECISION_COMPLETE_CHECKLIST_AUTHORING_STANDARD.md
-parent_standard_revision: 3b7a4fd25156e1adfbc92abb835c5f82a0d18c686b1c1150feb202f2d944d2ac
+parent_standard_revision: cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb523ede32848
 subwindow_standard_path: PROJECT_AGNOSTIC_WINDOW_AGENT_SUBWINDOW_AUTHORING_STANDARD.md
-subwindow_standard_revision: 1766f9107ce7d315877b75d4b0ea2b5521dff1c321e12f890b03787d66196ded
+subwindow_standard_revision: 842c29550c06c22d63e0a058a27cb8a9ff6b538b3168d2c83a384890b44247f0
 contract_path: KEYWORD_INTELLIGENCE_PRODUCT_CONTRACT.md
 contract_revision: 8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c
 decision_path: KEYWORD_INTELLIGENCE_DECISION_LEDGER.md
-decision_revision: c2dc635e5aa58f88c1ec465154663d314af68570fd4cbfdfca7b51c393c6f70f
+decision_revision: 2b2d75b9ebb94ae80d3cc7241ce69a2aa92a22efa755b1497887018950ccf406
 parent_checklist_path: KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md
-parent_checklist_revision: 324667cbe0d467ecf4f913c93e91087e75192bd463e0c05b033ee418754a362e
+parent_checklist_revision: 679e9a7d986775d60fa9f2a9b7cd9568084652534c857f7109482426653b1d36
 parent_active_state_path: ACTIVE_EXECUTION_STATE.md
-parent_active_state_revision: A5 state 108 (assignment block; pins A1/A3/A4 byte-equal above)
+parent_active_state_revision: state 185 (parent decomposition-approval block; pins above verified byte-equal)
+superseded_s1_starting_revision: a0e3e28b7d9e272cfa6b1eec79f224d2b156725d7ebc86b729bfe3067dd42d87
+trigger_evidence: [SRC-KI-055, EV-KI-A-110]
+governing_decisions: [DEC-KI-051, DEC-KI-052, DEC-KI-053]
 ```
 
-Scenario authority: `SCN-KI-018` (checklist §"SCN-KI-018 — Full local maximum
-path", lines 2993–3012) is the sole remaining uncovered scenario;
-`SCN-KI-001`–`017` are parity-complete through accepted windows W1–W5 (scenario
-audit recorded in `EV-KI-A-047`), so this decomposition allocates exactly
-`SCN-KI-018` plus the `KI-W6-T1` failure/restart/owner matrix, count ceilings
-(`DEC-KI-024`), and negative-search obligations (`KI-W6-V4`).
+All six authoring pins were recomputed and verified byte-equal against A5
+state 184 before authoring (recorded in S3 `EV-KI-W6-TC01`). The corrected S1
+was independently approved and pinned by the parent at A5 state 185
+(`EV-KI-W6-TC03`). A revision mismatch at dispatch time blocks assignment.
 
-### 0.1 Recorded interpretations (parent decomposition review required)
+Scenario authority: this sequence implements the parent's supplemental
+`SCN-KI-044` (complete clock/profile/round-trip closure) and preserves
+`SCN-KI-018` as the unchanged causal flow executed by `KI-W6-I119`'s
+`KI-W6-CV87` gate.
 
-1. **UI-leg fidelity (`KI-W6-T1` items 1/6/13).** A real-session browser E2E is
-   impossible locally without the external Neon Auth service: the server-side
-   session cookie is validated upstream (`NEON_AUTH_BASE_URL`), every existing
-   browser harness authenticates nothing, and `/runs/*` is proxy-protected.
-   `KI-W6-S002` therefore freezes the accepted W5/G-R1 mechanism — real
-   production Next build, real Chrome CDP, deterministic same-origin fetch
-   interception — with fixtures that are path-derived (built by the same frozen
-   deterministic generators that drive `KI-W6-S001`) and an aggregate
-   `pathWitness` block in its certificate that `KI-W6-I001` compares byte-equal
-   against `KI-W6-S001`'s executed-path certificate values. Real-API
-   authenticity, real authentication (`x-user-id` over real HTTP), the real
-   worker, the real probe, and the real merge are carried entirely by
-   `KI-W6-S001`; `S002` proves the real UI operating on contract-real data plus
-   the real unauthenticated gates (401 shapes; `/runs/*` → `/sign-in` redirect
-   through the real middleware). No oracle is weakened: every W5-grade UI
-   assertion class is re-proven on path-derived data.
-2. **"Enter existing downstream merge" endpoint (`KI-W6-T1` item 6).** Frozen
-   as the domain-aggregation boundary: `processDiscoveryMessage` ×100 →
-   `processDomainAggregation` → `domain-candidate-v1` ×1,000 +
-   `domain-stage-manifest-v1` + `publishAwsDomainCheckpoint` (1,000 `Shop`
-   rows by `stableShopIdentity`/`shopIdForStableKey`/`runStoreId`, 1,000
-   `RunStore` rows, lead stage with 1,000 tasks) + 1,000 `lead.domain`
-   dispatches. Full lead/traffic processing is downstream of the named merge
-   boundary and remains out of scope, consistent with the G10-accepted
-   aggregation tests.
-3. **Google probe mock.** `KI-W6-S001` keeps the default
-   `researchQueryValidationPipeline` (so `awsProbeSearchPage` writes real
-   `google-probe-attempt-v1`/`google-probe-result-v1` artifacts into the
-   in-memory artifact store) and mocks only the wire: an in-process
-   `globalThis.fetch` router that serves deterministic Custom Search JSON for
-   `customsearch.googleapis.com` with an exact call log (100 calls, `num=10`,
-   1,000 occurrences) and passes nothing else. DataForSEO is mocked at the
-   worker's `runtime.http` seam (W3 pattern); it never touches global fetch.
-4. **Harness composition.** `KI-W6-S001` composes three accepted patterns with
-   no new product code: the W4 `withServer` injection recipe
-   (`createLeadServer` overrides), the W3 worker runtime/message pump
-   (`runtimeFor`/`drain`, worker.test.js:181–203), and the G-R9 AWS provider
-   snapshot recipe (`awsProviderConfigSnapshot`, aws-pipeline-end-to-end
-   integration test lines 42–54). The server-side AWS branch is entered by
-   constructing `PrismaRunRepository(prisma, { runExecutionBackend: "aws",
-   ...snapshotInputs })` so keyword runs are created with
-   `executionBackend: "aws"` and the persisted provider snapshot
-   (prisma-run-repository.js:942–975, 1440–1497).
-5. **Path-derived handoff fixture.** `S002`'s intercepted `POST */runs`
-   response mirrors the real backend contract (`statusUrl:
-   "/api/runs/<runId>"`, api.js:520), and `U05` asserts the app navigates to
-   exactly that URL. This is stricter than the W5 fixture
-   (`/keywords/<id>`) and matches the shipped behavior.
-6. **Browser port and artifacts.** `S002` uses port `4348` (W5 used 4347) and
-   writes screenshots/logs under `frontend/review-evidence/keyword-intelligence/KI-W6/`
-   (gitignored runner output at leaf level; committed only by the requester).
-7. **Negative-search comment exclusion (`KI-W6-V4`).** The integrated trees
-   contain exactly one non-binding provenance comment naming the standalone
-   dashboard (`frontend/components/keyword-intelligence/keyword-dashboard.module.css:2`,
-   authored by `KI-W5-S007`). The A4 obligation is "no integrated production
-   dependency/script/import references" — a comment is none of these, and the
-   file is outside this window's two-file write scope, so a zero-match-period
-   gate would be unachievable without a scope violation. The frozen V4 rule
-   therefore asserts zero matches on non-comment lines: matches are
-   acceptable only on lines whose first non-whitespace token starts a
-   comment (`//`, `/*`, `*`, or `#`); any non-comment match fails the gate.
-   Pre-verified this session: with the exclusion, all five searches return
-   zero non-comment matches.
+### 0.1 Recorded mechanical interpretations (all cite locked decisions; none delegates a choice)
+
+1. **Statement-ceiling baseline.** CT20 item 5 requires that claim/renew/
+   terminal/aggregation database statement ceilings "not increase from the
+   post-consolidation baseline recorded by `C141`". `C141`'s dynamic spies
+   therefore record per-method transaction-internal operation counts
+   (raw-query locks, delegate reads, writes) into their activation witnesses;
+   `KI-W6-CV86` enforces the frozen ceilings. This allocates the parent's
+   recording duty to `C141` and its enforcement duty to `I119`; it changes no
+   behavior. Governing text: CT20 items 5/7.
+2. **Occurrence-count arithmetic for the frozen constants.** After `C136`, the
+   coordinator file contains exactly twelve `PIPELINE_TRANSACTION_OPTIONS`
+   tokens (one definition plus eleven usages). After `C137`, the run
+   repository contains exactly twenty-two `AWS_PIPELINE_TRANSACTION_OPTIONS`
+   tokens (one definition plus twenty-one usages) and exactly one surviving
+   inline `{ maxWait: 5_000, timeout: 30_000 }` — the `DEC-KI-051`
+   `saveQueryValidation` profile, which CT21 item 4 forbids modifying.
+   `C142` asserts these exact counts. Governing text: DEC-KI-053 transaction
+   profile; CT21 item 4.
+3. **Five-method integration coverage shape.** CT23 item 5's "five-method
+   final/lead/domain contract through direct or service activation" is
+   implemented by one new disposable-schema test in `C144` that registers
+   three zero-task stages (discovery, lead, traffic_crux), claims each
+   aggregator at a controlled inside-lease instant, and drives the five
+   instrumented readers with zero-candidate inputs (`domains: []`,
+   `selections: []`, `candidates: []`), asserting missing/invalid-now
+   pre-transaction rejection with zero writes, expired-lease
+   `PIPELINE_LEASE_LOST`, and inside-lease success. Zero-candidate inputs are
+   the minimal members already accepted by each method's strict input
+   validation (the existing `G10`/`G12` tests use the same shapes). Governing
+   text: CT23 item 5; DEC-KI-053 clock interface.
+4. **`C143` reuse-input refactor.** The existing direct
+   `readAwsReusableProfiles` call's input object is extracted verbatim into a
+   `reuseInput` const so the new rejection assertions reuse identical
+   literals; no existing assertion is weakened or removed. Governing text:
+   CT23 item 4.
+5. **Line anchors.** Line numbers cited below are authoring-time witnesses
+   into the pinned starting digests. Where a line number and the pinned digest
+   disagree, the digest governs and the leaf stops for re-verification.
+6. **`readAwsReuseInputs` `evaluatedAt` coupling.** The domain reader rejects
+   unless `input.evaluatedAt` equals the locked stage row's `createdAt`
+   (prisma-run-repository.js:1549–1550). The `C144` discovery-leg uses the
+   registered stage's returned `createdAt` as `evaluatedAt`. This is existing
+   locked behavior, not a new decision.
 
 ## 1. Parent-window scope and exclusions (copied unexpanded)
 
-- Write scope: exactly `email_scraper/test/keyword-intelligence-e2e.integration.test.js`
-  (leaf `KI-W6-S001`) and `frontend/test/browser/keyword-intelligence-e2e.mjs`
-  (leaf `KI-W6-S002`). No other workspace file may be created or edited by any
-  leaf or by the window agent.
-- Read-only scope: all application source in both repositories; the standalone
-  `KeywordSearchVolume/` reference repository (never edited, never executed as
-  an integrated runtime); all W1–W5 accepted outputs and existing
-  fixtures/harnesses; parent artifacts A1–A7.
-- Authorized actions: local test edits, local tests, isolated test-database
-  writes (`test/helpers/isolated-postgres.js` only, D2A), local builds, local
-  Chrome CDP, read-only negative searches, evidence updates.
+- Write scope: exactly the nine files of §3, each owned by exactly one leaf.
+  The window agent writes only the three coordination artifacts named in the
+  header. No other workspace file may be created or edited by any leaf or by
+  the window agent during this sequence.
+- Read-only scope: all application source and tests in `email_scraper/`; the
+  accepted W1–W6 outputs, fixtures, and harnesses; parent artifacts A1–A8;
+  the historical reauthored S1–S3; the superseded S1.
+- Authorized actions: local source/test edits, `node --check`, focused
+  `node --test` runs, isolated test-database writes
+  (`test/helpers/isolated-postgres.js` only, D2A) behind
+  `ALLOW_DATABASE_TESTS=true` with a non-production `TEST_DATABASE_URL`, the
+  one causal browser command of `KI-W6-CV87`, local builds, read-only source
+  audits, evidence updates, sandbox escalation for these local actions with
+  the inherited E8.1 identical-recovery rule (recovery limit 1 per invalidated
+  execution).
 - Prohibited: provider calls, AWS operations, production database writes,
-  algorithm changes, feature changes, unrelated cleanup, deleting the standalone
-  project, commits (requester-only), any `KI-W7` work.
-- Successor: `STOP_LOCAL`; `may_start_successor: false` everywhere.
+  schema/migration changes, package/config changes, algorithm or feature
+  changes, lease-duration/heartbeat/retry/batching changes, unrelated cleanup,
+  commits or pushes (requester-only), any `KI-W7` work, any edit to the
+  historical reauthored or superseded decompositions, any edit to A1–A8 by a
+  leaf.
+- Successor: `STOP_FOR_PARENT_REVIEW`; `may_start_successor: false` everywhere.
 
-## 2. Starting working-tree inventory (authoring time, 2026-08-20)
+## 2. Starting working-tree inventory (recorded without modification, 2026-08-23)
 
-- Backend repository clean at HEAD `fac5bb0` ("S010"); frontend repository
-  clean at HEAD `c85f93b` ("Harness escape fit"); both verified by
-  `git status --porcelain` = empty this session.
-- Root: the 36-line owner-controlled relocation set is unchanged
-  (authoritative `LC_ALL=C` porcelain digest
-  `d1a974b3248df1764007f77b4d423fc9ff0e85fc7d6add16005058e5156495db`, per
-  `EV-KI-A-045`); the only additional root changes are this window's three
-  subordinate artifacts (S1/S2/S3) once created.
-- Both planned writable files are `ABSENT` (verified).
-- Baseline suites: backend 272 tests (265 pass, 7 DB-gated skips) and frontend
-  `npm run check` exit 0 with 118/118 (`EV-KI-A-046`).
+- Backend repository clean at HEAD `173a015`; frontend repository clean at
+  HEAD `f981b34`; both verified by empty `git status --porcelain` this
+  session.
+- Root: `git status --porcelain | LC_ALL=C sort` lists exactly the eight
+  owner-controlled coordination documents (`ACTIVE_EXECUTION_STATE.md`,
+  `KEYWORD_INTELLIGENCE_DECISION_LEDGER.md`,
+  `KEYWORD_INTELLIGENCE_DISCOVERY_DOSSIER.md`,
+  `KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md`,
+  `KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md`,
+  `KEYWORD_INTELLIGENCE_SPECIFICATION_CHANGELOG.md`,
+  `KEYWORD_INTELLIGENCE_TRACEABILITY_INDEX.md`,
+  `PROJECT_AGNOSTIC_WINDOW_AGENT_SUBWINDOW_AUTHORING_STANDARD.md`); the
+  authoritative per-LF sorted-porcelain digest is
+  `565d9fb141c12fc6c056f259745965c450c65088acb62ade9c81d0193c022860`.
+  The only additional root changes during this sequence are this window's
+  three subordinate artifacts (this S1, S2, S3).
+- All nine planned files exist with the pinned §3 digests except
+  `email_scraper/test/aws-pipeline-transaction-clock-enforcement.test.js`,
+  which is `ABSENT` (verified).
+- The five production starting digests equal the accepted finals of
+  `KI-W6-C131`–`KI-W6-C134` and the post-I118 coordinator state recorded by
+  `SRC-KI-055` (coordinator `e285557a…`).
 
-## 3. Planned file set (the complete required changed-file set)
+## 3. Planned file set, DAG, waves, intermediate states, interface freeze
 
-| # | Path | Operation | Starting digest | Leaf |
-|---|---|---|---|---|
-| 1 | `email_scraper/test/keyword-intelligence-e2e.integration.test.js` | CREATE | `ABSENT` | `KI-W6-S001` |
-| 2 | `frontend/test/browser/keyword-intelligence-e2e.mjs` | CREATE | `ABSENT` | `KI-W6-S002` |
+### 3.1 Planned file set (the complete required changed-file set)
 
-Planned two-path per-LF `LC_ALL=C` set digest
-`bb9f6381cc3b65d08b696fa1f62a2d75759289b4d4f0f44554ca44a2ebf56edc`.
-Required changed-file set = planned set = files owned by initial sub-windows;
-each file has exactly one initial owner.
+| # | Path | Operation | Starting SHA-256 | Leaf | Wave |
+|---|---|---|---|---|---|
+| 1 | `email_scraper/src/aws-pipeline/repositories/pipeline-coordinator-repository.js` | MODIFY | `e285557a5dc854d0021bb71e19076d8bff6ce4e161b9ce8621acda9c24e549c4` | `KI-W6-C136` | 1 |
+| 2 | `email_scraper/src/prisma-run-repository.js` | MODIFY | `54d5f422431ec1914855b2ae5cc07ff30e9ab428f11601a7703d589ee21cef13` | `KI-W6-C137` | 1 |
+| 3 | `email_scraper/src/aws-pipeline/services/domain-aggregator.js` | MODIFY | `e873bb622c085ea34e69e3658f21dacd36d068765f821782dfc613009f3199ce` | `KI-W6-C138` | 1 |
+| 4 | `email_scraper/src/aws-pipeline/services/lead-aggregator.js` | MODIFY | `c3f2fb24576f43e6c046a87573e6e0942b9263d39c2002eec152280365cde38c` | `KI-W6-C139` | 1 |
+| 5 | `email_scraper/src/aws-pipeline/services/final-aggregator.js` | MODIFY | `416e36feeb35aedd571ae8863a413550215263a157a99ed8cf519722446f9683` | `KI-W6-C140` | 1 |
+| 6 | `email_scraper/test/pipeline-coordinator-repository.test.js` | MODIFY | `ee2f14da06e171d876c926cf2fde0f259a62dcf477f0d6873e8294d49bdb5533` | `KI-W6-C141` | 2 |
+| 7 | `email_scraper/test/aws-pipeline-transaction-clock-enforcement.test.js` | CREATE | `ABSENT` | `KI-W6-C142` | 2 |
+| 8 | `email_scraper/test/aws-pipeline-lead-aggregation.integration.test.js` | MODIFY | `102cac9694251ea5dedb40bcf44a07b771f26440202b5c81a3c5f33b98630238` | `KI-W6-C143` | 2 |
+| 9 | `email_scraper/test/aws-pipeline-final.integration.test.js` | MODIFY | `22b70d3111ea65d0e24fe9d5e82d4c03e8fe84c6b80e076335e919edd0e0e664` | `KI-W6-C144` | 2 |
+
+Sorted-member-plus-LF nine-path digest (§4 method):
+`ba4ccba7b65016b486dc2e1160bcc11a2cb08d306aff4945fad0022e3f19ad92`
+(recomputed this session; matches the parent pin). Required changed-file set =
+planned set = files owned by this sequence's leaves; each file has exactly one
+owner; no tenth file is authorized.
+
+### 3.2 DAG and parallel waves
+
+```text
+KI-W6-WAVE-1 (parallel, five production leaves, disjoint files/commands/resources):
+  KI-W6-C136  KI-W6-C137  KI-W6-C138  KI-W6-C139  KI-W6-C140
+      | (barrier: every wave-1 member independently ACCEPTED by the window agent)
+KI-W6-WAVE-2 (parallel, four test leaves, disjoint files/commands/resources):
+  KI-W6-C141  KI-W6-C142  KI-W6-C143  KI-W6-C144
+      | (barrier: every wave-2 member independently ACCEPTED)
+KI-W6-I119 (window-agent-only, sequential, zero implementation-write authority)
+      -> READY_FOR_PARENT_REVIEW -> stop before KI-W7
+```
+
+Wave conformance proofs (sub-window standard §5.4): every member owns one
+distinct canonical file and assignment ID; no member consumes an output,
+interface, generated artifact, fixture, database schema, port, or process
+owned by another member (wave 1 edits five disjoint production files whose
+consumed interfaces are already frozen by §3.4; wave 2 edits four disjoint
+test files, each reading only frozen wave-1 outputs plus existing fixtures);
+every cross-file interface consumed by either wave is frozen in §3.4 before
+dispatch; each member's commands write only its own file plus authorized
+disposable runtime state (per-leaf uniquely-named disposable schemas for
+`C143`/`C144`, `/tmp` scratch for `C142` if needed); `S2.active_subwindows`
+records the whole wave before any member begins; each member reports only to
+the window agent and stops at `AWAITING_WINDOW_REVIEW`; a failed or blocked
+member prevents the next wave. File disjointness alone creates no parallel
+authority beyond these two named waves (DEC-KI-053; revised sub-window
+standard).
+
+### 3.3 Intermediate-state contract
+
+- **After wave 1, before wave 2:** the five production files carry the frozen
+  §3.4 interfaces; behavior is closed under the existing harness `pinDates`
+  seam (services now pass real boundary clocks that `pinDates` substitution
+  controls). Local checks that must already pass: each leaf's `node --check`
+  and diff proof. Whole-window checks expected pending: every test assertion
+  of wave 2 (not yet authored/executed) and all `I119` gates. One expected
+  temporary state is exact and safe: `test/pipeline-coordinator-repository.test.js`
+  still passes unchanged (its unit fakes bypass raw SQL delegates only where
+  `registerStageInTransaction` is driven directly; the locked-row
+  consolidation does not alter that test's transaction fakes), while the
+  integration suites are not yet re-run — nothing is externally visible, no
+  provider/AWS/production surface exists, and wave 2 plus `I119` resolve the
+  pending proof. While this state exists: no commit, no `npm test` claim, no
+  parent handoff, no KI-W7 work.
+- **After `C141`, before `C142`/`C143`/`C144`:** coordinator unit coverage
+  (profiles, locked-row consolidation, no-reload) is green locally; the
+  remaining three test files are still pending. Same prohibitions.
+- **After each wave-2 member:** its local suite is green; the other members
+  may still be pending; only `I119` assembles the window.
+- **After `I119` PASS:** state is `READY_FOR_PARENT_REVIEW`; no successor
+  work; requester performs any commit.
+
+### 3.4 Interface freeze (before first dependent execution)
+
+1. **Coordinator constant (C136 output):** module-private
+   `const PIPELINE_TRANSACTION_OPTIONS = Object.freeze({ maxWait: 5_000, timeout: 30_000 });`
+   — byte-equivalent literal; passed as the second `$transaction` argument in
+   exactly the eleven methods of §5.1.
+2. **Run-repository constant (C137 output):** module-private
+   `const AWS_PIPELINE_TRANSACTION_OPTIONS = Object.freeze({ maxWait: 5_000, timeout: 30_000 });`
+   — passed as the second `$transaction` argument in exactly the twenty-one
+   methods of §5.2; `saveQueryValidation`'s existing inline equal object
+   (`DEC-KI-051`) is untouched; `renewAwsRunLease` remains one atomic
+   `updateMany` (never a `$transaction`).
+3. **Clock validator (C137 output):** module-private
+   `requireAwsPipelineNow(now)` returning `now` only when
+   `now instanceof Date && Number.isFinite(now.getTime())`, otherwise
+   throwing `PipelineInvariantError("PIPELINE_INPUT_CONFLICT")`.
+4. **Five reader signatures (C137 output):** `readAwsReuseInputs(input, now)`,
+   `readAwsReusableProfiles(input, now)`, `readAwsFinalReuseRows(input, now)`,
+   `readAwsAmbiguousDataForSeoTargets(input, now)`,
+   `readAwsTerminalCruxBigQueryWork(input, now)` — required second argument,
+   no default, validated before the transaction opens, validated value passed
+   to `assertCompleteAggregatorInTransaction`; `evaluatedAt` remains a
+   distinct durable manifest timestamp (never substituted for lease time).
+5. **Five service callers (C138–C140 output):** exactly one
+   `readAwsReuseInputs` call in `domain-aggregator.js`, one
+   `readAwsReusableProfiles` call in `lead-aggregator.js`, and
+   `readAwsAmbiguousDataForSeoTargets`, `readAwsTerminalCruxBigQueryWork`,
+   `readAwsFinalReuseRows` calls in `final-aggregator.js`, each appending
+   `new Date()` as the second argument with argument one byte-equivalent;
+   call position relative to artifact reads, ownership, materialization,
+   ledger construction, and publication unchanged.
+6. **Locked-row helpers (C136 output):** `lockedTask`, `lockedStage`,
+   `lockedRun` each execute one schema-scoped `SELECT * ... FOR UPDATE`,
+   require exactly one row, and return that raw row; no follow-up
+   `findUnique`. `recordDispatch` locks all stage tasks once with one ordered
+   `SELECT * ... FOR UPDATE`, proves cardinality and requested-item existence
+   from those rows, then performs its existing single `updateMany` returning
+   `{ count }`; lock order (tasks then stage), state predicates, fencing,
+   public return shapes, and write cardinalities unchanged.
+7. **Public surface:** no exported symbol, schema, payload, queue, artifact,
+   cost, lease-duration, heartbeat, retry, or provider-facing interface
+   changes anywhere in the nine files.
 
 ## 4. Digest method (authoritative for every set digest in this window)
 
 Lowercase SHA-256; members UTF-8-encoded; distinct; sorted by unsigned UTF-8
 byte order (`LC_ALL=C`); each member followed by exactly one LF; hashed over
-the concatenated bytes. Tool-default locale sorting is not authoritative. File
-digests are over exact raw bytes; a missing path is the literal token `ABSENT`.
-The 20-case required union
-(`W6-E01`–`W6-E12`, `W6-U01`–`W6-U08`) has digest
-`8d6d002cdf86a30459c2d140977fec3b72c30a8d1c4d612f512bd7c37ed4c523`.
+the concatenated bytes. File digests are over exact raw bytes; a missing path
+is the literal token `ABSENT`. Frozen sets for this sequence:
 
-## 5. File sub-window blocks
+- nine-path planned set: `ba4ccba7b65016b486dc2e1160bcc11a2cb08d306aff4945fad0022e3f19ad92`
+- new required cases `[W6-DB-08, W6-DB-09, W6-DB-10, W6-DB-11]`:
+  `e8bd1b4a3b3deb8f853eac0e8bcea5609278177945389f292b1b12a7309bf030`
+- new controls `[W6-NC-18, W6-NC-19, W6-NC-20]`:
+  `89e40c02b11dd426c8445de018a9d85fa2c110b6da9728cee8dff4e3cc31db1b`
+- final W6 39-case union:
+  `f8137d25f5994cc83e4ec1deaa672656d50f19692a5907b10e47399a78c6dd80`
+- final W6 20-control union:
+  `0cbaad071c1bc474102394ddc0082d61f0c366d67768dcab0eafa7b5f6a3fc88`
+
+All four were recomputed this session and match `DEC-KI-053`/the parent
+checklist (S3 `EV-KI-W6-TC01`).
+
+## 5. Sub-window blocks
 
 Semantics common to every block: the recorded
-`starting_repository_change_set_digest` is the authoring-time root set
-(`d1a974b3248df1764007f77b4d423fc9ff0e85fc7d6add16005058e5156495db`, computed
-with the §4 method); leaf preflight (P2) instead proves both nested
-repositories clean at their pinned HEADs (`fac5bb0`, `c85f93b`) or containing
-exactly the accepted predecessor endings, and the root relocation set
-unchanged. Every leaf reads the parent artifacts and installed guides named in
-its block before editing. Every leaf reports the exact §7.5 handoff and stops
-at `AWAITING_WINDOW_REVIEW`. The `prohibited_actions` list of every block is
+`starting_repository_change_set_digest` is the authoring-time root porcelain
+set digest
+`565d9fb141c12fc6c056f259745965c450c65088acb62ade9c81d0193c022860` (§4
+method over sorted porcelain lines); leaf preflight (P2) instead proves both
+nested repositories clean at their pinned HEADs (`173a015`, `f981b34`) or
+containing exactly the accepted same-wave-independent predecessor endings,
+and the eight-line owner-controlled root core set unchanged (the three
+subordinate artifacts of this window may additionally appear). Every leaf
+reads the parent artifacts and its named read scope before editing. Every
+leaf reports the exact §12.3 certificate and stops at
+`AWAITING_WINDOW_REVIEW`. The `prohibited_actions` list of every block is
 exactly: edit any second file; edit the three coordination artifacts or any
-parent artifact; start the successor or any later sub-window; communicate with
-the parent agent; mutate external state (providers, AWS, databases other than
-the prescribed disposable schema, queues, buckets); run any formatter,
-installer, generator, or snapshot-update command; weaken any existing test,
-fixture, or oracle; commit. It is not repeated per block.
+parent artifact; start the successor, another leaf, or any later sub-window;
+communicate with the parent agent; mutate external state (providers, AWS,
+databases other than the prescribed disposable schema, queues, buckets); run
+any formatter, installer, generator, or snapshot-update command; weaken any
+existing test, fixture, or oracle; commit. It is not repeated per block.
 
-### 5.1 `KI-W6-S001` — backend integrated E2E (`SCN-KI-018` spine)
+### 5.1 `KI-W6-C136` — coordinator transaction profile and locked-row consolidation
 
 ```yaml
-subwindow_id: KI-W6-S001
-type: FILE
+subwindow_id: KI-W6-C136
+type: CORRECTION
 parent_window_id: KI-W6
-parent_assignment_id: ASG-KI-W6-WA-01
-assigned_agent: LEAF (KI-W6-S001-AGENT)
-predecessors: []
+parent_assignment_id: ASG-KI-W6-WA-14
+assigned_agent: LEAF (KI-W6-C136-AGENT)
+predecessors: [KI-W6-WAVE-1 dispatch]
 successor_reserved_for: WINDOW-AGENT
-writable_file: email_scraper/test/keyword-intelligence-e2e.integration.test.js
-file_operation: CREATE
-starting_file_digest: ABSENT
-starting_repository_change_set_digest: d1a974b3248df1764007f77b4d423fc9ff0e85fc7d6add16005058e5156495db
+writable_file: email_scraper/src/aws-pipeline/repositories/pipeline-coordinator-repository.js
+file_operation: MODIFY
+starting_file_digest: e285557a5dc854d0021bb71e19076d8bff6ce4e161b9ce8621acda9c24e549c4
+starting_repository_change_set_digest: 565d9fb141c12fc6c056f259745965c450c65088acb62ade9c81d0193c022860
 read_only_scope:
-  - email_scraper/src/** (server.js, keyword-intelligence/*, aws-pipeline/**, prisma-run-repository.js, prisma-client.js, query-review.js, query-prober.js, search.js, http-client.js, config.js, api-errors.js, api-serializer.js, shop-persistence-contract.js)
-  - email_scraper/test/keyword-intelligence-worker.test.js, keyword-intelligence-worker-flow.test.js, keyword-intelligence-handoff.integration.test.js, keyword-intelligence-repository.integration.test.js, keyword-intelligence-adapter.test.js, keyword-intelligence-api.test.js
-  - email_scraper/test/helpers/isolated-postgres.js, aws-pipeline-e2e-harness.js
-  - email_scraper/test/aws-pipeline-end-to-end.integration.test.js, aws-pipeline-domain.test.js, aws-pipeline-traffic.integration.test.js
-  - email_scraper/prisma/schema.prisma, prisma.config.ts, package.json
-  - parent artifacts A1–A7, this S1, S2, S3
-authorized_actions: [create the one writable file, run node --check on it, run the file via npm run test:integration with ALLOW_DATABASE_TESTS=true and an isolated TEST_DATABASE_URL, run focused existing keyword suites, record S3 leaf evidence via the window agent]
-prohibited_actions: (the common list; additionally) any edit under email_scraper/src, any test-database use other than a disposable schema created via test/helpers/isolated-postgres.js, any real network call
+  - the writable file; prisma/schema.prisma (PipelineStage/PipelineTask/Run column names)
+  - email_scraper/test/pipeline-coordinator-repository.test.js, test/pipeline-coordinator-repository.integration.test.js
+  - DEC-KI-053; SRC-KI-055; parent checklist CT20/CT23; this S1 §3.4/§5.1; S2; S3
+authorized_actions: [apply the exact transformation below to the one writable file, run node --check, run node --test test/pipeline-coordinator-repository.test.js, run a leaf-local assertion script over the resulting file and record its output, record S3 leaf evidence via the window agent]
+prohibited_actions: (the common list)
 may_start_successor: false
 ```
 
-**Mechanical trace (§7.2):** implements `KI-W6-T1` items 1–12 for the non-UI
-surface; requirements `REQ-KI-001`–`022` (API/worker/selection/handoff/
-probe/merge subset exercised end-to-end), invariants `INV-KI-001`–`015`
-(S3-before-Neon, Neon-before-SQS, idempotent first-terminal, fenced
-publication, paid ledger reservation, owner scoping), exclusions
-`EXC-KI-001`–`008` (no cancel path; no raw provider retention), `D2`/`D2A`/`D3`
-(asserted literally), `D11` counters, `D13` safe-error surfaces; scenario
-`SCN-KI-018` (all non-UI activation witnesses); decisions `DEC-KI-002`,
-`004`–`009`, `013`–`022`, `024`, `026`–`028`. Every allocated item terminates
-in an executable assertion named below.
+**Mechanical trace (§7.2).** Implements `KI-W6-CT20` items 2–6 end-to-end.
+Requirements `REQ-KI-010`–`015/024`; invariants `INV-KI-004`–`006`,
+`INV-KI-010/011/015`; decisions `DEC-KI-053` (profile set, read
+consolidation), `DEC-KI-051` (unaffected), `DEC-KI-052` (timeout/retry
+prohibition respected — no retry added); trigger `SRC-KI-055`. Verified by
+`C141`/`C142`; cases `W6-DB-08`/`W6-DB-10`; controls `W6-NC-18`/`W6-NC-20`.
 
-**Exact file transformation (§7.3).** Create exactly this Node ESM test file;
-`node --check` must pass. Structure and content, in order:
+**Exact file transformation (§7.3).** Starting from the pinned digest
+(authoring-time anchors: `requireNow` :15–18; `lockedTask` :68–74;
+`lockedStage` :76–82; `lockedRun` :84–88; the eleven `$transaction` methods
+`registerStage` :185, `recordDispatch` :194, `claimTask` :214 (options :242),
+`renewTask` :245 (options :262), `recordTerminal` :265, `claimAggregator`
+:305, `renewAggregator` :334, `getCompleteStage` :353, `completeAggregator`
+:361, `listRecoverable` :371, `cancelRunGeneration` :394):
 
-1. **Imports (exactly):** `node:assert/strict`, `node:test`, `node:crypto`
-   (`createHash`), `test/helpers/isolated-postgres.js`
-   (`createIsolatedTestSchema`, `deployPrismaMigrations`,
-   `assertMigrationStayedInSchema`), `src/prisma-client.js`
-   (`createPrismaClient`), `src/prisma-run-repository.js`
-   (`PrismaRunRepository`, `awsProviderConfigSnapshot`), `src/keyword-intelligence/repository.js`
-   (`PrismaKeywordResearchRepository`), `src/aws-pipeline/keyword-intelligence/service.js`
-   (`processKeywordMessage`, `processInitialize`), `src/aws-pipeline/keyword-intelligence/recovery.js`
-   (`recoverKeywordWork`), `src/aws-pipeline/keyword-intelligence/keys.js`
-   (`keywordResultKey`, `keywordManifestKey`), `src/aws-pipeline/keyword-intelligence/contracts.js`
-   (`keywordMessageSchema`), `src/aws-pipeline/services/discovery-worker.js`
-   (`processDiscoveryMessage`), `src/aws-pipeline/services/domain-aggregator.js`
-   (`processDomainAggregation`), `src/aws-pipeline/repositories/pipeline-coordinator-repository.js`
-   (`PipelineCoordinatorRepository`), `src/server.js` (`createLeadServer`).
-2. **Skip gate:** `const enabled = process.env.ALLOW_DATABASE_TESTS === "true" && Boolean(process.env.TEST_DATABASE_URL);`
-   every database test uses `{ skip: !enabled }`. A non-database final
-   certificate test runs always (below).
-3. **Constants:** `OWNER = "owner_kiw6"`, `OTHER = "owner_b_kiw6"`; fixed clock
-   box `const clock = { nowMs: Date.parse("2026-08-20T00:00:00.000Z") }` and
-   `now()` returning `new Date(clock.nowMs)`; `QUEUE_URL =
-   "https://sqs.fixture/keyword-research"`, `LEAD_QUEUE_URL =
-   "https://sqs.fixture/lead"`, `BUCKET = "kiw6-fixture-bucket"`;
-   `AWS_INPUTS` = exactly the G-R9 snapshot inputs
-   (`browserlessUrl: "https://fixture.example"`, `googleSearchEngineId:
-   "fixture-cx"`, `googleResultsPerQuery: 10`, `requestTimeoutMs: 10000`,
-   `maxPagesPerStore: 5`, `pageFetchConcurrency: 2`, `maxQueries: 200`,
-   `generatedQueryCount: 10`, `queryProbeFreshnessMs: 60000`,
-   `queryProbeConcurrency: 4`, `minQueryResults: 1`, `minQueryUniqueHosts: 1`,
-   `minQueryRelevantResults: 1`, `minQueryRelevanceRatio: 0.1`,
-   `minQueryBaseScore: 1`, `browserlessEnabled: false`,
-   `enableAiNormalization: false`) plus `googleApiKey: "fixture-google-key"`,
-   `dataForSeoLogin: "fixture-login"`, `dataForSeoPassword:
-   "fixture-password"`; `SEEDS = ["seed one","seed two","seed three","seed
-   four","seed five"]` (the SCN-KI-018 five-seed input); `REQUIRED` = the
-   twelve case IDs `W6-E01..W6-E12`; registries `registered`/`executed`/
-   `skipped`/`witnesses`/`failures` arrays.
-4. **In-memory fakes (re-implement to this exact contract, single file):**
-   `memoryS3()` — a `Map`-backed S3 client accepting `PutObjectCommand`
-   (reject overwrite of an existing key with the stored body mismatch; store
-   body/metadata), `GetObjectCommand` (throw `ObjectNotFoundError`-shaped
-   error with name `"NoSuchKey"` for missing keys), returning
-   `{ status: 200 }`/`{ status: 404 }`-free shapes consumed by
-   `S3ArtifactStore` (copy the accepted shapes from
-   `keyword-intelligence-worker-flow.test.js` `memoryS3`, lines 160–182);
-   `memoryDispatcher()` — `{ sent: [], options: [], async sendOne(url,
-   message, schema) { parse via schema; push; return { sentItemIds:[1],
-   failedItemIds:[] }; }, async sendMany(url, messages, schema) { ...; return
-   { sentItemIds: messages.map((_,i)=>i), failedItemIds: [] }; } }`;
-   `keywordHttp(mode)` — the DataForSEO seam: `{ calls: [], http }` where
-   `http(url, init)` records `{ url, body: init?.body }` and answers by URL
-   substring (`keyword_suggestions`, `related_keywords`,
-   `keyword_overview`) with envelope builders below; `mode` is one of
-   `"full"` (default), `"parserDefect"`, `"ambiguousOnce"`.
-5. **Deterministic provider envelope builders (frozen):** for seed index
-   `s` (0–4), suggestions returns exactly 30 items with keyword
-   `w${s}a${String(i).padStart(2,"0")}` and related returns exactly 30 items
-   `w${s}b${String(i).padStart(2,"0")}` (300 distinct candidates total; the
-   words carry a benign product noun, e.g. `w${s}a${i} coffee grinder`
-   template — fixed literal strings); every item carries the valid metric
-   shape accepted by the strict expansion parser (copy per-item fields from
-   the accepted `expansionResponse`, worker-flow.test.js:222). The overview
-   envelope echoes one metrics item for every requested keyword (valid
-   `keyword_overview` shape from `overviewResponse`, worker-flow.test.js:199)
-   with volume `1000 + (index % 7) * 111`, `monthly_searches` length 15.
-   `parserDefect` mode: suggestions envelope omits the required `tasks`
-   array member for one call. `ambiguousOnce` mode: the first overview call
-   returns `{ status: 200, json: async () => { throw new SyntaxError("bad
-   json"); } }` (the accepted SCN-KI-024 ambiguity trigger,
-   adapter.test.js:359–369); later calls answer normally.
-6. **Google fetch router (frozen):** before server creation, wrap
-   `globalThis.fetch`: if `new URL(input).host ===
-   "customsearch.googleapis.com"`, record `{ query: searchParams.get("q"),
-   num: searchParams.get("num") }` and return `new Response(JSON.stringify(
-   googleFixture(searchParams.get("q"))), { status: 200, headers: {
-   "content-type": "application/json" } })`; otherwise delegate to the saved
-   original fetch. `googleFixture(q)` returns the strict Custom Search shape
-   (`kind: "customsearch#search"`, `searchInformation.totalResults: "10"`):
-   for query index `qi` parsed from the frozen query text suffix (queries are
-   `site:myshopify.com/products <keyword>`; `qi` = the RunQuery row order,
-   recovered from a fixed map built when the run is created), ten items with
-   `link: https://q${qi}s${j}.myshopify.com/products/p${j}`, title
-   `Store q${qi}s${j}`, snippet `Fixture occurrence q${qi}s${j}` (j = 0..9) —
-   1,000 distinct domains across the 100 queries. The wrapper is restored in
-   the top-level `finally`.
-7. **Harness construction (single recipe):** one top-level database test
-   `"KI-W6 integrated local maximum path (SCN-KI-018) in one disposable
-   schema"` with `{ skip: !enabled, timeout: 900000 }`; inside: `const schema
-   = \`kiw6_e2e_${Date.now().toString(36)}_${process.pid}\``; isolated schema
-   + `deployPrismaMigrations` + `assertMigrationStayedInSchema` (D2A);
-   `prisma = createPrismaClient(scopedUrl)`; `runRepository = new
-   PrismaRunRepository(prisma, { runExecutionBackend: "aws", ...AWS_INPUTS })`;
-   `keywordRepo = new PrismaKeywordResearchRepository(prisma)`; `s3 =
-   memoryS3()`; `store = new S3ArtifactStore({ client: s3, bucket: BUCKET,
-   maxBytes: 33554432 })` (import from
-   `src/aws-pipeline/adapters/artifact-store.js`); `keywordDispatcher =
-   memoryDispatcher()`; `pipelineDispatcher = memoryDispatcher()`; keyword
-   runtime `kwRuntime = { repository: keywordRepo, artifactStore: store,
-   dispatcher: keywordDispatcher, config: { awsPipelineBucket: BUCKET,
-   awsPipelineKeywordResearchQueueUrl: QUEUE_URL }, s3Client: s3, clock:
-   now, http: keywordHttp().http, secrets: { dataForSeoLogin:
-   AWS_INPUTS.dataForSeoLogin, dataForSeoPassword: AWS_INPUTS.dataForSeoPassword } }`;
-   coordinator = `new PipelineCoordinatorRepository(prisma)`; downstream
-   runtime `pipeRuntime = { coordinator, repository: runRepository,
-   artifactStore: store, dispatcher: pipelineDispatcher, config: {
-   awsPipelineBucket: BUCKET, awsPipelineLeadQueueUrl: LEAD_QUEUE_URL },
-   s3Client: s3, clock: now, secrets: { googleApiKey:
-   AWS_INPUTS.googleApiKey } }`; `server = createLeadServer({ ...
-   AWS_INPUTS, runExecutionBackend: "aws", backendApiToken: undefined }, {
-   repository: runRepository, pipelineRuntimeFactory: async () =>
-   pipeRuntime, logger: () => {}, setIntervalFn: () => ({ unref() {} }),
-   clearIntervalFn: () => {} })`; `server.listen(0, "127.0.0.1")`; `base` =
-   the bound URL; `headers(owner)` = `{ "content-type": "application/json",
-   "x-user-id": owner }`. Teardown in `finally`: close server, drop the
-   schema (`DROP SCHEMA ... CASCADE` + absence assert + admin disconnect),
-   restore fetch, assert `rss < 1536 MiB` via `process.memoryUsage().rss`.
-   The message pump is the `drain` algorithm of worker.test.js:181–203
-   (queue/seen/prevSent, throttle reset before each non-aggregate message,
-   runaway guard 200), calling `processKeywordMessage(message, kwRuntime)`.
-8. **Subtests (sequential `await context.test(...)` inside the schema; each
-   registers + executes exactly its case ID and records at least one
-   activation witness string):**
-   - **`W6-E01` authenticated seed creation and owner isolation:** POST
-     `/api/keyword-research` with `headers(OWNER)`, body `{"seeds": SEEDS}`
-     → 202; response research `state: "queued"`, `statusUrl
-     "/api/keyword-research/<id>"`; DB row owner-scoped to OWNER; exactly one
-     `keyword.initialize.v1` message in `keywordDispatcher.sent`; POST with
-     an invalid body (`{"seeds": []}`) → 400 `KEYWORD_RESEARCH_INPUT_INVALID`;
-     six seeds → 400; GET the research with `headers(OTHER)` → 404
-     `KEYWORD_RESEARCH_NOT_FOUND` and zero `OTHER` rows anywhere; duplicate
-     `x-user-id` header → 401 `USER_CONTEXT_REQUIRED`; missing header → 401.
-   - **`W6-E02` full worker flow with exact counters:** run the pump from the
-     initialize message to quiescence; assert research `state: "completed"`,
-     `selectionRevision: 1`, `result.keywords.length === 200`, default
-     `selection.items.length === 100`; stages exactly
-     `["expansion","anchor_screen","market_overview"]` all `completed`;
-     tasks: 10 expansion + 1 anchor + 8 market = 19, all `succeeded`;
-     expansion manifest candidates count `=== 300`; shortlist manifest
-     keywords `=== 200`; provider `http.calls.length === 19` (2 per seed + 1
-     anchor + 8 market); keyword S3 objects `=== 23` (19 task artifacts + 3
-     manifests + 1 `keywordResultKey` result) with the result artifact
-     validated through `S3ArtifactStore.getValidated` against
-     `keywordResearchResultArtifactSchema`; attempt rows `=== 19` all
-     `succeeded`; paid ledger: every attempt reserved USD before the call
-     (assert reservation rows/`mayCall` ordering per `DEC-KI-009`); message
-     types seen include all four (`initialize`, `expansion.task`,
-     `overview.task`, `aggregate.check`).
-   - **`W6-E03` overselect, conflict ceiling, resolution:** GET the research
-     → completed view with `result`, `selection`, `selectionConflicts ===
-     null`; PUT `/selection` with `expectedRevision: 1` and a 200-item draft
-     built from all 200 keywords including two seeded near-similar pairs
-     (choose keywords `w0a03`/`w0a04` and `w1b05`/`w1b06` with tokens crafted
-     to be near-similar per `DEC-KI-015` — fixed literal keywords guarantee
-     this) → 409 `KEYWORD_SELECTION_HAS_CONFLICTS` with both conflicts
-     listed; conflict analysis pair comparisons at draft 200 equal the
-     19,900 ceiling (assert `200*199/2`); PUT with the conflicts resolved
-     (drop one of each pair, then trim to exactly 100 items: the first 98 by
-     frozen order plus the two kept pair members) → 200 with
-     `selectionRevision: 2`; PUT again with `expectedRevision: 1` → 409
-     `KEYWORD_SELECTION_REVISION_CONFLICT`.
-   - **`W6-E04` atomic handoff, replay, stale revision, snapshot
-     immutability, owner isolation:** wrap `prisma` with the W4 operation-spy
-     proxy (handoff.integration.test.js:73–94) around `createRun`; POST
-     `/runs` `{ expectedSelectionRevision: 2, clientRequestId:
-     "kiw6-client-request-0001" }` (matches `^[A-Za-z0-9_-]{16,80}$`) with
-     `headers(OWNER)` → 201 `{ run, statusUrl }`; `statusUrl ===
-     "/api/runs/" + run.id`; Run row `state:
-     "awaiting_query_confirmation"`, `phase: "query_review"`,
-     `queryPlanSource: "keyword_research"`, `keywordResearchId` set;
-     exactly 100 `RunQuery` rows with `query === "site:myshopify.com/products
-     <keyword>"`, `source: "generated"`, `validationState: "pending"`,
-     `generationReason: "keyword_research"`, `keywordResearchItemId` set,
-     `probeFingerprint: null`; the transaction performed exactly the five
-     named ops (`keywordResearch.findUnique`,
-     `keywordResearchHandoff.findUnique`, `run.create`,
-     `runQuery.createMany`, `keywordResearchHandoff.create`); POST replay
-     with the same `clientRequestId` → 200 with the same `run.id` and no new
-     rows; POST with `expectedSelectionRevision: 1` → 409
-     `KEYWORD_SELECTION_REVISION_CONFLICT`; edit the research selection
-     (swap one item, `expectedRevision: 2`) → `selectionRevision: 3`; then
-     GET `/runs/<id>/queries` and the persisted `keywordSelectionSnapshot`:
-     snapshot still carries `selectionRevision: 2`, the original 100 items,
-     and the original `selectionFingerprint` (immutability under later
-     research edit); with `headers(OTHER)`: GET research → 404, GET
-     `/api/runs/<id>` → 404, GET queries → 404, and `OTHER` has zero
-     `UserShop`/`RunStore`/`Run` rows at every later checkpoint.
-   - **`W6-E05` query review edits and revision conflicts:** GET
-     `/api/runs/<id>/queries` → `revision: 1`, 100 editable rows; PUT with
-     `revision: 1` and a mixed edit: 97 rows unchanged, 3 rows reworded
-     within the keyword rules (prefix intact, ≤12 words, no operators;
-     fixed replacement literals) → 200, `revision: 2`, lineage
-     `keywordResearchItemId` preserved on every row; PUT with `revision: 1`
-     again → 409 `QUERY_REVISION_CONFLICT`; PUT introducing an
-     out-of-rules edit (operator `OR`) → 422 `QUERY_LIST_INVALID`.
-   - **`W6-E06` confirm, real probe path, S3 probe artifacts, confirmed
-     dispatch:** POST `/api/runs/<id>/start` `{ revision: 2 }` → 202, run
-     `state: "queued"`, `phase: "scraping"`; await the in-process
-     `executeRun` drain (poll the run row to `stage` beyond
-     `queued_query_validation`, bounded wait 120 s); assert: exactly 100
-     Google fetch calls, every call `num=10`, 100 distinct `q` values;
-     1,000 occurrence URLs recorded; every `RunQuery` row
-     `validationState: "valid"`, `probeContractVersion:
-     "google-probe-v2"`, `probeFingerprint` matching
-     `/^[a-f0-9]{64}$/`, `probeResults.length === 10`, `probedAt` set;
-     probe S3 artifacts: exactly 200 keys matching
-     `google-probe-attempt-v1`/`google-probe-result-v1` key patterns (100
-     each); one `confirmed-query-manifest-v1` artifact; discovery stage
-     registered with expected 100 tasks; exactly 100 `discovery.query`
-     messages in `pipelineDispatcher.sent`; validation failure path is not
-     taken (all rows valid — the frozen fixtures satisfy the thresholds in
-     `AWS_INPUTS`).
-   - **`W6-E07` downstream stable-domain merge at 1,000 scale:** drive
-     `processDiscoveryMessage` for each of the 100 discovery messages with
-     `pipeRuntime` → 100 per-query discovery artifacts; then
-     `processDomainAggregation` for the discovery `aggregation.check` →
-     assert: 1,000 `domain-candidate-v1` puts; one `domain-stage-manifest-v1`
-     with `domains.length === 1000` sorted by `shopId`; `publishAwsDomainCheckpoint`
-     effects in the DB: 1,000 `Shop` rows with `stableKey` matching
-     `domain:q{i}s{j}.myshopify.com`-derived identity, `id` equal to
-     `shopIdForStableKey(stableKey)`; 1,000 `RunStore` rows with `id ===
-     runStoreId(runId, shopId)`; lead stage registered with 1,000 tasks; 1,000
-     `lead.domain` messages sent to `LEAD_QUEUE_URL`; the manifest work-plan
-     marks every domain `needsLead: true`; `duplicateCount === 0` (all
-     domains distinct).
-   - **`W6-E08` restart, duplicate/reorder/redelivery, full lease expiry
-     (second research, 1 seed):** POST a second research (seed one only);
-     before pumping, reorder: deliver `keyword.aggregate.check.v1` for the
-     expansion stage first → outcome reflects `not_ready`/no premature
-     advance (stage stays `collecting`, research `running`); deliver the
-     initialize message twice → task set unchanged (11 tasks, no
-     duplicates); expire leases: advance `clock.nowMs` by 61,000 and call
-     `recoverKeywordWork({ now: now(), limit: 100 }, kwRuntime)` →
-     re-dispatched work drains; simulate API restart: close the server,
-     construct a fresh `createLeadServer` on the same `prisma` (same recipe),
-     GET the research with `headers(OWNER)` → same durable state; complete
-     the research via the pump → `completed` with 11 tasks; counters: 11
-     provider calls for this research.
-   - **`W6-E09` ambiguity is terminal (third research, 1 seed,
-     `ambiguousOnce`):** pump with the ambiguous overview seam → the anchor
-     task attempt is `ambiguous`, `safeErrorCode:
-     "KEYWORD_PROVIDER_AMBIGUOUS"`, task/stage/research `failed` terminally;
-     exactly one attempt row for the anchor task (no sixth-attempt storm);
-     GET the research → safe error surface only (no raw provider body
-     anywhere: assert the serialized `safeError.code` and that no response
-     field contains `"tasks"` envelope bodies).
-   - **`W6-E10` no-cancel and no-delete paths:** `DELETE
-     /api/keyword-research/<id>` → 404 (no route); `POST
-     /api/keyword-research/<id>/cancel` → 404; the three researches remain
-     in terminal/durable states (`EXC-KI-007`).
-   - **`W6-E11` negative controls (four, each: inject defect → assert the
-     E2E oracle fails → restore; `negative_controls_falsified` increments
-     only on a control that fails to fail):**
-     1. *bypass worker:* create a fourth research, deliver initialize, do
-        NOT deliver the anchor overview message, deliver the final
-        `aggregate.check` → research is not `completed` (the W3
-        worker-bypass oracle, worker.test.js:680–697).
-     2. *bypass parser:* `parserDefect` http mode on a fifth research →
-        the malformed suggestions call produces a failed attempt with a
-        safe parse code, no S3 artifact for that task, task not terminal,
-        retry scheduled (assert `nextAttemptAt` in the future).
-     3. *bypass snapshot:* after the main run's handoff, tamper the run's
-        `keywordSelectionSnapshot` in the DB (`selectionRevision: 99`) →
-        POST `/start` → validation returns invalid snapshot → run returns
-        to `awaiting_query_confirmation` with `confirmedQueryRevision:
-        null`; restore the snapshot byte-exactly afterwards (the
-        immutability assertions of `W6-E04` are re-asserted post-restore).
-     4. *bypass stable merge:* inside `W6-E07`, before the 100th discovery
-        message is delivered, run `processDomainAggregation` → aggregator
-        refuses (`not_ready`), zero `Shop`/`RunStore` rows and zero
-        `lead.domain` messages exist at that point; then deliver the final
-        message, aggregate again → merge completes exactly as specified (no
-        premature or partial merge possible). The control counts as
-        falsified only if the premature aggregation produced a checkpoint.
-   - **`W6-E12` resource ceilings and safe logging:** assert total S3
-     object count `===` the frozen total (23 keyword objects for research 1
-     + 11 for research 2 + 0 for research 3 + 0/… for NC researches + 200
-     probe + 1 confirmed manifest + 100 per-query + 1,000 domain candidates
-     + 1 domain manifest — computed from the case executions as a running
-     counter asserted exactly); `process.memoryUsage().rss() < 1536 MiB`;
-     the whole test's wall time recorded into `witnesses`; no log line or
-     response body in the captured server log contains any seed keyword,
-     provider body, or credential (assert by scanning the recorded
-     logger output for `dataForSeoPassword`, `"tasks"`, and the literal
-     seed strings).
-9. **Certificates:** after the database test, a non-skipped test
-   `"KI-W6 E2E execution certificate"` asserts `registered`, `executed`,
-   `skipped`, `witnesses`, `failures` invariants (required = registered =
-   executed when enabled; all twelve in `skipped` when disabled) and writes
-   exactly one stdout line
-   `KI_W6_E2E_EXECUTION_CERTIFICATE={"file":"keyword-intelligence-e2e.integration.test.js","required":[...],"registered":[...],"executed":[...],"skipped":[...],"activationWitnesses":[...],"oracleFailures":[...],"negativeControls":{"expected":4,"falsified":0},"pathWitness":{"candidateKeywords":300,"shortlistKeywords":200,"resultKeywords":200,"defaultSelectionItems":100,"finalSelectionItems":100,"runQueries":100,"probeCalls":100,"occurrences":1000,"uniqueDomains":1000},"digests":{"required":"<§4 digest>","registered":...,"executed":...}}`
-   with §4 digests. `pathWitness` values are the literal frozen numbers;
-   every corresponding subtest asserts its equal before registering its ID.
+1. **Constant.** Immediately after the `UUID` const (line 9), insert exactly:
+   `const PIPELINE_TRANSACTION_OPTIONS = Object.freeze({ maxWait: 5_000, timeout: 30_000 });`
+2. **`lockedTask`.** Replace the whole helper with exactly:
+   `async function lockedTask(transaction, taskId) {` / ``   const rows = await transaction.$queryRaw` `` +
+   `    SELECT * FROM "PipelineTask" WHERE "id" = ${taskId} FOR UPDATE` /
+   ``   `; `` / `  if (rows.length !== 1) conflict();` / `  return rows[0];` / `}`.
+3. **`lockedStage`.** Same shape with table `"PipelineStage"` and parameter
+   `stageId`.
+4. **`lockedRun`.** Same shape with table `"Run"` and parameter `runId`
+   (preserving the existing single-line template style is not required; the
+   statement content is exactly `SELECT * FROM "Run" WHERE "id" = ${runId} FOR UPDATE`).
+5. **`recordDispatch`.** Inside its transaction callback, replace the body
+   from the task-lock statement through the cardinality check with exactly:
+   lock all stage tasks once —
+   `` const lockedTasks = await transaction.$queryRaw`SELECT * FROM "PipelineTask" WHERE "stageId" = ${stageId} ORDER BY "id" FOR UPDATE`; ``
+   (multi-line template formatting as the file style); then
+   `const stage = await lockedStage(transaction, stageId);`; then the
+   unchanged `if (["failed", "cancelled"].includes(stage.state)) conflict("PIPELINE_CANCELLED");`;
+   then `if (lockedTasks.length !== stage.expectedCount) conflict();`; then
+   `const requestedItemKeys = new Set(itemKeys);` / `const requested = lockedTasks.filter((task) => requestedItemKeys.has(task.itemKey));` /
+   `if (requested.length !== itemKeys.length) conflict();`; then retain the
+   existing single `pipelineTask.updateMany({ where: { stageId, itemKey: { in: itemKeys } }, data: { dispatchCount: { increment: 1 }, lastDispatchedAt: now } })`
+   and `return { count: updated.count };`. The existing
+   `pipelineTask.findMany` line is deleted. Lock ordering (tasks before stage)
+   is unchanged.
+6. **Eleven transaction arguments.** In `registerStage`, `recordDispatch`,
+   `recordTerminal`, `claimAggregator`, `renewAggregator`, `getCompleteStage`,
+   `completeAggregator`, `listRecoverable`, and `cancelRunGeneration`, the
+   closing `});` of `this.prisma.$transaction(async (transaction) => { … })`
+   becomes `}, PIPELINE_TRANSACTION_OPTIONS);`. In `claimTask` (:242) and
+   `renewTask` (:262), the literal second argument
+   `{ maxWait: 5_000, timeout: 30_000 }` becomes `PIPELINE_TRANSACTION_OPTIONS`.
+7. **Everything else byte-identical:** no schema, predicate, lease duration,
+   heartbeat, return union, cancellation rule, export, validation, or
+   non-inventory transaction change; `requireNow`, fencing, counters, and
+   rollback untouched; no retry or external action inside any transaction.
 
-**Exact checks (§7.4).** C1 write-set proof: `git -C email_scraper status
---porcelain` attributable delta is exactly the one new untracked test file
-(CREATE; the schema is disposable and dropped; no other path changes). C2
-`node --check test/keyword-intelligence-e2e.integration.test.js` → exit 0
-(LOCAL_NOW). C3 focused existing suites still pass: `node --test
-test/keyword-intelligence-worker.test.js
-test/keyword-intelligence-handoff.integration.test.js` with and without the
-DB opt-in as applicable (LOCAL_NOW; no regression). C4 the file itself runs
-green twice: once without opt-in (all twelve skipped, certificate emits
-skipped set) and once with `ALLOW_DATABASE_TESTS=true npm run
-test:integration` against an isolated `TEST_DATABASE_URL` distinct from
-production (exit 0; certificate executed = required) — the leaf records both
-runs; the official gate re-execution belongs to `KI-W6-I001` (DEFERRED).
-C5 secrets: the file contains no real credential, token, production ID, or
-provider body (grep the file for the fixture literals only). C6 the file
-imports no module outside `email_scraper/src`, `email_scraper/test/helpers`,
-`node:` builtins, and `zod` indirectly via src imports.
+**Exact checks (§7.4).** C1 write-set: `git -C email_scraper status
+--porcelain` attributable delta is exactly the one modified file. C2
+`node --check src/aws-pipeline/repositories/pipeline-coordinator-repository.js`
+→ exit 0 (LOCAL_NOW). C3 `node --test test/pipeline-coordinator-repository.test.js`
+→ zero failures (existing five tests unaffected by this file's edits; LOCAL_NOW).
+C4 leaf-local assertion script (Node, `/tmp` scratch permitted) verifies on the
+resulting file: exactly one `PIPELINE_TRANSACTION_OPTIONS` definition with the
+byte-exact frozen literal; exactly eleven usages (total twelve tokens); zero
+remaining inline `{ maxWait: 5_000, timeout: 30_000 }`; each of the eleven
+method bodies contains `$transaction` and the constant; `lockedTask`/
+`lockedStage`/`lockedRun` bodies contain `SELECT *` and `FOR UPDATE`, contain
+`rows[0]`, and contain no `findUnique`; the `recordDispatch` body contains
+`SELECT *`, contains no `findMany`, and retains exactly one `updateMany`;
+every other top-level helper and method is byte-identical to the starting
+digest's parsed form except the enumerated edits (diff-hunk audit). Controls
+(on in-memory copies): (A) deleting the constant argument from `listRecoverable`
+makes the eleven-usage assertion fail; (B) restoring `findUnique` inside
+`lockedStage` makes the no-delegate assertion fail. C5 secrets: no credential,
+token, production ID, or provider body appears or changes (file diff contains
+only the enumerated hunks). All checks LOCAL_NOW except the integration
+re-verification owned by `I119` (DEFERRED: `CV85`/`CV86`).
 
-- [ ] P1 Revisions, assignment identity, writable file, baseline digest (`ABSENT`), and predecessor evidence match.
-- [ ] P2 Starting repository status and protected dirty changes match the recorded baseline (both nested repos clean at `fac5bb0`/`c85f93b`; root relocation set unchanged; writable file `ABSENT`).
+- [ ] P1 Revisions, assignment identity, writable file, baseline digest, and wave-1 dispatch evidence match.
+- [ ] P2 Starting repository status and protected dirty changes match §2.
 - [ ] T1 Apply every ordered transformation and no other edit to the writable file.
 - [ ] V1 Run every LOCAL_NOW check and record its activation witnesses and exact assertions.
 - [ ] V2 Prove the attributable workspace changed-file set is exactly the writable file.
-- [ ] V3 Prove required local coverage IDs (`W6-E01`–`W6-E12`) equal registered and executed local IDs with zero skips (opt-in run).
+- [ ] V3 Prove required local coverage (`W6-DB-08`/`W6-DB-10` static half) via the C4 script witnesses; registrations execute in `C142`.
 - [ ] H1 Return the exact diff, ending digest, commands, outcomes, and residual integration obligations.
 - [ ] H2 Confirm no prohibited action, second-file edit, successor work, external mutation, or parent communication occurred.
 - [ ] H3 Stop at AWAITING_WINDOW_REVIEW.
 
-### 5.2 `KI-W6-S002` — frontend browser integrated E2E (UI leg of `SCN-KI-018`)
+### 5.2 `KI-W6-C137` — run-repository clock and transaction inventory
 
 ```yaml
-subwindow_id: KI-W6-S002
-type: FILE
+subwindow_id: KI-W6-C137
+type: CORRECTION
 parent_window_id: KI-W6
-parent_assignment_id: ASG-KI-W6-WA-01
-assigned_agent: LEAF (KI-W6-S002-AGENT)
-predecessors: [KI-W6-S001]
+parent_assignment_id: ASG-KI-W6-WA-14
+assigned_agent: LEAF (KI-W6-C137-AGENT)
+predecessors: [KI-W6-WAVE-1 dispatch]
 successor_reserved_for: WINDOW-AGENT
-writable_file: frontend/test/browser/keyword-intelligence-e2e.mjs
-file_operation: CREATE
-starting_file_digest: ABSENT
-starting_repository_change_set_digest: d1a974b3248df1764007f77b4d423fc9ff0e85fc7d6add16005058e5156495db
+writable_file: email_scraper/src/prisma-run-repository.js
+file_operation: MODIFY
+starting_file_digest: 54d5f422431ec1914855b2ae5cc07ff30e9ab428f11601a7703d589ee21cef13
+starting_repository_change_set_digest: 565d9fb141c12fc6c056f259745965c450c65088acb62ade9c81d0193c022860
 read_only_scope:
-  - frontend/test/browser/keyword-intelligence-dashboard.mjs (the W5 harness: Cdp class, fixture injection, phases, certificate)
-  - frontend/scripts/g-r1-real-component-browser.mjs (redirect-probe precedent)
-  - frontend/lib/keyword-intelligence-validation.ts, keyword-intelligence-view-model.ts, client-api.ts, api-types.ts
-  - frontend/components/keyword-intelligence/** and frontend/app/keywords/**, frontend/app/runs/[runId]/**
-  - frontend/lib/backend-proxy.ts, auth/server.ts, frontend/proxy.ts
-  - frontend/package.json; installed Next.js documentation per workspace rules
-  - parent artifacts A1–A7, this S1 (especially §0.1 interpretation 1/5), S2, S3, and the S001 leaf evidence for the path-derived fixture parity values
-authorized_actions: [create the one writable file, run node --check on it, execute the harness once with full production build (K6_W6_SKIP_BUILD=1 escape only for intermediate fixes, never for the recorded official run), capture screenshots/logs under frontend/review-evidence/keyword-intelligence/KI-W6/, record S3 leaf evidence via the window agent]
-prohibited_actions: (the common list; additionally) any edit under frontend/app, frontend/lib, frontend/components, frontend/scripts; any real backend/Neon Auth/provider network access; auth credential fabrication beyond the frozen fixture boundary
+  - the writable file; src/aws-pipeline/repositories/pipeline-coordinator-repository.js (assertCompleteAggregatorInTransaction import, read-only)
+  - email_scraper/test/aws-pipeline-lead-aggregation.integration.test.js, test/aws-pipeline-final.integration.test.js, test/pipeline-coordinator-repository.integration.test.js
+  - DEC-KI-051/052/053; SRC-KI-055; parent checklist CT21/CT22/CT23; this S1 §3.4/§5.2; S2; S3
+authorized_actions: [apply the exact transformation below to the one writable file, run node --check, run a leaf-local assertion script over the resulting file and record its output, record S3 leaf evidence via the window agent]
+prohibited_actions: (the common list)
 may_start_successor: false
 ```
 
-**Mechanical trace (§7.2):** implements `KI-W6-T1` items 1/6/13 for the UI
-surface — "operate real UI", "load all dashboard surfaces", overselect/
-conflict resolve, finalize, edit-after-handoff reload durability, and the
-`SCN-KI-018` UI/dashboard-canvases activation witnesses on path-derived
-data (`REQ-KI-001`, `006`–`009`, `013`–`014`, `017`–`018`; `DEC-KI-013`–
-`015`, `023`; the W5 surface inventory). Interface freeze: the intercepted
-payload shapes are exactly the W4-accepted API contract envelopes validated
-through `parseResearchEnvelope`/`parseRunHandoffEnvelope` before injection.
+**Mechanical trace (§7.2).** Implements `KI-W6-CT21` items 2–7 and the
+repository half of `CT22`'s frozen interface. Same requirements/invariants as
+C136; decisions `DEC-KI-053` (validator, five signatures, twenty-one set),
+`DEC-KI-051` (saveQueryValidation untouched), `DEC-KI-052` (no retry).
+Verified by `C142`–`C144` and `I119`; cases `W6-DB-08`/`W6-DB-09`/`W6-DB-11`;
+controls `W6-NC-18`/`W6-NC-19`.
 
-**Exact file transformation (§7.3).** Create exactly this Node ESM script by
-cloning the W5 harness architecture (keyword-intelligence-dashboard.mjs) with
-these frozen deltas — five phases, single `KI_W6_BROWSER_E2E_CERTIFICATE=`
-stdout line, artifacts under
-`frontend/review-evidence/keyword-intelligence/KI-W6/`:
+**Exact file transformation (§7.3).** Authoring-time anchors: module
+constants `ACTIVE_STATES` :69 / `BULK_CHECKPOINT_LIMIT` :70; class
+declaration :941; the five readers :1545 (`readAwsReuseInputs`), :1595
+(`readAwsReusableProfiles`), :2462 (`readAwsFinalReuseRows`), :2511
+(`readAwsAmbiguousDataForSeoTargets`), :2530
+(`readAwsTerminalCruxBigQueryWork`); the twenty-one `$transaction` sites
+:1513, :1546, :1596, :1631, :1710, :2177, :2224, :2274, :2286, :2326, :2432,
+:2465, :2519, :2538, :2603, :3808, :3829, :4133, :4204, :4461, :4512;
+`publishAwsFinalResults` inline profile :2838; `saveQueryValidation` inline
+profile :1873; `renewAwsRunLease` :2261.
 
-1. **Constants:** port `4348`, `baseUrl = "http://127.0.0.1:4348"`; output
-   dir as above; `REQUIRED = ["W6-U01".."W6-U08"]`; registries and
-   `pathWitness = { candidateKeywords: 300, shortlistKeywords: 200,
-   resultKeywords: 200, defaultSelectionItems: 100, finalSelectionItems: 100,
-   runQueries: 100, probeCalls: 100, occurrences: 1000, uniqueDomains: 1000 }`
-   (byte-equal to `S001`'s certificate `pathWitness` — the I001 comparison).
-2. **Phase A (build/start):** identical to W5 lines 848–912 with the port
-   delta; build refusal semantics identical (`K6_W6_SKIP_BUILD=1` explicit;
-   skip mode refuses when `.next` is absent).
-3. **Phase B (path-derived fixtures):** builders mirroring the S001 frozen
-   generators — 300 candidate keywords (`w${s}a${i}` / `w${s}b${i}`,
-   s = 0..4, i = 00..29), the completed `ResearchView` envelope carrying
-   exactly the 200 shortlist-derived keyword rows (identical keyword
-   literals and metric formula `1000 + (index % 7) * 111`), summary/clusters
-   derived from those rows by the same fixed aggregation the W5 builders
-   use, `selection` of the default 100, `selectionRevision: 2`,
-   `selectionConflicts: null`; a queued view and a three-step running poll
-   sequence for `POLL_ID` (queued → running/anchor_screen → running/
-   market_overview → completed); a handoff envelope
-   `{ run: { runId: "run_e2e_fixture_0001", statusUrl:
-   "/api/runs/run_e2e_fixture_0001" }, statusUrl:
-   "/api/runs/run_e2e_fixture_0001" }` (real backend shape, §0.1 item 5);
-   every envelope validated through `parseResearchEnvelope` /
-   `parseRunHandoffEnvelope` before use (W5 line 591 pattern). A
-   `pathWitness` self-check runs at startup: the completed envelope's
-   keyword-row count must equal `pathWitness.resultKeywords` and its
-   candidate id pool must equal 300 distinct literals — a mismatch aborts
-   before Chrome launches.
-4. **Phase C (interception):** the W5 `fixtureInjection` wrapper (lines
-   600–699) with the W6 deltas: `POST /api/keyword-research` returns
-   `{ research: queuedView }`; `GET */` serves the poll sequence for
-   `POLL_ID` then the completed view, 404 `RESEARCH_NOT_FOUND` otherwise;
-   `PUT */selection` serves `state.conflictMode` (409
-   `KEYWORD_SELECTION_REVISION_CONFLICT`) and a conflict-bearing 409
-   `KEYWORD_SELECTION_HAS_CONFLICTS` variant for the overselect step;
-   `POST */runs` records `clientRequestId`, serves the handoff envelope,
-   supports `runsDelayMs` for the double-click window; all non-app URLs pass
-   through and are recorded; requests log into `globalThis.__kiE2E.requests`.
-5. **Phase D (subtests, sequential, each registers + executes its ID, zero
-   console errors / zero uncaught exceptions / zero non-app network asserted
-   globally after each):**
-   - **`W6-U01` create → durable poll → completed:** on `/keywords`, fill
-     five seed chips (the five S001 seed literals), submit → app navigates to
-     `/keywords/<POLL_ID>`; the dashboard renders the research-status
-     surface (`surface:research-status`) while polling; the real client poll
-     ladder advances through the poll sequence (assert ≥3 GETs recorded
-     before completion); terminal completed dashboard renders
-     `surface:research-dashboard`.
-   - **`W6-U02` all dashboard surfaces + canvases on path-derived data:**
-     assert presence of all nine `surface:*` ids and all eleven `chart:*`
-     canvases with nonzero size and a `$chartjs` instance each, plus
-     `landscape:cluster-scene` with a nonzero landscape canvas; "200 rows"
-     data-derived meta text.
-   - **`W6-U03` overselect → conflicts → resolve → save:** select all 200,
-     trigger the seeded near-similar pair selection → conflict review
-     surface lists the conflicts and finalize is blocked; resolve (drop the
-     fixed pair members, land on exactly 100) → PUT succeeds; revision
-     advances to 3; the request log shows exactly one PUT with the resolved
-     item set.
-   - **`W6-U04` stale revision 409 recovery:** force `conflictMode` → save
-     → 409 conflict surface rendered, no silent local-draft overwrite
-     (assert the local draft rows unchanged after the 409); reload → fresh
-     envelope revision, draft reset to server truth.
-   - **`W6-U05` finalize + idempotent double-click + statusUrl:** click
-     finalize twice within the `runsDelayMs` window → exactly one `POST
-     */runs` in the log with one retained `clientRequestId` matching
-     `^[A-Za-z0-9_-]{16,80}$`; the app navigates to
-     `/api/runs/run_e2e_fixture_0001` (assert the final URL equals the
-     statusUrl — the real backend behavior).
-   - **`W6-U06` edit-after-handoff + reload durability:** navigate back to
-     `/keywords/<POLL_ID>`, still editable (research completed); change one
-     selection item (fixed literal), save → revision 4; full page reload →
-     revision 4 durable, selection preserved, zero POST/PUT on reload
-     (GET-only durability).
-   - **`W6-U07` unauthenticated gates (real routes, no interception for
-     these probes):** Node-side fetch `GET /api/keyword-research/kr_e2e_fixture`
-     → 401 `AUTHENTICATION_REQUIRED` with `Cache-Control: no-store`; unknown
-     query key → 400 `INVALID_QUERY_PARAMETERS`; bad id → 400
-     `INVALID_RESEARCH_ID`; `localStorage` keys exactly `["ki-dashboard-theme"]`.
-   - **`W6-U08` run-page auth gate:** browser navigate
-     `/runs/run_e2e_fixture_0001` with no session → final URL
-     `/sign-in` (the real proxy redirect, g-r1:293–295 precedent) and the
-     sign-in surface renders.
-   - **`NC-W6-05` fixture-divergence control (falsified only if undetected):**
-     a second injection switches the completed envelope's row 0 volume to a
-     diverged value → the harness envelope-consistency oracle (Phase B
-     self-check re-run on the diverged copy) must flag divergence; the
-     subtest asserts the oracle threw/flagged.
-6. **Phase E (teardown/certificate):** W5 `finally` semantics — server log,
-   CDP close, process-group SIGTERM for Chrome and Next, temp dir removal,
-   and exactly one
-   `KI_W6_BROWSER_E2E_CERTIFICATE={"file":"keyword-intelligence-e2e.mjs","required":[...8],"registered":[...],"executed":[...],"skipped":[],"oracleFailures":[],"negativeControls":{"expected":1,"falsified":0},"scenarios":{"SCN-KI-018":true},"pathWitness":{...},"digests":{...}}`
-   line with §4 digests; screenshots for every subtest under the output dir.
+1. **Validator and constant.** Immediately after `const BULK_CHECKPOINT_LIMIT = 500;`
+   (line 70), insert exactly:
+   `function requireAwsPipelineNow(now) {` /
+   `  if (!(now instanceof Date) || !Number.isFinite(now.getTime())) {` /
+   `    throw new PipelineInvariantError("PIPELINE_INPUT_CONFLICT");` /
+   `  }` /
+   `  return now;` /
+   `}` and
+   `const AWS_PIPELINE_TRANSACTION_OPTIONS = Object.freeze({ maxWait: 5_000, timeout: 30_000 });`
+   (`PipelineInvariantError` is already imported and used in this file).
+2. **Five signatures.** `async readAwsReuseInputs(input) {` becomes
+   `async readAwsReuseInputs(input, now) {`; likewise
+   `readAwsReusableProfiles`, `readAwsFinalReuseRows`,
+   `readAwsAmbiguousDataForSeoTargets`, `readAwsTerminalCruxBigQueryWork`.
+   No default value. In each: insert `requireAwsPipelineNow(now);` as the
+   first statement — before the existing input validation for
+   `readAwsFinalReuseRows`/`readAwsAmbiguousDataForSeoTargets`/
+   `readAwsTerminalCruxBigQueryWork` is acceptable only in the exact position
+   "first statement of the method body"; the frozen rule is: the validator
+   runs before `this.prisma.$transaction` opens and before any database
+   access. In each of the five `assertCompleteAggregatorInTransaction(transaction, { … }, new Date())`
+   calls, the third argument `new Date()` becomes `now`.
+3. **Twenty-one transaction arguments.** Each `$transaction` call belonging
+   to `publishAwsDiscoveryStage`, `readAwsReuseInputs`,
+   `readAwsReusableProfiles`, `publishAwsDomainCheckpoint`,
+   `publishAwsLeadCheckpoint`, `claimAwsLeadWork`, `claimAwsRunLease`,
+   `releaseAwsRunLease`, `loadAwsTrafficStage`, `claimAwsTrafficWorkBatch`,
+   `recordAwsDataForSeoOutcome`, `readAwsFinalReuseRows`,
+   `readAwsAmbiguousDataForSeoTargets`, `readAwsTerminalCruxBigQueryWork`,
+   `publishAwsFinalResults`, `readReusableTrafficCache`,
+   `readReusableLatestCruxBigQueryCache`, `planDataForSeoRequest`,
+   `claimDataForSeoRequest`, `getDataForSeoRunCostUsd`,
+   `markStaleDataForSeoRequestsAmbiguous` gains
+   `AWS_PIPELINE_TRANSACTION_OPTIONS` as its second argument. The inline
+   `{ maxWait: 5_000, timeout: 30_000 }` at :2838
+   (`publishAwsFinalResults`) becomes the constant. The inline profile at
+   :1873 (`saveQueryValidation`, `DEC-KI-051`) is not modified. No other
+   transaction — and no atomic non-transactional `updateMany` such as
+   `renewAwsRunLease` — is modified.
+4. **Everything else byte-identical:** callbacks, locks, fences, rollback,
+   paid-ledger and publication boundaries, `evaluatedAt` durable timestamps,
+   error codes (`PIPELINE_LEASE_LOST` retained for stale clocks), and every
+   non-enumerated method.
 
-**Exact checks (§7.4).** C1 write-set proof: `git -C frontend status
---porcelain` attributable delta is exactly the one new untracked harness file
-(the `review-evidence/` runner output is gitignored at leaf level; if the
-tree shows it, the leaf records the exact listing and the window agent
-confirms the gitignore covers it). C2 `node --check` → 0. C3 `npm run
-check` from `frontend/` → exit 0 (no source changed; 118/118). C4 the
-official full-build execution `node test/browser/keyword-intelligence-e2e.mjs`
-→ exit 0, certificate `executed === required`, `scenarios."SCN-KI-018" ===
-true`, zero console errors, zero non-app network (LOCAL_NOW official run at
-leaf level; I001 re-runs it as gate `KI-W6-V1`'s UI half — both runs are
-recorded; the gate consumes the I001 re-run). C5 the file contains no
-credential, token, production ID, or provider body. C6 no real backend,
-Neon Auth, or provider URL appears in the network log of the official run
-(allowlist: app origin only).
+**Exact checks (§7.4).** C1 write-set as C136 (this file). C2 `node --check`
+→ 0. C3 leaf-local assertion script verifies: one `requireAwsPipelineNow`
+definition with the exact body; five signatures read
+`(input, now)` with no default and each body contains
+`requireAwsPipelineNow(now)` positioned before its `$transaction`; five
+`assertCompleteAggregatorInTransaction` third arguments changed to `now`
+(zero zero-argument `new Date()` remains at those five sites); one
+`AWS_PIPELINE_TRANSACTION_OPTIONS` definition with the byte-exact literal;
+twenty-one usages (twenty-two tokens); each of the twenty-one method bodies
+contains both `$transaction` and the constant; exactly one inline
+`{ maxWait: 5_000, timeout: 30_000 }` remains and lies inside
+`saveQueryValidation`'s body; `renewAwsRunLease`'s body contains `updateMany`
+and no `$transaction`; every other method byte-identical (diff-hunk audit).
+Controls on in-memory copies: (A) removing the constant from
+`markStaleDataForSeoRequestsAmbiguous` makes the twenty-one-usage assertion
+fail; (B) reverting one reader's third argument to `new Date()` makes the
+clock assertion fail. C4 secrets unchanged. DEFERRED to integration: real
+transaction/lease behavior (`C143`/`C144`/`CV86`).
 
-- [ ] P1 Revisions, assignment identity, writable file, baseline digest (`ABSENT`), and predecessor evidence match.
-- [ ] P2 Starting repository status and protected dirty changes match the recorded baseline (frontend clean at `c85f93b` plus exactly the accepted S001 ending if committed, else containing exactly the S001 output; root relocation set unchanged; writable file `ABSENT`).
+- [ ] P1 Revisions, assignment identity, writable file, baseline digest, and wave-1 dispatch evidence match.
+- [ ] P2 Starting repository status and protected dirty changes match §2.
 - [ ] T1 Apply every ordered transformation and no other edit to the writable file.
 - [ ] V1 Run every LOCAL_NOW check and record its activation witnesses and exact assertions.
 - [ ] V2 Prove the attributable workspace changed-file set is exactly the writable file.
-- [ ] V3 Prove required local coverage IDs (`W6-U01`–`W6-U08`) equal registered and executed local IDs with zero skips.
+- [ ] V3 Prove the `W6-DB-08`/`W6-DB-09`/`W6-DB-11` static witnesses; registrations execute in C142.
 - [ ] H1 Return the exact diff, ending digest, commands, outcomes, and residual integration obligations.
 - [ ] H2 Confirm no prohibited action, second-file edit, successor work, external mutation, or parent communication occurred.
 - [ ] H3 Stop at AWAITING_WINDOW_REVIEW.
 
-### 5.3 `KI-W6-I001` — whole-window integration assessment
+### 5.3 `KI-W6-C138` — domain-aggregator caller clock
 
 ```yaml
-subwindow_id: KI-W6-I001
+subwindow_id: KI-W6-C138
+type: CORRECTION
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-14
+assigned_agent: LEAF (KI-W6-C138-AGENT)
+predecessors: [KI-W6-WAVE-1 dispatch]
+successor_reserved_for: WINDOW-AGENT
+writable_file: email_scraper/src/aws-pipeline/services/domain-aggregator.js
+file_operation: MODIFY
+starting_file_digest: e873bb622c085ea34e69e3658f21dacd36d068765f821782dfc613009f3199ce
+starting_repository_change_set_digest: 565d9fb141c12fc6c056f259745965c450c65088acb62ade9c81d0193c022860
+read_only_scope: [the writable file; src/prisma-run-repository.js (read-only); DEC-KI-053; CT22; this S1 §3.4; S2; S3]
+authorized_actions: [apply the exact one-line transformation, run node --check, run the leaf-local assertion script, record S3 leaf evidence via the window agent]
+prohibited_actions: (the common list)
+may_start_successor: false
+```
+
+**Mechanical trace (§7.2).** `KI-W6-T22A` / `KI-W6-CT22` item 2 (domain
+member): the sole domain call. Decision `DEC-KI-053` clock callers. Verified
+by `C142` (caller audit) and `CV86`/`CV87`.
+
+**Exact file transformation (§7.3).** The sole
+`runtime.repository.readAwsReuseInputs({ runId: message.runId, … domains, evaluatedAt });`
+call (authoring-time anchor :87–89) becomes the same call with `, new Date()`
+inserted after the closing `}` of its first argument — ending
+`… domains, evaluatedAt }, new Date());`. Argument one is byte-equivalent
+otherwise; nothing else in the file changes; the call is not moved relative
+to artifact reads, ownership, materialization, or publication.
+
+**Exact checks (§7.4).** C1 write-set (this file). C2 `node --check` → 0. C3
+leaf script: exactly one `readAwsReuseInputs(` occurrence in the file; its
+call now ends `}, new Date());`; `git diff` is exactly one line changed.
+Controls: (A) reverting the argument fails the second-argument assertion;
+(B) adding `new Date()` to any other repository call fails the one-change
+assertion.
+
+- [ ] P1 Revisions, assignment identity, writable file, baseline digest, and wave-1 dispatch evidence match.
+- [ ] P2 Starting repository status and protected dirty changes match §2.
+- [ ] T1 Apply the exact one-call transformation and no other edit.
+- [ ] V1 Run every LOCAL_NOW check and record its activation witnesses and exact assertions.
+- [ ] V2 Prove the attributable workspace changed-file set is exactly the writable file.
+- [ ] V3 Record the domain caller-audit witness consumed by C142.
+- [ ] H1 Return the exact diff, ending digest, commands, outcomes, and residual integration obligations.
+- [ ] H2 Confirm no prohibited action, second-file edit, successor work, external mutation, or parent communication occurred.
+- [ ] H3 Stop at AWAITING_WINDOW_REVIEW.
+
+### 5.4 `KI-W6-C139` — lead-aggregator caller clock
+
+```yaml
+subwindow_id: KI-W6-C139
+type: CORRECTION
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-14
+assigned_agent: LEAF (KI-W6-C139-AGENT)
+predecessors: [KI-W6-WAVE-1 dispatch]
+successor_reserved_for: WINDOW-AGENT
+writable_file: email_scraper/src/aws-pipeline/services/lead-aggregator.js
+file_operation: MODIFY
+starting_file_digest: c3f2fb24576f43e6c046a87573e6e0942b9263d39c2002eec152280365cde38c
+starting_repository_change_set_digest: 565d9fb141c12fc6c056f259745965c450c65088acb62ade9c81d0193c022860
+read_only_scope:
+  - the writable file; src/prisma-run-repository.js (frozen wave-1 output, read-only)
+  - DEC-KI-053; KI-W6-CT22; this S1 §3.4; S2; S3
+authorized_actions: [apply the exact one-line transformation, run node --check, run the leaf-local assertion script, record S3 leaf evidence via the window agent]
+prohibited_actions: (the common list)
+may_start_successor: false
+```
+
+**Mechanical trace (§7.2).** `KI-W6-T22B` / `KI-W6-CT22` item 2 (lead
+member): the sole lead call. Decision `DEC-KI-053` clock callers. Verified by
+`C142` (caller audit) and `CV86`/`CV87`.
+
+**Exact file transformation (§7.3).** The sole
+`runtime.repository.readAwsReusableProfiles({ runId: message.runId, … selections: reusableSelections, evaluatedAt: new Date(manifest.workPlan.evaluatedAt) });`
+call (authoring-time anchor :71–73) ends `… evaluatedAt: new Date(manifest.workPlan.evaluatedAt) }, new Date());`.
+Argument one is byte-equivalent; nothing else in the file changes; the call
+is not moved.
+
+**Exact checks (§7.4).** C1 write-set (this file). C2 `node --check` → 0. C3
+leaf script: exactly one `readAwsReusableProfiles(` occurrence in the file;
+its call ends `}, new Date());`; `git diff` is exactly one line changed.
+Controls: (A) reverting the argument fails the second-argument assertion;
+(B) adding `new Date()` to any other repository call fails the one-change
+assertion.
+
+- [ ] P1 Revisions, assignment identity, writable file, baseline digest, and wave-1 dispatch evidence match.
+- [ ] P2 Starting repository status and protected dirty changes match §2.
+- [ ] T1 Apply the exact one-call transformation and no other edit.
+- [ ] V1 Run every LOCAL_NOW check and record its activation witnesses and exact assertions.
+- [ ] V2 Prove the attributable workspace changed-file set is exactly the writable file.
+- [ ] V3 Record the lead caller-audit witness consumed by C142.
+- [ ] H1 Return the exact diff, ending digest, commands, outcomes, and residual integration obligations.
+- [ ] H2 Confirm no prohibited action, second-file edit, successor work, external mutation, or parent communication occurred.
+- [ ] H3 Stop at AWAITING_WINDOW_REVIEW.
+
+### 5.5 `KI-W6-C140` — final-aggregator caller clocks
+
+```yaml
+subwindow_id: KI-W6-C140
+type: CORRECTION
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-14
+assigned_agent: LEAF (KI-W6-C140-AGENT)
+predecessors: [KI-W6-WAVE-1 dispatch]
+successor_reserved_for: WINDOW-AGENT
+writable_file: email_scraper/src/aws-pipeline/services/final-aggregator.js
+file_operation: MODIFY
+starting_file_digest: 416e36feeb35aedd571ae8863a413550215263a157a99ed8cf519722446f9683
+starting_repository_change_set_digest: 565d9fb141c12fc6c056f259745965c450c65088acb62ade9c81d0193c022860
+read_only_scope:
+  - the writable file; src/prisma-run-repository.js (frozen wave-1 output, read-only)
+  - DEC-KI-053; KI-W6-CT22; this S1 §3.4; S2; S3
+authorized_actions: [apply the exact three-line transformation, run node --check, run the leaf-local assertion script, record S3 leaf evidence via the window agent]
+prohibited_actions: (the common list)
+may_start_successor: false
+```
+
+**Mechanical trace (§7.2).** `KI-W6-T22C` / `KI-W6-CT22` item 2 (final
+member): the three final calls. Decision `DEC-KI-053` clock callers.
+Verified by `C142` (caller audit) and `CV86`/`CV87`.
+
+**Exact file transformation (§7.3).** Exactly three calls gain `, new Date()`
+as the second argument — `readAwsAmbiguousDataForSeoTargets({ … })` (anchor
+:294–296), `readAwsTerminalCruxBigQueryWork({ … })` (anchor :324–326), and
+`readAwsFinalReuseRows({ … selections: reuseSelections, evaluatedAt: new Date(manifest.workPlan.evaluatedAt) })`
+(anchor :334–336). Each argument one is byte-equivalent; call order and all
+other lines unchanged.
+
+**Exact checks (§7.4).** C1 write-set (this file). C2 `node --check` → 0. C3
+leaf script: exactly one occurrence each of the three call names; each ends
+`}, new Date());`; `git diff` shows exactly three changed lines. Controls:
+(A) reverting one argument fails the second-argument assertion; (B) adding a
+fourth `new Date()` call argument fails the three-change assertion.
+
+- [ ] P1 Revisions, assignment identity, writable file, baseline digest, and wave-1 dispatch evidence match.
+- [ ] P2 Starting repository status and protected dirty changes match §2.
+- [ ] T1 Apply the exact three-call transformation and no other edit.
+- [ ] V1 Run every LOCAL_NOW check and record its activation witnesses and exact assertions.
+- [ ] V2 Prove the attributable workspace changed-file set is exactly the writable file.
+- [ ] V3 Record the three final caller-audit witnesses consumed by C142.
+- [ ] H1 Return the exact diff, ending digest, commands, outcomes, and residual integration obligations.
+- [ ] H2 Confirm no prohibited action, second-file edit, successor work, external mutation, or parent communication occurred.
+- [ ] H3 Stop at AWAITING_WINDOW_REVIEW.
+
+### 5.6 `KI-W6-C141` — coordinator unit regression for profile and consolidation
+
+```yaml
+subwindow_id: KI-W6-C141
+type: CORRECTION
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-14
+assigned_agent: LEAF (KI-W6-C141-AGENT)
+predecessors: [KI-W6-WAVE-1 fully accepted]
+successor_reserved_for: WINDOW-AGENT
+writable_file: email_scraper/test/pipeline-coordinator-repository.test.js
+file_operation: MODIFY
+starting_file_digest: ee2f14da06e171d876c926cf2fde0f259a62dcf477f0d6873e8294d49bdb5533
+starting_repository_change_set_digest: 565d9fb141c12fc6c056f259745965c450c65088acb62ade9c81d0193c022860
+read_only_scope:
+  - the writable file; src/aws-pipeline/repositories/pipeline-coordinator-repository.js (frozen wave-1 output)
+  - DEC-KI-053; CT23 item 2; this S1 §3.4; S2; S3
+authorized_actions: [modify only the writable file per the transformation, run node --check, run node --test test/pipeline-coordinator-repository.test.js, record S3 leaf evidence via the window agent]
+prohibited_actions: (the common list; additionally) no production-source edit, no database use (unit fakes only)
+may_start_successor: false
+```
+
+**Mechanical trace (§7.2).** `KI-W6-T23A` / `CT23` item 2. Decisions
+`DEC-KI-053` (eleven-method set, consolidation), CT20 item 5 (baseline
+recording, §0.1 item 1). Cases `W6-DB-08`/`W6-DB-10` (dynamic half);
+supports `W6-NC-18`/`W6-NC-20` falsification surface.
+
+**Exact file transformation (§7.3).** Preserve all five existing tests and
+every accepted assertion byte-for-byte (migration/schema/exports/preflight
+tests :12–67, the focused `renewTask` profile oracle :69–86, the collation
+test :88–125). Append exactly three new tests:
+
+1. **"all eleven coordinator transactions receive the frozen profile"** — a
+   fake `prisma` whose `$transaction(operation, options)` records `options`
+   and throws a distinct sentinel without invoking `operation`; for each of
+   the eleven methods, call it with these preflight-passing literal inputs
+   (`registerStage`: `{ runId: "run_profile_fixture", stage: "discovery",
+   generation: 1,
+   manifestS3Key: "runs/run_profile_fixture/domains-manifest.json",
+   manifestFingerprint: "a".repeat(64), manifestProducedAt: now, tasks: [] }`;
+   `recordDispatch`:
+   `{ stageId: "stage_profile_fixture", itemKeys: ["k1"] }`; `claimTask`:
+   `{ runId: "run_profile_fixture", stage: "discovery", generation: 1,
+   itemKey: "k1", inputFingerprint: "a".repeat(64), owner: "spy",
+   token: "00000000-0000-4000-8000-000000000001", leaseDurationMs: 60000 }`;
+   `renewTask`: `{ taskId: "task_profile_fixture",
+   token: "00000000-0000-4000-8000-000000000001",
+   leaseDurationMs: 60000 }`; `recordTerminal`:
+   `{ taskId: "task_profile_fixture",
+   token: "00000000-0000-4000-8000-000000000001",
+   inputFingerprint: "a".repeat(64), state: "succeeded",
+   artifactS3Key: "runs/profile/result.json",
+   artifactFingerprint: "b".repeat(64) }`; `claimAggregator`:
+   `{ runId: "run_profile_fixture", stage: "discovery", generation: 1,
+   owner: "spy", token: "00000000-0000-4000-8000-000000000002",
+   leaseDurationMs: 120000 }`; `renewAggregator`:
+   `{ stageId: "stage_profile_fixture",
+   token: "00000000-0000-4000-8000-000000000002",
+   leaseDurationMs: 120000 }`; `getCompleteStage`:
+   `{ runId: "run_profile_fixture", stage: "discovery", generation: 1,
+   token: "00000000-0000-4000-8000-000000000002" }`;
+   `completeAggregator`: `{ stageId: "stage_profile_fixture",
+   token: "00000000-0000-4000-8000-000000000002",
+   state: "completed" }`; `listRecoverable`:
+   `{ olderThan: now, limit: 100 }`; `cancelRunGeneration`:
+   `{ runId: "run_profile_fixture", generation: 1 }`; every method receives
+   the same fixed `new Date("2026-08-23T00:00:00.000Z")`) and assert the
+   rejection is the sentinel (proving `$transaction` was reached) and
+   `assert.deepEqual(recordedOptions, { maxWait: 5_000, timeout: 30_000 })`
+   for all eleven, with exactly eleven records.
+2. **"locked helpers return complete raw rows without delegate reads and the
+   coordinator ceilings are exact"** — drive the maximal successful branch
+   of each of `claimTask`, `renewTask`, `recordTerminal`, `claimAggregator`,
+   `renewAggregator`, `getCompleteStage`, and `completeAggregator` through a
+   method-local fake transaction. Every fake serves `selectSchema` first and
+   then returns complete camelCase task/stage/run rows from `$queryRaw` in the
+   production lock order. The common run row is exactly
+   `{ id: runId, state: "running", executionBackend: "aws",
+   pipelineGeneration: 1, leaseExpiresAt: null }`; collecting task/stage rows
+   carry the method's exact IDs/fingerprints/tokens, live expiry
+   `new Date(now.getTime() + 60000)` or
+   `new Date(now.getTime() + 120000)`, `expectedCount: 1`, and matching
+   terminal counters. The `recordTerminal` fixture is the final expected task,
+   so it executes both stage writes and reaches `state: "ready"`.
+   `pipelineTask.update` and `pipelineStage.update` return separately named
+   expected updated rows; `claimTask` must return the task row returned by
+   `pipelineTask.update` (not the pre-update raw locked row). Every
+   `pipelineTask.findUnique`, `pipelineStage.findUnique`, and `run.findUnique`
+   records and throws `"delegate read must not occur"`; the one deliberate
+   `pipelineTask.findMany` inside `getCompleteStage` returns its single
+   terminal task and is recorded separately from forbidden helper reloads.
+   Assert the exact maximal statement ceilings below, counting `selectSchema`
+   and every raw/delegate/write operation:
+
+   | Method | Raw queries | Deliberate delegate reads | Writes | Total statements |
+   |---|---:|---:|---:|---:|
+   | `claimTask` | 4 | 0 | 1 | 5 |
+   | `renewTask` | 4 | 0 | 1 | 5 |
+   | `recordTerminal` | 4 | 0 | 3 | 7 |
+   | `claimAggregator` | 3 | 0 | 1 | 4 |
+   | `renewAggregator` | 3 | 0 | 1 | 4 |
+   | `getCompleteStage` | 3 | 1 | 0 | 4 |
+   | `completeAggregator` | 3 | 0 | 1 | 4 |
+
+   Emit this literal table as `context.diagnostic` and assert deep equality;
+   any additional raw query, delegate read, or write fails the test. This is
+   the frozen CT20-item-5 post-consolidation baseline consumed by CV86.
+3. **"recordDispatch locks complete rows once and never reloads tasks"** —
+   fake transaction whose `$queryRaw` returns: for the ordered task lock, two
+   complete task rows (`itemKey` `"k1"`, `"k2"`); for the stage lock, a
+   complete stage row with `expectedCount: 2`, `state: "collecting"`;
+   `pipelineTask.findMany` records and throws `"task reload must not occur"`;
+   `pipelineTask.updateMany` returns `{ count: 1 }`. Call
+   `recordDispatch({ stageId, itemKeys: ["k1"] }, now)` → `{ count: 1 }`,
+   zero `findMany`; then a cardinality-control call with a stage row whose
+   `expectedCount: 3` rejects with `PIPELINE_INPUT_CONFLICT`.
+
+**Exact checks (§7.4).** C1 write-set (this file). C2 `node --check` → 0. C3
+`node --test test/pipeline-coordinator-repository.test.js` → exit 0, eight
+tests, zero failures/skips (LOCAL_NOW). C4 diff-hunk audit: only the three
+appended tests; existing five byte-identical. DEFERRED: statement-ceiling
+enforcement (`CV86`).
+
+- [ ] P1 Revisions, assignment identity, writable file, baseline digest, and wave-2 dispatch evidence match.
+- [ ] P2 Starting repository status contains only accepted wave-1 endings plus protected root coordination state.
+- [ ] T1 Append exactly the three prescribed tests and preserve the existing five tests byte-identically.
+- [ ] V1 Run every LOCAL_NOW check and record eight passing tests and the literal seven-method ceiling table.
+- [ ] V2 Prove the attributable workspace changed-file set is exactly the writable file.
+- [ ] V3 Record the dynamic `W6-DB-08`/`W6-DB-10` witnesses with zero skips.
+- [ ] H1 Return the exact diff, ending digest, commands, outcomes, and residual integration obligations.
+- [ ] H2 Confirm no prohibited action, second-file edit, successor work, external mutation, or parent communication occurred.
+- [ ] H3 Stop at AWAITING_WINDOW_REVIEW.
+
+### 5.7 `KI-W6-C142` — transaction-clock enforcement suite (CREATE)
+
+```yaml
+subwindow_id: KI-W6-C142
+type: CORRECTION
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-14
+assigned_agent: LEAF (KI-W6-C142-AGENT)
+predecessors: [KI-W6-WAVE-1 fully accepted]
+successor_reserved_for: WINDOW-AGENT
+writable_file: email_scraper/test/aws-pipeline-transaction-clock-enforcement.test.js
+file_operation: CREATE
+starting_file_digest: ABSENT
+starting_repository_change_set_digest: 565d9fb141c12fc6c056f259745965c450c65088acb62ade9c81d0193c022860
+read_only_scope:
+  - src/aws-pipeline/repositories/pipeline-coordinator-repository.js, src/prisma-run-repository.js,
+    src/aws-pipeline/services/domain-aggregator.js, src/aws-pipeline/services/lead-aggregator.js,
+    src/aws-pipeline/services/final-aggregator.js (frozen wave-1 outputs, read via node:fs)
+  - email_scraper/test/keyword-intelligence-enforcement.test.js (registration/certificate precedent, read-only)
+  - DEC-KI-053; SRC-KI-055; CT23 item 3; SCN-KI-044; this S1 §3.4/§4; S2; S3
+authorized_actions: [create only the writable file, run node --check, run node --test on it (no database required), record S3 leaf evidence via the window agent]
+prohibited_actions: (the common list; additionally) no database use, no production-source edit, no dynamic import or execution of production modules except pure functions named below)
+may_start_successor: false
+```
+
+**Mechanical trace (§7.2).** `KI-W6-T23B` / `CT23` item 3. Registers and
+executes exactly `W6-DB-08`, `W6-DB-09`, `W6-DB-10`, `W6-DB-11` (unit half)
+and the three controls `W6-NC-18`–`20`. Decisions `DEC-KI-053` (all four
+enforcement clauses); scenario `SCN-KI-044` activation witnesses (32/32
+transaction members, 9/9 explicit clocks). Zero database, zero network.
+
+**Exact file transformation (§7.3).** Create exactly this Node ESM test file.
+Structure, in order:
+
+1. **Imports (exactly):** `node:assert/strict`, `node:test`, `node:fs/promises`
+   (`readFile`), `node:crypto` (`createHash`), `node:url` (`pathToFileURL` not
+   required — resolve sources relative to `import.meta.url`), and
+   `src/prisma-run-repository.js` (`PrismaRunRepository`) for the
+   `W6-DB-11` rejection half (pure construction with a fake prisma; no
+   connection).
+2. **Constants:** `REQUIRED = ["W6-DB-08","W6-DB-09","W6-DB-10","W6-DB-11"]`;
+   `CONTROLS = ["W6-NC-18","W6-NC-19","W6-NC-20"]`; the eleven coordinator
+   method names and twenty-one run-repository method names as literal arrays
+   (copied from DEC-KI-053 verbatim); the five clock-method names; the five
+   caller signatures (file + call name + count); registries
+   `registered`/`executed`/`witnesses`/`failures`.
+3. **Source loader:** read the five wave-1 files once into strings; a helper
+   slices a class body into per-method text on `^  async <name>(` boundaries;
+   a helper slices module functions (`lockedTask` etc.) on
+   `^async function <name>(` boundaries.
+4. **`W6-DB-08` (transaction memberships and frozen constants):** compute the
+   coordinator's `$transaction`-containing method set from source and assert
+   set equality with the literal eleven (recomputed from source, not
+   trusted from counts); assert each of the eleven bodies contains
+   `PIPELINE_TRANSACTION_OPTIONS`; assert exactly one definition of the
+   constant with the byte-exact frozen literal; assert zero inline
+   `{ maxWait: 5_000, timeout: 30_000 }` in the coordinator file. For the run
+   repository: assert each of the literal twenty-one bodies contains both
+   `$transaction` and `AWS_PIPELINE_TRANSACTION_OPTIONS`; assert exactly
+   twenty-one usages (twenty-two tokens including the one definition); one
+   definition with the byte-exact literal; exactly one surviving inline
+   profile and it is inside `saveQueryValidation`; `renewAwsRunLease` has no
+   `$transaction` and retains `updateMany`.
+5. **`W6-DB-09` (nine-clock inventory):** count
+   `assertCompleteAggregatorInTransaction(` call sites across the two
+   repository files — exactly nine (one coordinator, eight run-repository);
+   none of the nine passes `new Date()`; the five clock methods have
+   `(input, now)` signatures with no `= new Date()` default, contain
+   `requireAwsPipelineNow(now)` before `$transaction`, and forward `now`;
+   exactly one `requireAwsPipelineNow` definition; the five service callers:
+   in `domain-aggregator.js` exactly one `readAwsReuseInputs(` occurrence
+   ending `}, new Date())`; in `lead-aggregator.js` exactly one
+   `readAwsReusableProfiles(` occurrence ending `}, new Date())`; in
+   `final-aggregator.js` exactly one occurrence each of
+   `readAwsAmbiguousDataForSeoTargets(`, `readAwsTerminalCruxBigQueryWork(`,
+   `readAwsFinalReuseRows(`, each ending `}, new Date())`.
+6. **`W6-DB-10` (lock/read ceilings, static half):** `lockedTask`/
+   `lockedStage`/`lockedRun` bodies each contain `SELECT *` and `FOR UPDATE`
+   and `rows[0]` and no `findUnique`; the `recordDispatch` body contains
+   `SELECT *`, no `findMany`, exactly one `updateMany`; the dynamic
+   operation-count baseline itself is the `C141` witness (referenced by
+   evidence ID, not re-derived here).
+7. **`W6-DB-11` (required-now rejection, unit half):** with
+   `const prisma = { $transaction: async () => { throw new Error("transaction must not start"); } }`
+   and `new PrismaRunRepository(prisma, {})`: for each of the five clock
+   methods, `assert.rejects` with a missing second argument and with an
+   invalid second argument (`new Date("invalid")` and `42`) proving
+   `error.code === "PIPELINE_INPUT_CONFLICT"` and — via a recording fake
+   whose `$transaction` counts invocations — zero transaction attempts; then
+   with a valid `new Date("2026-08-23T00:00:00.000Z")` and a recording fake
+   whose `$transaction` throws a distinct sentinel, assert the sentinel
+   (validation passed, transport reached) for all five methods.
+8. **Controls (each: apply the mutation to an in-memory copy → rerun only the
+   targeted oracle function against the copy → assert it throws; record the
+   control only after the throw; then a fresh positive pass on the real
+   source):**
+   - `W6-NC-18`: in the coordinator copy, remove the constant argument from
+     `listRecoverable` (`}, PIPELINE_TRANSACTION_OPTIONS);`
+     → `});`) — the unchanged `W6-DB-08` membership/profile oracle must
+     throw.
+   - `W6-NC-19`: in the run-repository copy, replace one forwarded `now`
+     third argument at an `assertCompleteAggregatorInTransaction` site with
+     `new Date()` — the unchanged `W6-DB-09` oracle must throw.
+   - `W6-NC-20`: in the coordinator copy, restore one follow-up reload
+     (insert `await transaction.pipelineStage.findUnique({ where: { id: stageId } });`
+     into `lockedStage`) — the unchanged `W6-DB-10` oracle must throw.
+9. **Certificate:** a final always-run test asserts `registered = executed =
+   REQUIRED` (zero skips — no database gate exists), `failures` empty, and
+   `falsifiedControls = CONTROLS`. It writes exactly one stdout line whose JSON
+   value is the following complete member set (JSON key order is fixed as
+   shown; the three digests are recomputed at runtime and must equal the
+   literals):
+
+   `KI_W6_TXN_CLOCK_ENFORCEMENT_CERTIFICATE={"file":"aws-pipeline-transaction-clock-enforcement.test.js","required":["W6-DB-08","W6-DB-09","W6-DB-10","W6-DB-11"],"registered":["W6-DB-08","W6-DB-09","W6-DB-10","W6-DB-11"],"executed":["W6-DB-08","W6-DB-09","W6-DB-10","W6-DB-11"],"skipped":[],"activationWitnesses":{"coordinatorTransactions":11,"runRepositoryTransactions":21,"assertionClockSites":9,"serviceCallers":5},"oracleFailures":[],"negativeControls":{"expected":3,"falsified":3,"ids":["W6-NC-18","W6-NC-19","W6-NC-20"]},"digests":{"required":"e8bd1b4a3b3deb8f853eac0e8bcea5609278177945389f292b1b12a7309bf030","registered":"e8bd1b4a3b3deb8f853eac0e8bcea5609278177945389f292b1b12a7309bf030","executed":"e8bd1b4a3b3deb8f853eac0e8bcea5609278177945389f292b1b12a7309bf030","controls":"89e40c02b11dd426c8445de018a9d85fa2c110b6da9728cee8dff4e3cc31db1b"}}`
+
+**Exact checks (§7.4).** C1 write-set (this one new untracked file). C2
+`node --check` → 0. C3 `node --test
+test/aws-pipeline-transaction-clock-enforcement.test.js` → exit 0, all tests
+pass, certificate line present with `executed === required`,
+`negativeControls.falsified === 3`, and the exact three control IDs
+(LOCAL_NOW; no env vars). C4 the file
+imports nothing outside `node:` builtins and the one named `src/` module; no
+credentials, tokens, production IDs, or provider bodies (only method names,
+counts, hashes). DEFERRED: integration halves (`C143`/`C144`, `CV86`).
+
+- [ ] P1 Revisions, assignment identity, writable CREATE file, ABSENT baseline, and wave-2 dispatch evidence match.
+- [ ] P2 Starting repository status contains only accepted wave-1 endings plus protected root coordination state.
+- [ ] T1 Create exactly the prescribed enforcement suite and no other file.
+- [ ] V1 Run every LOCAL_NOW check and capture the exact certificate with four executed cases and three falsified controls.
+- [ ] V2 Prove the attributable workspace changed-file set is exactly the writable file.
+- [ ] V3 Prove required=registered=executed `W6-DB-08`–`11`, zero skips, and expected=falsified `W6-NC-18`–`20`.
+- [ ] H1 Return the exact file, ending digest, commands, outcomes, and residual integration obligations.
+- [ ] H2 Confirm no prohibited action, second-file edit, successor work, external mutation, or parent communication occurred.
+- [ ] H3 Stop at AWAITING_WINDOW_REVIEW.
+
+### 5.8 `KI-W6-C143` — lead integration controlled-clock coverage
+
+```yaml
+subwindow_id: KI-W6-C143
+type: CORRECTION
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-14
+assigned_agent: LEAF (KI-W6-C143-AGENT)
+predecessors: [KI-W6-WAVE-1 fully accepted, C141 and C142 dispatch-parallel peers]
+successor_reserved_for: WINDOW-AGENT
+writable_file: email_scraper/test/aws-pipeline-lead-aggregation.integration.test.js
+file_operation: MODIFY
+starting_file_digest: 102cac9694251ea5dedb40bcf44a07b771f26440202b5c81a3c5f33b98630238
+starting_repository_change_set_digest: 565d9fb141c12fc6c056f259745965c450c65088acb62ade9c81d0193c022860
+read_only_scope:
+  - the writable file; src/prisma-run-repository.js (frozen wave-1 output, read-only); src/aws-pipeline/repositories/pipeline-coordinator-repository.js (read-only)
+  - test/fixtures/aws-pipeline/v1/** (read-only); test/helpers/isolated-postgres.js (read-only)
+  - DEC-KI-053; CT23 item 4; this S1 §3.4; S2; S3
+authorized_actions: [modify only the writable file per the transformation, run node --check test/aws-pipeline-lead-aggregation.integration.test.js, run exactly once ALLOW_DATABASE_TESTS=true node -r dotenv/config --test --test-isolation=none --test-concurrency=1 test/aws-pipeline-lead-aggregation.integration.test.js against an isolated non-production TEST_DATABASE_URL with sandbox escalation permitted, record S3 leaf evidence via the window agent]
+prohibited_actions: (the common list; additionally) any production-database use, any test-database use other than one disposable schema named g10_lead_* created via test/helpers/isolated-postgres.js)
+may_start_successor: false
+```
+
+**Mechanical trace (§7.2).** `KI-W6-T23C` / `CT23` item 4. Case `W6-DB-11`
+(lead integration half). Decision `DEC-KI-053` clock interface.
+
+**Exact file transformation (§7.3).** In the single existing test, at the
+"reusable profile read" step (anchor :49–53): extract the existing input
+object verbatim into `const reuseInput = { runId: manifest.runId, generation: 1,
+stageId: lead.stage.id, aggregationToken: token, evaluatedAt: now,
+selections: [{ shopId: domain.shopId, profileShopId: domain.shopId, profileFingerprint,
+stableIdentity: domain.identity.stableKey }] };` and change the call to
+`const selected = await repository.readAwsReusableProfiles(reuseInput, new Date(now.getTime() + 2));`
+(the aggregator claim is at `+1` with a 120000 ms lease; `+2` is
+inside-lease). Retain `assert.equal(selected.profiles.length, 1);`. Then
+insert immediately after it exactly this block:
+
+```js
+step = "reusable profile clock rejection";
+await assert.rejects(repository.readAwsReusableProfiles(reuseInput),
+  (error) => error.code === "PIPELINE_INPUT_CONFLICT");
+await assert.rejects(repository.readAwsReusableProfiles(reuseInput, new Date("invalid")),
+  (error) => error.code === "PIPELINE_INPUT_CONFLICT");
+await assert.rejects(repository.readAwsReusableProfiles(reuseInput,
+  new Date(now.getTime() + 120001)), (error) => error.code === "PIPELINE_LEASE_LOST");
+assert.equal((await prisma.pipelineStage.findUnique({ where: { id: lead.stage.id } })).state,
+  "aggregating");
+```
+
+(expiry = claim `+1` + 120000 = `+120001` boundary past expiry; the claim at
+`+1` used `leaseDurationMs: 120000`; the three rejections mutate nothing, so
+every later existing assertion — publication at `+2`, post-commit checks —
+still passes unchanged). The existing `publishAwsLeadCheckpoint(…, new Date(now.getTime() + 2))`
+and every other line remain byte-identical.
+
+**Exact checks (§7.4).** C1 write-set (this file). C2 `node --check` → 0. C3
+one isolated-database run → exit 0, one test passing, `step` progression
+witnessed; disposable schema `g10_lead_*` dropped with
+`DROP SCHEMA IF EXISTS … CASCADE` in the unchanged `finally`. C4 diff-hunk
+audit: input extraction, clock argument, inserted rejection block only.
+DEFERRED: full-suite `CV86`.
+
+- [ ] P1 Revisions, assignment identity, writable file, baseline digest, and wave-2 dispatch evidence match.
+- [ ] P2 Starting repository status contains only accepted wave-1 endings plus protected root coordination state; TEST_DATABASE_URL is isolated and non-production.
+- [ ] T1 Apply the exact reuse-input extraction, controlled clock, and rejection block only.
+- [ ] V1 Run syntax and the one authorized isolated-file test command; require one pass and zero skips.
+- [ ] V2 Prove the attributable workspace changed-file set is exactly the writable file and the disposable schema is absent after exit.
+- [ ] V3 Prove the `W6-DB-11` lead half: missing/invalid/expired rejection and inside-lease success on the same input.
+- [ ] H1 Return the exact diff, ending digest, commands, outcomes, cleanup witness, and residual integration obligations.
+- [ ] H2 Confirm no prohibited action, second-file edit, successor work, external mutation, or parent communication occurred.
+- [ ] H3 Stop at AWAITING_WINDOW_REVIEW.
+
+### 5.9 `KI-W6-C144` — final integration controlled-clock coverage
+
+```yaml
+subwindow_id: KI-W6-C144
+type: CORRECTION
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-14
+assigned_agent: LEAF (KI-W6-C144-AGENT)
+predecessors: [KI-W6-WAVE-1 fully accepted, C141/C142/C143 dispatch-parallel peers]
+successor_reserved_for: WINDOW-AGENT
+writable_file: email_scraper/test/aws-pipeline-final.integration.test.js
+file_operation: MODIFY
+starting_file_digest: 22b70d3111ea65d0e24fe9d5e82d4c03e8fe84c6b80e076335e919edd0e0e664
+starting_repository_change_set_digest: 565d9fb141c12fc6c056f259745965c450c65088acb62ade9c81d0193c022860
+read_only_scope:
+  - the writable file; src/prisma-run-repository.js and src/aws-pipeline/repositories/pipeline-coordinator-repository.js (frozen wave-1 outputs, read-only)
+  - test/fixtures/aws-pipeline/v1/** (read-only); test/helpers/isolated-postgres.js (read-only)
+  - DEC-KI-053; CT23 item 5; this S1 §0.1 item 3/§3.4; S2; S3
+authorized_actions: [modify only the writable file per the transformation, run node --check test/aws-pipeline-final.integration.test.js, run exactly once ALLOW_DATABASE_TESTS=true node -r dotenv/config --test --test-isolation=none --test-concurrency=1 test/aws-pipeline-final.integration.test.js against an isolated non-production TEST_DATABASE_URL with sandbox escalation permitted, record S3 leaf evidence via the window agent]
+prohibited_actions: (the common list; additionally) any production-database use, any test-database use other than disposable schemas named g12_final_*/gr8_final_*/gr30_final_*/w6clk_final_* created via test/helpers/isolated-postgres.js)
+may_start_successor: false
+```
+
+**Mechanical trace (§7.2).** `KI-W6-T23D` / `CT23` item 5. Case `W6-DB-11`
+(final/domain/lead integration half). Decision `DEC-KI-053`; §0.1 item 3
+coverage shape.
+
+**Exact file transformation (§7.3).** Three edits; everything else
+byte-identical:
+
+1. **G12 test, `readAwsFinalReuseRows` (anchor :52–53):** the call gains
+   `, new Date(now.getTime() + 2)` as its second argument (claim at `+1`,
+   lease 120000 ms; the later `publishAwsFinalResults` remains at `+2`).
+2. **G-R8 test, `readAwsTerminalCruxBigQueryWork` (anchor :129–132):** the
+   call gains `, new Date(now.getTime() + 2)` as its second argument (the
+   fixed clock `2026-08-13` precedes the `:121–123` real-clock lease
+   extension; `+2` is inside the lease).
+3. **Append one new test
+   `"W6-DB-11 five aggregation readers reject, expire, and succeed under explicit controlled clocks"`
+   (`{ skip: !enabled, timeout: 180000 }`):** schema
+   `` `w6clk_final_${Date.now()}_${process.pid}` ``; one `Run` row
+   (`state: "running"`, `executionBackend: "aws"`, `pipelineGeneration: 1`,
+   `stage: "aws_traffic_crux"`). Its `trafficEnrichmentConfig` is exactly
+   `trafficEnrichmentConfigSnapshot({})`. Its `awsProviderConfig` is exactly
+   the valid G12 fixture produced by
+   `awsProviderConfigSnapshot({ browserlessUrl: "https://fixture.example",
+   googleSearchEngineId: "fixture", googleResultsPerQuery: 10,
+   requestTimeoutMs: 10000, maxPagesPerStore: 5, pageFetchConcurrency: 2,
+   maxQueries: 20, generatedQueryCount: 10, queryProbeFreshnessMs: 60000,
+   queryProbeConcurrency: 1, minQueryResults: 1, minQueryUniqueHosts: 1,
+   minQueryRelevantResults: 1, minQueryRelevanceRatio: 0.1,
+   minQueryBaseScore: 1, browserlessEnabled: false,
+   enableAiNormalization: false })`; raw `{}` snapshots are forbidden because
+   `readAwsReuseInputs` parses both contracts.
+   `now = new Date("2026-08-23T00:00:00.000Z")`; register three zero-task
+   stages via `coordinator.registerStage({ runId, stage: "discovery" |
+   "lead" | "traffic_crux", generation: 1, manifestS3Key:
+   `runs/${runId}/domains-manifest.json`, manifestFingerprint: "a".repeat(64),
+   manifestProducedAt: now, tasks: [] }, now)`; claim each stage's aggregator
+   at `new Date(now.getTime() + 1)` with its own UUID token and
+   `leaseDurationMs: 120000`, asserting `outcome: "owned"`. Then for the five
+   readers, each with its zero-candidate input — domain:
+   `{ runId, generation: 1, stageId: discoveryStage.stage.id,
+   aggregationToken: discoveryToken, domains: [], evaluatedAt:
+   discoveryStage.stage.createdAt }` (§0.1 item 6); lead:
+   `{ runId, generation: 1, stageId: leadStage.stage.id, aggregationToken:
+   leadToken, evaluatedAt: now, selections: [] }`; final-reuse:
+   `{ runId, generation: 1, stageId: trafficStage.stage.id,
+   aggregationToken: trafficToken, selections: [], evaluatedAt: now }`;
+   ambiguous/targets and terminal-work: `{ runId, generation: 1,
+   aggregationToken: trafficToken, candidates: [] }` — execute and assert in
+   order: (i) missing second argument → `PIPELINE_INPUT_CONFLICT`; (ii)
+   `new Date("invalid")` → `PIPELINE_INPUT_CONFLICT`; (iii) after (i)/(ii)
+   each stage row still reads `state: "aggregating"` and the run row is
+   unchanged (zero writes on rejection); (iv) expired
+   `new Date(now.getTime() + 120001)` → `PIPELINE_LEASE_LOST`; these injected
+   expiry probes are nonmutating and therefore do not prevent the following
+   inside-lease probes at earlier controlled instants. (v) call the domain and
+   lead readers at `new Date(now.getTime() + 2)` and assert domain
+   `awsProviderConfig`/traffic snapshot members are present and lead
+   `profiles.length === 0`; (vi) complete the lead stage exactly once with
+   `coordinator.completeAggregator({ stageId: leadStage.stage.id,
+   token: leadToken, state: "completed" }, new Date(now.getTime() + 3))` and
+   assert its returned stage and durable row are `completed`; this transition
+   is mandatory because `readAwsFinalReuseRows` rejects a non-completed lead
+   stage; (vii) call the three traffic-stage readers at
+   `new Date(now.getTime() + 4)` and assert final-reuse
+   `trafficRows/leadTasks/leads` are all empty arrays, ambiguous is an empty
+   array, and terminal-work is an empty array. The discovery stage remains
+   `aggregating`, the lead stage alone becomes `completed`, the traffic stage
+   remains `aggregating`, and the run remains byte-deep-equal to its captured
+   pre-reader row throughout except for no field (the stage completion does
+   not update `Run`). Teardown `finally`: drop the schema with
+   `DROP SCHEMA IF EXISTS … CASCADE`, then the exact absence witness
+   `const [absent] = await base.$queryRawUnsafe(\`SELECT EXISTS (SELECT 1 FROM pg_namespace WHERE nspname = '${schema}') AS present\`);`
+   `assert.equal(absent.present, false);` then disconnects.
+
+**Exact checks (§7.4).** C1 write-set (this file). C2 `node --check` → 0. C3
+one isolated-database run → exit 0, four tests passing (the three existing
+tests plus the new one), zero skips, schema-absence witnesses recorded. C4 diff-hunk audit: two
+argument additions plus the one appended test; existing assertions
+byte-identical. DEFERRED: `CV86`/`CV87`.
+
+- [ ] P1 Revisions, assignment identity, writable file, baseline digest, and wave-2 dispatch evidence match.
+- [ ] P2 Starting repository status contains only accepted wave-1 endings plus protected root coordination state; TEST_DATABASE_URL is isolated and non-production.
+- [ ] T1 Apply exactly two existing-call arguments plus the fully specified new controlled-clock test.
+- [ ] V1 Run syntax and the one authorized isolated-file test command; require four passes and zero skips.
+- [ ] V2 Prove the attributable workspace changed-file set is exactly the writable file and every disposable schema is absent after exit.
+- [ ] V3 Prove the `W6-DB-11` five-reader missing/invalid/expired/inside outcomes, lead completion prerequisite, zero rejected-path writes, and schema absence.
+- [ ] H1 Return the exact diff, ending digest, commands, outcomes, cleanup witnesses, and residual integration obligations.
+- [ ] H2 Confirm no prohibited action, second-file edit, successor work, external mutation, or parent communication occurred.
+- [ ] H3 Stop at AWAITING_WINDOW_REVIEW.
+
+### 5.10 `KI-W6-I119` — window-agent integration assessment
+
+```yaml
+subwindow_id: KI-W6-I119
 type: INTEGRATION_ASSESSMENT (window-agent owned; not delegated)
 parent_window_id: KI-W6
-parent_assignment_id: ASG-KI-W6-WA-01
+parent_assignment_id: ASG-KI-W6-WA-14
 assigned_agent: KI-W6-WINDOW-AGENT
-predecessors: [KI-W6-S002]
+predecessors: [KI-W6-C136..KI-W6-C144 all independently accepted]
 successor_reserved_for: PARENT
 writable_file: none
 file_operation: none
 starting_file_digest: N/A
-starting_repository_change_set_digest: d1a974b3248df1764007f77b4d423fc9ff0e85fc7d6add16005058e5156495db
-read_only_scope:
-  - both leaf files plus S1/S2/S3; both repositories' complete diff; parent artifacts
+starting_repository_change_set_digest: 565d9fb141c12fc6c056f259745965c450c65088acb62ade9c81d0193c022860
+read_only_scope: [all nine leaf files plus S1/S2/S3; both repositories' complete diff; parent artifacts A1–A8]
 authorized_actions:
-  - independently review both leaf handoffs per sub-window standard section 8
-  - execute gates KI-W6-V1 through KI-W6-V4 exactly once each on frozen final inputs
-  - execute the KI-W6-I001-M case-union merge
+  - independently review all nine leaf handoffs per the sub-window standard section 8
+  - execute gates KI-W6-CV84 through KI-W6-CV90 exactly once each on frozen final inputs, in order
+  - execute the W6 case/control union merge
   - append the section 12.4 integration certificate to S3 and set S2 to READY_FOR_PARENT_REVIEW
 prohibited_actions:
-  - any implementation-file write (a diagnosed defect opens KI-W6-C001+)
+  - any implementation-file write (a diagnosed defect opens KI-W6-C145+)
   - repeating a passed stateful gate without a documented invalidation
   - claiming parent acceptance or beginning KI-W7
 may_start_successor: false
 ```
 
-**Frozen gates (executed from the stated directories; each exactly once on
-the frozen final tree):**
+**Frozen gates (copied from the parent checklist's `KI-W6-I119` section; each
+exactly once, in order, on the frozen final tree; stop on an observable
+behavioral failure):**
 
-- **`KI-W6-V1` (scenario + matrix + controls):** (a) backend half —
-  `ALLOW_DATABASE_TESTS=true npm run test:integration` from `email_scraper/`
-  with an isolated `TEST_DATABASE_URL` distinct from production → exit 0;
-  the `KI_W6_E2E_EXECUTION_CERTIFICATE` line shows
-  `required = registered = executed` over the twelve `W6-E` IDs, zero
-  skipped, `oracleFailures: []`, `negativeControls.falsified === 0`.
-  (b) UI half — `node test/browser/keyword-intelligence-e2e.mjs` from
-  `frontend/` (full production build performed by the script) → exit 0;
-  certificate `executed === required` over the eight `W6-U` IDs,
-  `scenarios."SCN-KI-018" === true`, zero console errors, zero non-app
-  network. A documented sandbox `listen EPERM` failure is rerun under sandbox
-  approval, never silently accepted.
-- **`KI-W6-V2` (baselines + handler builds):** from `email_scraper/`:
-  `node --test test/keyword-intelligence-worker.test.js
-  test/keyword-intelligence-selection.test.js
-  test/keyword-intelligence-query-mapper.test.js` → 0 failures;
-  `npm run check:secrets` → exit 0; `npm test` → 272-test baseline intact
-  (272 + 1 new file's counts recorded; zero pre-existing failures); `npm run
-  build:lambda` → exit 0. From `frontend/`: `npm run check` → exit 0
-  (lint 0 errors/1 pre-existing warning, 118/118, build compiles).
-- **`KI-W6-V3` (ceilings):** from the V1 certificate and evidence: exact
-  counters equal the frozen values (`pathWitness` byte-equal in both
-  certificates); `rss < 1536 MiB`; recorded wall-clock for the database test
-  ≤ 900 s and the browser run ≤ 600 s; DEC-KI-024 keyword maxima asserted
-  inside the test (19 tasks / 19 calls / 23 keyword objects / result ≤
-  32 MiB / draft 200 / final 100 / occurrences 1,000).
-- **`KI-W6-V4` (obsolete-runtime negative searches + legacy preservation):**
-  from `email_scraper/`: `rg -ni 'python|sqlite|KeywordSearchVolume' src/`
-  → zero matches; `rg -n 'output/' src/` → zero matches. From `frontend/`:
-  `rg -ni 'python|sqlite|KeywordSearchVolume|output/' app/ lib/ components/
-  scripts/` → zero non-comment matches (§0.1 item 7: a match is acceptable
-  only on a line whose first non-whitespace token starts a comment);
-  `rg -ni 'unpkg\.com|jsdelivr\.net|cdnjs\.' app/ lib/ components/ scripts/`
-  → zero matches. Legacy preservation: the `npm test` run in V2 includes the
-  legacy run suites green (W1 migration baseline). `git -C
-  KeywordSearchVolume status --porcelain` → unchanged (standalone
-  read-only).
-- **`KI-W6-I001-M` (case-union merge):** the union of the two certificates'
-  `executed` sets equals exactly the 20-ID required set with per-LF §4
-  digest `8d6d002cdf86a30459c2d140977fec3b72c30a8d1c4d612f512bd7c37ed4c523`;
-  zero duplicates, zero unexpected IDs, zero skips; the two `pathWitness`
-  objects byte-equal; `negativeControls` totals 5 expected / 0 falsified.
-- Assembled write-set proof: `git -C email_scraper status --porcelain` and
-  `git -C frontend status --porcelain` list exactly the two planned paths
-  (per-LF set digest `bb9f6381cc3b65d08b696fa1f62a2d75759289b4d4f0f44554ca44a2ebf56edc`
-  over the two workspace-prefixed paths) and nothing else; the root change
-  set equals the 36-line relocation set plus the three subordinate
-  artifacts; unrelated files byte-identical.
+- **`KI-W6-CV84`** — recompute every starting/ending digest; prove the actual
+  implementation/test changed-file set equals exactly the nine-path set and
+  digest `ba4ccba7…`; independently inspect all diffs; prove no accepted
+  unrelated hunk was weakened.
+- **`KI-W6-CV85`** — `node --check` on the five production and four test
+  files; then from `email_scraper/`:
+  `node --test test/pipeline-coordinator-repository.test.js
+  test/aws-pipeline-transaction-clock-enforcement.test.js
+  test/aws-pipeline-domain.test.js
+  test/aws-pipeline-lead-aggregation.test.js
+  test/aws-pipeline-final.test.js` → exit 0, zero failures/skips for the four
+  new cases, exact executed set `W6-DB-08`–`11`, all three controls
+  falsified-then-fresh-positive.
+- **`KI-W6-CV86`** — once, with the authorized isolated test database, from
+  `email_scraper/`:
+  `ALLOW_DATABASE_TESTS=true node -r dotenv/config --test
+  --test-isolation=none --test-concurrency=1
+  test/pipeline-coordinator-repository.integration.test.js
+  test/aws-pipeline-domain.integration.test.js
+  test/aws-pipeline-lead-aggregation.integration.test.js
+  test/aws-pipeline-traffic.integration.test.js
+  test/aws-pipeline-final.integration.test.js` → exit 0, zero guarded skips,
+  controlled-time lease assertions, rollback assertions, operation ceilings
+  (C141 baseline), exact test-schema isolation, zero residual disposable
+  schemas.
+- **`KI-W6-CV87`** — after CV86 passes, exactly one durable causal command
+  from `email_scraper/` with local substitutes and the authorized test
+  database: `ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node
+  test/browser/keyword-intelligence-e2e.mjs`. Transport retains complete
+  stdout/stderr and exit status in the preflight-empty files
+  `/tmp/ki-w6-i119-state184.browser.log` and
+  `/tmp/ki-w6-i119-state184.browser.status`, uses an executor allowance of at
+  least 75 minutes, and remains attached/durable independently of a chat
+  turn. Require exit 0; existing browser required=registered=executed 26/26
+  with 13 controls; 100 validators; 100 discovery tasks; 1,000
+  domains/leads; the five clock-correct aggregation readers; no transaction
+  timeout/lease error; cleanup/schema absence. One identical escalated
+  recovery only after the exact E8.1 invalidation/postcondition proof.
+- **`KI-W6-CV88`** — only after CV87 passes, run once from `email_scraper/`:
+  `npm test`, `npm run check:secrets`, `npm run build:lambda`; from
+  `frontend/`: `npm run check`. Require zero failures, clean secret/privacy
+  scan, successful handler build/startup inventory, frontend
+  lint/test/build success. Do not repeat a successful unchanged expensive
+  gate.
+- **`KI-W6-CV89`** — recompute the final W6 case union as exactly 39 members
+  with digest `f8137d25…` and control union as exactly 20 members with
+  digest `0cbaad07…`; required=registered=executed; zero
+  skips/duplicates/unexpected IDs; every activation witness; 20/20
+  falsified controls.
+- **`KI-W6-CV90`** — verify no provider/AWS/production/paid action, schema or
+  migration, package/config, frontend product, global Prisma default, lease,
+  retry, cost, payload, S3/SQS, commit/push, or KI-W7 change occurred; paid
+  cost `$0.00`; exact disposable schema/process/output cleanup; privacy-safe
+  evidence.
+- **`KI-W6-CH15`** — append the complete window-agent
+  integration/enforcement certificate (§12.4 form), set the subordinate
+  state to `READY_FOR_PARENT_REVIEW`, return only the consolidated handoff
+  to the parent, and stop before KI-W7.
 
-## 6. Case allocation and control mapping
+**Mandatory integration checklist (sub-window standard §9.4), executed
+personally:** I1 all nine leaves independently accepted (list IDs and ending
+digests); I2 actual assembled changed files equal the nine-path set within
+parent scope; I3 complete requirement→decision→file→sub-window→assertion
+trace; I4 all frozen gates executed with activation witnesses; I5
+required=registered=executed case/control sets with matching digests and
+zero skips/duplicates/unexpected; I6 negative controls executed and
+acceptance fails under each prescribed defect; I7 substitute fidelity and
+accepted-test integrity (no weakened oracle); I8 no prohibited, successor,
+external, destructive, secret-bearing, or out-of-scope action; I9 independent
+source/diff inspection, not leaf summaries; I10 `PASS` /
+`CORRECTION_REQUIRED` / `PARENT_BLOCKED` recorded with decisive evidence.
+Result oracles: `PASS` only when CV84–CV90 all pass and CH15 completes;
+`CORRECTION_REQUIRED` opens `KI-W6-C145+` single-file corrections and a new
+`KI-W6-I120+`; `PARENT_BLOCKED` on any missing decision, contradiction, or
+scope expansion.
 
-| Case | Type | File | Scenario/requirement anchor |
+## 6. Case allocation and control mapping (complete W6 closure)
+
+New members owned by this sequence:
+
+| Case | Type | Leaf | Assertion anchor |
 |---|---|---|---|
-| `W6-E01`–`W6-E12` | integration case | S001 | `SCN-KI-018` non-UI witnesses; `REQ-KI-001`–`022`; `INV-KI-001`–`015`; `D2`/`D3`/`D11`; `DEC-KI-024` counters |
-| `W6-U01`–`W6-U08` | browser case | S002 | `SCN-KI-018` UI witnesses; `REQ-KI-006`–`009`, `013`–`014`, `017`–`018`; W5 surface inventory |
-| `NC-W6-01` worker bypass | negative control | S001 (`W6-E11.1`) | worker-less completion impossible (W3 oracle) |
-| `NC-W6-02` parser bypass | negative control | S001 (`W6-E11.2`) | strict-parser guard (`PAY-KI-006`) |
-| `NC-W6-03` snapshot bypass | negative control | S001 (`W6-E11.3`) | `DEC-KI-017` snapshot immutability |
-| `NC-W6-04` merge bypass | negative control | S001 (inside `W6-E07`) | terminal-evidence-only aggregation |
-| `NC-W6-05` fixture divergence | negative control | S002 | path-derived fixture integrity |
+| `W6-DB-08` | enforcement case | C142 (registration/execution), C141 (dynamic profile spies), C136/C137 (implementation) | 11/21 literal memberships; two frozen constants; usage-count arithmetic (§0.1 item 2) |
+| `W6-DB-09` | enforcement case | C142, C137/C138/C139/C140 (implementation) | nine `assertCompleteAggregatorInTransaction` sites with explicit clocks; five `(input, now)` signatures; five service callers; zero internal zero-argument `new Date()` |
+| `W6-DB-10` | enforcement case | C142 (static), C141 (dynamic baseline), C136 (implementation) | locked helpers return raw rows with zero delegate reads; `recordDispatch` zero task reload; CV86 ceiling enforcement |
+| `W6-DB-11` | enforcement case | C142 (unit rejection half), C143 (lead half), C144 (five-method half), C137 (implementation) | missing/invalid-now pre-transaction `PIPELINE_INPUT_CONFLICT` with zero writes; expired `PIPELINE_LEASE_LOST`; inside-lease success |
+| `W6-NC-18` | negative control | C142 | remove one profile argument → unchanged `W6-DB-08` oracle throws |
+| `W6-NC-19` | negative control | C142 | restore one hidden clock / drop caller argument → unchanged `W6-DB-09` oracle throws |
+| `W6-NC-20` | negative control | C142 | restore one follow-up reload → unchanged `W6-DB-10` oracle throws |
 
-Unmapped parent requirements/decisions/tasks/scenarios: none (every
-`KI-W6-T1` item and every `KI-W6-P1`–`P4` prerequisite maps into §5 blocks or
-§7; `SCN-KI-018` is wholly allocated; `SCN-KI-001`–`017` remain
-parity-complete and are only regression-referenced by V2).
+Existing 32 members (`W6-NAV-01`–`03`, `W6-CONF-01`–`06`, `W6-FLOW-01`–`13`,
+`W6-RES-01`–`04`, `W6-TXN-01`/`02`, `W6-DB-01`–`07`, and controls
+`W6-NC-01`–`17`) were registered, executed, and accepted by their prior
+W6 leaves and assessments; they are regression-referenced here by
+`KI-W6-CV87` (browser 26/13) and recomputed into the 39/20 unions by
+`KI-W6-CV89`. Unmapped parent requirements/decisions/tasks/scenarios/cases:
+none — every `KI-W6-CT20`–`CT23` item and `SCN-KI-044` clause maps into §5
+blocks; `SCN-KI-018` is executed unchanged by `CV87`; the parent readiness
+items `RW6O-001`–`006` and `RW6P-001`–`012` are already checked by the
+parent and are not re-owned here.
 
-## 7. Correction and re-assessment rules
+## 7. Correction and re-assessment rules (append-only)
 
-Corrections are append-only `KI-W6-C001+`, each owning exactly one of the two
-planned files, each citing failed evidence, root cause, the governing parent
+Corrections are append-only `KI-W6-C145+`, each owning exactly one of the
+nine files (or a parent-authorized tenth file only after explicit scope
+expansion), each citing failed evidence, root cause, the governing parent
 decision, corrected sub-window, invalidated evidence/gates, and a new
-`KI-W6-I002+` assessment. Every correction invalidates all evidence whose
+`KI-W6-I120+` assessment. Every correction invalidates all evidence whose
 inputs include its file; unaffected costly gates may be reused only with a
-recorded deterministic dependency comparison. No correction may touch
-application source, the standalone repository, or parent artifacts — a defect
-root-caused there is `PARENT_BLOCKED`.
+recorded deterministic dependency comparison. A defect root-caused outside
+the nine files or outside `DEC-KI-053`'s locked remedies is `PARENT_BLOCKED`.
+No correction may weaken an accepted oracle; E8.1 identical recovery is not a
+correction.
 
-## 8. Leaf dispatch protocol (requester-authorized, mirrors KI-W5 §9)
+## 8. Leaf dispatch protocol (two authorized waves)
 
-Every leaf dispatch includes the verbatim block text plus this file's path;
-the leaf reads its block before editing; the handoff quotes
-`subwindow_id`/`writable_file`/`starting_file_digest` unless the requester
-waives the quote form. Leaves execute strictly sequentially: S001 → S002 →
-I001. The requester performs all git commits; neither leaves nor the window
-agent commit anything.
+Every dispatch includes the verbatim block text plus this file's path and
+digest; the leaf reads its block and pinned revisions before editing; the
+handoff quotes `subwindow_id`/`writable_file`/`starting_file_digest`.
+`S2.active_subwindows` records the whole wave before any member begins. Wave
+1 members are mutually independent and dispatch together; wave 2 dispatches
+only after every wave-1 member is independently `ACCEPTED_FOR_INTEGRATION`;
+`I119` runs only after every wave-2 member is accepted. No leaf communicates
+with the parent, starts another leaf, or edits S1/S2/S3. The requester
+performs all git commits; nothing here commits anything.
 
 ## 9. Mandatory decomposition-readiness checklist (standard §11)
 
-- [ ] `SW-A01` Parent assignment `ASG-KI-W6-WA-01`, window-agent identity, and delegation authority are exact and current (A5 state 108; `EV-KI-A-047`). Evidence: S3 `EV-KI-W6-S01`.
-- [ ] `SW-A02` Parent/sub-window standards plus contract, decision, checklist, and state revisions pinned and verified this session. Evidence: `EV-KI-W6-S01`.
-- [ ] `SW-A03` Parent write/read/action/prohibition/stop boundaries copied unexpanded into §1 and every block. Evidence: `EV-KI-W6-S01`.
-- [ ] `SW-A04` Repositories, dirty state, and owner-controlled changes inventoried (§2; both nested repos clean; both targets `ABSENT`). Evidence: `EV-KI-W6-S01`.
-- [ ] `SW-A05` S1/S2/S3 exist with non-overlapping authorities. Evidence: `EV-KI-W6-S01`.
-- [ ] `SW-A06` Strict adjacency enforced; no subagent delegation beyond one leaf at a time. Evidence: §5 blocks, §8.
-- [ ] `SW-D01` Every KI-W6 requirement/invariant/decision/task/scenario/case allocated to exact files and assertions (§6). Evidence: `EV-KI-W6-S02`.
-- [ ] `SW-D02` No missing parent decision remains (the six §0.1 interpretations are mechanical, each cites its governing decision; none changes product behavior). Evidence: `EV-KI-W6-S02`.
-- [ ] `SW-D03` Required changed-file set equals planned initial file set (§3 digests). Evidence: `EV-KI-W6-S01`.
-- [ ] `SW-D04` One initial sub-window per file; no multi-file sub-window. Evidence: §5.
-- [ ] `SW-D05` Operations, starting digests, anchors, interfaces, preserved behavior, and forbidden edits exact per block. Evidence: §5.
-- [ ] `SW-D06` DAG complete, sequential, acyclic (S001 → S002 → I001), edges justified (path-derived fixtures consume S001's frozen generators; I001 consumes both). Evidence: §5.
-- [ ] `SW-D07` Cross-file interfaces frozen (API envelopes via W4 contract parsers; certificate shapes in §5.1/§5.2). Evidence: §5.
-- [ ] `SW-D08` Intermediate states defined: after S001, the backend E2E exists and both repos otherwise unchanged (S002 depends only on S001's frozen generators, not its execution; safe because fixtures are literal-frozen in S1). Evidence: §5.
-- [ ] `SW-D09` Production/test separation: both files are test files; no production file is editable. Evidence: §1.
-- [ ] `SW-D10` No rename/generator/formatter/installer can violate the one-file rule (creates only; `node --check` writes nothing; builds emit to gitignored `.next`/`dist`). Evidence: `EV-KI-W6-S02`.
-- [ ] `SW-E01`–`SW-E08` Every §7 field present; exact ordered edits; preflight/checks/witnesses/assertions/forbidden outcomes; single-file write-set proof; handoff/stop/successor rules; reporting line; no successor-dependent local acceptance; deferred checks name I001. Evidence: §5 blocks.
-- [ ] `SW-V01`–`SW-V10` Coverage allocated to exact files/registrations/witnesses; set-equality and digest checks prescribed (§4, §5.3); five negative controls at the narrowest level; substitute fidelity = §0.1 interpretation 1 (aggregate `pathWitness` parity, recorded); I001 fully authored with zero write authority; frozen gates risk-proportionate at final assessment; correction rules complete; window-agent personal review/assessment; zero-work acceptance impossible (witnesses + certificates); handoff contents exact. Evidence: `EV-KI-W6-S02`.
-- [ ] `SW-R01`–`SW-R10` IDs unique; no unresolved placeholders in assignable blocks; write-set lint semantics embedded in C1 checks; remove-one mappings fail readiness; case removal fails acceptance; oracle weakening invalidates; simulated second-file edit/parent communication rejected; window-agent repair requires a corrective sub-window; parent decomposition review precedes first assignment; document lint zero. Evidence: `EV-KI-W6-S02` (self-falsification pass).
+### 9.1 Authority and inheritance
+
+- [x] `SW-A01` Parent assignment `ASG-KI-W6-WA-14`, window-agent identity, and the two-wave delegation authority are exact and current (A5 state 184). Evidence: `EV-KI-W6-TC01`.
+- [x] `SW-A02` Parent/sub-window standards plus contract, decision, checklist, and state revisions pinned and verified byte-equal this session. Evidence: `EV-KI-W6-TC01`.
+- [x] `SW-A03` Parent write/read/action/prohibition/successor/stop boundaries copied without expansion into §1 and every block. Evidence: `EV-KI-W6-TC01`.
+- [x] `SW-A04` Repositories, dirty state, and owner-controlled changes inventoried (§2; both nested repos clean; nine baselines + `ABSENT` verified). Evidence: `EV-KI-W6-TC01`.
+- [x] `SW-A05` S1/S2/S3 exist with non-overlapping authorities. Evidence: `EV-KI-W6-TC02`.
+- [x] `SW-A06` Strict adjacency enforced; parallel waves carry no subagent-to-subagent or subagent-to-parent channel; integration assessment is window-agent-only. Evidence: §3.2/§8.
+- [x] `SW-A07` The inherited E8.1 sandbox-escalation and identical-recovery policy (limit 1) is copied into S1 §1 and S2 without expanding parent authority. Evidence: §1; `EV-KI-W6-TC01`.
+
+### 9.2 Decision and file-set closure
+
+- [x] `SW-D01` Every allocated requirement, invariant, decision, task, scenario, and case maps to exact files and assertions (§5 traces; §6 closure). Evidence: `EV-KI-W6-TC02`.
+- [x] `SW-D02` No missing parent decision or contradictory authority remains (the six §0.1 interpretations are mechanical and cite governing text; `SRC-KI-055`'s inventory was independently reproduced this session). Evidence: `EV-KI-W6-TC01`.
+- [x] `SW-D03` Required changed-file set equals planned initial file set (nine-path digest recomputed). Evidence: `EV-KI-W6-TC01`.
+- [x] `SW-D04` Every planned file has exactly one leaf; no leaf owns more than one file. Evidence: `EV-KI-W6-TC02` (lint).
+- [x] `SW-D05` Every file operation, starting digest, anchor, interface, preserved behavior, and forbidden edit is exact. Evidence: §3/§5.
+- [x] `SW-D06` The graph is complete and acyclic; the two waves are justified by frozen §3.4 interfaces plus disjoint files/commands/resources; the wave-2 barrier and sequential `I119` are frozen. Evidence: §3.2/§3.3.
+- [x] `SW-D07` Every cross-file interface is frozen before dependent execution (§3.4). Evidence: §3.4.
+- [x] `SW-D08` Every intermediate state has exact permitted checks, expected temporary states, safety, resolver, and prohibitions (§3.3). Evidence: §3.3.
+- [x] `SW-D09` Production and test files have separate leaves in separate waves (§3.1). Evidence: §3.1.
+- [x] `SW-D10` No rename, multi-output generator, formatter, installer, or command can violate the one-file invariant (`node --check` writes nothing; `node --test` writes only disposable schemas in leaf-unique namespaces; `prisma migrate` is never run by a leaf — migrations already exist). Evidence: `EV-KI-W6-TC02`.
+
+### 9.3 Sub-window execution completeness
+
+- [x] `SW-E01` Every file sub-window contains every §7 field. Evidence: `EV-KI-W6-TC02` (lint).
+- [x] `SW-E02` Every sub-window prescribes exact ordered edits; no broad verbs or alternatives remain. Evidence: §5.
+- [x] `SW-E03` Every sub-window has exact preflight, local checks, activation witnesses, assertions, and forbidden outcomes. Evidence: §5.
+- [x] `SW-E04` Every sub-window mechanically proves its attributable changed-file set is exactly one file. Evidence: §5 C1s.
+- [x] `SW-E05` Every sub-window has exact evidence, handoff, stop, and successor-reservation rules. Evidence: §5 P/T/V/H; §8.
+- [x] `SW-E06` Each subagent reports only to the window agent and cannot update subordinate or parent authority artifacts. Evidence: §1/§8.
+- [x] `SW-E07` No sub-window requires successor work to satisfy its file-local acceptance. Evidence: §5.
+- [x] `SW-E08` Deliberately deferred checks name the exact owning assessment (`I119` gates). Evidence: §5 DEFERRED notes.
+
+### 9.4 Enforcement and integration closure
+
+- [x] `SW-V01` Coverage cases are allocated to exact test files, registrations, activation witnesses, and assertions. Evidence: §6.
+- [x] `SW-V02` Required local and whole-window case-set equality and digest checks are prescribed (§4; C142 certificate; CV89). Evidence: §4/§5.7/§5.10.
+- [x] `SW-V03` Every critical invariant has a negative control at the narrowest effective level (`W6-NC-18`–`20` in C142, the sole suite that recomputes membership from source). Evidence: §5.7/§6.
+- [x] `SW-V04` Test substitutes and accepted tests/fixtures have exact fidelity and invalidation rules (unit fakes claim only unit parity; isolated-Prisma tests claim real transaction behavior; the causal browser claims the assembled path — no lower level claims more). Evidence: CT23 item 7 copied at §5 heads; §5.7 read scope.
+- [x] `SW-V05` The initial integration assessment is fully authored with zero implementation-file write authority. Evidence: §5.10.
+- [x] `SW-V06` Frozen gates are exact, risk-proportionate, and scheduled once at the final assessment (CV84→CV90 ordering; CV87 only after CV86; CV88 only after CV87). Evidence: §5.10.
+- [x] `SW-V07` Correction diagnosis, one-file corrective assignment, invalidation, and reassessment rules are complete. Evidence: §7.
+- [x] `SW-V08` The window agent independently inspects every file handoff and personally executes every integration assessment. Evidence: §5.10; §8.
+- [x] `SW-V09` Whole-window approval cannot pass through zero-work, skipped, filtered, duplicate, unexpected, unactivated, or summary-only evidence. Evidence: §5.10 I5/I9; CV89.
+- [x] `SW-V10` Parent handoff contents and `READY_FOR_PARENT_REVIEW` boundary are exact. Evidence: §5.10 CH15.
+- [x] `SW-V11` Every local gate distinguishes real failure from proven sandbox/channel invalidation and permits one identical escalated recovery without a parent round trip. Evidence: §1; CV87 clause.
+
+### 9.5 Mechanical and adversarial audit
+
+- [x] `SW-R01` All IDs (`C136`–`C144`, `I119`, `W6-DB-08`–`11`, `W6-NC-18`–`20`) are unique and all references resolve. Evidence: `EV-KI-W6-TC02` (lint).
+- [x] `SW-R02` No unresolved placeholder exists in an assignable sub-window. Evidence: `EV-KI-W6-TC02` (lint).
+- [x] `SW-R03` Single-file write-set lint rejects zero/two/wildcard/directory/rename/incidental outputs for every file sub-window. Evidence: `EV-KI-W6-TC02`.
+- [x] `SW-R04` Removing one required file or requirement-to-file mapping makes readiness fail (nine-path digest and §6 closure break). Evidence: `EV-KI-W6-TC02` (falsification pass).
+- [x] `SW-R05` Removing, duplicating, skipping, filtering, or bypassing one required coverage case makes acceptance fail (C142 set-equality; CV89 union digest). Evidence: §5.7/§5.10.
+- [x] `SW-R06` Weakening an oracle or diverging a substitute invalidates acceptance evidence (controls `W6-NC-18`–`20`; §7 no-weakening rule). Evidence: §5.7/§7.
+- [x] `SW-R07` Simulated second-file edit and direct parent communication are rejected (C1 checks; §8 prohibitions). Evidence: `EV-KI-W6-TC02` (falsification pass).
+- [x] `SW-R08` Simulated integration failure cannot be repaired by the window agent without a new corrective sub-window (§7; §5.10 zero-write authority). Evidence: §7.
+- [x] `SW-R09` Parent decomposition review is recorded before the first implementation assignment (S2 `AWAITING_PARENT_DECOMPOSITION_REVIEW`; this checklist gates dispatch). Evidence: §8; S2.
+- [x] `SW-R10` Document lint reports zero missing fields, mappings, cases, evidence references, or authority conflicts. Evidence: `EV-KI-W6-TC02`.
+- [x] `SW-R11` Simulated sandbox denial proceeds to one identical escalated recovery, while a changed command, observable test failure, or external action is rejected. Evidence: §1; `EV-KI-W6-TC02` (falsification pass).
 
 ## 10. Certificate templates
 
-The §12.1 `SUBWINDOW-DECOMPOSITION-READY` certificate (S3) carries:
-`initial_subwindow_ids: [KI-W6-S001, KI-W6-S002]`,
-`initial_subwindow_count: 2`, `planned_file_set` = the two §3 paths,
+The §12.1 `SUBWINDOW-DECOMPOSITION-READY` certificate (S3) carries
+`initial_subwindow_ids: [KI-W6-C136 … KI-W6-C144]` (nine, in ID order),
+`initial_subwindow_count: 9`, `planned_file_set` = the nine §3.1 paths,
 `planned_file_set_digest:
-bb9f6381cc3b65d08b696fa1f62a2d75759289b4d4f0f44554ca44a2ebf56edc`,
+ba4ccba7b65016b486dc2e1160bcc11a2cb08d306aff4945fad0022e3f19ad92`,
 `unmapped_*` and `unresolved_*` arrays all empty,
-`mandatory_authoring_items_checked: 44`, `mandatory_authoring_items_unchecked:
-0`, `first_subwindow: KI-W6-S001`, `integration_assessment_id: KI-W6-I001`,
-`parent_review_required: true`. Leaf execution certificates (§12.3) and the
-window-agent integration certificate (§12.4) follow the sub-window standard
-templates verbatim with the KI-W6 IDs and the 20-case required-set digest
-`8d6d002cdf86a30459c2d140977fec3b72c30a8d1c4d612f512bd7c37ed4c523`.
+`mandatory_authoring_items_checked: 47`,
+`mandatory_authoring_items_unchecked: 0`, `first_subwindow: KI-W6-WAVE-1`
+(all five members; no intra-wave order), `integration_assessment_id:
+KI-W6-I119`, `parent_review_required: true`. Leaf execution certificates
+(§12.3) and the window-agent integration certificate (§12.4) follow the
+sub-window standard templates verbatim with the KI-W6 IDs and the §4 case
+digests.
+
+## 11. Amendment sections (initially empty; append-only)
+
+### 11.1 Corrective sub-windows
+
+(none)
+
+### 11.2 Later integration assessments
+
+(none)

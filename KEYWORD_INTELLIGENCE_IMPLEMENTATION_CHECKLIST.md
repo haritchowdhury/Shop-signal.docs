@@ -7384,6 +7384,7 @@ parent-applied files, no commit is permitted, and KI-W7 remains prohibited.
 - [x] `RW6O-004` Rollback, lost-fence, operation-count and timing-independent controls are mandatory. Evidence: C126.
 - [x] `RW6O-005` Provider economics and established downstream behavior are unchanged. Evidence: `DEC-KI-051`.
 - [x] `RW6O-006` Stateful reruns and stop boundaries are exact. Evidence: I115.
+
 - [x] `RW6O-007` Parent implements; window agent independently reviews and assesses. Evidence: requester instruction/A5.
 - [x] `RW6O-008` KI-W7 remains prohibited. Evidence: A5.
 
@@ -7602,3 +7603,324 @@ C127 then C128, run in order:
   Evidence: I116 CV81; parent standard E8/E8.1.
 - [x] `RW6O-006` Authority is bounded to KI-W6 and stops before KI-W7.
   Evidence: window header and A5 assignment.
+
+## KI-W6 fifteenth corrective sequence — complete clock and transaction closure
+
+This append-only sequence supersedes A5 state 183's one-method continuation and
+the invalidated state-108 subwindow checklist. It does not erase accepted W6
+work. It closes the two source-wide defect classes exposed by the first causal
+run to complete all 100 discovery tasks, and it removes the coordinator's
+mechanically proven redundant locked-row reloads before one final causal run.
+
+```yaml
+correction_id: KI-W6-CLOCK-TXN-CLOSURE
+trigger: [SRC-KI-055, causal operation 304 PIPELINE_LEASE_LOST]
+decision: DEC-KI-053
+parent_assignment: ASG-KI-W6-WA-14
+window_agent_identity: KI-W6-WINDOW-AGENT
+subwindow_checklist_to_supersede: KEYWORD_INTELLIGENCE_KI_W6_SUBWINDOW_CHECKLIST.md
+historical_decomposition_read_only: KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_CHECKLIST.md
+subordinate_state_to_create: KEYWORD_INTELLIGENCE_KI_W6_TRANSACTION_CLOCK_SUBWINDOW_STATE.md
+subordinate_evidence_to_create: KEYWORD_INTELLIGENCE_KI_W6_TRANSACTION_CLOCK_SUBWINDOW_EVIDENCE.md
+logical_waves:
+  - id: KI-W6-WAVE-1
+    parallel: true
+    members: [KI-W6-C136, KI-W6-C137, KI-W6-C138, KI-W6-C139, KI-W6-C140]
+  - id: KI-W6-WAVE-2
+    parallel: true
+    depends_on: [KI-W6-WAVE-1 accepted]
+    members: [KI-W6-C141, KI-W6-C142, KI-W6-C143, KI-W6-C144]
+integration_assessment: KI-W6-I119
+planned_file_set_digest: ba4ccba7b65016b486dc2e1160bcc11a2cb08d306aff4945fad0022e3f19ad92
+successor: STOP_FOR_PARENT_REVIEW
+may_start_successor: false
+```
+
+The revised sub-window standard explicitly permits these two parallel waves.
+Each member has one distinct file, assignment ID and disposable-resource scope;
+wave 1 consumes only parent-frozen interfaces, wave 2 cannot start until every
+wave-1 member is independently accepted, and `I119` is personally executed
+sequentially by the window agent. A lower-level agent may never communicate
+with the parent, begin another leaf, or edit S1/S2/S3.
+
+### Exact nine-file inventory and leaf allocation
+
+| Leaf | One writable file | Operation | Starting SHA-256 |
+|---|---|---|---|
+| `KI-W6-C136` | `email_scraper/src/aws-pipeline/repositories/pipeline-coordinator-repository.js` | MODIFY | `e285557a5dc854d0021bb71e19076d8bff6ce4e161b9ce8621acda9c24e549c4` |
+| `KI-W6-C137` | `email_scraper/src/prisma-run-repository.js` | MODIFY | `54d5f422431ec1914855b2ae5cc07ff30e9ab428f11601a7703d589ee21cef13` |
+| `KI-W6-C138` | `email_scraper/src/aws-pipeline/services/domain-aggregator.js` | MODIFY | `e873bb622c085ea34e69e3658f21dacd36d068765f821782dfc613009f3199ce` |
+| `KI-W6-C139` | `email_scraper/src/aws-pipeline/services/lead-aggregator.js` | MODIFY | `c3f2fb24576f43e6c046a87573e6e0942b9263d39c2002eec152280365cde38c` |
+| `KI-W6-C140` | `email_scraper/src/aws-pipeline/services/final-aggregator.js` | MODIFY | `416e36feeb35aedd571ae8863a413550215263a157a99ed8cf519722446f9683` |
+| `KI-W6-C141` | `email_scraper/test/pipeline-coordinator-repository.test.js` | MODIFY | `ee2f14da06e171d876c926cf2fde0f259a62dcf477f0d6873e8294d49bdb5533` |
+| `KI-W6-C142` | `email_scraper/test/aws-pipeline-transaction-clock-enforcement.test.js` | CREATE | `ABSENT` |
+| `KI-W6-C143` | `email_scraper/test/aws-pipeline-lead-aggregation.integration.test.js` | MODIFY | `102cac9694251ea5dedb40bcf44a07b771f26440202b5c81a3c5f33b98630238` |
+| `KI-W6-C144` | `email_scraper/test/aws-pipeline-final.integration.test.js` | MODIFY | `22b70d3111ea65d0e24fe9d5e82d4c03e8fe84c6b80e076335e919edd0e0e664` |
+
+The sorted-member-plus-LF nine-path digest is
+`ba4ccba7b65016b486dc2e1160bcc11a2cb08d306aff4945fad0022e3f19ad92`.
+No tenth implementation or test file is permitted. Coordination writes are
+limited to the superseded S1 path and the new S2/S3 paths named above.
+
+### `KI-W6-CT20` — coordinator transaction profile and locked-row consolidation
+
+1. **Trace:** `REQ-KI-010`–`015/024`, `INV-KI-004`–`006/010/015`,
+   `SRC-KI-055`, `DEC-KI-053`; owner `C136`; verified by `C141/C142` and
+   `W6-DB-08/10`, `W6-NC-18/20`.
+2. **Source/target:** in `pipeline-coordinator-repository.js`, add private
+   `PIPELINE_TRANSACTION_OPTIONS = Object.freeze({ maxWait: 5_000, timeout:
+   30_000 })`; pass that exact object as the second argument to the transaction
+   in each of the eleven literal methods listed in `DEC-KI-053`. Convert the
+   existing inline options in `claimTask` and `renewTask` to the same constant.
+   No twelfth method is admitted.
+3. **Locked reads:** change only `lockedTask`, `lockedStage`, and `lockedRun`
+   from `SELECT id ... FOR UPDATE` plus `findUnique` to one `SELECT * ... FOR
+   UPDATE`, exact-one-row validation, and `rows[0]` return. In `recordDispatch`,
+   select all locked task columns once, require the locked row count equal
+   `stage.expectedCount`, derive the requested rows from that array, require one
+   unique match per requested `itemKey`, and retain the existing single
+   `updateMany` and return `{count}`. Do not alter lock ordering.
+4. **Atomicity/identity/time:** all methods remain one interactive transaction,
+   use their existing injected `now`, preserve schema selection, stable IDs,
+   generation/token/lease predicates, terminal/replay outcomes, counters and
+   rollback. No retry or provider/external action occurs inside a transaction.
+5. **Bounds:** final inventory 11/11 profiled; helper follow-up delegate reads
+   0; `recordDispatch` task reloads 0; claim/renew/terminal/aggregation database
+   statement ceilings must not increase from the post-consolidation baseline
+   recorded by `C141`.
+6. **Preserve/forbid:** no schema, query predicate, lease duration, heartbeat,
+   return union, cancellation rule, public export or non-inventory transaction
+   change.
+7. **Local proof:** syntax plus `C141` dynamic transaction-spy and query-shape
+   tests; `C142` exact method-set source audit and both controls.
+8. **Output:** frozen coordinator behavior consumed by wave 2 and `I119`.
+
+- [ ] `KI-W6-T20` Apply CT20 through the exact one-file C136 leaf. Evidence: ___
+
+### `KI-W6-CT21` — run-repository clock and transaction inventory
+
+1. **Trace:** same requirements/invariants, `SRC-KI-055`, `DEC-KI-053`; owner
+   `C137`; callers `C138`–`C140`; tests `C142`–`C144`; cases `W6-DB-08/09/11`,
+   controls `W6-NC-18/19`.
+2. **Clock validator:** add exactly one private
+   `requireAwsPipelineNow(now)` returning a valid finite `Date` and otherwise
+   throwing `PipelineInvariantError("PIPELINE_INPUT_CONFLICT")`.
+3. **Five signatures:** change exactly `readAwsReuseInputs`,
+   `readAwsReusableProfiles`, `readAwsFinalReuseRows`,
+   `readAwsAmbiguousDataForSeoTargets`, and
+   `readAwsTerminalCruxBigQueryWork` to `(input, now)` with no default; validate
+   before opening a transaction and replace only the internal assertion-time
+   `new Date()` with `now`. Existing `evaluatedAt` remains a distinct durable
+   manifest timestamp and is not substituted for lease time.
+4. **Transaction constant:** add private
+   `AWS_PIPELINE_TRANSACTION_OPTIONS = Object.freeze({ maxWait: 5_000,
+   timeout: 30_000 })` and pass it to exactly the twenty-one literal methods in
+   `DEC-KI-053`. Convert `publishAwsFinalResults` from its inline equal object to
+   the constant. Do not modify any transaction outside that set or any atomic
+   nontransactional `updateMany` such as `renewAwsRunLease`.
+5. **Atomicity/failure:** every callback, lock, fence, rollback, paid ledger and
+   publication boundary remains unchanged. Missing/invalid `now` fails before
+   a transaction with `PIPELINE_INPUT_CONFLICT`. Expired/stale clocks retain
+   `PIPELINE_LEASE_LOST`; no automatic transaction retry is added.
+6. **Scale:** final W6-reachable inventory is 21/21 profiled here and 32/32 with
+   CT20. The profile bounds wait/execution only; provider/S3/SQS work remains
+   outside transactions and provider cardinality/cost is unchanged.
+7. **Preserve/forbid:** no global Prisma configuration, unrelated transaction,
+   schema/migration, payload, cost, retry, lease-duration or public behavior
+   change.
+8. **Local proof:** syntax, `C142` source-set and falsification checks, and the
+   controlled-clock isolated tests in `C143/C144`.
+9. **Output:** exact two-constant/32-method/nine-clock interface consumed by
+   `I119`.
+
+- [ ] `KI-W6-T21` Apply CT21 through the exact one-file C137 leaf. Evidence: ___
+
+### `KI-W6-CT22` — five service clock callers
+
+1. **Trace/owners:** `DEC-KI-053`; `C138` owns the sole domain call, `C139` the
+   sole lead call, and `C140` the three final calls. No other symbol in those
+   files changes.
+2. **Exact calls:** append `new Date()` as the second argument to
+   `readAwsReuseInputs`, `readAwsReusableProfiles`,
+   `readAwsAmbiguousDataForSeoTargets`, `readAwsTerminalCruxBigQueryWork`, and
+   `readAwsFinalReuseRows`, respectively. Argument one remains byte-equivalent.
+3. **Clock/fidelity:** the production clock is constructed at the service
+   boundary; the accepted harness `pinDates` replacement therefore controls it.
+   No captured manifest timestamp or repository-internal real clock may replace
+   it.
+4. **Operation order:** do not move the calls relative to artifact reads,
+   aggregation ownership, reuse materialization, paid-ledger construction or
+   publication.
+5. **Outcomes:** success, lease loss, restart, monitor and failure propagation
+   remain unchanged; only deterministic lease-time evaluation changes.
+6. **Preserve/forbid:** no provider request, batching, cost, S3/SQS, monitor,
+   timer, retry, message, result or logging change.
+7. **Local proof:** syntax and the `C142` exact caller-set audit; final behavior
+   through `C143/C144` and `I119`.
+
+- [ ] `KI-W6-T22A` Apply the domain caller through C138. Evidence: ___
+- [ ] `KI-W6-T22B` Apply the lead caller through C139. Evidence: ___
+- [ ] `KI-W6-T22C` Apply the final callers through C140. Evidence: ___
+
+### `KI-W6-CT23` — enforcement and controlled-time regressions
+
+1. **Owners:** `C141` modifies only the coordinator unit test; `C142` creates
+   only the new enforcement test; `C143` modifies only the lead aggregation
+   integration test; `C144` modifies only the final integration test.
+2. **Coordinator unit:** update raw-query substitutes to return complete locked
+   rows, preserve every accepted assertion, and add dynamic spies proving all
+   eleven transaction calls receive deep-equal profile values, each locked
+   helper returns the raw row without a delegate read, and `recordDispatch`
+   performs no task `findMany`. Retain the accepted focused `renewTask` oracle.
+3. **New enforcement file:** register and execute exactly
+   `W6-DB-08`, `W6-DB-09`, `W6-DB-10`, `W6-DB-11`; enumerate literal 11- and
+   21-method sets, five repository clock methods, five service callers and nine
+   assertion sites. Recompute set equality from source rather than trusting
+   counts. Require zero implicit member, zero internal assertion-time
+   zero-argument `new Date()`, the two exact frozen constants, and zero
+   coordinator follow-up reloads. Execute in-memory source mutations that
+   remove one profile, restore one hidden clock/remove its caller argument, and
+   restore one follow-up reload; each must make the unchanged corresponding
+   oracle throw, recording `W6-NC-18`, `W6-NC-19`, `W6-NC-20` only after the
+   throw is observed. A fresh positive pass follows each control.
+4. **Lead integration:** pass one explicit controlled clock to the existing
+   direct `readAwsReusableProfiles` call; add missing/invalid-now zero-write
+   rejection and inside-lease success/expired-lease-loss assertions without
+   weakening existing reusable-profile or cleanup assertions.
+5. **Final integration:** pass explicit controlled clocks to the existing
+   direct `readAwsFinalReuseRows` and `readAwsTerminalCruxBigQueryWork` calls;
+   cover the five-method final/lead/domain contract through direct or service
+   activation, exact inside/expired lease outcomes, unchanged rows on rejection,
+   and exact disposable-schema absence.
+6. **Case closure:** new required case set is exactly
+   `[W6-DB-08,W6-DB-09,W6-DB-10,W6-DB-11]`, digest
+   `e8bd1b4a3b3deb8f853eac0e8bcea5609278177945389f292b1b12a7309bf030`;
+   new control set exactly `[W6-NC-18,W6-NC-19,W6-NC-20]`, digest
+   `89e40c02b11dd426c8445de018a9d85fa2c110b6da9728cee8dff4e3cc31db1b`.
+   Required=registered=executed and expected=falsified equality are mandatory;
+   names or aggregate counts alone fail.
+7. **Fidelity:** source inspection proves membership; transaction spies prove
+   argument transport and operation counts; isolated Prisma tests prove real
+   transaction, lease clock, rollback and schema behavior; the causal browser
+   proves the assembled path. No lower parity claims more.
+8. **Preserve/forbid:** no existing test, fixture, registry, case, control or
+   oracle is weakened, removed, renamed, skipped or filtered; no production
+   source changes in wave 2.
+
+- [ ] `KI-W6-T23A` Apply coordinator-test leaf C141. Evidence: ___
+- [ ] `KI-W6-T23B` Apply enforcement-test leaf C142. Evidence: ___
+- [ ] `KI-W6-T23C` Apply lead-integration leaf C143. Evidence: ___
+- [ ] `KI-W6-T23D` Apply final-integration leaf C144. Evidence: ___
+
+### `SCN-KI-044` — complete clock/profile/round-trip closure
+
+```yaml
+scenario_id: SCN-KI-044
+requirements: [REQ-KI-010, REQ-KI-011, REQ-KI-012, REQ-KI-013, REQ-KI-014, REQ-KI-015, REQ-KI-024]
+decisions: [DEC-KI-053]
+preconditions: exact nine-file baselines above; isolated non-production TEST_DATABASE_URL; no residual kiw6_ schema/process; provider/AWS substitutes only
+inputs: controlled inside-lease and expired instants; representative and maximum W6 task/stage sets
+actions: execute source inventory, transaction spies, five focused isolated suites, then the unchanged causal browser flow
+activation_witnesses: all 32 transaction members observed in the enforcement inventory; all nine aggregation assertion sites resolved; 100 discovery tasks, discovery aggregation, lead and final aggregation paths reached by focused or causal evidence
+oracle: 32/32 exact profiles; 9/9 explicit clocks; missing/invalid clock fails before transaction; stale clock loses without writes; zero helper follow-up reloads; recordDispatch zero task reload; causal W6 path and cleanup succeed
+call_and_operation_counts: 11 coordinator transactions + 21 run-repository transactions; five changed service calls; four new cases; three falsified controls; provider/AWS call count zero
+negative_control: W6-NC-18, W6-NC-19, W6-NC-20
+parity_class: unit + integration + local_e2e
+cleanup: isolated-postgres exact schema drop and absence proof; durable browser process/port/output postcondition
+```
+
+### `KI-W6-I119` — window-agent integration assessment
+
+`I119` has zero implementation-file write authority and begins only after all
+nine leaves are independently reviewed and accepted. Execute these gates in
+order against frozen final inputs; stop on an observable behavioral failure.
+
+- [ ] `KI-W6-CV84` Recompute every starting/ending digest and prove the actual
+  implementation/test changed-file set equals exactly the nine-path set and
+  digest above. Independently inspect all diffs and prove no accepted unrelated
+  hunk was weakened. Evidence: ___
+- [ ] `KI-W6-CV85` Run `node --check` on the five production files and four test
+  files, then from `email_scraper/` run:
+  `node --test test/pipeline-coordinator-repository.test.js
+  test/aws-pipeline-transaction-clock-enforcement.test.js
+  test/aws-pipeline-domain.test.js
+  test/aws-pipeline-lead-aggregation.test.js
+  test/aws-pipeline-final.test.js`.
+  Require exit 0, zero failures/skips for the four new cases, exact executed set
+  `W6-DB-08`–`11`, and all three controls falsified followed by fresh positives.
+  Evidence: ___
+- [ ] `KI-W6-CV86` Once, using the authorized isolated test database, run from
+  `email_scraper/`:
+  `ALLOW_DATABASE_TESTS=true node -r dotenv/config --test
+  --test-isolation=none --test-concurrency=1
+  test/pipeline-coordinator-repository.integration.test.js
+  test/aws-pipeline-domain.integration.test.js
+  test/aws-pipeline-lead-aggregation.integration.test.js
+  test/aws-pipeline-traffic.integration.test.js
+  test/aws-pipeline-final.integration.test.js`.
+  Require exit 0, zero guarded skips, controlled-time lease assertions, rollback
+  assertions, operation ceilings, exact test-schema isolation and zero residual
+  disposable schemas. Evidence: ___
+- [ ] `KI-W6-CV87` After CV86 passes, run exactly one durable causal command
+  from `email_scraper/` with local substitutes and the authorized test database:
+  `ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node
+  test/browser/keyword-intelligence-e2e.mjs`. Transport must retain complete
+  stdout/stderr and exit status in the preflight-empty files
+  `/tmp/ki-w6-i119-state184.browser.log` and
+  `/tmp/ki-w6-i119-state184.browser.status`, use an executor allowance of at
+  least 75 minutes, and remain attached/durable independently of a chat turn.
+  Require exit 0, existing browser required=registered=executed 26/26 with 13
+  controls, 100 validators, 100 discovery tasks, 1,000 domains/leads, the five
+  clock-correct aggregation readers, no transaction timeout/lease error, and
+  cleanup/schema absence. One identical escalated recovery is allowed only
+  after the exact E8.1 invalidation/postcondition proof. Evidence: ___
+- [ ] `KI-W6-CV88` Only after CV87 passes, run once from `email_scraper/`:
+  `npm test`, `npm run check:secrets`, and `npm run build:lambda`; from
+  `frontend/`, run `npm run check`. Require zero failures, clean secret/privacy
+  scan, successful handler build/startup inventory, and frontend lint/test/build
+  success. Do not repeat a successful unchanged expensive gate. Evidence: ___
+- [ ] `KI-W6-CV89` Recompute the final W6 case union as exactly 39 members with
+  digest `f8137d25f5994cc83e4ec1deaa672656d50f19692a5907b10e47399a78c6dd80`
+  and control union as exactly 20 members with digest
+  `0cbaad071c1bc474102394ddc0082d61f0c366d67768dcab0eafa7b5f6a3fc88`.
+  Require required=registered=executed, zero skips/duplicates/unexpected IDs,
+  every activation witness, and 20/20 falsified controls. Evidence: ___
+- [ ] `KI-W6-CV90` Verify no provider/AWS/production/paid action, schema or
+  migration, package/config, frontend product, global Prisma default, lease,
+  retry, cost, payload, S3/SQS, commit/push or KI-W7 change occurred; paid cost
+  `$0.00`; exact disposable schema/process/output cleanup; privacy-safe evidence.
+  Evidence: ___
+- [ ] `KI-W6-CH15` Append the complete window-agent integration/enforcement
+  certificate, set the subordinate state to `READY_FOR_PARENT_REVIEW`, return
+  only the consolidated handoff to the parent, and stop before KI-W7. Evidence: ___
+
+### Fifteenth-correction parent readiness
+
+- [x] `RW6P-001` The exact five hidden-clock members and five callers are
+  mechanically inventoried. Evidence: `SRC-KI-055`; `DEC-KI-053`.
+- [x] `RW6P-002` The exact 11+21 transaction membership and current 3/32
+  explicit profile state are mechanically inventoried. Evidence: `SRC-KI-055`.
+- [x] `RW6P-003` The locked-row and recordDispatch redundant reads plus their
+  preserved lock/fence semantics are exact. Evidence: `DEC-KI-053`; CT20.
+- [x] `RW6P-004` Required-now validation, caller argument order, constants and
+  error semantics leave no implementation choice. Evidence: CT21/CT22.
+- [x] `RW6P-005` The nine planned files have one owner each; the sorted-LF set
+  digest is pinned and no tenth file is authorized. Evidence: inventory table.
+- [x] `RW6P-006` Two parallel waves have disjoint files/resources, frozen
+  interfaces and a complete dependency barrier; integration remains sequential.
+  Evidence: `DEC-KI-053`; revised sub-window standard.
+- [x] `RW6P-007` Four new cases and three controls have exact members,
+  registrations, witnesses, oracles and digests. Evidence: CT23/SCN-KI-044.
+- [x] `RW6P-008` Unit, isolated-database, causal, regression, build, privacy and
+  scope gates are frozen once at final handoff. Evidence: I119.
+- [x] `RW6P-009` Test-substitute claims are bounded by static, spy, real-Prisma
+  and local-E2E parity; no lower level claims production deployment. Evidence:
+  CT23 item 7.
+- [x] `RW6P-010` Missing profile, hidden clock and restored redundant-read
+  counterexamples fail unchanged acceptance. Evidence: `W6-NC-18`–`20`.
+- [x] `RW6P-011` No payload unknown, provider/AWS action, cost-policy change,
+  external mutation or requester prerequisite remains. Evidence: `SRC-KI-055`;
+  `DEC-KI-053`.
+- [x] `RW6P-012` The window agent may supersede the named stale S1, author S2/S3,
+  manage only C136–C144/I119, and must stop for parent review before KI-W7.
+  Evidence: requester instruction; A5 assignment.

@@ -1326,3 +1326,35 @@ compatibility_or_migration_effect: none — two test-harness files only; no prod
 authorization_effect: KI-W6-WINDOW-AGENT may append C127/C128/I116 byte-exact to S1/S2/S3, sequentially assign and independently review two one-file leaves, personally execute I116, and stop for parent review; no production edit, commit, provider/AWS action or KI-W7 authority
 resumption_state: A5 state 177 READY under ASG-KI-W6-WA-11; execute C127, C128, I116 and stop before KI-W7
 ```
+
+```yaml
+change_id: CHG-KI-082
+timestamp: 2026-08-23T19:10:00+05:30
+trigger_evidence: [SRC-KI-055, requester complete-both-defect-classes and window-agent-assignment instructions]
+reason: The causal continuation completed 100/100 discovery tasks and then proved a second hidden-clock failure at readAwsReuseInputs. A mechanical reachable-set audit found four sibling hidden clocks, twenty-nine remaining implicit W6 transaction profiles, and redundant coordinator locked-row reloads. Correcting one observed method at a time would leave the same defect classes reachable.
+old_revision: A2 90f50d323d2473bdaecf89037c82d50636fbf43dbea85486b1b34909a64d926f; A3 bb6a62165581590304b8e58e642f842c2966af0d31947c07c1eaf6ef8cd5eed9; A4 5161088fb966cd614211cd07d1ea8a6bb3f37a2056c9d0fff2e606579a24be8a; A8 fc919703689364b8f983d9f0277e369e9e9788c5da00e048e147900d8e9cfd0b; subwindow standard 84e7590e74589f308c70dc9b0b67f7e9da395fafb1e5786202ecd1ca15be56e9; A5 state 183
+new_revision: A2 0c2b10e55ad779217574998e748687937471d19cc869c0d878af547f4e612320; A3 2b2d75b9ebb94ae80d3cc7241ce69a2aa92a22efa755b1497887018950ccf406; A4 679e9a7d986775d60fa9f2a9b7cd9568084652534c857f7109482426653b1d36; A8 c3c9d5a32c0086c20c2030478137acbc13ff994b2668a5a94b545777e8bea1ad; subwindow standard 842c29550c06c22d63e0a058a27cb8a9ff6b538b3168d2c83a384890b44247f0; A5 state 184 READY
+changed_requirements: []
+changed_decisions: [DEC-KI-053 freezes the five required-now repository interfaces and callers, exact 11+21 transaction memberships/profile, coordinator locked-row consolidation, nine-file ownership, four cases, three controls, two explicitly safe parallel waves and sequential final assessment]
+affected_windows: [KI-W6 only; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: [A5 state 183 one-method continuation is superseded; the state-108 KEYWORD_INTELLIGENCE_KI_W6_SUBWINDOW_CHECKLIST.md decomposition is explicitly supersedable and carries no current execution authority; accepted prior W6 implementation evidence remains historical, while any gate whose source/test dependency intersects the nine files must be rerun in I119]
+compatibility_or_migration_effect: none — no schema, migration, public payload, provider economics, AWS topology, lease duration, retry, frontend product or historical-data change
+authorization_effect: KI-W6-WINDOW-AGENT may supersede the named stale S1, create the exact new S2/S3, author and manage only C136-C144 in the two parent-authorized parallel waves, personally execute I119, and return for parent review; no leaf-to-parent communication, commit/push, provider/AWS/production action or KI-W7 authority
+resumption_state: A5 state 184 READY under ASG-KI-W6-WA-14; author the subordinate package, stop for parent decomposition review, then execute only after parent approval
+```
+
+```yaml
+change_id: CHG-KI-083
+timestamp: 2026-08-23T19:30:00+05:30
+trigger_evidence: [EV-KI-W6-TC01, EV-KI-W6-TC02, parent decomposition review, requester direct-amendment instruction]
+reason: The WA-14 decomposition had the correct nine-file/two-wave architecture but contained five dispatch blockers: a false 47/47 readiness claim, inverted negative-control count, incomplete coordinator ceiling coverage, unresolved test-command placeholders, and an unsatisfiable final integration fixture ordering/configuration.
+old_revision: S1 18eec5195b1aa042a595df78ed2b361c7dee4a42561ccc99071b0d2953eb50c4; S2 state 1 AWAITING_PARENT_DECOMPOSITION_REVIEW; A5 state 184
+new_revision: S1 eda1bd4ff887780f00f6aa7721f308b738505bed8dbcf9d6cb5d13cedaa6ef40; S2 state 2 READY; S3 EV-KI-W6-TC03; A5 state 185 READY
+changed_requirements: []
+changed_decisions: []
+affected_windows: [KI-W6 only; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: [EV-KI-W6-TC02 readiness disposition and its first SUBWINDOW-DECOMPOSITION-READY certificate are superseded; no implementation evidence is invalidated]
+compatibility_or_migration_effect: none — subordinate authoring and execution authority only; no source schema payload provider cost AWS lease retry or product behavior changed
+authorization_effect: KI-W6-WINDOW-AGENT may dispatch exact parallel Wave 1, independently accept it, dispatch exact parallel Wave 2, independently accept it, execute I119 sequentially, append subordinate evidence/state, and stop READY_FOR_PARENT_REVIEW; requester alone commits; KI-W7 remains prohibited
+resumption_state: A5 state 185 READY under ASG-KI-W6-WA-14; dispatch KI-W6-WAVE-1 from corrected S1 revision eda1bd4f
+```

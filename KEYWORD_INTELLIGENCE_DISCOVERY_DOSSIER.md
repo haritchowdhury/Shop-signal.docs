@@ -271,6 +271,19 @@ limitations: The underlying 120-second stall is not yet classified. Production l
 privacy: Only synthetic task identity classes, safe error name, operation phase, counts, wait classification and repository-relative frames may be recorded; no SQL text, connection URL, token, cookie, header, provider body, keyword text or user data.
 ```
 
+### `SRC-KI-055` — W6 clock and transaction-boundary inventory after the first complete discovery aggregation
+
+```yaml
+evidence_id: SRC-KI-055
+classification: OBSERVED
+claim: The accepted clock correction lets all 100 discovery tasks complete, but the next repository operation fails PIPELINE_LEASE_LOST because five PrismaRunRepository aggregation readers create real time internally while the causal harness pins service-level Date construction. The same W6-reachable graph contains exactly 32 interactive Prisma transactions: eleven PipelineCoordinatorRepository methods and twenty-one PrismaRunRepository methods. Only claimTask, renewTask, and publishAwsFinalResults currently carry the required explicit 5-second acquisition/30-second execution profile, leaving twenty-nine implicit defaults. Coordinator lockedTask, lockedStage, and lockedRun each perform SELECT id FOR UPDATE followed by a redundant findUnique, and recordDispatch reloads rows already locked.
+source: local causal-browser run ending at run-repository.readAwsReuseInputs operation sequence 304 after 100/100 discovery tasks; email_scraper/src/aws-pipeline/repositories/pipeline-coordinator-repository.js SHA-256 e285557a5dc854d0021bb71e19076d8bff6ce4e161b9ce8621acda9c24e549c4; email_scraper/src/prisma-run-repository.js SHA-256 54d5f422431ec1914855b2ae5cc07ff30e9ab428f11601a7703d589ee21cef13; domain/lead/final service SHAs e873bb622c085ea34e69e3658f21dacd36d068765f821782dfc613009f3199ce, c3f2fb24576f43e6c046a87573e6e0942b9263d39c2002eec152280365cde38c, 416e36feeb35aedd571ae8863a413550215263a157a99ed8cf519722446f9683; mechanical method/call-site inventory recorded by EV-KI-A-110
+observed_at: 2026-08-23
+environment: local emitted Next/browser, actual backend and isolated disposable Neon test schema; synthetic local provider substitutes only
+limitations: This evidence proves the local W6-reachable source set and causal clock failure. It does not claim a production incident, authorize a global Prisma default change, or establish provider/AWS behavior.
+privacy: Method names, counts, safe error code, source hashes and schema-absence result only; no SQL values, connection URL, credential, token, cookie, provider body, keyword text or user data retained.
+```
+
 ## 6. Post-W5 corrective discovery
 
 | Evidence ID | Class | Precise claim | Exact source/revision | Limitations | Privacy |

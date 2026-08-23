@@ -2750,6 +2750,91 @@ count, reservation, public API, schema, queue, artifact or AWS behavior.
 - **Tasks/scenarios:** `KI-W6-C127`, `KI-W6-C128`, `KI-W6-I116`; existing
   `SCN-KI-018`, `W6-FLOW-11/12`, `W6-RES-02/04`, `W6-NC-08`.
 
+### `DEC-KI-053` — Complete W6 clock, transaction-profile, and coordinator-read closure
+
+- **Requirements/evidence:** `REQ-KI-010`–`015`, `REQ-KI-024`,
+  `INV-KI-004`–`006`, `INV-KI-010/011/015`, `SRC-KI-055`, and the accepted
+  causal prefix through 100/100 discovery tasks.
+- **Clock interface:** add one private `requireAwsPipelineNow(now)` in
+  `PrismaRunRepository`; it returns `now` only when `now instanceof Date` and
+  `Number.isFinite(now.getTime())`, otherwise throws
+  `PipelineInvariantError("PIPELINE_INPUT_CONFLICT")`. The following five
+  methods take required argument order `(input, now)`, have no default, invoke
+  that validator before their transaction, and pass the validated value to
+  `assertCompleteAggregatorInTransaction`: `readAwsReuseInputs`,
+  `readAwsReusableProfiles`, `readAwsFinalReuseRows`,
+  `readAwsAmbiguousDataForSeoTargets`, and
+  `readAwsTerminalCruxBigQueryWork`. No repository aggregation-ownership check
+  may create its own current time.
+- **Clock callers:** the sole production callers pass `new Date()` as the
+  second argument: one call in `domain-aggregator.js`, one in
+  `lead-aggregator.js`, and three in `final-aggregator.js`. This is intentional:
+  production receives the current instant while the existing harness `pinDates`
+  seam deterministically substitutes its controlled clock. Together with the
+  four already-correct assertion sites, the reachable inventory is exactly
+  nine `assertCompleteAggregatorInTransaction` calls supplied with an explicit
+  clock and zero calls containing an internal zero-argument `new Date()`.
+- **Transaction profile:** define private frozen constants in the two
+  repositories, each byte-equivalent to
+  `Object.freeze({ maxWait: 5_000, timeout: 30_000 })`. Every W6-reachable
+  interactive transaction passes its repository constant as the second
+  `$transaction` argument. The exact coordinator set is eleven:
+  `registerStage`, `recordDispatch`, `claimTask`, `renewTask`,
+  `recordTerminal`, `claimAggregator`, `renewAggregator`, `getCompleteStage`,
+  `completeAggregator`, `listRecoverable`, `cancelRunGeneration`. The exact
+  run-repository set is twenty-one: `publishAwsDiscoveryStage`,
+  `readAwsReuseInputs`, `readAwsReusableProfiles`,
+  `publishAwsDomainCheckpoint`, `publishAwsLeadCheckpoint`, `claimAwsLeadWork`,
+  `claimAwsRunLease`, `releaseAwsRunLease`, `loadAwsTrafficStage`,
+  `claimAwsTrafficWorkBatch`, `recordAwsDataForSeoOutcome`,
+  `readAwsFinalReuseRows`, `readAwsAmbiguousDataForSeoTargets`,
+  `readAwsTerminalCruxBigQueryWork`, `publishAwsFinalResults`,
+  `readReusableTrafficCache`, `readReusableLatestCruxBigQueryCache`,
+  `planDataForSeoRequest`, `claimDataForSeoRequest`,
+  `getDataForSeoRunCostUsd`, and `markStaleDataForSeoRequestsAmbiguous`.
+  Final membership is exactly 32/32; no global Prisma default or transaction
+  outside this literal set changes. `renewAwsRunLease` remains one atomic
+  `updateMany` and is not misclassified as an interactive transaction.
+- **Coordinator read consolidation:** `lockedTask`, `lockedStage`, and
+  `lockedRun` each issue one schema-scoped `SELECT * ... FOR UPDATE`, require
+  exactly one returned row, and return that row directly; their follow-up
+  Prisma `findUnique` calls are removed. `recordDispatch` locks all stage tasks
+  with one ordered `SELECT * ... FOR UPDATE`, uses those returned rows to prove
+  exact stage cardinality and requested-item existence, then performs its
+  existing `updateMany`; it performs no independent task reload. Lock order,
+  state predicates, fencing, returned public shapes, and write cardinalities
+  remain unchanged.
+- **Parallel decomposition:** the parent freezes nine distinct files and two
+  dependency waves. Wave 1 contains the five production files and may execute
+  concurrently because every interface above is already frozen and the files,
+  commands, runtime resources and write sets are disjoint. Wave 2 contains four
+  test files and may execute concurrently only after all wave-1 leaves are
+  independently accepted. The integration assessment is always window-agent
+  owned and sequential. This is the explicit parallel authority required by
+  the sub-window standard; it creates no implied authority for other windows.
+- **Enforcement:** add cases `W6-DB-08`–`W6-DB-11` for the exact 11/21
+  transaction memberships, nine-clock inventory, lock/read operation ceilings,
+  required-now rejection, and controlled-time integration behavior. Controls
+  `W6-NC-18`–`W6-NC-20` must respectively make acceptance fail when one
+  transaction profile is omitted, one repository assertion recreates its own
+  time or loses the caller argument, or one redundant reload is restored. The
+  final W6 combined sets become exactly 39 cases with digest
+  `f8137d25f5994cc83e4ec1deaa672656d50f19692a5907b10e47399a78c6dd80`
+  and 20 controls with digest
+  `0cbaad071c1bc474102394ddc0082d61f0c366d67768dcab0eafa7b5f6a3fc88`.
+- **Preserved behavior:** no schema, migration, public payload, provider call,
+  DataForSEO batch/cost formula, S3/SQS operation, lease duration, heartbeat,
+  retry, ambiguity, API, frontend product, deployment, AWS or production
+  behavior changes. The explicit profile bounds genuine interactive database
+  work; it does not permit network/provider work inside a transaction.
+- **Rejected:** fixing only `readAwsReuseInputs`; changing global Prisma
+  defaults; extending lease durations; adding transaction retries; changing
+  provider batching; retaining redundant reads behind longer timeouts; or
+  treating a passing unit suite as causal closure.
+- **Tasks/scenarios:** fifteenth KI-W6 corrective sequence, nine single-file
+  leaves `KI-W6-C136`–`KI-W6-C144`, window-agent assessment `KI-W6-I119`,
+  existing `SCN-KI-018`, and supplemental `SCN-KI-044`.
+
 ## 4. KI-R5 D1–D13 delta ledger
 
 - **D1 interfaces/payloads:** `DEC-KI-034` and `PAY-KI-008` supersede only the

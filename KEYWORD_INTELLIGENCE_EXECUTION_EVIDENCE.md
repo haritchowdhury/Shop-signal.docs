@@ -6497,3 +6497,128 @@ authorized_first_window: KI-W6-C127
 planned_stop: KI-W6 parent review before KI-W7
 audit_evidence: [SRC-KI-054, DEC-KI-052, EV-KI-A-109]
 ```
+
+### `EV-KI-A-110` — Complete W6 clock/transaction correction authoring and window-agent assignment
+
+- **Phase/authority:** parent authoring under requester instruction to close
+  both defect classes completely, include the coordinator read optimization,
+  and assign a window agent under both project-agnostic standards. No leaf or
+  implementation execution occurred.
+- **Primary-source inventory:** current backend source hashes are coordinator
+  `e285557a5dc854d0021bb71e19076d8bff6ce4e161b9ce8621acda9c24e549c4`,
+  run repository `54d5f422431ec1914855b2ae5cc07ff30e9ab428f11601a7703d589ee21cef13`,
+  domain `e873bb622c085ea34e69e3658f21dacd36d068765f821782dfc613009f3199ce`,
+  lead `c3f2fb24576f43e6c046a87573e6e0942b9263d39c2002eec152280365cde38c`,
+  and final `416e36feeb35aedd571ae8863a413550215263a157a99ed8cf519722446f9683`.
+  Mechanical symbol searches established exactly five hidden
+  assertion-time clocks, five production callers, eleven coordinator and
+  twenty-one run-repository W6-reachable interactive transactions, with only
+  three already explicitly profiled. Direct test callers occur in exactly the
+  lead and final integration files named by CT23.
+- **Locked package:** `SRC-KI-055`, `DEC-KI-053`, A4 fifteenth correction and
+  A8 overlay freeze the complete interfaces, exact 32-member transaction set,
+  five-clock/nine-assertion set, four coordinator read consolidations, nine
+  paths, four cases, three controls and final gates. The nine-path sorted-LF
+  digest independently recomputed to
+  `ba4ccba7b65016b486dc2e1160bcc11a2cb08d306aff4945fad0022e3f19ad92`.
+  The final 39-case and 20-control digests independently recomputed to
+  `f8137d25f5994cc83e4ec1deaa672656d50f19692a5907b10e47399a78c6dd80`
+  and `0cbaad071c1bc474102394ddc0082d61f0c366d67768dcab0eafa7b5f6a3fc88`.
+- **Parallelism standard:** the sub-window standard changed from
+  `84e7590e…` to
+  `842c29550c06c22d63e0a058a27cb8a9ff6b538b3168d2c83a384890b44247f0`.
+  It now permits only parent-explicit waves with distinct files/assignments,
+  frozen interfaces, disjoint commands and runtime resources, an all-members-
+  accepted barrier, and sequential window-agent integration. The parent
+  explicitly authorizes only `KI-W6-WAVE-1` and `KI-W6-WAVE-2`.
+- **Revision closure:** A2
+  `0c2b10e55ad779217574998e748687937471d19cc869c0d878af547f4e612320`,
+  A3 `2b2d75b9ebb94ae80d3cc7241ce69a2aa92a22efa755b1497887018950ccf406`,
+  A4 `679e9a7d986775d60fa9f2a9b7cd9568084652534c857f7109482426653b1d36`,
+  A8 `c3c9d5a32c0086c20c2030478137acbc13ff994b2668a5a94b545777e8bea1ad`,
+  A7 `CHG-KI-082`, and A5 state 184 are mutually consistent. A1 and the
+  parent standard remain byte-identical. The requester-designated state-108
+  S1 path may be completely superseded; the reauthored W6 history remains
+  read-only.
+- **Falsification/readiness:** the package rejects a missing transaction
+  profile (`W6-NC-18`), hidden clock or missing caller argument (`W6-NC-19`),
+  and restored redundant reload (`W6-NC-20`). It also rejects a tenth file,
+  same-wave dependency/resource overlap, leaf-to-parent communication,
+  skipped/duplicate/unactivated cases, changed-command recovery, provider/AWS
+  authority and KI-W7 work. No payload unknown, unresolved interface,
+  unowned member, gate ambiguity or requester prerequisite remains.
+- **Mutation/cost:** documentation and the project-agnostic sub-window standard
+  only; no implementation/test file, database, build, browser, provider, AWS,
+  production, commit or push action; `$0.00`.
+
+```yaml
+certificate: AUTHORING-READY
+artifact_paths: {A1: KEYWORD_INTELLIGENCE_PRODUCT_CONTRACT.md, A2: KEYWORD_INTELLIGENCE_DISCOVERY_DOSSIER.md, A3: KEYWORD_INTELLIGENCE_DECISION_LEDGER.md, A4: KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md, A5: ACTIVE_EXECUTION_STATE.md, A6: KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md, A7: KEYWORD_INTELLIGENCE_SPECIFICATION_CHANGELOG.md, A8: KEYWORD_INTELLIGENCE_TRACEABILITY_INDEX.md}
+revisions: {standard: cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb523ede32848, subwindow_standard: 842c29550c06c22d63e0a058a27cb8a9ff6b538b3168d2c83a384890b44247f0, contract: 8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c, decision: 2b2d75b9ebb94ae80d3cc7241ce69a2aa92a22efa755b1497887018950ccf406, checklist: 679e9a7d986775d60fa9f2a9b7cd9568084652534c857f7109482426653b1d36}
+checked_authoring_items: 12
+unchecked_required_items: 0
+unresolved_evidence_references: 0
+unresolved_payload_contracts: 0
+delegated_implementation_decisions: 0
+unowned_source_members: 0
+unowned_plan_members: 0
+unproven_competing_owner_pairs: 0
+anti_vacuity_failures: 0
+mistake_conformance_failures: 0
+planned_coverage_cases: 39
+unmapped_coverage_cases: 0
+duplicate_coverage_case_ids: 0
+critical_invariants_without_negative_control: 0
+test_substitutes_without_fidelity_disposition: 0
+unresolved_accepted_evidence_invalidations: 0
+frozen_gate_ambiguities: 0
+predictable_gates: [one focused isolated-database gate, one durable local causal browser gate up to 75 minutes, one final regression/build/privacy closure]
+requester_actions_before_start: []
+authorized_first_window: KI-W6 subordinate decomposition under ASG-KI-W6-WA-14
+planned_stop: parent decomposition review before any C136-C144 leaf execution
+audit_evidence: [SRC-KI-055, DEC-KI-053, SCN-KI-044, CHG-KI-082, EV-KI-A-110]
+```
+
+### `EV-KI-A-111` — KI-W6 transaction-clock decomposition correction and approval
+
+- **Review result:** the parent independently verified all authority pins,
+  nine starting file states, both nested clean worktrees, the two-wave DAG,
+  the nine-path digest, and the 39-case/20-control unions. The submitted
+  decomposition was structurally correct but not dispatchable because its
+  readiness boxes were 0/47 checked, its C142 control certificate inverted
+  the falsification count, C141 did not freeze the full coordinator operation
+  ceilings, C143/C144 retained command placeholders, and C144's proposed
+  controlled-clock fixture could not satisfy final-reuse's completed-lead
+  prerequisite.
+- **Direct parent correction under requester authority:** S1 revision
+  `eda1bd4ff887780f00f6aa7721f308b738505bed8dbcf9d6cb5d13cedaa6ef40`
+  now freezes the exact seven-method ceilings, updated-row claim oracle,
+  complete 4-case/3-control certificate with `falsified:3`, literal database
+  commands, valid configuration snapshots, lead completion ordering, actual
+  four-test final-file total, nine literal leaf completion checklists, and
+  47/47 checked readiness items. S2 state 2 is `READY`; S3 `EV-KI-W6-TC03`
+  supersedes the invalid readiness claim.
+- **Approval:** A5 advanced 184→185 and pins the corrected decomposition.
+  `KI-W6-WINDOW-AGENT` may dispatch Wave 1, independently accept all five
+  members, then dispatch Wave 2, independently accept all four members, run
+  I119 sequentially, and stop `READY_FOR_PARENT_REVIEW`. Corrections already
+  mechanically governed by `DEC-KI-053` may use new one-file C145+ and I120+
+  IDs; scope expansion or a new parent decision still returns to the parent.
+- **No execution/mutation:** no implementation/test file, database, browser,
+  build, provider, AWS, production, commit, push, or KI-W7 action occurred;
+  paid cost `$0.00`.
+
+```yaml
+certificate: PARENT-DECOMPOSITION-APPROVED
+window: KI-W6
+assignment: ASG-KI-W6-WA-14
+active_state: 185
+decomposition_revision: eda1bd4ff887780f00f6aa7721f308b738505bed8dbcf9d6cb5d13cedaa6ef40
+subwindow_state_revision: f288b11036e8d462a7c1025c1f2a122d8b7d29baaa88fefc99a08c1618e716ee
+planned_file_set_digest: ba4ccba7b65016b486dc2e1160bcc11a2cb08d306aff4945fad0022e3f19ad92
+readiness_checked: 47
+readiness_unchecked: 0
+approved_first_wave: [KI-W6-C136, KI-W6-C137, KI-W6-C138, KI-W6-C139, KI-W6-C140]
+successor_authorized: false
+status: READY
+```
