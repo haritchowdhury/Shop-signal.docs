@@ -4953,3 +4953,146 @@ cleanup: all steps ok; schema kiw6_mt5fz2b5081919846ecc7d44 dropped with in-run 
 cost_usd: 0.00
 status: READY_FOR_PARENT_REVIEW
 ```
+
+---
+
+## `EV-KI-W6-R75` — `KI-W6-C131` ACCEPTED: `getCompleteStage` clock injection
+
+- Delegated leaf under `ASG-KI-W6-WA-13` (A5 state 180), single production
+  file `src/aws-pipeline/repositories/pipeline-coordinator-repository.js`.
+- Preflight: start `531dc4cf…` verified; worktree clean; the parent's
+  claimTask `{ maxWait: 5_000, timeout: 30_000 }` budget confirmed present
+  and untouched.
+- Edit (+3/−2, one method): `async getCompleteStage(input, now)` with
+  `requireNow(now);` as first statement before the transaction and
+  `assertCompleteAggregatorInTransaction(transaction, input, now)`. No
+  default-now fallback, no hidden clock, no other line changed. Final
+  SHA-256 `b010802e3554fcdc78d4b419f749a2f79413ccf30db8135759e0b9efd8031cba`.
+- Proofs: leaf 5/5; controls A/B fail exactly (ii)/(iii). Window-agent
+  independent review: byte-exact reconstruction of the final file from
+  `git show HEAD:` + the mandated replacement — PASS; independently
+  regenerated controls fail. S1's +2/−2 estimate corrected to +3/−2
+  (arithmetic of the mandated replacement; no specification ambiguity).
+  C131 ACCEPTED.
+
+---
+
+## `EV-KI-W6-R76` — `KI-W6-C132` ACCEPTED: domain-aggregator caller clock
+
+- Delegated leaf under `ASG-KI-W6-WA-13`, single production file
+  `src/aws-pipeline/services/domain-aggregator.js`; preflight start
+  `14226be8…` verified with exactly the C131 file pre-modified.
+- Edit (+1/−1): the sole discovery-stage `getCompleteStage` call now passes
+  `new Date()` as its second argument (`… token }, new Date());`). Nothing
+  else changed. Final SHA-256
+  `e873bb622c085ea34e69e3658f21dacd36d068765f821782dfc613009f3199ce`.
+- Proofs: leaf 3/3 (one call site, one changed line vs HEAD, only
+  getCompleteStage gained the clock); controls A/B fail exactly. Window
+  agent: byte-exact reconstruction from HEAD PASS; regenerated controls
+  fail. In the harness the trailing `new Date()` becomes the pinning seam
+  (`withClock` replaces the trailing Date argument), restoring the injected
+  clock end-to-end. C132 ACCEPTED.
+
+---
+
+## `EV-KI-W6-R77` — `KI-W6-C133` ACCEPTED: lead-aggregator caller clock
+
+- Delegated leaf under `ASG-KI-W6-WA-13`, single production file
+  `src/aws-pipeline/services/lead-aggregator.js`; preflight start
+  `8885024d…` verified with exactly the C131+C132 files pre-modified.
+- Edit (+1/−1): the sole lead-stage `getCompleteStage` call now passes
+  `new Date()` as its second argument. Final SHA-256
+  `c3f2fb24576f43e6c046a87573e6e0942b9263d39c2002eec152280365cde38c`.
+- Proofs: leaf 3/3; controls A/B fail exactly. Window agent: byte-exact
+  reconstruction from HEAD PASS; regenerated controls fail. C133 ACCEPTED.
+
+---
+
+## `EV-KI-W6-R78` — `KI-W6-C134` ACCEPTED: final-aggregator caller clock
+
+- Delegated leaf under `ASG-KI-W6-WA-13`, single production file
+  `src/aws-pipeline/services/final-aggregator.js`; preflight start
+  `fead8c9b…` verified with exactly the C131–C133 files pre-modified.
+- Edit (+1/−1): the sole traffic_crux-stage `getCompleteStage` call now
+  passes `new Date()` as its second argument. Final SHA-256
+  `416e36feeb35aedd571ae8863a413550215263a157a99ed8cf519722446f9683`.
+- Proofs: leaf 3/3; controls A/B fail exactly. Window agent: byte-exact
+  reconstruction from HEAD PASS; regenerated controls fail. All four
+  production leaves now inject the caller clock end-to-end (repository
+  consumes `now`; three services supply `new Date()` as the trailing
+  argument, which the harness `withClock` seam pins during tests). C134
+  ACCEPTED.
+
+---
+
+## `EV-KI-W6-R79` — `KI-W6-C135` ACCEPTED: injected-clock integration regression
+
+- Delegated leaf under `ASG-KI-W6-WA-13`, single test file
+  `test/pipeline-coordinator-repository.integration.test.js`; preflight
+  start `083aa06c…` verified with exactly the four production files
+  pre-modified.
+- Edits (+4/−1): (A) the winning aggregator's successful `getCompleteStage`
+  call now passes the controlled instant `new Date(now.getTime() + 5000)`
+  (inside the lease: claim +4000, expiry +124000); (B) a new nonmutating
+  rejection at the expired instant `+124001` asserting `PIPELINE_LEASE_LOST`,
+  inserted between the existing `deepEqual` witness and the existing renewal.
+  Every other line identical to HEAD. Final SHA-256
+  `9689ef9f5acbe7a68de1b224553c5dcf753fb618fe1dcfbfed3711046ea8b559`.
+- Proofs: leaf 4/4; controls A (124001→5000, non-expired) and B (Edit A
+  removed) fail exactly. Window agent: byte-exact reconstruction from HEAD +
+  the two mandated edits PASS; regenerated controls fail. The rejection is
+  provably nonmutating (`assertCompleteAggregatorInTransaction` conflicts
+  before any write), so the subsequent renewal at +5000 and every existing
+  assertion remain valid. C135 ACCEPTED.
+- Bookkeeping note: one stray evidence copy briefly created inside
+  `email_scraper/` by a wrong-workdir heredoc was immediately deleted;
+  backend worktree verified back to exactly the five leaf files.
+
+---
+
+## `EV-KI-W6-R80` — `KI-W6-I118` PARENT_BLOCKED at R1: test-database provider quota exhausted
+
+- **R1 executed once:** `node --check` on all five leaf files — 5/5 OK.
+  `node --test test/pipeline-coordinator-repository.test.js` — 4/4 pass.
+  `ALLOW_DATABASE_TESTS=true node -r dotenv/config --test
+  --test-concurrency=1 test/pipeline-coordinator-repository.integration.test.js`
+  — **0/6 pass, 6/6 fail**, every failure in
+  `createIsolatedTestSchema` (`test/helpers/isolated-postgres.js:69`) at
+  provider error `53000`: "Your project has exceeded the data transfer
+  quota. Upgrade your plan to increase limits." The failure occurs before
+  any test logic executes — it is an absent external live prerequisite, not
+  a product or correction defect.
+- **Retroactive explanation:** this provider state also explains the
+  post-R74 external probe outage recorded in EV-KI-W6-R74 ("Can't reach
+  database server" on both pooler and direct endpoints minutes after the
+  35-minute causal run completed) — the quota was exhausted during/after
+  that run; connections began being refused.
+- **R2 (causal browser gate), R3, R4 (CV82/CV83 closure) NOT executed:**
+  the causal command requires the same isolated `TEST_DATABASE_URL`
+  (100 validators, 100 discovery tasks, 1,000 stable domains); running it
+  against a quota-refusing endpoint would produce only a quota error, not
+  evidence. Per the workspace escalation rule (required isolated database
+  absent) the window stops; no guessed substitution is permitted.
+- **Correction status at stop:** C131 (`b010802e…`), C132 (`e873bb62…`),
+  C133 (`c3f2fb24…`), C134 (`416e36fe…`), C135 (`9689ef9f…`) — all ACCEPTED
+  with byte-exact independent reconstruction and falsification controls;
+  changed set = exactly the five leaf files; C129/C130 diagnostics, watchdog,
+  heartbeat, batching, and transaction-timeout behavior preserved; zero
+  provider/AWS mutations; cost `$0.00`; nothing committed or pushed.
+- **User prerequisite to resume:** restore the isolated test database's
+  availability (provider plan upgrade, quota reset window, or an alternate
+  authorized isolated `TEST_DATABASE_URL`), then re-run from I118-R1.
+
+```yaml
+certificate: INTEGRATION-PARENT-BLOCKED
+parent_window_id: KI-W6
+integration_assessment_id: KI-W6-I118
+assignment: ASG-KI-W6-WA-13 (A5 state 180 -> 181)
+correction_leaves: [C131 ACCEPTED b010802e… (R75), C132 ACCEPTED e873bb62… (R76), C133 ACCEPTED c3f2fb24… (R77), C134 ACCEPTED 416e36fe… (R78), C135 ACCEPTED 9689ef9f… (R79)]
+regression: {syntax: 5/5, unit: 4/4 pass, integration: 0/6 — provider quota 53000 in createIsolatedTestSchema}
+gates_not_run: [I118-R2 causal browser gate, I118-R3, I118-R4 CV82/CV83 closure]
+blocker: isolated TEST_DATABASE_URL provider (Neon) data-transfer quota exhausted — external live prerequisite absent; also explains EV-KI-W6-R74 probe outage
+cleanup: no kiw6_ schemas created this window (integration test failed at schema creation); five leaf files remain uncommitted as the exact changed set
+cost_usd: 0.00
+status: PARENT_BLOCKED (READY_FOR_PARENT_REVIEW with user prerequisite)
+```

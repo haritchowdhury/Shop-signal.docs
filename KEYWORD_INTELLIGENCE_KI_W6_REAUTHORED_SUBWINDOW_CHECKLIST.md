@@ -4520,3 +4520,195 @@ C129 then C130, execute personally, in order:
   `READY_FOR_PARENT_REVIEW` (state 179), and stop before KI-W7. Evidence:
   EV-KI-W6-R74; A5 CAS state 179; window stopped — no fix, no retry, no
   CV82/CV83, KI-W7 untouched.
+
+### Sixteenth section — clock correction and conditional closure `ASG-KI-W6-WA-13` (A5 state 180)
+
+`ASG-KI-W6-WA-12` localized the deterministic `PIPELINE_LEASE_LOST` to
+`PipelineCoordinatorRepository.getCompleteStage` using real `new Date()`
+instead of the caller/harness-injected clock (EV-KI-W6-R74). This section
+owns the exact clock-injection correction across four production files plus
+its integration regression, one causal continuation, and conditional
+completion of the already-frozen pending closure gates. KI-W7 remains
+prohibited. C129/C130 diagnostics, the watchdog, heartbeat, batching, and
+transaction-timeout behavior are preserved unchanged.
+
+Parent commits since state 179: `5a9165e` (backend, C129 verbatim) and
+`f981b34` (frontend, C130 verbatim); both worktrees clean before C131.
+
+#### `KI-W6-C131` — repository clock injection (single file)
+
+```yaml
+subwindow_id: KI-W6-C131
+type: CORRECTION
+assigned_agent: UNASSIGNED
+predecessors: [A5 state 180 assignment]
+writable_file: email_scraper/src/aws-pipeline/repositories/pipeline-coordinator-repository.js
+starting_file_digest: 531dc4cf9b7c3611b57d3403ae0e6a54d4c9325d3e200e524ae908bcaa6c3bc3
+may_start_successor: false
+```
+
+1. **Preflight.** Working-tree digest equals the starting digest; `git status
+   --porcelain` empty; the claimTask `{ maxWait: 5_000, timeout: 30_000 }`
+   budget line is present.
+2. **Edit (exactly one method).** `async getCompleteStage(input) {` becomes
+   `async getCompleteStage(input, now) {`; add `requireNow(now);` as the
+   first statement before `this.prisma.$transaction`; the inner call becomes
+   `assertCompleteAggregatorInTransaction(transaction, input, now)`. NO other
+   change: no default-now fallback, no hidden clock, all other methods
+   byte-identical.
+3. **Proof.** `node --check` + `git diff --check`; `git diff` shows exactly
+   the one method (3 line-changes); a leaf assertion script verifies the new
+   signature, the `requireNow(now);` guard placement before the transaction,
+   `input, now` passed to `assertCompleteAggregatorInTransaction`, zero
+   occurrences of `new Date()` inside `getCompleteStage`, and that every
+   OTHER method body is byte-identical to HEAD. Falsification controls on
+   copies: (A) removing `requireNow(now);` fails the guard assertion; (B)
+   keeping `new Date()` in the inner call fails the injection assertion.
+4. **Return.** Report final SHA-256, diff stat, proof outputs; window agent
+   independently reviews before C132.
+
+- [x] `C131-P1` Preflight verified. Evidence: start `531dc4cf…`, worktree clean, claimTask budget line present at :242; final `b010802e…`.
+- [x] `C131-T1` One-method clock injection applied exactly. Evidence: `git diff` shows only `getCompleteStage` (+3/−2 — signature `(input, now)`, `requireNow(now);` first statement, inner call `input, now`); no default-now fallback, no `new Date()` in the method.
+- [x] `C131-V1` Proofs and both controls executed. Evidence: leaf `node --check`/`git diff --check` clean, leaf script 5/5, controls A (guard removed) and B (`new Date()` reverted) fail (ii)/(iii); window agent independently reconstructed the expected final from HEAD + the mandated replacement — byte-exact PASS — and regenerated controls A/B failing.
+- [x] `C131-H1` Independent review complete. Evidence: final `b010802e3554fcdc78d4b419f749a2f79413ccf30db8135759e0b9efd8031cba`; C131 ACCEPTED (EV-KI-W6-R75). Leaf noted the S1 +2/−2 estimate should read +3/−2 (mandated replacement arithmetic); text applied byte-exact.
+
+#### `KI-W6-C132` — domain-aggregator caller clock (single file)
+
+```yaml
+subwindow_id: KI-W6-C132
+type: CORRECTION
+assigned_agent: UNASSIGNED
+predecessors: [KI-W6-C131 accepted]
+writable_file: email_scraper/src/aws-pipeline/services/domain-aggregator.js
+starting_file_digest: 14226be8bc775198d42a73a6c81fada869975dfed5a1f781eb6961fea4ed6e77
+may_start_successor: false
+```
+
+1. **Preflight.** C131 accepted; starting digest verified; worktree clean.
+2. **Edit (one line).** The sole
+   `runtime.coordinator.getCompleteStage({ runId: message.runId,` … `token });`
+   call (discovery stage) becomes `… token }, new Date());`. No other change.
+3. **Proof.** `node --check` + `git diff --check`; `git diff` = exactly one
+   line changed; leaf script verifies the call now has `new Date()` as its
+   second argument, exactly one `getCompleteStage` call site, and everything
+   else byte-identical to HEAD. Controls: (A) reverting the argument fails
+   the second-argument assertion; (B) adding `new Date()` to any other
+   coordinator call fails the only-one-change assertion.
+4. **Return.** Final SHA-256, diff stat, proofs; independent review.
+
+- [x] `C132-P1` Preflight verified. Evidence: C131 ACCEPTED; start `14226be8…`, worktree held exactly the C131 file; final `e873bb62…`.
+- [x] `C132-T1` Caller clock applied exactly. Evidence: one line (+1/−1) — the discovery `getCompleteStage` call now ends `token }, new Date());`; nothing else changed.
+- [x] `C132-V1` Proofs and both controls executed. Evidence: leaf `node --check`/`git diff --check` clean, leaf script 3/3, controls A (reverted) and B (renewAggregator gains clock) fail (i)/(iii); window agent exact-reconstruction from HEAD PASS with regenerated controls A/B failing.
+- [x] `C132-H1` Independent review complete. Evidence: final `e873bb622c085ea34e69e3658f21dacd36d068765f821782dfc613009f3199ce`; C132 ACCEPTED (EV-KI-W6-R76).
+
+#### `KI-W6-C133` — lead-aggregator caller clock (single file)
+
+```yaml
+subwindow_id: KI-W6-C133
+type: CORRECTION
+assigned_agent: UNASSIGNED
+predecessors: [KI-W6-C132 accepted]
+writable_file: email_scraper/src/aws-pipeline/services/lead-aggregator.js
+starting_file_digest: 8885024d2ab8bbefebfc06e0f62e0e85e6cd054e590fa8093b161593cc11fac1
+may_start_successor: false
+```
+
+Identical fields to C132 with the file and the sole lead-stage
+`getCompleteStage` call (`stage: "lead"`) as the target: `… token });`
+becomes `… token }, new Date());`, nothing else.
+
+- [x] `C133-P1` Preflight verified. Evidence: C132 ACCEPTED; start `8885024d…`, worktree held exactly the C131+C132 files; final `c3f2fb24…`.
+- [x] `C133-T1` Caller clock applied exactly. Evidence: one line (+1/−1) — the lead `getCompleteStage` call now ends `token }, new Date());`.
+- [x] `C133-V1` Proofs and both controls executed. Evidence: leaf 3/3, controls A/B fail exactly; window agent exact-reconstruction PASS with regenerated controls A/B failing.
+- [x] `C133-H1` Independent review complete. Evidence: final `c3f2fb24576f43e6c046a87573e6e0942b9263d39c2002eec152280365cde38c`; C133 ACCEPTED (EV-KI-W6-R77).
+
+#### `KI-W6-C134` — final-aggregator caller clock (single file)
+
+```yaml
+subwindow_id: KI-W6-C134
+type: CORRECTION
+assigned_agent: UNASSIGNED
+predecessors: [KI-W6-C133 accepted]
+writable_file: email_scraper/src/aws-pipeline/services/final-aggregator.js
+starting_file_digest: fead8c9b6bd6e5fad2d438a3c669b2a8b3b30445d55280402db1ac19f134ee9a
+may_start_successor: false
+```
+
+Identical fields to C132 with the file and the sole traffic_crux-stage
+`getCompleteStage` call (`stage: "traffic_crux"`) as the target: `… token });`
+becomes `… token }, new Date());`, nothing else.
+
+- [x] `C134-P1` Preflight verified. Evidence: C133 ACCEPTED; start `fead8c9b…`, worktree held exactly the C131+C132+C133 files; final `416e36fe…`.
+- [x] `C134-T1` Caller clock applied exactly. Evidence: one line (+1/−1) — the traffic_crux `getCompleteStage` call now ends `token }, new Date());`.
+- [x] `C134-V1` Proofs and both controls executed. Evidence: leaf 3/3, controls A/B fail exactly; window agent exact-reconstruction PASS with regenerated controls A/B failing.
+- [x] `C134-H1` Independent review complete. Evidence: final `416e36feeb35aedd571ae8863a413550215263a157a99ed8cf519722446f9683`; C134 ACCEPTED (EV-KI-W6-R78).
+
+#### `KI-W6-C135` — integration regression for the injected clock (single file)
+
+```yaml
+subwindow_id: KI-W6-C135
+type: CORRECTION
+assigned_agent: UNASSIGNED
+predecessors: [KI-W6-C134 accepted]
+writable_file: email_scraper/test/pipeline-coordinator-repository.integration.test.js
+starting_file_digest: 083aa06c32a309c48c363d7e206beba99edd71600f725e13b5813e7ba8fe765a
+may_start_successor: false
+```
+
+1. **Preflight.** C131–C134 accepted; starting digest verified; worktree
+   otherwise clean of this file.
+2. **Edit A (existing successful call gains a controlled instant).** The
+   winning-aggregator call
+   `const complete = await repositoryA.getCompleteStage({ runId: run1, stage: "discovery", generation: 1,\n        token: winner.stage.aggregationLeaseToken });`
+   becomes the same call with `, new Date(now.getTime() + 5000)` as its
+   second argument (after the winning claim at +4000, before the +124000
+   expiry).
+3. **Edit B (one new nonmutating expired-instant rejection, before the
+   existing renewal).** Immediately after the existing
+   `assert.deepEqual(complete.tasks…)` line and before the existing
+   `repositoryA.renewAggregator(… + 5000)` line, insert exactly:
+   `await assert.rejects(repositoryA.getCompleteStage({ runId: run1, stage: "discovery", generation: 1,\n        token: winner.stage.aggregationLeaseToken }, new Date(now.getTime() + 124001)),\n      (error) => error.code === "PIPELINE_LEASE_LOST");`
+   (expiry = claim +4000 + 120000 = +124000; +124001 is past expiry; the
+   rejection mutates nothing, so every existing assertion still passes.)
+4. **Proof.** `node --check` + `git diff --check`; leaf script verifies the
+   two edits and byte-identity of every other line vs HEAD. Controls: (A)
+   changing +124001 to +5000 (non-expired) makes the new-rejection shape
+   assertion fail; (B) deleting Edit A's instant makes the
+   controlled-instant assertion fail.
+5. **Return.** Final SHA-256, diff stat, proofs; independent review.
+
+- [x] `C135-P1` Preflight verified. Evidence: C131–C134 ACCEPTED; start `083aa06c…`, worktree held exactly the four production files; final `9689ef9f…`.
+- [x] `C135-T1` Both edits applied exactly. Evidence: Edit A (+1/−1) — successful call gains `new Date(now.getTime() + 5000)`; Edit B (+2) — nonmutating expired-instant rejection `+124001` asserting `PIPELINE_LEASE_LOST` between the `deepEqual` witness and the existing renewal; every other line identical.
+- [x] `C135-V1` Proofs and both controls executed. Evidence: leaf `node --check`/`git diff --check` clean, leaf 4/4, controls A (124001→5000) and B (Edit A removed) fail (ii)/(i); window agent exact-reconstruction from HEAD + both mandated edits PASS with regenerated controls A/B failing.
+- [x] `C135-H1` Independent review complete. Evidence: final `9689ef9f5acbe7a68de1b224553c5dcf753fb618fe1dcfbfed3711046ea8b559`; C135 ACCEPTED (EV-KI-W6-R79).
+
+#### `KI-W6-I118` — regression + causal continuation + conditional closure
+
+Zero implementation-write authority. Execute personally, in order:
+
+- [x] `I118-R1` After C135 acceptance, run once from `email_scraper/`:
+  `node --check` on all five leaf files; `node --test
+  test/pipeline-coordinator-repository.test.js`;
+  `ALLOW_DATABASE_TESTS=true node -r dotenv/config --test
+  test/pipeline-coordinator-repository.integration.test.js` (isolated
+  `TEST_DATABASE_URL` via dotenv). All must pass. Evidence: PARTIAL then
+  BLOCKED — syntax 5/5 OK; unit 4/4 pass; integration 0/6 with every test
+  failing in `createIsolatedTestSchema` at provider error `53000` "Your
+  project has exceeded the data transfer quota" (EV-KI-W6-R80).
+- [ ] `I118-R2` BLOCKED (test-database provider quota; requires R1 integration pass and the same isolated `TEST_DATABASE_URL`). Not executed. Causal gate, from `frontend/`, exactly once with authorized
+  escalation and the isolated `TEST_DATABASE_URL`:
+  `ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node
+  test/browser/keyword-intelligence-e2e.mjs`. One identical recovery is
+  permitted only under the proven environment-invalidation rule. A PASS
+  requires the existing 26/13 certificate, 100 validators, 100 discovery
+  tasks, 1,000 stable domains and cleanup/absence. Evidence: ___
+- [ ] `I118-R3` On a NEW deterministic failure: preserve C129/C130
+  diagnostics, identify the exact failing operation (method + sequence +
+  errorCode from the operation trace), record, CAS, and STOP — no fix, no
+  retry beyond the recovery rule. Evidence: ___
+- [ ] `I118-R4` Only on a causal PASS: execute the frozen CV82 (previously
+  unexecuted CV79, then CV72–CV75/CH14 exactly as frozen; reuse a prior
+  passing gate only when its complete input hash set is byte-identical) and
+  CV83 from the I116 section above, then produce the W6 handoff. Evidence: ___
+- [ ] `I118-H1` Append consolidated evidence, CAS A5 to
+  `READY_FOR_PARENT_REVIEW`, and stop before KI-W7. Evidence: ___
