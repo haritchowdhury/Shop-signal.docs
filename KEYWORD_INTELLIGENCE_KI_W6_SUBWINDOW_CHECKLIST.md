@@ -1377,3 +1377,729 @@ digests.
 ### 11.2 Later integration assessments
 
 (none)
+
+## 12. State-186 append-only amendment — terminal lease-monitor lifecycle
+
+This section is append-only under parent assignment `ASG-KI-W6-WA-15` and
+mechanically decomposes `DEC-KI-054`, parent tasks `KI-W6-CT24`–`CT27`,
+scenario `SCN-KI-045`, case `W6-DB-12`, control `W6-NC-21`, and assessment
+`KI-W6-I120`. It does not rewrite or reopen accepted `C136`–`C144`; it
+supersedes only `I119`'s blocked continuation after `CV87` through the new
+assessment `I120`. No leaf may begin until the parent approves this exact S1
+revision and the window agent records that approval in S2/S3.
+
+### 12.1 Inherited authority, package, and exact boundary
+
+```yaml
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-15
+window_agent_identity: KI-W6-WINDOW-AGENT
+parent_standard_path: PROJECT_AGNOSTIC_DECISION_COMPLETE_CHECKLIST_AUTHORING_STANDARD.md
+parent_standard_revision: cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb523ede32848
+subwindow_standard_path: PROJECT_AGNOSTIC_WINDOW_AGENT_SUBWINDOW_AUTHORING_STANDARD.md
+subwindow_standard_revision: 842c29550c06c22d63e0a058a27cb8a9ff6b538b3168d2c83a384890b44247f0
+A1: KEYWORD_INTELLIGENCE_PRODUCT_CONTRACT.md
+A1_revision: 8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c
+A2: KEYWORD_INTELLIGENCE_DISCOVERY_DOSSIER.md
+A2_revision: 425bedd9a7f429e2b145559d6d408fd161260a025382e047900f2112355316e0
+A3: KEYWORD_INTELLIGENCE_DECISION_LEDGER.md
+A3_revision: 412e58dffc326e43a6c3efaae5e2b18a9a1fd65841bcd66e34c0b7fcc161d183
+A4: KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md
+A4_revision: aaa15feedebe70d93284a87c4eb480593992481a51ce00ea7f838eb9e802dabc
+A5: ACTIVE_EXECUTION_STATE.md
+A5_state: 186
+A6: KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md
+A7: KEYWORD_INTELLIGENCE_SPECIFICATION_CHANGELOG.md
+A8: KEYWORD_INTELLIGENCE_TRACEABILITY_INDEX.md
+A8_revision: ac7165d143a786b65ee20681feb8be07009911113a29a34cc6e329dcfb605399
+S1: KEYWORD_INTELLIGENCE_KI_W6_SUBWINDOW_CHECKLIST.md
+S2: KEYWORD_INTELLIGENCE_KI_W6_TRANSACTION_CLOCK_SUBWINDOW_STATE.md
+S3: KEYWORD_INTELLIGENCE_KI_W6_TRANSACTION_CLOCK_SUBWINDOW_EVIDENCE.md
+trigger_evidence: [SRC-KI-056, EV-KI-W6-TC06]
+governing_decision: DEC-KI-054
+parent_tasks: [KI-W6-CT24, KI-W6-CT25, KI-W6-CT26, KI-W6-CT27]
+scenario: SCN-KI-045
+coverage_case: W6-DB-12
+negative_control: W6-NC-21
+accepted_predecessors: [KI-W6-C136, KI-W6-C137, KI-W6-C138, KI-W6-C139, KI-W6-C140, KI-W6-C141, KI-W6-C142, KI-W6-C143, KI-W6-C144]
+preserved_assessment_evidence: [KI-W6-CV84, KI-W6-CV85, KI-W6-CV86]
+failed_assessment_evidence: KI-W6-CV87
+successor_parent_window: PROHIBITED
+may_start_successor: false
+```
+
+Parent scope is exactly four implementation/test paths plus S1/S2/S3
+coordination. It prohibits schema/migration, repository fence/transaction,
+lease duration/heartbeat interval, retry, queue, provider, AWS, production,
+paid, frontend, package/configuration, build-script, commit/push, and KI-W7
+changes. Local syntax/tests, one dependency-gated isolated-database reuse or
+rerun, one durable causal browser gate, regression/build/privacy/scope gates,
+and sandbox escalation for those already-authorized local actions are allowed.
+An attempt invalidated solely by sandbox or channel transport may receive one
+identical escalated recovery only after the inherited E8.1 read-only
+postcondition proof; an observable assertion/product failure is never such a
+recovery.
+
+State-186 entry was independently reproduced: all pinned revisions above
+match; backend is clean at
+`8694b949bc4e308a7605074047cc330e2a2d8b44`; frontend is clean at
+`f981b34eeb79764a2e9e7ee96779f99907228a3f`; the four writable targets are
+regular non-symlink files with the exact baselines in §12.2; root porcelain
+contains only the seven owner-controlled parent artifacts present before this
+amendment, with sorted-line digest
+`84ed43672dd873536e36a2903cc9950bb1efbad22c453dfb46f39ea75b1e8f49`.
+The only window-agent writes authorized during decomposition are S1/S2/S3.
+
+### 12.2 Complete four-file set, DAG, and intermediate states
+
+| Path | Operation | Starting SHA-256 | Owner |
+|---|---|---|---|
+| `email_scraper/src/aws-pipeline/core/lease-monitor.js` | MODIFY | `cb0332470928fb33d59529544ac6a6c0b1adbcaa1d5a5a69cd80ee8fd55398be` | `KI-W6-C145` |
+| `email_scraper/src/aws-pipeline/services/discovery-worker.js` | MODIFY | `5ff0bd6c727da335422abccd336e87ae441c453e2bf63ef20c6189b278c60874` | `KI-W6-C146` |
+| `email_scraper/src/aws-pipeline/services/lead-worker.js` | MODIFY | `db616bccbd283c3f5488fd3458e6d86a1b57f945ac722cdf0935c95ccfb20d26` | `KI-W6-C147` |
+| `email_scraper/test/aws-pipeline-transaction-clock-enforcement.test.js` | MODIFY | `606d8e90e7a8045ddf0ae9bb374e6b2390a80491770a252c75d44b725e1b0448` | `KI-W6-C148` |
+
+Required changed-file set = planned set = the four rows above. The sorted
+distinct workspace-relative path plus LF digest is
+`e556d60d1253045b8193f683f86e9622118cf00f52a076011d2917c6da416fe4`.
+There are zero duplicate owners and zero multi-file leaves.
+
+```text
+KI-W6-C145
+    |
+    +-- KI-W6-WAVE-3 (parallel only after C145 is independently accepted)
+    |      KI-W6-C146       KI-W6-C147
+    |          \             /
+    +----------- barrier: both independently accepted
+                         |
+                     KI-W6-C148
+                         |
+                     KI-W6-I120 (window agent, sequential, no implementation writes)
+                         |
+                 READY_FOR_PARENT_REVIEW; stop before KI-W7
+```
+
+Wave 3 is the sole authorized parallel wave. C146 and C147 own disjoint files,
+consume the already accepted C145 export, run read-only syntax/source checks,
+share no writable fixture/schema/port/process/build output, and do not consume
+one another's output. S2 must record both assignments before either starts.
+The window agent must independently accept both before C148 starts.
+
+Intermediate-state contract:
+
+- After C145: the new export has zero callers. Only C145's syntax and exact
+  helper-byte checks are required to pass; worker behavior remains unchanged.
+  This is local/uncommitted and externally invisible. Wave 3 resolves the
+  temporary zero-caller state. No integration, provider/AWS, parent handoff,
+  commit, or KI-W7 action is allowed.
+- After one Wave-3 member returns: the sibling may still be running; no
+  dependent leaf or integration gate starts. Each changed worker consumes the
+  same frozen helper interface independently. The window agent accepts or
+  rejects each file separately.
+- After both Wave-3 members are accepted: production ordering is present, but
+  `W6-DB-12/W6-NC-21` are not registered until C148. Syntax/source checks must
+  pass; enforcement and all causal claims remain pending. C148 resolves this.
+- After C148: the four-file implementation is assembled. Only I120 may execute
+  whole-window gates. Leaves cannot claim causal browser, regression, build,
+  privacy, database, or parent acceptance.
+
+Frozen interface consumed by C146/C147 and enforced by C148:
+
+```js
+export async function preparePipelineTerminalLease(monitor) {
+  await monitor.renewNow();
+  await monitor.stop();
+  monitor.assertActive();
+}
+```
+
+It accepts exactly one `monitor`, resolves `undefined`, and adds no default,
+return object, catch, suppression, retry, timeout, timer/clock mutation,
+validation branch, or export. It runs outside transactions. Renewal/prior
+failure aborts before terminalization; successful return means the explicit
+renewal and any previously queued renewal settled, the timer was cleared, and
+stored failure was rethrown if present. Existing terminal token/fingerprint/
+state/live-expiry fences and recovery semantics remain unchanged.
+
+### 12.3 `KI-W6-C145` — shared terminal lease boundary
+
+```yaml
+subwindow_id: KI-W6-C145
+type: CORRECTION
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-15
+assigned_agent: UNASSIGNED
+predecessors: [KI-W6-I119 PARENT_BLOCKED at CV87, DEC-KI-054]
+successor_reserved_for: KI-W6-WINDOW-AGENT
+writable_file: email_scraper/src/aws-pipeline/core/lease-monitor.js
+file_operation: MODIFY
+starting_file_digest: cb0332470928fb33d59529544ac6a6c0b1adbcaa1d5a5a69cd80ee8fd55398be
+starting_repository_change_set: []
+starting_repository_change_set_digest: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+read_only_scope:
+  - ACTIVE_EXECUTION_STATE.md state 186
+  - KEYWORD_INTELLIGENCE_DECISION_LEDGER.md DEC-KI-054
+  - KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md KI-W6-CT24/I120
+  - email_scraper/src/aws-pipeline/core/lease-monitor.js
+  - email_scraper/src/aws-pipeline/services/discovery-worker.js
+  - email_scraper/src/aws-pipeline/services/lead-worker.js
+  - email_scraper/test/aws-pipeline-contracts.test.js lease-monitor tests
+authorized_actions: [edit the one writable file, read-only syntax/diff/source inspections, return evidence to the window agent]
+prohibited_actions: [second-file edit, worker caller edit, test execution that writes workspace state, external/database/provider/AWS action, commit, push, direct parent communication, successor work]
+may_start_successor: false
+```
+
+Mechanical trace: `REQ-KI-010`–`REQ-KI-015`, `REQ-KI-024`;
+`INV-KI-004`–`INV-KI-006`, `INV-KI-010`, `INV-KI-011`, `INV-KI-015`;
+`SRC-KI-056`, `EV-KI-W6-TC06`, `DEC-KI-054`, `KI-W6-CT24`,
+`SCN-KI-045`, `W6-DB-12`, `W6-NC-21` -> exact export above -> C146/C147
+call sites -> C148 dynamic/source assertions.
+
+Ordered transformation:
+
+1. Preserve the complete existing `createPipelineLeaseMonitor` export
+   byte-for-byte.
+2. Immediately after it, add exactly the five-line exported helper shown in
+   §12.2, including the three statements in that order.
+3. Add no import, validation, default, return, catch, suppression, retry,
+   timeout, timer/clock change, extra export, or other edit.
+
+LOCAL_NOW checks, from `email_scraper/`, write set empty:
+
+1. `node --check src/aws-pipeline/core/lease-monitor.js` -> exit 0.
+2. `git diff --check -- src/aws-pipeline/core/lease-monitor.js` -> exit 0.
+3. Deterministic source inspection must read the file as UTF-8, require the
+   exact helper literal in §12.2 exactly once, require its index after
+   `createPipelineLeaseMonitor`, require total occurrences of
+   `preparePipelineTerminalLease` = 1, and prove deletion of that literal
+   makes the inspection fail. Activation witness: exact helper bytes and
+   ordering. Forbidden outcomes: a changed existing monitor byte or any extra
+   helper behavior.
+4. Compare backend porcelain before/after and file digests: attributable
+   workspace path set is exactly `{email_scraper/src/aws-pipeline/core/lease-monitor.js}`;
+   all previously clean non-owned paths remain clean.
+
+Coverage registration is deferred to C148; causal proof is deferred to I120.
+
+- [ ] `P1` Revisions, `ASG-KI-W6-C145`, writable file, baseline digest, and predecessor evidence match.
+- [ ] `P2` Backend starts clean at `8694b949…`; root owner-controlled state is preserved.
+- [ ] `T1` Apply all three ordered transformation steps and no other edit.
+- [ ] `V1` Run all four LOCAL_NOW checks and record activation witnesses/assertions.
+- [ ] `V2` Prove the attributable workspace changed-file set is exactly the writable file.
+- [ ] `V3` Record local coverage as none and the exact C148/I120 deferred obligations; zero invented registration.
+- [ ] `H1` Return exact diff, ending digest, commands/outcomes, and deferred obligations.
+- [ ] `H2` Confirm no prohibited action, second-file edit, successor work, external mutation, or parent communication.
+- [ ] `H3` Stop at `AWAITING_WINDOW_REVIEW` and report only to the window agent.
+
+### 12.4 `KI-W6-C146` — discovery terminal ordering
+
+```yaml
+subwindow_id: KI-W6-C146
+type: CORRECTION
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-15
+assigned_agent: UNASSIGNED
+predecessors: [KI-W6-C145 independently accepted]
+parallel_wave: KI-W6-WAVE-3
+successor_reserved_for: KI-W6-WINDOW-AGENT
+writable_file: email_scraper/src/aws-pipeline/services/discovery-worker.js
+file_operation: MODIFY
+starting_file_digest: 5ff0bd6c727da335422abccd336e87ae441c453e2bf63ef20c6189b278c60874
+starting_repository_change_set: [src/aws-pipeline/core/lease-monitor.js]
+starting_repository_change_set_digest: e1304b502505ff5503e382d7a144d17bf6ae810f65a160ee600b1e675888cf10
+read_only_scope:
+  - ACTIVE_EXECUTION_STATE.md state 186
+  - KEYWORD_INTELLIGENCE_DECISION_LEDGER.md DEC-KI-054
+  - KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md KI-W6-CT25/I120
+  - email_scraper/src/aws-pipeline/core/lease-monitor.js accepted C145 export
+  - email_scraper/src/aws-pipeline/services/discovery-worker.js
+  - email_scraper/test/aws-pipeline-discovery.test.js
+  - email_scraper/test/aws-pipeline-transaction-clock-enforcement.test.js
+authorized_actions: [edit the one writable file, read-only syntax/diff/source inspections, return evidence to the window agent]
+prohibited_actions: [lease-monitor edit, lead-worker edit, test edit, second-file edit, provider/AWS/database action, commit, push, direct parent communication, successor work]
+may_start_successor: false
+```
+
+Mechanical trace: `REQ-KI-010`–`REQ-KI-015`, `REQ-KI-024`;
+`INV-KI-004`–`INV-KI-006`, `INV-KI-010`, `INV-KI-011`, `INV-KI-015`;
+`SRC-KI-056`, `EV-KI-W6-TC06`, `DEC-KI-054`, `KI-W6-CT25`,
+`SCN-KI-045`, `W6-DB-12`, `W6-NC-21` -> exact discovery import/call/order
+anchors -> C148's source and dynamic assertions -> I120 causal proof.
+
+Ordered transformation inside the exact exported
+`processDiscoveryMessage(message, runtime)` function:
+
+1. Add `preparePipelineTerminalLease` beside
+   `createPipelineLeaseMonitor` in the existing import from
+   `../core/lease-monitor.js`; no second lease-monitor import.
+2. Replace the sole success-path `await monitor.renewNow();` immediately before
+   the existing `recordTerminal` call with
+   `await preparePipelineTerminalLease(monitor);`.
+3. Delete only the success-path `await monitor.stop();` immediately after that
+   `recordTerminal` call.
+4. Preserve manifest/artifact/provider logic, terminal token/fingerprint/state
+   and `new Date()` arguments, busy/cancelled/terminal early returns,
+   dispatcher payload/order, return union, catch cleanup, 20-second/60-second
+   values, repository behavior, and every other byte.
+
+Resulting order is artifact validated/written -> helper renew/stop/drain/assert
+-> fenced terminal transaction -> existing aggregation-check `sendOne` ->
+acknowledge. Helper failure prevents terminal/check; terminal failure follows
+unchanged catch cleanup; after a recorded terminal no live heartbeat exists.
+
+LOCAL_NOW checks, from `email_scraper/`, write set empty:
+
+1. `node --check src/aws-pipeline/services/discovery-worker.js` -> exit 0.
+2. `git diff --check -- src/aws-pipeline/services/discovery-worker.js` -> exit 0.
+3. Deterministic inspection of the exact exported-function span requires:
+   import occurrence = 1, helper invocation occurrence = 1, direct
+   `monitor.renewNow()` occurrence = 0, helper index < `recordTerminal` index <
+   domain-aggregation dispatcher `sendOne` index, and the slice from
+   `recordTerminal` through that send contains zero `monitor.stop()`. It also
+   requires the unchanged catch cleanup stop. Replacing the helper call with
+   direct renewal plus a post-terminal stop must make the inspection fail;
+   the real source must pass immediately afterward.
+4. Attributable workspace path set is exactly the writable file; C145's file
+   digest is protected and the Wave-3 sibling's attributable edit is ignored
+   only as its separately recorded ownership, never attributed to C146.
+
+Runtime/certificate proof is deferred to C148/I120.
+
+- [ ] `P1` Revisions, `ASG-KI-W6-C146`, writable file, baseline, C145 acceptance, and Wave-3 state match.
+- [ ] `P2` Starting repository set is exactly the recorded C145 path; protected/sibling changes are preserved.
+- [ ] `T1` Apply the four ordered transformations and no other edit.
+- [ ] `V1` Run all four LOCAL_NOW checks with exact source-order witnesses.
+- [ ] `V2` Prove the attributable changed-file set is exactly the writable file.
+- [ ] `V3` Record no local case registration; preserve exact C148/I120 deferred proof.
+- [ ] `H1` Return exact diff, ending digest, commands/outcomes, and deferred obligations.
+- [ ] `H2` Confirm no prohibited action, second-file edit, successor work, external mutation, sibling communication, or parent communication.
+- [ ] `H3` Stop at `AWAITING_WINDOW_REVIEW` and report only to the window agent.
+
+### 12.5 `KI-W6-C147` — lead terminal ordering
+
+```yaml
+subwindow_id: KI-W6-C147
+type: CORRECTION
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-15
+assigned_agent: UNASSIGNED
+predecessors: [KI-W6-C145 independently accepted]
+parallel_wave: KI-W6-WAVE-3
+successor_reserved_for: KI-W6-WINDOW-AGENT
+writable_file: email_scraper/src/aws-pipeline/services/lead-worker.js
+file_operation: MODIFY
+starting_file_digest: db616bccbd283c3f5488fd3458e6d86a1b57f945ac722cdf0935c95ccfb20d26
+starting_repository_change_set: [src/aws-pipeline/core/lease-monitor.js]
+starting_repository_change_set_digest: e1304b502505ff5503e382d7a144d17bf6ae810f65a160ee600b1e675888cf10
+read_only_scope:
+  - ACTIVE_EXECUTION_STATE.md state 186
+  - KEYWORD_INTELLIGENCE_DECISION_LEDGER.md DEC-KI-054
+  - KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md KI-W6-CT26/I120
+  - email_scraper/src/aws-pipeline/core/lease-monitor.js accepted C145 export
+  - email_scraper/src/aws-pipeline/services/lead-worker.js
+  - email_scraper/test/aws-pipeline-transaction-clock-enforcement.test.js
+authorized_actions: [edit the one writable file, read-only syntax/diff/source inspections, return evidence to the window agent]
+prohibited_actions: [lease-monitor edit, discovery-worker edit, test edit, second-file edit, provider/AWS/database action, commit, push, direct parent communication, successor work]
+may_start_successor: false
+```
+
+Mechanical trace: `REQ-KI-010`–`REQ-KI-015`, `REQ-KI-024`;
+`INV-KI-004`–`INV-KI-006`, `INV-KI-010`, `INV-KI-011`, `INV-KI-015`;
+`SRC-KI-056`, `EV-KI-W6-TC06`, `DEC-KI-054`, `KI-W6-CT26`,
+`SCN-KI-045`, `W6-DB-12`, `W6-NC-21` -> exact lead import/call/order anchors
+-> C148's source and dynamic assertions -> I120 causal proof.
+
+Ordered transformation inside exact exported
+`processLeadMessage(message, runtime)`:
+
+1. Add `preparePipelineTerminalLease` beside
+   `createPipelineLeaseMonitor` in the existing lease-monitor import; no second
+   import.
+2. Replace the sole success-path `await monitor.renewNow();` immediately before
+   terminal-state derivation and `recordTerminal` with
+   `await preparePipelineTerminalLease(monitor);`.
+3. Delete only the success-path `await monitor.stop();` immediately after
+   `recordTerminal`.
+4. Preserve manifest/candidate/artifact/provider/marker logic, token/
+   fingerprint/terminal state/safe-error/`new Date()` arguments, busy/
+   cancelled/terminal early returns, dispatcher payload/order, return union,
+   catch cleanup, timing and repository behavior. No Browserless, AI,
+   page-fetch, artifact, cost, or ambiguity rule changes.
+
+Resulting success/failure/replay semantics and order are identical to C146,
+with the existing lead aggregation-check destination preserved.
+
+LOCAL_NOW checks, from `email_scraper/`, write set empty:
+
+1. `node --check src/aws-pipeline/services/lead-worker.js` -> exit 0.
+2. `git diff --check -- src/aws-pipeline/services/lead-worker.js` -> exit 0.
+3. Deterministic inspection of `processLeadMessage` requires: helper import =
+   1, helper invocation = 1, direct `monitor.renewNow()` = 0, helper index <
+   terminal-state derivation < `recordTerminal` < lead-aggregation `sendOne`,
+   and zero `monitor.stop()` from `recordTerminal` through send. Existing
+   early-return/catch cleanup stops remain. The same renew->terminal->stop
+   in-memory mutation must fail; fresh real source must pass.
+4. Attributable workspace path set is exactly the writable file; C145 and the
+   separately owned C146 path are protected from attribution.
+
+Runtime/certificate proof is deferred to C148/I120.
+
+- [ ] `P1` Revisions, `ASG-KI-W6-C147`, writable file, baseline, C145 acceptance, and Wave-3 state match.
+- [ ] `P2` Starting repository set is exactly the recorded C145 path; protected/sibling changes are preserved.
+- [ ] `T1` Apply the four ordered transformations and no other edit.
+- [ ] `V1` Run all four LOCAL_NOW checks with exact source-order witnesses.
+- [ ] `V2` Prove the attributable changed-file set is exactly the writable file.
+- [ ] `V3` Record no local case registration; preserve exact C148/I120 deferred proof.
+- [ ] `H1` Return exact diff, ending digest, commands/outcomes, and deferred obligations.
+- [ ] `H2` Confirm no prohibited action, second-file edit, successor work, external mutation, sibling communication, or parent communication.
+- [ ] `H3` Stop at `AWAITING_WINDOW_REVIEW` and report only to the window agent.
+
+### 12.6 `KI-W6-C148` — lifecycle enforcement
+
+```yaml
+subwindow_id: KI-W6-C148
+type: CORRECTION
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-15
+assigned_agent: UNASSIGNED
+predecessors: [KI-W6-C145, KI-W6-C146, KI-W6-C147 independently accepted]
+successor_reserved_for: KI-W6-WINDOW-AGENT
+writable_file: email_scraper/test/aws-pipeline-transaction-clock-enforcement.test.js
+file_operation: MODIFY
+starting_file_digest: 606d8e90e7a8045ddf0ae9bb374e6b2390a80491770a252c75d44b725e1b0448
+starting_repository_change_set:
+  - src/aws-pipeline/core/lease-monitor.js
+  - src/aws-pipeline/services/discovery-worker.js
+  - src/aws-pipeline/services/lead-worker.js
+starting_repository_change_set_digest: f2e8606cb5be884ffc116fedde48a0addfaa45535f9a0bfcb86b4ca498e4dd5f
+read_only_scope:
+  - ACTIVE_EXECUTION_STATE.md state 186
+  - KEYWORD_INTELLIGENCE_DECISION_LEDGER.md DEC-KI-054
+  - KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md KI-W6-CT27/I120
+  - email_scraper/src/aws-pipeline/core/lease-monitor.js accepted C145 output
+  - email_scraper/src/aws-pipeline/services/discovery-worker.js accepted C146 output
+  - email_scraper/src/aws-pipeline/services/lead-worker.js accepted C147 output
+  - email_scraper/test/aws-pipeline-transaction-clock-enforcement.test.js
+authorized_actions: [edit the one writable test file, run its read-only syntax and focused Node test, use only in-memory fake timer/deferred state, return evidence to the window agent]
+prohibited_actions: [production edit, second-file edit, real timer wait, database/provider/AWS action, fixture write, snapshot update, commit, push, direct parent communication, successor work]
+may_start_successor: false
+```
+
+Mechanical trace: `REQ-KI-010`–`REQ-KI-015`, `REQ-KI-024`;
+`INV-KI-004`–`INV-KI-006`, `INV-KI-010`, `INV-KI-011`, `INV-KI-015`;
+`SRC-KI-056`, `EV-KI-W6-TC06`, `DEC-KI-054`, `KI-W6-CT27`,
+`SCN-KI-045`, `W6-DB-12`, `W6-NC-21` -> exact test registrations,
+activation witnesses, negative control, certificate -> I120's 40/21 closure.
+
+Ordered transformation:
+
+1. Import `createPipelineLeaseMonitor` and
+   `preparePipelineTerminalLease` from the exact lease-monitor source.
+2. Add exact constants for
+   `../src/aws-pipeline/core/lease-monitor.js`,
+   `../src/aws-pipeline/services/discovery-worker.js`, and
+   `../src/aws-pipeline/services/lead-worker.js`; load all three in the existing
+   top-level `Promise.all` inventory and expose them in `REAL` without removing
+   existing source members.
+3. Set `REQUIRED` exactly to
+   `['W6-DB-08','W6-DB-09','W6-DB-10','W6-DB-11','W6-DB-12']` and `CONTROLS`
+   exactly to
+   `['W6-NC-18','W6-NC-19','W6-NC-20','W6-NC-21']` in that order. Replace the
+   required digest with
+   `1aba569c8f08f9ca3ee240a10c4ddb4fbb0e6ec0bb00608b74aa414faefaaf39`
+   and control digest with
+   `3068f94cf9c935bfdec5f0374182c5261fc0acaf7e5d8bf80d6b278cfa5b981c`.
+4. Extend witnesses with exact initial numeric members
+   `terminalLeaseWorkers: 0`, `terminalLeaseRenewals: 0`, and
+   `terminalLeaseTimerClears: 0`; preserve prior witness members.
+5. Add one reusable source oracle for the exact exported
+   `processDiscoveryMessage` and `processLeadMessage` spans. For each, require
+   one helper import, one helper call, zero direct `monitor.renewNow()`, helper
+   call index < `recordTerminal` index < the existing aggregation dispatcher
+   `sendOne` index, and zero `monitor.stop()` between terminal and send; allow
+   only existing cleanup stops outside that interval. It sets
+   `terminalLeaseWorkers` to exactly 2 only after both pass.
+6. Register `W6-DB-12` through `runRequired`. Use the real monitor/helper with
+   a controlled valid Date clock, fake `setIntervalFn` capturing exactly one
+   callback/token, fake `clearIntervalFn` asserting and counting that token,
+   and a renewal function whose first invocation appends start then waits on a
+   deferred release and whose second invocation appends start/completion.
+   Invoke the captured timer to queue renewal 1; start without awaiting the
+   helper to queue explicit renewal 2; release renewal 1; await the helper.
+   Assert serialized ordered completion of exactly two renewals, exactly one
+   clear, final `monitor.assertActive()` success, and source oracle success.
+   Invoke the captured stale callback after the simulated terminal boundary,
+   await exactly two `Promise.resolve()` microtasks, and assert renewal count
+   remains 2. Set witnesses to workers=2, renewals=2, clears=1.
+7. Register `W6-NC-21`. Mutate only an in-memory copy of discovery source by
+   replacing its helper call with direct `await monitor.renewNow();` and
+   inserting `await monitor.stop();` between terminalization and check send.
+   Assert the unchanged W6-DB-12 source oracle throws; append the control ID;
+   run the unmodified REAL source oracle immediately and require pass. Never
+   write the mutated bytes.
+8. Update the certificate to require 5 required/registered/executed cases,
+   zero skips/failures/duplicates/unexpected IDs; 4 expected/falsified controls
+   with the exact IDs; activation witnesses exactly
+   `{coordinatorTransactions:11, runRepositoryTransactions:21,
+   assertionClockSites:9, serviceCallers:5, terminalLeaseWorkers:2,
+   terminalLeaseRenewals:2, terminalLeaseTimerClears:1}`; and the two new
+   group digests for required/registered/executed/control sets. Preserve every
+   earlier oracle and test. File total is exactly 10 tests: five cases, four
+   controls, one certificate.
+
+LOCAL_NOW checks from `email_scraper/`, expected workspace write set empty:
+
+1. `node --check test/aws-pipeline-transaction-clock-enforcement.test.js` ->
+   exit 0.
+2. `node --test test/aws-pipeline-transaction-clock-enforcement.test.js` ->
+   exactly 10 pass, 0 fail, 0 skip; exact five-case/four-control certificate;
+   2/2/1 new witnesses; W6-NC-21 falsifies then fresh REAL passes.
+3. `git diff --check -- test/aws-pipeline-transaction-clock-enforcement.test.js`
+   -> exit 0; attributable workspace path set exactly the writable test file;
+   accepted C145–C147 digests protected.
+
+- [ ] `P1` Revisions, `ASG-KI-W6-C148`, writable file, baseline, and all three accepted predecessor digests match.
+- [ ] `P2` Starting repository set is exactly the recorded three production paths.
+- [ ] `T1` Apply all eight ordered transformations and preserve every prior case/control/oracle.
+- [ ] `V1` Run all three LOCAL_NOW checks and capture exact activation/certificate output.
+- [ ] `V2` Prove the attributable changed-file set is exactly the writable test file.
+- [ ] `V3` Prove local required=registered=executed exact five IDs, zero skips/duplicates/unexpected, and four/four controls falsified.
+- [ ] `H1` Return exact diff, ending digest, command outcomes, certificate, and I120 obligations.
+- [ ] `H2` Confirm no prohibited action, second-file edit, production mutation, successor work, external mutation, or parent communication.
+- [ ] `H3` Stop at `AWAITING_WINDOW_REVIEW` and report only to the window agent.
+
+### 12.7 Coverage, controls, fidelity, and immutable accepted evidence
+
+This correction adds exactly `W6-DB-12` and `W6-NC-21`. The enforcement group
+is exactly `W6-DB-08`–`W6-DB-12`, digest
+`1aba569c8f08f9ca3ee240a10c4ddb4fbb0e6ec0bb00608b74aa414faefaaf39`.
+Its controls are exactly `W6-NC-18`–`W6-NC-21`, digest
+`3068f94cf9c935bfdec5f0374182c5261fc0acaf7e5d8bf80d6b278cfa5b981c`.
+
+Final W6 required cases are exactly:
+
+```text
+W6-NAV-01 W6-NAV-02 W6-NAV-03
+W6-CONF-01 W6-CONF-02 W6-CONF-03 W6-CONF-04 W6-CONF-05 W6-CONF-06
+W6-FLOW-01 W6-FLOW-02 W6-FLOW-03 W6-FLOW-04 W6-FLOW-05 W6-FLOW-06 W6-FLOW-07 W6-FLOW-08 W6-FLOW-09 W6-FLOW-10 W6-FLOW-11 W6-FLOW-12 W6-FLOW-13
+W6-RES-01 W6-RES-02 W6-RES-03 W6-RES-04
+W6-TXN-01 W6-TXN-02
+W6-DB-01 W6-DB-02 W6-DB-03 W6-DB-04 W6-DB-05 W6-DB-06 W6-DB-07 W6-DB-08 W6-DB-09 W6-DB-10 W6-DB-11 W6-DB-12
+```
+
+Count = 40; sorted-member-plus-LF digest =
+`334999de9923c0af40fa46b1c99eb92b03efce978585a71ff6b031092d105b71`.
+Final controls are exactly `W6-NC-01` through `W6-NC-21`; count = 21;
+digest =
+`66921e9aae67f455bc35678da9b6ba659165dd037856d437b91c11b3c07fde80`.
+I120 must prove required=registered=executed and every control falsified with a
+fresh positive. Removing, skipping, filtering, duplicating, adding, or failing
+to activate any member makes closure fail.
+
+Fake timer/deferred behavior in C148 proves only monitor scheduling and source
+ordering; it cannot claim Prisma, browser, provider, or deployment parity.
+Existing accepted C142 cases/oracles are immutable except the additive
+registries/digests/witness members and exact new W6-DB-12/W6-NC-21 blocks.
+The unchanged causal browser supplies assembled local parity. No fixture,
+substitute, existing browser registration, or accepted database test changes.
+
+### 12.8 `KI-W6-I120` — corrective integration assessment and automatic continuation
+
+```yaml
+subwindow_id: KI-W6-I120
+type: INTEGRATION_ASSESSMENT
+parent_window_id: KI-W6
+parent_assignment_id: ASG-KI-W6-WA-15
+assigned_agent: KI-W6-WINDOW-AGENT
+predecessors: [KI-W6-C145, KI-W6-C146, KI-W6-C147, KI-W6-C148 independently accepted]
+authorized_write_file: NONE
+coordination_writes: [KEYWORD_INTELLIGENCE_KI_W6_TRANSACTION_CLOCK_SUBWINDOW_STATE.md, KEYWORD_INTELLIGENCE_KI_W6_TRANSACTION_CLOCK_SUBWINDOW_EVIDENCE.md]
+expected_changed_file_set:
+  - email_scraper/src/aws-pipeline/core/lease-monitor.js
+  - email_scraper/src/aws-pipeline/services/discovery-worker.js
+  - email_scraper/src/aws-pipeline/services/lead-worker.js
+  - email_scraper/test/aws-pipeline-transaction-clock-enforcement.test.js
+expected_changed_file_set_digest: e556d60d1253045b8193f683f86e9622118cf00f52a076011d2917c6da416fe4
+required_case_count: 40
+required_case_digest: 334999de9923c0af40fa46b1c99eb92b03efce978585a71ff6b031092d105b71
+negative_control_count: 21
+negative_control_digest: 66921e9aae67f455bc35678da9b6ba659165dd037856d437b91c11b3c07fde80
+may_start_successor: false
+```
+
+Execute personally and sequentially; successful boundaries are not stop
+points:
+
+- [ ] `KI-W6-CV91` Independently review and accept C145–C148; recompute their
+  ending digests; inspect complete diffs; prove attributable paths equal the
+  exact four-path set/digest above; prove accepted C136–C144 inputs are
+  byte-identical to backend HEAD `8694b949bc4e308a7605074047cc330e2a2d8b44`.
+- [ ] `KI-W6-CV92` From `email_scraper/`, run `node --check` separately on
+  `src/aws-pipeline/core/lease-monitor.js`,
+  `src/aws-pipeline/services/discovery-worker.js`,
+  `src/aws-pipeline/services/lead-worker.js`, and
+  `test/aws-pipeline-transaction-clock-enforcement.test.js`; then run exactly
+  `node --test test/aws-pipeline-transaction-clock-enforcement.test.js`.
+  Require 10/10/0, exact five-case/four-control certificate, 2/2/1 lifecycle
+  witnesses, W6-NC-21 failure on mutated source, and immediate fresh REAL pass.
+- [ ] `KI-W6-CV93` From `email_scraper/`, run exactly
+  `node --test test/aws-pipeline-contracts.test.js test/aws-pipeline-discovery.test.js test/aws-pipeline-transaction-clock-enforcement.test.js`.
+  Require 26 pass, 0 fail, 0 skip after C148 (11 contracts + 5 discovery + 10
+  enforcement), W6-DB-12 active, existing monitor serialization/loss and
+  discovery terminal behavior unchanged. Reuse I119 CV86 only when all seven
+  complete input hashes remain exact:
+  `pipeline-coordinator-repository.integration.test.js=9689ef9f5acbe7a68de1b224553c5dcf753fb618fe1dcfbfed3711046ea8b559`,
+  `aws-pipeline-domain.integration.test.js=e1f10225fb301c9b798032e70fa2bc57c38de5e7374f8c419b7b3928104f3779`,
+  `aws-pipeline-lead-aggregation.integration.test.js=020cafb8684a9cb9d7cd6bcb307a896f5ef363ee478b4a12be781cada609ac71`,
+  `aws-pipeline-traffic.integration.test.js=3f8af953c1bee9150cea9be422ac867c7a39737c3a4e8a4b6dcd4a737b78cdfd`,
+  `aws-pipeline-final.integration.test.js=8ed2a61a5b272e2f3f8c8c937000056ab5f41dceda56c2b398791e8a70b30638`,
+  `pipeline-coordinator-repository.js=abcf23786d069a18584d33af1f21d9e507f68b2625fac517599d21ece2d8cd60`,
+  `prisma-run-repository.js=1d5814084778c23b5af306ebe93996c481a19d63aa3dcebefd78ae00b628a962`,
+  with backend HEAD `8694b949…` and frontend HEAD `f981b34…`. If any differs,
+  run exactly once with the isolated helper and non-production URL:
+  `ALLOW_DATABASE_TESTS=true node -r dotenv/config --test --test-isolation=none --test-concurrency=1 test/pipeline-coordinator-repository.integration.test.js test/aws-pipeline-domain.integration.test.js test/aws-pipeline-lead-aggregation.integration.test.js test/aws-pipeline-traffic.integration.test.js test/aws-pipeline-final.integration.test.js`;
+  require 14 pass, 0 fail/skip, exact isolation, cleanup, and zero residual
+  disposable schemas.
+- [ ] `KI-W6-CV94` From `frontend/`, run exactly one durable child command
+  `ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node test/browser/keyword-intelligence-e2e.mjs`
+  with executor allowance at least 75 minutes and complete retained stdout,
+  stderr, and exit status in preflight-empty `/tmp/ki-w6-i120-cv94.browser.log`
+  and `/tmp/ki-w6-i120-cv94.browser.status`. Require exit 0; browser 26/26,
+  controls 13/13; 100 validators and discovery tasks; 1,000 domains/leads;
+  both discovery and lead terminal/check progression; zero
+  heartbeat-after-terminal `PIPELINE_LEASE_LOST`; and complete browser,
+  server, process, schema-drop/absence, and temporary-output cleanup. One
+  identical elevated recovery is allowed only after the exact inherited E8.1
+  environment-invalidated-attempt proof.
+- [ ] `KI-W6-CV95` Only after CV94 passes, run once from `email_scraper/`:
+  `npm test`, `npm run check:secrets`, `npm run build:lambda`; and from
+  `frontend/`: `npm run check`. Require every command exit 0, zero test/lint/
+  secret failures, successful handler build/startup inventories, and no
+  unplanned tracked/untracked workspace output. Do not repeat a successful
+  unchanged expensive gate.
+- [ ] `KI-W6-CV96` Recompute the literal §12.7 sets: required=registered=
+  executed exactly 40 with digest `334999de9923c0af40fa46b1c99eb92b03efce978585a71ff6b031092d105b71`;
+  zero skips/duplicates/unexpected/unactivated/oracle failures; controls
+  exactly 21 with digest
+  `66921e9aae67f455bc35678da9b6ba659165dd037856d437b91c11b3c07fde80`,
+  all falsified with fresh positives.
+- [ ] `KI-W6-CV97` Verify exact four-file correction scope and protected
+  accepted evidence; no schema, migration, repository transaction/fence,
+  lease duration/interval, queue, retry, provider, AWS, production, paid,
+  frontend product, package/config, commit/push, or KI-W7 action; cost `$0.00`;
+  privacy-safe evidence and complete cleanup.
+- [ ] `KI-W6-CH16` Append the complete `WINDOW-AGENT-INTEGRATION-PASS`
+  certificate, set S2 `READY_FOR_PARENT_REVIEW`, send the standard §12.5
+  consolidated handoff only to the parent, and stop before KI-W7.
+
+Mandatory I120 checklist:
+
+- [ ] `I1` Independently accept C145–C148 and record ending digests.
+- [ ] `I2` Prove actual four-file set equals planned set within parent scope.
+- [ ] `I3` Verify complete requirement/decision/task/scenario/file/assertion trace.
+- [ ] `I4` Execute CV91–CV97/CH16 in order with activation witnesses.
+- [ ] `I5` Verify exact required=registered=executed case/control sets/digests and zero skips/duplicates/unexpected.
+- [ ] `I6` Execute all prescribed controls and prove each falsifies unchanged acceptance with a fresh positive.
+- [ ] `I7` Verify substitute fidelity and accepted-test/fixture integrity.
+- [ ] `I8` Verify no prohibited, successor, external, destructive, secret-bearing, or out-of-scope action.
+- [ ] `I9` Independently inspect current source/diffs; do not rely on leaf summaries.
+- [ ] `I10` Record exactly `PASS`, `CORRECTION_REQUIRED`, or `PARENT_BLOCKED` with decisive evidence.
+
+`PASS` requires every CV91–CV97/CH16 item. A coding omission mechanically
+governed by DEC-KI-054 and confined to these four files is
+`CORRECTION_REQUIRED`: diagnose it, append one-file C149+ leaves and a new
+I121+ assessment, then continue without parent return. A new observable
+failure whose root cause is outside these four files, missing decision,
+authority expansion, unavailable isolated database, or authoritative
+contradiction is `PARENT_BLOCKED`. No successful leaf or gate boundary causes
+a stop; after parent decomposition approval, execution continues until PASS or
+one such new failure.
+
+### 12.9 State-186 mandatory decomposition-readiness checklist (47/47)
+
+#### Authority and inheritance
+
+- [x] `SW-A01` State 186 names `ASG-KI-W6-WA-15`, this window agent, and exact delegable correction scope. Evidence: `EV-KI-W6-TC07`.
+- [x] `SW-A02` Parent/subwindow standards and A1/A2/A3/A4/A5/A8 revisions are pinned and recomputed. Evidence: `EV-KI-W6-TC07`.
+- [x] `SW-A03` Write/read/action/prohibition/successor/stop boundaries are copied without expansion. Evidence: §12.1; `EV-KI-W6-TC07`.
+- [x] `SW-A04` Backend/frontend cleanliness, commits, four baselines, and owner-controlled root state are inventoried. Evidence: §12.1/§12.2; `EV-KI-W6-TC07`.
+- [x] `SW-A05` S1/S2/S3 exist with nonoverlapping authorities. Evidence: §12.1; `EV-KI-W6-TC07`.
+- [x] `SW-A06` Strict leaf↔window↔parent adjacency, no leaf delegation, and window-agent-only I120 are frozen. Evidence: §12.3–§12.8.
+- [x] `SW-A07` E8.1 sandbox escalation/one-identical-recovery policy is copied without external expansion. Evidence: §12.1/§12.8.
+
+#### Decision and file-set closure
+
+- [x] `SW-D01` Every parent requirement/invariant/decision/task/scenario/case/control maps to exact files/assertions. Evidence: §12.3–§12.8; `EV-KI-W6-TC07`.
+- [x] `SW-D02` DEC-KI-054 and CT24–CT27 leave no material choice or contradiction. Evidence: §12.1/§12.2.
+- [x] `SW-D03` Required changed-file set equals the four-path planned set and pinned digest. Evidence: §12.2.
+- [x] `SW-D04` Every planned file has one correction owner; no leaf owns multiple files. Evidence: §12.2.
+- [x] `SW-D05` Every operation, baseline, anchor, interface, preservation, and forbidden edit is exact. Evidence: §12.3–§12.6.
+- [x] `SW-D06` C145→Wave3{C146,C147}→C148→I120 is complete/acyclic with disjoint-resource proof. Evidence: §12.2.
+- [x] `SW-D07` The exact helper interface is frozen before Wave 3. Evidence: §12.2/§12.3.
+- [x] `SW-D08` Every intermediate state, pending check, safety rule, resolver, and prohibition is exact. Evidence: §12.2.
+- [x] `SW-D09` Three production files and one test file have four separate leaves. Evidence: §12.2.
+- [x] `SW-D10` No rename/generator/formatter/installer or local command can create an authorized second workspace edit. Evidence: §12.3–§12.6.
+
+#### Sub-window execution completeness
+
+- [x] `SW-E01` C145–C148 contain all Section 7 fields and literal nine-box checklists. Evidence: §12.3–§12.6; `EV-KI-W6-TC07`.
+- [x] `SW-E02` Every leaf has one ordered exact transformation with no alternatives. Evidence: §12.3–§12.6.
+- [x] `SW-E03` Every leaf freezes preflight, local activation/assertions, controls, and forbidden outcomes. Evidence: §12.3–§12.6.
+- [x] `SW-E04` Every leaf proves its attributable changed-file set is exactly one file. Evidence: §12.3–§12.6 V2.
+- [x] `SW-E05` Every leaf has exact evidence/handoff/stop/successor-reservation rules. Evidence: §12.3–§12.6 P/H boxes.
+- [x] `SW-E06` Leaves report only to the window agent and cannot edit S1/S2/S3 or parent artifacts. Evidence: §12.3–§12.6 prohibitions.
+- [x] `SW-E07` No leaf needs successor work for its LOCAL_NOW acceptance. Evidence: §12.3–§12.6.
+- [x] `SW-E08` All deferred checks name C148 or I120 exactly. Evidence: §12.3–§12.8.
+
+#### Enforcement and integration closure
+
+- [x] `SW-V01` W6-DB-12/W6-NC-21 registration, activation, assertions, and source ownership are exact. Evidence: §12.6/§12.7.
+- [x] `SW-V02` Local 5/4 and final 40/21 set equality/digests are literal. Evidence: §12.6–§12.8.
+- [x] `SW-V03` W6-NC-21 falsifies the narrow terminal-order invariant and requires a fresh positive. Evidence: §12.6.
+- [x] `SW-V04` Fake-timer/source parity is bounded and accepted C142/browser/database evidence invalidation rules are exact. Evidence: §12.7/§12.8.
+- [x] `SW-V05` I120 is fully authored with zero implementation-write authority. Evidence: §12.8.
+- [x] `SW-V06` Focused/reuse-or-rerun/browser/regression/build/privacy/scope gates are exact and scheduled once at I120. Evidence: §12.8.
+- [x] `SW-V07` C149+/I121+ routing is complete for in-scope omissions; outside-scope failures stop. Evidence: §12.8.
+- [x] `SW-V08` Window agent independently reviews every leaf and personally executes I120. Evidence: §12.2/§12.8.
+- [x] `SW-V09` Zero-work/skipped/filtered/duplicate/unexpected/unactivated/summary-only acceptance fails. Evidence: §12.6–§12.8.
+- [x] `SW-V10` `READY_FOR_PARENT_REVIEW`, consolidated handoff, and KI-W7 stop are exact. Evidence: §12.8 CH16.
+- [x] `SW-V11` Sandbox/channel invalidation is separated from observable failure with one identical recovery. Evidence: §12.1/§12.8 CV94.
+
+#### Mechanical and adversarial audit
+
+- [x] `SW-R01` C145–C148/I120/W6-DB-12/W6-NC-21 IDs are unique and references resolve. Evidence: `EV-KI-W6-TC07`.
+- [x] `SW-R02` No unresolved placeholder or implementation alternative occurs in assignable content. Evidence: `EV-KI-W6-TC07`.
+- [x] `SW-R03` One-file lint rejects zero/two/wildcard/directory/rename/incidental outputs. Evidence: §12.2–§12.6; `EV-KI-W6-TC07`.
+- [x] `SW-R04` Removing any required path or mapping changes the four-path digest/trace and fails readiness. Evidence: §12.2/§12.3–§12.6.
+- [x] `SW-R05` Removing/duplicating/skipping/filtering/bypassing any case fails local/final exact-set acceptance. Evidence: §12.6–§12.8.
+- [x] `SW-R06` Weakening the order oracle or diverging fake-timer behavior invalidates W6-DB-12/W6-NC-21 evidence. Evidence: §12.6/§12.7.
+- [x] `SW-R07` A second-file edit, sibling communication, or direct parent communication is rejected. Evidence: §12.3–§12.6.
+- [x] `SW-R08` Window-agent implementation repair is prohibited; a diagnosed omission requires C149+ then I121+. Evidence: §12.8.
+- [x] `SW-R09` Parent approval of this exact amended S1 revision is required before C145 assignment. Evidence: §12 opening; S2.
+- [x] `SW-R10` Document lint has zero missing fields/mappings/cases/evidence/authority conflicts. Evidence: `EV-KI-W6-TC07`.
+- [x] `SW-R11` Sandbox denial permits one identical escalated recovery; changed command, observable failure, surviving process/mutation, or external action does not. Evidence: §12.1/§12.8.
+
+## 13. State-188 append-only command-protocol supersession
+
+`DEC-KI-055`, A5 state 188, `EV-KI-A-114`, and `CHG-KI-086` supersede only
+the following three command literals; they require no new decomposition review
+and change no source/test bytes, registration, case/control membership, digest,
+expected total, assertion, later gate, or recovery allowance:
+
+1. C148 §12.6 LOCAL_NOW check 2 and I120 `KI-W6-CV92` use exactly:
+   `node --test --test-isolation=none test/aws-pipeline-transaction-clock-enforcement.test.js`.
+   Required result remains 10 pass, 0 fail, 0 skip; exact five-case/
+   four-control certificate; witnesses `11/21/9/5/2/2/1`; exact group
+   digests; W6-NC-21 falsification and fresh REAL positive.
+2. I120 `KI-W6-CV93` uses exactly:
+   `node --test --test-isolation=none test/aws-pipeline-contracts.test.js test/aws-pipeline-discovery.test.js test/aws-pipeline-transaction-clock-enforcement.test.js`.
+   Required result remains 26 pass, 0 fail, 0 skip with every previously frozen
+   activation oracle.
+3. The default-isolation 1/1 file wrapper is diagnostic evidence only. It is
+   neither an acceptance failure nor activation evidence and must not be used
+   in any required/registered/executed count.
+
+All other C148 and I120 text remains authoritative and unchanged. C148 remains
+the same one-file leaf with the same candidate bytes; the window agent now
+finishes its independent review under command 1 and, on acceptance, continues
+I120 automatically.

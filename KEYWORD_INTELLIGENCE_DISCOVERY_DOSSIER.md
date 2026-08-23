@@ -284,6 +284,19 @@ limitations: This evidence proves the local W6-reachable source set and causal c
 privacy: Method names, counts, safe error code, source hashes and schema-absence result only; no SQL values, connection URL, credential, token, cookie, provider body, keyword text or user data retained.
 ```
 
+### `SRC-KI-056` — AWS task heartbeat can race its own terminal commit
+
+```yaml
+evidence_id: SRC-KI-056
+classification: OBSERVED
+claim: I119 CV87 completed the transaction/clock gates and then observed a discovery task whose explicit renewal succeeded, whose recordTerminal transaction durably changed the task to succeeded, and whose still-active 20-second interval heartbeat subsequently called renewTask against that terminal row. renewTask correctly returned PIPELINE_LEASE_LOST; monitor.stop propagated the stored failure before the worker could send its aggregation check. The same post-terminal-stop order exists in processLeadMessage. The shared monitor already supplies the required renewNow, stop, and assertActive primitives; domain, lead, and final aggregators and the traffic run-lease path already stop their monitor before their fenced publication/release boundary.
+source: EV-KI-W6-TC06; email_scraper/src/aws-pipeline/core/lease-monitor.js SHA-256 cb0332470928fb33d59529544ac6a6c0b1adbcaa1d5a5a69cd80ee8fd55398be; discovery-worker.js SHA-256 5ff0bd6c727da335422abccd336e87ae441c453e2bf63ef20c6189b278c60874; lead-worker.js SHA-256 db616bccbd283c3f5488fd3458e6d86a1b57f945ac722cdf0935c95ccfb20d26; transaction enforcement test SHA-256 606d8e90e7a8045ddf0ae9bb374e6b2390a80491770a252c75d44b725e1b0448; backend commit 8694b949bc4e308a7605074047cc330e2a2d8b44
+observed_at: 2026-08-23
+environment: local causal browser run with actual backend and isolated disposable Neon schema; synthetic provider substitutes; no provider, AWS, production, or paid operation
+limitations: The trace proves the discovery race and source-equivalent lead ordering. It does not justify changing lease durations, heartbeat intervals, repository fencing, transaction profiles, retry policy, aggregators, traffic settlement, or the harness clock/timer model.
+privacy: Safe method names, sequence numbers, state class, error code, file hashes, and schema-cleanup result only; no SQL, URL, credential, token, cookie, provider body, keyword text, domain list, or user data retained.
+```
+
 ## 6. Post-W5 corrective discovery
 
 | Evidence ID | Class | Precise claim | Exact source/revision | Limitations | Privacy |

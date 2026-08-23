@@ -2804,6 +2804,33 @@ requester_actions_before_start: []
 status: READY
 ```
 
+### `EV-KI-A-114` — KI-W6 C148 nested-test evidence protocol corrected
+
+- **Observed distinction:** on Node `v24.14.1`, the frozen default-isolation
+  C148 command exits zero but reports only one child-file result and does not
+  expose the certificate. The identical test file under
+  `--test-isolation=none` independently produced 10 pass/0 fail/0 skip, the
+  exact five required cases, four falsified controls, both group digests and
+  lifecycle witnesses `11/21/9/5/2/2/1`.
+- **Disposition:** `DEC-KI-055` and the A4 protocol correction replace only the
+  C148/CV92 and CV93 command literals. No implementation/test byte, expected
+  total, registry, assertion, later gate or E8.1 rule changes. The window agent
+  may append that exact command supersession to S1/S2/S3, independently finish
+  C148 review, and continue I120 without another decomposition review.
+- **Boundary/cost:** no database, browser, build, provider, AWS, production,
+  paid, commit, push, frontend, schema or KI-W7 action occurred; cost `$0.00`.
+
+```yaml
+certificate: PARENT-PROTOCOL-CORRECTION
+window: KI-W6
+assignment: ASG-KI-W6-WA-15
+active_state: 188
+decision: DEC-KI-055
+candidate_c148_digest: c604ba492300d488ca7476c61940a0dd606ebdf3b5e9b55ad25688150a195511
+focused_result: {pass: 10, fail: 0, skip: 0}
+status: READY
+```
+
 ### `EV-KI-R4-02` — Independent parent acceptance of KI-R4 and cumulative KI-W3
 
 - **Review boundary:** requester-owned backend commit
@@ -6619,6 +6646,112 @@ planned_file_set_digest: ba4ccba7b65016b486dc2e1160bcc11a2cb08d306aff4945fad0022
 readiness_checked: 47
 readiness_unchecked: 0
 approved_first_wave: [KI-W6-C136, KI-W6-C137, KI-W6-C138, KI-W6-C139, KI-W6-C140]
+successor_authorized: false
+status: READY
+```
+
+### `EV-KI-A-112` — KI-W6 terminal-lease correction authoring and window-agent assignment
+
+- **Diagnosis:** independent parent inspection confirmed `EV-KI-W6-TC06` is a
+  real discovery-worker lifecycle race: `recordTerminal` commits before the
+  interval monitor is stopped, so a concurrent renewal observes the terminal
+  row, records `PIPELINE_LEASE_LOST`, and prevents the aggregation-check send.
+  The same ordering is present in the lead worker. Aggregators and traffic
+  already stop their applicable monitors before publication/release; the shared
+  monitor semantics are correct.
+- **Decision/package:** `SRC-KI-056`, `DEC-KI-054`, `SCN-KI-045`, CT24–CT27,
+  C145–C148 and I120 freeze the exact helper, two callers, dynamic timer
+  witness, source-order enforcement, one negative control, 40-case/21-control
+  closure and continuation through the remaining W6 gates.
+- **Mechanical facts:** backend `HEAD` and remote `main` are
+  `8694b949bc4e308a7605074047cc330e2a2d8b44`; the worktree is clean; the four
+  starting file hashes are `cb033247…`, `5ff0bd6c…`, `db616bcc…`, and
+  `606d8e90…`; the four-path sorted-LF digest is
+  `e556d60d1253045b8193f683f86e9622118cf00f52a076011d2917c6da416fe4`.
+  Seven zero-byte local Git objects were moved to
+  `/tmp/ki-w6-backend-empty-object-backup` and refetched from the exact remote
+  commit before assignment; `git fsck --full --no-reflogs` now reports only one
+  harmless dangling blob and `git status --porcelain` is empty. No source,
+  index, ref, branch, commit or worktree byte changed during that recovery.
+- **Coverage:** new enforcement group is exactly five cases/digest
+  `1aba569c…` and four controls/digest `3068f94c…`; final W6 is exactly 40
+  cases/digest `334999de…` and 21 controls/digest `66921e9a…`.
+- **Authority:** A5 state 186 assigns only subordinate authoring to
+  `KI-W6-WINDOW-AGENT` under `ASG-KI-W6-WA-15`. After parent review of its
+  appended C145–C148/I120 decomposition, the same assignment will receive
+  execution authority without a requester round trip. KI-W7 remains prohibited.
+- **Mutation/cost:** parent documentation plus recoverable Git-object repair
+  only; no implementation/test, database, browser, build, provider, AWS,
+  production, commit or push action; paid cost `$0.00`.
+
+```yaml
+certificate: AUTHORING-READY
+window: KI-W6
+correction: KI-W6-TERMINAL-LEASE-CLOSURE
+assignment: ASG-KI-W6-WA-15
+standard_revision: cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb523ede32848
+subwindow_standard_revision: 842c29550c06c22d63e0a058a27cb8a9ff6b538b3168d2c83a384890b44247f0
+contract_revision: 8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c
+discovery_revision: 425bedd9a7f429e2b145559d6d408fd161260a025382e047900f2112355316e0
+decision_revision: 412e58dffc326e43a6c3efaae5e2b18a9a1fd65841bcd66e34c0b7fcc161d183
+checklist_revision: aaa15feedebe70d93284a87c4eb480593992481a51ce00ea7f838eb9e802dabc
+traceability_revision: ac7165d143a786b65ee20681feb8be07009911113a29a34cc6e329dcfb605399
+planned_file_count: 4
+planned_file_set_digest: e556d60d1253045b8193f683f86e9622118cf00f52a076011d2917c6da416fe4
+planned_cases: 40
+planned_controls: 21
+unresolved_decisions: 0
+unmapped_requirements: 0
+unmapped_cases: 0
+requester_prerequisites: []
+status: READY_FOR_WINDOW_AGENT_DECOMPOSITION
+```
+
+### `EV-KI-A-113` — KI-W6 terminal-lease decomposition approved for execution
+
+- **Independent parent review:** the state-186 subordinate package was checked
+  against both authoring standards, `DEC-KI-054`, CT24–CT27 and the current
+  source. S1 revision
+  `1ab97a1a6bb66c400b31a5cc450ca94d515e96021588265789d26b2dea0b38cc`
+  has four one-file leaves, zero duplicate/multi-file owners, zero unmapped
+  requirements/decisions/tasks/cases, zero unresolved interfaces or execution
+  choices, and 47/47 readiness items evidenced.
+- **Execution completeness:** the exact DAG is C145 → parallel Wave 3
+  {C146,C147} → C148 → window-agent-only I120. The helper algorithm, both
+  worker call-site transformations, queued-renewal/stale-callback runtime
+  witness, source-order oracle, falsification control, intermediate states,
+  local checks, frozen expensive-gate order, recovery rule, correction route
+  and stop boundary are mechanical; no leaf must choose behavior.
+- **Enforcement completeness:** the correction owns exactly four paths/digest
+  `e556d60d1253045b8193f683f86e9622118cf00f52a076011d2917c6da416fe4`,
+  adds `W6-DB-12` and `W6-NC-21`, and closes the exact 40-case/21-control
+  unions with digests `334999de…` and `66921e9a…`. I120 requires the focused
+  suites, dependency-gated database evidence, one durable causal browser run,
+  regression/build/privacy/scope closure and a consolidated handoff.
+- **Approval:** A5 advances 186→187. The same `KI-W6-WINDOW-AGENT` may record
+  the approval in S2/S3, dispatch and independently review the exact leaves,
+  personally execute I120, and continue without a parent round trip through
+  any mechanically governed one-file C149+/I121+ correction. It stops only on
+  a genuinely new failure outside `DEC-KI-054`/the four-file boundary or at
+  `READY_FOR_PARENT_REVIEW`.
+- **Boundary:** requester alone commits. No provider/AWS/production/paid action,
+  schema/migration/package/frontend edit, destructive action or KI-W7 work is
+  authorized. Paid cost remains `$0.00`.
+
+```yaml
+certificate: PARENT-DECOMPOSITION-APPROVED
+window: KI-W6
+assignment: ASG-KI-W6-WA-15
+active_state: 187
+decomposition_revision: 1ab97a1a6bb66c400b31a5cc450ca94d515e96021588265789d26b2dea0b38cc
+subwindow_state_reviewed_revision: 01f34f71241c10af0258cc5890b913cd234e77be7f5ee78021b6e051c40f479e
+subwindow_evidence_reviewed_revision: 305ef107fc26290535a467eb7619331061f41839719f90e6b965d896b6bb0cb5
+planned_file_count: 4
+planned_file_set_digest: e556d60d1253045b8193f683f86e9622118cf00f52a076011d2917c6da416fe4
+readiness_checked: 47
+readiness_unchecked: 0
+approved_first_leaf: KI-W6-C145
+approved_parallel_wave: [KI-W6-C146, KI-W6-C147]
 successor_authorized: false
 status: READY
 ```

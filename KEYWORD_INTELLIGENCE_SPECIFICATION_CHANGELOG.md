@@ -1358,3 +1358,51 @@ compatibility_or_migration_effect: none — subordinate authoring and execution 
 authorization_effect: KI-W6-WINDOW-AGENT may dispatch exact parallel Wave 1, independently accept it, dispatch exact parallel Wave 2, independently accept it, execute I119 sequentially, append subordinate evidence/state, and stop READY_FOR_PARENT_REVIEW; requester alone commits; KI-W7 remains prohibited
 resumption_state: A5 state 185 READY under ASG-KI-W6-WA-14; dispatch KI-W6-WAVE-1 from corrected S1 revision eda1bd4f
 ```
+
+```yaml
+change_id: CHG-KI-084
+timestamp: 2026-08-23T21:20:00+05:30
+trigger_evidence: [SRC-KI-056, EV-KI-W6-TC06, EV-KI-A-112, requester direct window-agent dispatch instruction]
+reason: I119 CV87 exposed a pre-existing real-timer race in discovery terminalization and the identical lead-worker ordering; the affected files were outside state 185 and DEC-KI-053.
+old_revision: A2 0c2b10e55ad779217574998e748687937471d19cc869c0d878af547f4e612320; A3 2b2d75b9ebb94ae80d3cc7241ce69a2aa92a22efa755b1497887018950ccf406; A4 679e9a7d986775d60fa9f2a9b7cd9568084652534c857f7109482426653b1d36; A8 c3c9d5a32c0086c20c2030478137acbc13ff994b2668a5a94b545777e8bea1ad; A5 state 185; I119 CV84-CV86 PASS and CV87 diagnostic failure
+new_revision: A2 425bedd9a7f429e2b145559d6d408fd161260a025382e047900f2112355316e0; A3 412e58dffc326e43a6c3efaae5e2b18a9a1fd65841bcd66e34c0b7fcc161d183; A4 aaa15feedebe70d93284a87c4eb480593992481a51ce00ea7f838eb9e802dabc; A8 ac7165d143a786b65ee20681feb8be07009911113a29a34cc6e329dcfb605399; A5 state 186 READY_FOR_DECOMPOSITION
+changed_requirements: []
+changed_decisions: [DEC-KI-054 freezes renew-stop-drain-assert before discovery/lead terminalization, exact four-file ownership, dynamic timer enforcement and final 40/21 closure]
+affected_windows: [KI-W6 only; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: [I119 CV87 remains diagnostic and is superseded only by passing I120 CV94; CV84/CV85 inputs intersect the new correction and are replaced by CV91/CV92; CV86 is reusable only by exact dependency-hash proof]
+compatibility_or_migration_effect: none — no schema, migration, public payload, provider economics, AWS topology, lease duration, heartbeat interval, retry, queue, frontend or historical-data change
+authorization_effect: KI-W6-WINDOW-AGENT may author the exact C145-C148/I120 subordinate amendment; after parent approval it may manage the exact one-file DAG, continue automatically through CH16, and stop only on a new failure outside DEC-KI-054/four-file scope or at READY_FOR_PARENT_REVIEW; no commit/push, provider/AWS/production/paid or KI-W7 authority
+resumption_state: A5 state 186 under ASG-KI-W6-WA-15; window agent authors decomposition and returns only for parent decomposition review
+```
+
+```yaml
+change_id: CHG-KI-085
+timestamp: 2026-08-23T22:30:00+05:30
+trigger_evidence: [EV-KI-W6-TC07, parent decomposition review, EV-KI-A-113]
+reason: The state-186 C145-C148/I120 package is decision-complete, execution-complete and enforcement-complete and can now be dispatched without delegated design choices.
+old_revision: S1 before state-186 amendment; S2 state 7 AWAITING_PARENT_DECOMPOSITION_REVIEW; A5 state 186
+new_revision: S1 1ab97a1a6bb66c400b31a5cc450ca94d515e96021588265789d26b2dea0b38cc; reviewed S2 01f34f71241c10af0258cc5890b913cd234e77be7f5ee78021b6e051c40f479e; reviewed S3 305ef107fc26290535a467eb7619331061f41839719f90e6b965d896b6bb0cb5; A5 state 187 READY
+changed_requirements: []
+changed_decisions: []
+affected_windows: [KI-W6 only; KI-W7 remains prohibited and parent-reserved]
+invalidated_evidence: [I119 CV87 remains diagnostic; it is superseded only by passing I120 CV94]
+compatibility_or_migration_effect: none — execution authority only; no source/schema/payload/provider/AWS/cost/lease-duration/retry behavior changed by this record
+authorization_effect: KI-W6-WINDOW-AGENT may dispatch C145, then parallel C146/C147 after C145 acceptance, then C148, then personally execute I120; in-scope mechanically governed omissions use C149+/I121+ without parent return; new out-of-scope failures return to the parent
+resumption_state: A5 state 187 READY under ASG-KI-W6-WA-15; execute through PASS or one genuinely new parent-level blocker and stop before KI-W7
+```
+
+```yaml
+change_id: CHG-KI-086
+timestamp: 2026-08-23T22:45:00+05:30
+trigger_evidence: [EV-KI-W6-TC15, EV-KI-A-114]
+reason: Node 24 default test isolation reports the C148 file as one wrapper and suppresses the nested certificate, contradicting the frozen ten-test evidence oracle even though all ten tests pass.
+old_revision: A3 412e58dffc326e43a6c3efaae5e2b18a9a1fd65841bcd66e34c0b7fcc161d183; A4 aaa15feedebe70d93284a87c4eb480593992481a51ce00ea7f838eb9e802dabc; A8 ac7165d143a786b65ee20681feb8be07009911113a29a34cc6e329dcfb605399; A5 state 187
+new_revision: A3 b8a5190b614967be2369e75c3a4e5aa49cfc8f21d9112fc984ab7387b1aca60f; A4 86914c48562e69fe08007930ab3973dc5dfa28f743bef3d98eb89a1ebc2d7e5d; A8 6e0b8fe0cc56917a3d4397fd6b3260b869a8045a3f39906e8aafcead0d17f5f2; A5 state 188 READY
+changed_requirements: []
+changed_decisions: [DEC-KI-055 freezes --test-isolation=none for C148/CV92/CV93 evidence visibility]
+affected_windows: [KI-W6 only; KI-W7 remains prohibited]
+invalidated_evidence: [default-isolation 1/1 wrapper is diagnostic only; no behavioral evidence invalidated]
+compatibility_or_migration_effect: none — local test-runner evidence transport only
+authorization_effect: window agent records the exact S1/S2/S3 protocol supersession, accepts or rejects current C148 bytes, then continues I120 until PASS or another genuinely new parent-level blocker
+resumption_state: A5 state 188 READY under ASG-KI-W6-WA-15
+```

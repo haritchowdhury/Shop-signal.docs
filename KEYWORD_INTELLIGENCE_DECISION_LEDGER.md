@@ -2835,6 +2835,89 @@ count, reservation, public API, schema, queue, artifact or AWS behavior.
   leaves `KI-W6-C136`–`KI-W6-C144`, window-agent assessment `KI-W6-I119`,
   existing `SCN-KI-018`, and supplemental `SCN-KI-044`.
 
+### `DEC-KI-054` — Stop task heartbeat ownership before terminalization
+
+- **Requirements/evidence:** `REQ-KI-010`–`REQ-KI-015`, `REQ-KI-024`;
+  `INV-KI-004`–`006`, `INV-KI-010/011/015`; `SRC-KI-056` and
+  `EV-KI-W6-TC06`.
+- **Locked lifecycle:** add one internal exported helper
+  `preparePipelineTerminalLease(monitor)` in
+  `src/aws-pipeline/core/lease-monitor.js`. Its complete algorithm is exactly
+  `await monitor.renewNow(); await monitor.stop(); monitor.assertActive();` in
+  that order. It adds no catch, suppression, retry, default, timer, clock, or
+  return value. A queued/in-flight renewal must settle before `stop` returns;
+  any renewal failure prevents terminalization. After successful return the
+  interval is cleared and no later timer callback may renew.
+- **Worker callers:** the only callers added are `processDiscoveryMessage` and
+  `processLeadMessage`. Each replaces its success-path direct `renewNow()` with
+  `preparePipelineTerminalLease(monitor)` immediately before its existing
+  `recordTerminal(...)`; each removes only the success-path `monitor.stop()`
+  that currently follows `recordTerminal`. Existing catch cleanup remains.
+  The order becomes artifact validated/written -> renew -> stop/drain ->
+  assert active -> fenced terminal transaction -> aggregation-check send ->
+  acknowledge. No provider or artifact operation moves inside a transaction.
+- **Failure/replay semantics:** renewal or prior monitor failure aborts before
+  the terminal transaction. `recordTerminal` retains its token, fingerprint,
+  live-expiry, state and transaction fence. A terminal-transaction failure is
+  propagated through the unchanged catch cleanup. Dispatcher failure remains
+  governed by the existing durable-ready-stage recovery protocol. Busy,
+  cancelled and already-terminal claims remain byte-equivalent and perform no
+  provider/artifact work. No lease duration, heartbeat interval, recovery age,
+  retry count, queue contract, counter, or outcome union changes.
+- **Exact ownership/DAG:** four one-file corrections: `C145` owns
+  `lease-monitor.js`; after C145 acceptance, `C146` owns
+  `discovery-worker.js` and `C147` owns `lead-worker.js` and may run in one
+  explicitly authorized parallel wave; after both are accepted, `C148` owns
+  `aws-pipeline-transaction-clock-enforcement.test.js`; `I120` is sequential
+  and window-agent-only.
+- **Enforcement:** add `W6-DB-12`, which must dynamically prove an already
+  queued renewal drains, one explicit renewal completes, the timer clears
+  exactly once, and a post-stop stale timer callback cannot renew; it must also
+  statically prove both workers import and invoke the helper exactly once
+  before `recordTerminal`, contain zero direct success-path `renewNow`, and
+  contain no stop between terminalization and check dispatch. `W6-NC-21`
+  moves discovery back to renew -> terminal -> stop and must falsify the
+  unchanged oracle before a fresh positive passes.
+- **Coverage arithmetic:** the enforcement group becomes cases
+  `W6-DB-08`–`12`, digest
+  `1aba569c8f08f9ca3ee240a10c4ddb4fbb0e6ec0bb00608b74aa414faefaaf39`,
+  and controls `W6-NC-18`–`21`, digest
+  `3068f94cf9c935bfdec5f0374182c5261fc0acaf7e5d8bf80d6b278cfa5b981c`.
+  Final W6 closure is exactly 40 cases, digest
+  `334999de9923c0af40fa46b1c99eb92b03efce978585a71ff6b031092d105b71`,
+  and 21 controls, digest
+  `66921e9aae67f455bc35678da9b6ba659165dd037856d437b91c11b3c07fde80`.
+- **Rejected:** an identical CV87 timing gamble; treating the durable terminal
+  plus failed acknowledgement as success; changing `renewTask`; extending
+  leases/timeouts; swallowing `PIPELINE_LEASE_LOST`; changing aggregators,
+  traffic settlement, dispatcher recovery, the harness timer, or global timer
+  behavior; and source-order checks without a dynamic stopped-timer witness.
+- **Tasks/scenarios:** sixteenth KI-W6 corrective sequence `KI-W6-CT24`–`CT27`,
+  leaves `KI-W6-C145`–`C148`, assessment `KI-W6-I120`, existing
+  `SCN-KI-018`, and supplemental `SCN-KI-045`.
+
+### `DEC-KI-055` — Node test isolation mode for nested enforcement evidence
+
+- **Trigger:** C148 review on Node `v24.14.1` proved that `node --test
+  test/aws-pipeline-transaction-clock-enforcement.test.js` runs the file in a
+  child process and exposes only one file-level result, suppressing its required
+  ten test records and certificate. The identical file with
+  `--test-isolation=none` exposes 10 pass/0 fail/0 skip and the exact five-case,
+  four-control, `11/21/9/5/2/2/1` certificate.
+- **Locked correction:** C148 LOCAL_NOW and I120 CV92 must use exactly `node
+  --test --test-isolation=none
+  test/aws-pipeline-transaction-clock-enforcement.test.js`. I120 CV93 must use
+  exactly `node --test --test-isolation=none
+  test/aws-pipeline-contracts.test.js test/aws-pipeline-discovery.test.js
+  test/aws-pipeline-transaction-clock-enforcement.test.js`. Expected totals and
+  all assertions remain unchanged.
+- **Boundary:** this changes only the local evidence transport. It changes no
+  source/test bytes, test registration, product behavior, runtime isolation,
+  database/browser/build gate, retry/recovery rule, provider/AWS action or cost.
+  The already-produced C148 candidate remains reviewable; after the window
+  agent records this command supersession it must accept or reject C148 from
+  its actual bytes, then continue I120 without another decomposition review.
+
 ## 4. KI-R5 D1–D13 delta ledger
 
 - **D1 interfaces/payloads:** `DEC-KI-034` and `PAY-KI-008` supersede only the
