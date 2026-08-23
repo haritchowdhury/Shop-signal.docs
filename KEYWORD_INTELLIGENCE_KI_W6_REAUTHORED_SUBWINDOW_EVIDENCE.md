@@ -4773,3 +4773,183 @@ cost_usd: 0.00
 next_action: PARENT_DECISION_REQUIRED
 status: PARENT_BLOCKED
 ```
+
+---
+
+## `EV-KI-W6-R72` — `KI-W6-C129` ACCEPTED: harness safe operation tracing
+
+- Delegated leaf under `ASG-KI-W6-WA-12` (A5 state 178), single file
+  `email_scraper/test/helpers/keyword-intelligence-e2e-harness.js`.
+- Preflight: start SHA-256 `0b4de997…` verified; read-only input
+  `pipeline-coordinator-repository.js` `531dc4cf…` verified unchanged;
+  backend worktree clean.
+- Transformation (+23/−2): `let operationSequence = 0;` + a
+  `traceRepositoryOperations(base, component, methods)` Proxy inserted between
+  `wrapKeywordRepository` and `rebuildRepositories`; inside
+  `rebuildRepositories` exactly the `state.runRepository` and
+  `state.coordinator` lines rewired so the trace proxy wraps OUTSIDE
+  `pinDates` (pinned-clock injection preserved). Coordinator wraps exactly
+  `claimTask, renewTask, recordTerminal, claimAggregator, renewAggregator,
+  getCompleteStage, completeAggregator`; run-repository wraps exactly
+  `readAwsReuseInputs, publishAwsDomainCheckpoint`.
+- Event contract verified: `{kind:"operation", op:start|complete|failed, at,
+  component:"coordinator"|"run-repository", method, sequence}` with the
+  sequence assigned at start from one shared counter and reused by its paired
+  terminal event; failed events add only the existing
+  `downstreamErrorProjection` spread (errorName/errorCode/errorFrame).
+  Non-listed properties pass through untouched; the wrapper delegates with
+  `await value(...args)` and rethrows the ORIGINAL error object; no arguments,
+  results, IDs, payloads, SQL, or connection data are recorded;
+  `downstreamErrorProjection` is neither moved nor duplicated (lazy reference
+  inside catch only — TDZ-safe because it executes only post-construction).
+- Proofs: leaf `node --check` + `git diff --check` clean; leaf assertion
+  script 39/0; falsification controls (on copies in /tmp/opencode/, real file
+  never touched): A = failed-event spread removed → whitelist assertion fails;
+  B = `recordTerminal` dropped → seven-methods assertion fails.
+- Window-agent independent review: separately authored
+  `/tmp/opencode/kiw6-c129-window-review.mjs` — 19/19 PASS on the real file
+  (method sets/order, event whitelist, passthrough, rethrow, wrap order,
+  single-declaration, TDZ pattern, keywordRepository adjacency); independently
+  regenerated controls A/B each fail exactly their targeted assertion. Two
+  early failures were reviewer-script bugs (quote-pair counting included the
+  `"coordinator"` component literal; a leakage regex matched the local
+  variable name `result`) — fixed in the reviewer script only; the harness
+  file required no change after the leaf.
+- Final SHA-256 `1dc83d7eeb25d202eb6f79b70643349d2fa8fdcc6cbd710292dd6e6a6d799ceb`.
+  Coordinator input still `531dc4cf…`; browser test still `69c13519…`;
+  `git status --porcelain` = exactly ` M test/helpers/keyword-intelligence-e2e-harness.js`.
+  No commit, no push, no provider/AWS action. C129 ACCEPTED.
+
+---
+
+## `EV-KI-W6-R73` — `KI-W6-C130` ACCEPTED: rejected-drain diagnostic inclusion
+
+- Delegated leaf under `ASG-KI-W6-WA-12`, single file
+  `frontend/test/browser/keyword-intelligence-e2e.mjs`.
+- Preflight: start SHA-256 `69c13519…` verified (HEAD = parent commit
+  `399c464`); exactly two pre-existing `readDownstreamDiagnostics()` call
+  sites; frontend worktree clean.
+- Transformation (+2/−1, one hunk): the in-loop rejected-drain branch now
+  first awaits `const downstreamRejectDiagnostics = await
+  harness.readDownstreamDiagnostics();` and throws with the byte-identical
+  prefix `KI downstream drain rejected before first domain-check emission: `
+  and payload `{ error: safeDownstreamErrorProjection(...), diagnostics:
+  downstreamRejectDiagnostics }` (error first, diagnostics second). The
+  settle-wait rejected guard, no-progress branch, ceiling branch, progress
+  bookkeeping, all W6 case/control IDs, and all digest/certificate/manifest
+  lines are byte-identical to HEAD. File total `readDownstreamDiagnostics()`
+  call sites: exactly three.
+- Proofs: leaf `node --check` + `git diff --check` clean; leaf assertion
+  script 10/0; controls (copies in /tmp/opencode/): A = await line deleted →
+  call-site/await assertions fail; B = duplicate call inserted in the branch →
+  call-site count fails (saw 4).
+- Window-agent independent review: separately authored
+  `/tmp/opencode/kiw6-c130-window-review.mjs` — 10/10 PASS on the real file;
+  independently regenerated controls A/B fail exactly their targeted
+  assertions (control A additionally hits a guard-index TypeError in the
+  reviewer script AFTER the required failures already fired — reviewer-script
+  artifact, not a file property). One reviewer-side bug (unquoted `git -C`
+  path with a space) was fixed in the reviewer script only; the file required
+  no change after the leaf.
+- Final SHA-256 `c035094b1276161c6d69e4aa87b25a02c4aa360e8a0aea606f72d2385650d55f`.
+  `git status --porcelain` = exactly ` M test/browser/keyword-intelligence-e2e.mjs`.
+  No commit, no push, no provider/AWS action. C130 ACCEPTED.
+
+---
+
+## `EV-KI-W6-R74` — `KI-W6-I117` COMPLETE: causal run localizes `PIPELINE_LEASE_LOST` to `PipelineCoordinatorRepository.getCompleteStage`
+
+- **I117-D1 preflight PASS:** accepted leaf digests verified (harness
+  `1dc83d7e…`, browser `c035094b…`); coordinator read-only input still
+  `531dc4cf…`; `git diff --name-only HEAD` = exactly the two leaf files;
+  both nested worktrees otherwise identical to parent commits `a305941` /
+  `399c464`.
+- **I117-D2 — one causal execution** (`ALLOW_DATABASE_TESTS=true
+  KI_W6_SKIP_BUILD=1 node test/browser/keyword-intelligence-e2e.mjs` from
+  `frontend/`, `TEST_DATABASE_URL` exported from `email_scraper/.env` — the
+  same isolated disposable test database every prior KI-W6 window used; one
+  harmless sourcing artifact printed for an unrelated `.env` line 25 value
+  containing a space): exit 1, `ok:false`, wallTimeMs 2,091,611 (~35 min),
+  port 4357, one Chrome, viewports 1440x900/390x844, peak child RSS
+  next 208,616 KB / chrome 263,704 KB, networkRequests 607, pageExceptions 0.
+  `casesExecuted 0` / `controlsExecuted 0` — the drain rejected before the
+  browser cases, expected for a failing causal run.
+- **UNIQUE LOCALIZATION (disposition (a) — record and stop).** The drain
+  rejected through the C130 branch carrying `{error, diagnostics}`, and the
+  C129 operation trace names the exact failing operation:
+
+  `{kind:"operation", op:"failed", component:"coordinator",
+  method:"getCompleteStage", sequence:303, errorName:"PipelineInvariantError",
+  errorCode:"PIPELINE_LEASE_LOST", errorFrame:"src/aws-pipeline/repositories/
+  pipeline-coordinator-repository.js:12:9"}`
+
+  Trace narrative (last-20 window): seq 299 `renewTask` complete → seq 300
+  `recordTerminal` start+complete → discovery messages 256/257 complete
+  (seq 301 `claimTask` complete for 257) → durable discovery terminal
+  (`pipelineTask succeeded = 100/100`) → first domain-queue message
+  (deliveryId 258, `aggregation.check`) → seq 302 `claimAggregator`
+  start+complete → seq 303 `getCompleteStage` start → **FAILED
+  `PIPELINE_LEASE_LOST`** → message 258 `message-failed` with the identical
+  safe projection → drain rejected. Durable at failure: discovery stage
+  `aggregating`, 100/100 succeeded. Activity: both test-db sessions
+  `idle/Client/ClientRead` — no database lock. The lease is reported lost
+  within the SAME aggregation message, immediately after its own successful
+  claim.
+- **Mechanism (read-only inspection, recorded as a parent-decision input —
+  NO fix applied).** The failing method is
+  `PipelineCoordinatorRepository.getCompleteStage`
+  (`src/aws-pipeline/repositories/pipeline-coordinator-repository.js:353-358`).
+  It is the only one of the nine lease operations that accepts no `now`
+  argument and internally calls
+  `assertCompleteAggregatorInTransaction(transaction, input, new Date())` —
+  real wall-clock. Every other lease operation receives the harness-pinned
+  clock (`nowBox.current`, seeded `2026-01-01T00:00:00.000Z`, harness line
+  117) via `withClock`, so `claimAggregator` writes
+  `aggregationLeaseExpiresAt = pinnedNow + leaseDurationMs` (~2026-01-01),
+  while the completeness check evaluates
+  `stageRow.aggregationLeaseExpiresAt <= now` (lines 147-149) against real
+  time (~2026-08-23) → always true → `conflict("PIPELINE_LEASE_LOST")`
+  thrown from line 12 (the observed frame). This also explains why the
+  parent's directed runs reproduced the loss only after the real aggregation
+  heartbeat was restored and regardless of load.
+- **Watchdog behavior (parent's directed changes verified in-flow):**
+  `downstreamProgress` elapsedMs 1,776,236, lifecycleEvents 203,
+  completedMessages 101, 0.0569 completed/s (~17.5 s/message — host CPU
+  starvation persists, load 5.5–8.9 during the window) — the no-progress
+  watchdog correctly did NOT fire while the drain kept making lifecycle
+  progress, and the drain survived to discovery completion (100/100) before
+  the deterministic aggregation failure. `downstreamOutcome:"rejected"`,
+  `downstreamCleanup:{drainStarted:true, settlement:"settled-before-drop"}`,
+  all six cleanup steps ok, `droppedSchema:"kiw6_mt5fz2b5081919846ecc7d44"`,
+  in-run `schema-absence:ok` (the harness's own post-drop absence witness).
+- **I117-D3 hygiene:** changed set still exactly the two leaf files; zero
+  production diff (coordinator still `531dc4cf…`); zero provider/AWS actions;
+  cost `$0.00`. External residual-schema probe could NOT connect after the
+  run (3 attempts over ~4 min: `PrismaClientInitializationError` "Can't reach
+  database server" on both the pooler and direct endpoints of the isolated
+  test database, minutes after the run itself completed all cleanup against
+  it) — recorded as an environment observation; the authoritative in-run
+  post-drop schema-absence witness passed and nothing outside the run creates
+  schemas. No retry of the gate was performed or needed (disposition (a)
+  stops on unique identification).
+- **Stopped immediately after localization.** No production, timeout, lease,
+  batching, or retry change; CV82/CV83 untouched; KI-W7 not started.
+
+```yaml
+certificate: DIAGNOSTIC-COMPLETE
+parent_window_id: KI-W6
+diagnostic_assessment_id: KI-W6-I117
+assignment: ASG-KI-W6-WA-12 (A5 state 178)
+diagnostic_leaves: [KI-W6-C129 ACCEPTED (0b4de997… -> 1dc83d7e…; EV-KI-W6-R72), KI-W6-C130 ACCEPTED (69c13519… -> c035094b…; EV-KI-W6-R73)]
+causal_executions: 1 (allowed 1; recovery unused)
+failing_operation: PipelineCoordinatorRepository.getCompleteStage (operation sequence 303, message delivery 258, aggregation.check)
+error: PipelineInvariantError / PIPELINE_LEASE_LOST / src/aws-pipeline/repositories/pipeline-coordinator-repository.js:12:9
+conflict_path: assertCompleteAggregatorInTransaction lines 140-157 (lease-expiry clause lines 147-149)
+mechanism_summary: getCompleteStage is the only traced lease operation evaluated against real new Date() instead of the injected harness clock, so a lease claimed under the pinned clock reads as expired immediately after claimAggregator succeeds
+evidence_boundary: mechanism recorded from read-only inspection of the named method; no fix chosen or applied (parent decision)
+durable_state_at_failure: discovery aggregating; pipelineTask succeeded 100/100; both db sessions idle/ClientRead (no lock)
+watchdog_observations: no-progress watchdog tolerated ~17.5 s/message starvation correctly; failure is deterministic at aggregation, not load-related
+cleanup: all steps ok; schema kiw6_mt5fz2b5081919846ecc7d44 dropped with in-run absence witness; external probe blocked by transient endpoint unreachability (recorded)
+cost_usd: 0.00
+status: READY_FOR_PARENT_REVIEW
+```

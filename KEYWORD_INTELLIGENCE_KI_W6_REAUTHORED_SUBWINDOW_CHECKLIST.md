@@ -4352,3 +4352,171 @@ C127 then C128, run in order:
   Evidence: I116 CV81; parent standard E8/E8.1.
 - [x] `RW6O-006` Authority is bounded to KI-W6 and stops before KI-W7.
   Evidence: window header and A5 assignment.
+
+### Fifteenth section — diagnostic window `ASG-KI-W6-WA-12` (A5 state 178)
+
+Diagnostic-only. Parent-directed runs proved the progress watchdog, removed
+`claimTask` P2028 with a path-specific 30-second transaction budget, restored
+the real aggregation heartbeat, and reproduced `PIPELINE_LEASE_LOST` without
+identifying the exact lease operation. This window localizes that operation
+and makes no production, timeout, lease, batching, or retry change. KI-W7 and
+W6 closure gates (CV82/CV83) remain prohibited.
+
+Read-only inputs (verified against A5 state 178):
+`email_scraper/src/aws-pipeline/repositories/pipeline-coordinator-repository.js`
+SHA-256 `531dc4cf9b7c3611b57d3403ae0e6a54d4c9325d3e200e524ae908bcaa6c3bc3`
+(contains the parent's `{ maxWait: 5_000, timeout: 30_000 }` claimTask budget;
+its watchdog and heartbeat behavior are preserved). C129 starts from harness
+SHA-256 `0b4de9976318ed514ceef24432d7cf515c0dd905f74b295aa9b03b95492a423d`
+(parent commit `a305941`); C130 starts from browser SHA-256
+`69c135196ec07f48a129535960fcd1c14793b0fbfc5d822defc44f562985a31d` (parent
+commit `399c464`). Both nested worktrees are clean before C129.
+
+#### `KI-W6-C129` — harness safe operation tracing (single file)
+
+```yaml
+subwindow_id: KI-W6-C129
+type: DIAGNOSTIC_CORRECTION
+assigned_agent: UNASSIGNED
+predecessors: [A5 state 178 assignment]
+writable_file: email_scraper/test/helpers/keyword-intelligence-e2e-harness.js
+starting_file_digest: 0b4de9976318ed514ceef24432d7cf515c0dd905f74b295aa9b03b95492a423d
+may_start_successor: false
+```
+
+Fields (all seven, exact):
+
+1. **Preflight.** Verify the harness working-tree digest equals the starting
+   digest above and `git status --porcelain` in `email_scraper/` is empty;
+   verify the coordinator repository digest is still `531dc4cf…` (read-only).
+2. **Declaration.** Immediately after `wrapKeywordRepository` (before
+   `rebuildRepositories`), add `let operationSequence = 0;` and
+   `const traceRepositoryOperations = (base, component, methods) => new Proxy(base, { get(target, property) { const value = Reflect.get(target, property); if (!methods.includes(property) || typeof value !== "function") { return value; } return async (...args) => { const sequence = operationSequence += 1; record({ kind: "operation", op: "start", at: nowMs(), component, method: property, sequence }); try { const result = await value(...args); record({ kind: "operation", op: "complete", at: nowMs(), component, method: property, sequence }); return result; } catch (error) { record({ kind: "operation", op: "failed", at: nowMs(), component, method: property, sequence, ...downstreamErrorProjection(error) }); throw error; } }; } });`
+   `downstreamErrorProjection` is referenced lazily inside the catch; it is
+   initialized later in the same closure scope and only ever invoked at
+   operation-failure time (always after harness construction), so no
+   temporal-dead-zone access occurs.
+3. **Wiring.** Inside `rebuildRepositories()` change exactly two lines so the
+   trace proxy wraps OUTSIDE `pinDates` (preserving pinned-clock injection):
+   `state.runRepository = traceRepositoryOperations(pinDates(new PrismaRunRepository(state.prisma, RUN_REPOSITORY_OPTIONS)), "run-repository", ["readAwsReuseInputs", "publishAwsDomainCheckpoint"]);`
+   and
+   `state.coordinator = traceRepositoryOperations(pinDates(new PipelineCoordinatorRepository(state.prisma)), "coordinator", ["claimTask", "renewTask", "recordTerminal", "claimAggregator", "renewAggregator", "getCompleteStage", "completeAggregator"]);`
+   The `state.keywordRepository` line, `pinDates`, `wrapKeywordRepository`,
+   and every other harness behavior stay byte-identical.
+4. **Event contract.** `kind` is exactly `"operation"`; `op` is exactly one of
+   `start`/`complete`/`failed`; `component` is exactly `"coordinator"` or
+   `"run-repository"`; `method` is exactly one of the nine wired names;
+   `sequence` is the shared harness-instance counter assigned at start and
+   reused by its paired complete/failed event; failed events add only the
+   existing sanitized `errorName`/`errorCode`/`errorFrame` projection. Events
+   never contain arguments, results, IDs, payloads, SQL, or connection data.
+   Traced calls otherwise behave identically (same arguments in, same
+   result/rejection out; the original error object is rethrown unchanged).
+5. **Scope.** No other file changes; no change to `drainDownstream`,
+   `runDownstreamDrain`, `readDownstreamDiagnostics` (operation events simply
+   appear in its existing `recentTrace` tail), `close()`, fixtures, or any
+   production source.
+6. **Local proof.** `node --check` and `git diff --check` pass; a leaf
+   assertion script verifies: (i) the nine method names appear exactly in the
+   two wiring lines and nowhere else as trace arguments; (ii) the emitted
+   event fields are exactly the whitelisted set (plus the three sanitized
+   error fields on failed); (iii) the wrapper delegates non-listed properties
+   untouched and rethrows the original error; (iv) `git diff` shows only the
+   declaration block plus the two rewired lines. Falsification controls: (A)
+   deleting the failed-event projection makes assertion (ii) fail; (B)
+   dropping one method name from a wiring line makes assertion (i) fail.
+7. **Return.** The leaf reports the final SHA-256, the exact diff stat, and
+   proof outputs; the window agent independently reviews before C130 starts.
+
+- [x] `C129-P1` Preflight digests/scope verified. Evidence: harness start `0b4de997…`, coordinator read-only `531dc4cf…` confirmed unchanged, `git status --porcelain` empty before the leaf; final `1dc83d7e…`.
+- [x] `C129-T1` Declaration + two-line wiring applied exactly. Evidence: `git diff` shows only the 21-line declaration block (`let operationSequence = 0;` + `traceRepositoryOperations` proxy) inserted between `wrapKeywordRepository` and `rebuildRepositories`, and the two rewired lines wrapping OUTSIDE `pinDates`; `state.keywordRepository` and every other line byte-identical (+23/−2).
+- [x] `C129-V1` Local proofs and both falsification controls executed.
+  Evidence: leaf `node --check`/`git diff --check` clean, leaf script 39/0, control A (spread removed) fails (ii), control B (recordTerminal dropped) fails (i); window-agent independent script `/tmp/opencode/kiw6-c129-window-review.mjs` 19/19 on the real file with independently generated controls A/B failing exactly the failed-site whitelist and seven-methods assertions; two initial reviewer-side script bugs (quote-count, leakage regex) fixed in the reviewer script only — the file was already correct.
+- [x] `C129-H1` Leaf returned; window-agent independent review complete. Evidence: final `1dc83d7eeb25d202eb6f79b70643349d2fa8fdcc6cbd710292dd6e6a6d799ceb`; C129 ACCEPTED (EV-KI-W6-R72).
+
+#### `KI-W6-C130` — rejected-drain diagnostic inclusion (single file)
+
+```yaml
+subwindow_id: KI-W6-C130
+type: DIAGNOSTIC_CORRECTION
+assigned_agent: UNASSIGNED
+predecessors: [KI-W6-C129 accepted]
+writable_file: frontend/test/browser/keyword-intelligence-e2e.mjs
+starting_file_digest: 69c135196ec07f48a129535960fcd1c14793b0fbfc5d822defc44f562985a31d
+may_start_successor: false
+```
+
+Fields (all seven, exact):
+
+1. **Preflight.** C129 is accepted; the browser working-tree digest equals the
+   starting digest above; `git status --porcelain` in `frontend/` is empty.
+2. **Target.** Exactly the existing in-loop rejected-drain branch (currently
+   `if (downstreamOutcome.settled?.outcome === "rejected") { throw new Error(\`KI downstream drain rejected before first domain-check emission: ${JSON.stringify(safeDownstreamErrorProjection(downstreamOutcome.settled.error))}\`); }`).
+3. **Transformation.** That branch first awaits
+   `const downstreamRejectDiagnostics = await harness.readDownstreamDiagnostics();`
+   and then throws with the message prefix byte-identical
+   `KI downstream drain rejected before first domain-check emission: ` and
+   payload `{ error: safeDownstreamErrorProjection(downstreamOutcome.settled.error), diagnostics: downstreamRejectDiagnostics }`.
+   This is the ONLY new `readDownstreamDiagnostics()` call site in the file
+   (total becomes exactly three: rejected branch, no-progress branch, ceiling
+   branch).
+4. **Non-goals.** The settle-wait rejected guard
+   (`KI downstream drain rejected:`), the no-progress branch, the ceiling
+   branch, the progress bookkeeping, all 26 case IDs, 13 control IDs, digest
+   lines, certificates, fault injections, and every other line stay
+   byte-identical.
+5. **Privacy.** The thrown payload contains only the existing safe error
+   projection plus `readDownstreamDiagnostics()`'s already-sanitized
+   projection; no raw error text, stack, SQL, PID, connection, URL, token,
+   cookie, keyword, or payload serialization is added.
+6. **Local proof.** `node --check` and `git diff --check` pass; a leaf
+   assertion script verifies: (i) exactly three
+   `readDownstreamDiagnostics()` call sites; (ii) the rejected-branch message
+   prefix is byte-identical; (iii) the payload maps `error` then
+   `diagnostics` in that key order; (iv) case/control ID sets and all
+   digest/certificate/manifest lines are identical to the starting revision;
+   (v) `git diff` shows only the one branch rewritten. Falsification
+   controls: (A) deleting the new call makes (i) fail; (B) adding a second
+   call inside the branch makes (i) fail.
+7. **Return.** The leaf reports the final SHA-256, diff stat, and proof
+   outputs; the window agent independently reviews before I117 starts.
+
+- [x] `C130-P1` Preflight digests/scope verified. Evidence: C129 ACCEPTED (EV-KI-W6-R72); browser start `69c13519…` verified, HEAD had exactly two `readDownstreamDiagnostics()` call sites, `git status --porcelain` empty before the leaf; final `c035094b…`.
+- [x] `C130-T1` Rejected-branch rewrite applied exactly. Evidence: `git diff` shows only the in-loop rejected branch rewritten (+2/−1) — `const downstreamRejectDiagnostics = await harness.readDownstreamDiagnostics();` inside the branch before its throw; message prefix byte-identical; payload `{ error: <safe projection>, diagnostics: <safe projection> }` in that key order; settle-wait guard, no-progress/ceiling branches, all IDs/digest lines byte-identical.
+- [x] `C130-V1` Local proofs and both falsification controls executed. Evidence: leaf `node --check`/`git diff --check` clean, leaf script 10/0, control A (await deleted) fails (i)/(iii-a), control B (duplicate call) fails (i); window-agent independent script `/tmp/opencode/kiw6-c130-window-review.mjs` 10/10 on the real file (3 call sites, prefix, key order, placement, guard, W6 ID set and digest/certificate/manifest lines identical to HEAD) with independently generated controls A/B failing exactly their targeted assertions.
+- [x] `C130-H1` Leaf returned; window-agent independent review complete. Evidence: final `c035094b1276161c6d69e4aa87b25a02c4aa360e8a0aea606f72d2385650d55f`; C130 ACCEPTED (EV-KI-W6-R73).
+
+#### `KI-W6-I117` — window-agent diagnostic causal assessment
+
+`I117` has zero implementation-write authority. After independently accepting
+C129 then C130, execute personally, in order:
+
+- [x] `I117-D1` Verify both accepted digests, the combined changed set is
+  exactly the two leaf files, the coordinator repository is still
+  `531dc4cf…`, and both worktrees otherwise match their parent commits.
+  Evidence: harness `1dc83d7e…`, browser `c035094b…`, coordinator `531dc4cf…`;
+  `git diff --name-only HEAD` = exactly the two leaf files vs `a305941`/`399c464`. (EV-KI-W6-R74)
+- [ ] `I117-D2` From `frontend/`, run exactly once with authorized sandbox
+  escalation and an isolated `TEST_DATABASE_URL`:
+  `ALLOW_DATABASE_TESTS=true KI_W6_SKIP_BUILD=1 node
+  test/browser/keyword-intelligence-e2e.mjs`.
+  Disposition: (a) if the drain rejects, the rejected-branch error now
+  carries `{error, diagnostics}` and the diagnostics trace must uniquely
+  identify the failed operation (`kind:"operation"`, `op:"failed"`,
+  `component`, `method`, `errorCode`) — record it and stop; (b) a full clean
+  pass is one clean non-reproduction — record it and stop; (c) a pre-downstream
+  CDP/execution-channel invalidation that proves both diagnostic leaves
+  unexercised with complete cleanup authorizes exactly one identical
+  recovery; (d) any other failure stops as `PARENT_BLOCKED` with the full
+  diagnostic output. No retry, no edit, no timeout change. Evidence: disposition (a) — one execution (wallTimeMs 2,091,611) rejected with `{error:{PipelineInvariantError,PIPELINE_LEASE_LOST,src/aws-pipeline/repositories/pipeline-coordinator-repository.js:12:9}, diagnostics}`; operation seq 303 uniquely identifies `coordinator.getCompleteStage` as the failing operation, immediately after seq 302 `claimAggregator` completed in the same aggregation.check message; discovery 100/100 succeeded; both db sessions idle/ClientRead; mechanism (read-only): getCompleteStage is the only traced lease operation evaluated against real `new Date()` instead of the injected harness clock (pinned 2026-01-01), so the freshly claimed lease reads expired at lines 147-149. Stopped; recovery unused. (EV-KI-W6-R74)
+- [x] `I117-D3` Post-run hygiene: residual `kiw6_` schemas = 0, changed set
+  still exactly the two leaf files, zero production diff, zero provider/AWS
+  cost. Evidence: in-run `schema-absence:ok` after dropping `kiw6_mt5fz2…`
+  (authoritative post-drop witness); changed set exactly the two leaf files;
+  coordinator still `531dc4cf…`; cost `$0.00`; external residual probe
+  blocked 3× by transient endpoint unreachability minutes after the run —
+  recorded as an environment observation, not a hygiene failure. (EV-KI-W6-R74)
+- [x] `I117-H1` Append one consolidated diagnostic report to S3, CAS A5 to
+  `READY_FOR_PARENT_REVIEW` (state 179), and stop before KI-W7. Evidence:
+  EV-KI-W6-R74; A5 CAS state 179; window stopped — no fix, no retry, no
+  CV82/CV83, KI-W7 untouched.

@@ -9,7 +9,7 @@ authority lives in `S1`
 (`KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_CHECKLIST.md`).
 
 ```yaml
-state_version: 41
+state_version: 43
 parent_window_id: KI-W6
 parent_assignment_id: ASG-KI-W6-WA-05
 window_agent_identity: KI-W6-WINDOW-AGENT
@@ -23,7 +23,7 @@ parent_checklist_revision: 642025513288ae76dd448b7064e1d15fc6c57b688909206c96275
 parent_state_path: ACTIVE_EXECUTION_STATE.md
 parent_state_revision: 164
 decomposition_path: KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_CHECKLIST.md
-decomposition_revision: c2bfcb3f9d74d9550d2a93cc8b2d26a1144a5223ada4106befd86ac0f875c5fa
+decomposition_revision: c3401b2bbeb263d6ff2b0115408aca731124395b17f8b17939f54d6592f2e7b5
 evidence_path: KEYWORD_INTELLIGENCE_KI_W6_REAUTHORED_SUBWINDOW_EVIDENCE.md
 decomposition_status: READY
 integration: 'Parent history preserved: C107-C111 and CV26/CV32 as recorded; seventh correction C112-C117 accepted with I109 CV36-CV38 pass and CV39 preserved as diagnostic evidence (EV-KI-W6-R52); parent SRC-KI-048/DEC-KI-046/KI-CL-28 resolve the harness-oracle defect. The eighth correction C118/I110 is transcribed into S1 under ASG-KI-W6-WA-05 and executes sequentially here.'
@@ -41,11 +41,11 @@ execution_environment_policy:
   recovery_limit_per_invalidated_execution: 1
   external_authority_expansion: false
 may_start_successor: false
-current_status: BLOCKED
+current_status: READY_FOR_PARENT_REVIEW
 accepted_subwindows: [KI-W6-S101, KI-W6-S102, KI-W6-S103, KI-W6-S104, KI-W6-S105, KI-W6-C104, KI-W6-C105, KI-W6-C106, KI-W6-C107, KI-W6-C108, KI-W6-C109, KI-W6-C112, KI-W6-C113, KI-W6-C114, KI-W6-C115, KI-W6-C116, KI-W6-C117, KI-W6-C118]
 next_subwindow: STOP
-blocker: 'I116 CV81 failed twice within its frozen allowance (EV-KI-W6-R71). Execution 1: environmental 504 at selection-save (R65 class; drain never started; changed set proven unexercised; 8-core host at load 5.6-8.1) -> ONE identical E8.1 recovery authorized and used. Recovery: the fourteenth correction delivered its complete purpose — the 120 s first-domain-emission deadline captured every DEC-KI-052 diagnostic member: drain PROGRESSING (lifecycle message-complete 162/163, message-start 164; S3 put/get and aggregation.check cycling), discovery 92 pending/1 processing/7 succeeded, activity probe shows BOTH test-db sessions idle/Client/ClientRead (NO database lock — R68 lock hypothesis disproven), cleanup settled-after-drop with one-shot diagnostics, schema absence verified, residual kiw6_ schemas 0. Classification: host CPU starvation slows the sequential drain ~12x (~15 s/message vs ~1.2 s in passing R62) past the unchanged frozen 120000 ms budget. Not a C125-C128 defect. CV81 grants no retry; E8.1 exhausted; RW6O-005 forbids relabelling as fresh invalidation. Parent options: rerun once on a quiesced host (no code change), raise the frozen budget via new correction leaf, or both. CV82/CV83/I116-H1 not run.'
-last_updated: 2026-08-23T00:05:00+05:30
+blocker: null
+last_updated: 2026-08-23T16:10:00+05:30
 ```
 
 ## Sub-window registry
@@ -95,6 +95,9 @@ last_updated: 2026-08-23T00:05:00+05:30
 | `KI-W6-C127` | CORRECTION | `email_scraper/test/helpers/keyword-intelligence-e2e-harness.js` | ACCEPTED | (delegated leaf) | `ASG-KI-W6-WA-11` (start `c363fb61…` → final `974376b6…`; independent review EV-KI-W6-R69) |
 | `KI-W6-C128` | CORRECTION | `frontend/test/browser/keyword-intelligence-e2e.mjs` | ACCEPTED | (delegated leaf) | `ASG-KI-W6-WA-11` (start `0adfd854…` → final `1e7b0c10…`; independent review EV-KI-W6-R70) |
 | `KI-W6-I116` | INTEGRATION_ASSESSMENT | (none; CV80–CV83) | PARENT_BLOCKED | `KI-W6-WINDOW-AGENT` | `ASG-KI-W6-WA-11` (CV80 pass; CV81 fail 504 -> E8.1 recovery fail at downstream deadline with complete DEC-KI-052 diagnostics — host CPU starvation, no DB lock — EV-KI-W6-R71) |
+| `KI-W6-C129` | DIAGNOSTIC_CORRECTION | `email_scraper/test/helpers/keyword-intelligence-e2e-harness.js` | ACCEPTED | (delegated leaf) | `ASG-KI-W6-WA-12` (start `0b4de997…` → final `1dc83d7e…`; independent review EV-KI-W6-R72) |
+| `KI-W6-C130` | DIAGNOSTIC_CORRECTION | `frontend/test/browser/keyword-intelligence-e2e.mjs` | ACCEPTED | (delegated leaf) | `ASG-KI-W6-WA-12` (start `69c13519…` → final `c035094b…`; independent review EV-KI-W6-R73) |
+| `KI-W6-I117` | DIAGNOSTIC_ASSESSMENT | (none; I117-D1–D4) | COMPLETE | `KI-W6-WINDOW-AGENT` | `ASG-KI-W6-WA-12` (one causal run localized PIPELINE_LEASE_LOST to coordinator.getCompleteStage via operation seq 303 — EV-KI-W6-R74) |
 
 Counters: accepted initial file leaves 5/5; accepted window-agent corrective
 leaves 6/6 plus parent-executed C110/C111 preserved. The eighth correction is
