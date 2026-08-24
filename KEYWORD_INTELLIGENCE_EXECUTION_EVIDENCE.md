@@ -6917,3 +6917,128 @@ requester_commit_pending_paths: [email_scraper/test/aws-pipeline-transaction-clo
 successor_started: false
 status: COMPLETE
 ```
+
+### `EV-KI-A-119` — KI-W7/W8 decision- and enforcement-complete reauthoring
+
+- **Authority:** read the workspace start-here documents in order, the complete
+  current project-agnostic parent/window-agent standards, A1–A8 and the current
+  backend deployment/runtime/template/build sources. A5 state 193 was COMPLETE
+  through KI-W6 with KI-W7 unassigned; backend/frontend/root were clean before
+  authoring.
+- **Discovery:** recorded `SRC-KI-060`. It corrects the nonexistent historical
+  build-script path, identifies the production keyword-repository and recovery
+  gaps, inventories the already-live established stack conventions, and records
+  the current official AWS Node24/SQS constraints. No AWS account call or
+  credential read occurred.
+- **Decisions:** appended `DEC-KI-059`. It freezes disabled-by-default config,
+  production keyword repository construction, combined existing recovery,
+  exact ten-resource topology, 1080-second queue visibility, least-privilege
+  IAM, separate accepted builders, guarded two-ZIP deployment packet, two-step
+  activation, seven approval actions and a keyword-only one-research canary that
+  stops before downstream Run confirmation.
+- **Checklist:** replaced only the unexecuted W7/W8 specification and historical
+  canary scenario. W7 now has six complete task blocks, an exact 13-path set and
+  starting hashes, deterministic three-wave decomposition, 12 cases/12
+  controls and six frozen gates. W8 has three complete task blocks, zero source
+  leaves, one window-agent-only sequential assessment, seven individually
+  approved actions, 10 live cases/six controls and seven gates. `SCN-KI-047/048`
+  replace the superseded `SCN-KI-019` outline.
+- **Mechanical closure:** W7 path digest
+  `04ce71235fe61103c071f859d6050d4f8fee2b56dc0e088b9d97f5111be57a9f`;
+  W7 case/control digests `6bacf5d9…`/`6950a20f…`; W8 case/control digests
+  `b716a609…`/`1a2fd2fb…`. Literal arrays, owners, invalidation order,
+  falsification controls, stateful/costly gate counts, external prerequisites,
+  action boundaries and stop semantics are present; unresolved/unmapped counts
+  are zero. `RW78-001`–`020` are checked with evidence.
+- **Revisions before A5 CAS:** A2
+  `493192fc317c00ee43e277e85e00718985190cdd5c21e3d6824f67dd1d0b7c0c`;
+  A3 `6c0809225ba5336dc923786674b990f83c8db2496b88016f7655a770afb7e307`;
+  A4 `4a47d782223e372d2df7d653add494880eddf456ab3f4d63439fea2ed1c2374e`;
+  A8 `90c2f808426c4f1cf20ad885860e01b66763f3fc607e28c3b2dd9a2ef7391a5f`.
+- **Boundary:** documentation/authority only. No implementation/test/build,
+  database/browser, AWS/provider/network/production, paid/destructive,
+  commit/push, KI-W7 execution or KI-W8 action occurred; cost `$0.00`.
+
+```yaml
+certificate: W7-W8-PARENT-AUTHORING-READY
+source_state: 193
+standard_revision: cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb523ede32848
+subwindow_standard_revision: 842c29550c06c22d63e0a058a27cb8a9ff6b538b3168d2c83a384890b44247f0
+w7: {paths: 13, path_digest: 04ce71235fe61103c071f859d6050d4f8fee2b56dc0e088b9d97f5111be57a9f, cases: 12, controls: 12, assigned: false}
+w8: {source_paths: 0, actions: 7, cases: 10, controls: 6, assigned: false}
+unresolved_decisions: 0
+unmapped_requirements: 0
+unmapped_tasks: 0
+unmapped_cases: 0
+external_actions_performed: 0
+paid_cost_usd: 0.00
+status: AUTHORING_READY_NOT_ASSIGNED
+```
+
+### `EV-KI-A-120` — KI-W7 decomposition assignment
+
+- **Authority:** requester explicitly directed the parent to dispatch the W7
+  window agent for leaf-level decomposition.
+- **Preflight:** A1–A4/A8 and both standard hashes matched A5 state 194;
+  backend/frontend were clean; the only root changes were the parent-authored
+  W7/W8 coordination-package edits recorded by `EV-KI-A-119`.
+- **Assignment:** A5 CAS `194 → 195` assigns `ASG-KI-W7-WA-01` to
+  `KI-W7-WINDOW-AGENT`. Write authority is exactly the new W7 S1/S2/S3 paths.
+  The agent must author 13 single-file leaves and one zero-write integration
+  assessment, run decomposition lints, and return
+  `AWAITING_PARENT_DECOMPOSITION_REVIEW`.
+- **Boundary:** no leaf assignment/dispatch, implementation/test edit, build,
+  database/browser, network/provider/AWS/production/paid action, commit, push or
+  KI-W8 action is authorized.
+
+### `EV-KI-A-121` — KI-W7 DECOMP-4 parent acceptance and execution assignment
+
+- **Reconciliation:** the requester stopped the separately dispatched
+  overlapping W7 agent. The assigned `KI-W7-WINDOW-AGENT` reconciled the two
+  drafts without discarding valid changes; the overlap changed only S1/S2/S3
+  coordination artifacts and produced no backend/frontend implementation.
+- **Parent review:** independently verified all 13 literal paths and starting
+  digests, canonical path/case/control digests, 13 unique one-file owners,
+  13×15 authority fields, 13×9 completion boxes, and 47/47 standard authoring
+  checks. Backend/frontend remained clean.
+- **Corrections required before acceptance:** DECOMP-2 fixed the build-before-
+  enforcement dependency, strict temporary build-evidence bridge, exact static
+  registry parser, standard certificate and preapproval state. DECOMP-3 added
+  exact runtime execution accounting and stopped misclassifying parent review
+  as a blocker. DECOMP-4 assigned the TAP parser and fail-closed CLI to S013,
+  so I001 authors no implementation code.
+- **Accepted decomposition:** S1
+  `44f8bc4a2a51858937ba1ebeff6df8d45fdd82ceb86fd226486be0d12b84d8f5`,
+  S2 `9218ae3faf5a8f6089f6a3b97ea1860cbf3806edeb5e9a88acf2ec455e9ba227`,
+  S3 through operative certificate `EV-KI-W7-S013`, revision
+  `3b25f6ce6e16396d0470c8d7c0484e1e0f00beba78364f8ce3df11e81b654604`.
+- **Assignment:** A5 CAS `195 → 196` assigns `ASG-KI-W7-WA-02` to the same
+  window agent. Execution is the exact serial S001→S013→I001 schedule. Each
+  leaf owns one file and returns for independent window-agent review.
+- **Boundary:** local-only, paid cost `$0.00`. No database, browser, real
+  network/provider/AWS/production action, credential value read, commit, push,
+  or KI-W8 action is authorized. Passing W7 stops at parent review and does not
+  authorize W8.
+
+```yaml
+certificate: PARENT-DECOMPOSITION-ACCEPTED
+window: KI-W7
+decomposition_assignment: ASG-KI-W7-WA-01
+execution_assignment: ASG-KI-W7-WA-02
+source_state: 195
+active_state: 196
+decomposition_revision: 44f8bc4a2a51858937ba1ebeff6df8d45fdd82ceb86fd226486be0d12b84d8f5
+subwindow_state_revision: 9218ae3faf5a8f6089f6a3b97ea1860cbf3806edeb5e9a88acf2ec455e9ba227
+subwindow_evidence_revision: 3b25f6ce6e16396d0470c8d7c0484e1e0f00beba78364f8ce3df11e81b654604
+planned_file_count: 13
+planned_file_set_digest: 04ce71235fe61103c071f859d6050d4f8fee2b56dc0e088b9d97f5111be57a9f
+required_cases: {count: 12, digest: 6bacf5d9291362ee0d01f5d0d8e3e53f8f9e214a6ebbf5711497c80f3d74aa2e}
+required_controls: {count: 12, digest: 6950a20f91b666c03cf59c495576e72ad1501fcd58aa5f4378900bd473edafd7}
+execution_schedule: SERIAL
+first_subwindow: KI-W7-S001
+integration_assessment: KI-W7-I001
+external_actions_authorized: 0
+paid_cost_cap_usd: 0.00
+successor_started: false
+status: READY_FOR_SERIAL_DISPATCH
+```

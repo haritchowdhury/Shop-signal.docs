@@ -1,9 +1,10 @@
 # Keyword Intelligence Discovery Dossier (`A2`)
 
-**Revision:** `KI-DD-17`
-**Observed at:** `2026-08-22`
-**Environment:** local workspace `/home/harit/Email Scrapper`; no network,
-provider, database, AWS, or production operation was performed.
+**Revision:** `KI-DD-18`
+**Observed at:** `2026-08-24`
+**Environment:** local workspace `/home/harit/Email Scrapper` plus read-only
+official public AWS documentation; no AWS-account, provider, database,
+production, mutation, or paid operation was performed.
 
 This artifact is the sole authority for observed sources, inventories, payload
 provenance, environmental facts, and unknowns. The other artifacts are `A1`
@@ -334,6 +335,19 @@ observed_at: 2026-08-23
 environment: local emitted-browser run with actual backend, isolated disposable Neon schema and synthetic Google/provider substitutes
 limitations: This proves a missing deterministic storefront-resolution seam and a missing 100-query-to-1,000-domain bridge proof. It does not establish a production resolver defect, justify bypassing strict identity resolution, or invalidate the accepted downstream 1,000-domain traffic/final scale corpora.
 privacy: Counts, method names, source hashes and safe error classification only; no live domain list, response body, URL credential, token, keyword, customer data, provider body or database URL retained.
+```
+
+### `SRC-KI-060` — current W7/W8 deployment and production-runtime inventory
+
+```yaml
+evidence_id: SRC-KI-060
+classification: OBSERVED
+claim: The established production stack already contains seven Node 24 Lambdas, six source queues and DLQs, six enabled event-source mappings, one enabled five-minute Recovery schedule, guarded content-addressed deployment scripts, and an attached-by-operator control-plane policy seam. The accepted keyword build is a separate deterministic keyword-worker.zip; scripts/build-aws-handlers.js does not exist. The keyword handler currently calls createPipelineRuntime(), whose default repository is PrismaRunRepository, although processKeywordMessage requires PrismaKeywordResearchRepository. The established recovery handler invokes only recoverPipelineWork even though recoverKeywordWork already exists. src/config.js and runtime-config.js do not expose the locked keyword queue setting. The current template has no keyword queue, worker, mapping, IAM, alarms, outputs or activation parameter. AWS currently documents nodejs24.x as supported, SQS partial-batch response through ReportBatchItemFailures, MaximumConcurrency minimum 2, and queue visibility of at least six times function timeout; therefore the former 360-second visibility value is invalid for the locked 180-second keyword function and the exact minimum is 1080 seconds.
+source: email_scraper backend a87e139c020712ef95c05d232b9548216b0658b8; frontend 5e441aae7e2f3a132b2c7fc85bf1bc525d3d5cb6; email_scraper/infrastructure/aws/template.yaml SHA-256 9e5366c95250d37caf0190611d14ca308b03ee20b9c4a0758c8e82b0233c058f; src/aws-pipeline/runtime.js; src/aws-pipeline/keyword-intelligence/handler.js SHA-256 c6a38b0bb4adf19058b53b9e24b0ae3308f590a8d2eb387ca82d1bb0ab16c414; src/aws-pipeline/handlers/recovery.js SHA-256 7a633679b7d0894c789bf01fb32bd056fdc50ac6a11d8080db52e8fefad81e78; src/aws-pipeline/keyword-intelligence/recovery.js; scripts/build-keyword-worker.js; scripts/aws-pipeline/create-change-set.js; scripts/aws-pipeline/inspect-stack.js; official AWS Lambda SQS configuration, SQS scaling, SAM SQS event, and Node.js runtime documentation inspected 2026-08-24
+observed_at: 2026-08-24
+environment: read-only local source inspection and official AWS documentation; no AWS account call, provider call, database operation, build, mutation, deployment or paid action
+limitations: Local source proves the deployable-source gaps and current conventions, not the applied production account state. Account identity, quotas, current stack resources, secret capability, backend hosting controls and provider capability remain W8 read-only preflight gates. CloudFormation change-set details must be observed and matched to the frozen allowlist before execution.
+privacy: File paths, hashes, logical IDs, public AWS limits and structural configuration only; no account ID, ARN, URL, secret value, credential, provider body or production data read or recorded.
 ```
 
 ## 6. Post-W5 corrective discovery

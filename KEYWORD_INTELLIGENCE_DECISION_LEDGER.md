@@ -1,6 +1,6 @@
 # Keyword Intelligence Decision Ledger (`A3`)
 
-**Revision:** `KI-DL-26`
+**Revision:** `KI-DL-27`
 **Status:** locked decisions; not an assignment
 
 This is the sole authority for implementation-affecting choices and
@@ -3079,3 +3079,151 @@ window-agent-only I124. The requester explicitly directs the parent to perform
 the decomposition now; the window agent independently preflights, dispatches
 and reviews the frozen leaves without another decomposition phase. It stops
 only on PASS or a genuinely new failure outside this decision.
+
+### `DEC-KI-059` — deployment closure, safe activation, and bounded live proof
+
+- **Requirements:** `REQ-KI-002`, `005`, `015`–`017`, `022`–`024`;
+  `INV-KI-001`–`009`, `012`–`014`; `AUTH-KI-005`; `EXC-KI-008`.
+- **Finding:** `SRC-KI-060` supersedes the stale W7 source inventory and the
+  incomplete deployment mechanics in `DEC-KI-025/027`. The keyword ZIP already
+  exists, but the production handler would receive the established run
+  repository, keyword recovery is not invoked, the required runtime config is
+  absent, the former visibility timeout violates the current Lambda/SQS rule,
+  and the current deployed-pipeline template/scripts know only the established
+  seven functions.
+- **Runtime configuration:** `src/config.js` adds exactly
+  `awsPipelineKeywordResearchEnabled` from
+  `AWS_PIPELINE_KEYWORD_RESEARCH_ENABLED`, strict boolean default `false`, and
+  `awsPipelineKeywordResearchQueueUrl` from
+  `AWS_PIPELINE_KEYWORD_RESEARCH_QUEUE_URL`, default empty string.
+  `loadAwsPipelineConfig` preserves every accepted established-pipeline branch:
+  when the keyword flag is false the keyword URL may be empty and the returned
+  object includes `awsPipelineKeywordResearchActive:false`; when true it
+  requires an HTTPS keyword URL and returns
+  `awsPipelineKeywordResearchActive:true`. Invalid active configuration throws
+  `Object.assign(new Error("KEYWORD_RUNTIME_CONFIG_INVALID"),
+  {code:"KEYWORD_RUNTIME_CONFIG_INVALID"})`; the uninjected keyword handler
+  uses the same error object when the active flag is not true. It never guesses
+  or aliases a URL. Existing
+  six queue requirements and `awsPipelineActive` behavior are unchanged.
+- **Production keyword repository:** when `handler(event, runtime)` receives an
+  injected runtime, its injected `repository` remains authoritative for tests.
+  When `runtime` is absent, it awaits `createPipelineRuntime()`, requires
+  `base.prisma`, constructs exactly
+  `new PrismaKeywordResearchRepository(base.prisma)`, and replaces only the
+  keyword runtime's `repository`. It continues to create the 32 MiB
+  keyword-only artifact store from `base.s3Client` and the shared bucket. It
+  fails before record processing when keyword activation is false, repository,
+  dispatcher, S3 client, artifact store or HTTPS queue configuration is absent.
+- **Recovery integration:** the existing scheduled Recovery Lambda and existing
+  `rate(5 minutes)` rule are reused; no second recovery function, rule, queue or
+  message discriminator is added. Export a testable recovery composition that
+  runs `recoverPipelineWork({now,limit},base)` first. If keyword activation is
+  false it returns `{pipeline,keyword:{outcome:"disabled"}}` and performs no
+  keyword repository read/send. If true it constructs
+  `PrismaKeywordResearchRepository(base.prisma)`, calls
+  `recoverKeywordWork({now,limit},{...base,repository:keywordRepository})`, and
+  returns `{pipeline,keyword}`. `now` is one captured valid `Date`; `limit` is
+  the existing integer `1..100`. An established recovery failure prevents the
+  keyword pass; a keyword failure does not relabel the established result.
+- **Infrastructure:** add exactly these logical resources to the current JSON
+  SAM template: `KeywordResearchDlq`, `KeywordResearchQueue`,
+  `KeywordWorkerLogGroup`, `KeywordWorkerRole`, `KeywordWorker`,
+  `KeywordResearchMapping`, `KeywordResearchDlqDepthAlarm`,
+  `KeywordResearchOldestMessageAlarm`, `KeywordWorkerErrorsAlarm`, and
+  `KeywordWorkerThrottlesAlarm`. Add parameters
+  `KeywordWorkerCodeKey`, `KeywordWorkerCodeVersion`, and
+  `KeywordResearchEnabled` (`"false"|"true"`, default `"false"`), condition
+  `KeywordResearchEnabledCondition`, and outputs
+  `KeywordResearchQueueUrl`, `KeywordResearchQueueArn`,
+  `KeywordResearchDlqArn`, `KeywordWorkerFunctionArn`. No existing resource is
+  renamed, removed, disabled, recreated, or given broader data-plane access.
+- **Queue/function/mapping literals:** standard encrypted queue, name
+  `${AWS::StackName}-keyword-research`, retention `345600`, visibility `1080`,
+  maximum message bytes `262144`, long poll `20`, redrive receive count `5` to
+  encrypted 14-day DLQ. Worker name/log convention is `keyword-worker`, runtime
+  `nodejs24.x`, `x86_64`, handler `index.handler`, memory `1024`, reserved
+  concurrency `1`, timeout `180`, ephemeral storage `512`, tracing disabled,
+  log retention `30`. Mapping uses batch `1`, window `0`,
+  `ReportBatchItemFailures`, `Enabled` from the condition, and has no
+  `ScalingConfig` or provisioned poller configuration. The 1080-second
+  visibility is exactly six times the function timeout.
+- **IAM/artifacts/environment:** KeywordWorker may read the existing secret,
+  consume and send only `KeywordResearchQueue`, list/get/put only
+  `runs/keyword-research/*`, and write only its log group. RecoveryRole gains
+  only `sqs:SendMessage` to the keyword queue. ControlPlanePolicy gains only
+  `sqs:SendMessage` to the keyword queue. No wildcard S3/SQS data-plane action
+  or resource is permitted. KeywordWorker and Recovery receive the keyword URL
+  and activation flag; existing environment members remain byte-equivalent.
+  No credential value, database URL or provider credential is a template
+  parameter, output, Lambda environment value, queue body or evidence member.
+- **Build and deployment packet:** keep `scripts/build-lambda.js` and
+  `scripts/build-keyword-worker.js` as separate accepted builders. A new
+  keyword measurement script imports `KEYWORD_LAMBDA_HANDLERS`, validates only
+  `keyword-worker.zip`, uses the established forbidden-inventory/one-engine/
+  45-MiB ZIP/200-MiB expanded/cold-import rules, and does not delete siblings.
+  New keyword deployment scripts create a content-addressed packet containing
+  exactly the accepted template, `keyword-worker.zip`, and the newly built
+  `recovery.zip`; refuse source/hash drift; upload encrypted versioned objects;
+  create but do not execute a change set by default; require the exact A5
+  approval token and `--execute` to apply a previously recorded change-set ID;
+  and refuse remove/replacement/broad/unlisted changes. They target only profile
+  `storesignal-dev`, region `ap-south-2`, stack
+  `storesignal-production-pipeline`, environment `production`, and the STS
+  account discovered during W8 preflight. No direct `sam deploy` path exists.
+- **Change-set allowlists:** the disabled change set may add only the ten named
+  keyword resources and may directly modify only `ControlPlanePolicy`,
+  `RecoveryRole`, and `Recovery`, all with replacement `False`. It may also
+  contain only the established dynamic `RecoveryInvokePermission`
+  (`Conditional`, caused by `RecoverySchedule.Arn`, target `SourceArn`) and
+  `RecoverySchedule` (`False`, caused by `Recovery.Arn`) dependency
+  reevaluations; either may be absent, but no other member is permitted. The
+  activation change set may directly modify only `KeywordResearchMapping`,
+  `KeywordWorker`, and `Recovery`, replacement `False`, plus the same zero-or-one
+  occurrences of those two exact Recovery dependencies. Its static direct
+  targets are respectively `Enabled` and the two `Environment` members. Any
+  Remove, replacement `True`, unlisted member or different detail fails before
+  execution.
+- **Two-step deployment:** the first W8 stack update uses
+  `KeywordResearchEnabled=false`, adds the ten resources/outputs/parameters,
+  installs the Recovery and keyword code plus narrow IAM/environment changes,
+  and proves the mapping disabled and keyword recovery inactive. Backend
+  hosting then receives the exact queue URL and flag under a separately
+  approved host mutation. One normal owner request queues one one-seed research
+  while disabled and proves durable `queued` plus one visible source message
+  and zero keyword Lambda processing. A second separately reviewed stack update
+  sets `KeywordResearchEnabled=true`; it may modify only the keyword mapping,
+  KeywordWorker/Recovery environment and CloudFormation-declared dependent
+  resources identified by the reviewed change set. The already-queued research
+  is the sole paid canary; no second research is created.
+- **Canary boundary:** the canary uses the real authenticated API, SQS event
+  source, Lambda, Neon, S3 and dashboard. For one seed and a nonempty shortlist
+  its planned first pass is exactly 11 logical calls (2 US expansion, 1 US
+  anchor overview, 8 market overviews), at most 55 attempts, and never more than
+  the durable `$3.00000000` research cap. Record actual attempts/cost/duration,
+  artifact sizes, Lambda peak memory, queue/DLQ/alarm state, result and default
+  selection counts. Create the run handoff through the normal dashboard/API and
+  verify its 100-or-fewer immutable RunQueries, but do not confirm/start that
+  downstream Run; Google, lead, Browserless, traffic and CrUX work are outside
+  this canary and receive zero authorization.
+- **Approval/rollback:** read-only STS/quota/stack/config/secret-metadata/provider
+  capability checks may precede approvals. Disabled stack update, any secret
+  version mutation, backend-host configuration, activation update, the one paid
+  canary, and any rollback/disable action are distinct approvals; none implies
+  another. Failure stops without queue purge, DLQ redrive, data deletion, a
+  second canary or manual resource edits. A preapproved rollback changes the
+  backend flag and stack parameter back to false; retained rows/artifacts remain
+  evidence and are not deleted.
+- **Coverage:** W7 requires exactly 12 cases, digest
+  `6bacf5d9291362ee0d01f5d0d8e3e53f8f9e214a6ebbf5711497c80f3d74aa2e`,
+  and 12 controls, digest
+  `6950a20f91b666c03cf59c495576e72ad1501fcd58aa5f4378900bd473edafd7`.
+  W8 requires exactly 10 live cases, digest
+  `b716a609b2269f69d4e042503ad47dabb1eb397e17726af850f38ab09940431a`,
+  and six controls, digest
+  `1a2fd2fb71c94f297b27c5c6ad580c67d94ae807525b420996bd4382d46b7c6e`.
+- **Supersession:** this decision supersedes only the W7/W8 mechanics in
+  `DEC-KI-025` and the W7 configuration timing in `DEC-KI-027`. Their approval
+  separation, one-queue architecture and all accepted local behavior remain.
+- **Tasks/scenarios:** `KI-W7-T1`–`T6`, `KI-W8-T1`–`T3`,
+  `SCN-KI-047`, `SCN-KI-048`.

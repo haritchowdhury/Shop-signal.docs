@@ -1,6 +1,6 @@
 # Keyword Intelligence Traceability Index (`A8`)
 
-**Revision:** `KI-TR-24`
+**Revision:** `KI-TR-25`
 
 This is the sole authority for mechanical requirement/source/decision/task/test
 closure. The other artifacts are `A1`
@@ -287,3 +287,45 @@ is the mechanical expansion used for completeness checks:
 | `REQ-KI-010`–`015`; `INV-KI-010/015` domain-aggregation observation overlay | `SRC-KI-057`; parent-direct `KI-W6-C149` under `DEC-KI-056` | browser observes exact produced discriminator `aggregation.check` instead of impossible `domain*`; existing `W6-FLOW-11/12` and `W6-NC-08`, no new registration | `KI-W6-CV98`–`CV101`, `KI-W6-CH17`; fresh 1,000-domain causal run then unchanged closure |
 | `REQ-KI-015`–`017`; `INV-KI-010/011/015` durable handoff observation overlay | `SRC-KI-058`; parent-direct `KI-W6-C150` under `DEC-KI-057` | exact intercepted client key/revision matched to durable handoff and associated 100-query Run; response status/finish trace diagnostic only; existing `W6-NAV-02`, `W6-FLOW-08`, `W6-NC-06` | `KI-W6-CV102`–`CV105`, `KI-W6-CH18`; fresh causal run then unchanged closure |
 | `REQ-KI-010`–`015`, `REQ-KI-024`; `INV-KI-004`–`006`, `INV-KI-010/015` discovery-resolution bridge overlay | `SRC-KI-059`; `KI-W6-CT30`–`CT32`, leaves `KI-W6-C152`–`C154` under `DEC-KI-058` | `SCN-KI-046`; real resolver with injected no-network fetch proves ten stores for one query; 100 strict artifacts drive the real domain aggregator/repositories to exactly 1,000 Shops/RunStores/lead tasks/messages; maximum rollback/stale fence remain invisible; `W6-DB-13`–`15`, `W6-NC-22`–`24`; final 43/24 unions | `KI-W6-CV110`–`CV115`, `KI-W6-CH20`; retain browser causality only through 100 discovery dispatches, bridge the missing middle in isolated Neon, and reuse unchanged post-resolution scale corpora |
+
+## 9. KI-W7/W8 deployment and live-proof closure
+
+This section supersedes the older W7/W8 references in Sections 1–5 wherever
+they name `SCN-KI-019`, the nonexistent `build-aws-handlers.js`, a second
+recovery schedule, 360-second visibility, or one broad deployment/canary action.
+
+| Contract set | Observed evidence | Locked decision | Exact owner | Executable oracle | Evidence slot |
+|---|---|---|---|---|---|
+| `REQ-KI-002/005/022`–`024`; `INV-KI-001`–`009/012`–`014` | `SRC-KI-060`; accepted W6 build/worker evidence | `DEC-KI-059` runtime/config/recovery closure | `KI-W7-T1/T2/T6` | `SCN-KI-047`; `W7-RUNTIME-01/02`; `W7-NC-01`–`04` | `KI-W7-V2/V4/V5` |
+| `INV-KI-001/002/012`; `AUTH-KI-005`; `EXC-KI-008` | current template/build/deployment scripts in `SRC-KI-060`; official AWS bounds | `DEC-KI-059` ten resources, 1080 visibility, disabled condition, narrow IAM, two ZIP packet | `KI-W7-T3`–`T6` | `SCN-KI-047`; `W7-INFRA-01`–`06`, `W7-BUILD-01`, `W7-DEPLOY-01/02`, `W7-CONF-01`; `W7-NC-05`–`12` | `KI-W7-V1`–`V6` |
+| `REQ-KI-002/005/022`–`024`; `AUTH-KI-005/007`; `EXC-KI-008` | accepted W7 packet plus W8 applied preflight | `DEC-KI-059` seven separately approved actions | `KI-W8-T1/T2` | `SCN-KI-048`; `W8-LIVE-01`–`05`; `W8-NC-01`–`04` | `KI-W8-V1`–`V4` |
+| `REQ-KI-015`–`017/022`–`024`; `INV-KI-005`–`011/013`–`015` | same one queued research; real SQS/Lambda/Neon/S3/UI path | `DEC-KI-059` bounded keyword-only canary and stop-before-confirmation boundary | `KI-W8-T3` | `SCN-KI-048`; `W8-LIVE-06`–`09`, `W8-CONF-01`; `W8-NC-05/06` | `KI-W8-V4`–`V7` |
+
+### W7 exact ownership and enforcement
+
+- The only W7 implementation/test paths are the literal 13-path table in A4;
+  its sorted-member-plus-LF digest is
+  `04ce71235fe61103c071f859d6050d4f8fee2b56dc0e088b9d97f5111be57a9f`.
+- W7 required cases are exactly 12/digest
+  `6bacf5d9291362ee0d01f5d0d8e3e53f8f9e214a6ebbf5711497c80f3d74aa2e`;
+  controls are exactly 12/digest
+  `6950a20f91b666c03cf59c495576e72ad1501fcd58aa5f4378900bd473edafd7`.
+- Config, handler/recovery, template, measurement and deployment scripts have
+  one authoritative interface in `DEC-KI-059`; the window-agent decomposition
+  allocates one file per leaf and may not invent a second schedule, merge the
+  two builders, or select deployment semantics.
+
+### W8 exact authority and enforcement
+
+- W8 has zero source/test write paths and therefore zero implementation leaves.
+  The window agent personally owns the one sequential assessment; it cannot
+  delegate an AWS/host/provider approval to a leaf.
+- W8 required cases are exactly 10/digest
+  `b716a609b2269f69d4e042503ad47dabb1eb397e17726af850f38ab09940431a`;
+  controls are exactly six/digest
+  `1a2fd2fb71c94f297b27c5c6ad580c67d94ae807525b420996bd4382d46b7c6e`.
+- `W8-ACT-01`–`07` are the complete mutation/paid-action universe. Separate
+  approval is mandatory for each applicable action. ACT-04 creates the sole
+  research while disabled; ACT-05 activates it; ACT-06 is the only paid
+  execution. The handoff Run is never confirmed, so downstream provider work
+  is exactly outside W8.

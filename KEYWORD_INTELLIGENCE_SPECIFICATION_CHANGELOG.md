@@ -1470,3 +1470,35 @@ authorization_effect: KI-W6 accepted_through; no successor authority
 requester_commit_pending_paths: [email_scraper/test/aws-pipeline-transaction-clock-enforcement.test.js, email_scraper/test/prisma-run-repository.integration.test.js]
 resumption_state: A5 state 193 COMPLETE; KI-W7 not assigned or started
 ```
+
+```yaml
+change_id: CHG-KI-091
+timestamp: 2026-08-24T12:00:00+05:30
+trigger_evidence: [requester W7/W8 simultaneous reauthoring instruction, SRC-KI-060, EV-KI-A-119]
+reason: The unexecuted W7/W8 text predates the revised authoring standards, points to a nonexistent build script, omits the production keyword repository and combined recovery seams, specifies an AWS-invalid 360-second visibility for a 180-second Lambda, invents a second recovery schedule, lacks guarded integration with the already-deployed pipeline, and combines separately approved external actions into one broad canary task.
+old_revision: A2 022bd827f4827d3d543f48b502a6a5cbe5f74dbd54dd47b86b622463100a8d15; A3 4c32d520e379347f32046aae735ebe012f9c421d65e9faa67127e70f72e74747; A4 f177e81f1b40e4789fc7c0540685b15565e73145bc943ef4369629f8e59e5130; A8 36fe0aa2667f3cfa3091ddeca74c3d3c08720bd80a97d781d1c1b6c29d24f289; A5 state 193
+new_revision: A2 493192fc317c00ee43e277e85e00718985190cdd5c21e3d6824f67dd1d0b7c0c; A3 6c0809225ba5336dc923786674b990f83c8db2496b88016f7655a770afb7e307; A4 4a47d782223e372d2df7d653add494880eddf456ab3f4d63439fea2ed1c2374e; A8 90c2f808426c4f1cf20ad885860e01b66763f3fc607e28c3b2dd9a2ef7391a5f; A5 state 194
+changed_requirements: []
+changed_decisions: [DEC-KI-059 supersedes only W7/W8 mechanics in DEC-KI-025 and configuration timing in DEC-KI-027]
+affected_windows: [KI-W7, KI-W8]
+invalidated_evidence: [unexecuted SCN-KI-019 outline; old W7/W8 task text; no completed implementation or execution evidence invalidated]
+compatibility_or_migration_effect: W7 is additive around the accepted keyword worker and established deployed pipeline; no schema/data/product change. W8 first deploys disabled and uses one queued research across disabled and active states. Existing pipeline resources remain active and unchanged outside three named narrow extensions.
+authorization_effect: documentation authoring only; KI-W7 and KI-W8 remain unassigned. W7 requires a new parent A5 assignment. W8 additionally requires accepted W7 and separate approvals for each applicable W8-ACT-01 through W8-ACT-07 action.
+resumption_state: A5 state 194 COMPLETE through KI-W6; next_window KI-W7; assign only KI-W7 after parent decomposition/assignment, and perform no AWS/provider action under this record
+```
+
+```yaml
+change_id: CHG-KI-092
+timestamp: 2026-08-24T13:00:00+05:30
+trigger_evidence: [EV-KI-W7-S001 through EV-KI-W7-S013, EV-KI-A-121, requester restoration of the original W7 window agent]
+reason: Parent review reconciled overlapping W7 decomposition drafts and required exact build-evidence ordering, registry/runtime certificates, parser ownership, and non-blocking preapproval state before implementation assignment.
+changed_requirements: []
+changed_decisions: []
+affected_windows: [KI-W7 only]
+implementation_effect: none — coordination and execution authority only
+decomposition_revision: 44f8bc4a2a51858937ba1ebeff6df8d45fdd82ceb86fd226486be0d12b84d8f5
+invalidated_evidence: [EV-KI-W7-S005, EV-KI-W7-S007, EV-KI-W7-S009 and EV-KI-W7-S011 readiness certificates are superseded by EV-KI-W7-S013; history remains append-only]
+compatibility_or_migration_effect: none
+authorization_effect: KI-W7-WINDOW-AGENT may execute the exact serial S001-S013 leaves, independently review them, then personally run I001; no KI-W8 or external action is authorized
+resumption_state: A5 state 196 READY under ASG-KI-W7-WA-02; stop at KI-W7 parent review or one genuinely new parent-level blocker
+```

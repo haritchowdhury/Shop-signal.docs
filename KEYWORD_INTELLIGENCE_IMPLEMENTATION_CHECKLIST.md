@@ -1,6 +1,6 @@
 # Keyword Intelligence Decision-Complete Execution Checklist (`A4`)
 
-**Checklist revision:** `KI-CL-32`
+**Checklist revision:** `KI-CL-33`
 **Package status:** `AUTHORING-READY`; assignable only by a one-window `A5`
 assignment  
 **Execution status authority:** only `ACTIVE_EXECUTION_STATE.md`
@@ -3804,164 +3804,403 @@ sandbox/channel invalidation follows the standing identical-recovery rule.
   provider, AWS, production, destructive, commit, push, A1–A8, schema,
   migration, package, or frontend action occurs. Evidence: ___
 
-### `KI-W7` — Infrastructure source only
+### `KI-W7` — Deployable keyword infrastructure and runtime closure
 
 ```yaml
 window_id: KI-W7
-objective: Add deployable SAM source for one dedicated function, queue, DLQ, recovery schedule, permissions, alarms, and outputs without mutating AWS.
-depends_on: [KI-W6, explicit_infrastructure_source_approval]
-consumes: accepted emitted worker artifact and measured resource envelope
-produces: validated infrastructure source/package inventory
-assigned_agent_policy: one_window
-authorized_write_scope: email_scraper/infrastructure/aws/template.yaml keyword resource logical IDs only; email_scraper/scripts/build-aws-handlers.js keyword handler entry only; email_scraper/src/config.js AWS_PIPELINE_KEYWORD_RESEARCH_QUEUE_URL mapping only; email_scraper/src/aws-pipeline/runtime-config.js awsPipelineKeywordResearchQueueUrl validation/projection only; email_scraper/test/aws-pipeline-runtime-adapters.test.js keyword queue config describe block only; email_scraper/test/keyword-intelligence-infrastructure.test.js; email_scraper/test/keyword-intelligence-build.test.js
-shared_file_scope: template/build/config/runtime-config symbols are additive and limited to the one keyword queue; existing runtime configuration and resources remain unchanged
-read_only_scope: all existing AWS resources/contracts; W6 measurements
-authorized_actions: [local_source_edits, local_SAM_validation_if_installed, local_build, evidence_updates]
-prohibited_actions: [AWS_mutation, AWS_deploy, secret_changes, provider_calls, frontend_or_schema_edits, existing_resource_topology_changes, commits]
+objective: Close the production keyword repository/recovery/config seams and add one disabled-by-default keyword SQS/Lambda deployment slice with guarded local packaging; perform no AWS or paid action.
+depends_on: [KI-W6]
+consumes: [DEC-KI-059, SRC-KI-060, accepted_keyword_worker_build, accepted_established_pipeline_template_and_deployment_conventions]
+produces: [production_correct_keyword_handler, combined_recovery, disabled_keyword_infrastructure, guarded_keyword_deployment_packet, 12_case_and_12_control_certificate]
+assigned_agent_policy: recursive_window_agent
+planned_changed_file_count: 13
+planned_changed_file_set_digest: 04ce71235fe61103c071f859d6050d4f8fee2b56dc0e088b9d97f5111be57a9f
+authorized_write_scope: [email_scraper/src/config.js, email_scraper/src/aws-pipeline/runtime-config.js, email_scraper/src/aws-pipeline/keyword-intelligence/handler.js, email_scraper/src/aws-pipeline/handlers/recovery.js, email_scraper/infrastructure/aws/template.yaml, email_scraper/scripts/measure-keyword-worker-package.js, email_scraper/scripts/keyword-intelligence/create-change-set.js, email_scraper/scripts/keyword-intelligence/inspect-stack.js, email_scraper/test/aws-pipeline-runtime-adapters.test.js, email_scraper/test/keyword-intelligence-deployment-runtime.test.js, email_scraper/test/keyword-intelligence-infrastructure.test.js, email_scraper/test/keyword-intelligence-build.test.js, email_scraper/test/keyword-intelligence-deployment-guard.test.js, KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md append-only KI-W7 entry, ACTIVE_EXECUTION_STATE.md one-version CAS handoff]
+read_only_scope: [all other backend/frontend/root paths, existing AWS specification/evidence, accepted W6 evidence, official AWS documentation]
+authorized_actions: [single_file_leaf_edits, local_static_and_test_commands, deterministic_keyword_and_recovery_builds, local_template_and_packet_validation, one_frozen_npm_test, one_frozen_secret_scan, append_handoff_evidence, A5_CAS_to_AWAITING_REVIEW]
+prohibited_actions: [AWS_API_or_CLI_call, network_provider_call, paid_call, production_or_test_database_call, source_schema_migration_package_lock_frontend_edit, existing_resource_removal_rename_replacement_or_disable, direct_sam_deploy_path, credential_or_secret_read, commit, push, KI-W8_action]
 successor: STOP_AWS_MUTATION_APPROVAL
 successor_reserved_for: parent
 may_start_successor: false
 ```
 
-- [ ] `KI-W7-P1` Assignment/hashes/version and explicit source-edit approval match. Evidence: ___
-- [ ] `KI-W7-P2` W6 accepted artifact/resource measurements exist. Evidence: ___
-- [ ] `KI-W7-P3` Local SAM/build tools available or exact skip recorded; no AWS credential required. Evidence: ___
-- [ ] `KI-W7-P4` Shared template/build symbols and dirty state recorded. Evidence: ___
+The exact 13-path inventory and starting states are:
 
-#### Task block `KI-W7-T1`
+| Path | Start SHA-256 |
+|---|---|
+| `email_scraper/src/config.js` | `222daf3780cefa0f061cf486d978d84126fdee6d0a1adf358087b8db2bcc03f9` |
+| `email_scraper/src/aws-pipeline/runtime-config.js` | `1801455db1e4c88c63e9d8215e4b1f3770990359518fe07877c3b0218f11576b` |
+| `email_scraper/src/aws-pipeline/keyword-intelligence/handler.js` | `c6a38b0bb4adf19058b53b9e24b0ae3308f590a8d2eb387ca82d1bb0ab16c414` |
+| `email_scraper/src/aws-pipeline/handlers/recovery.js` | `7a633679b7d0894c789bf01fb32bd056fdc50ac6a11d8080db52e8fefad81e78` |
+| `email_scraper/infrastructure/aws/template.yaml` | `9e5366c95250d37caf0190611d14ca308b03ee20b9c4a0758c8e82b0233c058f` |
+| `email_scraper/scripts/measure-keyword-worker-package.js` | `ABSENT` |
+| `email_scraper/scripts/keyword-intelligence/create-change-set.js` | `ABSENT` |
+| `email_scraper/scripts/keyword-intelligence/inspect-stack.js` | `ABSENT` |
+| `email_scraper/test/aws-pipeline-runtime-adapters.test.js` | `5131d1c7eb0df24516804c2801288b0dd323cd10b4e7933ffdefa52b40b573d6` |
+| `email_scraper/test/keyword-intelligence-deployment-runtime.test.js` | `ABSENT` |
+| `email_scraper/test/keyword-intelligence-infrastructure.test.js` | `ABSENT` |
+| `email_scraper/test/keyword-intelligence-build.test.js` | `ABSENT` |
+| `email_scraper/test/keyword-intelligence-deployment-guard.test.js` | `ABSENT` |
 
-1. **Task:** add exactly one standard SQS queue, one DLQ/redrive policy, one Node
-   Lambda, batch-size-one event mapping without MaximumConcurrency=1, one
-   recovery schedule, least-privilege IAM, log/alarm/output entries, and build
-   inclusion.
-2. **Requirements/decisions:** `INV-KI-001`–`007`, `012`, `AUTH-KI-005`,
-   `DEC-KI-001`, `022`, `024`, `025`.
-3. **Source:** existing SAM/build patterns `SRC-KI-016`; W6 emitted closure.
-4. **Target:** exact shared symbols/owned tests in header, including only the
-   `AWS_PIPELINE_KEYWORD_RESEARCH_QUEUE_URL` →
-   `awsPipelineKeywordResearchQueueUrl` configuration seam locked by
-   `DEC-KI-027`.
-5. **Interface/schema:** handler `handler`; environment only existing secret/DB/
-   bucket plus `AWS_PIPELINE_KEYWORD_RESEARCH_QUEUE_URL` and config version;
-   runtime exposes that value only as `awsPipelineKeywordResearchQueueUrl`;
-   outputs expose function/queue/DLQ
-   names/ARNs without secret values.
-6. **Algorithm:** additive resources/wiring; event mapping batch size 1 and
-   function response types `ReportBatchItemFailures`; function reserved
-   concurrency 1, timeout 180 seconds, memory 1024 MiB, ephemeral storage
-   512 MiB; source queue visibility 360 seconds/retention 4 days, DLQ retention
-   14 days, redrive maxReceiveCount 5; recovery schedule `rate(1 minute)` invokes
-   the recovery discriminator.
-7. **Operations:** template/build/validate only; no cloud command.
-8. **Atomicity:** deployment atomicity deferred to approved stack action; runtime
-   remains Neon-fenced.
-9. **Identities:** deterministic SAM logical IDs; no production physical names
-   guessed; S3 prefix/queue contract from decisions.
-10. **Failure/replay:** DLQ/redrive/alarms declared; mapping disabled/enabled
-    default follows existing safe deployment convention; no mutation now.
-11. **Dependencies/bounds:** accepted artifact must fit existing Lambda package
-    limits; no MaximumConcurrency setting; batch1; reserved1; timeout180;
-    memory1024; ephemeral512; visibility360; 32MiB S3 artifact never enters SQS.
-12. **Callers/obsolete:** add handler to build inventory; do not change existing
-    discovery/lead/traffic resources.
-13. **Tests:** template parse/assert all exact resources/properties/IAM/env;
-    runtime config accepts one HTTPS queue URL, rejects missing/non-HTTPS with
-    `KEYWORD_RUNTIME_CONFIG_INVALID`, and exposes the exact camel-case property;
-    emitted inventory contains handler/dependencies once; startup mock invoke;
-    negative control adds forbidden Step Functions/Fargate/MaxConcurrency1 and
-    topology test fails.
-14. **Output:** deployable source for separately approved W8.
-15. **Non-goals:** AWS create/update, secrets, mapping enablement, provider call.
+- [ ] `KI-W7-P1` A5 assigns only KI-W7 and pins A1–A4/A8 plus both standards; all revisions and the 13-path set digest match. Evidence: ___
+- [ ] `KI-W7-P2` Backend and frontend starting HEAD/status and every path baseline above are recorded; unrelated changes stop assignment. Evidence: ___
+- [ ] `KI-W7-P3` KI-W6 is accepted and its keyword ZIP/build/runtime evidence is present; no local-product gate remains open. Evidence: ___
+- [ ] `KI-W7-P4` `SRC-KI-060` reproduces: wrong default production repository, missing combined recovery, missing two config members, absent ten template resources and absent three new scripts/four new tests. Evidence: ___
+- [ ] `KI-W7-P5` Node 24, npm, zip/unzip and installed dependencies are available; `sam` is absent and is not a gate because the template is literal JSON plus executable topology tests. Evidence: ___
+- [ ] `KI-W7-P6` No AWS credential, provider credential, database URL, network call or production identifier is required for W7. Evidence: ___
 
-- [ ] `KI-W7-T1` Perform the fully specified infrastructure-source change above.
+#### Task block `KI-W7-T1` — configuration seam
 
-- [ ] `KI-W7-V1` Execute infrastructure topology/build/startup scenarios and negative controls.
-- [ ] `KI-W7-V2` Run SAM validation if installed, handler build/inventory/size, backend regression/security tests.
-- [ ] `KI-W7-V3` Assert measured timeout/memory/package/visibility/concurrency settings cover W6 bounds and do not mask growth.
-- [ ] `KI-W7-V4` Assert no credential/value, broad IAM, existing topology change, or AWS mutation.
-- [ ] `KI-W7-H1` Record files/symbols. Evidence: ___
-- [ ] `KI-W7-H2` Record commands/outcomes/skips. Evidence: ___
-- [ ] `KI-W7-H3` Diff matches additive scope. Evidence: ___
-- [ ] `KI-W7-H4` No W8/live action. Evidence: ___
-- [ ] `KI-W7-H5` Append evidence; A5 `AWAITING_REVIEW` by CAS. Evidence: ___
-- [ ] `KI-W7-H6` Stop for exact AWS mutation/provider approval.
+1. **Task:** add the exact disabled-by-default keyword flag and queue URL to application/runtime configuration.
+2. **Requirements/decisions:** `DEC-KI-027`, `DEC-KI-059`; `INV-KI-002/012`.
+3. **Source:** `SRC-KI-060`; current config/runtime-config baselines above.
+4. **Target:** `src/config.js` two object members only; `runtime-config.js` keyword validation/projection only.
+5. **Interface/schema:** exact names/environment/defaults and active/inactive union in `DEC-KI-059`.
+6. **Algorithm:** parse strict boolean; active iff flag true and URL HTTPS; preserve all six established queue checks byte-equivalently.
+7. **Operations:** pure local configuration; zero I/O beyond `process.env` already used.
+8. **Atomicity:** configuration object is returned frozen or throws before runtime clients.
+9. **Identities:** no queue alias; exact environment/camel-case mapping.
+10. **Failure/replay:** false+empty succeeds inactive; true+empty/non-HTTPS throws `KEYWORD_RUNTIME_CONFIG_INVALID`; repeated loads are equal.
+11. **Dependencies/bounds:** existing local and AWS modes unchanged.
+12. **Callers/obsolete:** keyword handler, server dispatcher and recovery consume the two members; no consumer reads environment directly.
+13. **Tests:** `W7-RUNTIME-01`, `W7-NC-01/02`; existing runtime config cases remain green.
+14. **Output:** two deterministic config members with no secret value.
+15. **Non-goals:** backend hosting mutation or queue creation.
 
-### `KI-W8` — Approved deployment and live canary
+#### Task block `KI-W7-T2` — production handler and combined recovery
+
+1. **Task:** select `PrismaKeywordResearchRepository` in the uninjected keyword Lambda and compose keyword recovery into the existing scheduled handler.
+2. **Requirements/decisions:** `DEC-KI-001/018/026/059`; `INV-KI-004`–`007`.
+3. **Source:** `SRC-KI-060`; accepted handler/recovery/service contracts.
+4. **Target:** exactly the two production handler files in the inventory.
+5. **Interface/schema:** injected-runtime behavior, production repository construction and `{pipeline,keyword}` recovery result are literal `DEC-KI-059` members.
+6. **Algorithm:** create shared runtime once; construct keyword repository from the same Prisma client; capture one Date; established recovery first; keyword recovery only when active.
+7. **Operations:** no new HTTP/S3/SQS behavior; only already-defined service calls.
+8. **Atomicity:** each repository operation retains its existing Neon transaction/fence; no cross-service transaction is introduced.
+9. **Identities:** persisted research/task/generation identities only; owner never enters messages.
+10. **Failure/replay:** missing production prerequisites fail before batch; inactive recovery sends zero keyword messages; first failure propagates without relabel.
+11. **Dependencies/bounds:** keyword artifact max exactly `33554432`; recovery limit `1..100`; existing five-minute schedule.
+12. **Callers/obsolete:** Lambda exports remain `handler`; no whole-run Lambda or second recovery entry.
+13. **Tests:** `W7-RUNTIME-02`, `W7-NC-03/04`; injected and uninjected paths; call order and repository class identity.
+14. **Output:** production-safe keyword worker and one combined recovery handler.
+15. **Non-goals:** service/repository algorithm, lease, retry, cost or schema change.
+
+#### Task block `KI-W7-T3` — SAM topology
+
+1. **Task:** add exactly the `DEC-KI-059` parameters, condition, ten resources and four outputs, plus narrow RecoveryRole/ControlPlanePolicy/Recovery environment extensions.
+2. **Requirements/decisions:** `DEC-KI-020/024/025/059`; `INV-KI-001/002/012`.
+3. **Source:** exact current template resource patterns and official AWS constraints in `SRC-KI-060`.
+4. **Target:** `infrastructure/aws/template.yaml`; named logical members only.
+5. **Interface/schema:** exact logical IDs, parameter patterns, output IDs, IAM actions/resources and environment names in `DEC-KI-059`.
+6. **Algorithm:** additive JSON object members; condition controls only keyword mapping Enabled and keyword activation environment values.
+7. **Operations:** source edit and JSON parse only; no cloud command.
+8. **Atomicity:** CloudFormation application deferred to W8 reviewed change sets.
+9. **Identities:** stack-derived physical names; no account ID or ARN literal.
+10. **Failure/replay:** disabled is template default; DLQ max receive five; alarms are no-action evidence alarms.
+11. **Dependencies/bounds:** 180s/1024MiB/reserved1/512MiB; queue 1080s/4d/256KiB/20s; DLQ14d; batch1/window0; no ScalingConfig.
+12. **Callers/obsolete:** current seven functions, six queues/mappings, schedule, bucket and secret stay; no second schedule.
+13. **Tests:** `W7-INFRA-01`–`06`, `W7-NC-05`–`09`; exact inventory/set equality and existing-resource deep equality outside named extensions.
+14. **Output:** disabled deployable keyword topology.
+15. **Non-goals:** applied stack state or secret version.
+
+#### Task block `KI-W7-T4` — deterministic keyword package measurement
+
+1. **Task:** add one measurement script for `keyword-worker.zip` without changing either accepted builder.
+2. **Requirements/decisions:** `DEC-KI-024/059`.
+3. **Source:** `scripts/measure-lambda-packages.js` and `build-keyword-worker.js` read-only patterns.
+4. **Target:** `scripts/measure-keyword-worker-package.js` only.
+5. **Interface/schema:** JSON report `{node,measurements:[one keyword-worker member]}` with established member names.
+6. **Algorithm:** sorted ZIP/extracted inventory, one allowed Prisma engine, safe paths, forbidden-file scan, size bounds, cold import.
+7. **Operations:** local temp extraction and own report only; preserve every sibling ZIP.
+8. **Atomicity:** report is written only after all validations pass.
+9. **Identities:** handler exactly `keyword-worker`; content hashes from bytes.
+10. **Failure/replay:** two unchanged builds/reports are byte-equivalent except explicitly excluded timing/RSS measurements; package bytes must be identical.
+11. **Dependencies/bounds:** ZIP ≤45 MiB; expanded ≤200 MiB; one Node24 importable `index.mjs` and one required engine.
+12. **Callers/obsolete:** W7 build gate only; established seven-handler measurement remains unchanged.
+13. **Tests:** `W7-BUILD-01`, `W7-NC-10`.
+14. **Output:** sanitized keyword measurement evidence.
+15. **Non-goals:** Lambda resource increase or ZIP upload.
+
+#### Task block `KI-W7-T5` — guarded keyword deployment scripts
+
+1. **Task:** add one packet/change-set script and one read-only deployed-state inspector dedicated to the keyword slice.
+2. **Requirements/decisions:** `DEC-KI-025/059`; `AUTH-KI-005`; `EXC-KI-008`.
+3. **Source:** current guarded AWS scripts and deployment specification; `SRC-KI-060`.
+4. **Target:** exactly `scripts/keyword-intelligence/create-change-set.js` and `inspect-stack.js`.
+5. **Interface/schema:** profile/region/stack/environment, two ZIPs, template, approval-token, reviewed-change-set and disabled/active modes exactly as `DEC-KI-059`.
+6. **Algorithm:** deterministic packet → local hash validation → optional separately authorized encrypted/versioned upload → create/review → recorded exact ID → separately authorized execute; inspector compares all keyword and unchanged established invariants.
+7. **Operations:** scripts default to packet/read-only behavior; mutation branches require `--execute`, exact A5 token and exact phase.
+8. **Atomicity:** one CloudFormation change set per disabled or activation update; no direct resource mutation.
+9. **Identities:** content-addressed S3 keys and STS account; no guessed account.
+10. **Failure/replay:** stale hashes/tokens/IDs, remove/replacement, wildcard IAM, unlisted direct change or incomplete stack fail closed.
+11. **Dependencies/bounds:** disabled deployment and activation are separate phases; retained versioned objects; no queue receive/purge/redrive.
+12. **Callers/obsolete:** W8 window agent only; no generic G14/G15 phase is weakened.
+13. **Tests:** `W7-DEPLOY-01/02`, `W7-CONF-01`, `W7-NC-11/12`; spawn AWS stub, never a real CLI call.
+14. **Output:** reviewable W8 action packet and applied-state inspector.
+15. **Non-goals:** execute W8 or store credentials.
+
+#### Task block `KI-W7-T6` — executable enforcement
+
+1. **Task:** implement the five exact W7 test owners and one literal manifest embedded in the deployment-guard test.
+2. **Requirements/decisions:** all W7 requirements; `DEC-KI-059`.
+3. **Source:** T1–T5 interfaces and baselines.
+4. **Target:** the five test paths only.
+5. **Interface/schema:** required cases are exactly `W7-INFRA-01`–`06`, `W7-RUNTIME-01/02`, `W7-BUILD-01`, `W7-DEPLOY-01/02`, `W7-CONF-01`; controls exactly `W7-NC-01`–`12`.
+6. **Algorithm:** one registry per owner; merge once at integration; sorted-member-plus-LF digests.
+7. **Operations:** local fakes/temp directories only; no network/database/AWS/provider client.
+8. **Atomicity:** captured source mutation controls never write production files.
+9. **Identities:** unique case/control IDs; no wildcard or computed-at-dispatch membership.
+10. **Failure/replay:** every control proves positive→mutated-failure→fresh-positive.
+11. **Dependencies/bounds:** 12 cases digest `6bacf5d9291362ee0d01f5d0d8e3e53f8f9e214a6ebbf5711497c80f3d74aa2e`; 12 controls digest `6950a20f91b666c03cf59c495576e72ad1501fcd58aa5f4378900bd473edafd7`.
+12. **Callers/obsolete:** no existing accepted case ID or test is rewritten except the owned runtime-config describe block.
+13. **Tests:** each owner file focused, then integration merge; zero skips.
+14. **Output:** enforcement certificate with required=registered=executed and zero exceptional members.
+15. **Non-goals:** production source decisions or live parity.
+
+#### W7 case/control allocation and decomposition contract
+
+```json
+{
+  "requiredCases": [
+    "W7-BUILD-01", "W7-CONF-01", "W7-DEPLOY-01", "W7-DEPLOY-02",
+    "W7-INFRA-01", "W7-INFRA-02", "W7-INFRA-03", "W7-INFRA-04",
+    "W7-INFRA-05", "W7-INFRA-06", "W7-RUNTIME-01", "W7-RUNTIME-02"
+  ],
+  "requiredControls": [
+    "W7-NC-01", "W7-NC-02", "W7-NC-03", "W7-NC-04", "W7-NC-05",
+    "W7-NC-06", "W7-NC-07", "W7-NC-08", "W7-NC-09", "W7-NC-10",
+    "W7-NC-11", "W7-NC-12"
+  ]
+}
+```
+
+| Owner | Cases | Controls |
+|---|---|---|
+| runtime config | `W7-RUNTIME-01` | `W7-NC-01/02` |
+| handler/recovery runtime | `W7-RUNTIME-02` | `W7-NC-03/04` |
+| infrastructure | `W7-INFRA-01`–`06` | `W7-NC-05`–`09` |
+| build | `W7-BUILD-01` | `W7-NC-10` |
+| deployment guard | `W7-DEPLOY-01/02`, `W7-CONF-01` | `W7-NC-11/12` |
+
+| Case | Unique activation/effect oracle |
+|---|---|
+| `W7-RUNTIME-01` | inactive and active config partitions produce the exact two members/error code while six established queues remain equal |
+| `W7-RUNTIME-02` | uninjected handler constructs the keyword repository; active/inactive combined recovery proves order, class and sends |
+| `W7-INFRA-01` | exact parameter/condition/ten-resource/four-output set equality |
+| `W7-INFRA-02` | queue/DLQ literal properties and `1080=6*180` |
+| `W7-INFRA-03` | worker/log/mapping runtime, resource and absent-scaling equality |
+| `W7-INFRA-04` | exactly one unchanged five-minute Recovery rule and one combined Recovery handler |
+| `W7-INFRA-05` | exact keyword worker, recovery and control-plane IAM actions/resources/prefixes |
+| `W7-INFRA-06` | default-disabled condition plus active projection; established resource deep equality outside named extensions |
+| `W7-BUILD-01` | deterministic keyword ZIP, one engine, safe inventory, sizes, cold import and sibling preservation |
+| `W7-DEPLOY-01` | exact template/two-ZIP content-addressed packet and source/hash equality |
+| `W7-DEPLOY-02` | disabled/activation change-set allowlists, reviewed-ID/token requirement and no direct deploy path |
+| `W7-CONF-01` | 12/12 case/control registry equality, digests, zero skips/unexpected members and zero external call |
+
+| Control | Single captured mutation | Unchanged oracle that must fail |
+|---|---|---|
+| `W7-NC-01` | active flag true with empty keyword URL | `W7-RUNTIME-01` exact coded rejection |
+| `W7-NC-02` | active flag true with `http:` keyword URL | `W7-RUNTIME-01` exact coded rejection |
+| `W7-NC-03` | uninjected handler retains `base.repository` | `W7-RUNTIME-02` repository class/Prisma identity |
+| `W7-NC-04` | inactive recovery invokes `recoverKeywordWork` once | `W7-RUNTIME-02` zero keyword read/send |
+| `W7-NC-05` | keyword queue visibility changed to `360` | `W7-INFRA-02` exact `1080` and six-times equation |
+| `W7-NC-06` | mapping gains `ScalingConfig.MaximumConcurrency:1` | `W7-INFRA-03` absent-scaling member set |
+| `W7-NC-07` | second recovery rule inserted | `W7-INFRA-04` schedule cardinality/exact reuse |
+| `W7-NC-08` | one keyword S3/SQS IAM resource changed to `"*"` | `W7-INFRA-05` exact action/resource equality |
+| `W7-NC-09` | mapping Enabled changed to literal true | `W7-INFRA-06` condition/default-disabled equality |
+| `W7-NC-10` | synthetic archive inventory gains `.env` | `W7-BUILD-01` forbidden-member rejection |
+| `W7-NC-11` | one packet object SHA differs from local bytes | `W7-DEPLOY-01` source/packet equality |
+| `W7-NC-12` | synthetic reviewed change set gains one Remove | `W7-DEPLOY-02` exact allowlist/replacement equality |
+
+The window agent must decompose into 13 single-file leaves. Wave 1 contains
+`config.js`, `runtime-config.js`, `handler.js`, `recovery.js`, template, and the
+measurement script and may run in parallel because `DEC-KI-059` freezes their
+interfaces. Wave 2 contains the two deployment scripts and requires the template
+leaf accepted. Wave 3 contains the five tests and requires every production/
+script owner it tests accepted. The window agent then performs one zero-write
+integration assessment; leaves never edit A1–A8 or talk to the parent.
+
+- [ ] `KI-W7-V1` Exact 13-path scope/baseline/final set and no other nested change. Evidence: ___
+- [ ] `KI-W7-V2` `node --check` all eight production/script files; JSON parse template; five focused test files pass with 12 cases/12 controls and zero skips. Evidence: ___
+- [ ] `KI-W7-V3` Run `node scripts/build-lambda.js`, `node scripts/build-keyword-worker.js`, keyword measurement, then repeat the keyword build once; keyword ZIP hashes equal, seven sibling ZIP hashes unchanged, limits/startup pass. Evidence: ___
+- [ ] `KI-W7-V4` Run `npm test` once and `npm run check:secrets` once after final edit; zero failure. Evidence: ___
+- [ ] `KI-W7-V5` Independently recompute logical-resource/property/IAM/config/case/control/path sets and all four digests; negative controls falsify. Evidence: ___
+- [ ] `KI-W7-V6` Prove no AWS/network/provider/database call, credential read, source package/schema/frontend edit, commit or KI-W8 action. Evidence: ___
+- [ ] `KI-W7-H1` Append changed files/symbols, exact commands/outcomes, build hashes/sizes/startup, controls, skipped-none statement and residual prerequisites to A6. Evidence: ___
+- [ ] `KI-W7-H2` CAS A5 one version to `AWAITING_REVIEW`, `accepted_through: KI-W6`, `next_window: KI-W8`, `may_start_successor:false`; stop. Evidence: ___
+
+### `KI-W8` — separately approved disabled deployment, activation and one canary
 
 ```yaml
 window_id: KI-W8
-objective: Read-only preflight, then only explicitly approved resource/secret/mapping/provider actions, followed by one bounded production-format canary.
-depends_on: [KI-W7, explicit_action_by_action_approvals]
-consumes: accepted template/artifacts; exact account/region/resource targets supplied or discovered read-only
-produces: applied capability evidence, deployed resources, sanitized nonempty canary evidence, rollback/disable state
-assigned_agent_policy: one_window
-authorized_write_scope: KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md and ACTIVE_EXECUTION_STATE.md only; deployed targets exactly named in approval
-shared_file_scope: A5/A6 versioned append/status only
-read_only_scope: deployed stack/log/metric/config descriptions and owner-scoped canary result
-authorized_actions: [approved_read_only_AWS_preflight, individually_approved_stack_mutation, individually_approved_secret_reference, individually_approved_event_mapping_enablement, one_approved_paid_canary, evidence_updates]
-prohibited_actions: [unapproved_mutation, queue_receive_or_purge, DLQ_redrive, broad_S3_access, production_data_deletion, arbitrary_provider_calls, source_edits, commits]
+objective: Prove applied capability, deploy the accepted keyword slice disabled, queue one one-seed research through the normal API, activate the mapping/recovery, complete that same research and its run handoff, then stop before downstream run confirmation.
+depends_on: [accepted_KI-W7, exact_action_manifest, separate_requester_approvals]
+consumes: [accepted_W7_packet_template_and_two_ZIPs, DEC-KI-059, applied_read_only_preflight]
+produces: [disabled_and_active_stack_witnesses, one_paid_keyword_canary, owner_visible_result_and_run_handoff, sanitized_cost_runtime_privacy_evidence]
+assigned_agent_policy: window_agent_personal_execution_no_leaf_delegation
+authorized_write_scope: [KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md append-only KI-W8 entries, ACTIVE_EXECUTION_STATE.md one-version transitions, generated gitignored deployment packet/evidence paths named by accepted W7 scripts]
+external_write_scope: only exact resource and hosting mutations individually approved after read-only preflight
+authorized_actions: read-only preflight is assignable; every mutation and the paid canary require their named approval token
+prohibited_actions: [source_test_schema_migration_package_lock_commit_push_edit, unapproved_AWS_or_host_mutation, second_canary, downstream_Run_confirmation, Google_Browserless_DataForSEO_traffic_CrUX_downstream_run_work, queue_receive_purge_redrive, DLQ_replay, S3_or_database_delete, secret_value_logging, broad_rollout, final_completion_declaration]
 successor: STOP_FINAL_INDEPENDENT_REVIEW
 successor_reserved_for: parent
 may_start_successor: false
 ```
 
-- [ ] `KI-W8-P1` Assignment/hashes/version and exact approvals/resources/actions match. Evidence: ___
-- [ ] `KI-W8-P2` W7 accepted artifact/template hashes exist. Evidence: ___
-- [ ] `KI-W8-P3` Read-only applied quotas, region, permissions, DB transport, bucket/queue limits, and provider capability satisfy locked bounds. Evidence: ___
-- [ ] `KI-W8-P4` Starting deployed state and exact mutation targets recorded without secrets. Evidence: ___
+W8 has no implementation-file leaf. Its window agent authors one zero-source-write
+assessment with the exact action manifest below, executes only currently approved
+steps sequentially, and returns for the missing approval rather than combining
+approval gates.
 
-#### Task block `KI-W8-T1`
+- [ ] `KI-W8-P1` A5 assigns only KI-W8, pins accepted W7 A1–A4/A8 and both standards, and names exact generated packet/template/ZIP hashes. Evidence: ___
+- [ ] `KI-W8-P2` Read-only STS proves the account; region is `ap-south-2`, profile `storesignal-dev`, stack `storesignal-production-pipeline`, status complete; current inventory/config/IAM/queues/DLQs/mappings/schedule/logs/alarms and attachment target are recorded sanitized. Evidence: ___
+- [ ] `KI-W8-P3` Read-only Lambda/SQS/account quota checks satisfy reserved concurrency 1, timeout 180, memory 1024, ZIP/expanded limits, mapping creation and queue limits; mismatch stops. Evidence: ___
+- [ ] `KI-W8-P4` Secret metadata and an in-memory key-name/strict-parser check prove the current secret can supply the accepted strict schema and nonempty DataForSEO credentials without printing values; otherwise stop for separate secret-version approval. Evidence: ___
+- [ ] `KI-W8-P5` Provider capability is checked without a paid endpoint call; current prices/limits and `$3` cap are recorded. If capability cannot be proven read-only, stop for explicit capability-probe approval. Evidence: ___
+- [ ] `KI-W8-P6` Source/packet hashes equal accepted W7, keyword/recovery ZIPs cold-import, initial keyword nonterminal count and keyword queue/DLQ counts are zero, and no unapproved mutation is pending. Evidence: ___
 
-1. **Task:** execute only approved preflight/mutations, then one 1-seed
-   production-format canary whose sanitized result reaches dashboard and run
-   handoff; disable/rollback only by its preapproved branch.
-2. **Requirements/decisions:** `AUTH-KI-005`, `INV-KI-001`–`015`,
-   `DEC-KI-025`.
-3. **Source:** accepted W7 artifacts and exact approved AWS/account/provider
-   evidence; no published default substitutes.
-4. **Target:** exact approved stack resources and evidence/state files only.
-5. **Interface/schema:** deployed units must hash-match accepted artifacts;
-   canary uses normal strict API/messages/artifacts, no admin shortcut.
-6. **Algorithm:** read-only capability/config preflight → compare every applied
-   value → stop if mismatch → disclose/execute each approved mutation → verify
-   disabled state → approved secret reference → enable mapping → one seed canary
-   → verify durable terminal/UI/handoff → observe alarms/DLQ → stop.
-7. **Operations:** exact AWS/provider commands are recorded before execution;
-   one canary may incur exactly two US expansion tasks, one US anchor-screen
-   task, and eight remaining-market tasks when the shortlist is nonempty: 11
-   first-pass logical calls and at most 55 attempts under the locked known retry
-   rules. Its reservation is computed from actual candidate/shortlist lengths
-   under `DEC-KI-009` and can never exceed the `$3.00` hard cap.
-8. **Atomicity:** CloudFormation stack action plus runtime Neon/S3 recovered
-   boundaries; failed deploy follows approved stack rollback, never manual purge.
-9. **Identities:** exact account/region/stack/research/generation/artifact hashes
-   recorded sanitized; no learning resource reused as production contract.
-10. **Failure/replay:** any capability/permission/contract/ambiguity failure stops;
-    no second paid canary; disable mapping only if preapproved; no queue purge.
-11. **Dependencies/bounds:** applied values must meet W6/W7 measurements; one
-    seed; reserved1/batch1; alarm/log/privacy policies.
-12. **Callers/obsolete:** actual API→queue→Lambda path only; no local direct
-    invocation as canary proof.
-13. **Tests:** `SCN-KI-019`; activation witnesses: real API, SQS receive by
-    mapping, each worker stage, Neon rows, S3 artifacts, completed owner UI and
-    run snapshot; exact counts/cost; negative control is disabled mapping before
-    enable and must leave queued/not completed without hidden processor.
-14. **Output:** live evidence for independent final review only.
-15. **Non-goals:** broad rollout, load test, second canary, purges/redrive,
-    final completion declaration.
+#### Task block `KI-W8-T1` — disabled stack deployment
 
-- [ ] `KI-W8-T1` Perform only the specifically approved deployment/canary actions above.
+1. **Task:** disclose, approve, review and apply the accepted disabled keyword change set.
+2. **Requirements/decisions:** `DEC-KI-025/059`; `AUTH-KI-005`.
+3. **Source:** accepted W7 packet and P1–P6 applied facts.
+4. **Target:** exact production stack and content-addressed template/keyword/recovery objects.
+5. **Interface/schema:** `KeywordResearchEnabled=false`; exact direct-change allowlist from `DEC-KI-059`; conditional dependent changes must be named by reviewed CloudFormation details.
+6. **Algorithm:** upload approved objects → create change set → compare direct/conditional changes → persist ID → requester approves exact token → execute → wait complete → inspect disabled.
+7. **Operations:** `W8-ACT-01` upload/create-review and `W8-ACT-02` execute are separate approvals.
+8. **Atomicity:** CloudFormation only; rollback status must complete before proceeding.
+9. **Identities:** STS account, fixed profile/region/stack and content hashes.
+10. **Failure/replay:** failed/review-drift change set stops; no manual repair or second execute.
+11. **Dependencies/bounds:** mapping disabled, keyword/recovery flags false, source/DLQ empty, established mappings/schedule remain active.
+12. **Callers/obsolete:** generic G14/G15 scripts are not used or weakened.
+13. **Tests:** `W8-LIVE-01`–`03`, `W8-NC-01/02`.
+14. **Output:** inspected disabled keyword resources.
+15. **Non-goals:** host config, activation or provider call.
 
-- [ ] `KI-W8-V1` Execute `SCN-KI-019` with real nonempty activation and negative control.
-- [ ] `KI-W8-V2` Verify deployed hashes/config/IAM/event mapping/logs/alarms and exact durable/public state.
-- [ ] `KI-W8-V3` Record actual calls/cost/duration/memory/artifact/message sizes against bounds.
-- [ ] `KI-W8-V4` Confirm privacy, owner isolation, no DLQ/hidden retry, and no unapproved mutation.
-- [ ] `KI-W8-H1` Record exact external mutations/resources and reversibility. Evidence: ___
-- [ ] `KI-W8-H2` Record commands/outcomes/cost/skips sanitized. Evidence: ___
-- [ ] `KI-W8-H3` Source/evidence diff and deployed hashes match scope. Evidence: ___
-- [ ] `KI-W8-H4` No final-review work or extra canary. Evidence: ___
-- [ ] `KI-W8-H5` Append evidence; A5 `AWAITING_REVIEW` by CAS. Evidence: ___
-- [ ] `KI-W8-H6` Stop for independent parent final review.
+#### Task block `KI-W8-T2` — normal queued negative control and activation
+
+1. **Task:** separately configure the backend host, create one normal queued research while disabled, then activate the accepted mapping/recovery parameter.
+2. **Requirements/decisions:** `DEC-KI-059`; owner/auth and durable queue invariants.
+3. **Source:** disabled stack outputs and approved host target discovered in P2.
+4. **Target:** exact host environment/role attachment members, then exact activation change set.
+5. **Interface/schema:** host receives only keyword queue URL and literal true flag; existing policy gains no extra statement beyond accepted ControlPlanePolicy.
+6. **Algorithm:** approve/apply host config → normal authenticated one-seed POST → observe durable queued research and exactly one visible source message/zero worker log → review/approve/apply activation → same message is consumed.
+7. **Operations:** `W8-ACT-03` host config, `W8-ACT-04` one API research creation, `W8-ACT-05` activation are separate approvals; ACT-04 reserves spend but does not call provider while disabled.
+8. **Atomicity:** durable research exists before send; stack activation is atomic; no queue manipulation.
+9. **Identities:** one sanitized owner/research/client request; exact queue output.
+10. **Failure/replay:** API ambiguity uses normal idempotency/status read; no second research ID; hidden processing while disabled fails the window.
+11. **Dependencies/bounds:** exactly one seed; one queued message; no keyword Lambda invocation before activation.
+12. **Callers/obsolete:** normal public API only; no admin insert/direct Lambda invoke/send-message command.
+13. **Tests:** `W8-LIVE-04/05`, `W8-NC-03/04`.
+14. **Output:** activated worker processing the original queued research.
+15. **Non-goals:** downstream Run start or load test.
+
+#### Task block `KI-W8-T3` — paid completion and bounded handoff
+
+1. **Task:** observe the sole canary through terminal research, dashboard and normal run handoff, then inspect operational/privacy state.
+2. **Requirements/decisions:** `DEC-KI-004/009/014/017/059`; `AUTH-KI-005/007`.
+3. **Source:** same research from T2; strict live contracts only.
+4. **Target:** owner-scoped API/UI, durable Neon rows, immutable S3 keys, CloudWatch/log/queue/DLQ/alarm read state and one run handoff.
+5. **Interface/schema:** no fixture/substitute; exact v1 messages/artifacts/result/selection and normal handoff client key.
+6. **Algorithm:** observe expansion→anchor→market→final → save/default selection → one run handoff → read Run/RunQuery workspace → stop before confirmation.
+7. **Operations:** the paid execution caused by activation is `W8-ACT-06`; no second paid action. Read-only observations follow.
+8. **Atomicity:** S3-before-Neon, terminal counters, fenced final publication and atomic handoff remain authoritative.
+9. **Identities:** exact research/generation/task/attempt/artifact/run lineage recorded by hashes/counts, not private values.
+10. **Failure/replay:** ambiguity/retry remains durable; any failed research, DLQ member, alarm, cost breach or privacy leak stops; rollback requires separate `W8-ACT-07` approval.
+11. **Dependencies/bounds:** planned 11 first-pass logical calls/≤55 attempts/≤$3; actual may be smaller through cache or empty shortlist and is recorded. RunQuery count `1..100`; downstream confirmation count exactly zero.
+12. **Callers/obsolete:** real SQS mapping/Lambda path; local invocation cannot substitute.
+13. **Tests:** `W8-LIVE-06`–`09`, `W8-CONF-01`, `W8-NC-05/06`.
+14. **Output:** sanitized production canary certificate for independent review.
+15. **Non-goals:** broad enablement claim, downstream Google/domain/lead/traffic/CrUX canary, deletion or final acceptance.
+
+#### W8 action manifest and executable coverage
+
+| Action | Effect | Required approval |
+|---|---|---|
+| `W8-ACT-01` | upload accepted versioned objects and create disabled change set only | exact object keys/hashes and change-set creation |
+| `W8-ACT-02` | execute recorded disabled change-set ID | exact reviewed ID/token |
+| `W8-ACT-03` | attach/use accepted policy and set two backend host values | exact host/service/revision and values by name, never value output |
+| `W8-ACT-04` | create the sole one-seed research through normal API while mapping disabled | seed/owner/spend disclosure |
+| `W8-ACT-05` | execute recorded activation change-set ID | exact reviewed ID/token |
+| `W8-ACT-06` | allow that queued research to make its bounded paid calls | one research ID, 11-call first-pass ceiling, 55-attempt/$3 ceilings |
+| `W8-ACT-07` | on failure only, set host flag and stack activation false | separate rollback approval; no purge/delete |
+
+Required live IDs are exactly `W8-LIVE-01`–`09` and `W8-CONF-01`, digest
+`b716a609b2269f69d4e042503ad47dabb1eb397e17726af850f38ab09940431a`.
+Controls are exactly `W8-NC-01`–`06`, digest
+`1a2fd2fb71c94f297b27c5c6ad580c67d94ae807525b420996bd4382d46b7c6e`.
+`W8-CONF-01` requires required=registered=executed=activated for all ten IDs,
+all six controls falsified, zero skips/unexpected members, and an ordered action
+ledger showing no action without its own approval.
+
+```json
+{
+  "requiredCases": [
+    "W8-CONF-01", "W8-LIVE-01", "W8-LIVE-02", "W8-LIVE-03",
+    "W8-LIVE-04", "W8-LIVE-05", "W8-LIVE-06", "W8-LIVE-07",
+    "W8-LIVE-08", "W8-LIVE-09"
+  ],
+  "requiredControls": [
+    "W8-NC-01", "W8-NC-02", "W8-NC-03", "W8-NC-04", "W8-NC-05",
+    "W8-NC-06"
+  ]
+}
+```
+
+| Case | Unique production activation/effect oracle |
+|---|---|
+| `W8-LIVE-01` | STS/region/stack/quota/secret-metadata/provider-capability preflight matches the action manifest |
+| `W8-LIVE-02` | uploaded template/two ZIP object versions hash-match W7 and reviewed disabled change set matches the allowlist |
+| `W8-LIVE-03` | applied disabled resources/config/IAM/outputs match W7 while established topology remains active |
+| `W8-LIVE-04` | separately approved host policy/two-value configuration is applied without exposing values |
+| `W8-LIVE-05` | normal API creates the sole research; durable queued plus one visible message and zero processing while disabled |
+| `W8-LIVE-06` | reviewed activation consumes that same message through the real event source and keyword worker/recovery |
+| `W8-LIVE-07` | durable task/attempt/call/cost/throttle/retry counts respect the 11/55/$3 ceilings |
+| `W8-LIVE-08` | immutable S3 artifacts and fenced Neon final result/default selection are nonempty and owner scoped |
+| `W8-LIVE-09` | dashboard saves selection and creates one immutable Run/`1..100` RunQueries; Run remains unconfirmed with zero downstream work |
+| `W8-CONF-01` | ten/six registry equality, seven-action approval order, deployed/privacy/queue/DLQ/alarm closure and no extra action |
+
+| Control | Captured branch/mutation | Required failure witness |
+|---|---|---|
+| `W8-NC-01` | accepted template/ZIP hash differs at preflight | stop before `W8-ACT-01` |
+| `W8-NC-02` | reviewed change projection contains one unlisted member | change-set guard rejects; zero execute |
+| `W8-NC-03` | mapping/recovery remain disabled after ACT-04 | same research queued, one visible message, zero Lambda/provider action |
+| `W8-NC-04` | ACT-05 approval token absent/stale | activation execution rejects; mapping remains disabled |
+| `W8-NC-05` | owner B requests owner A research/run | exact authenticated not-found/denial; zero private projection |
+| `W8-NC-06` | synthetic action ledger adds a second canary or Run confirmation | `W8-CONF-01` rejects unexpected action before execution |
+
+- [ ] `KI-W8-V1` P1–P6 read-only preflight and source/packet/applied-start equality pass before ACT-01. Evidence: ___
+- [ ] `KI-W8-V2` ACT-01/02 disabled deployment inspected: exact resources/config/IAM/hashes, disabled mapping/recovery, empty queue/DLQ, unchanged established topology. Evidence: ___
+- [ ] `KI-W8-V3` ACT-03/04 negative path: normal API creates one durable queued research and one visible message; zero keyword worker processing/provider cost while disabled. Evidence: ___
+- [ ] `KI-W8-V4` ACT-05/06 same research completes; actual task/attempt/call/cost/duration/memory/artifact/message values respect bounds. Evidence: ___
+- [ ] `KI-W8-V5` Owner UI/result/default selection and one immutable run handoff are visible; owner B denied; downstream Run remains unconfirmed and no downstream work exists. Evidence: ___
+- [ ] `KI-W8-V6` Queue/DLQ/log/alarm/IAM/S3/secret/privacy inspection passes; no raw provider body, credential or customer data appears. Evidence: ___
+- [ ] `KI-W8-V7` Ten-case/six-control equality/digests and ordered seven-action approval ledger pass; no second canary or unapproved mutation. Evidence: ___
+- [ ] `KI-W8-H1` Append exact sanitized commands/actions/resources/hashes/outcomes/costs, rollback status, residual risks and user prerequisites to A6. Evidence: ___
+- [ ] `KI-W8-H2` CAS A5 one version to `AWAITING_REVIEW`, `accepted_through: KI-W7`, `next_window: STOP_FINAL_INDEPENDENT_REVIEW`, `may_start_successor:false`; stop for parent review. Evidence: ___
+
+#### W7/W8 parent-authoring readiness certificate
+
+- [x] `RW78-001` Governing workspace documents and both current standards were read in authority order. Evidence: `EV-KI-A-119`.
+- [x] `RW78-002` Current A5 state 193, accepted-through W6, and clean nested baselines were verified before authoring. Evidence: `EV-KI-A-119`.
+- [x] `RW78-003` Current source, not the historical W7 outline, supplies the build/runtime/template/deployment inventory. Evidence: `SRC-KI-060`.
+- [x] `RW78-004` Every material fact is observed or an explicit W8 deferred preflight; no account/quota/host/secret/provider value is guessed. Evidence: `SRC-KI-060`; `DEC-KI-059`.
+- [x] `RW78-005` Runtime repository selection, recovery composition, config activation, topology, IAM, package, deployment and canary decisions each have one literal outcome. Evidence: `DEC-KI-059`.
+- [x] `RW78-006` The invalid 360-second visibility, nonexistent build script and second recovery schedule are superseded explicitly. Evidence: `SRC-KI-060`; `DEC-KI-059`.
+- [x] `RW78-007` W7 has an exact 13-path set, starting states, digest, task ownership, dependency waves and no duplicate file owner. Evidence: W7 header/inventory/decomposition contract.
+- [x] `RW78-008` Every W7 task contains all 15 execution fields and delegates no schema/interface/operation/failure/acceptance choice. Evidence: `KI-W7-T1`–`T6`.
+- [x] `RW78-009` W7 stateful/costly gate count is predictable: zero database/provider/AWS calls, two keyword builds, one recovery build, one npm regression and one secret scan. Evidence: `KI-W7-V1`–`V6`.
+- [x] `RW78-010` W7 cases/controls have exact memberships, allocations, counts and independently recomputable digests. Evidence: `SCN-KI-047`; W7 allocation table.
+- [x] `RW78-011` W8 has zero source leaves and one window-agent-only sequential assessment because external authority cannot be delegated. Evidence: W8 header.
+- [x] `RW78-012` W8 account, quotas, applied stack, host target, secret capability and provider capability are explicit read-only preflight gates with stop branches. Evidence: `KI-W8-P1`–`P6`.
+- [x] `RW78-013` W8 has exactly seven separately approved actions; no approval implies another. Evidence: action manifest; `DEC-KI-059`.
+- [x] `RW78-014` The disabled negative control and active canary use the same one research ID, preventing a hidden second paid run. Evidence: `KI-W8-T2/T3`; `SCN-KI-048`.
+- [x] `RW78-015` The canary ends after owner-visible run handoff and explicitly forbids downstream Run confirmation/provider work. Evidence: `DEC-KI-059`; `KI-W8-T3`.
+- [x] `RW78-016` W8 live cases/controls have exact memberships, counts, digests, activation witnesses and approval-ledger equality. Evidence: `SCN-KI-048`; `KI-W8-V1`–`V7`.
+- [x] `RW78-017` Sandbox escalation is permitted only for an already authorized identical local/AWS action; it cannot create approval, change a command or relabel behavior failure. Evidence: both standards; W7/W8 headers.
+- [x] `RW78-018` Secret values, URLs, account identifiers, raw bodies and private data are excluded from source, outputs and evidence. Evidence: `DEC-KI-059`; W7/W8 privacy oracles.
+- [x] `RW78-019` A2/A3/A4/A8 trace forward and backward with zero unmapped W7/W8 requirement, decision, task, scenario, case or control. Evidence: A8 Section 9; `EV-KI-A-119`.
+- [x] `RW78-020` W7 remains unassigned and W8 remains approval-gated; this authoring turn performs no implementation, build, database, provider, AWS, production, commit or deployment action. Evidence: A5 state 194; `EV-KI-A-119`.
 
 ## 3. Scenario ledger
 
@@ -4334,25 +4573,85 @@ explicit W8 approval.
   schema, verify its absence, remove only its `mkdtemp` directory, and preserve
   all source/accepted evidence. Cleanup failure fails the scenario.
 
-### `SCN-KI-019` — Approved deployed canary
+### `SCN-KI-019` — Historical deployed-canary outline (superseded)
 
-- **Requirements:** `AUTH-KI-005`.
-- **Decisions:** `DEC-KI-025`.
-- **Preconditions:** exact approved account, region, resources, actions, hashes,
-  secrets, spend ceiling, and initially disabled event mapping.
-- **Inputs:** one sanitized seed and approved canary identity.
-- **Actions:** run read-only applied preflight; prove disabled mapping; perform
-  only approved deploy/secret/mapping actions; use normal API through SQS,
-  Lambda, Neon, S3, UI, and Run snapshot.
-- **Activation witnesses:** applied IAM/config checks, disabled and enabled event
-  paths, each worker stage, artifact writes, final UI, and handoff execute.
-- **Oracle:** hashes/config/permissions match; result is nonempty and terminal;
-  no DLQ/secret/raw log/unapproved mutation; actual calls/costs are recorded.
-- **Call and operation counts:** exact live calls and mutations remain those in
-  the approved W8 action manifest and must be recorded against planned ceilings.
-- **Negative control:** disabled mapping leaves durable queued state and no hidden worker.
-- **Parity class:** `production_canary`.
-- **Cleanup:** perform only the exact separately approved live cleanup, or retain resources unchanged.
+This unexecuted outline is superseded in full by `SCN-KI-047/048` and
+`DEC-KI-059`. It supplies no W7/W8 acceptance claim, action authority, case
+member or negative control.
+
+### `SCN-KI-047` — Deployable disabled keyword infrastructure
+
+- **Requirements:** `REQ-KI-002/005/022`–`024`; `INV-KI-001`–`009/012`–`014`;
+  `EXC-KI-008`.
+- **Decisions:** `DEC-KI-025/027/059`.
+- **Preconditions:** accepted W6; W7 one-window assignment; exact 13-path
+  baselines; no AWS credential or database/provider client.
+- **Inputs:** current template; deterministic keyword/recovery ZIPs; active and
+  inactive synthetic config maps; injected runtime/repository/dispatcher/S3
+  clients; captured AWS-CLI stub responses only.
+- **Actions:** exercise exact config partitions; uninjected/injected handler and
+  inactive/active recovery composition; parse exact topology; build/measure
+  keyword package twice; construct/reject deployment packets/change sets;
+  inspect synthetic disabled/active stack projections; merge registries.
+- **Activation witnesses:** each of `W7-INFRA-01`–`06`, `W7-RUNTIME-01/02`,
+  `W7-BUILD-01`, `W7-DEPLOY-01/02`, `W7-CONF-01` reaches its unique named
+  production/script branch and asserts an effect, not source presence alone.
+- **Oracle:** required=registered=executed is the exact 12-member set/digest in
+  W7; all 12 controls are executed/falsified; keyword handler uses the keyword
+  repository in production; recovery is inactive at false and combined at
+  true; exact ten resources/properties/IAM/outputs exist; existing resources
+  outside named extensions deep-equal baseline; deterministic build and guarded
+  packet/inspection pass; zero live call.
+- **Call and operation counts:** zero AWS/provider/database/network calls; one
+  production keyword repository construction in the uninjected harness; one
+  established plus one keyword recovery invocation in active harness; one
+  keyword mapping/resource set; two keyword builds; one recovery build.
+- **Negative controls:** exactly `W7-NC-01`–`12`, each positive→one-mutation
+  failure→fresh-positive. Mutations cover missing/invalid active URL, wrong
+  repository, inactive send, 360-second visibility, ScalingConfig, second
+  schedule, wildcard IAM, missing condition, forbidden ZIP member, stale packet
+  hash, unlisted change and approval-token bypass.
+- **Parity class:** `local_emitted_infrastructure`; no applied AWS claim.
+- **Cleanup:** remove only owned build staging/temp output; preserve all sibling
+  ZIPs and source; no cloud or database cleanup.
+
+### `SCN-KI-048` — Disabled-to-active production keyword canary
+
+- **Requirements:** `REQ-KI-002/005/015`–`017/022`–`024`;
+  `INV-KI-001`–`015`; `AUTH-KI-005/007`; `EXC-KI-008`.
+- **Decisions:** `DEC-KI-009/017/025/059`.
+- **Preconditions:** accepted W7; W8 assignment; exact packet; read-only P1–P6;
+  seven separately approvable actions; initially no nonterminal keyword research
+  and empty keyword queue/DLQ.
+- **Inputs:** one sanitized owner and one normalized seed selected in ACT-04;
+  accepted real credentials/config held only by their runtime systems.
+- **Actions:** reviewed disabled deploy; applied inspection; separately approved
+  host config; normal API create while disabled; durable/queue negative witness;
+  reviewed activation; observe same research to completion; normal dashboard
+  selection and run handoff; stop before Run confirmation.
+- **Activation witnesses:** unique evidence for `W8-LIVE-01`–`09` and
+  `W8-CONF-01`, including STS/stack/secret-metadata/quota preflight, disabled and
+  active mapping states, queue receipt by event source, all keyword stages,
+  attempts/cost, S3/Neon result, owner UI and handoff.
+- **Oracle:** exact ten-case/six-control sets/digests; exact ordered approval
+  ledger; deployed hashes/config/IAM/topology equal W7; disabled state performs
+  zero worker/provider action; active state completes the same research; result
+  is nonempty, owner scoped and durable; run handoff contains `1..100` queries;
+  Run confirmation/downstream tasks are absent; queue/DLQ/alarms/privacy pass.
+- **Call and operation counts:** one research only; for nonempty shortlist
+  planned 11 first-pass provider calls and at most 55 total attempts; actual
+  values recorded and durable cost never exceeds `$3.00000000`; one handoff;
+  zero downstream Google/lead/Browserless/traffic/CrUX calls.
+- **Negative controls:** exactly `W8-NC-01`–`06`: hash drift stops; unlisted
+  change stops; disabled mapping retains one queued message/zero processing;
+  missing independent approval stops; owner B denied; second canary/downstream
+  confirmation prohibited. Each is an observed branch or captured-command
+  falsification that incurs no extra paid call.
+- **Parity class:** `production_keyword_canary`; downstream pipeline scale stays
+  proven by accepted W6/existing AWS-pipeline evidence, not rerun here.
+- **Cleanup:** retain durable canary history/artifacts. On failure only, execute
+  separately approved ACT-07 to set host and stack activation false; never
+  purge/redrive/delete.
 
 ### `SCN-KI-020` — Corrected repository/worker schedules and atomic publication
 
