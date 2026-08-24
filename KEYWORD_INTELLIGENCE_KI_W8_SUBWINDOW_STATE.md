@@ -1,0 +1,47 @@
+state_version: 2
+parent_window_id: KI-W8
+parent_assignment_id: ASG-KI-W8-WA-01
+window_agent_identity: KI-W8-WINDOW-AGENT
+parent_standard_path: PROJECT_AGNOSTIC_DECISION_COMPLETE_CHECKLIST_AUTHORING_STANDARD.md
+parent_standard_revision: cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb523ede32848
+subwindow_standard_path: PROJECT_AGNOSTIC_WINDOW_AGENT_SUBWINDOW_AUTHORING_STANDARD.md
+subwindow_standard_revision: 842c29550c06c22d63e0a058a27cb8a9ff6b538b3168d2c83a384890b44247f0
+parent_contract_revision: 8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c
+parent_discovery_revision: 493192fc317c00ee43e277e85e00718985190cdd5c21e3d6824f67dd1d0b7c0c
+parent_decision_revision: 6c0809225ba5336dc923786674b990f83c8db2496b88016f7655a770afb7e307
+parent_checklist_revision: 4f4b16bbe6ab20312e312db75506f9acfee7aaca67fbb66d1d951676f1f646e4
+parent_traceability_revision: 90c2f808426c4f1cf20ad885860e01b66763f3fc607e28c3b2dd9a2ef7391a5f
+parent_state_version: 200
+parent_state_revision: a4e08c31469b1c309a58ef52c457a65bcef3b9fe0561d9e60cabb802df4429b3
+decomposition_path: KEYWORD_INTELLIGENCE_KI_W8_SUBWINDOW_CHECKLIST.md
+decomposition_revision: 7019451217532974865c440a14c87fa7698d125877897bd5aac98d686b450fe2
+supersedes_decomposition_revision: 19cfd226b4821e133951332b125f6ecc161a8f96f36e3a6a82e472eb794b5df1
+evidence_path: KEYWORD_INTELLIGENCE_KI_W8_SUBWINDOW_EVIDENCE.md
+decomposition_status: AWAITING_PARENT_DECOMPOSITION_REVIEW
+initial_file_subwindows: []
+parallel_waves: []
+current_subwindow: KI-W8-I001
+current_assignment_id: ASG-KI-W8-I001-PENDING-PARENT-APPROVAL
+assigned_agent: WINDOW-AGENT
+subwindow_type: INTEGRATION_ASSESSMENT
+authorized_write_file: NONE
+authorized_read_scope: [local parent package, both standards, accepted W7 source tests scripts build artifacts and evidence]
+authorized_actions: [decomposition review only]
+prohibited_actions: [assessment execution, W8 preflight, leaf or subagent dispatch, implementation test schema migration package lock authority edit, build measurement database browser network provider AWS host production paid destructive commit push action, W8-ACT-01 through W8-ACT-07, final independent review]
+execution_environment_policy:
+  sandbox_escalation_for_authorized_local_actions: true
+  automatic_identical_recovery_after_proven_environment_invalidation: true
+  recovery_limit_per_invalidated_execution: 1
+  external_authority_expansion: false
+execution_authority_active: false
+may_start_successor: false
+current_status: AWAITING_PARENT_DECOMPOSITION_REVIEW
+accepted_subwindows: []
+next_subwindow: KI-W8-I001_AFTER_PARENT_APPROVAL
+blocker: null
+execution_prerequisites:
+  provider_capability_protocol: PARENT_BLOCKED_UNTIL_LITERAL_A5_RECORD
+  host_discovery_protocol: PARENT_BLOCKED_UNTIL_LITERAL_A5_RECORD
+  host_apply_protocol: PARENT_BLOCKED_UNTIL_LITERAL_A5_RECORD
+  owner_origin_cookie_seed_hashes: REQUIRED_IN_EXECUTION_A5
+last_updated: 2026-08-24T17:28:00+05:30

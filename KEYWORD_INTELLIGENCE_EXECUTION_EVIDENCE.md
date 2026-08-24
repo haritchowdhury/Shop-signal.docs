@@ -7194,3 +7194,43 @@ paid_cost_usd: 0.00
 successor_assigned: false
 status: ACCEPTED
 ```
+
+### `EV-KI-A-125` — KI-W8 decomposition-only assignment
+
+- **Accepted entry state:** KI-W7 is parent-accepted and committed. Coordination
+  root `1d771668`, backend `c3ba835`, and frontend `5e441aa` were clean at
+  assignment entry.
+- **Authority pins:** A1
+  `8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c`,
+  A2 `493192fc317c00ee43e277e85e00718985190cdd5c21e3d6824f67dd1d0b7c0c`,
+  A3 `6c0809225ba5336dc923786674b990f83c8db2496b88016f7655a770afb7e307`,
+  A4 `4f4b16bbe6ab20312e312db75506f9acfee7aaca67fbb66d1d951676f1f646e4`,
+  A8 `90c2f808426c4f1cf20ad885860e01b66763f3fc607e28c3b2dd9a2ef7391a5f`,
+  parent standard `cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb523ede32848`
+  and sub-window standard
+  `842c29550c06c22d63e0a058a27cb8a9ff6b538b3168d2c83a384890b44247f0`
+  were recomputed byte-equal.
+- **Assignment:** A5 CAS `199→200` assigns `ASG-KI-W8-WA-01` to author only
+  `KEYWORD_INTELLIGENCE_KI_W8_SUBWINDOW_CHECKLIST.md`, its state file, and its
+  evidence file. The output must contain one zero-source-write,
+  window-agent-owned sequential assessment. W8 deliberately has no
+  implementation leaf and no delegated lower-level agent.
+- **Boundary:** this assignment permits local documentation/source inspection
+  and authoring only. It permits no W8 preflight, AWS or host call, provider or
+  paid call, database/browser action, build, source edit, leaf dispatch, or
+  execution of `W8-ACT-01` through `W8-ACT-07`. The agent must stop at
+  `AWAITING_PARENT_DECOMPOSITION_REVIEW`.
+
+```yaml
+certificate: KI-W8-DECOMPOSITION-ASSIGNED
+assignment: ASG-KI-W8-WA-01
+source_state: 199
+assigned_state: 200
+accepted_through: KI-W7
+assessment_count: 1
+source_leaf_count: 0
+separately_gated_actions: 7
+external_actions_authorized: 0
+paid_cost_usd: 0.00
+status: READY
+```

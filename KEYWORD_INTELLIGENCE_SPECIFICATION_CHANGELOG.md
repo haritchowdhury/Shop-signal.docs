@@ -1534,3 +1534,18 @@ compatibility_or_migration_effect: none
 authorization_effect: no W8 authority is granted; W8 read-only preflight requires a new assignment and each W8-ACT-01 through W8-ACT-07 mutation or paid action retains its separate approval
 resumption_state: A5 state 199 COMPLETE through KI-W7; next window KI-W8; successor unassigned
 ```
+
+```yaml
+change_id: CHG-KI-095
+timestamp: 2026-08-24T15:23:13+05:30
+trigger_evidence: [EV-KI-A-125, requester KI-W8 decomposition dispatch instruction]
+reason: KI-W7 is accepted and committed, so the already-reauthored KI-W8 may be decomposed for execution without granting any external or paid authority.
+changed_requirements: []
+changed_decisions: []
+affected_windows: [KI-W8 decomposition only]
+implementation_effect: none
+decomposition_effect: author exactly one zero-source-write window-agent-owned sequential assessment; do not invent source leaves or delegate external authority
+compatibility_or_migration_effect: none
+authorization_effect: local three-document authoring only; no W8 preflight, AWS, host, provider, paid, database, browser, build, mutation or W8 action is authorized
+resumption_state: A5 state 200 READY under ASG-KI-W8-WA-01; stop at parent decomposition review
+```
