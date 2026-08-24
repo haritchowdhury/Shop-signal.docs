@@ -1,9 +1,9 @@
-state_version: 198
+state_version: 199
 standard_path: PROJECT_AGNOSTIC_DECISION_COMPLETE_CHECKLIST_AUTHORING_STANDARD.md
 standard_revision: cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb523ede32848
 subwindow_standard_path: PROJECT_AGNOSTIC_WINDOW_AGENT_SUBWINDOW_AUTHORING_STANDARD.md
 subwindow_standard_revision: 842c29550c06c22d63e0a058a27cb8a9ff6b538b3168d2c83a384890b44247f0
-standard_adoption: KI-W6 is accepted; KI-W7 implementation and local verification are handed off for parent review under DEC-KI-059; every KI-W8 external action remains prohibited
+standard_adoption: KI-W6 and KI-W7 are parent-accepted under the current standards and DEC-KI-059; KI-W8 remains unassigned and every external mutation or paid action retains its separate approval gate
 contract_path: KEYWORD_INTELLIGENCE_PRODUCT_CONTRACT.md
 contract_revision: 8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c
 decision_path: KEYWORD_INTELLIGENCE_DECISION_LEDGER.md
@@ -11,21 +11,21 @@ discovery_path: KEYWORD_INTELLIGENCE_DISCOVERY_DOSSIER.md
 discovery_revision: 493192fc317c00ee43e277e85e00718985190cdd5c21e3d6824f67dd1d0b7c0c
 decision_revision: 6c0809225ba5336dc923786674b990f83c8db2496b88016f7655a770afb7e307
 checklist_path: KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md
-checklist_revision: 4a47d782223e372d2df7d653add494880eddf456ab3f4d63439fea2ed1c2374e
+checklist_revision: 4f4b16bbe6ab20312e312db75506f9acfee7aaca67fbb66d1d951676f1f646e4
 traceability_path: KEYWORD_INTELLIGENCE_TRACEABILITY_INDEX.md
 traceability_revision: 90c2f808426c4f1cf20ad885860e01b66763f3fc607e28c3b2dd9a2ef7391a5f
 current_window: KI-W7
-current_assignment_id: ASG-KI-W7-WA-03
-assigned_agent: KI-W7-WINDOW-AGENT
-authorized_windows: [KI-W7]
+current_assignment_id: NONE
+assigned_agent: NONE
+authorized_windows: []
 decomposition_target_path: KEYWORD_INTELLIGENCE_KI_W7_SUBWINDOW_CHECKLIST.md
 decomposition_revision: fe57eeadd9d495d8d9fb2ab41b320c5d5af222b91849fb68d502997b7d4f5d64
 subwindow_state_target_path: KEYWORD_INTELLIGENCE_KI_W7_SUBWINDOW_STATE.md
 subwindow_evidence_target_path: KEYWORD_INTELLIGENCE_KI_W7_SUBWINDOW_EVIDENCE.md
-decomposition_amendment_target: parent-approved DECOMP-4 accepted S001-S013 history plus exact C003 one-file compatibility correction and I004 corrected final reassessment; further mechanically governed one-file corrections use new C-IDs and reassessments use new I-IDs without weakening accepted history
+decomposition_amendment_target: COMPLETE; S001-S013, C001-C003 and I004 parent-accepted
 authorized_write_scope: []
-authorized_actions: [parent_read_only_review, parent_A5_acceptance_or_rejection_CAS]
-prohibited_actions: [implementation_test_template_script_schema_migration_package_lock_frontend_edit, build_measurement_database_browser_real_network_provider_AWS_production_paid_action, credential_or_secret_value_read, commit, push, KI-W8_action]
+authorized_actions: []
+prohibited_actions: [any implementation test documentation build measurement database browser network provider AWS production paid destructive commit push or KI-W8 action without a new explicit assignment and every applicable separate approval]
 execution_environment_policy:
   sandbox_escalation_for_authorized_local_actions: true
   automatic_identical_recovery_after_proven_environment_invalidation: true
@@ -36,10 +36,10 @@ parallel_execution_policy:
   integration_assessment_parallel: false
   implied_parallel_authority: false
 may_start_successor: false
-current_status: AWAITING_REVIEW
-accepted_through: KI-W6
+current_status: COMPLETE
+accepted_through: KI-W7
 next_window: KI-W8
 stop_after: KI-W7
 blocker: null
-user_gates: []
-last_updated: 2026-08-24T19:15:00+05:30
+user_gates: [KI-W8 requires a new assignment; W8-ACT-01 through W8-ACT-07 remain separately approval-gated when applicable]
+last_updated: 2026-08-24T19:45:00+05:30

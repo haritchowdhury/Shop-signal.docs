@@ -1518,3 +1518,19 @@ compatibility_or_migration_effect: none — preserved test totals now describe t
 authorization_effect: existing KI-W7-WINDOW-AGENT may execute C003, independently review it, execute I004, and continue only under the mechanically governed correction rule until parent review or one new out-of-scope blocker
 resumption_state: A5 state 197 READY under ASG-KI-W7-WA-03; KI-W8 remains prohibited
 ```
+
+```yaml
+change_id: CHG-KI-094
+timestamp: 2026-08-24T19:45:00+05:30
+trigger_evidence: [EV-KI-W7-S035, EV-KI-A-123, EV-KI-A-124, requester formal W7 closure authorization]
+reason: Independent parent review verified the committed W7 implementation, exact fourteen-file corrected scope, executable case/control closure, package evidence, regression, privacy and prohibited-action boundary with no remaining defect.
+changed_requirements: []
+changed_decisions: []
+affected_windows: [KI-W7 accepted; KI-W8 remains unassigned]
+implementation_effect: none — parent review and formal checklist/state closure only
+checklist_effect: KI-W7 P1-P6, V1-V6 and H1-H2 are checked with resolvable execution and parent-review evidence; V1/V3 wording reflects accepted C003/I004 supersession
+invalidated_evidence: []
+compatibility_or_migration_effect: none
+authorization_effect: no W8 authority is granted; W8 read-only preflight requires a new assignment and each W8-ACT-01 through W8-ACT-07 mutation or paid action retains its separate approval
+resumption_state: A5 state 199 COMPLETE through KI-W7; next window KI-W8; successor unassigned
+```

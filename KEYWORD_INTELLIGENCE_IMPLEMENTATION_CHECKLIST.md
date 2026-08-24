@@ -3842,12 +3842,12 @@ The exact 13-path inventory and starting states are:
 | `email_scraper/test/keyword-intelligence-build.test.js` | `ABSENT` |
 | `email_scraper/test/keyword-intelligence-deployment-guard.test.js` | `ABSENT` |
 
-- [ ] `KI-W7-P1` A5 assigns only KI-W7 and pins A1–A4/A8 plus both standards; all revisions and the 13-path set digest match. Evidence: ___
-- [ ] `KI-W7-P2` Backend and frontend starting HEAD/status and every path baseline above are recorded; unrelated changes stop assignment. Evidence: ___
-- [ ] `KI-W7-P3` KI-W6 is accepted and its keyword ZIP/build/runtime evidence is present; no local-product gate remains open. Evidence: ___
-- [ ] `KI-W7-P4` `SRC-KI-060` reproduces: wrong default production repository, missing combined recovery, missing two config members, absent ten template resources and absent three new scripts/four new tests. Evidence: ___
-- [ ] `KI-W7-P5` Node 24, npm, zip/unzip and installed dependencies are available; `sam` is absent and is not a gate because the template is literal JSON plus executable topology tests. Evidence: ___
-- [ ] `KI-W7-P6` No AWS credential, provider credential, database URL, network call or production identifier is required for W7. Evidence: ___
+- [x] `KI-W7-P1` A5 assigns only KI-W7 and pins A1–A4/A8 plus both standards; all revisions and the 13-path set digest match. Evidence: `EV-KI-W7-S001`, `EV-KI-W7-S013`, `EV-KI-A-121`.
+- [x] `KI-W7-P2` Backend and frontend starting HEAD/status and every path baseline above are recorded; unrelated changes stop assignment. Evidence: `EV-KI-W7-S001`, `EV-KI-A-121`.
+- [x] `KI-W7-P3` KI-W6 is accepted and its keyword ZIP/build/runtime evidence is present; no local-product gate remains open. Evidence: `EV-KI-W7-S001`, `EV-KI-A-121`.
+- [x] `KI-W7-P4` `SRC-KI-060` reproduces: wrong default production repository, missing combined recovery, missing two config members, absent ten template resources and absent three new scripts/four new tests. Evidence: `EV-KI-W7-S002`, `EV-KI-A-121`.
+- [x] `KI-W7-P5` Node 24, npm, zip/unzip and installed dependencies are available; `sam` is absent and is not a gate because the template is literal JSON plus executable topology tests. Evidence: `EV-KI-W7-S001`, `EV-KI-W7-S035`.
+- [x] `KI-W7-P6` No AWS credential, provider credential, database URL, network call or production identifier is required for W7. Evidence: `EV-KI-W7-S001`, `EV-KI-W7-S035`.
 
 #### Task block `KI-W7-T1` — configuration seam
 
@@ -4020,14 +4020,14 @@ leaf accepted. Wave 3 contains the five tests and requires every production/
 script owner it tests accepted. The window agent then performs one zero-write
 integration assessment; leaves never edit A1–A8 or talk to the parent.
 
-- [ ] `KI-W7-V1` Exact 13-path scope/baseline/final set and no other nested change. Evidence: ___
-- [ ] `KI-W7-V2` `node --check` all eight production/script files; JSON parse template; five focused test files pass with 12 cases/12 controls and zero skips. Evidence: ___
-- [ ] `KI-W7-V3` Run `node scripts/build-lambda.js`, `node scripts/build-keyword-worker.js`, keyword measurement, then repeat the keyword build once; keyword ZIP hashes equal, seven sibling ZIP hashes unchanged, limits/startup pass. Evidence: ___
-- [ ] `KI-W7-V4` Run `npm test` once and `npm run check:secrets` once after final edit; zero failure. Evidence: ___
-- [ ] `KI-W7-V5` Independently recompute logical-resource/property/IAM/config/case/control/path sets and all four digests; negative controls falsify. Evidence: ___
-- [ ] `KI-W7-V6` Prove no AWS/network/provider/database call, credential read, source package/schema/frontend edit, commit or KI-W8 action. Evidence: ___
-- [ ] `KI-W7-H1` Append changed files/symbols, exact commands/outcomes, build hashes/sizes/startup, controls, skipped-none statement and residual prerequisites to A6. Evidence: ___
-- [ ] `KI-W7-H2` CAS A5 one version to `AWAITING_REVIEW`, `accepted_through: KI-W6`, `next_window: KI-W8`, `may_start_successor:false`; stop. Evidence: ___
+- [x] `KI-W7-V1` Exact initial 13-path scope plus accepted one-file `KI-W7-C003` correction yields the exact 14-path final set and no other nested change. Evidence: `EV-KI-W7-S034`, `EV-KI-W7-S035`, `EV-KI-A-124`.
+- [x] `KI-W7-V2` `node --check` all production/script/test files; JSON parse template; five focused test files pass with 12 cases/12 controls and zero skips. Evidence: `EV-KI-W7-S035`, `EV-KI-A-124`.
+- [x] `KI-W7-V3` Run `node scripts/build-lambda.js`, then the established `node scripts/measure-lambda-packages.js`, then two keyword builds and measurements; keyword ZIP hashes equal, seven sibling ZIP hashes unchanged, limits/startup pass. Evidence: `EV-KI-W7-S035`, `EV-KI-A-123`.
+- [x] `KI-W7-V4` Run `npm test` once and `npm run check:secrets` once after final edit; zero failure. Evidence: `EV-KI-W7-S035`, `EV-KI-A-123`, `EV-KI-A-124`.
+- [x] `KI-W7-V5` Independently recompute logical-resource/property/IAM/config/case/control/path sets and all four digests; negative controls falsify. Evidence: `EV-KI-W7-S035`, `EV-KI-A-124`.
+- [x] `KI-W7-V6` Prove no AWS/network/provider/database call, credential read, source package/schema/frontend edit or KI-W8 action. Evidence: `EV-KI-W7-S035`, `EV-KI-A-123`, `EV-KI-A-124`.
+- [x] `KI-W7-H1` Append changed files/symbols, exact commands/outcomes, build hashes/sizes/startup, controls, guarded-skip statement and residual prerequisites to A6. Evidence: `EV-KI-A-123`.
+- [x] `KI-W7-H2` CAS A5 one version to `AWAITING_REVIEW`, `accepted_through: KI-W6`, `next_window: KI-W8`, `may_start_successor:false`; stop. Evidence: `EV-KI-A-123`.
 
 ### `KI-W8` — separately approved disabled deployment, activation and one canary
 

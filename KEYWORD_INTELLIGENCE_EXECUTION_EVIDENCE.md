@@ -7139,3 +7139,58 @@ paid_cost_usd: 0.00
 successor_started: false
 status: READY_FOR_PARENT_REVIEW
 ```
+
+### `EV-KI-A-124` — independent parent acceptance of KI-W7
+
+- **Committed baselines:** coordination root `ba7e828`, backend `c3ba835`, and
+  frontend `5e441aa` were clean at review entry. Backend comparison to accepted
+  W6 baseline `a87e139` contains exactly the fourteen final W7 paths and no
+  frontend change.
+- **Independent source review:** inspected the complete runtime configuration,
+  production keyword repository construction, combined recovery ordering,
+  disabled-by-default SAM topology, exact queue/function/mapping bounds,
+  least-privilege IAM extensions, deterministic package measurement,
+  content-addressed two-ZIP packet, change-set allowlists, approval guard, and
+  read-only deployed-state inspector against `DEC-KI-059`. No code-quality,
+  compatibility, privacy, cost, ownership or enforcement blocker was found.
+- **Independent mechanical proof:** final path count/digest recomputed as
+  `14` / `dd30a08f7f9bfa66d224c2b8f72758557d0823bf392e1f59c7a4ca2f26640836`.
+  Source registrations recomputed as 12 unique cases and 12 unique controls;
+  digests exactly
+  `6bacf5d9291362ee0d01f5d0d8e3e53f8f9e214a6ebbf5711497c80f3d74aa2e`
+  and `6950a20f91b666c03cf59c495576e72ad1501fcd58aa5f4378900bd473edafd7`.
+  Template inventory independently reads 82 resources, eight IAM roles, 31
+  alarms, three keyword parameters, one condition, ten resources and four
+  outputs.
+- **Focused verification:** the identical five-file focused review initially
+  encountered the documented restricted-sandbox nested-child limitation; the
+  identical elevated run passed `55/55`, including every W7 case/control owner.
+  `npm run check:secrets` independently passed. `git diff --check`, all authority
+  hashes, S1/S2/S3 revisions and the retained build outputs matched the handoff.
+- **Frozen expensive gates:** parent review did not repeat the already-final
+  build or full regression. Accepted I004 evidence records the corrected
+  established build→measurement→two keyword build/measurement sequence,
+  byte-identical keyword ZIP `47fda36e…` at `32,006,605` bytes / `84,224,692`
+  expanded, and `npm test` with 721 pass, zero fail and 73 guarded skips.
+- **Disposition:** KI-W7 is accepted. The W7 checklist P/V/H boxes are closed
+  with evidence. A5 may CAS `198→199` to `COMPLETE`, `accepted_through: KI-W7`,
+  with KI-W8 still unassigned and every AWS/provider/paid action still gated.
+
+```yaml
+certificate: KI-W7-PARENT-ACCEPTED
+window: KI-W7
+source_state: 198
+accepted_state: 199
+final_file_count: 14
+final_file_digest: dd30a08f7f9bfa66d224c2b8f72758557d0823bf392e1f59c7a4ca2f26640836
+required_cases: 12
+executed_cases: 12
+required_controls: 12
+falsified_controls: 12
+focused_parent_review: {pass: 55, fail: 0, skip: 0}
+full_regression: {pass: 721, fail: 0, guarded_skip: 73}
+external_actions: 0
+paid_cost_usd: 0.00
+successor_assigned: false
+status: ACCEPTED
+```
