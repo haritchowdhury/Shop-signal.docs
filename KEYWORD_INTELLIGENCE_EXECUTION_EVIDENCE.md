@@ -7042,3 +7042,100 @@ paid_cost_cap_usd: 0.00
 successor_started: false
 status: READY_FOR_SERIAL_DISPATCH
 ```
+
+### `EV-KI-A-122` — KI-W7 C003/I004 corrective assignment
+
+- **Trigger:** `EV-KI-W7-S032` proves that I003 CV5's four failures reduce to
+  one preserved-test topology-count omission and one omitted invocation of an
+  existing build-measurement producer. No product, template, packaging-source,
+  AWS, provider, database, browser, privacy or cost defect was observed.
+- **Parent decision:** append-only S1 now freezes `KI-W7-C003` as one file and
+  exactly four assertion-literal replacements: roles `7→8`, alarms `27→31`,
+  template resources `72→82`, and deployment-packet resources `72→82`.
+  `KI-W7-I004` runs the existing `node scripts/measure-lambda-packages.js`
+  immediately after the sole established `build-lambda.js`, then repeats
+  CV1–CV7 through handoff.
+- **Mechanical closure:** C003 starts from
+  `3bfa45fab2beb2613be395e2a903fa87cdfef2a3b8c558073483acd504da13f8`,
+  owns only `email_scraper/test/aws-pipeline-infrastructure.test.js`, and must
+  reverse exactly four replacements to reproduce that digest. The expanded
+  fourteen-path digest is
+  `dd30a08f7f9bfa66d224c2b8f72758557d0823bf392e1f59c7a4ca2f26640836`.
+- **Assignment:** A5 CAS `196→197` assigns `ASG-KI-W7-WA-03` to the existing
+  `KI-W7-WINDOW-AGENT`; S1 revision is
+  `fe57eeadd9d495d8d9fb2ab41b320c5d5af222b91849fb68d502997b7d4f5d64`
+  and A5 revision is
+  `862d0422bbeb1d0394fdbc7af3e97ff6e8fad77e1140040603edde4d84fc926c`.
+- **Boundary:** C003 → independent review → I004 only. Passing returns
+  `READY_FOR_PARENT_REVIEW`; a genuinely new mechanically governed one-file
+  defect may use a new C/I pair, while an out-of-scope decision returns one
+  blocker. No KI-W8, database, browser, real network/provider/AWS, paid,
+  credential-read, commit or push action is authorized; cost cap `$0.00`.
+
+```yaml
+certificate: PARENT-CORRECTIVE-ASSIGNMENT
+window: KI-W7
+assignment: ASG-KI-W7-WA-03
+source_state: 196
+active_state: 197
+correction: KI-W7-C003
+reassessment: KI-W7-I004
+corrective_file_count: 1
+final_path_count: 14
+final_path_digest: dd30a08f7f9bfa66d224c2b8f72758557d0823bf392e1f59c7a4ca2f26640836
+required_cases: 12
+required_controls: 12
+external_actions_authorized: 0
+paid_cost_cap_usd: 0.00
+successor_started: false
+status: READY_FOR_CORRECTIVE_DISPATCH
+```
+
+### `EV-KI-A-123` — KI-W7 window-agent handoff
+
+- **Result:** `KI-W7-I004` passed CV1–CV7 after independent acceptance of
+  S001–S013 and corrections C001–C003. The exact final 14-file set digest is
+  `dd30a08f7f9bfa66d224c2b8f72758557d0823bf392e1f59c7a4ca2f26640836`.
+- **Activation:** the focused nonisolated gate registered and executed all 12
+  required cases and all 12 controls, with zero skip, duplicate, unexpected,
+  unactivated or failed ID. Case/control digests remain
+  `6bacf5d9291362ee0d01f5d0d8e3e53f8f9e214a6ebbf5711497c80f3d74aa2e`
+  and `6950a20f91b666c03cf59c495576e72ad1501fcd58aa5f4378900bd473edafd7`.
+- **Build:** the corrected schedule ran the established build and measurement
+  first, then two byte-identical keyword builds and measurements. Keyword ZIP
+  SHA-256 is `47fda36e621bcb35a98fd1614854dadc0231e70871cf5488828610400d8460d4`,
+  size `32,006,605` bytes, expanded size `84,224,692` bytes. The bridge and
+  focused-certificate hashes are `9f6ffe010ea714ec78c86080942a7d02d5aec70f727099538fe167e511051be6`
+  and `b68985a23ccd5d9509151035249b094498f6d2e04e15b17a41d49a91c2f577dd`.
+- **Regression:** `npm test` passed `794/794` with `721` pass, `73` guarded
+  skips and zero failures. `npm run check:secrets` passed. The final topology
+  is exactly 82 resources, eight IAM roles and 31 alarms.
+- **Revisions:** S1
+  `fe57eeadd9d495d8d9fb2ab41b320c5d5af222b91849fb68d502997b7d4f5d64`,
+  S2 `eab7c0e40c51ac72e6b5644b961567ee7b0bb4f172f740bcb81d6de591cb8d6c`,
+  S3 `d8d1e22202c26b0758bf7a87a5dfc826e8de411dc9bc37af175160c249cb0201`.
+- **Boundary:** A5 CAS `197→198` records `AWAITING_REVIEW`; KI-W7 is not
+  parent-accepted by this handoff, and KI-W8 was not assigned or begun. No
+  database, browser, real network/provider/AWS/production/paid action,
+  credential-value read, commit or push occurred; cost `$0.00`.
+
+```yaml
+certificate: KI-W7-WINDOW-AGENT-HANDOFF
+window: KI-W7
+assignment: ASG-KI-W7-WA-03
+integration_assessment: KI-W7-I004
+source_state: 197
+handoff_state: 198
+initial_subwindows_accepted: 13
+corrective_subwindows_accepted: [KI-W7-C001, KI-W7-C002, KI-W7-C003]
+final_file_count: 14
+final_file_digest: dd30a08f7f9bfa66d224c2b8f72758557d0823bf392e1f59c7a4ca2f26640836
+required_cases: 12
+executed_cases: 12
+required_controls: 12
+falsified_controls: 12
+external_actions: 0
+paid_cost_usd: 0.00
+successor_started: false
+status: READY_FOR_PARENT_REVIEW
+```

@@ -1540,3 +1540,87 @@ and the aggregate certificate. It then runs CV5 once, using only one identical
 elevated recovery if the sandbox alone invalidates it, followed by CV6/CV7.
 PASS requires all 12 cases, all 12 controls, zero exceptions, ordinary npm
 regression closure, no external call/cost and only `READY_FOR_PARENT_REVIEW`.
+
+### `KI-W7-C003` - reconcile preserved infrastructure topology totals
+
+```yaml
+subwindow_id: KI-W7-C003
+type: FILE_CORRECTION
+parent_window_id: KI-W7
+parent_assignment_id: ASG-KI-W7-WA-03
+assigned_agent: UNASSIGNED
+predecessors: [KI-W7-I003-CV5-FAIL]
+successor_reserved_for: KI-W7-WINDOW-AGENT
+writable_file: email_scraper/test/aws-pipeline-infrastructure.test.js
+file_operation: MODIFY
+starting_file_digest: 3bfa45fab2beb2613be395e2a903fa87cdfef2a3b8c558073483acd504da13f8
+read_only_scope: [EV-KI-W7-S032, accepted S005 template topology, email_scraper/infrastructure/aws/template.yaml, email_scraper/scripts/measure-lambda-packages.js, Sections 7.3-7.5]
+authorized_actions: [apply exactly four frozen assertion-literal replacements, run correction-local syntax exact-source inverse-digest focused-test and diff checks, return for independent window-agent review]
+prohibited_actions: [production template script package fixture or second-file edit, build measurement database browser network provider AWS paid credential commit push KI-W8 action, successor dispatch]
+may_start_successor: false
+```
+
+The accepted W7 template adds exactly ten resources: `KeywordResearchDlq`,
+`KeywordResearchQueue`, `KeywordWorkerLogGroup`, `KeywordWorkerRole`,
+`KeywordWorker`, `KeywordResearchMapping`, and the four keyword alarm resources.
+The role count therefore changes by one and the alarm count by four. Modify only
+these four complete assertion lines, each exactly once:
+
+```text
+assert.equal(roles.length, 7);                         -> assert.equal(roles.length, 8);
+assert.equal(alarms.length, 27);                       -> assert.equal(alarms.length, 31);
+assert.equal(Object.keys(template.Resources).length, 72); -> assert.equal(Object.keys(template.Resources).length, 82);
+assert.equal(packet.full.resources.length, 72);        -> assert.equal(packet.full.resources.length, 82);
+```
+
+No other count, topology assertion, expected set, production byte, or test
+behavior may change. `LOCAL_NOW`, from `email_scraper/`: `node --check
+test/aws-pipeline-infrastructure.test.js`; an exact-source script must require
+each new complete line once, each superseded complete line zero times, reverse
+only the four replacements in memory and reproduce starting digest
+`3bfa45fab2beb2613be395e2a903fa87cdfef2a3b8c558073483acd504da13f8`;
+`node --test test/aws-pipeline-infrastructure.test.js` must exit zero with zero
+fail/skip; `git diff --check`; and the file diff must be exactly four additions
+and four deletions. These are compatibility-count corrections only and create
+no new W7 case/control ID.
+
+### `KI-W7-I004` - corrected final reassessment and handoff
+
+```yaml
+subwindow_id: KI-W7-I004
+type: INTEGRATION_REASSESSMENT
+parent_window_id: KI-W7
+parent_assignment_id: ASG-KI-W7-WA-03
+assigned_agent: KI-W7-WINDOW-AGENT
+predecessors: [KI-W7-C003]
+authorized_write_file: NONE
+authorized_read_scope: [A1-A8, KI-W7 S1-S3, all fourteen final W7 paths, email_scraper/scripts/build-lambda.js, email_scraper/scripts/measure-lambda-packages.js, email_scraper/scripts/build-keyword-worker.js, email_scraper/scripts/measure-keyword-worker-package.js, gitignored dist/lambda build outputs]
+authorized_actions: [repeat CV1-CV4 once with corrected CV3 order, execute CV5 once, execute CV6 once, execute CV7 once, append final W7 evidence and CAS handoff only after every gate passes]
+prohibited_actions: [implementation edit, changed test filter or timeout, database browser real network provider AWS paid action, credential value read, package schema migration frontend edit, commit push KI-W8]
+may_start_successor: false
+```
+
+I004 supersedes only I003's failed assessment schedule. Run CV1-CV7 in the
+unchanged Sections 7.3-7.5 order, with these exact corrections:
+
+1. CV1 expects the original thirteen W7 paths plus
+   `email_scraper/test/aws-pipeline-infrastructure.test.js`; the exact fourteen-
+   path digest is
+   `dd30a08f7f9bfa66d224c2b8f72758557d0823bf392e1f59c7a4ca2f26640836`.
+2. In CV3, immediately after the sole `node scripts/build-lambda.js`, run the
+   existing `node scripts/measure-lambda-packages.js` exactly once. Require exit
+   zero and `dist/lambda/measurements.json` before recording the seven sibling
+   hashes/snapshot or running the first keyword build. The rest of CV3,
+   including two keyword builds, two keyword measurements and bridge emission,
+   remains byte-for-byte the frozen sequence.
+3. CV4 must again certify exactly 12 cases and 12 controls with the frozen
+   digests and no exception. CV5 is one fresh `npm test`; CV6 is one fresh
+   `npm run check:secrets`; CV7 recomputes the expanded fourteen-path set and
+   all original topology/privacy/prohibition oracles.
+
+Only a proven sandbox denial permits the one identical E8.1 recovery already
+frozen by A5. A passing I004 returns `READY_FOR_PARENT_REVIEW`, records the exact
+commands/results and final file/case/control digests, and confirms zero external
+action and `$0.00` cost. It must not begin KI-W8. Any genuinely new failing
+oracle is diagnosed and handled under the existing mechanically-governed
+one-file correction rule; an out-of-scope decision returns one exact blocker.

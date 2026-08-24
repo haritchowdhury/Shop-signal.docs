@@ -1502,3 +1502,19 @@ compatibility_or_migration_effect: none
 authorization_effect: KI-W7-WINDOW-AGENT may execute the exact serial S001-S013 leaves, independently review them, then personally run I001; no KI-W8 or external action is authorized
 resumption_state: A5 state 196 READY under ASG-KI-W7-WA-02; stop at KI-W7 parent review or one genuinely new parent-level blocker
 ```
+
+```yaml
+change_id: CHG-KI-093
+timestamp: 2026-08-24T18:20:00+05:30
+trigger_evidence: [EV-KI-W7-S032, EV-KI-A-122, requester corrective dispatch authorization]
+reason: W7 legitimately added one IAM role, four alarms and ten CloudFormation resources, but one preserved infrastructure test retained four pre-W7 totals; the assessment also built established packages without invoking their existing measurement-report producer before packaging regression.
+changed_requirements: []
+changed_decisions: []
+affected_windows: [KI-W7 only]
+implementation_effect: test-only C003 changes exactly four assertion literals; no production or packaging source changes
+verification_effect: I004 inserts the existing measure-lambda-packages.js immediately after build-lambda.js and repeats CV1-CV7 against the expanded fourteen-path set
+invalidated_evidence: [I003 CV1-CV4 remain diagnostic and are rerun because C003 changes a preserved test and CV3 schedule; I003 CV5 remains failure evidence]
+compatibility_or_migration_effect: none — preserved test totals now describe the accepted additive topology
+authorization_effect: existing KI-W7-WINDOW-AGENT may execute C003, independently review it, execute I004, and continue only under the mechanically governed correction rule until parent review or one new out-of-scope blocker
+resumption_state: A5 state 197 READY under ASG-KI-W7-WA-03; KI-W8 remains prohibited
+```

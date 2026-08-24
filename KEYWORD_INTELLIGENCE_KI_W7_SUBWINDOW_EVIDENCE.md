@@ -1061,3 +1061,138 @@ produce that report. The already-existing `measure-lambda-packages.js` is its
 sole producer and requires no source edit. Because the preserved test file is
 outside A5's exact 13-file scope and I003 has zero implementation-write
 authority, CV6/CV7 were not run and KI-W8 was not begun.
+
+## `EV-KI-W7-S033` - parent corrective authority reconciled and C003 assigned
+
+```yaml
+evidence_id: EV-KI-W7-S033
+timestamp: 2026-08-24T18:25:00+05:30
+parent_evidence: EV-KI-A-122
+parent_change: CHG-KI-093
+parent_state_version: 197
+parent_state_revision: 862d0422bbeb1d0394fdbc7af3e97ff6e8fad77e1140040603edde4d84fc926c
+parent_assignment: ASG-KI-W7-WA-03
+decomposition_revision: fe57eeadd9d495d8d9fb2ab41b320c5d5af222b91849fb68d502997b7d4f5d64
+assigned_subwindow: KI-W7-C003
+assigned_subwindow_assignment: ASG-KI-W7-C003-01
+writable_file: email_scraper/test/aws-pipeline-infrastructure.test.js
+starting_digest: 3bfa45fab2beb2613be395e2a903fa87cdfef2a3b8c558073483acd504da13f8
+frozen_replacements: [roles.length 7_to_8, alarms.length 27_to_31, template.Resources 72_to_82, packet.full.resources 72_to_82]
+successor_after_independent_acceptance: KI-W7-I004
+external_actions_authorized: 0
+paid_cost_cap_usd: "0.00"
+state_version: 25
+status: READY_FOR_C003
+```
+
+The parent-approved correction expands only the final path inventory, not the
+product implementation. C003 is the sole executable leaf; I004 remains
+reserved for the window agent until independent C003 acceptance.
+
+## `EV-KI-W7-S034` - C003 independently accepted and I004 assigned
+
+```yaml
+evidence_id: EV-KI-W7-S034
+timestamp: 2026-08-24T18:35:00+05:30
+reviewed_subwindow: KI-W7-C003
+reviewed_assignment: ASG-KI-W7-C003-01
+disposition: ACCEPTED_FOR_INTEGRATION
+writable_file: email_scraper/test/aws-pipeline-infrastructure.test.js
+starting_digest: 3bfa45fab2beb2613be395e2a903fa87cdfef2a3b8c558073483acd504da13f8
+ending_digest: 973fb4e3a105139ea77326be41eebc0540e40810f1ac58ec8ccdb36574d27b4a
+diff_numstat: {added: 4, deleted: 4}
+independent_checks: [node_check_pass, exact_four_line_diff_pass, inverse_start_digest_pass, focused_1_pass_0_fail_0_skip, diff_check_pass]
+prohibited_actions_observed: []
+next_subwindow: KI-W7-I004
+next_assignment: ASG-KI-W7-I004-01
+state_version: 26
+```
+
+The window agent reconstructed the pinned baseline by reversing only the four
+approved literals and reran the complete focused file. C003 is accepted; I004
+now owns the zero-write CV1-CV7 final reassessment.
+
+## `EV-KI-W7-S035` - I004 complete integration pass and parent handoff
+
+```yaml
+evidence_id: EV-KI-W7-S035
+timestamp: 2026-08-24T19:10:00+05:30
+certificate: WINDOW-AGENT-INTEGRATION-PASS
+parent_window_id: KI-W7
+integration_assessment_id: KI-W7-I004
+window_agent_identity: KI-W7-WINDOW-AGENT
+accepted_initial_subwindows: [KI-W7-S001, KI-W7-S002, KI-W7-S003, KI-W7-S004, KI-W7-S005, KI-W7-S006, KI-W7-S007, KI-W7-S008, KI-W7-S009, KI-W7-S010, KI-W7-S011, KI-W7-S012, KI-W7-S013]
+accepted_corrective_subwindows: [KI-W7-C001, KI-W7-C002, KI-W7-C003]
+superseded_failed_assessments: [KI-W7-I001, KI-W7-I002, KI-W7-I003]
+expected_changed_file_set:
+  - email_scraper/infrastructure/aws/template.yaml
+  - email_scraper/scripts/keyword-intelligence/create-change-set.js
+  - email_scraper/scripts/keyword-intelligence/inspect-stack.js
+  - email_scraper/scripts/measure-keyword-worker-package.js
+  - email_scraper/src/aws-pipeline/handlers/recovery.js
+  - email_scraper/src/aws-pipeline/keyword-intelligence/handler.js
+  - email_scraper/src/aws-pipeline/runtime-config.js
+  - email_scraper/src/config.js
+  - email_scraper/test/aws-pipeline-infrastructure.test.js
+  - email_scraper/test/aws-pipeline-runtime-adapters.test.js
+  - email_scraper/test/keyword-intelligence-build.test.js
+  - email_scraper/test/keyword-intelligence-deployment-guard.test.js
+  - email_scraper/test/keyword-intelligence-deployment-runtime.test.js
+  - email_scraper/test/keyword-intelligence-infrastructure.test.js
+actual_changed_file_set:
+  - email_scraper/infrastructure/aws/template.yaml
+  - email_scraper/scripts/keyword-intelligence/create-change-set.js
+  - email_scraper/scripts/keyword-intelligence/inspect-stack.js
+  - email_scraper/scripts/measure-keyword-worker-package.js
+  - email_scraper/src/aws-pipeline/handlers/recovery.js
+  - email_scraper/src/aws-pipeline/keyword-intelligence/handler.js
+  - email_scraper/src/aws-pipeline/runtime-config.js
+  - email_scraper/src/config.js
+  - email_scraper/test/aws-pipeline-infrastructure.test.js
+  - email_scraper/test/aws-pipeline-runtime-adapters.test.js
+  - email_scraper/test/keyword-intelligence-build.test.js
+  - email_scraper/test/keyword-intelligence-deployment-guard.test.js
+  - email_scraper/test/keyword-intelligence-deployment-runtime.test.js
+  - email_scraper/test/keyword-intelligence-infrastructure.test.js
+expected_changed_file_set_digest: dd30a08f7f9bfa66d224c2b8f72758557d0823bf392e1f59c7a4ca2f26640836
+actual_changed_file_set_digest: dd30a08f7f9bfa66d224c2b8f72758557d0823bf392e1f59c7a4ca2f26640836
+required_case_count: 12
+registered_case_count: 12
+executed_case_count: 12
+required_case_set_digest: 6bacf5d9291362ee0d01f5d0d8e3e53f8f9e214a6ebbf5711497c80f3d74aa2e
+registered_case_set_digest: 6bacf5d9291362ee0d01f5d0d8e3e53f8f9e214a6ebbf5711497c80f3d74aa2e
+executed_case_set_digest: 6bacf5d9291362ee0d01f5d0d8e3e53f8f9e214a6ebbf5711497c80f3d74aa2e
+skipped_required_cases: []
+duplicate_case_ids: []
+unexpected_case_ids: []
+missing_activation_witnesses: []
+oracle_failures: []
+negative_controls_expected: 12
+negative_controls_falsified: 12
+substitute_fidelity_failures: []
+accepted_evidence_invalidations_unresolved: []
+commands_and_outcomes:
+  - {gate: CV1, outcome: PASS, path_count: 14, path_digest: dd30a08f7f9bfa66d224c2b8f72758557d0823bf392e1f59c7a4ca2f26640836, frontend_dirty_paths: 0}
+  - {gate: CV2, outcome: PASS, syntax_files: 13, template_json: PASS, diff_check: PASS}
+  - {gate: CV3, command: node scripts/build-lambda.js then node scripts/measure-lambda-packages.js then two keyword builds and two keyword measurements, outcome: PASS, keyword_sha256: 47fda36e621bcb35a98fd1614854dadc0231e70871cf5488828610400d8460d4, keyword_zip_bytes: 32006605, keyword_unzipped_bytes: 84224692, bridge_sha256: 9f6ffe010ea714ec78c86080942a7d02d5aec70f727099538fe167e511051be6}
+  - {gate: CV4, command: frozen five-file nonisolated TAP plus accepted parser CLI, outcome: PASS, certificate_sha256: b68985a23ccd5d9509151035249b094498f6d2e04e15b17a41d49a91c2f577dd, cases: 12, controls: 12, ignored_non_w7_tests: 17, exceptions: 0}
+  - {gate: CV5, command: npm test, outcome: PASS, tests: 794, pass: 721, fail: 0, skip: 73}
+  - {gate: CV6, command: npm run check:secrets, outcome: PASS}
+  - {gate: CV7, outcome: PASS, resources: 82, roles: 8, alarms: 31, forbidden_counts: 0}
+environment_invalidations_and_identical_recoveries:
+  - {gate: CV1 preflight, restricted_issue: nested Node spawnSync git EPERM after returning stdout, resolution: direct read-only git status plus independent digest command, usable_failed_result: false}
+gates_reused_with_dependency_proof: []
+prohibited_actions_observed: []
+successor_parent_window_work_started: false
+residual_parent_review_items: []
+external_mutations: []
+paid_cost_usd: "0.00"
+state_version: 27
+status: READY_FOR_PARENT_REVIEW
+```
+
+The window agent personally reviewed every accepted leaf/correction and ran
+the complete final assessment. The real local package gate proves deterministic
+packaging only; AWS spawn stubs and the local template do not claim applied AWS,
+credentials, quotas, providers, pricing, or production runtime. No external
+mutation or paid call occurred, and KI-W8 was not begun.
