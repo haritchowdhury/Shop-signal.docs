@@ -1,4 +1,4 @@
-state_version: 216
+state_version: 220
 standard_path: PROJECT_AGNOSTIC_DECISION_COMPLETE_CHECKLIST_AUTHORING_STANDARD.md
 standard_revision: cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb523ede32848
 subwindow_standard_path: PROJECT_AGNOSTIC_WINDOW_AGENT_SUBWINDOW_AUTHORING_STANDARD.md
@@ -15,10 +15,10 @@ checklist_revision: 25c33528a7a2059aedb0ed850de8e83b49ca5a08b02ee8d2f64621090780
 traceability_path: KEYWORD_INTELLIGENCE_TRACEABILITY_INDEX.md
 traceability_revision: e89fe868823ba97a3c8877d79055bbc85d2593353add13c32b8a6c35a51e7d4b
 current_window: KI-W8
-current_subwindow: KI-W8-I101
-current_assignment_id: NONE_AWAITING_REQUESTER_APPROVAL_ACT02
+current_subwindow: KI-W8-C201
+current_assignment_id: ASG-KI-W8-C201-PARENT
 assigned_agent: /root
-authorized_windows: []
+authorized_windows: [KI-W8-C201]
 decomposition_path: KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_CHECKLIST.md
 decomposition_revision: 2aa5e6f45445cbfd9f17cd55e5afe0cdd62df78c30beb3b6f4eb689700dce44d
 frozen_runner_revision: 4611115aa6c7fc3ae9448e44435051ad0e2abc6f85245f656613608bef5d47d0
@@ -39,9 +39,9 @@ aws_profile: storesignal-dev
 aws_region: ap-south-2
 aws_stack: storesignal-production-pipeline
 aws_environment: production
-authorized_write_scope: []
-authorized_actions: []
-prohibited_actions: [W8-ACT-01 replay, W8-ACT-02, every further AWS mutation including CloudFormation execute-change-set update-stack delete or manual repair, Lambda invoke, queue send receive delete purge redrive, secret value read, provider or paid call, database API browser local-server action, further implementation source test schema migration package lock frontend edit, leaf or subagent dispatch, commit, push, destructive action, successor work]
+authorized_write_scope: [email_scraper/src/aws-pipeline/keyword-intelligence/handler.js, email_scraper/src/aws-pipeline/keyword-intelligence/contracts.js, email_scraper/src/aws-pipeline/keyword-intelligence/dataforseo-labs-adapter.js, email_scraper/test/keyword-intelligence-deployment-runtime.test.js, email_scraper/.env private-local-only, email_scraper/dist/lambda/keyword-worker.zip generated-only, ACTIVE_EXECUTION_STATE.md, KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md append-only KI-W8-C201]
+authorized_actions: [distinguish AWS Lambda context from injected runtime, restore the working nested keyword_info.monthly_searches provider mapping, focused syntax and handler verification, deterministic keyword-worker build and measurement, read the deployed pipeline secret without displaying or persisting its value outside ignored local environment, align local DATABASE_URL and DIRECT_URL to the deployed canonical database, deploy the existing forward keyword-intelligence migration to that database, sanitized migration verification, content-addressed artifact upload, reviewed single-resource CloudFormation code corrections for the keyword worker, read-only SQS Lambda CloudFormation and log verification, observe queued research]
+prohibited_actions: [provider or paid call, new research submission, direct Lambda invoke, queue send receive delete purge redrive, secret value display or evidence persistence, schema reset or destructive migration, frontend edit, package or lock edit, unrelated source edit, leaf or subagent dispatch, commit, push, successor work]
 execution_environment_policy:
   sandbox_escalation_for_authorized_local_or_read_only_actions: true
   automatic_identical_recovery_after_proven_environment_invalidation: true
@@ -52,12 +52,12 @@ parallel_execution_policy:
   integration_assessment_parallel: false
   executable_schedule: SERIAL
 may_start_successor: false
-current_status: AWAITING_REQUESTER_APPROVAL_ACT02
+current_status: READY
 accepted_through: KI-W7
-next_window: KI-W8-ACT-02
-stop_after: KI-W8-ACT-02
+next_window: null
+stop_after: KI-W8-C201
 blocker: null
-user_gates: [requester approval for the exact W8-ACT-02 disabled-intermediate then active-final sequence]
+user_gates: []
 preflight_p2_sanitized_projection_sha256: 4419b32a71c1993a839a13595c6fd8444389affa78c2c28e95534b03dba2755e
 preflight_p3_sanitized_projection_sha256: ef9748a94435ffefb0b2d41ceec23ed1b8d6883d1a42849f2a0656195ac54349
 preflight_packet_projection_sha256: dade137fe8274b48ed32441bf1e32be10f5f44673a8084174e59ca21a2c39bba
@@ -86,6 +86,20 @@ aws_change_set_present: true
 aws_change_set_id_sha256: 5a4e7c1d0c4dc456a59640a25753f68cea2bf39b3e47c7f5971d2f14d6f9127a
 full_change_set_record_sha256: 6754a6ddad248da921f5563b2508f7c63e922251cccfc579ee09b080b88c6ec1
 change_projection_sha256: 55a6dcf69ca72fb4004facc422c5677723aa50a0e8daecd6d1300a1eaac19649
+aws_activation_change_set_present: true
+aws_activation_change_set_id_sha256: 652549cbb16f0c6186a9f6af7f4a1c163f3153e92e9ac949e34d29974a66d78b
+activation_change_set_record_sha256: 2cc71db925dd5252d859c10c6d16b5fa3328137566126e8afab72c43a4d5a356
+activation_projection_sha256: 62e610da5fbf796d29dfd722ea729968f207fbff48ec1066de0e36729a5be5e5
+active_inspector_projection_sha256: 09372381ad73c064d53cb83a7370b4b76b61bd2a3ff730c32e801257cd03c664
+post_inspect_projection_sha256: 99a411629994eb4c146148251591d7c93c332bb8acf3fbae9103cf86bb5bd627
+aws_keyword_active: true
+aws_keyword_source_messages: 0
+aws_keyword_dlq_messages: 0
+execution_case_count: 4
+execution_case_digest: 3bd44b2c2c244b1dd29881dcfa249d9cdad5f9b1aecc981c56612d587283ca7e
+execution_control_count: 8
+execution_control_digest: 9bd004917f960abb4842ea2f2da48ed60821fdedd55fcbc54dc7bdd271037ea6
+aws_action_ledger: [W8-ACT-01, W8-ACT-02]
 keyword_worker_measurement_revision: 07217b5a05418c9790559c24b5cb07281e6edd9fa28dc6e4d5ac2d0237043447
 established_measurement_revision: 5286e288717283027316c43c5fe4ddc66471790b6bf3c4c230a91ad02c4572a6
-last_updated: 2026-08-25T21:49:00+05:30
+last_updated: 2026-08-25T23:12:00+05:30

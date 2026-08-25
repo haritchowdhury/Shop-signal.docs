@@ -702,3 +702,77 @@ No CloudFormation execution, stack update, activation, Lambda invocation,
 queue data-plane operation, secret-value read, provider/paid call, database,
 API, browser, local-server, commit, push or successor action occurred. Cost was
 `$0.00`. LIVE-02 is accepted; ACT-02 still requires separate requester approval.
+
+## `EV-KI-W8-AWS-S017` — requester-approved ACT-02 active deployment pass
+
+**Outcome:** `PASS_PENDING_FINAL_CONFORMANCE`.
+
+Under A5 state 217 and assignment `ASG-KI-W8-ACT02-PARENT-01`, the frozen
+runner re-established target state and validated every ACT-01 private-record
+hash before execution. The reviewed full change set applied, after which the
+exact disabled-intermediate inspector passed:
+
+```yaml
+full_apply_sha256: 222cd437edf7066a29d05197b5ec7b4bac6764eb03304c78fecf0bf6707694d5
+disabled_inspector_sha256: 337d8b8b8ae92b9774870d8f45c823e6d36b98fef2a50a35690b2cea99b382d8
+disabled_keyword_active: false
+disabled_keyword_source_messages: 0
+disabled_keyword_dlq_messages: 0
+```
+
+The production guard reviewed the deterministic five-change activation set,
+the private activation record reconciled, and only that recorded ID executed.
+The active-final inspector then passed:
+
+```yaml
+activation_review_sha256: 913c2835b65ae1d626db6777c5ae761f0ea97fd4e289205f0aebce699d254aaf
+activation_record_sha256: 2c8ec16a4d1b5ae8002b81fac1c24c663ebbb2ffa507e803f420f1ec7684551e
+activation_apply_sha256: dfc2831e29f86dd2287013020deccfab150636367c25b4f04d32edc1bff5f069
+active_inspector_sha256: 09372381ad73c064d53cb83a7370b4b76b61bd2a3ff730c32e801257cd03c664
+post_inspect_sha256: 99a411629994eb4c146148251591d7c93c332bb8acf3fbae9103cf86bb5bd627
+stack_status: UPDATE_COMPLETE
+active_keyword_active: true
+active_keyword_source_messages: 0
+active_keyword_dlq_messages: 0
+resource_count: 82
+function_count: 8
+source_queue_count: 7
+dlq_count: 7
+mapping_count: 7
+alarm_count: 31
+output_count: 34
+established_output_count: 30
+added_keyword_output_count: 4
+```
+
+No replacement change set, update-stack/manual repair, direct Lambda invoke,
+queue data-plane action, secret-value read, provider/paid call, database,
+application API, browser, local-server, commit, push or successor action
+occurred. Cost was `$0.00`. LIVE-03 is accepted; final conformance remains.
+
+## `EV-KI-W8-AWS-S018` — final conformance and integration handoff
+
+**Outcome:** `WINDOW-AGENT-INTEGRATION-PASS`.
+
+After LIVE-03 was recorded, the frozen executor constructed the exact
+certificate from A6 and passed all final checks:
+
+```yaml
+required_registered_executed_activated_cases: 4
+case_digest: 3bd44b2c2c244b1dd29881dcfa249d9cdad5f9b1aecc981c56612d587283ca7e
+required_falsified_controls: 8
+control_digest: 9bd004917f960abb4842ea2f2da48ed60821fdedd55fcbc54dc7bdd271037ea6
+pre_action_mutants_rejected: 2
+final_mutants_rejected: 6
+control_result_sha256: 22876037d4875db924a687c5316d53f5e41297d10fcd1f54e65b550ebfe9ae49
+scope_result_sha256: c4d74d768046c8e04ea6b019fccd10ca8f7eb387af5d88c7a19fa23eb31a405e
+action_ledger: [W8-ACT-01, W8-ACT-02]
+temporary_cleanup: PASS
+paid_cost_usd: 0.00
+```
+
+The execution scope contained exactly A5, A6, S2 and S3; backend and frontend
+tracked worktrees were clean. All eleven forbidden counters are zero. The AWS
+keyword infrastructure is active, its source queue and DLQ were empty at final
+inspection, and no successor window exists or was started. KI-W8 is ready for
+final parent acceptance.

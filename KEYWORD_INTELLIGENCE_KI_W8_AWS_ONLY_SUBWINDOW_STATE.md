@@ -5,7 +5,7 @@ This machine-scannable state contains no evidence. `S1` is the corrected
 decomposition authority and `S3` is the append-only evidence authority.
 
 ```yaml
-state_version: 12
+state_version: 14
 parent_window_id: KI-W8
 parent_assignment_id: ASG-KI-W8-I101-PARENT-03
 window_agent_identity: /root
@@ -19,24 +19,24 @@ parent_decision_revision: 32ae437a3c755d370e6d78ff4ba33badec0fec504f2045339303c3
 parent_checklist_revision: 25c33528a7a2059aedb0ed850de8e83b49ca5a08b02ee8d2f64621090780e1a6
 parent_traceability_revision: e89fe868823ba97a3c8877d79055bbc85d2593353add13c32b8a6c35a51e7d4b
 parent_state_path: ACTIVE_EXECUTION_STATE.md
-parent_state_version: 216
-parent_state_revision: 754d99c6130e1b85a9130213ac0c1832eb69866cf48046f26fa3328c15e2202a
+parent_state_version: 218
+parent_state_revision: 00f104874573047de0558a597f33233baf4aef866bddcd9d4893d8cdcd210bac
 decomposition_path: KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_CHECKLIST.md
 decomposition_revision: 2aa5e6f45445cbfd9f17cd55e5afe0cdd62df78c30beb3b6f4eb689700dce44d
 supersedes_decomposition_revision: d68d8f72e3e830481ace6aa9f489abcb57dad79a7ab503a7d11d3970a5b9fba9
 frozen_runner_revision: 4611115aa6c7fc3ae9448e44435051ad0e2abc6f85245f656613608bef5d47d0
 evidence_path: KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_EVIDENCE.md
-decomposition_status: ACT01_COMPLETE
+decomposition_status: READY_FOR_PARENT_REVIEW
 initial_file_subwindows: []
 parallel_waves: []
 current_subwindow: KI-W8-I101
-current_assignment_id: NONE_AWAITING_REQUESTER_APPROVAL_ACT02
+current_assignment_id: NONE_AWAITING_PARENT_REVIEW
 assigned_agent: /root
 subwindow_type: INTEGRATION_ASSESSMENT
 authorized_write_file: NONE
 authorized_read_scope: [local parent package, both standards, accepted W7 source scripts packages and evidence, rejected DECOMP-1 S1-S3 history]
-authorized_actions: [no further execution until requester approves W8-ACT-02]
-prohibited_actions: [W8-ACT-01 replay, W8-ACT-02, every further AWS mutation, provider paid database API browser local-server action, further implementation source test schema migration package lock frontend edit, leaf or subagent dispatch, commit, push, destructive action, successor work]
+authorized_actions: [parent review only]
+prohibited_actions: [W8-ACT-01 replay, W8-ACT-02 replay, every further AWS mutation, Lambda invoke, queue send receive delete purge redrive, secret value read, provider paid database API browser local-server action, further implementation source test schema migration package lock frontend edit, leaf or subagent dispatch, commit, push, destructive action, successor work]
 execution_environment_policy:
   sandbox_escalation_for_authorized_local_actions: true
   automatic_identical_recovery_after_proven_environment_invalidation: true
@@ -48,9 +48,9 @@ parallel_execution_policy:
   executable_schedule: SERIAL
 execution_authority_active: false
 may_start_successor: false
-current_status: AWAITING_REQUESTER_APPROVAL_ACT02
-accepted_subwindows: []
-next_subwindow: KI-W8-ACT-01
+current_status: READY_FOR_PARENT_REVIEW
+accepted_subwindows: [KI-W8-I101]
+next_subwindow: NONE
 blocker: null
 authoring_baseline:
   root_head: 8a235e858888cbd0ea21a26520493cda72ba1a23
@@ -73,8 +73,10 @@ revision_history:
   - {state_version: 10, decomposition_revision: 2aa5e6f45445cbfd9f17cd55e5afe0cdd62df78c30beb3b6f4eb689700dce44d, outcome: P1_P6_PASS_AWAITING_REQUESTER_APPROVAL_ACT01}
   - {state_version: 11, decomposition_revision: 2aa5e6f45445cbfd9f17cd55e5afe0cdd62df78c30beb3b6f4eb689700dce44d, outcome: READY_REQUESTER_APPROVED_ACT01}
   - {state_version: 12, decomposition_revision: 2aa5e6f45445cbfd9f17cd55e5afe0cdd62df78c30beb3b6f4eb689700dce44d, outcome: ACT01_PASS_AWAITING_REQUESTER_APPROVAL_ACT02}
-last_updated: 2026-08-25T21:50:00+05:30
+  - {state_version: 13, decomposition_revision: 2aa5e6f45445cbfd9f17cd55e5afe0cdd62df78c30beb3b6f4eb689700dce44d, outcome: READY_REQUESTER_APPROVED_ACT02}
+  - {state_version: 14, decomposition_revision: 2aa5e6f45445cbfd9f17cd55e5afe0cdd62df78c30beb3b6f4eb689700dce44d, outcome: WINDOW_AGENT_INTEGRATION_PASS_READY_FOR_PARENT_REVIEW}
+last_updated: 2026-08-25T22:20:00+05:30
 ```
 
-DECOMP-5 P1–P6 and ACT-01 passed. The exact disabled change set remains
-unexecuted. ACT-02 remains prohibited until its separate requester approval.
+DECOMP-5 P1–P6, ACT-01, ACT-02 and final conformance passed. AWS keyword
+infrastructure is active and no successor window exists. Ready for parent review.

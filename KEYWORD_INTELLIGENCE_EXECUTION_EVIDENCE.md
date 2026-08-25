@@ -7683,3 +7683,82 @@ activation_performed: false
 paid_cost_usd: 0.00
 next_gate: W8-ACT-02_REQUESTER_APPROVAL
 ```
+
+## EV-KI-W8-L03 — ACT-02 deployed, activated and inspected
+
+- **Timestamp/phase:** `2026-08-25T22:14:00+05:30`; requester-approved
+  `W8-ACT-02` under assignment `ASG-KI-W8-ACT02-PARENT-01`.
+- The exact previously reviewed full change-set ID applied successfully. The
+  disabled-intermediate inspector then verified the complete production
+  topology with keyword activation false and both keyword queues empty.
+- The exact five-change activation set was created, production-guard reviewed
+  and applied by its recorded ID. Sanitized activation ID hash:
+  `652549cbb16f0c6186a9f6af7f4a1c163f3153e92e9ac949e34d29974a66d78b`;
+  record hash:
+  `2cc71db925dd5252d859c10c6d16b5fa3328137566126e8afab72c43a4d5a356`;
+  projection hash:
+  `62e610da5fbf796d29dfd722ea729968f207fbff48ec1066de0e36729a5be5e5`.
+- Final inspection verified `UPDATE_COMPLETE`, keyword activation true, eight
+  functions, seven source queues, seven DLQs, seven mappings, 31 alarms and
+  both keyword queues empty. All 30 established output hashes remained equal;
+  exactly four keyword outputs were added, for 34 total.
+- No Lambda was directly invoked and no queue message was sent, received,
+  deleted, purged or redriven. No secret value, provider, paid operation,
+  database, application API, browser or local server was used. Paid cost was
+  `$0.00`.
+
+sanitized_projection_sha256: 09372381ad73c064d53cb83a7370b4b76b61bd2a3ff730c32e801257cd03c664
+
+```yaml
+certificate: KI-W8-LIVE-03-PASS
+action: W8-ACT-02
+full_change_set_applied: true
+disabled_intermediate_verified: true
+activation_change_set_applied: true
+active_final_verified: true
+keyword_source_messages: 0
+keyword_dlq_messages: 0
+paid_cost_usd: 0.00
+next_gate: W8-CONF-01
+```
+
+## EV-KI-W8-C01 — W8 final conformance and handoff
+
+- **Timestamp/phase:** `2026-08-25T22:17:00+05:30`; post-LIVE-03 conformance.
+- `W8-CONF-01` passed. Required, registered, executed and activated cases are
+  exactly the same four IDs. All eight controls were falsified by their
+  positive→mutant-rejects→fresh-positive oracles.
+- Control projection SHA-256:
+  `22876037d4875db924a687c5316d53f5e41297d10fcd1f54e65b550ebfe9ae49`.
+  Scope projection SHA-256:
+  `c4d74d768046c8e04ea6b019fccd10ca8f7eb387af5d88c7a19fa23eb31a405e`.
+- Scope was exactly the four coordination files changed during execution;
+  backend and frontend tracked source/test trees were clean. Deployment record
+  files and accepted measurement outputs remain generated/ignored artifacts.
+  Temporary evidence cleanup passed.
+- The AWS action ledger is exactly `W8-ACT-01` then `W8-ACT-02`. No secret
+  value read, provider/paid call, database, application API, browser,
+  local-server, direct Lambda invocation, queue data-plane action, destructive
+  operation, manual repair, commit, push or successor action occurred.
+
+sanitized_projection_sha256: 22876037d4875db924a687c5316d53f5e41297d10fcd1f54e65b550ebfe9ae49
+
+```json
+{
+  "certificate": "KI-W8-EXECUTION-PASS",
+  "requiredCases": ["W8-CONF-01", "W8-LIVE-01", "W8-LIVE-02", "W8-LIVE-03"],
+  "registeredCases": ["W8-CONF-01", "W8-LIVE-01", "W8-LIVE-02", "W8-LIVE-03"],
+  "executedCases": ["W8-CONF-01", "W8-LIVE-01", "W8-LIVE-02", "W8-LIVE-03"],
+  "activatedCases": ["W8-CONF-01", "W8-LIVE-01", "W8-LIVE-02", "W8-LIVE-03"],
+  "skippedCases": [],
+  "duplicateCaseIds": [],
+  "unexpectedCaseIds": [],
+  "requiredControls": ["W8-NC-01", "W8-NC-02", "W8-NC-03", "W8-NC-04", "W8-NC-05", "W8-NC-06", "W8-NC-07", "W8-NC-08"],
+  "falsifiedControls": ["W8-NC-01", "W8-NC-02", "W8-NC-03", "W8-NC-04", "W8-NC-05", "W8-NC-06", "W8-NC-07", "W8-NC-08"],
+  "caseDigest": "3bd44b2c2c244b1dd29881dcfa249d9cdad5f9b1aecc981c56612d587283ca7e",
+  "controlDigest": "9bd004917f960abb4842ea2f2da48ed60821fdedd55fcbc54dc7bdd271037ea6",
+  "liveEvidence": {"W8-LIVE-01": "EV-KI-W8-L01", "W8-LIVE-02": "EV-KI-W8-L02", "W8-LIVE-03": "EV-KI-W8-L03"},
+  "actionLedger": ["W8-ACT-01", "W8-ACT-02"],
+  "forbiddenCounts": {"activation": 0, "apiResearch": 0, "browser": 0, "database": 0, "destructive": 0, "lambdaDirectInvoke": 0, "localServer": 0, "paid": 0, "provider": 0, "queueDataPlane": 0, "secretValueRead": 0}
+}
+```
