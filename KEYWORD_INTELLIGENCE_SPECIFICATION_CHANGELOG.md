@@ -1549,3 +1549,19 @@ compatibility_or_migration_effect: none
 authorization_effect: local three-document authoring only; no W8 preflight, AWS, host, provider, paid, database, browser, build, mutation or W8 action is authorized
 resumption_state: A5 state 200 READY under ASG-KI-W8-WA-01; stop at parent decomposition review
 ```
+
+```yaml
+change_id: CHG-KI-096
+timestamp: 2026-08-24T17:20:47+05:30
+trigger_evidence: [EV-KI-W8-S005, EV-KI-A-126]
+reason: Parent review accepted the third W8 decomposition after exact live-operation, rendered-UI, ambiguity-reconciliation and artifact-metadata corrections closed every returned finding.
+changed_requirements: []
+changed_decisions: []
+affected_windows: [KI-W8 decomposition]
+implementation_effect: none
+decomposition_revision: 7f2bc8197a52c4264f876f58db0cb386613007f3a16b8fdabbb468740b47a296
+invalidated_evidence: [DECOMP-1 and DECOMP-2 readiness certificates remain superseded history]
+compatibility_or_migration_effect: none
+authorization_effect: decomposition is approved, but KI-W8-I001 and every read-only/external/paid action remain unassigned until the named prerequisites and a new A5 authorization exist
+resumption_state: A5 state 201 AWAITING_USER_PREREQUISITES; obtain literal host/provider protocols, origin, owner sessions and seed, then separately assign P1-P6 only
+```

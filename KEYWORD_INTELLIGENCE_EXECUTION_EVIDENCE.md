@@ -7234,3 +7234,44 @@ external_actions_authorized: 0
 paid_cost_usd: 0.00
 status: READY
 ```
+
+### `EV-KI-A-126` — independent parent approval of KI-W8 decomposition
+
+- **Reviewed package:** S1
+  `7f2bc8197a52c4264f876f58db0cb386613007f3a16b8fdabbb468740b47a296`,
+  S2 `fe09c4b689f8f1b72d2727808f55846fe609a97c12c76d4432166143075ec170`
+  and S3 `5392bdbb3ff629e3928619fba64a9af3f7cf0a39d53f700327a5b81c682a576e`.
+  Their parent pins match A5 state 200; backend and frontend are clean at the
+  accepted W7 commits.
+- **Independent review:** verified the zero-leaf/one-assessment architecture,
+  seven independently approved actions, fail-closed deferred applied facts,
+  exact G1-G7 operation manifest, rendered Chrome/CDP dashboard save, separately
+  resumable selection and same-key handoff ambiguity paths, read-only owner-B
+  denial, persisted manifest-produced-at mapping and empty implementation set.
+- **Mechanical closure:** required cases are exactly 10 with digest
+  `b716a609b2269f69d4e042503ad47dabb1eb397e17726af850f38ab09940431a`;
+  controls are exactly six with digest
+  `1a2fd2fb71c94f297b27c5c6ad580c67d94ae807525b420996bd4382d46b7c6e`;
+  all 47 readiness boxes are checked. S1/S2 revision equality and
+  `git diff --check` pass; no source repository is dirty.
+- **Disposition:** DECOMP-3 is parent-approved. A5 CAS `200→201` grants no
+  execution yet. KI-W8-I001 remains unassigned until its literal host/provider
+  protocols, production origin, two owner sessions and normalized seed are
+  available and the requester authorizes read-only P1-P6. Every external
+  mutation/paid action remains separately gated.
+
+```yaml
+certificate: KI-W8-DECOMPOSITION-PARENT-APPROVED
+parent_window: KI-W8
+source_state: 200
+approved_state: 201
+decomposition_revision: 7f2bc8197a52c4264f876f58db0cb386613007f3a16b8fdabbb468740b47a296
+source_leaf_count: 0
+assessment_id: KI-W8-I001
+required_cases: 10
+required_controls: 6
+external_actions_authorized: 0
+paid_cost_usd: 0.00
+execution_assigned: false
+status: APPROVED_AWAITING_USER_PREREQUISITES
+```

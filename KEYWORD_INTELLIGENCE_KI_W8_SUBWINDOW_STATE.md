@@ -1,4 +1,4 @@
-state_version: 2
+state_version: 3
 parent_window_id: KI-W8
 parent_assignment_id: ASG-KI-W8-WA-01
 window_agent_identity: KI-W8-WINDOW-AGENT
@@ -14,8 +14,8 @@ parent_traceability_revision: 90c2f808426c4f1cf20ad885860e01b66763f3fc607e28c3b2
 parent_state_version: 200
 parent_state_revision: a4e08c31469b1c309a58ef52c457a65bcef3b9fe0561d9e60cabb802df4429b3
 decomposition_path: KEYWORD_INTELLIGENCE_KI_W8_SUBWINDOW_CHECKLIST.md
-decomposition_revision: 7019451217532974865c440a14c87fa7698d125877897bd5aac98d686b450fe2
-supersedes_decomposition_revision: 19cfd226b4821e133951332b125f6ecc161a8f96f36e3a6a82e472eb794b5df1
+decomposition_revision: 7f2bc8197a52c4264f876f58db0cb386613007f3a16b8fdabbb468740b47a296
+supersedes_decomposition_revision: 7019451217532974865c440a14c87fa7698d125877897bd5aac98d686b450fe2
 evidence_path: KEYWORD_INTELLIGENCE_KI_W8_SUBWINDOW_EVIDENCE.md
 decomposition_status: AWAITING_PARENT_DECOMPOSITION_REVIEW
 initial_file_subwindows: []
@@ -44,4 +44,11 @@ execution_prerequisites:
   host_discovery_protocol: PARENT_BLOCKED_UNTIL_LITERAL_A5_RECORD
   host_apply_protocol: PARENT_BLOCKED_UNTIL_LITERAL_A5_RECORD
   owner_origin_cookie_seed_hashes: REQUIRED_IN_EXECUTION_A5
-last_updated: 2026-08-24T17:28:00+05:30
+  browser_selection_state_pin: REQUIRED_AFTER_BROWSER_PREFLIGHT_BEFORE_AMBIGUITY_RECONCILIATION_OR_HANDOFF
+  handoff_reconciliation_state_pin: REQUIRED_ONLY_AFTER_RECORDED_INITIAL_RESPONSE_AMBIGUITY
+authoring_baseline:
+  root_head: e4f315488cd80c567e035cc99ed0083b1c717a14
+  backend_head: c3ba835be446ba43e1a80be4f5ab4d28bae89497
+  frontend_head: 5e441aae7e2f3a132b2c7fc85bf1bc525d3d5cb6
+  starting_dirty_paths: []
+last_updated: 2026-08-24T17:45:00+05:30

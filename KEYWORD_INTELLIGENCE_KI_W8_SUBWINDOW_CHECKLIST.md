@@ -41,16 +41,16 @@ Inherited parent package:
 | A4 | `4f4b16bbe6ab20312e312db75506f9acfee7aaca67fbb66d1d951676f1f646e4` |
 | A8 | `90c2f808426c4f1cf20ad885860e01b66763f3fc607e28c3b2dd9a2ef7391a5f` |
 | A5 authoring state | state `200` / `a4e08c31469b1c309a58ef52c457a65bcef3b9fe0561d9e60cabb802df4429b3` |
-| Coordination root | commit `1d77166817830af0ba5acc4e6fa7fe61dd234795`; only A5/A6/A7 contain the parent assignment delta |
+| Coordination root | requester commit `e4f315488cd80c567e035cc99ed0083b1c717a14`; clean before this superseding decomposition revision |
 | Backend | clean commit `c3ba835be446ba43e1a80be4f5ab4d28bae89497` |
 | Frontend | clean commit `5e441aae7e2f3a132b2c7fc85bf1bc525d3d5cb6` |
 
-The starting root changed-path set is exactly
-`ACTIVE_EXECUTION_STATE.md`, `KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md`, and
-`KEYWORD_INTELLIGENCE_SPECIFICATION_CHANGELOG.md`; its sorted-member-plus-LF
-digest is `de3724531095ca3c8d7ebbb1089b339c8f40927f7a23f8b4b6f6b43b33edc2ce`.
-Those are parent-owned assignment edits and must remain byte-identical during
-this decomposition turn.
+The requester committed the state-200 assignment and DECOMP-2 package as
+`e4f315488cd80c567e035cc99ed0083b1c717a14` before this parent correction.
+The starting root changed-path set for DECOMP-3 is empty; its
+sorted-member-plus-LF digest is
+`e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`.
+Only S1/S2/S3 may differ during this reconciliation.
 
 ### 0.2 Parent scope copied without expansion
 
@@ -226,8 +226,34 @@ AWAITING_PARENT_DECOMPOSITION_REVIEW
  -> AWAITING_REQUESTER_APPROVAL_ACT06
  -> ACT05_ACT06_RUNNING
  -> LIVE_OBSERVATION_RUNNING
+ -> BROWSER_SELECTION_SAVE_RUNNING
+ -> AWAITING_PARENT_SAVED_SELECTION_PIN
+ -> HANDOFF_INITIAL_RUNNING
+ -> OWNER_B_DENIAL_RUNNING
  -> READY_FOR_PARENT_REVIEW
 ```
+
+The only resumable ambiguity branches are:
+
+```text
+BROWSER_SELECTION_SAVE_RUNNING
+ -> AWAITING_PARENT_SELECTION_RECONCILIATION_PIN
+ -> SELECTION_RECONCILIATION_RUNNING
+ -> AWAITING_PARENT_SAVED_SELECTION_PIN        # saved only; rolled_back stops
+
+HANDOFF_INITIAL_RUNNING
+ -> AWAITING_PARENT_HANDOFF_RECONCILIATION_PIN
+ -> HANDOFF_RECONCILIATION_RUNNING
+ -> OWNER_B_DENIAL_RUNNING                     # exact same key/body; 200 only
+ -> READY_FOR_PARENT_REVIEW
+
+OWNER_B_DENIAL_RUNNING
+ -> OWNER_B_DENIAL_READONLY_TRANSPORT_RECOVERY # only after zero usable response
+ -> READY_FOR_PARENT_REVIEW
+```
+
+The parent pin transitions record only the safe fields enumerated in §3.7.
+They do not authorize another save, research, or unequal handoff request.
 
 Any pre-activation failure stops without mutation beyond already completed
 approved actions. Any failure after ACT-05 begins transitions to
@@ -269,6 +295,12 @@ KIW8_OWNER_B_COOKIE=<one complete Cookie request-header value>
 KIW8_APPROVED_SEED=<one normalized 1..100-character seed>
 KIW8_WINDOW_STARTED_AT=<ISO-8601 instant fixed before ACT-04>
 KIW8_RESEARCH_ID=<exact A5 research ID after ACT-04 reconciliation>
+KIW8_SELECTION_PRIOR_REVISION=<A5-pinned browser preflight integer, ambiguity only>
+KIW8_SELECTION_COUNT=<A5-pinned browser preflight integer, ambiguity only>
+KIW8_SELECTION_EXPECTED_SHA256=<A5-pinned browser preflight 64-lower-hex, ambiguity only>
+KIW8_SELECTION_SAVED_REVISION=<A5-pinned successful saved revision>
+KIW8_SELECTION_SAVED_SHA256=<A5-pinned successful saved-selection 64-lower-hex>
+KIW8_HANDOFF_MODE=<literal initial or parent-authorized ambiguity-only reconcile>
 ```
 
 The angle-bracket members above are named external values, not executor choices.
@@ -282,8 +314,10 @@ both. Owner cookies, seed, database URL, provider credentials,
 secret value, full account ID and raw response bodies never reach stdout,
 stderr, S1/S2/S3/A6 or a generated file. A command emits one JSON object per
 prescribed evidence line with only fields enumerated by its output schema; an
-extra key or extra line is a privacy failure. The save-handoff command has the
-two exact lines frozen in §3.7; all other commands have one.
+extra key or extra line is a privacy failure. The browser-save command has the
+two exact lines frozen in §3.7.1; every other command has one. The five
+selection variables are unavailable before their preceding safe record has
+been parent-pinned in A5; absence or drift stops before the next request.
 
 All AWS CLI commands below have the literal suffix
 `--profile storesignal-dev --region ap-south-2 --no-cli-pager --output json`.
@@ -668,9 +702,9 @@ expansion/shortlist/market manifest schema; result ->
 `keywordResearchResultArtifactSchema`. Expected metadata uses the DB
 input/content fingerprints and produced-at fields exactly as service.js does.
 The only output is `{validatedObjects,validatedBytes,versioned:true,
-encrypted:true,fingerprintMismatches:0,metadataMismatches:0}`. `HeadObject` for
-each key must additionally show AES256 and a nonempty VersionId. No raw object
-body/key is emitted.
+encrypted:true,fingerprintMismatches:0,metadataMismatches:0}`. The existing
+`GetObject` response for each key must show AES256 and a nonempty VersionId; no
+separate `HeadObject` operation occurs. No raw object body/key is emitted.
 
 The artifact observer is the following exact inline Node source, invoked from
 `email_scraper/` only as the direct stdin consumer of `KIW8-DB-V1 artifactRows`:
@@ -704,6 +738,15 @@ const taskSchema = { expansion: keywordExpansionResultSchema,
 const manifestSchema = { expansion: keywordExpansionManifestSchema,
   anchor_screen: keywordShortlistManifestSchema, market_overview: keywordMarketOverviewManifestSchema };
 let validatedObjects = 0, validatedBytes = 0;
+// KIW8-MANIFEST-METADATA-V1-BEGIN
+function manifestProducedAt(row) {
+  if (typeof row.manifestProducedAt !== "string" || !row.manifestProducedAt)
+    throw new Error("KIW8_MANIFEST_PRODUCED_AT");
+  const value = new Date(row.manifestProducedAt);
+  if (!Number.isFinite(value.getTime())) throw new Error("KIW8_MANIFEST_PRODUCED_AT");
+  return value.toISOString();
+}
+// KIW8-MANIFEST-METADATA-V1-END
 async function validate(key, schema, expected) {
   const response = await s3.send(new GetObjectCommand({ Bucket: outputs.ArtifactBucketName, Key: key }));
   if (response.ServerSideEncryption !== "AES256" || typeof response.VersionId !== "string" || !response.VersionId)
@@ -744,7 +787,7 @@ for (const row of stages) {
     stage:row.stage,tasks:stageTasks});
   await validate(row.manifestS3Key, manifestSchema[row.stage], { stage: row.stage,
     generation: row.generation, itemId: "manifest", inputFingerprint: stageInputFingerprint,
-    contentFingerprint: row.manifestFingerprint, producedAt: new Date(row.stageCreatedAt).toISOString() });
+    contentFingerprint: row.manifestFingerprint, producedAt: manifestProducedAt(row) });
 }
 const market = stages.find((x) => x.stage === "market_overview");
 if (!market) throw new Error("KIW8_MARKET_STAGE_MISSING");
@@ -765,87 +808,179 @@ process.stdout.write(`${JSON.stringify({validatedObjects,validatedBytes,versione
 No ListObjects operation, prefix scan, alternate key, schema fallback or body
 logging is permitted.
 
-### 3.7 Exact production frontend/API runner (`KIW8-API-V1`)
+The manifest-metadata local-now oracle is the following exact documentation-
+only command from root. It extracts and executes the function used by the
+literal observer, gives `manifestProducedAt` and `stageCreatedAt` deliberately
+different instants, and proves the persisted manifest instant wins. Its
+in-memory negative control replaces only `row.manifestProducedAt` with
+`row.stageCreatedAt`; that mutated function must fail the same semantic oracle.
 
-Every positive HTTP operation is executed from `frontend/` by Node 20+ with
-`--experimental-strip-types --input-type=module`. Each literal command imports
-`parseResearchEnvelope`, `parseRunHandoffEnvelope` and
-`CLIENT_REQUEST_ID_PATTERN` from
-`./lib/keyword-intelligence-validation.ts`; no handwritten success parser is
-permitted. These are the exact commands (whitespace-only shell reflow is the
-only freedom):
+```text
+node -e 'const fs=require("node:fs"),s=fs.readFileSync("KEYWORD_INTELLIGENCE_KI_W8_SUBWINDOW_CHECKLIST.md","utf8"),start="// KIW8-MANIFEST-METADATA-V1-BEGIN",end="// KIW8-MANIFEST-METADATA-V1-END",body=s.slice(s.indexOf(start)+start.length,s.indexOf(end));if(!body||body.includes(start)||body.includes(end))throw Error("KIW8_MANIFEST_ORACLE_EXTRACT");const load=x=>Function(`${x};return manifestProducedAt`)(),row={manifestProducedAt:"2026-08-24T01:02:03.456Z",stageCreatedAt:"2026-08-20T04:05:06.789Z"},fn=load(body);if(fn(row)!=="2026-08-24T01:02:03.456Z")throw Error("KIW8_MANIFEST_PRODUCED_AT_MAPPING");const mutated=load(body.replaceAll("row.manifestProducedAt","row.stageCreatedAt"));let falsified=false;try{if(mutated(row)!=="2026-08-24T01:02:03.456Z")throw Error("KIW8_MANIFEST_PRODUCED_AT_MAPPING")}catch(e){falsified=e.message==="KIW8_MANIFEST_PRODUCED_AT_MAPPING"}if(!falsified)throw Error("KIW8_MANIFEST_NEGATIVE_CONTROL");console.log("KIW8_MANIFEST_METADATA_SEMANTIC_PASS")'
+```
+
+### 3.7 Exact production frontend/browser/API runners
+
+All runners in this section execute from `frontend/` with Node 20+ and shell
+tracing disabled. The create and poll commands remain exactly:
+Together these two read/create commands are `KIW8-API-V1`; the browser save,
+selection reconciliation and handoff runners below are separate resumable
+operations and are never collapsed back into `KIW8-API-V1`.
 
 ```text
 node --experimental-strip-types --input-type=module -e 'import{createHash}from"node:crypto";import{parseResearchEnvelope}from"./lib/keyword-intelligence-validation.ts";const origin=process.env.KIW8_ORIGIN,cookie=process.env.KIW8_OWNER_A_COOKIE,seed=process.env.KIW8_APPROVED_SEED,r=await fetch(`${origin}/api/keyword-research`,{method:"POST",headers:{Accept:"application/json","Content-Type":"application/json",Cookie:cookie},body:JSON.stringify({seeds:[seed]}),redirect:"error",signal:AbortSignal.timeout(20000)}),body=await r.json();if(r.status!==202)throw Error("KIW8_CREATE_STATUS");const v=parseResearchEnvelope(body);if(!/^kr_[A-Za-z0-9_-]{24}$/u.test(v.id)||v.state!=="queued"||v.generation!==1||v.contractVersion!==1||v.selectionRevision!==0||v.result!==null||v.safeError!==null||v.seeds.length!==1||v.seeds[0]!==seed)throw Error("KIW8_CREATE_CONTRACT");console.log(JSON.stringify({mode:"create",status:r.status,researchIdSha256:createHash("sha256").update(v.id).digest("hex"),state:v.state,generation:v.generation,selectionRevision:v.selectionRevision}))'
 
 node --experimental-strip-types --input-type=module -e 'import{createHash}from"node:crypto";import{parseResearchEnvelope}from"./lib/keyword-intelligence-validation.ts";const origin=process.env.KIW8_ORIGIN,cookie=process.env.KIW8_OWNER_A_COOKIE,id=process.env.KIW8_RESEARCH_ID,r=await fetch(`${origin}/api/keyword-research/${encodeURIComponent(id)}`,{headers:{Accept:"application/json",Cookie:cookie},redirect:"error",signal:AbortSignal.timeout(20000)}),body=await r.json();if(r.status!==200)throw Error("KIW8_POLL_STATUS");const v=parseResearchEnvelope(body);if(v.id!==id)throw Error("KIW8_POLL_ID");console.log(JSON.stringify({mode:"poll",researchIdSha256:createHash("sha256").update(id).digest("hex"),state:v.state,progress:v.progress,selectionCount:v.selection.length,selectionRevision:v.selectionRevision,resultKeywordCount:v.result?.keywords.length??0,safeErrorCode:v.safeError?.code??null}))'
-
-node --experimental-strip-types --input-type=module -e 'import{createHash}from"node:crypto";import{parseResearchEnvelope,parseRunHandoffEnvelope}from"./lib/keyword-intelligence-validation.ts";const h=x=>createHash("sha256").update(x).digest("hex"),origin=process.env.KIW8_ORIGIN,cookie=process.env.KIW8_OWNER_A_COOKIE,other=process.env.KIW8_OWNER_B_COOKIE,id=process.env.KIW8_RESEARCH_ID,started=process.env.KIW8_WINDOW_STARTED_AT,request=async(path,init={})=>{const r=await fetch(`${origin}${path}`,{...init,headers:{Accept:"application/json",...init.headers,Cookie:cookie},redirect:"error",signal:AbortSignal.timeout(20000)});return{r,body:await r.json()}};const page=await fetch(`${origin}/keywords/${encodeURIComponent(id)}`,{headers:{Cookie:cookie},redirect:"error",signal:AbortSignal.timeout(20000)}),html=await page.text();if(page.status!==200||!String(page.headers.get("content-type")).startsWith("text/html")||page.url!==`${origin}/keywords/${encodeURIComponent(id)}`||!html.includes("Loading keyword research"))throw Error("KIW8_DASHBOARD_CONTRACT");let x=await request(`/api/keyword-research/${encodeURIComponent(id)}`);if(x.r.status!==200)throw Error("KIW8_RESEARCH_GET_STATUS");const before=parseResearchEnvelope(x.body);if(before.state!=="completed"||before.selection.length<1||before.selection.length>100||before.selectionRevision<1||before.selectionConflicts.length)throw Error("KIW8_SELECTION_PRECONDITION");process.stdout.write(`${JSON.stringify({mode:"selection-preflight",selectionRevision:before.selectionRevision,selectionCount:before.selection.length,selectionSha256:h(JSON.stringify(before.selection))})}\n`);const items=before.selection.map(v=>v.sourceKind==="calculated"?{sourceKind:"calculated",sourceKeywordId:v.sourceKeywordId,keyword:v.keyword}:{sourceKind:"manual",keyword:v.keyword});x=await request(`/api/keyword-research/${encodeURIComponent(id)}/selection`,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({expectedRevision:before.selectionRevision,items})});if(x.r.status!==200)throw Error("KIW8_SELECTION_STATUS");const saved=parseResearchEnvelope(x.body);if(saved.selectionRevision!==before.selectionRevision+1||JSON.stringify(saved.selection)!==JSON.stringify(before.selection)||saved.selectionConflicts.length)throw Error("KIW8_SELECTION_SAVE_CONTRACT");const key=`kiw8_${h(`${id}\n${saved.selectionRevision}\n${started}`).slice(0,60)}`;x=await request(`/api/keyword-research/${encodeURIComponent(id)}/runs`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({expectedSelectionRevision:saved.selectionRevision,clientRequestId:key})});if(x.r.status!==201)throw Error("KIW8_HANDOFF_STATUS");const handoff=parseRunHandoffEnvelope(x.body);if(handoff.statusUrl!==`/api/runs/${handoff.run.id}`)throw Error("KIW8_HANDOFF_CONTRACT");for(const [name,path,code]of[["research",`/api/keyword-research/${encodeURIComponent(id)}`,"KEYWORD_RESEARCH_NOT_FOUND"],["run",`/api/runs/${encodeURIComponent(handoff.run.id)}`,"RUN_NOT_FOUND"]]){const r=await fetch(`${origin}${path}`,{headers:{Accept:"application/json",Cookie:other},redirect:"error",signal:AbortSignal.timeout(20000)}),v=await r.json();if(r.status!==404||Object.keys(v).join(",")!=="error"||!v.error||Object.keys(v.error).sort().join(",")!=="code,message"||v.error.code!==code)throw Error(`KIW8_OWNER_B_${name.toUpperCase()}`)}console.log(JSON.stringify({mode:"save-handoff",dashboardStatus:page.status,dashboardBytes:Buffer.byteLength(html),dashboardSha256:h(html),selectionSaved:true,selectionRevision:saved.selectionRevision,selectionCount:saved.selection.length,selectionSha256:h(JSON.stringify(saved.selection)),runIdSha256:h(handoff.run.id),clientRequestIdSha256:h(key),handoffStatus:x.r.status,ownerBResearchStatus:404,ownerBRunStatus:404,privateProjectionCount:0}))'
 ```
 
-The following rules are additional acceptance constraints on those literal
-commands:
+Create sends one POST only. A lost create response is never retried:
+`KIW8-DB-V1 resolveResearch` runs once, with exactly one row proving creation,
+zero rows proving rollback, and multiple rows stopping
+`PARENT_BLOCKED_SECOND_CANARY`. Poll runs every 15 seconds, with one read-only
+transport recovery, a 15-minute no-durable-progress watchdog and four-hour
+absolute ceiling.
 
-1. `create` sends exactly one `POST /api/keyword-research` with body
-   `JSON.stringify({seeds:[process.env.KIW8_APPROVED_SEED]})`, owner-A cookie,
-   the headers in §3.1, redirect `error` and a 20-second abort. It requires 202,
-   parses with `parseResearchEnvelope`, and requires ID regex
-   `^kr_[A-Za-z0-9_-]{24}$`, state `queued`, generation `1`, contractVersion
-   `1`, selection revision `0`, null result, exactly the normalized seed and no
-   safe error. Output is exactly
-   `{mode:"create",status:202,researchIdSha256,state,generation,selectionRevision}`.
-2. A create transport loss is never retried. `KIW8-DB-V1 resolveResearch`
-   executes once with owner-A, seed and `KIW8_WINDOW_STARTED_AT`; exactly one
-   row reconciles success, zero rows reconciles rollback, multiple rows stops
-   `PARENT_BLOCKED_SECOND_CANARY`. This is the create ambiguity protocol; there
-   is no invented idempotency key or second POST.
-3. `poll` obtains the ID only from current A5 `kiw8_research_id`, sends exact
-   `GET /api/keyword-research/${encodeURIComponent(id)}`, requires 200 and
-   `parseResearchEnvelope`, and emits only state, progress counters, selection
-   count/revision, result-keyword count, safe error code and SHA-256 IDs. It
-   runs every 15 seconds, with a 15-minute no-durable-progress watchdog and a
-   four-hour absolute ceiling. GET transport loss may be repeated once because
-   it is read-only; a second loss stops.
-4. `save-handoff` first sends exact owner-A `GET /keywords/${id}`, requires 200,
-   `content-type` beginning `text/html`, final URL unchanged and body containing
-   `Loading keyword research`; it records only byte length and SHA-256. It then
-   GETs/parses the completed research and **always** sends one selection PUT;
-   there is no conditional save branch. The PUT body is exactly
-   `{expectedRevision:view.selectionRevision,items}` where calculated items are
-   `{sourceKind:"calculated",sourceKeywordId,keyword}` and manual items are
-   `{sourceKind:"manual",keyword}`. It requires 200, exact selection equality,
-   revision `prior+1`, no conflicts and item count `1..100`.
-5. Selection PUT ambiguity is reconciled once by owner-A GET. Exact saved items
-   plus revision `prior+1` and the preflight `selectionSha256` is success;
-   unchanged revision/items is rollback;
-   every other state stops `PARENT_BLOCKED_SELECTION_AMBIGUITY`. The PUT is not
-   repeated.
-6. The run key is deterministic and reconstructible:
-   `clientRequestId="kiw8_"+sha256(researchId+"\n"+savedRevision+"\n"+KIW8_WINDOW_STARTED_AT).slice(0,60)`.
-   It must match `CLIENT_REQUEST_ID_PATTERN`. POST path is exact
-   `/api/keyword-research/${encodeURIComponent(id)}/runs`; body is exactly
-   `{expectedSelectionRevision:savedRevision,clientRequestId}`. Require 201 on
-   first creation or 200 only during same-key ambiguity reconciliation, parse
-   with `parseRunHandoffEnvelope`, and require status URL
-   `/api/runs/${run.id}`. On lost response the same POST body/key may execute
-   once; any unequal ID/fingerprint or second loss stops.
-7. The final command sends only owner-B GETs for the exact research route and exact
-   `/api/runs/${encodeURIComponent(runId)}`. Each must return the contract's
-   authenticated 404/not-found response. The strict error parser accepts only
-   `{error:{code,message}}`, code `KEYWORD_RESEARCH_NOT_FOUND` for research and
-   `RUN_NOT_FOUND` for run; any private top-level member or
-   200 is failure. Output is exactly
-   Its safe output includes exactly `ownerBResearchStatus:404`,
-   `ownerBRunStatus:404` and `privateProjectionCount:0`.
+#### 3.7.1 Real rendered dashboard selection save (`KIW8-BROWSER-SAVE-V1`)
 
-The module never logs cookies, seed, raw payloads, selection text, IDs, URLs or
-error messages. Its first safe line is exactly
-`{mode:"selection-preflight",selectionRevision,selectionCount,selectionSha256}`;
-its second safe line is
-`{mode:"save-handoff",dashboardStatus:200,dashboardBytes,dashboardSha256,
-selectionSaved:true,selectionRevision,selectionCount,selectionSha256,runIdSha256,
-clientRequestIdSha256,handoffStatus,ownerBResearchStatus,ownerBRunStatus,
-privateProjectionCount}`.
+The selection state transition uses `/usr/bin/google-chrome` headless through
+Chrome DevTools Protocol. It does not use an HTML fetch as a UI substitute.
+Execute this literal heredoc once:
+
+```bash
+node --experimental-strip-types --input-type=module - <<'KIW8_BROWSER_SAVE_V1'
+import { spawn } from "node:child_process";
+import { createHash } from "node:crypto";
+import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { parseResearchEnvelope } from "./lib/keyword-intelligence-validation.ts";
+const h=(x)=>createHash("sha256").update(String(x)).digest("hex"), wait=(ms)=>new Promise(r=>setTimeout(r,ms));
+const origin=process.env.KIW8_ORIGIN,cookieHeader=process.env.KIW8_OWNER_A_COOKIE,id=process.env.KIW8_RESEARCH_ID;
+if(!/^https:\/\/[^/?#]+$/u.test(origin||"")||!/^kr_[A-Za-z0-9_-]{24}$/u.test(id||"")||!cookieHeader)throw Error("KIW8_BROWSER_INPUT");
+if(typeof WebSocket!=="function")throw Error("KIW8_BROWSER_WEBSOCKET");
+const profile=await mkdtemp(join(tmpdir(),"kiw8-live-browser-"));let chrome,cdp;
+class Cdp{constructor(url){this.ws=new WebSocket(url);this.n=1;this.pending=new Map();this.listeners=[]}async open(){await new Promise((r,j)=>{this.ws.addEventListener("open",r,{once:true});this.ws.addEventListener("error",j,{once:true})});this.ws.addEventListener("message",({data})=>{const m=JSON.parse(String(data));if(m.id!==undefined){const p=this.pending.get(m.id);if(!p)return;this.pending.delete(m.id);m.error?p.j(Error("KIW8_CDP_PROTOCOL")):p.r(m.result);return}for(const x of this.listeners)if(x.method===m.method)x.fn(m.params)})}send(method,params={}){const id=this.n++;this.ws.send(JSON.stringify({id,method,params}));return new Promise((r,j)=>this.pending.set(id,{r,j}))}on(method,fn){this.listeners.push({method,fn})}close(){this.ws.close()}}
+const evaluate=async(expression)=>{const x=await cdp.send("Runtime.evaluate",{expression,awaitPromise:true,returnByValue:true});if(x.exceptionDetails)throw Error("KIW8_BROWSER_EVALUATE");return x.result.value};
+const until=async(fn,ms,code)=>{const start=Date.now();while(Date.now()-start<ms){const v=await fn();if(v)return v;await wait(100)}throw Error(code)};
+const requests=[],responses=new Map(),finished=new Set();
+try{
+  chrome=spawn("/usr/bin/google-chrome",["--headless=new","--no-sandbox","--disable-gpu","--disable-dev-shm-usage",`--user-data-dir=${profile}`,"--remote-debugging-port=0","about:blank"],{detached:true,stdio:"ignore"});
+  const port=await until(async()=>{try{return (await readFile(join(profile,"DevToolsActivePort"),"utf8")).trim().split(/\r?\n/u)[0]}catch{return null}},20000,"KIW8_BROWSER_PORT");
+  const targets=await(await fetch(`http://127.0.0.1:${port}/json/list`,{signal:AbortSignal.timeout(20000)})).json(),target=targets.find(x=>x.type==="page");if(!target)throw Error("KIW8_BROWSER_TARGET");
+  cdp=new Cdp(target.webSocketDebuggerUrl);await cdp.open();await cdp.send("Page.enable");await cdp.send("Runtime.enable");await cdp.send("Network.enable");
+  cdp.on("Network.requestWillBeSent",p=>requests.push({requestId:p.requestId,method:p.request?.method,url:p.request?.url,postData:p.request?.postData??null}));
+  cdp.on("Network.responseReceived",p=>responses.set(p.requestId,p.response?.status));cdp.on("Network.loadingFinished",p=>finished.add(p.requestId));
+  const cookies=cookieHeader.split(";").map(x=>x.trim()).filter(Boolean).map(x=>{const i=x.indexOf("=");if(i<1)throw Error("KIW8_BROWSER_COOKIE");return{name:x.slice(0,i),value:x.slice(i+1)}});
+  for(const entry of cookies){const set=await cdp.send("Network.setCookie",{...entry,url:origin,secure:true,httpOnly:true,sameSite:"Lax"});if(set.success!==true)throw Error("KIW8_BROWSER_COOKIE")}
+  await cdp.send("Page.navigate",{url:`${origin}/keywords/${encodeURIComponent(id)}`});
+  await until(()=>evaluate(`document.readyState==="complete"&&location.href===${JSON.stringify(`${origin}/keywords/${encodeURIComponent(id)}`)}`),60000,"KIW8_BROWSER_NAVIGATION");
+  const completed=await until(()=>evaluate(`(()=>{const d=document.querySelector('[aria-label="Keyword research dashboard"]'),t=document.querySelector('[data-surface="surface:keyword-table"] tbody tr'),r=document.querySelector('[data-surface="surface:selection-review"]'),b=[...document.querySelectorAll('[data-surface="surface:selection-review"] button')].find(x=>x.textContent.trim()==="Save selection"),c=document.querySelector('[data-surface="surface:keyword-table"] input[type="checkbox"][aria-label^="Select "]');return d&&t&&r&&b&&!b.disabled&&c?{dashboard:true,table:true,review:true,save:true,checkbox:true}:null})()`),60000,"KIW8_BROWSER_COMPLETED_UI");
+  const beforeRaw=await evaluate(`fetch(${JSON.stringify(`/api/keyword-research/${encodeURIComponent(id)}`)},{headers:{Accept:"application/json"},redirect:"error",signal:AbortSignal.timeout(20000)}).then(async r=>({status:r.status,body:await r.json()}))`),before=parseResearchEnvelope(beforeRaw.body);
+  if(beforeRaw.status!==200||before.id!==id||before.state!=="completed"||before.selection.length<1||before.selection.length>100||before.selectionRevision<1||before.selectionConflicts.length)throw Error("KIW8_SELECTION_PREFLIGHT");
+  const selectionSha256=h(JSON.stringify(before.selection));
+  process.stdout.write(`${JSON.stringify({mode:"selection-preflight",researchIdSha256:h(id),selectionRevision:before.selectionRevision,selectionCount:before.selection.length,selectionSha256,rendered:completed})}\n`);
+  const clicked=await evaluate(`(()=>{const b=[...document.querySelectorAll('[data-surface="surface:selection-review"] button')].find(x=>x.textContent.trim()==="Save selection");if(!b||b.disabled)return false;b.click();return true})()`);if(!clicked)throw Error("KIW8_SELECTION_CLICK");
+  let req;try{req=await until(async()=>requests.find(x=>x.method==="PUT"&&new URL(x.url).pathname===`/api/keyword-research/${encodeURIComponent(id)}/selection`),20000,"KIW8_SELECTION_REQUEST_TIMEOUT")}catch{process.stdout.write(`${JSON.stringify({mode:"selection-save-ambiguous",researchIdSha256:h(id),priorRevision:before.selectionRevision,selectionCount:before.selection.length,selectionSha256,requestObserved:false})}\n`);process.exitCode=75}
+  let status=null;if(req){const posted=JSON.parse(req.postData),projected=before.selection.map(v=>v.sourceKind==="calculated"?{sourceKind:"calculated",sourceKeywordId:v.sourceKeywordId,keyword:v.keyword}:{sourceKind:"manual",keyword:v.keyword});
+  if(posted.expectedRevision!==before.selectionRevision||JSON.stringify(posted.items)!==JSON.stringify(projected))throw Error("KIW8_SELECTION_REQUEST_BODY");
+  try{status=await until(async()=>responses.get(req.requestId)||null,20000,"KIW8_SELECTION_RESPONSE_TIMEOUT")}catch{process.stdout.write(`${JSON.stringify({mode:"selection-save-ambiguous",researchIdSha256:h(id),priorRevision:before.selectionRevision,selectionCount:before.selection.length,selectionSha256,requestObserved:true})}\n`);process.exitCode=75}}
+  if(status!==null){if(status!==200)throw Error("KIW8_SELECTION_STATUS");await until(async()=>finished.has(req.requestId),20000,"KIW8_SELECTION_BODY_TIMEOUT");const body=JSON.parse((await cdp.send("Network.getResponseBody",{requestId:req.requestId})).body),saved=parseResearchEnvelope(body);if(saved.id!==id||saved.selectionRevision!==before.selectionRevision+1||JSON.stringify(saved.selection)!==JSON.stringify(before.selection)||saved.selectionConflicts.length)throw Error("KIW8_SELECTION_SAVE_CONTRACT");const ui=await until(()=>evaluate(`(()=>{const b=[...document.querySelectorAll('[data-surface="surface:selection-review"] button')].find(x=>x.textContent.trim()==="Save selection"),a=document.querySelector('[aria-label="Keyword research dashboard"] [role="alert"]');return b&&!b.disabled&&b.getAttribute("aria-busy")!=="true"&&!a?{saveSettled:true,noErrorAlert:true}:null})()`),20000,"KIW8_SELECTION_UI_SETTLE");if(requests.some(x=>x.method==="POST"&&(/\/runs$/u.test(new URL(x.url).pathname)||/\/start$/u.test(new URL(x.url).pathname))))throw Error("KIW8_FORBIDDEN_CONFIRM_START");process.stdout.write(`${JSON.stringify({mode:"browser-save",researchIdSha256:h(id),selectionSaved:true,priorRevision:before.selectionRevision,selectionRevision:saved.selectionRevision,selectionCount:saved.selection.length,selectionSha256:h(JSON.stringify(saved.selection)),saveRequestStatus:status,ui,forbiddenRunOrStartRequests:0})}\n`)}
+}finally{try{cdp?.close()}catch{}if(chrome?.pid&&chrome.exitCode===null)try{process.kill(-chrome.pid,"SIGTERM")}catch{}await rm(profile,{recursive:true,force:true})}
+KIW8_BROWSER_SAVE_V1
+```
+
+The runner proves the real owner-A page rendered the completed dashboard,
+keyword table, at least one real checkbox, selection review and enabled `Save
+selection` control before it clicks that exact button. It observes and parses
+the resulting real PUT, proves the UI returned to an enabled non-error settled
+state, and proves no `/runs` or `/start` POST occurred. It emits the preflight
+line before the click and exactly one success or ambiguity line afterward.
+Cookies, raw IDs, keywords, request/response bodies, URLs and Chrome output are
+never emitted. Chrome and its temporary profile are always terminated/removed.
+
+#### 3.7.2 Selection ambiguity reconciliation (`KIW8-SELECTION-READ-V1`)
+
+This command is permitted exactly once only after the browser emitted
+`selection-save-ambiguous` or its execution channel lost the terminal line
+after preserving `selection-preflight`. A5 must pin the preflight revision,
+count and hash as `KIW8_SELECTION_PRIOR_REVISION`,
+`KIW8_SELECTION_COUNT`, and `KIW8_SELECTION_EXPECTED_SHA256`. It performs one
+read-only GET and never sends another PUT:
+
+```text
+node --experimental-strip-types --input-type=module -e 'import{createHash}from"node:crypto";import{parseResearchEnvelope}from"./lib/keyword-intelligence-validation.ts";const h=x=>createHash("sha256").update(String(x)).digest("hex"),origin=process.env.KIW8_ORIGIN,cookie=process.env.KIW8_OWNER_A_COOKIE,id=process.env.KIW8_RESEARCH_ID,prior=Number(process.env.KIW8_SELECTION_PRIOR_REVISION),count=Number(process.env.KIW8_SELECTION_COUNT),expected=process.env.KIW8_SELECTION_EXPECTED_SHA256;if(!Number.isSafeInteger(prior)||prior<1||!Number.isSafeInteger(count)||count<1||count>100||!/^[0-9a-f]{64}$/u.test(expected||""))throw Error("KIW8_SELECTION_RECONCILE_INPUT");const r=await fetch(`${origin}/api/keyword-research/${encodeURIComponent(id)}`,{headers:{Accept:"application/json",Cookie:cookie},redirect:"error",signal:AbortSignal.timeout(20000)}),body=await r.json();if(r.status!==200)throw Error("KIW8_SELECTION_RECONCILE_STATUS");const v=parseResearchEnvelope(body),actual=h(JSON.stringify(v.selection));let outcome;if(v.id===id&&v.selection.length===count&&actual===expected&&v.selectionRevision===prior+1&&!v.selectionConflicts.length)outcome="saved";else if(v.id===id&&v.selection.length===count&&actual===expected&&v.selectionRevision===prior&&!v.selectionConflicts.length)outcome="rolled_back";else throw Error("PARENT_BLOCKED_SELECTION_AMBIGUITY");console.log(JSON.stringify({mode:"selection-reconcile",researchIdSha256:h(id),outcome,priorRevision:prior,selectionRevision:v.selectionRevision,selectionCount:v.selection.length,selectionSha256:actual}))'
+```
+
+Only outcome `saved` may advance. `rolled_back` is a definitive stopped outcome;
+the save is not repeated. The successful browser line or reconciliation line is
+pinned in A5 as literal saved revision/count/hash before handoff.
+
+#### 3.7.3 Independently resumable same-key handoff (`KIW8-HANDOFF-V1`)
+
+The initial and ambiguity-reconciliation invocations use the same literal
+source and differ only in `KIW8_HANDOFF_MODE=initial|reconcile`. A5 must pin
+`KIW8_SELECTION_SAVED_REVISION` and `KIW8_SELECTION_SAVED_SHA256`; the source
+imports and enforces `CLIENT_REQUEST_ID_PATTERN`. Execute `initial` once. Only
+after its `handoff-ambiguous` line or a proven lost terminal response may the
+same source execute once as `reconcile`; it does not load or save selection.
+
+```bash
+KIW8_HANDOFF_MODE=initial node --experimental-strip-types --input-type=module - <<'KIW8_HANDOFF_V1'
+import { createHash } from "node:crypto";
+import { CLIENT_REQUEST_ID_PATTERN, parseRunHandoffEnvelope } from "./lib/keyword-intelligence-validation.ts";
+const h=x=>createHash("sha256").update(String(x)).digest("hex"),origin=process.env.KIW8_ORIGIN,cookie=process.env.KIW8_OWNER_A_COOKIE,id=process.env.KIW8_RESEARCH_ID,started=process.env.KIW8_WINDOW_STARTED_AT,revision=Number(process.env.KIW8_SELECTION_SAVED_REVISION),selectionSha256=process.env.KIW8_SELECTION_SAVED_SHA256,mode=process.env.KIW8_HANDOFF_MODE;
+if(!["initial","reconcile"].includes(mode)||!Number.isSafeInteger(revision)||revision<2||!/^[0-9a-f]{64}$/u.test(selectionSha256||""))throw Error("KIW8_HANDOFF_INPUT");
+const key=`kiw8_${h(`${id}\n${revision}\n${started}`).slice(0,60)}`;if(!CLIENT_REQUEST_ID_PATTERN.test(key))throw Error("KIW8_HANDOFF_KEY");const requestBody={expectedSelectionRevision:revision,clientRequestId:key};let r;
+try{r=await fetch(`${origin}/api/keyword-research/${encodeURIComponent(id)}/runs`,{method:"POST",headers:{Accept:"application/json","Content-Type":"application/json",Cookie:cookie},body:JSON.stringify(requestBody),redirect:"error",signal:AbortSignal.timeout(20000)})}catch{console.log(JSON.stringify({mode:"handoff-ambiguous",attempt:mode,researchIdSha256:h(id),selectionRevision:revision,selectionSha256,clientRequestIdSha256:h(key)}));process.exit(75)}
+const body=await r.json(),expectedStatus=mode==="initial"?201:200;if(r.status!==expectedStatus)throw Error(mode==="initial"?"KIW8_HANDOFF_INITIAL_STATUS":"KIW8_HANDOFF_RECONCILE_STATUS");const handoff=parseRunHandoffEnvelope(body);if(handoff.statusUrl!==`/api/runs/${handoff.run.id}`)throw Error("KIW8_HANDOFF_CONTRACT");
+console.log(JSON.stringify({mode:"handoff",attempt:mode,handoffStatus:r.status,researchIdSha256:h(id),selectionRevision:revision,selectionSha256,runIdSha256:h(handoff.run.id),clientRequestIdSha256:h(key)}))
+KIW8_HANDOFF_V1
+```
+
+For the sole reconciliation invocation, replace only the command prefix with
+`KIW8_HANDOFF_MODE=reconcile`; the heredoc body is byte-identical. Status `201`
+is accepted only by `initial`; status `200` is accepted only by `reconcile`.
+A second lost response, a mismatching strict envelope, any other status, or an
+unequal identity stops. There is at most one selection PUT, one initial handoff
+POST, one ambiguity-only same-key POST, zero second research POSTs and zero
+Confirm/Start requests.
+
+#### 3.7.4 Independently resumable owner-B denial (`KIW8-OWNER-DENIAL-V1`)
+
+After either handoff success record, run the following exact source once from
+`email_scraper/`. It resolves the sole run ID inside one read-only production
+transaction and uses it in memory for the owner-B requests. The raw run ID,
+database URL and cookie never cross the process boundary or enter evidence.
+
+```bash
+node --input-type=module - <<'KIW8_OWNER_DENIAL_V1'
+import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
+import { SecretsManagerClient } from "@aws-sdk/client-secrets-manager";
+import { loadPipelineSecrets } from "./src/aws-pipeline/secrets.js";
+import { createPrismaClient } from "./src/prisma-client.js";
+const h=x=>createHash("sha256").update(String(x)).digest("hex"),origin=process.env.KIW8_ORIGIN,cookie=process.env.KIW8_OWNER_B_COOKIE,id=process.env.KIW8_RESEARCH_ID;
+if(!/^https:\/\/[^/?#]+$/u.test(origin||"")||!/^kr_[A-Za-z0-9_-]{24}$/u.test(id||"")||!cookie)throw Error("KIW8_OWNER_DENIAL_INPUT");
+const stack=JSON.parse(execFileSync("aws",["cloudformation","describe-stacks","--stack-name","storesignal-production-pipeline","--profile","storesignal-dev","--region","ap-south-2","--no-cli-pager","--output","json"],{encoding:"utf8",maxBuffer:16777216})).Stacks?.[0],outputs=Object.fromEntries((stack?.Outputs||[]).map(x=>[x.OutputKey,x.OutputValue]));if(typeof outputs.PipelineSecretArn!=="string")throw Error("KIW8_OWNER_DENIAL_SECRET_OUTPUT");
+const secrets=await loadPipelineSecrets({client:new SecretsManagerClient({region:"ap-south-2",maxAttempts:3}),secretId:outputs.PipelineSecretArn}),prisma=createPrismaClient(secrets.databaseUrl);let runId;
+try{runId=await prisma.$transaction(async tx=>{await tx.$executeRawUnsafe("SET TRANSACTION READ ONLY");const schemas=await tx.$queryRawUnsafe("SELECT current_schema() AS schema");if(schemas.length!==1||schemas[0].schema!=="public")throw Error("KIW8_OWNER_DENIAL_SCHEMA");const rows=await tx.$queryRawUnsafe(`SELECT "runId" FROM "KeywordResearchHandoff" WHERE "researchId"=$1`,id);if(rows.length!==1||typeof rows[0].runId!=="string"||!rows[0].runId)throw Error("KIW8_OWNER_DENIAL_CARDINALITY");return rows[0].runId},{maxWait:5000,timeout:30000})}finally{await prisma.$disconnect()}
+for(const [name,path,code]of[["research",`/api/keyword-research/${encodeURIComponent(id)}`,"KEYWORD_RESEARCH_NOT_FOUND"],["run",`/api/runs/${encodeURIComponent(runId)}`,"RUN_NOT_FOUND"]]){const r=await fetch(`${origin}${path}`,{headers:{Accept:"application/json",Cookie:cookie},redirect:"error",signal:AbortSignal.timeout(20000)}),v=await r.json();if(r.status!==404||Object.keys(v).join(",")!=="error"||!v.error||Object.keys(v.error).sort().join(",")!=="code,message"||v.error.code!==code)throw Error(`KIW8_OWNER_B_${name.toUpperCase()}`)}
+console.log(JSON.stringify({mode:"owner-denial",researchIdSha256:h(id),runIdSha256:h(runId),ownerBResearchStatus:404,ownerBRunStatus:404,privateProjectionCount:0}))
+KIW8_OWNER_DENIAL_V1
+```
+
+The denial runner is read-only and independently resumable once after a proven
+transport-only failure because the handoff is already durable and it creates no
+state. A contract/status failure is not retried. It accepts only exact
+`{error:{code,message}}`, with `KEYWORD_RESEARCH_NOT_FOUND` and `RUN_NOT_FOUND`
+respectively; any 200, extra key or private projection fails.
+
+The exact safe transition records are: browser `selection-preflight` followed
+by `browser-save` or `selection-save-ambiguous`; optional
+`selection-reconcile`; then `handoff` or `handoff-ambiguous`; then
+`owner-denial`. Raw/private state never crosses a process boundary. A5/S2 advance only from the recorded safe
+revision/count/hash and action-attempt discriminator; S3/A6 retain only hashes,
+counts, booleans and statuses.
 
 ## 4. Coverage and control matrix
 
@@ -859,7 +994,7 @@ privateProjectionCount}`.
 | `W8-LIVE-06` | `I001-ACT05-06` | expected-active inspector plus same research stage progress | reviewed activation consumed original message through event mapping/worker/recovery; no direct invoke/send |
 | `W8-LIVE-07` | `I001-LIVE` | terminal attempt/task/stage rows for same research | nonempty-shortlist planned first-pass logical work is exactly `11`; actual first-pass network calls are `0..11` only through durable cache reuse; attempts `<=55`; durable USD `<=3.00000000`; exact observed call/attempt/throttle/retry counts recorded |
 | `W8-LIVE-08` | `I001-LIVE` | every terminal task's S3 object reconciles to its Neon key/fingerprint and final result | private encrypted versioned immutable objects; nonempty fenced result/default selection; owner A visible only |
-| `W8-LIVE-09` | `I001-HANDOFF` | dashboard selection save and one normal run-handoff POST | one immutable Run, `1..100` RunQueries, exact lineage; Run unconfirmed; zero PipelineStage/PipelineTask/downstream messages/calls |
+| `W8-LIVE-09` | `I001-HANDOFF` | owner-A real rendered completed dashboard exposes table checkbox plus enabled save control; its mandatory click settles after one selection PUT; one initial or ambiguity-only same-key run-handoff succeeds | saved revision/hash reconcile; one immutable Run, `1..100` RunQueries, exact lineage; owner B gets two exact denials; Run unconfirmed; zero Confirm/Start, PipelineStage/PipelineTask/downstream messages/calls |
 | `W8-CONF-01` | `I001-CONFORMANCE` | final registry executed after all preceding witnesses | required=registered=executed=activated ten; six controls falsified; exact digests; action ledger is an allowed prefix of ACT01..06 plus failure-only ACT07 and contains no unapproved/extra/second-canary/confirm action |
 
 | ID | Safe execution | Expected falsification witness |
@@ -1124,12 +1259,27 @@ terminal timestamp. Execute
 
 ### 6.8 Owner visibility, denial and run handoff
 
-Execute only the third literal `KIW8-API-V1` command in §3.7. It performs the
-exact HTML GET, completed research GET, mandatory same-selection PUT, one
-same-key run POST and both owner-B denial GETs in that order. Apply the frozen
-selection and handoff ambiguity branches; no alternate request or click is
-allowed. Require its exact safe output and `privateProjectionCount:0`; execute
-`W8-NC-05`.
+Execute `KIW8-BROWSER-SAVE-V1` once. Require the rendered completed dashboard,
+real table checkbox, selection review and enabled save control witnesses, then
+the mandatory click-generated PUT, status 200, revision `prior+1`, exact
+selection hash/count preservation, settled enabled UI, zero error alert, and
+zero `/runs` or `/start` POST. A terminally missing response permits only the
+one read-only `KIW8-SELECTION-READ-V1` invocation after A5 pins the browser's
+preflight record; require outcome `saved`. Outcome `rolled_back` or ambiguity
+stops, and no second browser/save invocation occurs.
+
+After A5 pins the saved revision/hash, execute `KIW8-HANDOFF-V1` in `initial`
+mode exactly once. Require status 201 and strict handoff parsing. A terminally
+lost response permits only one byte-identical invocation in `reconcile` mode,
+with the same deterministic pattern-validated key and selection revision;
+require status 200. The successful invocation performs the exact strict handoff
+contract checks and emits only hashes/status. Then execute
+`KIW8-OWNER-DENIAL-V1` once; its read-only transaction resolves the durable run
+inside the process and its two owner-B GETs must emit exact 404 statuses and
+`privateProjectionCount:0`. Execute `W8-NC-05`. A transport-only failure of the
+denial runner permits one identical read-only retry; no command reloads or
+resaves selection, creates another research, generates a new handoff key, or
+clicks Finalize/Confirm/Start.
 
 Immediately execute `KIW8-DB-V1 handoff`. Require one handoff, selection revision
 equal to the PUT result, `1..100` queries, exact selection fingerprint, every
@@ -1220,13 +1370,13 @@ the ledger and does not make the failed canary pass.
 
 | Gate | Exact command/runner and cwd | Environment allowlist | Exit/output and activation witness | Maximum runs | External side effect / cost | Ambiguity and reconciliation | Evidence artifact |
 |---|---|---|---|---:|---|---|---|
-| `G1` | root: `sha256sum` the two standards/A1-A5/A8/S1; `git status --short`, `git rev-parse HEAD`, packet `sha256sum`/`wc -c`; backend: the two measurement commands in §6.2 P6 | none | exit 0; all pinned hashes/bytes/counts/cold imports exact; W7 commits clean | 1 | gitignored measurement refresh only; `$0` | local read/build transport only: E8.1 one identical recovery after zero surviving process/write proof | `EV-KI-W8-I001-G1.json` in S3 entry |
+| `G1` | root: `sha256sum` the two standards/A1-A5/A8/S1; `git status --short`, `git rev-parse HEAD`, packet `sha256sum`/`wc -c`; execute §3.6 `KIW8_MANIFEST_METADATA_SEMANTIC_PASS`; backend: the two measurement commands in §6.2 P6 | none | exit 0; all pinned hashes/bytes/counts/cold imports exact; semantic persisted-manifest-produced-at oracle passes and its stage-created-at control falsifies; W7 commits clean | 1 | gitignored measurement refresh only; `$0` | local read/build transport only: E8.1 one identical recovery after zero surviving process/write proof | `EV-KI-W8-I001-G1.json` in S3 entry |
 | `G2` | backend: exact P2/P3/P4/P5/P6 commands and `KIW8-DB-V1 baseline`; §3.6 queue observer; §3.2 discovery | `AWS_PROFILE,AWS_REGION,KIW8_HOST_READ_TOKEN`; P4 credentials remain in memory | exit 0; exact safe schemas; every DG passing; `W8-LIVE-01` activated | 1 | read-only AWS/host/provider/Neon; `$0` | GET/read transport may recover once under E8.1 only after zero mutation/cost/result; missing host/P5 record is a blocker, not recovery | `EV-KI-W8-I001-G2.json` |
 | `G3` | backend: exact §6.3 create-change-set command | `KIW8_ACCOUNT_ID` equal current A5 | exit 0 `CHANGE_SET_REVIEWED`; three object versions and reviewed projection exact; NC01/02 activated | 1 | three versioned AES256 S3 writes plus one unexecuted change set; `$0` | stable object keys and change-set name/ID reconcile any lost response; never recreate if identity exists | `EV-KI-W8-I001-G3.json` |
 | `G4` | backend: exact two §6.4 commands | `KIW8_ACCOUNT_ID` | exit 0 `REVIEWED_CHANGE_SET_APPLIED` then `EXPECTED_DISABLED_KEYWORD_STACK_VERIFIED`; LIVE03 | 1 | execute one reviewed disabled stack update; `$0` | describe exact A5 change-set ID and stack events; if final state cannot be proven, stop without second execute | `EV-KI-W8-I001-G4.json` |
 | `G5` | §3.4 exact host update/readback, then frontend first `KIW8-API-V1` command, `KIW8-DB-V1 resolveResearch/progress`, §3.6 observers | G2 allowlist plus `KIW8_HOST_WRITE_TOKEN,KIW8_ORIGIN,KIW8_OWNER_A_COOKIE,KIW8_APPROVED_SEED,KIW8_WINDOW_STARTED_AT` | host exact; POST 202 or exact DB reconciliation; one queued row/message; zero work/cost; LIVE04/05 and NC03/04 | host 1; create POST 1 | one host config update and one research/message; provider `$0` | host readback by configuration revision; create uses §3.7 no-retry DB reconciliation | `EV-KI-W8-I001-G5.json` |
 | `G6` | backend: exact three §6.7 activation commands; frontend second `KIW8-API-V1`; backend `KIW8-DB-V1 progress/artifactRows` plus §3.6 queue/Lambda/alarm/log/S3 observers | `KIW8_ACCOUNT_ID,KIW8_ORIGIN,KIW8_OWNER_A_COOKIE,KIW8_RESEARCH_ID` plus AWS fixed values | active inspector; same ID progresses/completes; artifacts validated; LIVE06/07/08 | activation 1; canary 1; bounded polls only | one activation stack update; same research may make provider calls; total `<=3.00000000` | activation reconciled by exact change-set/stack/mapping state; paid ambiguity uses durable attempt rows only; never repeat activation/research | `EV-KI-W8-I001-G6.json` |
-| `G7` | frontend third `KIW8-API-V1`; backend `KIW8-DB-V1 handoff/progress/artifactRows`, §3.6 queue/Lambda/alarm/log/S3 observers, literal registry/digest command | `KIW8_ORIGIN,KIW8_OWNER_A_COOKIE,KIW8_OWNER_B_COOKIE,KIW8_RESEARCH_ID,KIW8_WINDOW_STARTED_AT` plus AWS fixed values | dashboard 200, mandatory save, one handoff, owner B two 404s, zero downstream, privacy zero, 10/6 sets and digests; LIVE09/CONF01/NC05/06 | save 1; handoff 1; final reads 1 | one selection revision and one unconfirmed Run; `$0` additional | selection read-after-timeout; handoff same-key one retry; DB handoff row is final authority; never confirm/start | `EV-KI-W8-I001-G7.json` |
+| `G7` | frontend: `KIW8-BROWSER-SAVE-V1`; ambiguity-only `KIW8-SELECTION-READ-V1`; `KIW8-HANDOFF-V1` initial and ambiguity-only reconcile; backend: `KIW8-OWNER-DENIAL-V1`, `KIW8-DB-V1 handoff/progress/artifactRows`, §3.6 queue/Lambda/alarm/log/S3 observers, literal registry/digest command | browser: `KIW8_ORIGIN,KIW8_OWNER_A_COOKIE,KIW8_RESEARCH_ID`; reconcile adds `KIW8_SELECTION_PRIOR_REVISION,KIW8_SELECTION_COUNT,KIW8_SELECTION_EXPECTED_SHA256`; handoff adds `KIW8_WINDOW_STARTED_AT,KIW8_SELECTION_SAVED_REVISION,KIW8_SELECTION_SAVED_SHA256,KIW8_HANDOFF_MODE`; denial adds `KIW8_OWNER_B_COOKIE` plus AWS fixed values; observers use AWS fixed values | real rendered completed dashboard and save control; mandatory click save and UI settle; one strict handoff; independently resumable owner-B two-404 denial; zero confirm/start/downstream/private projection; 10/6 sets and digests; LIVE09/CONF01/NC05/06 | browser/save 1; selection reconcile 0..1 only after ambiguity; handoff initial 1; same-key reconcile 0..1 only after ambiguity; owner denial 1 plus one transport-only read recovery; final reads 1 | one selection revision and one unconfirmed Run; `$0` additional | browser preflight safe record is the selection reconciliation identity; no second PUT; deterministic `CLIENT_REQUEST_ID_PATTERN` key is the handoff identity; initial accepts 201 only, reconcile accepts 200 only; denial resolves run identity inside its read-only process; DB handoff row is final authority | `EV-KI-W8-I001-G7.json` |
 
 All `EV-KI-W8-I001-G*.json` names identify exact JSON blocks appended to S3;
 they are not workspace files. Every row's action requires its separate current
@@ -1237,15 +1387,68 @@ A5 approval predicate. G6 additionally requires ACT-05 and ACT-06 together.
 Before parent review and again at P6, run from root:
 
 ```text
-node -e 'const fs=require("node:fs"),s=fs.readFileSync("KEYWORD_INTELLIGENCE_KI_W8_SUBWINDOW_CHECKLIST.md","utf8"),a=s.slice(s.indexOf("## 6. `KI-W8-I001`"),s.indexOf("## 7. Frozen gates")),db=s.slice(s.indexOf("### 3.5 Exact production Neon observer"),s.indexOf("### 3.6 Exact AWS dynamic observers")),ops=s.slice(s.indexOf("### 7.1 Literal per-gate operation manifest"),s.indexOf("### 7.2 Mechanical execution-choice lint")),bad=["dashboard form or same-origin route","if required","normal authenticated GETs","read-only durable inspection","Search exact inspected projections","execute only the P2-recorded host operation","may use only a current official provider","inspect only","read Neon","as appropriate","as needed","choose","decide","determine"," etc."];const hit=bad.filter(x=>a.includes(x));if(hit.length)throw Error(`KIW8_EXECUTION_CHOICE:${hit.join("|")}`);for(const x of["### 3.2 Exact admissible host discovery","### 3.3 Exact P5 prerequisite record","### 3.4 Exact ACT-03 prerequisite record","### 3.5 Exact production Neon observer","### 3.6 Exact AWS dynamic observers","### 3.7 Exact production frontend/API runner","### 7.1 Literal per-gate operation manifest"]){if(!s.includes(x))throw Error(`KIW8_MECHANISM_MISSING:${x}`)}if((db.match(/SELECT count\(\*\)::int AS \"nonterminalResearchCount\"/g)||[]).length!==2)throw Error("KIW8_DB_BASELINE_QUERY_COUNT");if(!ops.includes("| Gate | Exact command/runner and cwd | Environment allowlist |"))throw Error("KIW8_GATE_ENV_ALLOWLIST");for(let n=1;n<=7;n++)if(!ops.includes(`| \`G${n}\` |`)||!ops.includes(`\`EV-KI-W8-I001-G${n}.json\``))throw Error(`KIW8_GATE_ROW:${n}`);console.log("KIW8_EXECUTION_CHOICES_ZERO")'
+node <<'KIW8_EXECUTION_CHOICE_LINT'
+const fs = require("node:fs");
+const original = fs.readFileSync("KEYWORD_INTELLIGENCE_KI_W8_SUBWINDOW_CHECKLIST.md", "utf8");
+const between = (source, start, end) => source.slice(source.indexOf(start), source.indexOf(end, source.indexOf(start)));
+const replaceIn = (source, start, end, before, after) => {
+  const section = between(source, start, end);
+  if (!section.includes(before)) throw new Error("KIW8_CONTROL_MEMBER");
+  return source.replace(section, section.replace(before, after));
+};
+function lint(source) {
+  const assignable = between(source, "## 6. `KI-W8-I001`", "## 7. Frozen gates");
+  const p5 = between(source, "### 3.3 Exact P5 prerequisite record", "### 3.4 Exact ACT-03 prerequisite record");
+  const db = between(source, "### 3.5 Exact production Neon observer", "### 3.6 Exact AWS dynamic observers");
+  const browser = between(source, "#### 3.7.1", "#### 3.7.2");
+  const selection = between(source, "#### 3.7.2", "#### 3.7.3");
+  const handoff = between(source, "#### 3.7.3", "#### 3.7.4");
+  const denial = between(source, "#### 3.7.4", "## 4. Coverage");
+  const operations = between(source, "### 7.1 Literal per-gate operation manifest", "### 7.2 Mechanical execution-choice lint");
+  const broad = ["dashboard form or same-origin route", "if required", "normal authenticated GETs", "read-only durable inspection", "Search exact inspected projections", "execute only the P2-recorded host operation", "may use only a current official provider", "inspect only", "read Neon", "as appropriate", "as needed", "choose", "decide", "determine", " etc.", "Loading keyword research", "third literal KIW8-API-V1"];
+  const hits = broad.filter((value) => assignable.includes(value));
+  if (hits.length) throw new Error(`KIW8_EXECUTION_CHOICE:${hits.join("|")}`);
+  if (p5.includes("select endpoint") || !p5.includes("PARENT_BLOCKED_PROVIDER_CAPABILITY_PROTOCOL")) throw new Error("KIW8_P5_EXECUTOR_CHOICE");
+  for (const heading of ["### 3.2 Exact admissible host discovery", "### 3.3 Exact P5 prerequisite record", "### 3.4 Exact ACT-03 prerequisite record", "### 3.5 Exact production Neon observer", "### 3.6 Exact AWS dynamic observers", "### 3.7 Exact production frontend/browser/API runners", "### 7.1 Literal per-gate operation manifest"]) if (!source.includes(heading)) throw new Error(`KIW8_MECHANISM_MISSING:${heading}`);
+  if ((db.match(/SELECT count\(\*\)::int AS "nonterminalResearchCount"/g) || []).length !== 2) throw new Error("KIW8_DB_BASELINE_QUERY_COUNT");
+  for (const value of ["/usr/bin/google-chrome", "Network.setCookie", "surface:keyword-table", "surface:selection-review", "b.click()", "Network.responseReceived", "mode:\"browser-save\"", "forbiddenRunOrStartRequests:0"]) if (!browser.includes(value)) throw new Error(`KIW8_BROWSER_UI_ACTIVATION:${value}`);
+  if (browser.includes("fetch(`/api/keyword-research/${encodeURIComponent(id)}/selection`")) throw new Error("KIW8_BROWSER_DIRECT_API_SAVE");
+  for (const value of ["mode:\"selection-reconcile\"", "v.selectionRevision===prior+1", "v.selectionRevision===prior", "outcome=\"rolled_back\"", "the save is not repeated"]) if (!selection.includes(value)) throw new Error(`KIW8_SELECTION_AMBIGUITY_CODE:${value}`);
+  if (selection.includes("method:\"PUT\"") || selection.includes("/runs`")) throw new Error("KIW8_SELECTION_RECONCILE_MUTATION");
+  for (const value of ["CLIENT_REQUEST_ID_PATTERN.test(key)", "expectedStatus=mode===\"initial\"?201:200", "KIW8_HANDOFF_MODE=initial", "KIW8_HANDOFF_MODE=reconcile", "mode:\"handoff-ambiguous\""]) if (!handoff.includes(value)) throw new Error(`KIW8_HANDOFF_AMBIGUITY_CODE:${value}`);
+  for (const value of ["SET TRANSACTION READ ONLY", "KeywordResearchHandoff", "KEYWORD_RESEARCH_NOT_FOUND", "RUN_NOT_FOUND", "privateProjectionCount:0"]) if (!denial.includes(value)) throw new Error(`KIW8_OWNER_DENIAL_CODE:${value}`);
+  if (!operations.includes("| Gate | Exact command/runner and cwd | Environment allowlist |")) throw new Error("KIW8_GATE_ENV_ALLOWLIST");
+  for (let number = 1; number <= 7; number += 1) if (!operations.includes(`| \`G${number}\` |`) || !operations.includes(`\`EV-KI-W8-I001-G${number}.json\``)) throw new Error(`KIW8_GATE_ROW:${number}`);
+}
+lint(original);
+const controls = [
+  replaceIn(original, "## 6. `KI-W8-I001`", "## 7. Frozen gates", "Execute `KIW8-BROWSER-SAVE-V1` once", "dashboard form or same-origin route"),
+  replaceIn(original, "### 3.5 Exact production Neon observer", "### 3.6 Exact AWS dynamic observers", "SELECT count(*)::int AS \"nonterminalResearchCount\"", "SELECT 0 AS \"removedBaseline\""),
+  replaceIn(original, "### 7.1 Literal per-gate operation manifest", "### 7.2 Mechanical execution-choice lint", "| Gate | Exact command/runner and cwd | Environment allowlist |", "| Gate | Exact command/runner and cwd | removed |"),
+  replaceIn(original, "### 3.3 Exact P5 prerequisite record", "### 3.4 Exact ACT-03 prerequisite record", "PARENT_BLOCKED_PROVIDER_CAPABILITY_PROTOCOL", "select endpoint"),
+  replaceIn(original, "#### 3.7.1", "#### 3.7.2", "b.click();return true", "fetch(`/api/keyword-research/${encodeURIComponent(id)}/selection`,{method:\"PUT\"});return true"),
+  replaceIn(original, "#### 3.7.3", "#### 3.7.4", "expectedStatus=mode===\"initial\"?201:200", "expectedStatus=mode===\"initial\"?201:201")
+];
+for (const [index, control] of controls.entries()) {
+  let falsified = false;
+  try { lint(control); } catch { falsified = true; }
+  if (!falsified) throw new Error(`KIW8_EXECUTION_CONTROL_${index + 1}`);
+}
+console.log("KIW8_EXECUTION_CHOICES_ZERO controls=6");
+KIW8_EXECUTION_CHOICE_LINT
 ```
 
 Self-falsification runs on an in-memory copy only. Replace the exact ACT-04
 command with the former `dashboard form or same-origin route`, delete one SQL
 query, delete one operation-table environment allowlist, and change P5's
-fail-closed state to `select endpoint`; each separate mutation must make the
-lint exit nonzero. It emits only the failing rule name. Required outcome is four
-falsifications plus the unmodified `KIW8_EXECUTION_CHOICES_ZERO` pass.
+fail-closed state to `select endpoint`. Then separately replace the browser's
+`b.click()` with a direct API PUT and replace handoff
+`expectedStatus=mode==="initial"?201:200` with
+`expectedStatus=mode==="initial"?201:201`. Each of the six separate in-memory
+mutations must make the lint exit nonzero. It emits only the failing rule name.
+Required outcome is six falsifications plus the unmodified
+`KIW8_EXECUTION_CHOICES_ZERO` pass. The manifest-produced-at semantic control
+in §3.6 is a seventh independent falsification and must also pass at G1.
 
 No stateful, AWS, host, provider, paid, database or browser gate may be repeated
 to accumulate evidence. The one E8.1 identical recovery applies only to a
@@ -1270,7 +1473,7 @@ open a source corrective leaf.
 - [ ] `I5` Obtain/verify ACT-03 approval, execute host update/readback, then stop for ACT-04. Evidence: ___
 - [ ] `I6` Obtain/verify ACT-04 approval, create exactly one disabled research and execute NC03/04, then stop for ACT-05. Evidence: ___
 - [ ] `I7` Obtain ACT-05 and ACT-06 independently; execute activation only when both are current; observe the same research. Evidence: ___
-- [ ] `I8` Execute owner/UI/handoff, privacy, operation, cost and no-downstream oracles; execute no second canary. Evidence: ___
+- [ ] `I8` Execute one real rendered browser save; use only the frozen read-only selection reconciliation if its terminal response is ambiguous; parent-pin the saved revision/hash; execute one initial handoff and only its same-key reconcile mode after ambiguity; prove owner-B denial, privacy, cost and zero downstream/Confirm/Start; execute no second save/research. Evidence: ___
 - [ ] `I9` Verify required=registered=executed=activated case sets and all six controls/digests with zero exceptions. Evidence: ___
 - [ ] `I10` Verify current source diff is empty, only authorized coordination/generated paths changed, and no prohibited/successor action occurred. Evidence: ___
 - [ ] `I11` On success append the window certificate, CAS A5 to AWAITING_REVIEW and stop; on failure use ACT-07 only after its separate approval and still stop failed. Evidence: ___

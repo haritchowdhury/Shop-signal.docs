@@ -325,3 +325,128 @@ status: AWAITING_PARENT_DECOMPOSITION_REVIEW
 No W8 preflight, network, AWS, host, provider, paid, database, browser, build,
 source/test edit, leaf dispatch, commit, push, action or assessment execution
 occurred during this reconciliation.
+
+## `EV-KI-W8-S005` — rendered-UI, resumability and artifact reconciliation
+
+```yaml
+evidence_id: EV-KI-W8-S005
+timestamp: 2026-08-24T17:45:00+05:30
+phase: decomposition_parent_second_finding_reconciliation
+parent_window_id: KI-W8
+subwindow_id: KI-W8-DECOMPOSITION
+assignment_id: ASG-KI-W8-WA-01
+actor: KI-W8-WINDOW-AGENT
+supersedes_readiness_claims:
+  - EV-KI-W8-S004
+  - SUBWINDOW-DECOMPOSITION-READY-SUPERSEDING at decomposition 7019451217532974865c440a14c87fa7698d125877897bd5aac98d686b450fe2
+parent_findings:
+  F1: direct SSR loading-shell GET plus API PUT could not activate the required rendered dashboard save witness
+  F2: combined save-handoff code did not implement the frozen selection/handoff ambiguity protocol or permit independent safe resume
+  F3: observer prose claimed HeadObject while code used GetObject and mapped manifest produced-at from stageCreatedAt
+revised_decomposition_revision: 7f2bc8197a52c4264f876f58db0cb386613007f3a16b8fdabbb468740b47a296
+requester_committed_baseline:
+  root_head: e4f315488cd80c567e035cc99ed0083b1c717a14
+  backend_head: c3ba835be446ba43e1a80be4f5ab4d28bae89497
+  frontend_head: 5e441aae7e2f3a132b2c7fc85bf1bc525d3d5cb6
+  starting_dirty_paths: []
+corrections:
+  rendered_dashboard:
+    runner: KIW8-BROWSER-SAVE-V1
+    mechanism: /usr/bin/google-chrome headless through exact CDP source
+    authentication: owner-A Cookie members installed through Network.setCookie and never emitted
+    positive_witnesses: [completed dashboard, keyword-table row, real checkbox, selection review, enabled Save selection control, click-generated PUT 200, settled enabled UI]
+    forbidden_witnesses: [direct API save substitute, Finalize click, Confirm action, Start action, runs POST during browser save]
+    cleanup: browser socket process group and temporary profile always closed
+  selection_resumability:
+    browser_attempts: 1
+    safe_preflight: [researchIdSha256, prior revision, item count, selectionSha256]
+    ambiguity_runner: KIW8-SELECTION-READ-V1
+    ambiguity_attempts: 0..1 only after recorded terminal ambiguity
+    saved_branch: exact hash/count and revision prior+1
+    rollback_branch: exact hash/count and unchanged revision then stop
+    second_put: prohibited
+  handoff_resumability:
+    runner: KIW8-HANDOFF-V1
+    client_key_validation: CLIENT_REQUEST_ID_PATTERN.test(key)
+    initial: {attempts: 1, accepted_status: 201}
+    ambiguity_reconcile: {attempts: 0..1, accepted_status: 200, key_and_body: byte-identical}
+    owner_b_denial: independently resumable KIW8-OWNER-DENIAL-V1 resolves the durable run in its own read-only process and never emits raw identity
+    second_research_or_selection_save: prohibited
+  artifact_storage:
+    operation: GetObject only
+    encryption_version_witness: GetObject response ServerSideEncryption AES256 plus nonempty VersionId
+    manifest_produced_at: persisted manifestProducedAt through extracted manifestProducedAt(row) function
+    semantic_oracle: KIW8_MANIFEST_METADATA_SEMANTIC_PASS
+    negative_control: stageCreatedAt substitution falsifies the semantic mapping
+  execution_choice_enforcement:
+    positive: KIW8_EXECUTION_CHOICES_ZERO
+    controls: 6
+    new_controls: [browser click replaced by direct API PUT, initial/reconcile status branch collapsed]
+    independent_manifest_control: 1
+verification:
+  browser_runner_syntax: PASS
+  handoff_runner_syntax: PASS
+  inline_create_poll_selection_shell_syntax: PASS
+  manifest_semantic_oracle_and_control: PASS
+  execution_choice_lint: PASS
+  execution_choice_controls: 6/6 falsified
+  authoring_items: 47/47
+  registry_rows: 10 cases plus 6 controls
+  required_case_digest: b716a609b2269f69d4e042503ad47dabb1eb397e17726af850f38ab09940431a
+  required_control_digest: 1a2fd2fb71c94f297b27c5c6ad580c67d94ae807525b420996bd4382d46b7c6e
+closure:
+  implementation_source_leaves: 0
+  leaf_delegation: prohibited
+  action_ids_preserved: [W8-ACT-01, W8-ACT-02, W8-ACT-03, W8-ACT-04, W8-ACT-05, W8-ACT-06, W8-ACT-07]
+  unresolved_interfaces: []
+  unresolved_intermediate_states: []
+  unresolved_execution_choices: []
+  unresolved_evidence_references: []
+commands:
+  - documentation-only source inspection
+  - syntax checks over extracted literal inline runners
+  - manifest mapping semantic oracle and negative control
+  - execution-choice lint and six in-memory falsifications
+  - registry and authoring-count checks
+  - git diff --check
+external_mutations: []
+paid_cost_usd: "0.00"
+status: PASS
+```
+
+```yaml
+certificate: SUBWINDOW-DECOMPOSITION-READY-SUPERSEDING-2
+parent_window_id: KI-W8
+parent_assignment_id: ASG-KI-W8-WA-01
+window_agent_identity: KI-W8-WINDOW-AGENT
+decomposition_revision: 7f2bc8197a52c4264f876f58db0cb386613007f3a16b8fdabbb468740b47a296
+state_version: 3
+decomposition_status: AWAITING_PARENT_DECOMPOSITION_REVIEW
+initial_subwindow_ids: []
+initial_subwindow_count: 0
+integration_assessment_id: KI-W8-I001
+planned_file_set: []
+planned_file_set_digest: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+unmapped_parent_requirements: []
+unmapped_parent_decisions: []
+unmapped_parent_tasks: []
+unmapped_parent_scenarios: []
+unmapped_coverage_cases: []
+duplicate_initial_file_owners: []
+multi_file_subwindows: []
+unresolved_interfaces: []
+unresolved_intermediate_states: []
+unresolved_execution_choices: []
+unresolved_evidence_references: []
+mandatory_authoring_items_checked: 47
+mandatory_authoring_items_unchecked: 0
+real_rendered_UI_activation_required: true
+selection_and_handoff_ambiguity_code_complete: true
+manifest_metadata_semantic_control: true
+parent_review_required: true
+status: AWAITING_PARENT_DECOMPOSITION_REVIEW
+```
+
+No W8 preflight, network, AWS, host, provider, paid, production database,
+browser, build, source/test edit, leaf dispatch, commit, push, action or
+assessment execution occurred during this second reconciliation.
