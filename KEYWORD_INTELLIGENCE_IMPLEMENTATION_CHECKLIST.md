@@ -4031,22 +4031,22 @@ integration assessment; leaves never edit A1–A8 or talk to the parent.
 - [x] `KI-W7-H1` Append changed files/symbols, exact commands/outcomes, build hashes/sizes/startup, controls, guarded-skip statement and residual prerequisites to A6. Evidence: `EV-KI-A-123`.
 - [x] `KI-W7-H2` CAS A5 one version to `AWAITING_REVIEW`, `accepted_through: KI-W6`, `next_window: KI-W8`, `may_start_successor:false`; stop. Evidence: `EV-KI-A-123`.
 
-### `KI-W8` — AWS-only disabled keyword infrastructure deployment
+### `KI-W8` — AWS-only active keyword infrastructure deployment
 
 ```yaml
 window_id: KI-W8
-objective: Prove the applied AWS target, deploy the accepted keyword infrastructure and code disabled, verify the resulting topology and outputs, then stop before any control-plane connection, activation, research, provider call or paid work.
-depends_on: [accepted_KI-W7, DEC-KI-060, exact_W8_action_manifest, separate_requester_approvals]
+objective: Prove the applied AWS target, deploy the accepted keyword infrastructure through a verified disabled intermediate state, activate its mapping and recovery integration, verify the active topology and outputs, then stop before any research, provider call or paid work.
+depends_on: [accepted_KI-W7, DEC-KI-061, exact_W8_action_manifest, separate_requester_approvals]
 consumes: [accepted_W7_packet_template_and_two_ZIPs, read_only_AWS_preflight]
-produces: [reviewed_disabled_change_set, applied_disabled_keyword_stack_witness, exact_sanitized_stack_outputs_for_future_KI-W9]
+produces: [reviewed_disabled_change_set, applied_disabled_intermediate_witness, reviewed_activation_change_set, applied_active_keyword_stack_witness, exact_sanitized_stack_outputs_for_local_backend_and_frontend]
 assigned_agent_policy: window_agent_personal_execution_no_leaf_delegation
-authorized_write_scope: [KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md append-only KI-W8 entries, ACTIVE_EXECUTION_STATE.md one-version transitions, KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_STATE.md one-version transitions, KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_EVIDENCE.md append-only KI-W8 entries, email_scraper/dist/lambda/keyword-worker-measurements.json, email_scraper/dist/lambda/measurements.json, email_scraper/dist/aws-deployment/keyword-intelligence/packet.json, email_scraper/dist/aws-deployment/keyword-intelligence/artifacts.json, email_scraper/dist/aws-deployment/keyword-intelligence/full-change-set.json]
+authorized_write_scope: [KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md append-only KI-W8 entries, ACTIVE_EXECUTION_STATE.md one-version transitions, KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_STATE.md one-version transitions, KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_EVIDENCE.md append-only KI-W8 entries, email_scraper/dist/lambda/keyword-worker-measurements.json, email_scraper/dist/lambda/measurements.json, email_scraper/dist/aws-deployment/keyword-intelligence/packet.json, email_scraper/dist/aws-deployment/keyword-intelligence/artifacts.json, email_scraper/dist/aws-deployment/keyword-intelligence/full-change-set.json, email_scraper/dist/aws-deployment/keyword-intelligence/activate-change-set.json]
 shared_file_scope: []
 read_only_scope: [KEYWORD_INTELLIGENCE_PRODUCT_CONTRACT.md, KEYWORD_INTELLIGENCE_DISCOVERY_DOSSIER.md, KEYWORD_INTELLIGENCE_DECISION_LEDGER.md, KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md, ACTIVE_EXECUTION_STATE.md, KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md, KEYWORD_INTELLIGENCE_SPECIFICATION_CHANGELOG.md, KEYWORD_INTELLIGENCE_TRACEABILITY_INDEX.md, PROJECT_AGNOSTIC_DECISION_COMPLETE_CHECKLIST_AUTHORING_STANDARD.md, PROJECT_AGNOSTIC_WINDOW_AGENT_SUBWINDOW_AUTHORING_STANDARD.md, email_scraper/infrastructure/aws/template.yaml, email_scraper/dist/lambda/keyword-worker.zip, email_scraper/dist/lambda/recovery.zip, email_scraper/scripts/measure-keyword-worker-package.js, email_scraper/scripts/measure-lambda-packages.js, email_scraper/scripts/keyword-intelligence/create-change-set.js, email_scraper/scripts/keyword-intelligence/inspect-stack.js, AWS account selected by profile storesignal-dev region ap-south-2 and stack storesignal-production-pipeline through the read-only operations enumerated under W8 literal inputs and commands]
-external_write_scope: only W8-ACT-01 content-addressed S3 uploads/change-set creation and W8-ACT-02 execution of that exact reviewed disabled change-set ID
+external_write_scope: only W8-ACT-01 content-addressed S3 uploads/disabled change-set creation and W8-ACT-02 execution of that exact disabled ID followed by create/review/execution of the one exact activation change set
 authorized_actions: read-only AWS preflight is separately assignable; W8-ACT-01 and W8-ACT-02 each require their own current requester approval
-prohibited_actions: [source_test_schema_migration_package_lock_frontend_edit, hosted_backend_configuration, local_backend_or_frontend_start, secret_value_read, provider_or_paid_call, production_database_or_API_research, keyword_activation, Lambda_direct_invoke, queue_send_receive_delete_purge_redrive, DLQ_replay, S3_or_database_delete, manual_stack_repair, second_change_set_after_observable_failure, commit, push, KI-W9_action, final_completion_declaration]
-successor: STOP_KI-W9_REAUTHORING
+prohibited_actions: [source_test_schema_migration_package_lock_frontend_edit_except_the_parent_approved_create_change_set_action_label_correction, hosted_backend_configuration, local_backend_or_frontend_start, secret_value_read, provider_or_paid_call, production_database_or_API_research, Lambda_direct_invoke, queue_send_receive_delete_purge_redrive, DLQ_replay, S3_or_database_delete, manual_stack_repair, unlisted_change_set, commit, push, successor_window_action]
+successor: STOP_KI-W8_COMPLETE
 successor_reserved_for: parent
 may_start_successor: false
 ```
@@ -4095,6 +4095,9 @@ ACT-02 is exactly:
 ```text
 node scripts/keyword-intelligence/create-change-set.js --profile=storesignal-dev --region=ap-south-2 --stack=storesignal-production-pipeline --environment=production --phase=full --account-id=${KIW8_ACCOUNT_ID} --execute --apply-reviewed-change-set
 node scripts/keyword-intelligence/inspect-stack.js --profile=storesignal-dev --region=ap-south-2 --stack=storesignal-production-pipeline --account-id=${KIW8_ACCOUNT_ID} --expected-disabled
+node scripts/keyword-intelligence/create-change-set.js --profile=storesignal-dev --region=ap-south-2 --stack=storesignal-production-pipeline --environment=production --phase=activate --account-id=${KIW8_ACCOUNT_ID} --execute
+node scripts/keyword-intelligence/create-change-set.js --profile=storesignal-dev --region=ap-south-2 --stack=storesignal-production-pipeline --environment=production --phase=activate --account-id=${KIW8_ACCOUNT_ID} --execute --apply-reviewed-change-set
+node scripts/keyword-intelligence/inspect-stack.js --profile=storesignal-dev --region=ap-south-2 --stack=storesignal-production-pipeline --account-id=${KIW8_ACCOUNT_ID} --expected-active
 ```
 
 `KIW8_ACCOUNT_ID`, the packet approval token, object versions and change-set ID
@@ -4127,32 +4130,32 @@ authority or change any argument.
 14. **Output:** exact reviewed disabled change-set ID in the mode-0600 record plus its sanitized SHA-256/presence projection in A5/A6.
 15. **Non-goals:** execute, configure a control plane, activate, inspect secrets, create research or call providers.
 
-#### Task block `KI-W8-T2` — execute and inspect the disabled stack
+#### Task block `KI-W8-T2` — execute the disabled update, activate, and inspect the active stack
 
 - [ ] `KI-W8-T2` Perform the fully specified apply/inspection action below. Evidence: ___
 
-1. **Task:** execute only the ACT-01 reviewed change-set ID and verify the final disabled stack.
-2. **Requirements/decisions:** `DEC-KI-025/059/060`; `AUTH-KI-005`.
+1. **Task:** execute only the ACT-01 reviewed full change-set ID, verify its disabled intermediate state, create/review/apply the exact activation change set, and verify the final active stack.
+2. **Requirements/decisions:** `DEC-KI-025/059/061`; `AUTH-KI-005`.
 3. **Source:** exact ACT-01 record and a fresh read-only equality check.
 4. **Target:** `storesignal-production-pipeline` in `ap-south-2`.
-5. **Interface/schema:** exact disabled change-set ID/token/projection in mode-0600 records; A5/evidence SHA-256/presence projection; expected-disabled stack inspector.
-6. **Algorithm:** disclose exact ID/projection → obtain ACT-02 approval → re-describe/equality-check ID → execute once → wait stack-update-complete or rollback-complete → require success → run expected-disabled inspector → compare established before/after projection.
+5. **Interface/schema:** exact disabled ID/token/projection and deterministic activation name/allowlist in mode-0600 records; A5/evidence retain only SHA-256/presence projections; expected-disabled and expected-active inspectors.
+6. **Algorithm:** disclose the exact full ID/projection and activation allowlist → obtain one ACT-02 approval → re-describe/equality-check the full ID → execute once → require `UPDATE_COMPLETE` and expected-disabled inspection → create/review the deterministic `ki-activate-${approvalToken.slice(0,12)}` change set → require exactly the three direct activation members plus only the permitted Recovery dependencies → apply that exact ID once → require `UPDATE_COMPLETE` and expected-active inspection.
 7. **Operations:** only `W8-ACT-02`.
-8. **Atomicity:** CloudFormation transaction/automatic rollback is authoritative; no manual repair.
+8. **Atomicity:** the full apply and activation apply are separate CloudFormation transactions; automatic rollback is authoritative for each and the verified disabled state is the activation rollback boundary; no manual repair.
 9. **Identities:** same account/profile/region/stack/packet and reviewed ID.
-10. **Failure/replay:** lost execute response is reconciled read-only by change-set and stack events/status; never execute twice. Any failed/rollback status stops with retained evidence and no replacement change set.
-11. **Dependencies/bounds:** final inventory exactly 82 resources, 34 outputs, 19 parameters, seven queues/DLQs, eight functions, seven mappings and 31 alarms; KeywordResearchMapping disabled; KeywordWorker and Recovery keyword flags false; source/DLQ counts zero; established six mappings and Recovery schedule remain enabled.
-12. **Callers/obsolete:** accepted apply-reviewed-change-set and expected-disabled inspector only.
+10. **Failure/replay:** each create/apply boundary is reconciled read-only by deterministic name/ID, stack events and status; never execute an ID twice. A full failure stops before activation. An activation failure or ambiguity stops with retained evidence and requires the stack to be disabled or in CloudFormation rollback; no replacement set or manual mutation is permitted.
+11. **Dependencies/bounds:** final inventory exactly 82 resources, 34 outputs, 19 parameters, seven queues/DLQs, eight functions, seven mappings and 31 alarms; KeywordResearchMapping enabled; KeywordWorker and Recovery keyword flags true; source/DLQ counts zero at final inspection; established six mappings and Recovery schedule remain enabled.
+12. **Callers/obsolete:** accepted create/apply-reviewed-change-set paths and both expected-disabled/expected-active inspector modes only; the legacy `W8-ACT-05` label is prohibited.
 13. **Tests:** `W8-LIVE-03`, `W8-CONF-01`.
-14. **Output:** sanitized disabled-stack certificate and exact outputs reserved for future KI-W9 authoring.
-15. **Non-goals:** host/local configuration, activation, direct invocation, API research, provider call, canary or rollback mutation.
+14. **Output:** sanitized disabled-intermediate and active-final certificates plus exact outputs usable by the local backend/frontend.
+15. **Non-goals:** host/local configuration, direct invocation, API research, provider call, paid canary or rollback mutation.
 
 #### W8 action manifest and coverage
 
 | Action | Exact effect | Required approval |
 |---|---|---|
 | `W8-ACT-01` | upload exactly three accepted versioned objects and create/review one disabled change set; zero execution | account/stack/bucket, three keys/hashes/bytes and create-only packet token |
-| `W8-ACT-02` | execute only the recorded reviewed disabled change-set ID, wait and inspect | exact ID, normalized projection hash and apply token |
+| `W8-ACT-02` | execute the recorded disabled ID; inspect disabled; create/review/apply the deterministic exact activation set; inspect active | exact full ID/projection, activation name/allowlist and the same packet token |
 
 Required IDs are exactly `W8-CONF-01`, `W8-LIVE-01`–`03`, digest
 `3bd44b2c2c244b1dd29881dcfa249d9cdad5f9b1aecc981c56612d587283ca7e`.
@@ -4218,7 +4221,7 @@ digest does not match, or any extra top-level/member key is present.
 |---|---|
 | `W8-LIVE-01` | exact STS/region/stack/quota/source/package/before-topology preflight passes with zero mutation |
 | `W8-LIVE-02` | three uploaded object versions hash/size/metadata-match W7 and one unexecuted reviewed disabled change set equals the allowlist |
-| `W8-LIVE-03` | the exact reviewed ID applies successfully and expected-disabled inspection proves the complete keyword topology plus unchanged established operation |
+| `W8-LIVE-03` | the exact full ID applies, disabled inspection passes, the exact activation set applies, and expected-active inspection proves the live keyword topology plus unchanged established operation |
 | `W8-CONF-01` | required=registered=executed=activated four; all eight controls falsified; exact digests; action ledger exactly ACT-01 then ACT-02; zero forbidden activity |
 
 | Control | Captured mutation | Required failure witness |
@@ -4228,20 +4231,20 @@ digest does not match, or any extra top-level/member key is present.
 | `W8-NC-03` | remove `W8-LIVE-02` from a synthetic registered-case set | exact required/registered equality rejects the certificate |
 | `W8-NC-04` | report `W8-LIVE-03` as skipped after selecting the complete set | zero-required-skip rule rejects the certificate |
 | `W8-NC-05` | append a second `W8-LIVE-02` execution record | duplicate-ID rule rejects the certificate |
-| `W8-NC-06` | report `W8-LIVE-03` executed but omit its expected-disabled inspector activation witness | activation equality rejects the certificate |
-| `W8-NC-07` | remove the zero-provider/zero-activation assertion from a synthetic conformance member | required-oracle schema rejects the weakened certificate |
-| `W8-NC-08` | substitute a fabricated disabled-stack summary without the inspector command/result digest | live-evidence fidelity rule rejects the certificate |
+| `W8-NC-06` | report `W8-LIVE-03` executed but omit either disabled-intermediate or active-final inspector witness | activation equality rejects the certificate |
+| `W8-NC-07` | remove the zero-provider/zero-unapproved-activation assertion from a synthetic conformance member | required-oracle schema rejects the weakened certificate |
+| `W8-NC-08` | substitute a fabricated active-stack summary without the inspector command/result digest | live-evidence fidelity rule rejects the certificate |
 
 - [ ] `KI-W8-V1` P1-P5 pass with exact source/package/target/quota/before-state evidence and zero mutation. Evidence: ___
 - [ ] `KI-W8-V2` ACT-01 produces exactly three accepted object versions and one reviewed, unexecuted, allowlisted disabled change set. Evidence: ___
-- [ ] `KI-W8-V3` ACT-02 applies only that ID; expected-disabled inventory/config/IAM/outputs/queue/DLQ inspection passes and established topology remains active. Evidence: ___
-- [ ] `KI-W8-V4` Four-case/eight-control required=registered=executed=activated equality and digests pass; action ledger is exactly ACT-01→ACT-02; provider/database/API/browser/local-server/activation/paid/forbidden counts are zero. Evidence: ___
+- [ ] `KI-W8-V3` ACT-02 applies the exact full ID, passes expected-disabled inspection, creates/reviews/applies only the exact activation set, and passes expected-active inventory/config/IAM/output/queue/DLQ inspection. Evidence: ___
+- [ ] `KI-W8-V4` Four-case/eight-control required=registered=executed=activated equality and digests pass; action ledger is exactly ACT-01→ACT-02; provider/database/API/browser/local-server/paid and unapproved-activation counts are zero. Evidence: ___
 - [ ] `KI-W8-H1` Record exact changed/generated paths and prove no source, test, schema, migration, package-lock or frontend path changed. Evidence: ___
-- [ ] `KI-W8-H2` Append exact sanitized commands, approvals, object/change-set identities, before/after projections, outcomes, automatic rollback status, residual risks, coverage counts/digests and W9 prerequisites to A6. Evidence: ___
+- [ ] `KI-W8-H2` Append exact sanitized commands, approvals, both change-set identities, disabled/active projections, outcomes, automatic rollback status, residual risks and coverage counts/digests to A6. Evidence: ___
 - [ ] `KI-W8-H3` Diff/status and AWS action ledger equal the authorized write and two-action scopes exactly. Evidence: ___
-- [ ] `KI-W8-H4` Prove no secret read, provider/database/API/browser/local-server/activation/paid/destructive action and no KI-W9 work occurred. Evidence: ___
-- [ ] `KI-W8-H5` Append the execution/enforcement certificates and CAS A5 one version to `AWAITING_REVIEW`, retaining `accepted_through:KI-W7`, `next_window:KI-W9-AUTHORING`, `may_start_successor:false`. Evidence: ___
-- [ ] `KI-W8-H6` Stop without assigning or beginning KI-W9. Evidence: ___
+- [ ] `KI-W8-H4` Prove no secret read, provider/database/API/browser/local-server/paid/destructive or unapproved activation action occurred. Evidence: ___
+- [ ] `KI-W8-H5` Append the execution/enforcement certificates and CAS A5 one version to `AWAITING_REVIEW`, retaining `accepted_through:KI-W7`, `next_window:null`, `may_start_successor:false`. Evidence: ___
+- [ ] `KI-W8-H6` Stop with the AWS keyword infrastructure active and no successor window assigned. Evidence: ___
 
 #### W8 AWS-first authoring readiness
 
@@ -4249,33 +4252,30 @@ digest does not match, or any extra top-level/member key is present.
 - [x] `RW8A-02` W8 has zero implementation leaves, one sequential window-agent assessment and two separately approved actions. Evidence: W8 header/action manifest.
 - [x] `RW8A-03` Exact packet, upload, change-set allowlist, execute, ambiguity and automatic rollback semantics are frozen. Evidence: `DEC-KI-059/060`; T1/T2.
 - [x] `RW8A-04` Required cases/controls have exact membership, counts, activation witnesses, enforcement falsification controls and recomputable digests. Evidence: W8 coverage tables.
-- [x] `RW8A-05` No secret value, provider, database, API, browser, local server, research, activation or paid operation is required by W8. Evidence: W8 prohibitions/V4.
-- [x] `RW8A-06` KI-W9 is explicitly deferred and cannot inherit W8 action authority. Evidence: `DEC-KI-060`; W9 header.
+- [x] `RW8A-05` No secret value, provider, database, API, browser, local server, research or paid operation is required by W8; only the exact ACT-02 activation is allowed. Evidence: W8 prohibitions/V4.
+- [x] `RW8A-06` KI-W9 is retired; active AWS outputs are the terminal W8 result. Evidence: `DEC-KI-061`; retired marker below.
 - [x] `RW8A-07` The old DECOMP-3 is revision-invalidated but retained as history; a new W8 decomposition is required. Evidence: `CHG-KI-097`.
 - [x] `RW8A-08` This rewrite performs no AWS/network/provider/database/build/deployment/source action. Evidence: `EV-KI-A-127`.
 
-### `KI-W9` — deferred local-control-plane activation and canary
+### `KI-W9` — retired identifier; not a window
 
 ```yaml
-window_id: KI-W9
-status: DRAFT_NOT_ASSIGNABLE
-objective: Later connect the locally running backend/frontend to the disabled W8 stack, prove local permissions and strict secret/provider capability, create one research while disabled, activate the event source, complete the same bounded paid canary and one unconfirmed run handoff.
-depends_on: [parent_accepted_KI-W8, applied_W8_outputs, requester_ready_for_local_sessions_and_paid_canary]
-consumes: [DEC-KI-060, disabled_keyword_stack_certificate]
+window_id: KI-W9-RETIRED
+status: RETIRED_NOT_A_WINDOW
+objective: none
+depends_on: []
+consumes: [DEC-KI-061]
 authorized_write_scope: []
 authorized_actions: []
-prohibited_actions: [assignment, decomposition, local_server_start, AWS_or_host_mutation, API_research, provider_or_paid_call, database_or_browser_action, activation, rollback, successor_work]
-successor: STOP_FINAL_INDEPENDENT_REVIEW
+prohibited_actions: [assignment, decomposition, execution, successor_work]
+successor: null
 may_start_successor: false
 ```
 
-KI-W9 intentionally has no assignable task block yet. After W8 acceptance, the
-parent must re-inspect the applied outputs and local run method, then author a
-decision- and execution-complete KI-W9 package under the current standards.
-That package must preserve one research across disabled→active processing,
-separate activation/paid/rollback approvals, the $3/11/55 bounds, owner
-isolation, real rendered dashboard save, immutable run handoff and zero
-downstream Run confirmation. No W8 approval starts KI-W9.
+`KI-W9` is retained only as historical text identity. It cannot be assigned,
+decomposed or executed. KI-W8 ends with active AWS infrastructure; later local
+application testing is ordinary product operation and any paid research still
+requires the user's deliberate product action rather than a deployment window.
 
 ## 3. Scenario ledger
 

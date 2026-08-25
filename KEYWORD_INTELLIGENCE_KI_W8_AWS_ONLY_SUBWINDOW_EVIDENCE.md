@@ -634,3 +634,71 @@ finish with active AWS infrastructure usable by the local application.
 
 S2 state 8 and A5 state 212 stop at parent reauthoring with no external action
 authority.
+
+## `EV-KI-W8-AWS-S015` — DECOMP-5 P1–P6 pass; ACT-01 approval boundary
+
+**Outcome:** `PASS_THROUGH_P6`.
+
+The requester retained ACT-01 and changed only ACT-02's terminal behavior:
+after the exact disabled intermediate update and inspection, ACT-02 reviews and
+applies the already-supported exact activation set and requires expected-active
+inspection. The parent recorded `DEC-KI-061`, retired the legacy ACT-05 label,
+and assigned only read-only P1–P6 under A5 state 213.
+
+The extracted runner revision
+`4611115aa6c7fc3ae9448e44435051ad0e2abc6f85245f656613608bef5d47d0`
+passed syntax/self-test. P1–P6 passed with projections:
+
+```yaml
+p2_initial_sha256: 4419b32a71c1993a839a13595c6fd8444389affa78c2c28e95534b03dba2755e
+p3_sha256: ef9748a94435ffefb0b2d41ceec23ed1b8d6883d1a42849f2a0656195ac54349
+p4_packet_sha256: dade137fe8274b48ed32441bf1e32be10f5f44673a8084174e59ca21a2c39bba
+p5_recheck_sha256: 4419b32a71c1993a839a13595c6fd8444389affa78c2c28e95534b03dba2755e
+p6_scope_sha256: 2f5e7d55ce5a18de0f9d5ada2a37da5a07843aa18df21bb31e41a0c3c0d6e442
+p2_p5_byte_equal: true
+keyword_measurement_sha256: 07217b5a05418c9790559c24b5cb07281e6edd9fa28dc6e4d5ac2d0237043447
+established_measurement_sha256: 5286e288717283027316c43c5fe4ddc66471790b6bf3c4c230a91ad02c4572a6
+aws_mutations: 0
+paid_cost_usd: 0.00
+```
+
+No deployment, activation, Lambda invocation, queue data-plane, secret-value,
+database, API, browser, local-server or provider action occurred. LIVE-01 is
+accepted. The sole next operation is requester approval of unchanged ACT-01.
+
+## `EV-KI-W8-AWS-S016` — requester-approved ACT-01 completed
+
+**Outcome:** `PASS_AWAITING_ACT02_APPROVAL`.
+
+Under A5 state 215 and assignment `ASG-KI-W8-ACT01-PARENT-01`, the frozen
+runner revalidated the exact state pins and target before any write. The exact
+three content-addressed artifact members reconciled to versioned AES256 S3
+objects. Sanitized version hashes, in packet order, are:
+
+```yaml
+object_version_sha256s:
+  - 73a3b542888e36bf77dc9bc38738ef60811e9733a50d46097951a99364ec1b6f
+  - a7ddf54cca1ed60516a2017ed6d73afc3df222df8b68957f9985abd7e7c4ccd8
+  - b57038b574321c2a467dd77344448b15b9f7d129c660dd9bc64b2bee07d7c859
+```
+
+The exact full-phase change set `ki-full-a62298d72baf` was created and reviewed
+but not executed. Sanitized change-set ID hash is
+`5a4e7c1d0c4dc456a59640a25753f68cea2bf39b3e47c7f5971d2f14d6f9127a`;
+the exact normalized 15-change projection hash is
+`55a6dcf69ca72fb4004facc422c5677723aa50a0e8daecd6d1300a1eaac19649`.
+The sanitizer, strict private-record reconciliation and both ACT-01 negative
+controls passed. Sanitized output hashes are:
+
+```yaml
+sanitize_act01_sha256: 05a273ff878addc3e8238a2411efc93dd7d389753424761413732ab978b73e1e
+records_sanitized_sha256: 2a6c0a26bb0bdaea94c0faafb6eefac382de9e8e83d572e62f1e0a4b53930ff6
+pre_control_result_sha256: dc271ffd74845b46a8c86e4430c181fdf261a1ee2573a9ebaad6deb5eab1cd03
+p2_act02_sha256: 2292fb4a3079ae29b3fe00e7a4bb835168dae09bd5efce123aec988d9a433619
+falsified_controls: [W8-NC-01, W8-NC-02]
+```
+
+No CloudFormation execution, stack update, activation, Lambda invocation,
+queue data-plane operation, secret-value read, provider/paid call, database,
+API, browser, local-server, commit, push or successor action occurred. Cost was
+`$0.00`. LIVE-02 is accepted; ACT-02 still requires separate requester approval.

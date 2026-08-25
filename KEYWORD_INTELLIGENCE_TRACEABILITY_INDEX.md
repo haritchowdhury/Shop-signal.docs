@@ -288,19 +288,20 @@ is the mechanical expansion used for completeness checks:
 | `REQ-KI-015`–`017`; `INV-KI-010/011/015` durable handoff observation overlay | `SRC-KI-058`; parent-direct `KI-W6-C150` under `DEC-KI-057` | exact intercepted client key/revision matched to durable handoff and associated 100-query Run; response status/finish trace diagnostic only; existing `W6-NAV-02`, `W6-FLOW-08`, `W6-NC-06` | `KI-W6-CV102`–`CV105`, `KI-W6-CH18`; fresh causal run then unchanged closure |
 | `REQ-KI-010`–`015`, `REQ-KI-024`; `INV-KI-004`–`006`, `INV-KI-010/015` discovery-resolution bridge overlay | `SRC-KI-059`; `KI-W6-CT30`–`CT32`, leaves `KI-W6-C152`–`C154` under `DEC-KI-058` | `SCN-KI-046`; real resolver with injected no-network fetch proves ten stores for one query; 100 strict artifacts drive the real domain aggregator/repositories to exactly 1,000 Shops/RunStores/lead tasks/messages; maximum rollback/stale fence remain invisible; `W6-DB-13`–`15`, `W6-NC-22`–`24`; final 43/24 unions | `KI-W6-CV110`–`CV115`, `KI-W6-CH20`; retain browser causality only through 100 discovery dispatches, bridge the missing middle in isolated Neon, and reuse unchanged post-resolution scale corpora |
 
-## 9. KI-W7/W8 AWS-first closure and deferred KI-W9
+## 9. KI-W7/W8 AWS-first closure; active W8 terminal state
 
 This section supersedes the former combined W8 deployment/canary trace.
-`DEC-KI-060` preserves accepted W7 source/package behavior, limits W8 to an
-applied disabled AWS deployment, and postpones local control-plane activation
-and the paid canary to an unassignable KI-W9.
+`DEC-KI-061` preserves accepted W7 source/package behavior and the W8
+preflight/ACT-01 boundary, but makes ACT-02 finish with the exact keyword
+mapping and Recovery integration active. No KI-W9 exists; W8 performs no
+research, provider call or paid canary.
 
 | Contract set | Observed evidence | Locked decision | Exact owner | Executable oracle | Evidence slot |
 |---|---|---|---|---|---|
 | `REQ-KI-002/005/022`–`024`; `INV-KI-001`–`009/012`–`014` | `SRC-KI-060`; accepted W6 build/worker evidence | `DEC-KI-059` runtime/config/recovery closure | `KI-W7-T1/T2/T6` | `SCN-KI-047`; `W7-RUNTIME-01/02`; `W7-NC-01`–`04` | `KI-W7-V2/V4/V5` |
 | `INV-KI-001/002/012`; `AUTH-KI-005`; `EXC-KI-008` | current template/build/deployment scripts in `SRC-KI-060`; official AWS bounds | `DEC-KI-059` ten resources, 1080 visibility, disabled condition, narrow IAM, two-ZIP packet | `KI-W7-T3`–`T6` | `SCN-KI-047`; W7 infrastructure/build/deploy cases and controls | `KI-W7-V1`–`V6` |
-| `REQ-KI-002/005/022`–`024`; `INV-KI-001/002/012`; `AUTH-KI-005`; `EXC-KI-008` | accepted W7 packet; `SRC-KI-061`; W8 read-only applied preflight | `DEC-KI-060` AWS-only disabled deployment and two-action boundary | `KI-W8-T1/T2` | `SCN-KI-049`; `W8-LIVE-01`–`03`, `W8-CONF-01`; `W8-NC-01`–`08` | `KI-W8-V1`–`V4` |
-| `REQ-KI-015`–`017/022`–`024`; `INV-KI-005`–`011/013`–`015`; `AUTH-KI-007` | future accepted W8 outputs plus local-control-plane facts not yet observed | `DEC-KI-060` postponement boundary | `KI-W9-AUTHORING` reserved for parent | no executable oracle yet | `DRAFT_NOT_ASSIGNABLE` |
+| `REQ-KI-002/005/022`–`024`; `INV-KI-001/002/012`; `AUTH-KI-005`; `EXC-KI-008` | accepted W7 packet; `SRC-KI-061`; W8 read-only applied preflight | `DEC-KI-061` disabled intermediate plus active terminal deployment under the two-action boundary | `KI-W8-T1/T2` | `SCN-KI-049`; `W8-LIVE-01`–`03`, `W8-CONF-01`; `W8-NC-01`–`08` | `KI-W8-V1`–`V4` |
+| `REQ-KI-015`–`017/022`–`024`; `INV-KI-005`–`011/013`–`015`; `AUTH-KI-007` | active W8 outputs consumed later by the locally run application | `DEC-KI-061` no deployment canary/no successor boundary | ordinary requester-driven local product use after W8 | no W8 provider/API/browser action | `KI-W9-RETIRED` |
 
 ### W7 exact ownership and enforcement
 
@@ -320,16 +321,17 @@ and the paid canary to an unassignable KI-W9.
   `3bd44b2c2c244b1dd29881dcfa249d9cdad5f9b1aecc981c56612d587283ca7e`;
   controls are exactly eight/digest
   `9bd004917f960abb4842ea2f2da48ed60821fdedd55fcbc54dc7bdd271037ea6`.
-- `W8-ACT-01/02` are the entire W8 mutation universe. No W8 action configures
-  a backend/frontend, reads secret values, creates a research, activates the
-  mapping, invokes Lambda, accesses production Neon, calls a provider or spends
+- `W8-ACT-01/02` are the entire W8 mutation universe. ACT-02 alone applies the
+  disabled full set and then the exact reviewed activation set. No W8 action
+  configures a backend/frontend, reads secret values, creates a research,
+  directly invokes Lambda, submits queue data, calls a provider or spends
   money.
 - The former DECOMP-3 and `SCN-KI-048` are retained as unexecuted historical
   evidence but are revision-invalidated and cannot authorize work.
 
-### KI-W9 reservation
+### KI-W9 retired identifier
 
-- KI-W9 will later be reauthored from applied W8 outputs for a local
-  frontend/backend control plane.
-- No current task, case, control, action, approval or decomposition authorizes
-  KI-W9, activation, a canary, provider cost or run handoff.
+- KI-W9 is historical text only and cannot be assigned or reauthored.
+- KI-W8's active outputs are consumed by the locally run frontend/backend.
+  Deployment does not itself create a research, canary, provider cost or run
+  handoff.

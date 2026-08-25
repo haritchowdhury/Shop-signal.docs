@@ -1664,3 +1664,18 @@ compatibility_or_migration_effect: none; no AWS mutation occurred
 authorization_effect: no current AWS mutation authority; accepted P1-P5 may be consumed by the corrected remaining W8 sequence subject to freshness recheck
 resumption_state: A5 state 212 READY_FOR_PARENT_REAUTHORING; author P6 and one-approval active deployment, then stop for requester deployment approval
 ```
+
+```yaml
+change_id: CHG-KI-103
+timestamp: 2026-08-25T21:14:00+05:30
+trigger_evidence: [requester active-ACT02 instruction, EV-KI-W8-P03]
+reason: Preserve the accepted preflight and ACT-01 boundary while making ACT-02 finish with the exact keyword mapping and Recovery integration active.
+changed_requirements: [W8 terminal AWS state is expected-active; W8 submits no research or paid work; KI-W9 is retired]
+changed_decisions: [DEC-KI-061 supersedes only DEC-KI-060 terminal-state, ACT-02 and successor members]
+affected_windows: [KI-W8]
+implementation_effect: email_scraper/scripts/keyword-intelligence/create-change-set.js maps the existing activate phase to W8-ACT-02 instead of the retired W8-ACT-05 label
+invalidated_evidence: [DECOMP-4 terminal-disabled authoring only; accepted P1-P5 observations remain historical and are rerun under DECOMP-5]
+compatibility_or_migration_effect: no payload, database, API or frontend contract change; local backend/frontend may use active W8 outputs after deployment
+authorization_effect: read-only P1-P6 only until a later requester ACT-01 approval; no current AWS mutation
+resumption_state: parent authors and pins DECOMP-5, reruns P1-P6, then stops for ACT-01 approval
+```

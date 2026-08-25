@@ -3295,3 +3295,46 @@ only on PASS or a genuinely new failure outside this decision.
   deletion as unexecuted historical authoring evidence.
 - **Tasks/scenarios:** current `KI-W8-T1/T2`, `SCN-KI-049`; deferred
   `KI-W9-AUTHORING`.
+
+### `DEC-KI-061` — W8 terminates with active keyword AWS infrastructure
+
+- **Requester decision:** KI-W8 remains the final deployment window. There is
+  no KI-W9. The backend and frontend continue to run locally, no research or
+  paid canary is created by W8, and ACT-01 remains byte-for-byte the disabled
+  create/review operation from `DEC-KI-060`.
+- **ACT-02 replacement:** one requester approval authorizes one bounded
+  sequence: apply the exact ACT-01 full change-set ID; require the complete
+  expected-disabled inspection; create and strictly review the deterministic
+  `phase=activate` change set; require its direct set to be exactly
+  `KeywordResearchMapping.Enabled`, `KeywordWorker.Environment`, and
+  `Recovery.Environment`, replacement `False`, plus only the zero-or-one exact
+  Recovery dependency members already defined by `DEC-KI-059`; apply that
+  exact reviewed activation ID; then require the complete expected-active
+  inspection. The production deployment guard maps both `full` apply and both
+  `activate` operations to the single authority label `W8-ACT-02`.
+- **Final active oracle:** `KeywordResearchEnabled` is `"true"`;
+  `KeywordResearchMapping` is `Enabled`; KeywordWorker and Recovery expose
+  `AWS_PIPELINE_KEYWORD_RESEARCH_ENABLED="true"`; the established six mappings
+  and Recovery schedule remain enabled; inventory/IAM/queue/DLQ/function/alarm
+  properties still equal the template; the newly created keyword source queue
+  and DLQ remain empty at inspection; and no direct Lambda invocation, queue
+  data-plane operation, secret-value read, API research, browser, provider call
+  or paid call is performed by W8.
+- **Atomicity and failure:** the full apply and activation apply are two
+  separate CloudFormation transactions inside one approved ACT-02 sequence.
+  Activation begins only after the disabled transaction and inspector pass.
+  Any failed or ambiguous full apply stops before activation. Any failed or
+  ambiguous activation stops after read-only status/event reconciliation; the
+  accepted disabled stack is the safe rollback state. W8 never manually
+  repairs, deletes, purges, redrives, directly invokes, or creates a research.
+- **Operational consequence:** once activation succeeds, the mapping and
+  scheduled Recovery integration are live. A later local backend request may
+  enqueue work without another AWS enablement action. The ACT-02 approval must
+  therefore explicitly cover this active state; it does not authorize W8 to
+  submit work itself.
+- **Supersession:** this decision supersedes only the disabled terminal state,
+  ACT-02 algorithm/output, KI-W9 reservation, and activation prohibition in
+  `DEC-KI-060`. Preflight P1-P6, ACT-01, packet/object identity, privacy,
+  allowlists, provider/cost exclusions, and all accepted W7 behavior remain.
+- **Tasks/scenarios:** `KI-W8-T2`, `SCN-KI-049`; `KI-W9` is retired and is not
+  a successor window.

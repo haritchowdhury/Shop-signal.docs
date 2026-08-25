@@ -1,13 +1,14 @@
 # KI-W8 AWS-Only Sub-Window Decomposition Checklist (`S1`)
 
-**Decomposition ID:** `KI-W8-AWS-ONLY-DECOMP-4`  
+**Decomposition ID:** `KI-W8-AWS-ONLY-DECOMP-5`
 **Parent window:** `KI-W8`  
 **Parent assignment:** `ASG-KI-W8-WA-02`  
 **Window agent:** `/root/ki_w8_aws_decomposition`  
-**Status:** `PARENT-DIRECT-PREFLIGHT`
+**Status:** `PARENT-DIRECT-ACTIVE-PREFLIGHT`
 
-This is the revised subordinate decomposition authority for the AWS-only,
-disabled KI-W8 deployment. It supersedes no bytes in the historical
+This is the revised subordinate decomposition authority for the AWS-only KI-W8
+deployment with a disabled intermediate state and active terminal state. It
+supersedes no bytes in the historical
 `KEYWORD_INTELLIGENCE_KI_W8_SUBWINDOW_*` package and derives no authority from
 that package. Live subordinate state exists only in
 `KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_STATE.md` (`S2`); append-only
@@ -17,8 +18,10 @@ decomposition, execution, review and assessment evidence exists only in
 `KI-W8-AWS-ONLY-DECOMP-1` and `KI-W8-AWS-ONLY-DECOMP-2` remain rejected
 authoring history in S3. `KI-W8-AWS-ONLY-DECOMP-3` is superseded only because
 its lifecycle validator omitted AWS's accepted normalized empty filter
-`{Prefix:""}`. None grants execution authority. KI-W8 has zero
-implementation leaves. After parent decomposition approval and
+`{Prefix:""}`. `KI-W8-AWS-ONLY-DECOMP-4` is superseded by the
+requester-directed ACT-02 active-terminal decision. None grants execution
+authority. KI-W8 has no delegated implementation leaves; the parent made the
+one-line deployment-guard action-label correction directly. After parent approval and
 a new execution assignment, the same window agent personally executes the one
 sequential assessment `KI-W8-I101`. No lower-level agent or subagent is used.
 
@@ -30,17 +33,17 @@ sequential assessment `KI-W8-I101`. No lower-level agent or subagent is used.
 | Sub-window standard | `PROJECT_AGNOSTIC_WINDOW_AGENT_SUBWINDOW_AUTHORING_STANDARD.md` | `842c29550c06c22d63e0a058a27cb8a9ff6b538b3168d2c83a384890b44247f0` |
 | `A1` contract | `KEYWORD_INTELLIGENCE_PRODUCT_CONTRACT.md` | `8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c` |
 | `A2` discovery | `KEYWORD_INTELLIGENCE_DISCOVERY_DOSSIER.md` | `3a6b294cc561556d0e3d92572121bc8cc529470866fba5bad8f78cf816310470` |
-| `A3` decisions | `KEYWORD_INTELLIGENCE_DECISION_LEDGER.md` | `9dfbe47b16200a3dae4480068f86eb845543244c5e45b38ac42ee0cf4568c3f6` |
-| `A4` checklist | `KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md` | `5f056307a779a413406f5a4f0e7e87dac8dc12703d5633ec7f00d077d6a036b6` |
+| `A3` decisions | `KEYWORD_INTELLIGENCE_DECISION_LEDGER.md` | `32ae437a3c755d370e6d78ff4ba33badec0fec504f2045339303c3c9e9ee044e` |
+| `A4` checklist | `KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md` | `25c33528a7a2059aedb0ed850de8e83b49ca5a08b02ee8d2f64621090780e1a6` |
 | `A5` state v205 | `ACTIVE_EXECUTION_STATE.md` | `61a795bd198c6e91e7b51bfe3d768c3a9f1cb0dec0065ca184876c6d041e2987` |
 | `A6` evidence | `KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md` | `095dc473f1b14d65c7f2a14fbb0ce515eeb77cace9ae07ed33c89fcbfa0f1406` |
-| `A7` changelog | `KEYWORD_INTELLIGENCE_SPECIFICATION_CHANGELOG.md` | `65cae353f6436383a70c5a06a90bf0c276b444b3bf5705c5291480613a683d37` |
-| `A8` traceability | `KEYWORD_INTELLIGENCE_TRACEABILITY_INDEX.md` | `76e5fbdab699f07fdabb85a381c6b7f400a8fcfa2619b517cdf0ab6304a4de89` |
+| `A7` changelog | `KEYWORD_INTELLIGENCE_SPECIFICATION_CHANGELOG.md` | `ba7d3831cf5737382fd32045b725dad718f65e7b79bfe0fa01dfa10a1bd7c6b2` |
+| `A8` traceability | `KEYWORD_INTELLIGENCE_TRACEABILITY_INDEX.md` | `e89fe868823ba97a3c8877d79055bbc85d2593353add13c32b8a6c35a51e7d4b` |
 
 The current assignment authorizes only creation of `S1`–`S3`, static/read-only
 authoring checks and parent handoff. It authorizes no preflight command in
 Section 6, no measurement, network, AWS, deployment, provider, database,
-browser, local-server, paid, destructive, commit, push, leaf-dispatch or KI-W9
+browser, local-server, paid, destructive, commit, push, leaf-dispatch or successor
 action.
 
 ### 0.1 Mechanical interpretations fixed by this decomposition
@@ -99,15 +102,18 @@ invalidation. Escalation never grants AWS authority.
 ### 1.1 Objective, successor and exclusions
 
 - **Objective:** preflight the exact production AWS target, deploy the accepted
-  W7 keyword infrastructure and two ZIPs with keyword processing disabled,
-  inspect the applied disabled stack, and stop.
-- **Successor:** `STOP_KI-W9_REAUTHORING`, reserved for the parent;
+  W7 keyword infrastructure and two ZIPs through a verified disabled
+  intermediate state, apply the exact activation set, inspect the active stack,
+  and stop without creating work.
+- **Successor:** `STOP_KI-W8_COMPLETE`, reserved for the parent;
   `may_start_successor:false`.
 - **Excluded:** hosted/local backend or frontend configuration, local server,
   authentication, secret-value read, research/API call, browser, Neon,
-  provider/paid call, activation, direct Lambda invocation, queue data-plane
+  provider/paid call, activation outside exact ACT-02, direct Lambda invocation, queue data-plane
   operation, DLQ action, rollback mutation, purge/delete/redrive/manual repair,
-  source/test/schema/migration/package/lock/frontend edit, commit/push and KI-W9.
+  source/test/schema/migration/package/lock/frontend edit other than the
+  parent-approved deployment action-label correction, commit/push and any
+  successor window.
 
 ### 1.2 Exact path scopes
 
@@ -120,20 +126,21 @@ KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md
 KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_EVIDENCE.md
 KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_STATE.md
 email_scraper/dist/aws-deployment/keyword-intelligence/artifacts.json
+email_scraper/dist/aws-deployment/keyword-intelligence/activate-change-set.json
 email_scraper/dist/aws-deployment/keyword-intelligence/full-change-set.json
 email_scraper/dist/aws-deployment/keyword-intelligence/packet.json
 email_scraper/dist/lambda/keyword-worker-measurements.json
 email_scraper/dist/lambda/measurements.json
 ```
 
-It has nine members and sorted-member-LF digest
-`b19c0f7e5daae79e0d373432c4315aeff4e5236156b3b326ecc2d17174410ccb`.
+It has ten members and sorted-member-LF digest
+`c0ae7c02ba529c538d22ae831637abbc199b53836428ec79f13fd844604057f9`.
 S2 and S3 have exactly this one execution owner; they are not added again by a
 subordinate scope. The current decomposition-authoring set remains exactly S1,
 S2 and S3, digest
 `92afa898a46252737c52e5be698ebc65c197cd5862294b59a5998c8fe46565b3`.
-The union of the nine execution paths and immutable S1 has ten members and
-digest `775f9083d0cfc21609f6c6f1c8ba3c6e99619916cf25afb4e9b340995faa482b`.
+The union of the ten execution paths and immutable S1 has eleven members; its
+digest is recomputed by the frozen scope oracle.
 No other workspace path may be created, modified or deleted by I101. Temporary
 validator material exists only below a `mktemp -d /tmp/ki-w8-i101.XXXXXX`
 directory, mode 0700, contains no raw remote identity, and is removed after its
@@ -149,11 +156,13 @@ directory/glob grants write authority.
 | Action | Authorized effect | Explicitly absent effect |
 |---|---|---|
 | `W8-ACT-01` | up to three exact content-addressed AES256/versioned `PutObject` operations and one exact disabled CloudFormation change-set create/review; never execute | activation, queue traffic, Lambda invocation, secret/provider/database access |
-| `W8-ACT-02` | execute only the exact ACT-01 reviewed change-set ID, wait for its stack result and run read-only expected-disabled inspection | second change set, manual repair, rollback mutation, activation, data-plane traffic |
+| `W8-ACT-02` | execute the exact ACT-01 full ID, require expected-disabled inspection, create/review/apply the deterministic exact activation set, then require expected-active inspection | manual repair, rollback mutation, unlisted change set, direct invocation, submitted queue traffic |
 
 Read-only P1–P6 and post-action reconciliation are not mutations but still need
 a later A5 execution assignment. ACT-01 and ACT-02 each require a new requester
-approval reflected in A5; neither approval implies the other.
+approval reflected in A5. ACT-02 is one approval covering both exact
+CloudFormation transactions in its sequence; it does not authorize application
+work.
 
 ## 2. Starting working-tree and artifact inventory
 
@@ -177,6 +186,7 @@ Recorded in `EV-KI-W8-AWS-S007`:
 | `email_scraper/dist/aws-deployment/keyword-intelligence/packet.json` | `ABSENT` | ACT-01 creates |
 | `email_scraper/dist/aws-deployment/keyword-intelligence/artifacts.json` | `ABSENT` | ACT-01 creates |
 | `email_scraper/dist/aws-deployment/keyword-intelligence/full-change-set.json` | `ABSENT` | ACT-01 creates |
+| `email_scraper/dist/aws-deployment/keyword-intelligence/activate-change-set.json` | `ABSENT` | ACT-02 creates only after disabled inspection passes |
 
 ## 3. Frozen inputs, identities and boundary contracts
 
@@ -189,7 +199,7 @@ Recorded in `EV-KI-W8-AWS-S007`:
 | `email_scraper/dist/lambda/recovery.zip` | `31984076` | `cc5b6819d80c85a3ca74f05c9887b580aa8dd498f1f866ffc8e812ce89f2bb9c` |
 | `email_scraper/scripts/measure-keyword-worker-package.js` | bytes pinned by adjacent SHA-256 | `e3c54db213b57af5a30d2475645186db9a138b00a1488f2299085aac4ce68494` |
 | `email_scraper/scripts/measure-lambda-packages.js` | bytes pinned by adjacent SHA-256 | `b33318a78a6e6a0e25264fdc908c5185098d1188ef88e848e17fb9d85423f194` |
-| `email_scraper/scripts/keyword-intelligence/create-change-set.js` | bytes pinned by adjacent SHA-256 | `b2cac13d5457c3f565f1d385ef09578d6efbc36f3dcfaff03e03493423f05c83` |
+| `email_scraper/scripts/keyword-intelligence/create-change-set.js` | bytes pinned by adjacent SHA-256 | `54d82520988cae11edae7593ab2ad5ed1c5049be4601fb90282abdc23339342e` |
 | `email_scraper/scripts/keyword-intelligence/inspect-stack.js` | bytes pinned by adjacent SHA-256 | `47ad3e90ac91f51d7d91292618828dd51e88d011bf53ce7625b8adb93c540496` |
 
 Any byte/size drift before its consuming phase invalidates that phase and every
@@ -299,11 +309,12 @@ sanitized projection hash. The runner selftest proves the accepted optional
 details pass and a wrong `RecoverySchedule` dependency detail rejects through
 this same production guard.
 
-### 3.4 Applied disabled-state contract
+### 3.4 Applied intermediate-disabled and terminal-active contracts
 
 The accepted template has exactly 82 resources, 34 outputs, 19 parameters, 14
 physical queues (seven source plus seven DLQ), eight functions, seven mappings
-and 31 alarms. `inspect-stack --expected-disabled` must return exactly:
+and 31 alarms. The intermediate `inspect-stack --expected-disabled` result
+remains exactly:
 
 ```json
 {
@@ -331,6 +342,32 @@ minutes)`; `KeywordResearchMapping` disabled; KeywordWorker and Recovery
 keyword flags `false`; keyword source/DLQ total visible+in-flight+delayed count
 zero; and no KeywordWorker log stream.
 
+The final `inspect-stack --expected-active` result must return exactly:
+
+```json
+{
+  "outcome": "EXPECTED_ACTIVE_KEYWORD_STACK_VERIFIED",
+  "identityVerified": true,
+  "deployment": "production",
+  "resources": 82,
+  "queues": 7,
+  "dlqs": 7,
+  "functions": 8,
+  "mappings": 7,
+  "alarms": 31,
+  "keywordActive": true,
+  "keywordSourceMessages": 0,
+  "keywordDlqMessages": 0
+}
+```
+
+The active inspector requires `KeywordResearchMapping` enabled, KeywordWorker
+and Recovery keyword flags `true`, every established mapping and the Recovery
+schedule still enabled, and every other topology/IAM/configuration assertion
+identical to the intermediate check. W8 submits no queue message and creates no
+research. `forbiddenCounts.activation` therefore means activation outside the
+single exact ACT-02 activation transaction and remains zero.
+
 ## 4. Approval and lifecycle state machine
 
 | State | Entry predicate | Allowed next operation | Durable/output write | Replay/ambiguity result | Forbidden transition |
@@ -341,7 +378,7 @@ zero; and no KeywordWorker log stream.
 | `ACT01_ASSIGNED` | A5 authorizes only `W8-ACT-01`, pins exact packet token and Section 5.1 sanitized hashes/cardinalities | exact ACT-01 command | packet/artifacts/full-change-set plus AWS objects/change set | in-memory/private-record identity re-hashes to tracked pins; unequal blocks | execute change set |
 | `AWAITING_ACT02_APPROVAL` | LIVE-02 pass; unexecuted reviewed-ID hash/presence exact | parent/requester approval | A5/S2/S3 only | private ID re-hash and live re-description projection re-hash; drift blocks | ACT-02 without approval |
 | `ACT02_ASSIGNED` | A5 authorizes only `W8-ACT-02` and pins Section 5.2 sanitized hashes/cardinalities | exact apply then inspector | stack update plus A5/A6/S2/S3 | describe/wait/inspect private ID; retained evidence stays sanitized | replacement create/manual repair |
-| `READY_FOR_PARENT_REVIEW` | LIVE-03, CONF-01, V1–V4, H1–H6 pass | parent review | evidence/state only | none | KI-W9/final completion |
+| `READY_FOR_PARENT_REVIEW` | LIVE-03, CONF-01, V1–V4, H1–H6 and expected-active pass | parent review | evidence/state only | none | unapproved application work |
 | `PARENT_BLOCKED` | one exact blocker branch below | parent decision | evidence/state only | no retry beyond prescribed reconciliation | workaround/expanded action |
 
 CloudFormation's own update transaction and automatic rollback are the only
@@ -356,7 +393,7 @@ exists in W8.
 ### 5.1 ACT-01 state must pin
 
 - `state_version`, approved S1 SHA-256 and `current_assignment_id`;
-- `authorized_actions:[W8-ACT-01]` and no ACT-02/KI-W9 member;
+- `authorized_actions:[W8-ACT-01]` and no ACT-02/successor member;
 - exact profile, region, stack and environment; account `{present:true,
   sha256:<64hex>,last4:<4digits>}`; bucket `{present:true,sha256:<64hex>}`;
 - exact scalar fields `aws_target_account_present:true`,
@@ -374,7 +411,7 @@ returns `PARENT_BLOCKED_ACT01_PIN_DRIFT`.
 ### 5.2 ACT-02 state must pin
 
 - every unchanged ACT-01 sanitized identity and exact packet token;
-- `authorized_actions:[W8-ACT-02]` and no ACT-01/KI-W9 member;
+- `authorized_actions:[W8-ACT-02]` and no ACT-01/successor member;
 - exact local `full-change-set.json` SHA-256;
 - change-set ID `{present:true,sha256:<64hex>}`, deterministic name, status
   `CREATE_COMPLETE`, execution status `AVAILABLE`, normalized projection and
@@ -462,7 +499,7 @@ const CASES = ["W8-CONF-01", "W8-LIVE-01", "W8-LIVE-02", "W8-LIVE-03"];
 const CONTROLS = Array.from({ length: 8 }, (_, index) => `W8-NC-${String(index + 1).padStart(2, "0")}`);
 const FORBIDDEN = ["activation", "apiResearch", "browser", "database", "destructive", "lambdaDirectInvoke", "localServer", "paid", "provider", "queueDataPlane", "secretValueRead"];
 const ROOT_ALLOWED = ["ACTIVE_EXECUTION_STATE.md", "KEYWORD_INTELLIGENCE_DECISION_LEDGER.md", "KEYWORD_INTELLIGENCE_DISCOVERY_DOSSIER.md", "KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md", "KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md", "KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_CHECKLIST.md", "KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_EVIDENCE.md", "KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_STATE.md", "KEYWORD_INTELLIGENCE_SPECIFICATION_CHANGELOG.md", "KEYWORD_INTELLIGENCE_TRACEABILITY_INDEX.md"];
-const EXECUTION_PATHS = ["ACTIVE_EXECUTION_STATE.md", "KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md", "KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_EVIDENCE.md", "KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_STATE.md", "email_scraper/dist/aws-deployment/keyword-intelligence/artifacts.json", "email_scraper/dist/aws-deployment/keyword-intelligence/full-change-set.json", "email_scraper/dist/aws-deployment/keyword-intelligence/packet.json", "email_scraper/dist/lambda/keyword-worker-measurements.json", "email_scraper/dist/lambda/measurements.json"];
+const EXECUTION_PATHS = ["ACTIVE_EXECUTION_STATE.md", "KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md", "KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_EVIDENCE.md", "KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_STATE.md", "email_scraper/dist/aws-deployment/keyword-intelligence/activate-change-set.json", "email_scraper/dist/aws-deployment/keyword-intelligence/artifacts.json", "email_scraper/dist/aws-deployment/keyword-intelligence/full-change-set.json", "email_scraper/dist/aws-deployment/keyword-intelligence/packet.json", "email_scraper/dist/lambda/keyword-worker-measurements.json", "email_scraper/dist/lambda/measurements.json"];
 const DIRECT = [
   ["Add", "KeywordResearchDlq", "AWS::SQS::Queue", null],
   ["Add", "KeywordResearchQueue", "AWS::SQS::Queue", null],
@@ -476,6 +513,11 @@ const DIRECT = [
   ["Add", "KeywordWorkerThrottlesAlarm", "AWS::CloudWatch::Alarm", null],
   ["Modify", "ControlPlanePolicy", "AWS::IAM::ManagedPolicy", "False"],
   ["Modify", "RecoveryRole", "AWS::IAM::Role", "False"],
+  ["Modify", "Recovery", "AWS::Lambda::Function", "False"]
+];
+const ACTIVATE = [
+  ["Modify", "KeywordResearchMapping", "AWS::Lambda::EventSourceMapping", "False"],
+  ["Modify", "KeywordWorker", "AWS::Lambda::Function", "False"],
   ["Modify", "Recovery", "AWS::Lambda::Function", "False"]
 ];
 
@@ -537,8 +579,33 @@ function validateChanges(changes) {
   }
   return changes.map(projection).sort((a, b) => a.logicalId.localeCompare(b.logicalId));
 }
+function validateActivationChanges(changes) {
+  ok(Array.isArray(changes) && changes.length >= 3 && changes.length <= 5, "KIW8_ACTIVATION_CHANGE_COUNT");
+  const ids = changes.map((entry) => entry.logicalId);
+  ok(ids.length === new Set(ids).size, "KIW8_ACTIVATION_CHANGE_DUPLICATE");
+  const direct = changes.filter((entry) => !["RecoveryInvokePermission", "RecoverySchedule"].includes(entry.logicalId)).map(projection).sort((a, b) => a.logicalId.localeCompare(b.logicalId));
+  const expected = ACTIVATE.map(([action, logicalId, type, replacement]) => ({ action, logicalId, type, replacement })).sort((a, b) => a.logicalId.localeCompare(b.logicalId));
+  ok(canonical(direct) === canonical(expected), "KIW8_ACTIVATION_CHANGE_ALLOWLIST");
+  const optional = changes.filter((item) => ["RecoveryInvokePermission", "RecoverySchedule"].includes(item.logicalId));
+  for (const entry of optional) {
+    const expectedOptional = entry.logicalId === "RecoveryInvokePermission"
+      ? { action: "Modify", logicalId: "RecoveryInvokePermission", type: "AWS::Lambda::Permission", replacement: "Conditional" }
+      : { action: "Modify", logicalId: "RecoverySchedule", type: "AWS::Events::Rule", replacement: "False" };
+    ok(canonical(projection(entry)) === canonical(expectedOptional), "KIW8_ACTIVATION_CHANGE_OPTIONAL");
+  }
+  return changes.map(projection).sort((a, b) => a.logicalId.localeCompare(b.logicalId));
+}
 function fullDescriptionWithDependencies() {
   const direct = DIRECT.map(([Action, LogicalResourceId, ResourceType, Replacement]) => ({ ResourceChange: { Action, LogicalResourceId, ResourceType, Replacement, Details: [] } }));
+  const dependencies = [
+    { ResourceChange: { Action: "Modify", LogicalResourceId: "RecoveryInvokePermission", ResourceType: "AWS::Lambda::Permission", Replacement: "Conditional", Details: [{ Evaluation: "Dynamic", ChangeSource: "ResourceAttribute", CausingEntity: "RecoverySchedule.Arn", Target: { Name: "SourceArn", RequiresRecreation: "Always" } }] } },
+    { ResourceChange: { Action: "Modify", LogicalResourceId: "RecoverySchedule", ResourceType: "AWS::Events::Rule", Replacement: "False", Details: [{ Evaluation: "Dynamic", ChangeSource: "ResourceAttribute", CausingEntity: "Recovery.Arn", Target: { Name: "Targets", RequiresRecreation: "Never" } }] } }
+  ];
+  return { Changes: [...direct, ...dependencies] };
+}
+function activationDescriptionWithDependencies() {
+  const targets = new Map([["KeywordResearchMapping", "Enabled"], ["KeywordWorker", "Environment"], ["Recovery", "Environment"]]);
+  const direct = ACTIVATE.map(([Action, LogicalResourceId, ResourceType, Replacement]) => ({ ResourceChange: { Action, LogicalResourceId, ResourceType, Replacement, Details: [{ Evaluation: "Static", ChangeSource: "DirectModification", CausingEntity: null, Target: { Name: targets.get(LogicalResourceId), RequiresRecreation: "Never" } }] } }));
   const dependencies = [
     { ResourceChange: { Action: "Modify", LogicalResourceId: "RecoveryInvokePermission", ResourceType: "AWS::Lambda::Permission", Replacement: "Conditional", Details: [{ Evaluation: "Dynamic", ChangeSource: "ResourceAttribute", CausingEntity: "RecoverySchedule.Arn", Target: { Name: "SourceArn", RequiresRecreation: "Always" } }] } },
     { ResourceChange: { Action: "Modify", LogicalResourceId: "RecoverySchedule", ResourceType: "AWS::Events::Rule", Replacement: "False", Details: [{ Evaluation: "Dynamic", ChangeSource: "ResourceAttribute", CausingEntity: "Recovery.Arn", Target: { Name: "Targets", RequiresRecreation: "Never" } }] } }
@@ -548,6 +615,10 @@ function fullDescriptionWithDependencies() {
 async function assertReviewedFull(description) {
   const deployment = await import(pathToFileURL(path.join(ROOT, "email_scraper/scripts/keyword-intelligence/create-change-set.js")));
   return deployment.assertReviewedChanges("full", description);
+}
+async function assertReviewedActivate(description) {
+  const deployment = await import(pathToFileURL(path.join(ROOT, "email_scraper/scripts/keyword-intelligence/create-change-set.js")));
+  return deployment.assertReviewedChanges("activate", description);
 }
 function validLifecycle(value) {
   const rules = value?.Rules;
@@ -663,16 +734,28 @@ function records() {
   console.log(`KIW8_PRIVATE_RECORDS_OK ${result.sha256}`);
   return { packetRecord, artifact, change, sanitized };
 }
+function activationRecord() {
+  const file = path.join(ROOT, "email_scraper/dist/aws-deployment/keyword-intelligence/activate-change-set.json");
+  privateMode(file);
+  const value = readJson(file), base = records(), expectedName = `ki-activate-${base.packetRecord.approvalToken.slice(0, 12)}`;
+  exactKeys(value, ["contractVersion", "approvalToken", "phase", "changeSetName", "changeSetId", "changes"], "KIW8_ACTIVATION_RECORD_KEYS");
+  ok(value.contractVersion === "storesignal-keyword-change-set-v1" && value.approvalToken === base.packetRecord.approvalToken && value.phase === "activate" && value.changeSetName === expectedName, "KIW8_ACTIVATION_RECORD_HEADER");
+  const normalized = validateActivationChanges(value.changes);
+  const sanitized = { changeRecordSha256: sha(readFileSync(file)), changeSet: safeId(value.changeSetId), changeSetName: value.changeSetName, projection: normalized, projectionSha256: sha(canonical(normalized)) };
+  safeWrite("activation-record-sanitized.json", sanitized);
+  return { value, sanitized };
+}
 function porcelain(cwd) { return command("git", ["status", "--porcelain=v1", "-z"], { cwd, json: false, preserveWhitespace: true }).split("\0").filter(Boolean).map((line) => line.slice(3)).sort(); }
 function scope() {
   const rootPaths = porcelain(ROOT), backend = porcelain(path.join(ROOT, "email_scraper")), frontend = porcelain(path.join(ROOT, "frontend"));
   ok(rootPaths.every((item) => ROOT_ALLOWED.includes(item)), "KIW8_ROOT_SCOPE");
-  ok(backend.length === 0 && frontend.length === 0, "KIW8_NESTED_SCOPE");
+  ok((backend.length === 0 || canonical(backend) === canonical(["scripts/keyword-intelligence/create-change-set.js"])) && frontend.length === 0, "KIW8_NESTED_SCOPE");
+  ok(sha(readFileSync(path.join(ROOT, "email_scraper/scripts/keyword-intelligence/create-change-set.js"))) === "54d82520988cae11edae7593ab2ad5ed1c5049be4601fb90282abdc23339342e", "KIW8_DEPLOYMENT_GUARD_PIN");
   const state = readFileSync(path.join(ROOT, "ACTIVE_EXECUTION_STATE.md"), "utf8"), s1Hash = sha(readFileSync(path.join(ROOT, "KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_CHECKLIST.md")));
   ok(stateField(state, "decomposition_revision", "[a-f0-9]{64}") === s1Hash, "KIW8_IMMUTABLE_S1");
   const executionDigest = digest(EXECUTION_PATHS);
-  ok(executionDigest === "b19c0f7e5daae79e0d373432c4315aeff4e5236156b3b326ecc2d17174410ccb", "KIW8_EXECUTION_SET");
-  const result = safeWrite("scope-sanitized.json", { rootPaths, backendPaths: [], frontendPaths: [], immutableS1Sha256: s1Hash, executionPaths: EXECUTION_PATHS, executionDigest });
+  ok(executionDigest === "c0ae7c02ba529c538d22ae831637abbc199b53836428ec79f13fd844604057f9", "KIW8_EXECUTION_SET");
+  const result = safeWrite("scope-sanitized.json", { rootPaths, backendPaths: backend, frontendPaths: [], immutableS1Sha256: s1Hash, executionPaths: EXECUTION_PATHS, executionDigest });
   console.log(`KIW8_SCOPE_OK ${result.sha256}`);
 }
 function stateField(body, name, pattern) { const value = body.match(new RegExp(`^${name}:\\s*(${pattern})\\s*$`, "mu"))?.[1]; ok(value != null, `KIW8_STATE_FIELD_${name}`); return value; }
@@ -763,8 +846,10 @@ function sanitize(mode) {
   const value = stdinJson(); let projected;
   if (mode === "sanitize-packet") { ok(value.mode === "DRY_RUN_NO_AWS" && value.phase === "full", "KIW8_DRY_RUN_MODE"); const { mode: _mode, phase: _phase, ...raw } = value; const expected = packet(raw.accountId); ok(canonical(raw) === canonical(expected), "KIW8_DRY_RUN_PACKET"); projected = { mode: value.mode, phase: value.phase, packet: safePacket(raw) }; }
   else if (mode === "sanitize-act01") { ok(value.outcome === "CHANGE_SET_REVIEWED", "KIW8_ACT01_OUTCOME"); const record = records(); ok(value.changeSetId === record.change.changeSetId, "KIW8_ACT01_ID"); projected = { outcome: value.outcome, contractVersion: value.contractVersion, approvalToken: value.approvalToken, phase: value.phase, changeSetName: value.changeSetName, changeSet: safeId(value.changeSetId), projectionSha256: record.sanitized.projectionSha256 }; }
-  else if (mode === "sanitize-act02") { ok(value.outcome === "REVIEWED_CHANGE_SET_APPLIED" && value.phase === "full", "KIW8_ACT02_OUTCOME"); projected = { outcome: value.outcome, phase: value.phase, changeSet: safeId(value.changeSetId), projectionSha256: sha(canonical(validateChanges(value.changes))) }; }
-  else { ok(value.outcome === "EXPECTED_DISABLED_KEYWORD_STACK_VERIFIED", "KIW8_INSPECT_OUTCOME"); exactKeys(value, ["outcome", "identityVerified", "deployment", "resources", "queues", "dlqs", "functions", "mappings", "alarms", "keywordActive", "keywordSourceMessages", "keywordDlqMessages"], "KIW8_INSPECT_KEYS"); ok(value.identityVerified === true && value.deployment === "production" && value.resources === 82 && value.queues === 7 && value.dlqs === 7 && value.functions === 8 && value.mappings === 7 && value.alarms === 31 && value.keywordActive === false && value.keywordSourceMessages === 0 && value.keywordDlqMessages === 0, "KIW8_INSPECT_VALUE"); projected = value; }
+  else if (mode === "sanitize-act02-full") { ok(value.outcome === "REVIEWED_CHANGE_SET_APPLIED" && value.phase === "full", "KIW8_ACT02_FULL_OUTCOME"); projected = { outcome: value.outcome, phase: value.phase, changeSet: safeId(value.changeSetId), projectionSha256: sha(canonical(validateChanges(value.changes))) }; }
+  else if (mode === "sanitize-act02-activate-review") { ok(value.outcome === "CHANGE_SET_REVIEWED" && value.phase === "activate", "KIW8_ACT02_ACTIVATE_REVIEW_OUTCOME"); const record = activationRecord(); ok(value.changeSetId === record.value.changeSetId, "KIW8_ACTIVATION_REVIEW_ID"); projected = { outcome: value.outcome, phase: value.phase, changeSet: safeId(value.changeSetId), projectionSha256: record.sanitized.projectionSha256 }; }
+  else if (mode === "sanitize-act02-activate-apply") { ok(value.outcome === "REVIEWED_CHANGE_SET_APPLIED" && value.phase === "activate", "KIW8_ACT02_ACTIVATE_APPLY_OUTCOME"); projected = { outcome: value.outcome, phase: value.phase, changeSet: safeId(value.changeSetId), projectionSha256: sha(canonical(validateActivationChanges(value.changes))) }; }
+  else { const active = mode === "sanitize-inspector-active"; ok(mode === "sanitize-inspector-disabled" || active, "KIW8_INSPECT_MODE"); ok(value.outcome === (active ? "EXPECTED_ACTIVE_KEYWORD_STACK_VERIFIED" : "EXPECTED_DISABLED_KEYWORD_STACK_VERIFIED"), "KIW8_INSPECT_OUTCOME"); exactKeys(value, ["outcome", "identityVerified", "deployment", "resources", "queues", "dlqs", "functions", "mappings", "alarms", "keywordActive", "keywordSourceMessages", "keywordDlqMessages"], "KIW8_INSPECT_KEYS"); ok(value.identityVerified === true && value.deployment === "production" && value.resources === 82 && value.queues === 7 && value.dlqs === 7 && value.functions === 8 && value.mappings === 7 && value.alarms === 31 && value.keywordActive === active && value.keywordSourceMessages === 0 && value.keywordDlqMessages === 0, "KIW8_INSPECT_VALUE"); projected = value; }
   const result = safeWrite(`${mode}.json`, projected); console.log(`${mode.toUpperCase().replaceAll("-", "_")}_OK ${result.sha256}`);
 }
 function watermark(label) {
@@ -848,7 +933,7 @@ function versions() {
   const nodeVersion = command("node", ["--version"], { json: false }); ok(/^v24\./u.test(nodeVersion), "KIW8_NODE_VERSION"); const awsVersion = command("aws", ["--version"], { json: false }); ok(/^aws-cli\/2\./u.test(awsVersion), "KIW8_AWS_CLI_VERSION"); safeWrite("versions.json", { nodeMajor: 24, awsCliMajor: 2 }); console.log("KIW8_VERSIONS_OK");
 }
 async function selftest() {
-  ok(digest(CASES) === "3bd44b2c2c244b1dd29881dcfa249d9cdad5f9b1aecc981c56612d587283ca7e", "KIW8_CASE_DIGEST"); ok(digest(CONTROLS) === "9bd004917f960abb4842ea2f2da48ed60821fdedd55fcbc54dc7bdd271037ea6", "KIW8_CONTROL_DIGEST"); ok(digest(EXECUTION_PATHS) === "b19c0f7e5daae79e0d373432c4315aeff4e5236156b3b326ecc2d17174410ccb", "KIW8_PATH_DIGEST");
+  ok(digest(CASES) === "3bd44b2c2c244b1dd29881dcfa249d9cdad5f9b1aecc981c56612d587283ca7e", "KIW8_CASE_DIGEST"); ok(digest(CONTROLS) === "9bd004917f960abb4842ea2f2da48ed60821fdedd55fcbc54dc7bdd271037ea6", "KIW8_CONTROL_DIGEST"); ok(digest(EXECUTION_PATHS) === "c0ae7c02ba529c538d22ae831637abbc199b53836428ec79f13fd844604057f9", "KIW8_PATH_DIGEST");
   const lifecycleRule = { ID: "AbortIncompleteMultipartUploads", Status: "Enabled", AbortIncompleteMultipartUpload: { DaysAfterInitiation: 7 } };
   for (const Filter of [undefined, {}, { Prefix: "" }]) validLifecycle({ Rules: [{ ...lifecycleRule, ...(Filter === undefined ? {} : { Filter }) }] });
   for (const Filter of [{ Prefix: "nonempty" }, { Prefix: "", Tag: { Key: "x", Value: "y" } }, []]) { let rejected = false; try { validLifecycle({ Rules: [{ ...lifecycleRule, Filter }] }); } catch { rejected = true; } ok(rejected, "KIW8_BUCKET_FILTER_CONTROL"); }
@@ -856,6 +941,13 @@ async function selftest() {
   await assertReviewedFull(structuredClone(reviewed));
   const wrongDependency = structuredClone(reviewed); wrongDependency.Changes.at(-1).ResourceChange.Details[0].CausingEntity = "RecoveryInvokePermission.Arn";
   let dependencyRejected = false; try { await assertReviewedFull(wrongDependency); } catch { dependencyRejected = true; } ok(dependencyRejected, "KIW8_OBSERVATION_DEPENDENCY_CONTROL");
+  const activation = activationDescriptionWithDependencies();
+  const activationProjection = await assertReviewedActivate(structuredClone(activation));
+  validateActivationChanges(activationProjection.map((entry) => ({ action: entry.action, logicalId: entry.logicalId, type: entry.type, replacement: entry.replacement })));
+  const wrongActivation = structuredClone(activation); wrongActivation.Changes[0].ResourceChange.Details[0].Target.Name = "BatchSize";
+  let activationRejected = false; try { await assertReviewedActivate(wrongActivation); } catch { activationRejected = true; } ok(activationRejected, "KIW8_ACTIVATION_DETAIL_CONTROL");
+  const deploymentSource = readFileSync(path.join(ROOT, "email_scraper/scripts/keyword-intelligence/create-change-set.js"), "utf8");
+  ok(!deploymentSource.includes("W8-ACT-05") && /return "W8-ACT-02";/u.test(deploymentSource), "KIW8_ACT02_LABEL_CONTROL");
   const absentObject = { present: false, absent: true }, exactObject = { present: true, exact: true }, absentChange = { present: false, absent: true }, exactChange = { present: true, id: { present: true, sha256: "a".repeat(64) }, status: "CREATE_COMPLETE", executionStatus: "AVAILABLE", projectionSha256: "b".repeat(64) };
   const local = () => ({ sanitized: { changeSet: { present: true, sha256: "a".repeat(64) }, projectionSha256: "b".repeat(64) } });
   const zero = Array.from({ length: 12 }, (_, index) => ({ index: index + 1, objects: [absentObject, absentObject, absentObject], changeSet: absentChange, stackStatus: "CREATE_COMPLETE", newEvent: false }));
@@ -869,13 +961,13 @@ function cleanup() { const base = realpathSync(TMP); ok(base.startsWith("/tmp/ki
 
 const [mode, argument] = process.argv.slice(2);
 try {
-  if (mode === "selftest") await selftest(); else if (mode === "versions") versions(); else if (mode === "p2") p2(argument); else if (mode === "p3") quotas(); else if (mode === "records") records(); else if (mode === "scope") scope(); else if (mode === "state-pins") statePins(argument); else if (mode === "pre-controls") await preControls(); else if (mode === "make-control-input") makeControlInput(); else if (mode === "controls") await controls(); else if (["sanitize-packet", "sanitize-act01", "sanitize-act02", "sanitize-inspector"].includes(mode)) sanitize(mode); else if (mode === "watermark") watermark(argument); else if (mode === "observe") await observe(argument, Number(process.argv[4])); else if (mode === "classify") classify(argument); else if (mode === "wait-act02") waitAct02(); else if (mode === "post-inspect") postInspect(); else if (mode === "cleanup") cleanup(); else fail("KIW8_RUNNER_MODE");
+  if (mode === "selftest") await selftest(); else if (mode === "versions") versions(); else if (mode === "p2") p2(argument); else if (mode === "p3") quotas(); else if (mode === "records") records(); else if (mode === "activation-record") activationRecord(); else if (mode === "scope") scope(); else if (mode === "state-pins") statePins(argument); else if (mode === "pre-controls") await preControls(); else if (mode === "make-control-input") makeControlInput(); else if (mode === "controls") await controls(); else if (["sanitize-packet", "sanitize-act01", "sanitize-act02-full", "sanitize-act02-activate-review", "sanitize-act02-activate-apply", "sanitize-inspector-disabled", "sanitize-inspector-active"].includes(mode)) sanitize(mode); else if (mode === "watermark") watermark(argument); else if (mode === "observe") await observe(argument, Number(process.argv[4])); else if (mode === "classify") classify(argument); else if (mode === "wait-act02") waitAct02(); else if (mode === "post-inspect") postInspect(); else if (mode === "cleanup") cleanup(); else fail("KIW8_RUNNER_MODE");
 } catch (error) { console.error(`KIW8_RUNNER_FAILED ${error?.code || error?.message || "UNKNOWN"}`); process.exitCode = 1; }
 ```
 <!-- KIW8_RUNNER_END -->
 
 Extracted runner bytes are exactly SHA-256
-`f2d21cdd9a9ff7c6dd2d0d4d26ec70592cecb8aaf44dab335241a2a383fb960e`.
+`4611115aa6c7fc3ae9448e44435051ad0e2abc6f85245f656613608bef5d47d0`.
 P1 must reproduce this value before any AWS read.
 
 The exact executable phase calls are frozen below. No prose-only projector,
@@ -1018,12 +1110,13 @@ before P6 passes.
 
 ### 6.6 P6 — write/action-scope closure
 
-Run exactly `node "$KIW8_RUNNER" scope`. Recompute the empty implementation
-set, nine-path execution-write set, zero additional subordinate-write set,
-three-path authoring set and ten-path union from Section 1 using the
+Run exactly `node "$KIW8_RUNNER" scope`. Recompute the parent-approved one-file
+deployment-guard correction, ten-path execution-write set, zero additional
+subordinate-write set, three-path authoring set and eleven-path union from Section 1 using the
 sub-window standard's unsigned-UTF-8 sorted-member-LF formula. The runner
-requires every root porcelain member in its literal ten-path protected list,
-both nested porcelains empty and execution-set digest exact. Record exact
+requires every root porcelain member in its literal protected list, frontend
+porcelain empty, backend porcelain either clean after requester commit or the
+one exact pinned deployment-guard path, and execution-set digest exact. Record exact
 starting/ending digests of the two
 measurement outputs and protected coordination paths. Then activate
 `W8-LIVE-01`, append `EV-KI-W8-L01`, set S2 to
@@ -1108,7 +1201,7 @@ run exactly the deployment-pipe, `records`, `pre-controls`, and post-ACT-01
 recovery reruns the complete primary block with a new pre-action watermark.
 Never create a second change set or manually synthesize a missing record.
 
-### 6.8 ACT-02 — apply only the reviewed ID and inspect disabled
+### 6.8 ACT-02 — apply the reviewed full ID, then review/apply activation
 
 After the requester approval and A5 pins Section 5.2, re-run the exact Section
 6.0 bootstrap from workspace root, then run:
@@ -1121,17 +1214,35 @@ node "$KIW8_RUNNER" state-pins W8-ACT-02
 cd "$KIW8_ROOT/email_scraper"
 node "$KIW8_RUNNER" watermark act02
 set -o pipefail
-node scripts/keyword-intelligence/create-change-set.js --profile=storesignal-dev --region=ap-south-2 --stack=storesignal-production-pipeline --environment=production --phase=full --account-id=${KIW8_ACCOUNT_ID} --execute --apply-reviewed-change-set | node "$KIW8_RUNNER" sanitize-act02
-node scripts/keyword-intelligence/inspect-stack.js --profile=storesignal-dev --region=ap-south-2 --stack=storesignal-production-pipeline --account-id=${KIW8_ACCOUNT_ID} --expected-disabled | node "$KIW8_RUNNER" sanitize-inspector
+node scripts/keyword-intelligence/create-change-set.js --profile=storesignal-dev --region=ap-south-2 --stack=storesignal-production-pipeline --environment=production --phase=full --account-id=${KIW8_ACCOUNT_ID} --execute --apply-reviewed-change-set | node "$KIW8_RUNNER" sanitize-act02-full
+node scripts/keyword-intelligence/inspect-stack.js --profile=storesignal-dev --region=ap-south-2 --stack=storesignal-production-pipeline --account-id=${KIW8_ACCOUNT_ID} --expected-disabled | node "$KIW8_RUNNER" sanitize-inspector-disabled
+node scripts/keyword-intelligence/create-change-set.js --profile=storesignal-dev --region=ap-south-2 --stack=storesignal-production-pipeline --environment=production --phase=activate --account-id=${KIW8_ACCOUNT_ID} --execute | node "$KIW8_RUNNER" sanitize-act02-activate-review
+node "$KIW8_RUNNER" activation-record
+node scripts/keyword-intelligence/create-change-set.js --profile=storesignal-dev --region=ap-south-2 --stack=storesignal-production-pipeline --environment=production --phase=activate --account-id=${KIW8_ACCOUNT_ID} --execute --apply-reviewed-change-set | node "$KIW8_RUNNER" sanitize-act02-activate-apply
+node scripts/keyword-intelligence/inspect-stack.js --profile=storesignal-dev --region=ap-south-2 --stack=storesignal-production-pipeline --account-id=${KIW8_ACCOUNT_ID} --expected-active | node "$KIW8_RUNNER" sanitize-inspector-active
 node "$KIW8_RUNNER" post-inspect
 ```
 
-The first command may execute only the recorded ID after source, A5 and live
-description equality. The second must emit the exact Section 3.4 object and its
-internal complete-topology assertions must pass. `post-inspect` hashes all 34
+The first command may execute only the recorded full ID after source, A5 and
+live-description equality. The disabled inspector must pass before activation
+creation. The deterministic activation set must pass the production
+`assertReviewedChanges("activate", ...)` guard and the private-record validator;
+only that recorded ID may then execute. The final active inspector must emit the
+exact Section 3.4 active object and its internal complete-topology assertions
+must pass. `post-inspect` hashes all 34
 output values, proves every established output hash unchanged and the exact
 four keyword outputs added; no raw ARN/URL is retained. Append `EV-KI-W8-L03`,
 activate `W8-LIVE-03`, then run the conformance gate.
+
+An observable full-apply failure stops before activation. An observable
+activation-create failure leaves the verified disabled stack and stops. An
+observable activation-apply failure is reconciled read-only and must leave the
+stack disabled or in CloudFormation's automatic rollback state; it stops. Loss
+of transport at either activation boundary is
+`PARENT_BLOCKED_ACT02_AMBIGUOUS` unless one exact deterministic remote/local ID
+and terminal stack status can be proven without another create or execute. No
+replacement change set, manual repair, direct Lambda invocation, queue action
+or application request is permitted.
 
 For lost execute response, after proving no matching local process run exactly:
 
@@ -1179,7 +1290,7 @@ Each case registers exactly once before its phase but enters `executed` and
 |---|---|---|
 | `W8-LIVE-01` | I101 P1–P6, final P5 stable read | all pins/target/capability/package/before/scope checks pass; zero mutation |
 | `W8-LIVE-02` | ACT-01 exit/reconciled record | exact three object versions and one allowlisted unexecuted change set |
-| `W8-LIVE-03` | ACT-02 final inspector | exact reviewed ID applied and Section 3.4 expected-disabled state |
+| `W8-LIVE-03` | ACT-02 final inspector | exact full and activation IDs applied and Section 3.4 expected-active state |
 | `W8-CONF-01` | frozen runner `make-control-input` then `controls` | case equality 4, controls 8, exact digests/action ledger, every forbidden count zero |
 
 | Control | One in-memory captured mutation | Unchanged guard that must throw/reject |
@@ -1217,7 +1328,7 @@ counts/digests.
 | local packet/source bytes | real `buildDeploymentPacket` dry run and measurement scripts | accepted bytes, identities, inventory, handler import | AWS object or deployment state |
 | change-set allowlist | real exported `assertReviewedChanges` plus live described change set | accepted normalized change inventory and rejection | CloudFormation apply success before ACT-02 |
 | AWS identity/quota/stack | real AWS CLI read calls | applied account facts returned at execution time | secret/provider/database capability |
-| deployed topology | real `inspect-stack --expected-disabled` | read-only current AWS resource/config/IAM/alarm/empty-queue equality | Lambda execution, research, provider or local control plane |
+| deployed topology | real disabled-intermediate and active-final inspector modes | read-only current AWS resource/config/IAM/alarm/empty-queue equality and exact active flag/mapping | research, provider or local control plane |
 | CloudFormation transaction | real reviewed-ID execute, wait/status/events | applied or automatic-rollback state of that exact update | future activation or rollback mutation |
 
 No fake supports a live claim. A fabricated summary is rejected by NC-08.
@@ -1265,7 +1376,7 @@ workspace or AWS member.
 |---|---|---:|---|---|
 | `G-W8-01` | P1 then P2/P3 then P4 then P5/P6; LIVE-01 | once after execution assignment | any authority/source/package/stack/quota/scope drift | `EV-KI-W8-L01` |
 | `G-W8-02` | ACT-01 plus NC-01/02; LIVE-02 | one approved action; no repeat after observable effect | no edit allowed; ambiguity uses 6.7 | `EV-KI-W8-L02` |
-| `G-W8-03` | ACT-02 then expected-disabled inspector; LIVE-03 | one approved execute; no repeat | no edit allowed; ambiguity uses 6.8 | `EV-KI-W8-L03` |
+| `G-W8-03` | ACT-02 full apply → disabled inspector → activation review/apply → active inspector; LIVE-03 | one approved sequence; no repeated create/execute after observable effect | no edit allowed; ambiguity uses 6.8 | `EV-KI-W8-L03` |
 | `G-W8-04` | NC-03–08, certificate set/digest/action/privacy/scope checks; CONF-01 | once after LIVE-03 | any evidence/certificate/state change | `EV-KI-W8-C01` |
 
 Measurement, stateful AWS and broad inspection gates do not run per leaf because
@@ -1293,14 +1404,14 @@ handoff; W8 does not repair it.
 
 - [ ] `KI-W8-V1` P1–P5 pass with exact source/package/target/quota/before-state evidence and zero mutation. Evidence destination: `EV-KI-W8-L01` in A6.
 - [ ] `KI-W8-V2` ACT-01 produces/reconciles exactly three accepted object versions and one reviewed, unexecuted, allowlisted disabled change set. Evidence destination: `EV-KI-W8-L02` in A6.
-- [ ] `KI-W8-V3` ACT-02 applies only that ID; expected-disabled inventory/config/IAM/outputs/queue/DLQ inspection passes and established topology remains active. Evidence destination: `EV-KI-W8-L03` in A6.
+- [ ] `KI-W8-V3` ACT-02 applies the exact full ID, passes expected-disabled inspection, applies the exact reviewed activation ID, and passes expected-active inventory/config/IAM/output/queue/DLQ inspection. Evidence destination: `EV-KI-W8-L03` in A6.
 - [ ] `KI-W8-V4` Four-case/eight-control equality/digests, exact ACT-01→ACT-02 ledger and all-zero forbidden counts pass. Evidence destination: `EV-KI-W8-C01` in A6.
 - [ ] `KI-W8-H1` Record exact changed/generated paths and prove no source/test/schema/migration/package-lock/frontend path changed. Evidence destination: KI-W8 handoff entry in A6.
 - [ ] `KI-W8-H2` Append sanitized commands, approvals, identities, projections, outcomes, rollback status, residuals, coverage/digests and W9 prerequisites to A6. Evidence destination: KI-W8 handoff entry in A6.
 - [ ] `KI-W8-H3` Prove workspace diff/status and AWS action ledger equal the exact authorized scopes. Evidence destination: KI-W8 handoff entry in A6.
-- [ ] `KI-W8-H4` Prove no secret read, provider/database/API/browser/local-server/activation/paid/destructive action and no KI-W9 work. Evidence destination: KI-W8 handoff entry in A6.
-- [ ] `KI-W8-H5` Append execution/enforcement certificates and CAS A5 one version to `AWAITING_REVIEW`, retaining `accepted_through:KI-W7`, `next_window:KI-W9-AUTHORING`, `may_start_successor:false`. Evidence destination: KI-W8 handoff entry in A6 and one-version A5 CAS.
-- [ ] `KI-W8-H6` Stop without assigning or beginning KI-W9. Evidence destination: final I101 integration certificate in S3.
+- [ ] `KI-W8-H4` Prove no secret read, provider/database/API/browser/local-server/paid/destructive or unapproved activation action. Evidence destination: KI-W8 handoff entry in A6.
+- [ ] `KI-W8-H5` Append execution/enforcement certificates and CAS A5 one version to `AWAITING_REVIEW`, retaining `accepted_through:KI-W7`, `next_window:null`, `may_start_successor:false`. Evidence destination: KI-W8 handoff entry in A6 and one-version A5 CAS.
+- [ ] `KI-W8-H6` Stop with active AWS keyword infrastructure and no successor window. Evidence destination: final I101 integration certificate in S3.
 
 ### 9.3 Result classification
 
@@ -1367,7 +1478,7 @@ browser substitute or application workflow is reachable in W8.
 - [x] `SW-E05` I101 evidence, approval pauses, stop and parent successor reservation are exact. Evidence: `EV-KI-W8-AWS-S008`.
 - [x] `SW-E06` No subagent exists; only window agent updates S1–S3 and reports to parent. Evidence: `EV-KI-W8-AWS-S008`.
 - [x] `SW-E07` No successor work satisfies W8 acceptance. Evidence: `EV-KI-W8-AWS-S008`.
-- [x] `SW-E08` Deferred KI-W9 facts are excluded; applied W8 facts have exact fail-closed branches. Evidence: `EV-KI-W8-AWS-S008`.
+- [x] `SW-E08` No successor-window facts are required; active W8 facts have exact fail-closed branches. Evidence: parent DECOMP-5 audit.
 
 ### 11.4 Enforcement and integration closure
 
@@ -1410,4 +1521,4 @@ No amendment exists. After parent approval, the original decomposition above is
 immutable and S1 is read-only. Any genuine coordination, validator, action or
 scope defect returns `PARENT_BLOCKED` for a parent-authored superseding
 decomposition revision; the window agent does not append a corrective block to
-S1. No supersession can authorize KI-W9 or an implementation edit implicitly.
+S1. No supersession can authorize application work or an implementation edit implicitly.

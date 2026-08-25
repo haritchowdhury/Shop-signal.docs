@@ -7508,6 +7508,50 @@ blocker: EXPIRED_STORESIGNAL_DEV_CREDENTIALS
 status: PARENT_BLOCKED
 ```
 
+## EV-KI-W8-L01 — DECOMP-5 active-terminal preflight P1–P6 pass
+
+- **Assignment:** `ASG-KI-W8-I101-PARENT-03`; requester-directed parent
+  execution under `DEC-KI-061` and S1 revision
+  `2aa5e6f45445cbfd9f17cd55e5afe0cdd62df78c30beb3b6f4eb689700dce44d`.
+- **Local correction:** the existing activation implementation is unchanged;
+  only the deployment guard's retired `W8-ACT-05` authority label now resolves
+  to `W8-ACT-02`. Syntax, frozen-runner self-test, activation allowlist/detail
+  controls and the four focused deployment cases/controls passed.
+- **P1:** exact standards/A1/A2/A3/A4/A5/A8/S1, template, both ZIPs,
+  measurement scripts, deployment/inspection scripts and byte counts matched.
+- **P2/P5:** the complete read-only AWS target/bucket projection passed twice
+  and remained byte-identical, SHA-256
+  `4419b32a71c1993a839a13595c6fd8444389affa78c2c28e95534b03dba2755e`.
+- **P3:** Lambda account capacity, applicable Lambda/SQS/CloudFormation quota
+  inventory, template counts and worker/queue/mapping bounds passed; projection
+  SHA-256 `ef9748a94435ffefb0b2d41ceec23ed1b8d6883d1a42849f2a0656195ac54349`.
+- **P4:** package measurements/cold imports passed without rebuilding; the
+  source-bound full-phase dry-run made zero AWS call and produced packet
+  projection SHA-256
+  `dade137fe8274b48ed32441bf1e32be10f5f44673a8084174e59ca21a2c39bba`.
+- **P6:** exact root/frontend/backend scope passed, including the one pinned
+  parent deployment-guard correction; projection SHA-256
+  `2f5e7d55ce5a18de0f9d5ada2a37da5a07843aa18df21bb31e41a0c3c0d6e442`.
+- **Measurements:** keyword
+  `07217b5a05418c9790559c24b5cb07281e6edd9fa28dc6e4d5ac2d0237043447`;
+  established
+  `5286e288717283027316c43c5fe4ddc66471790b6bf3c4c230a91ad02c4572a6`.
+- **External effects:** read-only STS/CloudFormation/S3/Lambda/Service Quotas
+  only. No AWS mutation, Lambda invoke, queue action, secret-value read,
+  database/API/browser/local-server/provider/paid action or destructive action;
+  cost `$0.00`.
+
+sanitized_projection_sha256: 2f5e7d55ce5a18de0f9d5ada2a37da5a07843aa18df21bb31e41a0c3c0d6e442
+
+```yaml
+certificate: KI-W8-LIVE-01-PASS
+p1_p6: PASS
+p2_p5_byte_equal: true
+aws_mutations: 0
+paid_cost_usd: 0.00
+next_gate: W8-ACT-01_REQUESTER_APPROVAL
+```
+
 ## EV-KI-W8-P03 — Parent-direct P1–P5 preflight pass
 
 - **Timestamp/phase:** `2026-08-25T20:37:30+05:30`; requester-authorized parent
@@ -7601,4 +7645,41 @@ live_01_activated: false
 aws_mutations: 0
 paid_cost_usd: 0.00
 status: PARENT_BLOCKED
+```
+
+## EV-KI-W8-L02 — ACT-01 immutable artifacts and disabled change set reviewed
+
+- **Timestamp/phase:** `2026-08-25T21:47:00+05:30`; requester-approved
+  `W8-ACT-01` under assignment `ASG-KI-W8-ACT01-PARENT-01`.
+- The three exact content-addressed artifacts reconciled as private AES256,
+  versioned S3 objects. Their sanitized version-ID hashes, in packet order,
+  are `73a3b542888e36bf77dc9bc38738ef60811e9733a50d46097951a99364ec1b6f`,
+  `a7ddf54cca1ed60516a2017ed6d73afc3df222df8b68957f9985abd7e7c4ccd8`
+  and `b57038b574321c2a467dd77344448b15b9f7d129c660dd9bc64b2bee07d7c859`.
+- CloudFormation created and reviewed the exact full-phase change set
+  `ki-full-a62298d72baf`. It remains unexecuted. Its sanitized ID hash is
+  `5a4e7c1d0c4dc456a59640a25753f68cea2bf39b3e47c7f5971d2f14d6f9127a`;
+  its normalized 15-change projection hash is
+  `55a6dcf69ca72fb4004facc422c5677723aa50a0e8daecd6d1300a1eaac19649`.
+- Private-record validation passed. Sanitized record digest:
+  `2a6c0a26bb0bdaea94c0faafb6eefac382de9e8e83d572e62f1e0a4b53930ff6`;
+  full change-set record digest:
+  `6754a6ddad248da921f5563b2508f7c63e922251cccfc579ee09b080b88c6ec1`.
+- Both ACT-01 controls passed positive→mutant-rejects→fresh-positive.
+  No change set was executed; no Lambda/event mapping was enabled or invoked;
+  no queue, provider, secret-value, database, API, browser or local-server
+  action occurred. Paid cost was `$0.00`.
+
+sanitized_projection_sha256: 05a273ff878addc3e8238a2411efc93dd7d389753424761413732ab978b73e1e
+falsified_controls: [W8-NC-01, W8-NC-02]
+
+```yaml
+certificate: KI-W8-LIVE-02-PASS
+action: W8-ACT-01
+artifact_object_versions: 3
+change_set_reviewed: true
+change_set_executed: false
+activation_performed: false
+paid_cost_usd: 0.00
+next_gate: W8-ACT-02_REQUESTER_APPROVAL
 ```
