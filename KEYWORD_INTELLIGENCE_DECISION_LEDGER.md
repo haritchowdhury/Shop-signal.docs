@@ -3227,3 +3227,71 @@ only on PASS or a genuinely new failure outside this decision.
   separation, one-queue architecture and all accepted local behavior remain.
 - **Tasks/scenarios:** `KI-W7-T1`–`T6`, `KI-W8-T1`–`T3`,
   `SCN-KI-047`, `SCN-KI-048`.
+
+### `DEC-KI-060` — AWS-first disabled deployment; local activation/canary postponed
+
+- **Requirements:** `REQ-KI-002`, `005`, `015`–`017`, `022`–`024`;
+  `INV-KI-001`–`015`; `AUTH-KI-005/007`; `EXC-KI-008`.
+- **Requester decision:** deploy and verify the AWS keyword infrastructure first.
+  The backend and frontend remain local. Do not configure a hosted control
+  plane, activate keyword processing, create a research, call a provider, or
+  perform the live handoff in KI-W8.
+- **Current-window split:** KI-W8 consumes the accepted W7 template,
+  `keyword-worker.zip` and `recovery.zip`; performs read-only AWS target/quota/
+  stack preflight; uploads the three content-addressed versioned objects;
+  creates and reviews the exact disabled change set; after a separate approval,
+  executes that reviewed ID; inspects the applied disabled stack; and stops.
+  `KeywordResearchEnabled` is exactly `false`; KeywordResearchMapping is
+  disabled; KeywordWorker and Recovery keyword flags are false; the source
+  queue and DLQ are empty; established mappings and the recovery schedule
+  remain in their accepted active state.
+- **W8 action universe:** `W8-ACT-01` uploads the accepted objects and creates/
+  reviews the disabled change set only. `W8-ACT-02` executes only its recorded
+  reviewed ID and waits for/inspects the disabled result. Each requires its own
+  requester approval. No other mutation is permitted. CloudFormation's normal
+  automatic update rollback is observed; W8 never purges, redrives, deletes,
+  manually repairs, activates, or creates a second change set after an
+  observable failure.
+- **W8 preflight:** requires exact W7 source/package hashes; fixed profile
+  `storesignal-dev`, region `ap-south-2`, stack
+  `storesignal-production-pipeline`; STS account; complete/stable starting
+  stack; sufficient Lambda/SQS/CloudFormation quotas; expected artifact bucket;
+  applied bucket versioning enabled, AES256 default encryption, all four public-
+  access blocks true, `BucketOwnerEnforced`, and only the accepted seven-day
+  incomplete-multipart lifecycle rule;
+  no pending stack operation/change set; and the exact disabled change allowlist
+  from `DEC-KI-059`. It does not read secret values, contact DataForSEO, access
+  Neon, start a browser, or require frontend/backend sessions.
+- **W8 identity privacy:** the exact 12-digit account, account-bearing bucket/
+  ARN/URL, object-version IDs and change-set ID remain only in process memory
+  and mode-0600 ignored deployment records. Tracked A5/A6/S3 records contain
+  only SHA-256 digests, presence/cardinality and account-last-four projections;
+  every consumer recomputes equality before the external operation. The packet
+  approval token remains the exact source/account-bound authorization fence.
+- **W8 coverage:** cases are exactly `W8-CONF-01`, `W8-LIVE-01`,
+  `W8-LIVE-02`, `W8-LIVE-03`, digest
+  `3bd44b2c2c244b1dd29881dcfa249d9cdad5f9b1aecc981c56612d587283ca7e`.
+  Controls are exactly `W8-NC-01`–`W8-NC-08`, digest
+  `9bd004917f960abb4842ea2f2da48ed60821fdedd55fcbc54dc7bdd271037ea6`.
+  They prove preflight identity/capability, object/change-set identity, applied
+  disabled topology, exact approval ledger, hash-drift rejection and unlisted-
+  change rejection plus required/registered/executed/activated equality,
+  zero skips/duplicates, oracle integrity and live-inspector fidelity. Zero
+  Lambda keyword invocation, provider call, database operation, API research,
+  browser action or paid cost is required or allowed.
+- **Deferred local-control-plane window:** KI-W9 owns later local backend/
+  frontend configuration from exact W8 outputs, local profile permission proof,
+  strict secret/provider capability proof, two local authenticated owners, the
+  single research while mapping remains disabled, reviewed activation, the
+  same bounded paid canary, rendered dashboard selection, immutable run handoff
+  and failure-only disable rollback. KI-W9 is `DRAFT / NOT ASSIGNABLE`; it must
+  be reauthored after W8 supplies applied outputs and the requester is ready to
+  provide local sessions and approve paid execution. It may not infer standing
+  authority from W8.
+- **Supersession:** this decision preserves every accepted W7 source/runtime/
+  template/package interface in `DEC-KI-059` but supersedes its W8 hosted-
+  control-plane, activation, canary, rollback and seven-action sequencing. The
+  parent-approved old W8 decomposition revision `7f2bc819…` is retired without
+  deletion as unexecuted historical authoring evidence.
+- **Tasks/scenarios:** current `KI-W8-T1/T2`, `SCN-KI-049`; deferred
+  `KI-W9-AUTHORING`.

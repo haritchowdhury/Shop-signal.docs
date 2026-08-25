@@ -1565,3 +1565,102 @@ compatibility_or_migration_effect: none
 authorization_effect: decomposition is approved, but KI-W8-I001 and every read-only/external/paid action remain unassigned until the named prerequisites and a new A5 authorization exist
 resumption_state: A5 state 201 AWAITING_USER_PREREQUISITES; obtain literal host/provider protocols, origin, owner sessions and seed, then separately assign P1-P6 only
 ```
+
+```yaml
+change_id: CHG-KI-097
+timestamp: 2026-08-25T18:00:38+05:30
+trigger_evidence: [SRC-KI-061, EV-KI-A-127, requester AWS-first/local-control-plane-later decision]
+reason: Replace the obsolete combined W8 deployment-and-canary sequence with an AWS-only disabled deployment, and defer local frontend/backend activation, canary and handoff closure to a later reauthored W9.
+changed_requirements: [KI-W8 rewritten as AWS-only disabled deployment, KI-W9 marked DRAFT_NOT_ASSIGNABLE]
+changed_decisions: [DEC-KI-060]
+affected_windows: [KI-W8, KI-W9]
+old_revision: {A2: 493192fc317c00ee43e277e85e00718985190cdd5c21e3d6824f67dd1d0b7c0c, A3: 6c0809225ba5336dc923786674b990f83c8db2496b88016f7655a770afb7e307, A4: 4f4b16bbe6ab20312e312db75506f9acfee7aaca67fbb66d1d951676f1f646e4, A8: 90c2f808426c4f1cf20ad885860e01b66763f3fc607e28c3b2dd9a2ef7391a5f}
+new_revision: {A2: 3a6b294cc561556d0e3d92572121bc8cc529470866fba5bad8f78cf816310470, A3: d65cd9b128170de778a2d1492ef8347c5d2a988b8c3c7737f4a36b740531515a, A4: 85e9b4ad5fd47d63fe36b03455b0bfe69275b842d243fa92a9025afa6ea9916c, A8: 76e5fbdab699f07fdabb85a381c6b7f400a8fcfa2619b517cdf0ab6304a4de89}
+invalidated_evidence: [EV-KI-A-126 approval of decomposition revision 7f2bc8197a52c4264f876f58db0cb386613007f3a16b8fdabbb468740b47a296 as current execution authority; SCN-KI-048 as the active W8 scenario]
+retained_history: [EV-KI-A-126, W8 DECOMP-3 artifacts and SCN-KI-048 remain immutable unexecuted history]
+implementation_effect: none
+compatibility_or_migration_effect: none until the separately approved AWS actions execute
+authorization_effect: no AWS action is assigned; a fresh W8 decomposition is required, followed by separate requester approvals for W8-ACT-01 and W8-ACT-02; KI-W9 remains prohibited
+resumption_state: A5 state 202 COMPLETE; next step is fresh KI-W8 AWS-only decomposition and parent review
+```
+
+```yaml
+change_id: CHG-KI-098
+timestamp: 2026-08-25T18:22:55+05:30
+trigger_evidence: [EV-KI-A-129]
+reason: KI-W8-P4 invokes two accepted measurement scripts whose exact generated JSON outputs were omitted from the W8 write scope.
+old_revision: {A4: 85e9b4ad5fd47d63fe36b03455b0bfe69275b842d243fa92a9025afa6ea9916c}
+new_revision: {A4: b6cf79dd8fbe925101dd2c618c01ee1072f6df30c4653ea3c45c2660e6f0126b}
+changed_requirements: []
+changed_decisions: []
+affected_windows: [KI-W8]
+invalidated_evidence: [EV-KI-A-128 state-203 checklist pin only]
+implementation_effect: none; adds two generated measurement-output paths already written by the prescribed P4 commands
+compatibility_or_migration_effect: none
+authorization_effect: ASG-KI-W8-WA-02 remains decomposition-only; no measurement command or AWS action is authorized during decomposition
+resumption_state: A5 state 204 READY; window agent may resume fresh AWS-only decomposition authoring
+```
+
+```yaml
+change_id: CHG-KI-099
+timestamp: 2026-08-25T18:47:49+05:30
+trigger_evidence: [EV-KI-A-130]
+reason: Parent decomposition review found missing subordinate execution-state/evidence paths, absent applied artifact-bucket safety preflight, and tracked raw-production-identifier pinning contrary to workspace privacy policy.
+old_revision: {A3: d65cd9b128170de778a2d1492ef8347c5d2a988b8c3c7737f4a36b740531515a, A4: b6cf79dd8fbe925101dd2c618c01ee1072f6df30c4653ea3c45c2660e6f0126b}
+new_revision: {A3: 9dfbe47b16200a3dae4480068f86eb845543244c5e45b38ac42ee0cf4568c3f6, A4: 5f056307a779a413406f5a4f0e7e87dac8dc12703d5633ec7f00d077d6a036b6}
+changed_requirements: []
+changed_decisions: [DEC-KI-060 W8 identity privacy and bucket preflight]
+affected_windows: [KI-W8]
+invalidated_evidence: [KI-W8-AWS-ONLY-DECOMP-1 readiness certificate at S1 revision a204d89a2909265392336d1cd78a89bdcfdf207fd5bc1f30a2a52c0543518d79]
+implementation_effect: none
+compatibility_or_migration_effect: none; the applied existing artifact bucket is now verified before any upload
+authorization_effect: ASG-KI-W8-WA-02 remains decomposition-only and may revise only S1-S3; no preflight or AWS action is authorized
+resumption_state: A5 state 205 READY; revise decomposition and return for parent review
+```
+
+```yaml
+change_id: CHG-KI-100
+timestamp: 2026-08-25T19:48:15+05:30
+trigger_evidence: [EV-KI-W8-AWS-S007, EV-KI-W8-AWS-S008, EV-KI-W8-AWS-S009, EV-KI-A-131]
+reason: Parent review verified that DECOMP-3 corrected the CloudFormation quota interpretation, preserved exact dependency details in ACT-01 observation, and fenced every ACT-01 recovery outcome by an accepted complete stack status.
+changed_requirements: []
+changed_decisions: []
+affected_windows: [KI-W8]
+implementation_effect: none
+decomposition_revision: d68d8f72e3e830481ace6aa9f489abcb57dad79a7ab503a7d11d3970a5b9fba9
+invalidated_evidence: [DECOMP-1 and DECOMP-2 readiness certificates remain rejected history]
+compatibility_or_migration_effect: none until separately approved W8 external actions execute
+authorization_effect: assign only KI-W8-I101 P1-P6 and read-only AWS preflight; W8-ACT-01, W8-ACT-02 and KI-W9 remain prohibited
+resumption_state: A5 state 206 READY under ASG-KI-W8-I101-01; stop after LIVE-01 at requester ACT-01 approval gate
+```
+
+```yaml
+change_id: CHG-KI-101
+timestamp: 2026-08-25T20:05:33+05:30
+trigger_evidence: [EV-KI-W8-P01, EV-KI-A-132, requester credential-refresh confirmation]
+reason: Restore the byte-identical I101 P1-P6 preflight after the sole external prerequisite, expired storesignal-dev credentials, was reported refreshed.
+changed_requirements: []
+changed_decisions: []
+affected_windows: [KI-W8]
+implementation_effect: none
+invalidated_evidence: []
+compatibility_or_migration_effect: none
+authorization_effect: read-only AWS preflight and accepted local measurement only; no W8-ACT-01, W8-ACT-02 or KI-W9 authority
+resumption_state: A5 state 208 READY under ASG-KI-W8-I101-02; stop after LIVE-01 at requester ACT-01 approval gate
+```
+
+```yaml
+change_id: CHG-KI-102
+timestamp: 2026-08-25T20:37:30+05:30
+trigger_evidence: [EV-KI-W8-P02, EV-KI-W8-AWS-S013, requester parent-takeover instruction, EV-KI-W8-AWS-S014, EV-KI-W8-P03]
+reason: Accept AWS's normalized empty lifecycle filter, remove a nonexistent Lambda AccountLimit.FunctionCount assumption, execute preflight through P5 directly, and retain its evidence while W8 is reauthored to end active without KI-W9.
+changed_requirements: [W8 must finish with active AWS infrastructure usable by the local backend and frontend; no KI-W9 successor]
+changed_decisions: [W8 deployment interaction collapses to one later requester approval after automatic preflight]
+affected_windows: [KI-W8]
+implementation_effect: none; frozen preflight runner only
+decomposition_revision: 0f99913d69f573ce9df7a89bf1b05962f2fbd5cceb68ca3f5dbeb1f4d784e62d
+invalidated_evidence: [DECOMP-3 lifecycle and Lambda-account runner claims only; prior failure evidence remains history]
+compatibility_or_migration_effect: none; no AWS mutation occurred
+authorization_effect: no current AWS mutation authority; accepted P1-P5 may be consumed by the corrected remaining W8 sequence subject to freshness recheck
+resumption_state: A5 state 212 READY_FOR_PARENT_REAUTHORING; author P6 and one-approval active deployment, then stop for requester deployment approval
+```

@@ -350,6 +350,19 @@ limitations: Local source proves the deployable-source gaps and current conventi
 privacy: File paths, hashes, logical IDs, public AWS limits and structural configuration only; no account ID, ARN, URL, secret value, credential, provider body or production data read or recorded.
 ```
 
+### `SRC-KI-061` — local control plane permits an AWS-first disabled deployment
+
+```yaml
+evidence_id: SRC-KI-061
+classification: OBSERVED_AND_REQUESTER_DIRECTED
+claim: The requester will continue to run the frontend and backend locally and wants AWS infrastructure deployed first. Current backend configuration already supports that later split: RUN_EXECUTION_BACKEND=aws plus AWS_PIPELINE_ENABLED=true selects the AWS data plane; AWS_PIPELINE_KEYWORD_RESEARCH_ENABLED and AWS_PIPELINE_KEYWORD_RESEARCH_QUEUE_URL independently activate keyword dispatch; the AWS SDK uses its normal local credential chain and fixed ap-south-2 region. The frontend already accepts a loopback BACKEND_API_BASE_URL. Therefore no hosted-backend policy attachment or production frontend origin is required to deploy the keyword CloudFormation resources disabled. Activation, the one research, provider capability/cost proof, local authenticated UI, and run handoff can be postponed without changing source.
+source: requester instruction 2026-08-25; email_scraper/src/config.js; email_scraper/src/aws-pipeline/runtime-config.js; email_scraper/src/aws-pipeline/runtime.js; frontend/.env.example; frontend/lib/backend-proxy.ts; accepted W7 packet and DEC-KI-059 infrastructure literals
+observed_at: 2026-08-25
+environment: read-only local source and documentation inspection; no AWS call, provider call, database operation, build, deployment, host mutation or paid action
+limitations: Applied account identity, quotas, stack state and reviewed CloudFormation change details remain W8 read-only preflight facts. The local profile's eventual SendMessage/read permissions, local authentication sessions, secret/provider compatibility and active canary behavior remain deferred KI-W9 facts and are not proved by source inspection.
+privacy: Configuration variable names and public structural behavior only; no URL, account ID, ARN, cookie, token, credential, secret value, provider body or production row was read or recorded.
+```
+
 ## 6. Post-W5 corrective discovery
 
 | Evidence ID | Class | Precise claim | Exact source/revision | Limitations | Privacy |

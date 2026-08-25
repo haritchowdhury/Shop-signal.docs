@@ -7275,3 +7275,330 @@ paid_cost_usd: 0.00
 execution_assigned: false
 status: APPROVED_AWAITING_USER_PREREQUISITES
 ```
+
+## EV-KI-A-127 — AWS-first W8 reauthoring and deployment deferral
+
+- **Timestamp/phase/environment:** `2026-08-25T18:00:38+05:30`; parent
+  authoring/reconciliation; local workspace at root
+  `8a235e858888cbd0ea21a26520493cda72ba1a23`.
+- **Operations:** read-only source/document inspection, append-only A2/A3/A6/A7
+  additions, localized A4/A5/A8 reauthoring, SHA-256/set-digest recomputation,
+  `git diff --check`, path-scope and nested-worktree inspection. No sandbox
+  escalation or environment-invalidated execution occurred.
+- Requester decision: deploy only the already-built AWS data plane first. Keep
+  the backend and frontend local; postpone activation, paid-provider canary,
+  local-control-plane handoff proof and completion closure to a later window.
+- Read-only source review confirmed the existing control plane already supports
+  this split: the backend can select the AWS execution backend and keyword
+  queue, while the frontend can continue targeting the loopback backend.
+- `SRC-KI-061` and `DEC-KI-060` record that decision. KI-W8 is now an AWS-only,
+  disabled deployment window with exactly two separately approved external
+  actions: create/review the disabled CloudFormation change set, then execute
+  that exact reviewed change set and inspect the disabled stack.
+- KI-W8 owns exactly `W8-CONF-01` and `W8-LIVE-01..03` (case-set digest
+  `3bd44b2c2c244b1dd29881dcfa249d9cdad5f9b1aecc981c56612d587283ca7e`)
+  plus `W8-NC-01..08` (control-set digest
+  `9bd004917f960abb4842ea2f2da48ed60821fdedd55fcbc54dc7bdd271037ea6`).
+  Required/registered/activated authoring membership is `4/4/4` cases and
+  `8/8/8` controls; executed/skipped/duplicate/unexpected counts are all zero
+  because this is authoring evidence, not W8 execution evidence.
+- KI-W9 is explicitly `DRAFT_NOT_ASSIGNABLE`; it will later own the local
+  frontend/backend activation, canary and handoff work after a separate
+  decision-complete rewrite.
+- The previously approved W8 decomposition at revision
+  `7f2bc8197a52c4264f876f58db0cb386613007f3a16b8fdabbb468740b47a296`
+  and `SCN-KI-048` are retained as superseded, unexecuted history. No
+  implementation acceptance evidence was invalidated because no W8 action had
+  been assigned or executed.
+- Reauthored authority revisions: A2
+  `3a6b294cc561556d0e3d92572121bc8cc529470866fba5bad8f78cf816310470`,
+  A3 `d65cd9b128170de778a2d1492ef8347c5d2a988b8c3c7737f4a36b740531515a`,
+  A4 `85e9b4ad5fd47d63fe36b03455b0bfe69275b842d243fa92a9025afa6ea9916c`
+  and A8 `76e5fbdab699f07fdabb85a381c6b7f400a8fcfa2619b517cdf0ab6304a4de89`.
+- Starting revisions were coordination root
+  `8a235e858888cbd0ea21a26520493cda72ba1a23`, backend
+  `4f9d6ce079d7fcd93d8a034b0592d4cdc1522f02`, frontend
+  `5e441aae7e2f3a132b2c7fc85bf1bc525d3d5cb6`; both nested source repositories
+  remained clean. The coordination-root delta is only A2–A8 authority/evidence
+  documentation. No code, build, database, provider, browser, AWS or network
+  action occurred; paid cost was `$0.00`.
+- **Limitations/artifacts:** applied account, quota, stack and change-set facts
+  remain W8 preflight observations. The authoritative artifacts are A2–A8 at
+  the revisions recorded here; no secret-bearing or private output artifact was
+  created.
+- A5 advanced to state 202 with no execution assignment. The next authorized
+  step is a fresh W8 decomposition review; ACT01 and ACT02 remain distinct user
+  approval gates.
+
+```yaml
+certificate: KI-W8-AWS-FIRST-REAUTHORING-COMPLETE
+parent_window: KI-W8
+source_state: 201
+reauthored_state: 202
+superseded_decomposition_revision: 7f2bc8197a52c4264f876f58db0cb386613007f3a16b8fdabbb468740b47a296
+required_cases: 4
+required_controls: 8
+external_actions_authorized: 0
+paid_cost_usd: 0.00
+execution_assigned: false
+status: READY_FOR_NEW_DECOMPOSITION
+```
+
+## EV-KI-A-128 — Fresh AWS-only W8 decomposition assigned
+
+- **Timestamp/phase:** `2026-08-25T18:14:41+05:30`; parent assignment.
+- A5 advanced by one version from 202 to 203 and assigned
+  `ASG-KI-W8-WA-02` to `/root/ki_w8_aws_decomposition`.
+- The assignment owns exactly the three new
+  `KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_*` artifacts. It must author a
+  fresh recursive package from `KI-CL-34`, independently recompute its
+  decomposition closure, and stop for parent decomposition review.
+- The superseded `KEYWORD_INTELLIGENCE_KI_W8_SUBWINDOW_*` package is read-only
+  history. Leaf dispatch, implementation, preflight, build, database, browser,
+  local-server, network, provider, AWS, paid, destructive, commit, KI-W9 and
+  final-review actions are prohibited.
+- No external action or implementation change occurred while assigning the
+  decomposition; sandbox escalation was not used and paid cost was `$0.00`.
+
+```yaml
+certificate: KI-W8-AWS-ONLY-DECOMPOSITION-ASSIGNED
+source_state: 202
+assigned_state: 203
+assignment_id: ASG-KI-W8-WA-02
+assigned_agent: /root/ki_w8_aws_decomposition
+owned_paths: 3
+external_actions_authorized: 0
+leaf_dispatch_authorized: false
+status: READY
+```
+
+## EV-KI-A-129 — W8 measurement-output scope correction
+
+- **Timestamp/phase:** `2026-08-25T18:22:55+05:30`; parent authoring
+  correction before decomposition output existed.
+- The assigned window agent correctly proved that P4's accepted measurement
+  commands write `email_scraper/dist/lambda/keyword-worker-measurements.json`
+  and `email_scraper/dist/lambda/measurements.json`, while KI-CL-34 omitted
+  those two generated paths from W8's execution write scope.
+- The parent added exactly those two generated measurement records to the W8
+  header. No command, build, measurement, implementation, network, provider or
+  AWS action ran; no subordinate artifact had been created.
+- A4 advanced from revision
+  `85e9b4ad5fd47d63fe36b03455b0bfe69275b842d243fa92a9025afa6ea9916c`
+  to `b6cf79dd8fbe925101dd2c618c01ee1072f6df30c4653ea3c45c2660e6f0126b`;
+  A5 advanced 203→204 while retaining assignment `ASG-KI-W8-WA-02` and the
+  same three decomposition-artifact write paths.
+
+```yaml
+certificate: KI-W8-MEASUREMENT-SCOPE-CORRECTED
+state_version: 204
+assignment_id: ASG-KI-W8-WA-02
+added_execution_paths: 2
+implementation_actions: 0
+external_actions: 0
+status: READY
+```
+
+## EV-KI-A-130 — First AWS-only decomposition parent review
+
+- **Timestamp/phase:** `2026-08-25T18:47:49+05:30`; independent parent
+  decomposition review of S1 revision `a204d89a…3518d79`.
+- Source/hash/path/count audits passed, but approval was rejected for three
+  parent-scope defects and three subordinate execution-completeness defects.
+- Parent corrections: W8 execution now owns exact S2 state and append-only S3
+  evidence paths; P2 must verify applied artifact-bucket versioning, encryption,
+  public-access block, ownership and lifecycle before ACT-01; tracked A5/A6/S3
+  must hash/redact the account, ARN/URL, object-version and change-set IDs while
+  exact values remain only in memory/mode-0600 ignored records.
+- Required subordinate corrections: freeze literal executable validators for
+  quota/record/certificate/control projections; replace the undefined resource-
+  status predicate with one exact accepted set; add runtime/CLI version checks
+  and bounded ACT-01/ACT-02 ambiguity observation schedules. The revised
+  package must recompute every affected path set, digest, pin and certificate.
+- A3 advanced to
+  `9dfbe47b16200a3dae4480068f86eb845543244c5e45b38ac42ee0cf4568c3f6`,
+  A4 to `5f056307a779a413406f5a4f0e7e87dac8dc12703d5633ec7f00d077d6a036b6`,
+  and A5 204→205. No AWS, network, build, measurement, implementation,
+  provider, database, browser, paid, commit or deployment action occurred.
+
+```yaml
+certificate: KI-W8-DECOMPOSITION-REVISION-REQUIRED
+reviewed_revision: a204d89a2909265392336d1cd78a89bdcfdf207fd5bc1f30a2a52c0543518d79
+parent_findings: 3
+subordinate_findings: 3
+state_version: 205
+assignment_id: ASG-KI-W8-WA-02
+external_actions: 0
+status: REVISION_REQUIRED
+```
+
+## EV-KI-A-131 — DECOMP-3 accepted and I101 preflight assigned
+
+- **Timestamp/phase:** `2026-08-25T19:48:15+05:30`; independent parent
+  decomposition acceptance and preflight assignment.
+- The parent independently recomputed S1/S2/S3 as
+  `d68d8f72e3e830481ace6aa9f489abcb57dad79a7ab503a7d11d3970a5b9fba9`,
+  `4c871820110e4042735ef54064e145490274b59fe4ad434bf021bb3c4dcab770`
+  and `63811b60d913cfbd89338dae4759c117176b1efab47abf5d571f226efc0a0aee`.
+- The extracted frozen runner hashed to
+  `70b636fb06af162c1325247110fdc52beb122d54a7abba327a7f6ce02fedea03`;
+  independent `node --check`, runner self-test, dependency-detail rejection,
+  ACT-01 stack-status branch controls, document hashes, dirty-scope checks and
+  `git diff --check` passed. Backend and frontend porcelains were empty.
+- DECOMP-3 resolves the rejected quota, live dependency-detail and ACT-01
+  recovery-classifier defects. It has zero implementation leaves, one
+  sequential window-agent assessment and no unresolved requirement, decision,
+  task, scenario, case, control, interface, intermediate-state, execution or
+  evidence choice.
+- A5 advanced 205→206 and assigns `ASG-KI-W8-I101-01` to the same window agent
+  for only P1–P6/G-W8-01. This permits the frozen local checks, two accepted
+  measurement commands and the enumerated read-only AWS preflight. It permits
+  no AWS mutation, ACT-01, ACT-02, provider, paid, database, browser,
+  local-server, source edit, leaf dispatch or KI-W9 work.
+- I101 must append sanitized LIVE-01 evidence, clean its exact temporary
+  directory, transition to `AWAITING_ACT01_APPROVAL`, and stop. ACT-01 and
+  ACT-02 remain separate requester gates.
+- No AWS/network/build/measurement/external action occurred during this parent
+  review and assignment; paid cost was `$0.00`.
+
+```yaml
+certificate: KI-W8-DECOMP-3-PARENT-ACCEPTED
+source_state: 205
+assigned_state: 206
+decomposition_revision: d68d8f72e3e830481ace6aa9f489abcb57dad79a7ab503a7d11d3970a5b9fba9
+runner_revision: 70b636fb06af162c1325247110fdc52beb122d54a7abba327a7f6ce02fedea03
+assignment_id: ASG-KI-W8-I101-01
+assigned_phase: P1-P6
+implementation_leaves: 0
+external_mutations_authorized: 0
+paid_cost_usd: 0.00
+status: READY
+```
+
+## EV-KI-W8-P01 — I101 preflight blocked by expired AWS credentials
+
+- **Timestamp/phase:** `2026-08-25T19:59:41+05:30`; assigned I101 P1–P6.
+- P1 passed: Node v24/AWS CLI v2, frozen runner, A1–A5/A8, both standards,
+  immutable S1, template/two ZIPs/four scripts and exact bytes matched. Root
+  scope contained only protected coordination paths; backend/frontend were
+  clean.
+- P2 stopped at its first read-only STS call. Sanitized diagnosis was status
+  `255`, profile present, credentials expired, no connectivity/access-denied
+  classification; stderr SHA-256
+  `73c866bcbd5383b9013eff2236e8a5d55ed51bd7b1f472d1b620e1db4299b552`.
+  No raw stderr or AWS identity was retained.
+- P3–P6 did not run and `W8-LIVE-01` was not activated. Both measurement files
+  stayed byte-identical at `f1665751…4930c3` and `bd7a02cf…c2b1`; all I101
+  temporary directories were removed.
+- No AWS mutation, ACT-01/02, provider/paid/database/API/browser/local-server,
+  implementation, commit/push or KI-W9 action occurred; cost `$0.00`.
+- Resume prerequisite: refresh the existing `storesignal-dev` credentials and
+  issue a new parent state returning I101 P1–P6 to READY.
+
+```yaml
+certificate: KI-W8-PREFLIGHT-EXTERNAL-PREREQUISITE
+assignment_id: ASG-KI-W8-I101-01
+p1: PASS
+p2: BLOCKED_BEFORE_IDENTITY
+p3_p6: NOT_RUN
+live_01_activated: false
+aws_mutations: 0
+paid_cost_usd: 0.00
+blocker: EXPIRED_STORESIGNAL_DEV_CREDENTIALS
+status: PARENT_BLOCKED
+```
+
+## EV-KI-W8-P03 — Parent-direct P1–P5 preflight pass
+
+- **Timestamp/phase:** `2026-08-25T20:37:30+05:30`; requester-authorized parent
+  takeover through P5.
+- The parent corrected the accepted AWS empty-filter representation and removed
+  the nonexistent Lambda `AccountLimit.FunctionCount` assertion. Corrected S1
+  is `0f99913d69f573ce9df7a89bf1b05962f2fbd5cceb68ca3f5dbeb1f4d784e62d`;
+  its runner is
+  `f2d21cdd9a9ff7c6dd2d0d4d26ec70592cecb8aaf44dab335241a2a383fb960e`.
+- P1, P2, P3, P4 and P5 passed. Sanitized projection hashes were P2/P5
+  `4419b32a71c1993a839a13595c6fd8444389affa78c2c28e95534b03dba2755e`,
+  P3 `ef9748a94435ffefb0b2d41ceec23ed1b8d6883d1a42849f2a0656195ac54349`
+  and dry-run packet
+  `dade137fe8274b48ed32441bf1e32be10f5f44673a8084174e59ca21a2c39bba`.
+  P2 and P5 were byte-identical.
+- Measurement outputs are
+  `fd0c6232cee16ce3a43370928e06702412e70e2b73db9bec07e59297943c366c`
+  and `6168ddc070b96880d6793db7749bd2f497e177d553543710cd7fd21287d0c0b6`.
+  Temporary cleanup passed.
+- No AWS mutation, secret/provider/paid/database/API/browser/local-server,
+  Lambda invoke or queue data-plane action occurred; cost `$0.00`.
+- P6 was not run. A5 state 212 retains the passing P1–P5 evidence and stops for
+  parent reauthoring of the remaining W8 sequence: one deployment approval,
+  active AWS infrastructure ready for local testing, and no KI-W9.
+
+```yaml
+certificate: KI-W8-P1-P5-PASS
+assignment_id: ASG-KI-W8-I101-PARENT-02
+p1_p5: PASS
+p2_p5_equal: true
+p6: NOT_RUN_BY_REQUESTER_BOUNDARY
+aws_mutations: 0
+paid_cost_usd: 0.00
+state_version: 212
+status: READY_FOR_PARENT_REAUTHORING
+```
+
+## EV-KI-A-132 — I101 preflight resumed after credential refresh
+
+- **Timestamp/phase:** `2026-08-25T20:05:33+05:30`; requester prerequisite
+  satisfied and identical preflight reassignment.
+- The requester confirmed that the existing `storesignal-dev` credentials were
+  refreshed. No account, profile, region, stack, source, command, runner,
+  action or write boundary changed.
+- A5 advanced 207→208 and assigns `ASG-KI-W8-I101-02` to the same window agent
+  for the identical P1–P6/G-W8-01 sequence. The agent must independently
+  re-establish identity through the frozen P2 STS call; this parent transition
+  does not itself claim AWS identity or capability.
+- W8-ACT-01, W8-ACT-02, every AWS mutation, provider/paid/database/API/browser/
+  local-server action, implementation edit, leaf dispatch and KI-W9 remain
+  prohibited. Stop after LIVE-01 at `AWAITING_ACT01_APPROVAL`.
+- No AWS command, external action or paid operation occurred while recording
+  this recovery authority; cost was `$0.00`.
+
+```yaml
+certificate: KI-W8-PREFLIGHT-CREDENTIAL-RECOVERY-ASSIGNED
+source_state: 207
+assigned_state: 208
+assignment_id: ASG-KI-W8-I101-02
+sequence: IDENTICAL_P1_P6
+aws_mutations_authorized: 0
+paid_cost_usd: 0.00
+status: READY
+```
+
+## EV-KI-W8-P02 — P2 accepted lifecycle normalization blocked by frozen oracle
+
+- **Timestamp/phase:** `2026-08-25T20:08:42+05:30`; reassigned I101 P1–P6.
+- P1 passed again. P2 independently reached the refreshed AWS target and passed
+  identity/stack/resource/change-set/versioning/encryption/public-access/
+  ownership checks before frozen `KIW8_BUCKET_FILTER` rejected the lifecycle.
+- Sanitized read-only diagnosis proves exactly one enabled
+  `AbortIncompleteMultipartUploads` rule, seven-day abort, no expiration or
+  transitions, and AWS-normalized empty filter `{Prefix:""}`.
+- A4/S1 prose accepts empty/absent filter/prefix, but immutable runner code
+  accepts only absent filter or `{}`. Exact correction: additionally accept
+  only `{Prefix:""}`; retain rejection for every other key/nonempty prefix.
+- P3–P6 did not run and LIVE-01 was not activated. Temp cleanup passed; no AWS
+  mutation, ACT-01/02, paid/provider/database/API/browser/local-server,
+  implementation, commit/push or KI-W9 action occurred; cost `$0.00`.
+
+```yaml
+certificate: KI-W8-PREFLIGHT-ORACLE-CORRECTION-REQUIRED
+assignment_id: ASG-KI-W8-I101-02
+p1: PASS
+p2: BLOCKED_AT_BUCKET_LIFECYCLE_FILTER
+observed_filter_keys: [Prefix]
+observed_filter_prefix_empty: true
+p3_p6: NOT_RUN
+live_01_activated: false
+aws_mutations: 0
+paid_cost_usd: 0.00
+status: PARENT_BLOCKED
+```

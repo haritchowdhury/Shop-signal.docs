@@ -1,45 +1,61 @@
-state_version: 201
+state_version: 212
 standard_path: PROJECT_AGNOSTIC_DECISION_COMPLETE_CHECKLIST_AUTHORING_STANDARD.md
 standard_revision: cda352017e75c0d11f6797d9fbe108b4365508cd38b0e92365cfb523ede32848
 subwindow_standard_path: PROJECT_AGNOSTIC_WINDOW_AGENT_SUBWINDOW_AUTHORING_STANDARD.md
 subwindow_standard_revision: 842c29550c06c22d63e0a058a27cb8a9ff6b538b3168d2c83a384890b44247f0
-standard_adoption: KI-W6 and KI-W7 are parent-accepted and KI-W8 DECOMP-3 is parent-approved under the current standards and DEC-KI-059; KI-W8 execution is unassigned and every preflight external mutation or paid action retains its separate approval gate
+standard_adoption: KI-W6 and KI-W7 are parent-accepted; requester-directed DECOMP-4 lifecycle and Lambda account-shape correction revision 0f99913d69f573ce9df7a89bf1b05962f2fbd5cceb68ca3f5dbeb1f4d784e62d governs direct parent execution through P5; W8 terminal sequencing will be reconciled after preflight because no KI-W9 exists
 contract_path: KEYWORD_INTELLIGENCE_PRODUCT_CONTRACT.md
 contract_revision: 8b17f85c533e8f37f963e5c2bef2b59784714d6ef1ef5ef8964b81abdad0522c
 decision_path: KEYWORD_INTELLIGENCE_DECISION_LEDGER.md
 discovery_path: KEYWORD_INTELLIGENCE_DISCOVERY_DOSSIER.md
-discovery_revision: 493192fc317c00ee43e277e85e00718985190cdd5c21e3d6824f67dd1d0b7c0c
-decision_revision: 6c0809225ba5336dc923786674b990f83c8db2496b88016f7655a770afb7e307
+discovery_revision: 3a6b294cc561556d0e3d92572121bc8cc529470866fba5bad8f78cf816310470
+decision_revision: 9dfbe47b16200a3dae4480068f86eb845543244c5e45b38ac42ee0cf4568c3f6
 checklist_path: KEYWORD_INTELLIGENCE_IMPLEMENTATION_CHECKLIST.md
-checklist_revision: 4f4b16bbe6ab20312e312db75506f9acfee7aaca67fbb66d1d951676f1f646e4
+checklist_revision: 5f056307a779a413406f5a4f0e7e87dac8dc12703d5633ec7f00d077d6a036b6
 traceability_path: KEYWORD_INTELLIGENCE_TRACEABILITY_INDEX.md
-traceability_revision: 90c2f808426c4f1cf20ad885860e01b66763f3fc607e28c3b2dd9a2ef7391a5f
+traceability_revision: 76e5fbdab699f07fdabb85a381c6b7f400a8fcfa2619b517cdf0ab6304a4de89
 current_window: KI-W8
-current_assignment_id: NONE
-assigned_agent: NONE
+current_subwindow: KI-W8-I101
+current_assignment_id: ASG-KI-W8-I101-PARENT-02
+assigned_agent: /root
 authorized_windows: []
-decomposition_target_path: KEYWORD_INTELLIGENCE_KI_W8_SUBWINDOW_CHECKLIST.md
-decomposition_revision: 7f2bc8197a52c4264f876f58db0cb386613007f3a16b8fdabbb468740b47a296
-subwindow_state_target_path: KEYWORD_INTELLIGENCE_KI_W8_SUBWINDOW_STATE.md
-subwindow_evidence_target_path: KEYWORD_INTELLIGENCE_KI_W8_SUBWINDOW_EVIDENCE.md
-decomposition_amendment_target: PARENT_APPROVED_DECOMP_3; KI-W8-I001 execution remains unassigned
-authorized_write_scope: []
-authorized_actions: []
-prohibited_actions: [KI-W8 assessment or preflight execution, leaf or subagent dispatch, implementation test schema migration package lock or authority-document edit, build measurement database browser network provider AWS host production paid destructive commit push action, W8-ACT-01 through W8-ACT-07 execution, final independent review]
+decomposition_path: KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_CHECKLIST.md
+decomposition_revision: 0f99913d69f573ce9df7a89bf1b05962f2fbd5cceb68ca3f5dbeb1f4d784e62d
+frozen_runner_revision: f2d21cdd9a9ff7c6dd2d0d4d26ec70592cecb8aaf44dab335241a2a383fb960e
+subwindow_state_path: KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_STATE.md
+subwindow_evidence_path: KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_EVIDENCE.md
+template_path: email_scraper/infrastructure/aws/template.yaml
+template_bytes: 104582
+template_revision: 2d87c28ad564842d13e42855aef676fb30b2f3aa357ef6eda73bc88f67cb8fa8
+keyword_worker_zip_path: email_scraper/dist/lambda/keyword-worker.zip
+keyword_worker_zip_bytes: 32006605
+keyword_worker_zip_revision: 47fda36e621bcb35a98fd1614854dadc0231e70871cf5488828610400d8460d4
+recovery_zip_path: email_scraper/dist/lambda/recovery.zip
+recovery_zip_bytes: 31984076
+recovery_zip_revision: cc5b6819d80c85a3ca74f05c9887b580aa8dd498f1f866ffc8e812ce89f2bb9c
+aws_profile: storesignal-dev
+aws_region: ap-south-2
+aws_stack: storesignal-production-pipeline
+aws_environment: production
+authorized_write_scope: [KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_CHECKLIST.md exact lifecycle-oracle correction already applied, KEYWORD_INTELLIGENCE_EXECUTION_EVIDENCE.md append-only KI-W8 preflight entry, KEYWORD_INTELLIGENCE_SPECIFICATION_CHANGELOG.md append-only parent correction entry, ACTIVE_EXECUTION_STATE.md one-version transition after P5, KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_STATE.md parent-takeover transition, KEYWORD_INTELLIGENCE_KI_W8_AWS_ONLY_SUBWINDOW_EVIDENCE.md append-only parent-takeover entries, email_scraper/dist/lambda/keyword-worker-measurements.json, email_scraper/dist/lambda/measurements.json]
+authorized_actions: [no further execution; parent may reauthor P6 and the single-approval active AWS deployment sequence using the accepted P1-P5 evidence]
+prohibited_actions: [P6 activation or handoff, W8-ACT-01, W8-ACT-02, S3 PutObject, CloudFormation create-change-set execute-change-set update-stack or delete action, Lambda invoke, queue send receive delete purge redrive, secret value read, provider or paid call, database API browser local-server action, implementation source test schema migration package lock frontend edit, leaf or subagent dispatch, commit, push, destructive action, final completion declaration]
 execution_environment_policy:
-  sandbox_escalation_for_authorized_local_actions: true
+  sandbox_escalation_for_authorized_local_or_read_only_actions: true
   automatic_identical_recovery_after_proven_environment_invalidation: true
   recovery_limit_per_invalidated_execution: 1
   external_authority_expansion: false
 parallel_execution_policy:
-  permitted_waves_after_parent_decomposition_approval: []
+  permitted_waves: []
   integration_assessment_parallel: false
-  implied_parallel_authority: false
+  executable_schedule: SERIAL
 may_start_successor: false
-current_status: AWAITING_USER_PREREQUISITES
+current_status: READY_FOR_PARENT_REAUTHORING
 accepted_through: KI-W7
-next_window: KI-W8
-stop_after: KI-W8-DECOMPOSITION
-blocker: KI-W8 execution assignment requires literal host-discovery and zero-charge provider-capability protocols plus the production origin two authenticated owner sessions and one normalized seed; none may be guessed
-user_gates: [supply or authorize discovery of the exact host protocol and provider-capability prerequisite, supply the production origin and two authenticated owner sessions plus one seed without recording secrets, then explicitly authorize the read-only P1-P6 assessment; W8-ACT-01 through W8-ACT-07 remain separately approval-gated and no approval implies another]
-last_updated: 2026-08-24T17:20:47+05:30
+next_window: KI-W8-P6-AND-DEPLOYMENT-SEQUENCE-REAUTHORING
+stop_after: KI-W8-I101-P5
+blocker: null
+user_gates: [one later deployment approval after the corrected active W8 sequence is decision-complete; no AWS mutation is currently authorized]
+keyword_worker_measurement_revision: fd0c6232cee16ce3a43370928e06702412e70e2b73db9bec07e59297943c366c
+established_measurement_revision: 6168ddc070b96880d6793db7749bd2f497e177d553543710cd7fd21287d0c0b6
+last_updated: 2026-08-25T20:37:30+05:30

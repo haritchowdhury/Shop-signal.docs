@@ -288,44 +288,48 @@ is the mechanical expansion used for completeness checks:
 | `REQ-KI-015`–`017`; `INV-KI-010/011/015` durable handoff observation overlay | `SRC-KI-058`; parent-direct `KI-W6-C150` under `DEC-KI-057` | exact intercepted client key/revision matched to durable handoff and associated 100-query Run; response status/finish trace diagnostic only; existing `W6-NAV-02`, `W6-FLOW-08`, `W6-NC-06` | `KI-W6-CV102`–`CV105`, `KI-W6-CH18`; fresh causal run then unchanged closure |
 | `REQ-KI-010`–`015`, `REQ-KI-024`; `INV-KI-004`–`006`, `INV-KI-010/015` discovery-resolution bridge overlay | `SRC-KI-059`; `KI-W6-CT30`–`CT32`, leaves `KI-W6-C152`–`C154` under `DEC-KI-058` | `SCN-KI-046`; real resolver with injected no-network fetch proves ten stores for one query; 100 strict artifacts drive the real domain aggregator/repositories to exactly 1,000 Shops/RunStores/lead tasks/messages; maximum rollback/stale fence remain invisible; `W6-DB-13`–`15`, `W6-NC-22`–`24`; final 43/24 unions | `KI-W6-CV110`–`CV115`, `KI-W6-CH20`; retain browser causality only through 100 discovery dispatches, bridge the missing middle in isolated Neon, and reuse unchanged post-resolution scale corpora |
 
-## 9. KI-W7/W8 deployment and live-proof closure
+## 9. KI-W7/W8 AWS-first closure and deferred KI-W9
 
-This section supersedes the older W7/W8 references in Sections 1–5 wherever
-they name `SCN-KI-019`, the nonexistent `build-aws-handlers.js`, a second
-recovery schedule, 360-second visibility, or one broad deployment/canary action.
+This section supersedes the former combined W8 deployment/canary trace.
+`DEC-KI-060` preserves accepted W7 source/package behavior, limits W8 to an
+applied disabled AWS deployment, and postpones local control-plane activation
+and the paid canary to an unassignable KI-W9.
 
 | Contract set | Observed evidence | Locked decision | Exact owner | Executable oracle | Evidence slot |
 |---|---|---|---|---|---|
 | `REQ-KI-002/005/022`–`024`; `INV-KI-001`–`009/012`–`014` | `SRC-KI-060`; accepted W6 build/worker evidence | `DEC-KI-059` runtime/config/recovery closure | `KI-W7-T1/T2/T6` | `SCN-KI-047`; `W7-RUNTIME-01/02`; `W7-NC-01`–`04` | `KI-W7-V2/V4/V5` |
-| `INV-KI-001/002/012`; `AUTH-KI-005`; `EXC-KI-008` | current template/build/deployment scripts in `SRC-KI-060`; official AWS bounds | `DEC-KI-059` ten resources, 1080 visibility, disabled condition, narrow IAM, two ZIP packet | `KI-W7-T3`–`T6` | `SCN-KI-047`; `W7-INFRA-01`–`06`, `W7-BUILD-01`, `W7-DEPLOY-01/02`, `W7-CONF-01`; `W7-NC-05`–`12` | `KI-W7-V1`–`V6` |
-| `REQ-KI-002/005/022`–`024`; `AUTH-KI-005/007`; `EXC-KI-008` | accepted W7 packet plus W8 applied preflight | `DEC-KI-059` seven separately approved actions | `KI-W8-T1/T2` | `SCN-KI-048`; `W8-LIVE-01`–`05`; `W8-NC-01`–`04` | `KI-W8-V1`–`V4` |
-| `REQ-KI-015`–`017/022`–`024`; `INV-KI-005`–`011/013`–`015` | same one queued research; real SQS/Lambda/Neon/S3/UI path | `DEC-KI-059` bounded keyword-only canary and stop-before-confirmation boundary | `KI-W8-T3` | `SCN-KI-048`; `W8-LIVE-06`–`09`, `W8-CONF-01`; `W8-NC-05/06` | `KI-W8-V4`–`V7` |
+| `INV-KI-001/002/012`; `AUTH-KI-005`; `EXC-KI-008` | current template/build/deployment scripts in `SRC-KI-060`; official AWS bounds | `DEC-KI-059` ten resources, 1080 visibility, disabled condition, narrow IAM, two-ZIP packet | `KI-W7-T3`–`T6` | `SCN-KI-047`; W7 infrastructure/build/deploy cases and controls | `KI-W7-V1`–`V6` |
+| `REQ-KI-002/005/022`–`024`; `INV-KI-001/002/012`; `AUTH-KI-005`; `EXC-KI-008` | accepted W7 packet; `SRC-KI-061`; W8 read-only applied preflight | `DEC-KI-060` AWS-only disabled deployment and two-action boundary | `KI-W8-T1/T2` | `SCN-KI-049`; `W8-LIVE-01`–`03`, `W8-CONF-01`; `W8-NC-01`–`08` | `KI-W8-V1`–`V4` |
+| `REQ-KI-015`–`017/022`–`024`; `INV-KI-005`–`011/013`–`015`; `AUTH-KI-007` | future accepted W8 outputs plus local-control-plane facts not yet observed | `DEC-KI-060` postponement boundary | `KI-W9-AUTHORING` reserved for parent | no executable oracle yet | `DRAFT_NOT_ASSIGNABLE` |
 
 ### W7 exact ownership and enforcement
 
-- The only W7 implementation/test paths are the literal 13-path table in A4;
-  its sorted-member-plus-LF digest is
-  `04ce71235fe61103c071f859d6050d4f8fee2b56dc0e088b9d97f5111be57a9f`.
-- W7 required cases are exactly 12/digest
+- Accepted W7 remains exactly the fourteen-file corrected set and its recorded
+  parent evidence. `DEC-KI-060` changes no W7 source, package, test, case,
+  control or acceptance result.
+- W7 required cases remain 12/digest
   `6bacf5d9291362ee0d01f5d0d8e3e53f8f9e214a6ebbf5711497c80f3d74aa2e`;
-  controls are exactly 12/digest
+  controls remain 12/digest
   `6950a20f91b666c03cf59c495576e72ad1501fcd58aa5f4378900bd473edafd7`.
-- Config, handler/recovery, template, measurement and deployment scripts have
-  one authoritative interface in `DEC-KI-059`; the window-agent decomposition
-  allocates one file per leaf and may not invent a second schedule, merge the
-  two builders, or select deployment semantics.
 
 ### W8 exact authority and enforcement
 
-- W8 has zero source/test write paths and therefore zero implementation leaves.
-  The window agent personally owns the one sequential assessment; it cannot
-  delegate an AWS/host/provider approval to a leaf.
-- W8 required cases are exactly 10/digest
-  `b716a609b2269f69d4e042503ad47dabb1eb397e17726af850f38ab09940431a`;
-  controls are exactly six/digest
-  `1a2fd2fb71c94f297b27c5c6ad580c67d94ae807525b420996bd4382d46b7c6e`.
-- `W8-ACT-01`–`07` are the complete mutation/paid-action universe. Separate
-  approval is mandatory for each applicable action. ACT-04 creates the sole
-  research while disabled; ACT-05 activates it; ACT-06 is the only paid
-  execution. The handoff Run is never confirmed, so downstream provider work
-  is exactly outside W8.
+- W8 has zero source/test paths and zero implementation leaves. Its window agent
+  personally executes one sequential AWS assessment.
+- W8 cases are exactly four/digest
+  `3bd44b2c2c244b1dd29881dcfa249d9cdad5f9b1aecc981c56612d587283ca7e`;
+  controls are exactly eight/digest
+  `9bd004917f960abb4842ea2f2da48ed60821fdedd55fcbc54dc7bdd271037ea6`.
+- `W8-ACT-01/02` are the entire W8 mutation universe. No W8 action configures
+  a backend/frontend, reads secret values, creates a research, activates the
+  mapping, invokes Lambda, accesses production Neon, calls a provider or spends
+  money.
+- The former DECOMP-3 and `SCN-KI-048` are retained as unexecuted historical
+  evidence but are revision-invalidated and cannot authorize work.
+
+### KI-W9 reservation
+
+- KI-W9 will later be reauthored from applied W8 outputs for a local
+  frontend/backend control plane.
+- No current task, case, control, action, approval or decomposition authorizes
+  KI-W9, activation, a canary, provider cost or run handoff.
