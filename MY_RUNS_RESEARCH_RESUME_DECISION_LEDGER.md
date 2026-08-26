@@ -25,7 +25,10 @@ Companions: A1 `MY_RUNS_RESEARCH_RESUME_PRODUCT_CONTRACT.md`; A2
 | `MRR-DEC-009` | 011 | Backend `sendJson` and BFF response remain `no-store`; no `use cache`, cache tags, or static route config. | SRC-012,014 | personalized cache | Every page visit sees current owner state. |
 | `MRR-DEC-010` | 004,006 | Research and run sections have independent totals/pages; handed-off research disappears on the next research-list fetch and its run remains. | SRC-002,010 | atomic mixed snapshot | Transient cross-request movement is allowed; duplicate rows are forbidden within one rendered response. |
 | `MRR-DEC-011` | 007,012 | Preserve existing run row markup/behavior; append narrowly scoped research history classes to `globals.css` and update page copy to “My searches”. | SRC-007,015 | redesign; new route | Existing responsive run layout remains recognizable. |
-| `MRR-DEC-012` | 001-014 | Two sequential windows: backend contract/persistence first, frontend composition/emitted-browser proof second. | SRC-001-015 | single broad window | W2 consumes a frozen W1 payload contract. |
+| `MRR-DEC-012` | 001-015 | Three sequential windows: backend contract/persistence, frontend composition/emitted-browser proof, then test-only stale-contract correction. | SRC-001-019 | single broad window; mixing unrelated stale tests into feature edits | W2 consumes W1; W3 runs only after feature files freeze and may edit tests only. |
+| `MRR-DEC-013` | 015 | W3 changes exactly four test files: frontend `test/keyword-intelligence-api.test.ts`; backend `test/keyword-intelligence-api.test.js`, `test/keyword-intelligence-query-mapper.test.js`, and `test/keyword-intelligence-worker-flow.test.js`. | SRC-016-019 | weaken production parsers; restore removed product restrictions; edit production code | Existing registries/IDs remain; assertions and synthetic seams move to current contracts. |
+| `MRR-DEC-014` | 015 | Frontend W5-A06 accepts history lengths 0, 14, and 103 while retaining strict point/date/numeric/unknown-key checks. Backend API/component tests inject a deterministic classifier returning exactly ordered `{itemId,product}` values, mapping tests drive `product` directly, editable-query tests retain only current rejection partitions, and worker `overviewResponse` nests `monthly_searches` inside `keyword_info`. | SRC-016-018 | remove tests; call OpenAI; invent provider aliases | Tests become deterministic and contract-faithful without production edits or external calls. |
+| `MRR-DEC-015` | 015 | W3 first runs the four focused files, then full frontend/backend suites. Any remaining failure must be diagnosed: only a mechanically traced stale fixture/assertion may be corrected inside the four-file scope; a production defect or fifth-file requirement stops and escalates. | SRC-016-019 | make all failures pass by changing expectations; expand scope ad hoc | Test repair cannot conceal regressions. |
 
 ## Exact payload contract: `keyword-research-history-v1`
 
@@ -108,3 +111,14 @@ Adding the repository transaction changes the pinned repository inventory from
 the full-file SHA after W1 freezes. Preserve all historical cases and mutation
 controls.
 
+## Accepted-test invalidation rules
+
+W3 supersedes only assertions contradicted by `MRR-SRC-016` through
+`MRR-SRC-018`. It MUST preserve all existing case IDs, registry membership,
+execution certificates, negative controls, strict unknown-key and scalar
+validation, row-set identity enforcement, maximum row/query bounds, and worker
+call/object-count oracles. The deterministic classifier fake reproduces the
+production classifier's ordered one-result-per-item surface but supports no
+claim about OpenAI transport or semantic model quality. The synthetic
+DataForSEO response reproduces the current consumed nested field path; provider
+contract fidelity remains owned by the existing adapter fixture tests.

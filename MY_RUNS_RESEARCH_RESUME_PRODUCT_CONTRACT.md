@@ -68,6 +68,11 @@ continues to open `/runs/{runId}`.
 - `MRR-REQ-014` Existing keyword dashboard polling, selection persistence,
   handoff atomicity, landing/auth flow, worker contracts, and AWS pipeline
   behavior MUST remain unchanged.
+- `MRR-REQ-015` After the resume feature is complete, repair the four proven
+  stale keyword-intelligence test surfaces named in A3. Test expectations and
+  fixtures MUST match the already-committed current contracts without changing
+  production behavior, deleting coverage IDs, weakening strict fields that
+  remain authoritative, or relabelling a product failure as expectation drift.
 
 ## Exact user-visible policy
 
@@ -110,4 +115,6 @@ AWS coordination state.
 - No autosave for unsaved browser selection drafts.
 - No change to `/keywords/{researchId}` or `/runs/{runId}` behavior.
 - No change to auth pages, landing page, workers, queues, artifacts, or schema.
-
+- No production-code change is permitted in the stale-test correction window;
+  a failure not explained by the four source-grounded contract changes in A3
+  stops that window for diagnosis and correction planning.

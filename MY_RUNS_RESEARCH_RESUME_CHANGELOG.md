@@ -22,8 +22,21 @@ Companions: A1 `MY_RUNS_RESEARCH_RESUME_PRODUCT_CONTRACT.md`; A2
   compatibility_or_migration_effect: No schema migration; existing run contract preserved.
   authorization_effect: Plan authoring only; no execution assignment created.
   resumption_state: READY but UNASSIGNED after authoring certificate.
+
+- change_id: MRR-CHG-002
+  timestamp: 2026-08-26T18:30:00+05:30
+  trigger_evidence: [MRR-SRC-016, MRR-SRC-017, MRR-SRC-018, MRR-SRC-019]
+  reason: User explicitly requested correction of tests that still expect old assertions after feature completion.
+  old_revision: INITIAL
+  new_revision: INITIAL-PLUS-TEST-CORRECTION
+  changed_requirements: [MRR-REQ-015]
+  changed_decisions: [MRR-DEC-012, MRR-DEC-013, MRR-DEC-014, MRR-DEC-015]
+  affected_windows: [MRR-W3]
+  invalidated_evidence: []
+  compatibility_or_migration_effect: Test-only; no production or schema change.
+  authorization_effect: Adds a future test-only window; still no execution assignment.
+  resumption_state: READY but UNASSIGNED after refreshed authoring certificate.
 ```
 
 Future changes append rows. Never rewrite an assigned contract, reuse an ID, or
 edit historical execution evidence.
-

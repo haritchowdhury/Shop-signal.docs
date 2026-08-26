@@ -142,12 +142,48 @@ provider, AWS, secret, or customer-data probe was performed.
 
 - evidence_id: MRR-SRC-015
   classification: OBSERVED
-  claim: Relevant worktrees already contain unrelated edits, including keyword dashboard/selection presentation files; they must be preserved.
+  claim: Both nested repositories were clean at plan freeze; the coordination root retains its owner-controlled relocation state and the new plan documents are unstaged.
   source: git status --short in root, email_scraper, and frontend
   observed_at: 2026-08-26
   environment: local workspace
   limitations: status can change before assignment and must be re-recorded
   privacy: filenames only
+
+- evidence_id: MRR-SRC-016
+  classification: OBSERVED
+  claim: Frontend W5-A06 still rejects 0-14 and greater-than-102 monthly-history rows although the current parser accepts any array length and still validates every point strictly.
+  source: frontend/lib/keyword-intelligence-validation.ts monthlyHistory; frontend/test/keyword-intelligence-api.test.ts W5-A06; focused test output 2026-08-26
+  observed_at: 2026-08-26
+  environment: local workspace
+  limitations: test-only contract drift; no browser claim
+  privacy: source and synthetic fixture only
+
+- evidence_id: MRR-SRC-017
+  classification: OBSERVED
+  claim: Query mapping now uses AI-produced item.product, defaults absent product to false/store scope, and intentionally permits arbitrary nonempty edited text subject only to row identity, 200-codepoint, control-character, duplicate, and cardinality checks; old lane, grammar, and relevance assertions fail.
+  source: email_scraper/src/keyword-intelligence/query-intent-classifier.js; src/keyword-intelligence/query-mapper.js; test/keyword-intelligence-api.test.js; test/keyword-intelligence-query-mapper.test.js; focused test output 2026-08-26
+  observed_at: 2026-08-26
+  environment: local workspace and localhost rerun
+  limitations: AI transport is replaced by a deterministic contract-faithful test seam; no provider call
+  privacy: source and synthetic fixture only
+
+- evidence_id: MRR-SRC-018
+  classification: OBSERVED
+  claim: The current DataForSEO adapter reads monthly_searches from keyword_info, while the worker-flow fixture still emits it at the obsolete item top level, producing empty history and a downstream null trendSlope rejection.
+  source: email_scraper/src/aws-pipeline/keyword-intelligence/dataforseo-labs-adapter.js normalizeOverviewMetrics; test/keyword-intelligence-worker-flow.test.js overviewResponse; focused test output 2026-08-26
+  observed_at: 2026-08-26
+  environment: local component test
+  limitations: synthetic provider response only; no paid call
+  privacy: synthetic fixture only
+
+- evidence_id: MRR-SRC-019
+  classification: OBSERVED
+  claim: Current full-suite baseline is frontend 21/22 files with only keyword-intelligence-api failing; backend exits nonzero with stale API/query-mapper/worker-flow failures, while localhost-only cases pass when the identical focused API suite is rerun with local sandbox escalation.
+  source: npm test in frontend; npm test and escalated node test/keyword-intelligence-api.test.js in email_scraper, 2026-08-26
+  observed_at: 2026-08-26
+  environment: local workspace
+  limitations: diagnostic pre-change run, not acceptance evidence
+  privacy: no secrets or external calls
 ```
 
 ## Payload evidence certificate
@@ -168,4 +204,3 @@ count and one bounded `findMany`, selects at most 100 summary rows and stage
 counters, reads no result JSON, and performs zero external calls. Initial
 `/runs` page load performs two independent BFF GETs; no sequential dependency
 exists between them.
-

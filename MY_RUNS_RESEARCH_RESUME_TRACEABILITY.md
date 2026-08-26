@@ -24,6 +24,7 @@ Companions: A1 `MY_RUNS_RESEARCH_RESUME_PRODUCT_CONTRACT.md`; A2
 | `MRR-REQ-012` | SRC-007,013 | DEC-006,011 | W2-T3,T4 | FE-01–05,E2E-01 | Accessible responsive two-section UI. |
 | `MRR-REQ-013` | SRC-001 | DEC-008 | all | REG-02 | Schema/migration hashes unchanged. |
 | `MRR-REQ-014` | SRC-005,010,015 | DEC-008 | all | REG-01–03 | Dashboard/auth/worker behavior unchanged. |
+| `MRR-REQ-015` | SRC-016-019 | DEC-012-015 | W3-T1–T4 | TEST-01–04 | Four stale test surfaces match current contracts with production unchanged. |
 
 ## Authoritative required coverage set
 
@@ -47,6 +48,10 @@ MRR-E2E-03
 MRR-REG-01
 MRR-REG-02
 MRR-REG-03
+MRR-TEST-01
+MRR-TEST-02
+MRR-TEST-03
+MRR-TEST-04
 ```
 
 The sorted unsigned-UTF-8 LF digest is mechanically recorded in A6 and A4.
@@ -62,4 +67,6 @@ The sorted unsigned-UTF-8 LF digest is mechanically recorded in A6 and A4.
 | `MRR-NC-05` | Couple both fetches with one failing `Promise.all`. | FE-04 partial-success oracle |
 | `MRR-NC-06` | Accept unknown response/query keys. | BE-05/FE-06 strictness oracle |
 | `MRR-NC-07` | Remove one required case registration/activation. | coverage-set equality gate |
-
+| `MRR-NC-08` | Restore the obsolete 15–102 monthly-history length rejection. | TEST-01 variable-length-history oracle |
+| `MRR-NC-09` | Make mapping depend on legacy lane or let the classifier fake omit/reorder an item. | TEST-02 product/classifier oracle |
+| `MRR-NC-10` | Put `monthly_searches` back at item top level. | TEST-04 worker-flow publication oracle |
