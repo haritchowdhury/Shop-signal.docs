@@ -1,3 +1,4 @@
+  f03d613b-502a-4a87-85c3-750c70de095b.
   The pipeline is doing its job. The recommendation engine is optimizing the wrong
   job. Below is a product review of that gap, grounded in the live Clothing result
   and the current scoring, clustering, and selection code.
