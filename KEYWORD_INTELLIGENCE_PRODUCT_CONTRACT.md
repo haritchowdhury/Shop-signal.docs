@@ -26,7 +26,7 @@ activated.
 | Term | Locked operational meaning |
 |---|---|
 | research | One owner-scoped, generation-fenced execution over 1–5 seed phrases and all nine supported markets. |
-| recommended | An active calculated keyword whose preserved scoring result has `recommended=true`; it is not a top-N label. |
+| recommended | An active calculated keyword whose preserved result has `recommended=true`. For v1 snapshots that is the Python-parity score threshold. For v2 researches it is the default query plan: one non-blocked representative per concept cluster, capped at 100. It is not an arbitrary top-N label. |
 | selected | A keyword present in the research record's current durable selection draft. |
 | retained | A selected keyword in a conflict-free finalized selection containing 1–100 items. |
 | active keyword | A calculated or manually added keyword not removed from the current research revision. |
@@ -51,16 +51,19 @@ activated.
   CA, AU, NZ, DE, FR, IN, and AE with the locked location/language mapping in
   `DEC-KI-004`.
 - `REQ-KI-004` Except for the explicitly changed collection topology in
-  `REQ-KI-023`–`024`, the Node.js port preserves the current Python behavior
-  for expansion, normalization, trend, intent, deduplication, clustering,
-  facets, lane classification, scoring, flags, recommendation, summaries, and
-  exports. Numeric and ordering tolerances are defined in `DEC-KI-011`.
+  `REQ-KI-023`–`024` and the lead-finding recommendation contract for
+  `keyword-research-config-v2` researches, v1 snapshots preserve the ported
+  Python behavior. v2 researches classify with closed-class local/store/retailer
+  operators, cluster by dynamic concept key, score with a stable lead-finding
+  formula, and default-select one non-blocked representative per cluster.
 - `REQ-KI-005` A completed research persists its complete normalized dashboard
   result, default selection, configuration snapshot, and provenance in
   Neon/Postgres. Output files and browser storage are not sources of truth.
-- `REQ-KI-006` All active recommended keywords are selected by default when
-  their count is at most 100. When more than 100 exist, exactly the first 100
-  under `DEC-KI-013` are selected and the UI truthfully reports the cap and
+- `REQ-KI-006` For v1 snapshots, all active recommended keywords are selected
+  by default when their count is at most 100. For v2 researches, default
+  selection is exactly one non-blocked representative per concept cluster,
+  capped at 100. When more than 100 exist, exactly the first 100 under the
+  locked sort are selected and the UI truthfully reports the cap and
   unselected count. There is no top-10 reduction.
 - `REQ-KI-007` The owner may select recommended or non-recommended calculated
   keywords, add manual keywords, edit keyword text, remove items, and restore
@@ -194,8 +197,11 @@ activated.
 - `EXC-KI-001` No Python runtime, Python subprocess, SQLite database, iframe,
   separate API/application, second dashboard, Fargate, Step Functions,
   DynamoDB coordination, or S3-event/queue-emptiness completion.
-- `EXC-KI-002` No scoring, threshold, cluster, intent, or market redesign in
-  the port.
+- `EXC-KI-002` No nine-market expansion, Google `gl` fan-out, AWS/Luna/storefront
+  redesign, or clothing-specific scoring ontology. New researches use
+  lead-finding classification, concept-key clustering, and one-representative
+  default selection (`keyword-research-config-v2`). Persisted v1 snapshots keep
+  Python-parity scoring and are not rewritten.
 - `EXC-KI-003` No product-only query policy and no storefront-verification or
   second research step between query mapping and Google probing.
 - `EXC-KI-004` No automatic duplicate reduction, arbitrary top-N reduction, or

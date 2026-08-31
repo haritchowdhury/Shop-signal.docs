@@ -1,10 +1,14 @@
 # KI-W10 Lead-Finding Recommendation — Decomposition Draft
 
-**Status:** `DRAFT / NOT ASSIGNABLE`  
+**Status:** `SUPERSEDED BY PARENT IMPLEMENTATION`  
 **Date:** 2026-08-31  
-**Role of this file:** working decomposition from parent/window-agent review. It is **not** A1–A8, **not** an assignment, and **not** authority to edit source.
+**Role of this file:** historical decomposition. Parent implemented the lead-finding
+recommendation contract directly; this file is not A1–A8 and is not assignment
+authority. Do not start a window-agent DAG from it.
 
-Current `KEYWORD_INTELLIGENCE_PRODUCT_CONTRACT.md` (`KI-PC-2`) still forbids this work (`EXC-KI-002`, `REQ-KI-004` Python parity). The eight new/revised artifacts do not exist. Literals in the lock table are proposed decisions, not an assigned `A3`.
+Implemented in `keyword-research-config-v2` / result `contractVersion` 2. Research
+row `contractVersion` remains 1. `ACTIVE_EXECUTION_STATE.md` remains the KI-W8 AWS
+assignment and was not used as write-scope for this product work.
 
 A window agent that started `cluster.js` from this file would be inventing the retailer list, junk rules, score formula, and `contractVersion` bump.
 
