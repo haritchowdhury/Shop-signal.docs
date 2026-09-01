@@ -3338,3 +3338,24 @@ only on PASS or a genuinely new failure outside this decision.
   allowlists, provider/cost exclusions, and all accepted W7 behavior remain.
 - **Tasks/scenarios:** `KI-W8-T2`, `SCN-KI-049`; `KI-W9` is retired and is not
   a successor window.
+
+### `DEC-KI-062` — v2 retailer phrase match and shortlist demotion
+
+- **Requirements:** `REQ-KI-004`, `REQ-KI-024`.
+- **Locked choice:** v2 retailer classification keeps the frozen 22-token list.
+  Matching uses ordered normalized tokens, consecutive two-token compact folds
+  (`wal mart` / `home depot` / `best buy`), compact-signature substring only
+  for retailer forms of length ≥ 7, frozen aliases `wallmart` and `amazom`,
+  and Levenshtein distance ≤ 1 only when both strings have length ≥ 6. The
+  v2 200-shortlist ranks `leadFindingShortlistGroup` 0 then 1 then 2 before
+  the existing `DEC-KI-006` comparator. Group 0 has none of
+  `brand_competitor`, `local_intent`, `junk_quality`, or
+  `informational_dropped`. Group 1 has a penalty flag and is not
+  informational. Group 2 is `informational_dropped`. Rows are demoted, not
+  excluded. v1 snapshots and the v2 config schema/version are unchanged.
+- **Rejected:** expanding the retailer list; unbounded dictionaries; edit
+  distance on short names; dropping penalty rows from the 200; ranking v1 by
+  these groups; a new research/Google step.
+- **Consequences:** misspelled or hyphenated retailer phrases stop occupying
+  default-query and overview budget ahead of independent-store phrases.
+- **Tasks/scenarios:** `CASE-KR-L-011`, `CASE-KR-L-012`, `CASE-KR-L-013`.

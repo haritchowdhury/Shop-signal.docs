@@ -31,7 +31,7 @@ activated.
 | retained | A selected keyword in a conflict-free finalized selection containing 1–100 items. |
 | active keyword | A calculated or manually added keyword not removed from the current research revision. |
 | screened candidate | One globally unique phrase from US expansion that has passed strict US overview normalization. |
-| shortlist | The first at most 200 screened candidates under the deterministic anchor ranking in `DEC-KI-006`; only this set receives the remaining eight markets. |
+| shortlist | The first at most 200 screened candidates under the deterministic anchor ranking in `DEC-KI-006`, with the v2 group overlay in `REQ-KI-024` / `DEC-KI-062`; only this set receives the remaining eight markets. |
 | duplicate conflict | Two selected items with equal compact signatures or Jaccard token similarity at least `0.88`. |
 | research-backed run | An Email Scraper `Run` created atomically from a finalized keyword selection revision. |
 | query | Exactly one Shopify-scoped Google query mapped from exactly one retained keyword. |
@@ -56,6 +56,14 @@ activated.
   Python behavior. v2 researches classify with closed-class local/store/retailer
   operators, cluster by dynamic concept key, score with a stable lead-finding
   formula, and default-select one non-blocked representative per cluster.
+  Retailer matching stays on the frozen 22-token list and does not add names.
+  A phrase is `brand_competitor` when any ordered normalized token or
+  consecutive two-token compact equals a retailer form or frozen alias
+  (`wallmart`, `amazom`); when the unstripped compact signature contains a
+  retailer form of length ≥ 7; or when a candidate compact of length ≥ 6 has
+  Levenshtein distance ≤ 1 from a retailer form of length ≥ 6. Short names
+  (`wish`, `ikea`, `ebay`, `etsy`, `temu`) match only as exact normalized
+  tokens so `wishlist` / `idea` do not collide.
 - `REQ-KI-005` A completed research persists its complete normalized dashboard
   result, default selection, configuration snapshot, and provenance in
   Neon/Postgres. Output files and browser storage are not sources of truth.
@@ -187,10 +195,15 @@ activated.
 - `REQ-KI-024` One US anchor overview request screens all 1–300 candidates.
   Strict usable non-informational normalized rows are processed through the
   preserved variant, cluster, flag, recommendation, and scoring algorithms,
-  ranked by `DEC-KI-006`, and truncated to 200. The other eight market requests
-  contain only that shortlist; the final calculation reuses the US metrics and
-  recalculates the complete nine-market result. No candidate is capped before
-  the metric-backed US screen.
+  ranked by `DEC-KI-006`, and truncated to 200. For
+  `keyword-research-config-v2` only, that ranking is preceded by the group
+  overlay in `DEC-KI-062`: clean phrases, then `brand_competitor` /
+  `local_intent` / `junk_quality`, then `informational_dropped`. Cardinality
+  remains 1–200; demoted rows may fill remaining slots and are never deleted.
+  v1 ranking is unchanged. The other eight market requests contain only that
+  shortlist; the final calculation reuses the US metrics and recalculates the
+  complete nine-market result. No candidate is capped before the metric-backed
+  US screen.
 
 ## 5. Explicit exclusions
 
