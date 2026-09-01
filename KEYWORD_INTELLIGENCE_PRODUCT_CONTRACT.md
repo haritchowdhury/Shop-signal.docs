@@ -64,6 +64,14 @@ activated.
   Levenshtein distance ≤ 1 from a retailer form of length ≥ 6. Short names
   (`wish`, `ikea`, `ebay`, `etsy`, `temu`) match only as exact normalized
   tokens so `wishlist` / `idea` do not collide.
+  v2 clustering still uses concept keys, then Jaccard on content-token sets
+  with size-dependent bars in `DEC-KI-063`: the smaller set size ≤ 3 merges
+  at ≥ 0.5, and ≥ 4 merges at ≥ 0.6. Naive plural stemming does not strip
+  the frozen invariant-s list (`tennis`, `canvas`, `always`, `news`,
+  `species`, `series`, `business`, `circus`, `atlas`). For v2 default
+  blocking, `informational_dropped` always applies to `how to` / `what is` /
+  `wiki`; DataForSEO `informational` intent is not a default block when the
+  phrase contains `best`, `review`, `reviews`, `vs`, or `comparison`.
 - `REQ-KI-005` A completed research persists its complete normalized dashboard
   result, default selection, configuration snapshot, and provenance in
   Neon/Postgres. Output files and browser storage are not sources of truth.

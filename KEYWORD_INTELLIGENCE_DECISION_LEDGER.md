@@ -3359,3 +3359,23 @@ only on PASS or a genuinely new failure outside this decision.
 - **Consequences:** misspelled or hyphenated retailer phrases stop occupying
   default-query and overview budget ahead of independent-store phrases.
 - **Tasks/scenarios:** `CASE-KR-L-011`, `CASE-KR-L-012`, `CASE-KR-L-013`.
+
+### `DEC-KI-063` — v2 Jaccard bars, informational rescue, invariant-s stem
+
+- **Requirements:** `REQ-KI-004`, `REQ-KI-006`.
+- **Locked choice:** v2 pair merge uses content-token Jaccard against
+  `leadFindingJaccardThreshold(min(|A|,|B|))`: ≤ 3 tokens → 0.5; ≥ 4 tokens →
+  0.6. Same-lane only. The v2 config `clustering.similarityThreshold` literal
+  `0.8` remains for snapshot parse and is not the v2 merge bar. Naive `-s`
+  stemming skips the frozen `INVARIANT_S_TOKENS` list and still folds
+  `stores` / `paddles`. v2 `informational_dropped` is true for `how to` /
+  `what is` / `wiki` regardless of DataForSEO intent; a DataForSEO
+  `informational` label is ignored for that flag when the phrase contains
+  `best`, `review`, `reviews`, `vs`, or `comparison`. v1 flag, stem, and
+  cluster paths are unchanged. No seed-overlap default gate.
+- **Rejected:** seed-token default gate; lowering 1–2-token pairs with a 50%
+  bar as a substitute for identity (share-one on two 2-token sets is 33%);
+  config version bump; CSE in research.
+- **Consequences:** `organic cotton baby clothes` / `onesies` share a cluster;
+  `best ceramic mugs` can default; `tennis` does not become `tenni`.
+- **Tasks/scenarios:** `CASE-KR-L-016`, `CASE-KR-L-017`, `CASE-KR-L-018`.
